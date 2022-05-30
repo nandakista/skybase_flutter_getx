@@ -63,6 +63,7 @@ flutter:
 
   assets:
     - assets/
+    - assets/anim
   fonts:
     - family: Poppins
       fonts:
