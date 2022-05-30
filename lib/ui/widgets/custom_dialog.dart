@@ -70,7 +70,7 @@ class SuccessDialog extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: accentColor,
             radius: 50,
-            child: Lottie.asset('assets/anim_success.json', repeat: false),
+            child: Lottie.asset('assets/anim/anim_success.json', repeat: false),
           ),
         )
       ],
@@ -144,7 +144,7 @@ class FailedDialog extends StatelessWidget {
           child: CircleAvatar(
             radius: 50,
             backgroundColor: Colors.red[100],
-            child: Lottie.asset('assets/anim_failed.json', repeat: false),
+            child: Lottie.asset('assets/anim/anim_failed.json', repeat: false),
           ),
         )
       ],
@@ -235,7 +235,7 @@ class WarningDialog extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: Colors.orangeAccent,
             radius: 50,
-            child: Lottie.asset('assets/anim_warning.json', repeat: false),
+            child: Lottie.asset('assets/anim/anim_warning.json', repeat: false),
           ),
         )
       ],
@@ -359,7 +359,7 @@ class CommingSoonDialog extends StatelessWidget {
                 SizedBox(
                   height: 250,
                   width: 200,
-                  child: Lottie.asset('assets/anim_soon.json'),
+                  child: Lottie.asset('assets/anim/anim_soon.json'),
                 ),
                 Text(
                   'COMING SOON',
