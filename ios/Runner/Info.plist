@@ -43,5 +43,27 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>To take image from camera/gallery</string>
+
+    <key>NSCameraUsageDescription</key>
+    <string>To choose photo image</string>
+
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Used to capture audio from image_picker plugin</string>
+
+    <key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+    </dict>
+    <key>com.apple.security.network.client</key>
+    <true/>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>https</string>
+      <string>http</string>
+    </array>
 </dict>
 </plist>
