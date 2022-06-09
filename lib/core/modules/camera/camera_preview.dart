@@ -78,6 +78,6 @@ class PreviewCameraPage extends StatelessWidget {
   showImageInfo(BuildContext context) async {
     // Show Image Info
     String size = await AppFunction.getFileSize(imageFile.path, 2);
-    Toast.show("$size, ${imageFile.path}");
+    Toast.show('$size, ${imageFile.path}');
   }
 }

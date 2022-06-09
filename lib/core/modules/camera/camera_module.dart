@@ -61,13 +61,13 @@ class _CameraModuleState extends State<CameraModule>
           }
           initCamera(cameras![selectedCameraIndex!]).then((_) {});
         } else {
-          Toast.show("Kamera tidak ditemukan");
+          Toast.show('Kamera tidak ditemukan');
         }
       }
     }).catchError((e) {
       AppDialog.show(
           typeDialog: TypeDialog.FAILED,
-          message: "Terjadi Kesalahan!\n${e.toString()}",
+          message: 'Terjadi Kesalahan!\n${e.toString()}',
           onPress: () {
             AppDialog.close();
             Get.back();
@@ -117,13 +117,13 @@ class _CameraModuleState extends State<CameraModule>
       }
     });
     if (_cameraController!.value.hasError) {
-      Toast.show("Terjadi kesalahan pada kamera.");
+      Toast.show('Terjadi kesalahan pada kamera.');
     }
 
     try {
       _cameraController!.initialize();
     } catch (e) {
-      debugPrint("Terjadi kesalahan pada kamera.\n$e");
+      debugPrint('Terjadi kesalahan pada kamera.\n$e');
     }
 
     if (mounted) {
@@ -447,16 +447,16 @@ class _CameraModuleState extends State<CameraModule>
       await _cameraController!.setFlashMode(mode);
     } on CameraException catch (e) {
       logError(e.code, e.description);
-      Toast.show("Error: ${e.code}\n${e.description}");
+      Toast.show('Error: ${e.code}\n${e.description}');
       rethrow;
     }
   }
 
   void logError(String code, String? message) {
     if (message != null) {
-      debugPrint("Error: $code\nError Message: $message");
+      debugPrint('Error: $code\nError Message: $message');
     } else {
-      debugPrint("Error: $code");
+      debugPrint('Error: $code');
     }
   }
 }

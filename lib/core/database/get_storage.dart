@@ -4,16 +4,16 @@ import 'package:get_storage/get_storage.dart';
 import 'package:varcore_flutter_base/data/models/user.dart';
 
 class KeyBox {
-  static const String token = "token";
-  static const String refreshToken = "refresh-token";
-  static const String user = "user";
+  static const String token = 'token';
+  static const String refreshToken = 'refresh-token';
+  static const String user = 'user';
 }
 
 class LocalStorage {
   static LocalStorage get to => Get.find<LocalStorage>();
 
-  final userBox = GetStorage("userBox");
-  final authBox = GetStorage("authBox");
+  final userBox = GetStorage('userBox');
+  final authBox = GetStorage('authBox');
 
   // -------<Credential Storage>-------
   void saveToken(String token) => authBox.write(KeyBox.token, token);

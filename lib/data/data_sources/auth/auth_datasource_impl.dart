@@ -17,9 +17,9 @@ class AuthDatasourceImpl implements AuthDatasource {
         url: ApiUrl.login,
         requestMethod: RequestMethod.POST,
         body: {
-          "phone": phoneNumber,
-          "password": password,
-          "email": email,
+          'phone': phoneNumber,
+          'password': password,
+          'email': email,
         },
       );
       return User.fromJson(response.data);
@@ -39,8 +39,8 @@ class AuthDatasourceImpl implements AuthDatasource {
         requestMethod: RequestMethod.POST,
         useToken: true,
         body: {
-          "uid": userId,
-          "token": token,
+          'uid': userId,
+          'token': token,
         },
       );
       return User.fromJson(response.data);

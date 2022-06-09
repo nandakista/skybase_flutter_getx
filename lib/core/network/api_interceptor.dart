@@ -18,41 +18,41 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
 
   @override
   Future<dynamic> onRequest(options, handler) async {
-    debugPrint("Interceptor ON REQUEST");
-    debugPrint("--> ${options.method.toUpperCase()}");
+    debugPrint('Interceptor ON REQUEST');
+    debugPrint('--> ${options.method.toUpperCase()}');
     options.headers
-        .forEach((key, value) => debugPrint("Headers : $key: $value"));
+        .forEach((key, value) => debugPrint('Headers : $key: $value'));
     options.queryParameters
-        .forEach((key, value) => debugPrint("queryParameters : $key: $value"));
+        .forEach((key, value) => debugPrint('queryParameters : $key: $value'));
     if (options.data != null) {
-      debugPrint("Body: ${options.data}");
+      debugPrint('Body: ${options.data}');
     }
-    debugPrint("--> END ${options.method.toUpperCase()}");
+    debugPrint('--> END ${options.method.toUpperCase()}');
     return handler.next(options);
   }
 
   @override
   Future<dynamic> onResponse(Response response, handler) async {
-    debugPrint("Interceptor ON RESPONSE");
+    debugPrint('Interceptor ON RESPONSE');
     debugPrint(
-        "<-- ${(response.requestOptions.baseUrl + response.requestOptions.path)}");
-    debugPrint("Satus Code : ${response.statusCode} ");
+        '<-- ${(response.requestOptions.baseUrl + response.requestOptions.path)}');
+    debugPrint('Satus Code : ${response.statusCode} ');
     response.headers
-        .forEach((key, value) => debugPrint("Headers : $key: $value"));
-    debugPrint("Response: ${response.data}");
-    debugPrint("<-- END HTTP");
+        .forEach((key, value) => debugPrint('Headers : $key: $value'));
+    debugPrint('Response: ${response.data}');
+    debugPrint('<-- END HTTP');
     return super.onResponse(response, handler);
   }
 
   @override
   Future<dynamic> onError(DioError err, handler) async {
-    debugPrint("Interceptor ON ERROR");
+    debugPrint('Interceptor ON ERROR');
     debugPrint(
-        "<-- ${err.response?.requestOptions.baseUrl}, ${err.response?.requestOptions.path}");
-    debugPrint("Status Code : ${err.response?.statusCode} ");
-    debugPrint("Error Message : ${err.response?.statusMessage} ");
-    debugPrint("Error Message : ${err.message} ");
-    debugPrint("<-- End error");
+        '<-- ${err.response?.requestOptions.baseUrl}, ${err.response?.requestOptions.path}');
+    debugPrint('Status Code : ${err.response?.statusCode} ');
+    debugPrint('Error Message : ${err.response?.statusMessage} ');
+    debugPrint('Error Message : ${err.message} ');
+    debugPrint('<-- End error');
 
     _handleRefreshToken(err, handler);
     super.onError(err, handler);
@@ -72,10 +72,10 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
   }
 
   Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
-    String newAccessToken = LocalStorage.to.getToken() ?? "";
+    String newAccessToken = LocalStorage.to.getToken() ?? '';
     final options = Options(
         method: requestOptions.method,
-        headers: {"Authorization": "Bearer $newAccessToken"});
+        headers: {'Authorization': 'Bearer $newAccessToken'});
     return _dio.request<dynamic>(requestOptions.path,
         data: requestOptions.data,
         queryParameters: requestOptions.queryParameters,
@@ -86,17 +86,17 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
     try {
       final responseBody = await Dio().post(
         DioClient.baseURL + ApiUrl.refreshToken,
-        data: jsonEncode({"refresh_token": refreshToken}),
+        data: jsonEncode({'refresh_token': refreshToken}),
         options:
             Options(headers: headers, contentType: Headers.jsonContentType),
       );
-      return ApiResponse.fromJson(responseBody.data).data["token"];
+      return ApiResponse.fromJson(responseBody.data).data['token'];
     } on DioError catch (error) {
-      debugPrint("${DioException.message(error)}");
+      debugPrint('${DioException.message(error)}');
       return AppDialog.show(
           typeDialog: TypeDialog.FAILED,
           dismissible: false,
-          message: "Anda harus login kembali!",
+          message: 'Anda harus login kembali!',
           onPress: () => getx.Get.offAllNamed(LoginPage.routeName));
     }
   }

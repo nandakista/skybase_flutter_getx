@@ -7,9 +7,9 @@ class ApiResponse<T> {
 
   factory ApiResponse.fromJson(Map<dynamic, dynamic> json) {
     return ApiResponse(
-        success: json["success"],
-        error: json["error"],
-        data: json["data"],
+        success: json['success'],
+        error: json['error'],
+        data: json['data'],
     );
   }
 }

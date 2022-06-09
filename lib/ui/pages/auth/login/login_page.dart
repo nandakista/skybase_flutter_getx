@@ -10,7 +10,7 @@ import 'package:varcore_flutter_base/ui/widgets/custom_button.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_form_field.dart';
 
 class LoginPage extends GetView<LoginController> {
-  static String routeName = "/login";
+  static String routeName = '/login';
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -31,9 +31,9 @@ class LoginPage extends GetView<LoginController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Log In ", style: AppStyle.headline2),
+                            Text('Log In ', style: AppStyle.headline2),
                             const SizedBox(height: 10),
-                            Text("Masukkan No.Handphone dan password anda. ",
+                            Text('Masukkan No.Handphone dan password anda. ',
                                 style: AppStyle.subtitle4),
                           ],
                         ),
@@ -53,8 +53,8 @@ class LoginPage extends GetView<LoginController> {
                       children: [
                         const SizedBox(height: 20),
                         CustomFieldForm(
-                          label: "No.Handphone",
-                          hint: "No.Handphone",
+                          label: 'No.Handphone',
+                          hint: 'No.Handphone',
                           controller: controller.phoneController,
                           keyboardType: TextInputType.phone,
                           icon: Icons.phone,
@@ -64,8 +64,8 @@ class LoginPage extends GetView<LoginController> {
                         const SizedBox(height: 20),
                         Obx(
                               () => CustomPasswordFieldForm(
-                            label: "Password",
-                            hint: "Password",
+                            label: 'Password',
+                            hint: 'Password',
                             controller: controller.passController,
                             icon: Icons.lock,
                             hiddenText: controller.isHiddenPassword.value,
@@ -82,7 +82,7 @@ class LoginPage extends GetView<LoginController> {
                               FocusScope.of(context).unfocus();
                               controller.login();
                             },
-                            text: "Log In",
+                            text: 'Log In',
                             icon: Icons.arrow_forward,
                             color: AppColors.primary),
                         Column(
@@ -91,11 +91,10 @@ class LoginPage extends GetView<LoginController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text("Belum memiliki akun ? ",
+                                Text('Belum memiliki akun ? ',
                                     style: AppStyle.normalBig),
                                 InkWell(
-                                    // onTap: () => Get.toNamed(AgreementPage.routeName),
-                                    child: Text("Daftar",
+                                    child: Text('Daftar',
                                         style: AppStyle.normalBig.copyWith(
                                             color: AppColors.primary,
                                             fontWeight: FontWeight.bold))),
@@ -105,11 +104,10 @@ class LoginPage extends GetView<LoginController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text("Lupa password ? ",
+                                Text('Lupa password ? ',
                                     style: AppStyle.normalBig),
                                 InkWell(
-                                    // onTap: () => Get.toNamed(PasswordResetPage.routeName),
-                                    child: Text("Reset",
+                                    child: Text('Reset',
                                         style: AppStyle.normalBig.copyWith(
                                             color: AppColors.primary,
                                             fontWeight: FontWeight.bold))),

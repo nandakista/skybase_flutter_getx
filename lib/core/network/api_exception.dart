@@ -24,7 +24,7 @@ class DioException {
           var status = dioError.response?.statusCode;
           var message = dioError.response?.statusMessage;
           status ??= 504;
-          message ??= "Timeout";
+          message ??= 'Timeout';
           return 'Terjadi kesalahan! \n($status : $message)';
       }
     }

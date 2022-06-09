@@ -109,7 +109,7 @@ class CustomAppBar extends StatelessWidget {
   const CustomAppBar(
       {Key? key,
       required this.onPress,
-      this.title = "",
+      this.title = '',
       this.iconColor,
       this.backgroundColor,
       this.textColor,

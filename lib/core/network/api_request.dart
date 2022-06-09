@@ -12,8 +12,8 @@ import 'package:varcore_flutter_base/data/models/base_response/api_response.dart
 enum RequestMethod { GET, POST, PATCH, PUT, DELETE }
 
 Map<String, String> headers = {
-  HttpHeaders.authorizationHeader: "",
-  // "Client-Token": "EY5WGBIXosmK5f2Jckxt52Gm9p8sv1VEMjYzozArzb0=",
+  HttpHeaders.authorizationHeader: '',
+  // 'Client-Token': 'EY5WGBIXosmK5f2Jckxt52Gm9p8sv1VEMjYzozArzb0=',
 };
 
 Future<ApiResponse> sendRequest({
@@ -26,7 +26,7 @@ Future<ApiResponse> sendRequest({
   DioClient.setInterceptor();
   var apiToken = LocalStorage.to.isLoggedIn() ? LocalStorage.to.getToken() : null;
   if (useToken) {
-    headers[HttpHeaders.authorizationHeader] = "Bearer $apiToken";
+    headers[HttpHeaders.authorizationHeader] = 'Bearer $apiToken';
   } else {
     headers.clear();
   }
@@ -35,7 +35,7 @@ Future<ApiResponse> sendRequest({
     switch (requestMethod) {
       case RequestMethod.POST:
         try {
-          debugPrint("Request Body : ${FormData.fromMap(body as Map<String, dynamic>).fields}");
+          debugPrint('Request Body : ${FormData.fromMap(body as Map<String, dynamic>).fields}');
           final responseBody = await dioClient.post(
             url,
             data: contentType == Headers.jsonContentType
@@ -50,7 +50,7 @@ Future<ApiResponse> sendRequest({
             throw ApiMessage.message(baseResponse.error);
           }
         } on SocketException {
-          throw "Tidak ada koneksi internet!";
+          throw 'Tidak ada koneksi internet!';
         } on DioError catch (error) {
           throw DioException.message(error);
         }
@@ -68,7 +68,7 @@ Future<ApiResponse> sendRequest({
             throw ApiMessage.message(baseResponse.error);
           }
         } on SocketException {
-          throw "Tidak ada koneksi internet!";
+          throw 'Tidak ada koneksi internet!';
         } on DioError catch (error) {
           throw DioException.message(error);
         }
@@ -89,7 +89,7 @@ Future<ApiResponse> sendRequest({
             throw ApiMessage.message(baseResponse.error);
           }
         } on SocketException {
-          throw "Tidak ada koneksi internet!";
+          throw 'Tidak ada koneksi internet!';
         } on DioError catch (error) {
           throw DioException.message(error);
         }
@@ -104,7 +104,7 @@ Future<ApiResponse> sendRequest({
             options: Options(headers: headers, contentType: contentType),
           );
         } on SocketException {
-          throw "Tidak ada koneksi internet!";
+          throw 'Tidak ada koneksi internet!';
         } on DioError catch (error) {
           throw DioException.message(error);
         }
@@ -116,7 +116,7 @@ Future<ApiResponse> sendRequest({
             options: Options(headers: headers),
           );
         } on SocketException {
-          throw "Tidak ada koneksi internet!";
+          throw 'Tidak ada koneksi internet!';
         } on DioError catch (error) {
           throw DioException.message(error);
         }
@@ -139,7 +139,7 @@ Future<Response> stampRequest({
 }) async {
   var apiToken = LocalStorage.to.isLoggedIn() ? LocalStorage.to.getToken() : null;
   if (useToken) {
-    headers[HttpHeaders.authorizationHeader] = "Bearer $apiToken";
+    headers[HttpHeaders.authorizationHeader] = 'Bearer $apiToken';
   }
   try {
     Response response;
@@ -154,7 +154,7 @@ Future<Response> stampRequest({
             options: Options(headers: headers, contentType: contentType),
           );
         } on SocketException {
-          throw "Tidak ada koneksi internet!";
+          throw 'Tidak ada koneksi internet!';
         } on DioError catch (error) {
           throw DioException.message(error);
         }

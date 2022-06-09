@@ -1,12 +1,12 @@
 import 'package:intl/intl.dart';
 
-const String dateFormat = "y-MM-dd";
-const String dateFormatName = "d MMM y";
-const String FORMAT_LONG_DAY_MONTH_TIME = "EEEE, dd MMMM yyyy HH:mm:ss";
-const String FORMAT_LONG_DAY_AND_MONTH = "EEEE, dd MMMM yyyy";
-const String FORMAT_DD_MMM_YYYY = "dd MMM yyyy";
-const String FORMAT_EEE_DD_MMM_YYYY = "EEE, dd MMM yyyy";
-const String FORMAT_DEFAULT = "yyyy-MM-dd HH:mm:ss";
+const String dateFormat = 'y-MM-dd';
+const String dateFormatName = 'd MMM y';
+const String FORMAT_LONG_DAY_MONTH_TIME = 'EEEE, dd MMMM yyyy HH:mm:ss';
+const String FORMAT_LONG_DAY_AND_MONTH = 'EEEE, dd MMMM yyyy';
+const String FORMAT_DD_MMM_YYYY = 'dd MMM yyyy';
+const String FORMAT_EEE_DD_MMM_YYYY = 'EEE, dd MMM yyyy';
+const String FORMAT_DEFAULT = 'yyyy-MM-dd HH:mm:ss';
 
 class DateHelper {
 
@@ -55,7 +55,7 @@ class DateHelper {
     } else if (date != null && isNotRange) {
       return DateFormat(pattern).format(date!);
     } else {
-      return "Error date converted!";
+      return 'Error date converted!';
     }
   }
 }

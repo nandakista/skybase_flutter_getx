@@ -46,7 +46,7 @@ class AppDialog {
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.error(
-            title: title ?? "Gagal",
+            title: title ?? 'Gagal',
             description: message,
             onConfirm: onPress,
           ),
@@ -56,7 +56,7 @@ class AppDialog {
           barrierDismissible: dismissible ?? false,
           context: Get.context!,
           builder: (context) => DialogAlert.success(
-            title: title ?? "Berhasil",
+            title: title ?? 'Berhasil',
             description: message,
             onConfirm: onPress,
           ),
@@ -66,7 +66,7 @@ class AppDialog {
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.warning(
-            title: title ?? "Peringatan!",
+            title: title ?? 'Peringatan!',
             description: message,
             onConfirm: onPress,
             onCancel: () => Get.back(),

@@ -6,5 +6,5 @@ class AppConst {
   /* Validator
   ... Size Validator
    */
-  static const String validSize = "Ukuran file tidak boleh melebihi 2MB.";
+  static const String validSize = 'Ukuran file tidak boleh melebihi 2MB.';
 }

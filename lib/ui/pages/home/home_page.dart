@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 
 class HomePage extends StatelessWidget {
-  static String routeName = "/home";
+  static String routeName = '/home';
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Text("Home Page", style: AppStyle.subtitle4),
+            child: Text('Home Page', style: AppStyle.subtitle4),
           ),
         ],
       ),

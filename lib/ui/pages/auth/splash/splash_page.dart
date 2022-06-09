@@ -6,7 +6,7 @@ import 'package:varcore_flutter_base/ui/pages/auth/splash/splash_controller.dart
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
 
 class SplashPage extends GetView<SplashController> {
-  static String routeName = "/splash";
+  static String routeName = '/splash';
   const SplashPage({Key? key}) : super(key: key);
 
   @override
@@ -28,7 +28,7 @@ class SplashPage extends GetView<SplashController> {
                     color: Colors.white),
                 // child: const CircleAvatar(
                 //   backgroundColor: Colors.white,
-                //   backgroundImage: AssetImage("assets/logo_splash.png"),
+                //   backgroundImage: AssetImage('assets/logo_splash.png'),
                 // ),
                 child: FlutterLogo(),
               ),
@@ -36,10 +36,10 @@ class SplashPage extends GetView<SplashController> {
                 height: 20,
               ),
               Text(
-                "VARCORE",
+                'VARCORE',
                 style: AppStyle.headline2.copyWith(color: Colors.white),
               ),
-              Text("BASE CODE",
+              Text('BASE CODE',
                   style: AppStyle.normalBig.copyWith(
                       color: Colors.white, fontWeight: FontWeight.bold))
             ],

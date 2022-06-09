@@ -3,11 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final SharedPreferences prefs = Get.find<SharedPreferences>();
 class KeyPrefs {
-  static const firstOpen = "onboarding";
-  static const signature = "signature";
-  static const roles = "roles";
-  static const isRevision = "true";
-  static const haveCA = "haveCA";
+  static const firstOpen = 'onboarding';
 }
 
 class SPrefs {

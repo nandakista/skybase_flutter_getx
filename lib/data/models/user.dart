@@ -51,19 +51,19 @@ class User {
   }
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "token": token,
-    "refresh_token": refreshToken,
-    "email": email,
-    "phone": phone,
-    "active": isLogin,
-    "active_email": isActiveEmail,
+    'id': id,
+    'token': token,
+    'refresh_token': refreshToken,
+    'email': email,
+    'phone': phone,
+    'active': isLogin,
+    'active_email': isActiveEmail,
 
     // Biodata
-    "nama": name,
-    "tempat_lahir": birthPlace,
-    "tanggal_lahir": birthDate,
-    "gender": gender,
-    "alamat": address,
+    'nama': name,
+    'tempat_lahir': birthPlace,
+    'tanggal_lahir': birthDate,
+    'gender': gender,
+    'alamat': address,
   };
 }

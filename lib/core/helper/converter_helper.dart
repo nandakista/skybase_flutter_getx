@@ -28,11 +28,11 @@ class AppConverter {
   }
 
   static String snakeCaseToNormal(String input){
-    return input.replaceAll("_", " ").toLowerCase().split(" ").map((e) => "${e[0].toUpperCase()}${e.substring(1)}").join(" ");
+    return input.replaceAll('_', ' ').toLowerCase().split(' ').map((e) => '${e[0].toUpperCase()}${e.substring(1)}').join(' ');
   }
 
   static String toSnakeCase(String input){
-    return input.replaceAll(" ", "_").toLowerCase().split(" ").map((e) => "${e[0].toLowerCase()}${e.substring(1)}").join(" ");
+    return input.replaceAll(' ', '_').toLowerCase().split(' ').map((e) => '${e[0].toLowerCase()}${e.substring(1)}').join(' ');
   }
 
   static String replaceCharAt(String oldString, int index, String newChar) {

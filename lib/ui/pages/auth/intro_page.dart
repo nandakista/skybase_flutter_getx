@@ -26,7 +26,7 @@ class IntroPage extends StatelessWidget {
       key: introKey,
       pages: [
         PageViewModel(
-          title: 'PPAT Digital Security',
+          title: 'Varcore Base',
           body: '',
           image: _buildImage('img_pv_1.png'),
           decoration: pageDecoration,
