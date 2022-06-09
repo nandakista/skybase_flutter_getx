@@ -20,40 +20,42 @@ class DateHelper {
     this.endDate
   });
 
-  String? format({bool range = false}) {
-    return formatDate(range: range, pattern: 'dd MMMM y');
+  String? format() {
+    return formatDate(pattern: 'dd MMMM y');
   }
 
-  String? format2({bool range = false}) {
-    return formatDate(range: range, pattern: 'dd/MM/yyyy');
+  String? format2() {
+    return formatDate(pattern: 'dd/MM/yyyy');
   }
 
-  String? format3({bool range = false}) {
-    return formatDate(range: range, pattern: 'dd-MM-yyyy');
+  String? format3() {
+    return formatDate(pattern: 'dd-MM-yyyy');
   }
 
-  String? format4({bool range = false}) {
-    return formatDate(range: range, pattern: 'EEEE, dd MMMM y');
+  String? format4() {
+    return formatDate(pattern: 'EEEE, dd MMMM y');
   }
 
-  String? format5({bool range = false}) {
-    return formatDate(range: range, pattern: 'EEEE, dd MMMM yyyy HH:mm:ss');
+  String? format5() {
+    return formatDate(pattern: 'EEEE, dd MMMM yyyy HH:mm:ss');
   }
 
-  String? format6({bool range = false}) {
-    return formatDate(range: range, pattern: 'yyyy-MM-dd');
+  String? format6() {
+    return formatDate(pattern: 'yyyy-MM-dd');
   }
 
-  String? formatDate({bool range = false, String? pattern}) {
-    if(range) {
-      if(startDate == null || endDate == null) return null;
+  String? formatDate({String? pattern}) {
+    bool isRange = (startDate != null && endDate != null);
+    bool isNotRange = (startDate == null && endDate == null);
+
+    if(isRange && date == null) {
       var start = DateFormat(pattern).format(startDate!);
       var end = DateFormat(pattern).format(endDate!);
       return '$start - $end';
-    } else {
-      if(date == null) return null;
+    } else if (date != null && isNotRange) {
       return DateFormat(pattern).format(date!);
+    } else {
+      return "Error date converted!";
     }
   }
-
 }
