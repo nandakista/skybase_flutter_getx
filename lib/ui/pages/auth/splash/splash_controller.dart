@@ -21,7 +21,8 @@ class SplashController extends GetxController {
       prefs.setBool(KeyPrefs.firstOpen, false);
       Timer(const Duration(seconds: 2), () => Get.toNamed(IntroPage.routeName));
     } else {
-      verifyToken(token: LocalStorage.to.getToken());
+      // verifyToken(token: LocalStorage.to.getToken());
+      Timer(const Duration(seconds: 2), () => Get.toNamed(HomePage.routeName));
     }
   }
 

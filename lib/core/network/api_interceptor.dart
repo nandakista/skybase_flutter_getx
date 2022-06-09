@@ -54,16 +54,21 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
     debugPrint("Error Message : ${err.message} ");
     debugPrint("<-- End error");
 
+    _handleRefreshToken(err, handler);
+    super.onError(err, handler);
+  }
+
+  _handleRefreshToken(DioError err, ErrorInterceptorHandler handler) async {
     String? accessToken = LocalStorage.to.getToken();
     String? refreshToken = LocalStorage.to.getRefreshToken();
     if (accessToken != null && err.response?.statusCode == 401) {
-      String? newToken = await getAccessToken(refreshToken: refreshToken.toString());
+      String? newToken =
+          await _getAccessToken(refreshToken: refreshToken.toString());
       LocalStorage.to.saveToken(newToken.toString());
       return handler.resolve(await _retry(err.requestOptions));
     } else {
       super.onError(err, handler);
     }
-    super.onError(err, handler);
   }
 
   Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
@@ -77,7 +82,7 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
         options: options);
   }
 
-  Future<String?> getAccessToken({required String refreshToken}) async {
+  Future<String?> _getAccessToken({required String refreshToken}) async {
     try {
       final responseBody = await Dio().post(
         DioClient.baseURL + ApiUrl.refreshToken,

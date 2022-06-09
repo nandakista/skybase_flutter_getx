@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 
@@ -9,11 +10,16 @@ class CustomFieldForm extends StatelessWidget {
   final IconData icon;
   final IconData? endIcon;
   final int? maxLength, maxLines;
-  final Function? onPress;
+  final VoidCallback? onPress;
   final String? Function(String?)? validator;
+  final List<TextInputFormatter>? inputFormatters;
   final Color? backgroundColor;
   final Color? textColor;
   final Color? hintColor;
+  final bool readOnly;
+
+  final Function(String)? onFieldSubmitted;
+  final Function(String)? onChanged;
 
   const CustomFieldForm({
     Key? key,
@@ -30,56 +36,48 @@ class CustomFieldForm extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.hintColor,
+    this.inputFormatters,
+    this.onFieldSubmitted,
+    this.onChanged,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<TextInputFormatter> formatters = [];
+    formatters.add(LengthLimitingTextInputFormatter(maxLength));
+    if (inputFormatters != null) {
+      formatters.addAll(inputFormatters!);
+    }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: backgroundColor ?? Colors.grey.withOpacity(0.1),
       ),
-      child: (onPress == null)
-          ? TextFormField(
-              onEditingComplete: () => FocusScope.of(context).nextFocus(),
-              controller: controller,
-              keyboardType: keyboardType,
-              maxLength: maxLength,
-              maxLines: maxLines,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                prefixIcon: Icon(icon),
-                suffixIcon: Icon(endIcon),
-                hintText: hint,
-                labelText: label,
-                floatingLabelStyle: TextStyle(color: textColor ?? AppColors.primary),
-                labelStyle: TextStyle(color: hintColor ?? Colors.grey),
-                hintStyle: TextStyle(color: hintColor ?? Colors.grey),
-              ),
-              validator: validator,
-              // validator: (value) => FieldValidator.validate(value!),
-            )
-          : TextFormField(
-              onTap: () => onPress!(),
-              readOnly: true,
-              onEditingComplete: () => FocusScope.of(context).nextFocus(),
-              controller: controller,
-              keyboardType: keyboardType,
-              maxLength: maxLength,
-              maxLines: maxLines,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                prefixIcon: Icon(icon),
-                suffixIcon: Icon(endIcon),
-                hintText: label,
-                labelText: hint,
-                floatingLabelStyle: TextStyle(color: textColor ?? AppColors.primary),
-                labelStyle: TextStyle(color: hintColor ?? Colors.grey),
-                hintStyle: TextStyle(color: hintColor ?? Colors.grey),
-              ),
-              validator: validator,
-            ),
+      child: TextFormField(
+        onTap: onPress,
+        readOnly: readOnly,
+        onEditingComplete: () => FocusScope.of(context).nextFocus(),
+        controller: controller,
+        keyboardType: keyboardType,
+        maxLength: maxLength,
+        maxLines: maxLines,
+        onFieldSubmitted: onFieldSubmitted,
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          prefixIcon: Icon(icon),
+          suffixIcon: Icon(endIcon),
+          hintText: label,
+          labelText: hint,
+          floatingLabelStyle: TextStyle(color: textColor ?? AppColors.primary),
+          labelStyle: TextStyle(color: hintColor ?? Colors.grey),
+          hintStyle: TextStyle(color: hintColor ?? Colors.grey),
+        ),
+        validator: validator,
+        inputFormatters: inputFormatters,
+      ),
     );
   }
 }
@@ -89,8 +87,9 @@ class CustomPasswordFieldForm extends StatelessWidget {
   final TextEditingController controller;
   final IconData icon;
   final Widget? endIcon;
-  final Function? onPress;
-  final String? Function(String?)? validator, onSaved, onChanged;
+  final VoidCallback? onPress;
+  final int? maxLength;
+  final String? Function(String?)? validator, onSaved, onChanged, onSubmit;
   final String? errorText;
   final bool hiddenText;
   final Color? backgroundColor;
@@ -113,6 +112,8 @@ class CustomPasswordFieldForm extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.hintColor,
+    this.maxLength,
+    this.onSubmit,
   }) : super(key: key);
 
   @override
@@ -138,71 +139,11 @@ class CustomPasswordFieldForm extends StatelessWidget {
           hintStyle: TextStyle(color: hintColor ?? Colors.grey),
         ),
         obscureText: hiddenText,
-        onSaved: onSaved,
-        validator: validator,
-        onChanged: onChanged,
-        // validator: (value) => FieldValidator.validate(value!),
-      ),
-    );
-  }
-}
-
-class CustomFieldPassiveForm extends StatelessWidget {
-  final String label, hint;
-  final TextInputType? keyboardType;
-  final IconData icon;
-  final IconData? endIcon;
-  final int? maxLength, maxLines;
-  final Function? onPress;
-  final String? Function(String?)? validator;
-  final TextEditingController controller;
-  final Color? backgroundColor;
-  final Color? textColor;
-  final Color? hintColor;
-
-  const CustomFieldPassiveForm({
-    Key? key,
-    required this.label,
-    required this.hint,
-    this.maxLength,
-    this.maxLines,
-    this.onPress,
-    this.endIcon,
-    required this.validator,
-    required this.controller,
-    this.keyboardType,
-    required this.icon,
-    this.backgroundColor,
-    this.textColor,
-    this.hintColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: backgroundColor ?? Colors.grey.withOpacity(0.1),
-      ),
-      child: TextFormField(
-        onTap: () => onPress!(),
-        controller: controller,
-        readOnly: true,
-        onEditingComplete: () => FocusScope.of(context).nextFocus(),
-        keyboardType: keyboardType,
         maxLength: maxLength,
-        maxLines: maxLines,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          prefixIcon: Icon(icon),
-          suffixIcon: Icon(endIcon),
-          hintText: hint,
-          labelText: label,
-          floatingLabelStyle: TextStyle(color: textColor ?? AppColors.primary),
-          labelStyle: TextStyle(color: hintColor ?? Colors.grey),
-          hintStyle: TextStyle(color: hintColor ?? Colors.grey),
-        ),
+        onChanged: onChanged,
+        onSaved: onSaved,
+        onTap: onPress,
+        onFieldSubmitted: onSubmit,
         validator: validator,
       ),
     );
@@ -233,8 +174,8 @@ class RegisterPasswordRequirement extends StatelessWidget {
         const SizedBox(width: 5),
         Expanded(
           child: Text(message,
-              style: AppStyle.normalBig.copyWith(
-                  color: (isValid) ? Colors.green : Colors.grey)),
+              style: AppStyle.normalBig
+                  .copyWith(color: (isValid) ? Colors.green : Colors.grey)),
         )
       ],
     );

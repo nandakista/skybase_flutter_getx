@@ -5,22 +5,16 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_dialog.dart';
 
-// ----------------------------------------------------------------------------------------
-//                               LOADING DIALOG
-// ----------------------------------------------------------------------------------------
-
+//---------------<Toast>-----------------
 class Toast {
   static show(String message) {
     Fluttertoast.showToast(msg: message);
   }
 }
 
-// ----------------------------------------------------------------------------------------
-//                               LOADING DIALOG
-// ----------------------------------------------------------------------------------------
-
+//---------------<Loading Dialog>-----------------
 class Loading {
-  static show(){
+  static show() {
     return showDialog(
         barrierDismissible: false,
         context: Get.context!,
@@ -30,9 +24,7 @@ class Loading {
   static hide() => Get.back();
 }
 
-// ----------------------------------------------------------------------------------------
-//                               DIALOG
-// ----------------------------------------------------------------------------------------
+//---------------<Custom Dialog>-----------------
 enum TypeDialog {
   FAILED,
   SUCCESS,
@@ -41,7 +33,13 @@ enum TypeDialog {
 }
 
 class AppDialog {
-  static show({required TypeDialog typeDialog, String? title, required String message, required Function onPress, bool? dismissible}) {
+  static show({
+    required TypeDialog typeDialog,
+    String? title,
+    required String message,
+    required Function onPress,
+    bool? dismissible,
+  }) {
     switch (typeDialog) {
       case TypeDialog.FAILED:
         return showDialog(
@@ -50,7 +48,7 @@ class AppDialog {
           builder: (context) => FailedDialog(
             title: title ?? "Gagal",
             description: message,
-            onPress: () => onPress(),
+            onPress: onPress,
           ),
         );
       case TypeDialog.SUCCESS:
@@ -60,7 +58,7 @@ class AppDialog {
           builder: (context) => SuccessDialog(
             title: title ?? "Berhasil",
             description: message,
-            onPress: () => onPress(),
+            onPress: onPress,
           ),
         );
       case TypeDialog.WARNING:
@@ -70,8 +68,8 @@ class AppDialog {
           builder: (context) => WarningDialog(
             title: title ?? "Peringatan!",
             description: message,
-            confirmPress: () => onPress(),
-            cancelPress: () => Get.back() ,
+            confirmPress: onPress,
+            cancelPress: () => Get.back(),
           ),
         );
       case TypeDialog.SOON:

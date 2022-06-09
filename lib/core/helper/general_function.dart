@@ -38,12 +38,14 @@ class AppFunction {
     return result;
   }
 
-  static Future<File?> compressFile(
+  static Future<File?> compressImage(
       {required File file, required String targetPath}) async {
     var result = await FlutterImageCompress.compressAndGetFile(
       file.absolute.path,
       targetPath,
-      quality: 3,
+      minWidth: 1024,
+      minHeight: 1024,
+      quality: 80,
     );
     debugPrint(file.lengthSync().toString());
     debugPrint(result?.lengthSync().toString());
@@ -52,7 +54,7 @@ class AppFunction {
 
   // Download File
   static Future<File> downloadFile({required String url, bool useToken = false, name}) async {
-    var fileName = "result-infinite-digital-security";
+    var fileName = "downloaded_file";
     if (name != null) {
       fileName = name;
     }
@@ -121,6 +123,7 @@ class AppFunction {
       File file = File(result.files.single.path!);
       return file;
     }
+    return null;
   }
 }
 
