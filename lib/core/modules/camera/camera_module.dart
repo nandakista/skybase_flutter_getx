@@ -20,13 +20,18 @@ T? _ambiguate<T>(T? value) => value;
 class CameraModule extends StatefulWidget {
   final CameraType cameraType;
   final bool showInfo;
+  final bool originSize;
+  final bool userBorder;
   final ResolutionPreset resolutionPreset;
-  const CameraModule(
-      {Key? key,
-      required this.cameraType,
-      required this.showInfo,
-      this.resolutionPreset = ResolutionPreset.high})
-      : super(key: key);
+
+  const CameraModule({
+    Key? key,
+    required this.cameraType,
+    required this.showInfo,
+    this.resolutionPreset = ResolutionPreset.high,
+    required this.originSize,
+    required this.userBorder,
+  }) : super(key: key);
 
   @override
   _CameraModuleState createState() => _CameraModuleState();
@@ -193,43 +198,52 @@ class _CameraModuleState extends State<CameraModule>
     final size = MediaQuery.of(context).size;
     var scale = size.aspectRatio * camera.aspectRatio;
     if (scale < 1) scale = 1 / scale;
-    // return Transform.scale(
-    //   scale: scale,
-    //   child: Center(
-    //     child: CameraPreview(_cameraController!),
-    //   ),
-    // );
-    return Stack(
-      children: [
-        Center(
-          child: CameraPreview(_cameraController!),
-        ),
-        Column(
-          children: [
-            Container(
-              height: (MediaQuery.of(context).size.height - MediaQuery.of(context).size.width)/2 - 15,
-              color: Colors.black.withOpacity(0.3),
-            ),
-            Center(
-              child: AspectRatio(
-                aspectRatio: MediaQuery.of(context).size.width /
-                    MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomPaint(
-                    foregroundPainter: BorderPainter(),
+    if (widget.userBorder) {
+      return Stack(
+        children: [
+          Center(
+            child: CameraPreview(_cameraController!),
+          ),
+          Column(
+            children: [
+              Container(
+                height: (MediaQuery.of(context).size.height -
+                            MediaQuery.of(context).size.width) /
+                        2 -
+                    15,
+                color: Colors.black.withOpacity(0.3),
+              ),
+              Center(
+                child: AspectRatio(
+                  aspectRatio: MediaQuery.of(context).size.width /
+                      MediaQuery.of(context).size.width,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CustomPaint(
+                      foregroundPainter: BorderPainter(),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              height: (MediaQuery.of(context).size.height - MediaQuery.of(context).size.width)/2 - 15,
-              color: Colors.black.withOpacity(0.3),
-            ),
-          ],
+              Container(
+                height: (MediaQuery.of(context).size.height -
+                            MediaQuery.of(context).size.width) /
+                        2 -
+                    15,
+                color: Colors.black.withOpacity(0.3),
+              ),
+            ],
+          ),
+        ],
+      );
+    } else {
+      return Transform.scale(
+        scale: scale,
+        child: Center(
+          child: CameraPreview(_cameraController!),
         ),
-      ],
-    );
+      );
+    }
   }
 
   Widget cameraButton(context) {
@@ -237,28 +251,23 @@ class _CameraModuleState extends State<CameraModule>
       alignment: Alignment.topCenter,
       child: InkWell(
         onTap: () => onCapture(context),
-        child: CircleAvatar(
-          backgroundColor: Colors.white,
-          radius: 40,
-          child: CircleAvatar(
-            backgroundColor: Colors.black.withOpacity(1),
-            radius: 33,
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 25,
+        child: Container(
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.white, width: 2.0),
+            shape: BoxShape.circle,
+          ),
+          child: const CircleAvatar(
+            child: Icon(
+              Icons.camera,
+              size: 55,
+              color: Colors.white,
             ),
+            radius: 35,
+            backgroundColor: Colors.black,
           ),
         ),
       ),
-      // child: CircleAvatar(
-      //   backgroundColor: Colors.black,
-      //   radius: 40,
-      //   child: IconButton(
-      //       icon: const Icon(Icons.camera, color: Colors.white,),
-      //       onPressed: () => onCapture(context),
-      //       iconSize: 50,
-      //   ),
-      // ),
     );
   }
 
@@ -273,11 +282,20 @@ class _CameraModuleState extends State<CameraModule>
         } else {
           imageCaptured = File(value.path);
         }
-        // var cropedImg = await squareCropImage(imageCaptured);
-        final arguments = Get.to(() => PreviewCameraPage(
-              imageFile: imageCaptured,
-              showInfo: widget.showInfo,
-            ));
+
+        dynamic arguments;
+        if (widget.originSize) {
+          arguments = Get.to(() => PreviewCameraPage(
+                imageFile: imageCaptured,
+                showInfo: widget.showInfo,
+              ));
+        } else {
+          var cropedImg = await squareCropImage(imageCaptured);
+          arguments = Get.to(() => PreviewCameraPage(
+                imageFile: cropedImg,
+                showInfo: widget.showInfo,
+              ));
+        }
         arguments?.then((value) {
           if (value != null) {
             Get.back(result: value);
@@ -300,9 +318,12 @@ class _CameraModuleState extends State<CameraModule>
   Future<File> flipSelfieImage(XFile image) async {
     final img.Image? capturedImage =
         img.decodeImage(await File(image.path).readAsBytes());
-    final img.Image orientedImage = img.flipHorizontal(capturedImage!);
-    // var croppedImage = img.copyResizeCropSquare(capturedImage!, 1080);
-    // final img.Image orientedImage = img.flipHorizontal(croppedImage);
+
+    // final img.Image orientedImage = img.flipHorizontal(capturedImage!);
+
+    var croppedImage = img.copyResizeCropSquare(capturedImage!, 1080);
+    final img.Image orientedImage = img.flipHorizontal(croppedImage);
+
     File flipedImage =
         await File(image.path).writeAsBytes(img.encodeJpg(orientedImage));
     return flipedImage;
