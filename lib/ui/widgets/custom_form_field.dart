@@ -17,7 +17,6 @@ class CustomFieldForm extends StatelessWidget {
   final Color? textColor;
   final Color? hintColor;
   final bool readOnly;
-
   final Function(String)? onFieldSubmitted;
   final Function(String)? onChanged;
 
@@ -26,7 +25,7 @@ class CustomFieldForm extends StatelessWidget {
     required this.label,
     required this.hint,
     this.maxLength,
-    this.maxLines,
+    this.maxLines = 1,
     this.onPress,
     this.endIcon,
     required this.validator,
@@ -34,8 +33,8 @@ class CustomFieldForm extends StatelessWidget {
     this.keyboardType,
     required this.icon,
     this.backgroundColor,
-    this.textColor,
-    this.hintColor,
+    this.textColor = AppColors.primary,
+    this.hintColor = Colors.grey,
     this.inputFormatters,
     this.onFieldSubmitted,
     this.onChanged,
@@ -71,9 +70,9 @@ class CustomFieldForm extends StatelessWidget {
           suffixIcon: Icon(endIcon),
           hintText: label,
           labelText: hint,
-          floatingLabelStyle: TextStyle(color: textColor ?? AppColors.primary),
-          labelStyle: TextStyle(color: hintColor ?? Colors.grey),
-          hintStyle: TextStyle(color: hintColor ?? Colors.grey),
+          floatingLabelStyle: TextStyle(color: textColor),
+          labelStyle: TextStyle(color: hintColor),
+          hintStyle: TextStyle(color: hintColor),
         ),
         validator: validator,
         inputFormatters: inputFormatters,
@@ -110,8 +109,8 @@ class CustomPasswordFieldForm extends StatelessWidget {
     required this.controller,
     required this.icon,
     this.backgroundColor,
-    this.textColor,
-    this.hintColor,
+    this.textColor = AppColors.primary,
+    this.hintColor = Colors.grey,
     this.maxLength,
     this.onSubmit,
   }) : super(key: key);
@@ -134,9 +133,9 @@ class CustomPasswordFieldForm extends StatelessWidget {
           suffixIcon: endIcon,
           hintText: hint,
           labelText: label,
-          floatingLabelStyle: TextStyle(color: textColor ?? AppColors.primary),
-          labelStyle: TextStyle(color: hintColor ?? Colors.grey),
-          hintStyle: TextStyle(color: hintColor ?? Colors.grey),
+          floatingLabelStyle: TextStyle(color: textColor),
+          labelStyle: TextStyle(color: hintColor),
+          hintStyle: TextStyle(color: hintColor),
         ),
         obscureText: hiddenText,
         maxLength: maxLength,

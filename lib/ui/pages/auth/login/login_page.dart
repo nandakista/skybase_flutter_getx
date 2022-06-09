@@ -19,7 +19,7 @@ class LoginPage extends GetView<LoginController> {
       child: Scaffold(
         body: Center(
           child: SingleChildScrollView(
-            child: Content(
+            child: ContentWrapper(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

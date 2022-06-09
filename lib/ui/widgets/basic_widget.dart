@@ -3,7 +3,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/app/app_constant.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
-import 'package:varcore_flutter_base/core/themes/app_style.dart';
 
 Widget loadingIndicator =
     const SpinKitThreeBounce(size: 45, color: Colors.blue);
@@ -49,60 +48,61 @@ class CustomCard extends StatelessWidget {
 }
 
 class CircleIcon extends StatelessWidget {
-  final Function onPressed;
+  final VoidCallback? onPressed;
   final IconData? icon;
   final double? iconSize, size;
-  final Color? backgroundColor, color;
+  final Color? backgroundColor, color, splashColor;
 
-  const CircleIcon(
-      {Key? key,
-      required this.onPressed,
-      required this.icon,
-      this.backgroundColor = Colors.black,
-      this.color = Colors.white,
-      this.iconSize = 30,
-      this.size = 56})
-      : super(key: key);
+  const CircleIcon({
+    Key? key,
+    this.onPressed,
+    required this.icon,
+    this.backgroundColor = Colors.black,
+    this.color = Colors.white,
+    this.iconSize = 30,
+    this.size = 56,
+    this.splashColor = Colors.grey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClipOval(
       child: Material(
-        color: backgroundColor,
-        child: InkWell(
-          splashColor: Colors.grey, // Splash color
-          onTap: () => onPressed(),
-          child: Container(
-              color: backgroundColor ?? Colors.black54.withOpacity(0.6),
-              width: size,
-              height: size,
-              child: Icon(
-                icon,
-                size: iconSize,
-                color: color,
-              )),
+        color: backgroundColor ?? Colors.black54.withOpacity(0.6),
+        child: SizedBox(
+          height: size,
+          width: size,
+          child: IconButton(
+            onPressed: onPressed,
+            splashColor: splashColor,
+            icon: Icon(
+              icon,
+              size: iconSize,
+              color: color,
+            ),
+          ),
         ),
       ),
     );
   }
 }
 
-class Content extends StatelessWidget {
+class ContentWrapper extends StatelessWidget {
   final Widget? child;
-  const Content({Key? key, required this.child}) : super(key: key);
+  const ContentWrapper({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.fromLTRB(
-            AppConst.defaultMargin, 0, AppConst.defaultMargin, AppConst.defaultMargin),
+        margin: const EdgeInsets.fromLTRB(AppConst.defaultMargin, 0,
+            AppConst.defaultMargin, AppConst.defaultMargin),
         child: child);
   }
 }
 
 class CustomAppBar extends StatelessWidget {
   final Color? backgroundColor, textColor, iconColor;
-  final Function onPress;
+  final VoidCallback? onPress;
   final String title;
   final List<Widget>? action;
 
@@ -129,7 +129,8 @@ class CustomAppBar extends StatelessWidget {
                     : Colors.black
                 : textColor),
       ),
-      backgroundColor: (Get.isDarkMode) ? AppColors.baseDark : AppColors.baseLight,
+      backgroundColor:
+          (Get.isDarkMode) ? AppColors.baseDark : AppColors.baseLight,
       elevation: 0,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
@@ -140,7 +141,7 @@ class CustomAppBar extends StatelessWidget {
                         ? AppColors.primary
                         : Colors.black
                     : iconColor),
-            onPressed: () => onPress()),
+            onPressed: onPress),
       ),
       actions: action,
     );

@@ -14,7 +14,7 @@ class SplashPage extends GetView<SplashController> {
     controller.init();
     return Scaffold(
       backgroundColor: AppColors.primary,
-      body: Content(
+      body: ContentWrapper(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
