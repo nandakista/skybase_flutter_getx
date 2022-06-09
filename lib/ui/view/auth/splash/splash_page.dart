@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
-import 'package:varcore_flutter_base/ui/pages/auth/splash/splash_controller.dart';
+import 'package:varcore_flutter_base/ui/view/auth/splash/splash_controller.dart';
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
 
 class SplashPage extends GetView<SplashController> {
-  static String routeName = '/splash';
+  static const String route = '/splash';
   const SplashPage({Key? key}) : super(key: key);
 
   @override

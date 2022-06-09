@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
 import 'package:varcore_flutter_base/data/data_sources/auth/auth_datasource.dart';
-import 'package:varcore_flutter_base/ui/pages/home/home_page.dart';
+import 'package:varcore_flutter_base/ui/view/home/home_page.dart';
 
 class LoginController extends GetxController {
   final AuthDatasource dataSource;
@@ -36,7 +36,7 @@ class LoginController extends GetxController {
           //   res.isLogin,
           //   phoneController.text,
           // ]);
-          Get.offAllNamed(HomePage.routeName);
+          Get.offAllNamed(HomePage.route);
         });
       } catch (err) {
         Loading.hide();

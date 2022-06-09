@@ -4,10 +4,10 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:varcore_flutter_base/core/database/shared_prefs.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
-import 'package:varcore_flutter_base/ui/pages/auth/login/login_page.dart';
+import 'package:varcore_flutter_base/ui/view/auth/login/login_page.dart';
 
 class IntroPage extends StatelessWidget {
-  static String routeName = '/intro';
+  static const String route = '/intro';
   const IntroPage({Key? key}) : super(key: key);
 
   @override
@@ -70,7 +70,7 @@ class IntroPage extends StatelessWidget {
 
   void _onIntroEnd(context) async {
     prefs.setBool(KeyPrefs.firstOpen, false);
-    Get.offAllNamed(LoginPage.routeName);
+    Get.offAllNamed(LoginPage.route);
   }
 
   Widget _buildImage(String assetName, [double width = 250]) {

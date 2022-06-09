@@ -10,7 +10,7 @@ import 'package:varcore_flutter_base/core/network/api_exception.dart';
 import 'package:varcore_flutter_base/core/network/api_request.dart';
 import 'package:varcore_flutter_base/core/network/api_url.dart';
 import 'package:varcore_flutter_base/data/models/base_response/api_response.dart';
-import 'package:varcore_flutter_base/ui/pages/auth/login/login_page.dart';
+import 'package:varcore_flutter_base/ui/view/auth/login/login_page.dart';
 
 class ApiInterceptors extends QueuedInterceptorsWrapper {
   final Dio _dio;
@@ -97,7 +97,7 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
           typeDialog: TypeDialog.FAILED,
           dismissible: false,
           message: 'Anda harus login kembali!',
-          onPress: () => getx.Get.offAllNamed(LoginPage.routeName));
+          onPress: () => getx.Get.offAllNamed(LoginPage.route));
     }
   }
 }

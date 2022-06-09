@@ -4,13 +4,13 @@ import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/helper/validator_helper.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
-import 'package:varcore_flutter_base/ui/pages/auth/login/login_controller.dart';
+import 'package:varcore_flutter_base/ui/view/auth/login/login_controller.dart';
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_button.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_form_field.dart';
 
 class LoginPage extends GetView<LoginController> {
-  static String routeName = '/login';
+  static const String route = '/login';
   const LoginPage({Key? key}) : super(key: key);
 
   @override

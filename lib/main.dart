@@ -8,7 +8,7 @@ import 'package:varcore_flutter_base/core/app/app_config.dart';
 import 'package:varcore_flutter_base/core/app/app_services.dart';
 import 'package:varcore_flutter_base/core/helper/general_function.dart';
 import 'package:varcore_flutter_base/core/themes/app_theme.dart';
-import 'package:varcore_flutter_base/ui/pages/auth/splash/splash_page.dart';
+import 'package:varcore_flutter_base/ui/view/auth/splash/splash_page.dart';
 import 'package:varcore_flutter_base/ui/routes/app_routes.dart';
 
 void main() async {
@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.light,
-      getPages: AppPages(),
-      initialRoute: SplashPage.routeName,
+      getPages: AppPages.routes,
+      initialRoute: SplashPage.route,
     );
   }
 }
