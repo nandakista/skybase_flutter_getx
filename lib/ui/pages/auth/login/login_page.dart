@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/helper/validator_helper.dart';
+import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 import 'package:varcore_flutter_base/ui/pages/auth/login/login_controller.dart';
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
@@ -30,10 +31,10 @@ class LoginPage extends GetView<LoginController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Log In ", style: titleFontStyle),
+                            Text("Log In ", style: AppStyle.headline2),
                             const SizedBox(height: 10),
                             Text("Masukkan No.Handphone dan password anda. ",
-                                style: baseFontStyle),
+                                style: AppStyle.subtitle1),
                           ],
                         ),
                       ),
@@ -83,7 +84,7 @@ class LoginPage extends GetView<LoginController> {
                             },
                             text: "Log In",
                             icon: Icons.arrow_forward,
-                            color: primaryColor),
+                            color: AppColors.primary),
                         Column(
                           children: [
                             const SizedBox(height: 30),
@@ -91,12 +92,12 @@ class LoginPage extends GetView<LoginController> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text("Belum memiliki akun ? ",
-                                    style: baseFontStyleSmall),
+                                    style: AppStyle.normalBig),
                                 InkWell(
                                     // onTap: () => Get.toNamed(AgreementPage.routeName),
                                     child: Text("Daftar",
-                                        style: baseFontStyleSmall.copyWith(
-                                            color: primaryColor,
+                                        style: AppStyle.normalBig.copyWith(
+                                            color: AppColors.primary,
                                             fontWeight: FontWeight.bold))),
                               ],
                             ),
@@ -105,12 +106,12 @@ class LoginPage extends GetView<LoginController> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text("Lupa password ? ",
-                                    style: baseFontStyleSmall),
+                                    style: AppStyle.normalBig),
                                 InkWell(
                                     // onTap: () => Get.toNamed(PasswordResetPage.routeName),
                                     child: Text("Reset",
-                                        style: baseFontStyleSmall.copyWith(
-                                            color: primaryColor,
+                                        style: AppStyle.normalBig.copyWith(
+                                            color: AppColors.primary,
                                             fontWeight: FontWeight.bold))),
                               ],
                             ),

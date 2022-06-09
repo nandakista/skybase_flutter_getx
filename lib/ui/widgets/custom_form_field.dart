@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 
 class CustomFieldForm extends StatelessWidget {
@@ -52,7 +53,7 @@ class CustomFieldForm extends StatelessWidget {
                 suffixIcon: Icon(endIcon),
                 hintText: hint,
                 labelText: label,
-                floatingLabelStyle: TextStyle(color: textColor ?? primaryColor),
+                floatingLabelStyle: TextStyle(color: textColor ?? AppColors.primary),
                 labelStyle: TextStyle(color: hintColor ?? Colors.grey),
                 hintStyle: TextStyle(color: hintColor ?? Colors.grey),
               ),
@@ -73,7 +74,7 @@ class CustomFieldForm extends StatelessWidget {
                 suffixIcon: Icon(endIcon),
                 hintText: label,
                 labelText: hint,
-                floatingLabelStyle: TextStyle(color: textColor ?? primaryColor),
+                floatingLabelStyle: TextStyle(color: textColor ?? AppColors.primary),
                 labelStyle: TextStyle(color: hintColor ?? Colors.grey),
                 hintStyle: TextStyle(color: hintColor ?? Colors.grey),
               ),
@@ -132,7 +133,7 @@ class CustomPasswordFieldForm extends StatelessWidget {
           suffixIcon: endIcon,
           hintText: hint,
           labelText: label,
-          floatingLabelStyle: TextStyle(color: textColor ?? primaryColor),
+          floatingLabelStyle: TextStyle(color: textColor ?? AppColors.primary),
           labelStyle: TextStyle(color: hintColor ?? Colors.grey),
           hintStyle: TextStyle(color: hintColor ?? Colors.grey),
         ),
@@ -198,7 +199,7 @@ class CustomFieldPassiveForm extends StatelessWidget {
           suffixIcon: Icon(endIcon),
           hintText: hint,
           labelText: label,
-          floatingLabelStyle: TextStyle(color: textColor ?? primaryColor),
+          floatingLabelStyle: TextStyle(color: textColor ?? AppColors.primary),
           labelStyle: TextStyle(color: hintColor ?? Colors.grey),
           hintStyle: TextStyle(color: hintColor ?? Colors.grey),
         ),
@@ -227,12 +228,12 @@ class RegisterPasswordRequirement extends StatelessWidget {
               )
             : const Icon(
                 Icons.close,
-                color: systemDarkGreyColor,
+                color: AppColors.systemDarkGrey,
               ),
         const SizedBox(width: 5),
         Expanded(
           child: Text(message,
-              style: baseFontStyleSmall.copyWith(
+              style: AppStyle.normalBig.copyWith(
                   color: (isValid) ? Colors.green : Colors.grey)),
         )
       ],

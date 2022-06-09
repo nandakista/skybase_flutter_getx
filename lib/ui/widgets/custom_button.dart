@@ -45,7 +45,7 @@ class CustomButton extends StatelessWidget {
                 ),
                 child: Text(text,
                     textAlign: TextAlign.center,
-                    style: baseFontStyle.copyWith(
+                    style: AppStyle.subtitle1.copyWith(
                         fontSize: fontSize,
                         fontWeight: fontWeight,
                         color: (color == Colors.white)
@@ -102,7 +102,7 @@ class CustomButtonIcon extends StatelessWidget {
               ),
             ),
             label: Text(text,
-                style: baseFontStyle.copyWith(
+                style: AppStyle.subtitle1.copyWith(
                     fontWeight: FontWeight.bold, color: textColor))),
       ),
     );

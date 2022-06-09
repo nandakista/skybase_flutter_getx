@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/app/app_constant.dart';
+import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 
 Widget loadingIndicator =
@@ -94,7 +95,7 @@ class Content extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.fromLTRB(
-            defaultMargin, 0, defaultMargin, defaultMargin),
+            AppConst.defaultMargin, 0, AppConst.defaultMargin, AppConst.defaultMargin),
         child: child);
   }
 }
@@ -128,7 +129,7 @@ class CustomAppBar extends StatelessWidget {
                     : Colors.black
                 : textColor),
       ),
-      backgroundColor: (Get.isDarkMode) ? baseDarkColor : baseLightColor,
+      backgroundColor: (Get.isDarkMode) ? AppColors.baseDark : AppColors.baseLight,
       elevation: 0,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
@@ -136,7 +137,7 @@ class CustomAppBar extends StatelessWidget {
             icon: Icon(Icons.arrow_back_ios_rounded,
                 color: (iconColor == null)
                     ? Get.isDarkMode
-                        ? primaryColor
+                        ? AppColors.primary
                         : Colors.black
                     : iconColor),
             onPressed: () => onPress()),
@@ -157,7 +158,7 @@ class MyBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: padding,
-      color: (Get.isDarkMode) ? baseDarkColor : color,
+      color: (Get.isDarkMode) ? AppColors.baseDark : color,
       child: child,
     );
   }

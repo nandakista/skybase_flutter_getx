@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 import 'package:varcore_flutter_base/ui/pages/auth/splash/splash_controller.dart';
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
@@ -12,7 +13,7 @@ class SplashPage extends GetView<SplashController> {
   Widget build(BuildContext context) {
     controller.init();
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: AppColors.primary,
       body: Content(
         child: Center(
           child: Column(
@@ -36,10 +37,10 @@ class SplashPage extends GetView<SplashController> {
               ),
               Text(
                 "VARCORE",
-                style: titleFontStyle.copyWith(color: Colors.white),
+                style: AppStyle.headline2.copyWith(color: Colors.white),
               ),
               Text("BASE CODE",
-                  style: baseFontStyleSmall.copyWith(
+                  style: AppStyle.normalBig.copyWith(
                       color: Colors.white, fontWeight: FontWeight.bold))
             ],
           ),

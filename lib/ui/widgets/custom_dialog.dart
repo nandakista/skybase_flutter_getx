@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
+import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_button.dart';
 
@@ -38,7 +39,7 @@ class SuccessDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(17),
                 boxShadow: [
                   BoxShadow(
-                      color: (Get.isDarkMode) ? primaryColor : Colors.black,
+                      color: (Get.isDarkMode) ? AppColors.primary : Colors.black,
                       offset: const Offset(0.0, 0.0),
                       blurRadius: 10.0)
                 ]),
@@ -46,19 +47,19 @@ class SuccessDialog extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: baseFontStyleVeryBig.copyWith(color: primaryColor),
+                  style: AppStyle.title1.copyWith(color: AppColors.primary),
                 ),
                 const SizedBox(height: 24),
                 Text(
                   description,
-                  style: baseFontStyleSmall,
+                  style: AppStyle.normalBig,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
                 Align(
                     alignment: Alignment.bottomRight,
                     child: CustomButton(
-                        onPress: onPress, text: 'OK', color: primaryColor))
+                        onPress: onPress, text: 'OK', color: AppColors.primary))
               ],
             ),
           ),
@@ -68,7 +69,7 @@ class SuccessDialog extends StatelessWidget {
           left: 16,
           right: 16,
           child: CircleAvatar(
-            backgroundColor: accentColor,
+            backgroundColor: AppColors.accent,
             radius: 50,
             child: Lottie.asset('assets/anim/anim_success.json', repeat: false),
           ),
@@ -111,7 +112,7 @@ class FailedDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(17),
                 boxShadow: [
                   BoxShadow(
-                      color: (Get.isDarkMode) ? primaryColor : Colors.black,
+                      color: (Get.isDarkMode) ? AppColors.primary : Colors.black,
                       offset: const Offset(0.0, 0.0),
                       blurRadius: 10.0)
                 ]),
@@ -119,19 +120,19 @@ class FailedDialog extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: baseFontStyleVeryBig.copyWith(fontWeight: FontWeight.bold, color: primaryColor),
+                  style: AppStyle.title1.copyWith(fontWeight: FontWeight.bold, color: AppColors.primary),
                 ),
                 const SizedBox(height: 24),
                 Text(
                   description,
-                  style: baseFontStyleSmall,
+                  style: AppStyle.normalBig,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
                 Align(
                   alignment: Alignment.bottomRight,
                   child: CustomButton(
-                      onPress: onPress, text: 'OK', color: primaryColor),
+                      onPress: onPress, text: 'OK', color: AppColors.primary),
                 )
               ],
             ),
@@ -187,7 +188,7 @@ class WarningDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(17),
                 boxShadow: [
                   BoxShadow(
-                      color: (Get.isDarkMode) ? primaryColor : Colors.black,
+                      color: (Get.isDarkMode) ? AppColors.primary : Colors.black,
                       offset: const Offset(0.0, 0.0),
                       blurRadius: 10.0)
                 ]),
@@ -195,12 +196,12 @@ class WarningDialog extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: baseFontStyleVeryBig.copyWith(color: primaryColor),
+                  style: AppStyle.title1.copyWith(color: AppColors.primary),
                 ),
                 const SizedBox(height: 24),
                 Text(
                   description,
-                  style: baseFontStyleSmall,
+                  style: AppStyle.normalBig,
                   textAlign: TextAlign.justify,
                 ),
                 const SizedBox(height: 24),Row(
@@ -277,7 +278,7 @@ class ConfirmDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(17),
                 boxShadow: [
                   BoxShadow(
-                      color: (Get.isDarkMode) ? primaryColor : Colors.black,
+                      color: (Get.isDarkMode) ? AppColors.primary : Colors.black,
                       offset: const Offset(0.0, 0.0),
                       blurRadius: 10.0)
                 ]),
@@ -285,12 +286,12 @@ class ConfirmDialog extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: baseFontStyleVeryBig,
+                  style: AppStyle.title1,
                 ),
                 const SizedBox(height: 10),
                 Text(
                   description,
-                  style: baseFontStyleSmall,
+                  style: AppStyle.normalBig,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
@@ -350,7 +351,7 @@ class CommingSoonDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(17),
                 boxShadow: [
                   BoxShadow(
-                      color: (Get.isDarkMode) ? primaryColor : Colors.black,
+                      color: (Get.isDarkMode) ? AppColors.primary : Colors.black,
                       offset: const Offset(0.0, 0.0),
                       blurRadius: 10.0)
                 ]),
@@ -363,11 +364,11 @@ class CommingSoonDialog extends StatelessWidget {
                 ),
                 Text(
                   'COMING SOON',
-                  style: baseFontStyleVeryBig,
+                  style: AppStyle.title1,
                 ),
                 Text(
                   'Fitur ini lagi dikembangin..',
-                  style: baseFontStyleVeryBig,
+                  style: AppStyle.title1,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
@@ -376,7 +377,7 @@ class CommingSoonDialog extends StatelessWidget {
                     child: CustomButton(
                         onPress: () => Get.back(),
                         text: 'OK',
-                        color: primaryColor))
+                        color: AppColors.primary))
               ],
             ),
           ),
@@ -399,12 +400,12 @@ class LoadingDialog extends StatelessWidget {
         height: 100,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-            color: systemBlackColor,
+            color: AppColors.systemBlack,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(17),
             boxShadow: [
               BoxShadow(
-                  color: (Get.isDarkMode) ? primaryColor : Colors.black26,
+                  color: (Get.isDarkMode) ? AppColors.primary : Colors.black26,
                   offset: const Offset(0.0, 2.0),
                   blurRadius: 10.0)
             ]),
@@ -413,7 +414,7 @@ class LoadingDialog extends StatelessWidget {
           children: [
             Text(
               'Loading',
-              style: baseFontStyleBig.copyWith(color: Colors.white),
+              style: AppStyle.title2.copyWith(color: Colors.white),
             ),
             const SpinKitThreeBounce(size: 35, color: Colors.blue),
           ],

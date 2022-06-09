@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'app_style.dart';
 
 final ThemeData lightTheme = ThemeData(
-  primaryColor: materialPrimaryColor,
-  primarySwatch: materialPrimaryColor,
+  primaryColor: AppColors.materialPrimary,
+  primarySwatch: AppColors.materialPrimary,
   fontFamily: "Poppins",
   brightness: Brightness.light,
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
       systemNavigationBarColor: Colors.black,
-      statusBarColor: primaryColor,
+      statusBarColor: AppColors.primary,
     ),
   ),
 );
 
 final ThemeData darkTheme = ThemeData(
-  primaryColor: materialPrimaryColor,
-  primarySwatch: materialPrimaryColor,
+  primaryColor: AppColors.materialPrimary,
+  primarySwatch: AppColors.materialPrimary,
   fontFamily: "Poppins",
   brightness: Brightness.dark,
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
       systemNavigationBarColor: Colors.black,
-      statusBarColor: primaryColor,
+      statusBarColor: AppColors.primary,
     ),
   ),
 );
@@ -41,7 +42,7 @@ extension DarkMode on BuildContext {
 setStatusBarColor(){
   return const SystemUiOverlayStyle(
     statusBarBrightness: Brightness.light,
-    statusBarColor: primaryColor,
+    statusBarColor: AppColors.primary,
   );
 }
 
