@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 
 class CustomButton extends StatelessWidget {
   final Color color, textColor;
-  final Function onPress;
+  final VoidCallback? onPress;
   final String text;
   final double? height, width;
   final FontWeight? fontWeight;
   final double? fontSize;
 
-  const CustomButton(
-      {Key? key,
-      required this.onPress,
-      required this.text,
-      required this.color,
-      this.fontSize,
-      this.textColor = Colors.white,
-      this.height = 60,
-      this.fontWeight,
-      this.width})
-      : super(key: key);
+  const CustomButton({
+    Key? key,
+    required this.onPress,
+    required this.text,
+    this.color = AppColors.primary,
+    this.fontSize,
+    this.textColor = Colors.white,
+    this.height = 60,
+    this.fontWeight,
+    this.width,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +35,20 @@ class CustomButton extends StatelessWidget {
         child: Wrap(
           children: [
             ElevatedButton(
-                onPressed: () => onPress(),
+                onPressed: onPress,
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   primary: color,
-                  fixedSize: Size(width ?? MediaQuery.of(context).size.width, height!),
+                  fixedSize:
+                      Size(width ?? MediaQuery.of(context).size.width, height!),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
                 child: Text(text,
                     textAlign: TextAlign.center,
-                    style: AppStyle.subtitle1.copyWith(
+                    style: AppStyle.subtitle4.copyWith(
                         fontSize: fontSize,
                         fontWeight: fontWeight,
                         color: (color == Colors.white)
@@ -60,20 +63,22 @@ class CustomButton extends StatelessWidget {
 
 class CustomButtonIcon extends StatelessWidget {
   final Color color, textColor, iconColor;
-  final Function onPress;
+  final VoidCallback onPress;
   final String text;
   final double height, width;
   final IconData icon;
 
-  const CustomButtonIcon(
-      {Key? key, required this.onPress,
-      required this.text,
-      required this.icon,
-      required this.color,
-      this.iconColor = Colors.white,
-      this.textColor = Colors.white,
-      this.height = 60,
-      this.width = double.infinity}) : super(key: key);
+  const CustomButtonIcon({
+    Key? key,
+    required this.onPress,
+    required this.text,
+    required this.icon,
+    this.color = AppColors.primary,
+    this.iconColor = Colors.white,
+    this.textColor = Colors.white,
+    this.height = 60,
+    this.width = double.infinity,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +107,8 @@ class CustomButtonIcon extends StatelessWidget {
               ),
             ),
             label: Text(text,
-                style: AppStyle.subtitle1.copyWith(
-                    fontWeight: FontWeight.bold, color: textColor))),
+                style: AppStyle.subtitle4
+                    .copyWith(fontWeight: FontWeight.bold, color: textColor))),
       ),
     );
   }

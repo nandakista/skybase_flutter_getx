@@ -34,7 +34,7 @@ class LoginPage extends GetView<LoginController> {
                             Text("Log In ", style: AppStyle.headline2),
                             const SizedBox(height: 10),
                             Text("Masukkan No.Handphone dan password anda. ",
-                                style: AppStyle.subtitle1),
+                                style: AppStyle.subtitle4),
                           ],
                         ),
                       ),

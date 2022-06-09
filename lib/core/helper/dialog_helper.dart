@@ -37,7 +37,7 @@ class AppDialog {
     required TypeDialog typeDialog,
     String? title,
     required String message,
-    required Function onPress,
+    required VoidCallback onPress,
     bool? dismissible,
   }) {
     switch (typeDialog) {
@@ -45,38 +45,38 @@ class AppDialog {
         return showDialog(
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
-          builder: (context) => FailedDialog(
+          builder: (context) => DialogAlert.error(
             title: title ?? "Gagal",
             description: message,
-            onPress: onPress,
+            onConfirm: onPress,
           ),
         );
       case TypeDialog.SUCCESS:
         return showDialog(
           barrierDismissible: dismissible ?? false,
           context: Get.context!,
-          builder: (context) => SuccessDialog(
+          builder: (context) => DialogAlert.success(
             title: title ?? "Berhasil",
             description: message,
-            onPress: onPress,
+            onConfirm: onPress,
           ),
         );
       case TypeDialog.WARNING:
         return showDialog(
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
-          builder: (context) => WarningDialog(
+          builder: (context) => DialogAlert.warning(
             title: title ?? "Peringatan!",
             description: message,
-            confirmPress: onPress,
-            cancelPress: () => Get.back(),
+            onConfirm: onPress,
+            onCancel: () => Get.back(),
           ),
         );
       case TypeDialog.SOON:
         return showDialog(
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
-          builder: (context) => const CommingSoonDialog(),
+          builder: (context) => const SoonDialog(),
         );
     }
   }

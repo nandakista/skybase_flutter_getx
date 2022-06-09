@@ -16,7 +16,7 @@ class IntroPage extends StatelessWidget {
     const bodyStyle = TextStyle(fontSize: 19.0);
 
     var pageDecoration = PageDecoration(
-      titleTextStyle: AppStyle.subtitle1.copyWith(fontSize: 26.0, fontWeight: FontWeight.w700),
+      titleTextStyle: AppStyle.subtitle4.copyWith(fontSize: 26.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
       descriptionPadding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       imagePadding: EdgeInsets.zero,
@@ -50,9 +50,9 @@ class IntroPage extends StatelessWidget {
       showSkipButton: true,
       skipFlex: 0,
       nextFlex: 0,
-      skip: Text('Skip', style: AppStyle.subtitle1.copyWith(color: AppColors.primary, fontWeight: FontWeight.bold)),
+      skip: Text('Skip', style: AppStyle.subtitle4.copyWith(color: AppColors.primary, fontWeight: FontWeight.bold)),
       next: const Icon(Icons.arrow_forward, color: AppColors.primary,),
-      done: Text('Done', style: AppStyle.subtitle1.copyWith(fontWeight: FontWeight.w600)),
+      done: Text('Done', style: AppStyle.subtitle4.copyWith(fontWeight: FontWeight.w600)),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),
       controlsPadding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),

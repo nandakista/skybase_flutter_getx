@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 
 class AppStyle {
-  static TextStyle title1 = const TextStyle(fontSize: 34);
-  static TextStyle title2 = const TextStyle(fontSize: 24);
-  static TextStyle subtitle1 = const TextStyle(fontSize: 16);
+  static TextStyle title1 = const TextStyle(fontSize: 40);
+  static TextStyle title2 = const TextStyle(fontSize: 34);
+  static TextStyle title3 = const TextStyle(fontSize: 30);
+  static TextStyle title4 = const TextStyle(fontSize: 28);
+
+  static TextStyle subtitle1 = const TextStyle(fontSize: 24);
+  static TextStyle subtitle2 = const TextStyle(fontSize: 20);
+  static TextStyle subtitle3 = const TextStyle(fontSize: 18);
+  static TextStyle subtitle4 = const TextStyle(fontSize: 16);
 
   static TextStyle normalBig = const TextStyle(fontSize: 14);
   static TextStyle normalSmall = const TextStyle(fontSize: 11);
