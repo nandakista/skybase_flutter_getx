@@ -28,6 +28,7 @@ dependencies:
 
   # File Manager
   camera: ^0.9.4+11
+  photo_manager: ^2.1.2
   image_picker: ^0.8.4+6
   file_picker: ^4.3.1
   flutter_image_compress: ^1.1.0

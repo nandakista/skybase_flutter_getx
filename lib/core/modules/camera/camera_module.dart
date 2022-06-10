@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:io';
 
 import 'package:camera/camera.dart';
@@ -5,9 +7,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
+import 'package:photo_manager/photo_manager.dart';
 import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
 import 'package:varcore_flutter_base/core/helper/general_function.dart';
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
+import 'package:varcore_flutter_base/ui/widgets/image_picker.dart';
 import 'camera_preview.dart';
 
 enum CameraType {
@@ -22,6 +26,7 @@ class CameraModule extends StatefulWidget {
   final bool showInfo;
   final bool originSize;
   final bool userBorder;
+  final bool fromGallery;
   final ResolutionPreset resolutionPreset;
 
   const CameraModule({
@@ -31,6 +36,7 @@ class CameraModule extends StatefulWidget {
     this.resolutionPreset = ResolutionPreset.high,
     required this.originSize,
     required this.userBorder,
+    required this.fromGallery,
   }) : super(key: key);
 
   @override
@@ -42,49 +48,16 @@ class _CameraModuleState extends State<CameraModule>
   CameraController? _cameraController;
   List<CameraDescription>? cameras;
   int? selectedCameraIndex;
+  File? lastImageFromGallery;
 
   late AnimationController _flashModeControlRowAnimationController;
   late Animation<double> _flashModeControlRowAnimation;
-
-  onInit() async {
-    _flashModeControlRowAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-    _flashModeControlRowAnimation = CurvedAnimation(
-      parent: _flashModeControlRowAnimationController,
-      curve: Curves.easeIn,
-    );
-    await availableCameras().then((value) {
-      if (value.isNotEmpty) {
-        cameras = value;
-        if (cameras!.isNotEmpty) {
-          if (widget.cameraType == CameraType.REAR) {
-            selectedCameraIndex = 0;
-          } else {
-            selectedCameraIndex = 1;
-          }
-          initCamera(cameras![selectedCameraIndex!]).then((_) {});
-        } else {
-          Toast.show('Kamera tidak ditemukan');
-        }
-      }
-    }).catchError((e) {
-      AppDialog.show(
-          typeDialog: TypeDialog.FAILED,
-          message: 'Terjadi Kesalahan!\n${e.toString()}',
-          onPress: () {
-            AppDialog.close();
-            Get.back();
-          });
-    });
-  }
 
   @override
   void initState() {
     super.initState();
     _ambiguate(WidgetsBinding.instance)?.addObserver(this);
-    onInit();
+    setup();
   }
 
   @override
@@ -106,11 +79,53 @@ class _CameraModuleState extends State<CameraModule>
     if (state == AppLifecycleState.inactive) {
       cameraController.dispose();
     } else if (state == AppLifecycleState.resumed) {
-      initCamera(cameraController.description);
+      initController(cameraController.description);
     }
   }
 
-  Future initCamera(CameraDescription cameraDescription) async {
+  Future setup() async {
+    await initCamera();
+    await fetchFirstPhotoFromGallery();
+  }
+
+  initCamera() async {
+    _flashModeControlRowAnimationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    _flashModeControlRowAnimation = CurvedAnimation(
+      parent: _flashModeControlRowAnimationController,
+      curve: Curves.easeIn,
+    );
+    debugPrint('CameraModule::initCamera() -> $cameras');
+    await availableCameras().then((value) {
+      if (value.isNotEmpty) {
+        cameras = value;
+        if (cameras!.isNotEmpty) {
+          if (widget.cameraType == CameraType.REAR) {
+            selectedCameraIndex = 0;
+          } else {
+            selectedCameraIndex = 1;
+          }
+          initController(cameras![selectedCameraIndex!]).then((_) {});
+        } else {
+          Toast.show('Kamera tidak ditemukan');
+        }
+      }
+    }).catchError((e) {
+      debugPrint('CameraModule::initCamera() -> $e');
+      AppDialog.show(
+          typeDialog: TypeDialog.FAILED,
+          message: 'Terjadi Kesalahan!\n${e.toString()}',
+          onPress: () {
+            AppDialog.close();
+            Get.back();
+          });
+    });
+  }
+
+  Future initController(CameraDescription cameraDescription) async {
+    debugPrint('CameraModule::initCamera() cameras.isNotEmpty');
     if (_cameraController != null) {
       await _cameraController!.dispose();
     }
@@ -122,17 +137,34 @@ class _CameraModuleState extends State<CameraModule>
       }
     });
     if (_cameraController!.value.hasError) {
-      Toast.show('Terjadi kesalahan pada kamera.');
+      Toast.show('Terjadi kesalahan pada kamera. ()');
     }
 
+    debugPrint('CameraModule::initCameraController()');
     try {
       _cameraController!.initialize();
     } catch (e) {
-      debugPrint('Terjadi kesalahan pada kamera.\n$e');
+      debugPrint('CameraException::initCameraController() ${e.toString()}');
+      Toast.show('Terjadi kesalahan pada kamera.\n$e');
     }
-
+    debugPrint('CameraModule::initCamera() _controller.initialize');
     if (mounted) {
       setState(() {});
+    }
+  }
+
+  Future fetchFirstPhotoFromGallery() async {
+    try {
+      final albums = await PhotoManager.getAssetPathList(type: RequestType.all);
+      final recentAlbum = albums.first;
+      final recentAssets = await recentAlbum.getAssetListRange(
+        start: 0,
+        end: 1,
+      );
+      var image = await recentAssets.first.file;
+      setState(() {lastImageFromGallery = image;});
+    } catch (e) {
+      debugPrint('e: $e');
     }
   }
 
@@ -146,7 +178,7 @@ class _CameraModuleState extends State<CameraModule>
           children: [
             Align(
               alignment: Alignment.center,
-              child: cameraPreview(),
+              child: _cameraPreview(),
             ),
             Align(
               alignment: Alignment.topCenter,
@@ -163,7 +195,7 @@ class _CameraModuleState extends State<CameraModule>
                     ),
                     const Spacer(),
                     _flashModeControlRowWidget(),
-                    flashCameraButton(),
+                    _flashCameraButton(),
                   ],
                 ),
               ),
@@ -178,8 +210,9 @@ class _CameraModuleState extends State<CameraModule>
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    cameraButton(context),
-                    flipCameraButton(),
+                    _cameraButton(context),
+                    _switchCameraButton(),
+                    _buildGalleryButton(),
                   ],
                 ),
               ),
@@ -190,7 +223,7 @@ class _CameraModuleState extends State<CameraModule>
     );
   }
 
-  Widget cameraPreview() {
+  Widget _cameraPreview() {
     if (_cameraController == null || !_cameraController!.value.isInitialized) {
       return loadingIndicator;
     }
@@ -246,7 +279,7 @@ class _CameraModuleState extends State<CameraModule>
     }
   }
 
-  Widget cameraButton(context) {
+  Widget _cameraButton(context) {
     return Align(
       alignment: Alignment.topCenter,
       child: InkWell(
@@ -271,6 +304,40 @@ class _CameraModuleState extends State<CameraModule>
     );
   }
 
+  Widget _buildGalleryButton() {
+    var image = (lastImageFromGallery != null)
+        ? FileImage(lastImageFromGallery!)
+        : null;
+    return Visibility(
+      visible: widget.fromGallery,
+      child: Container(
+        margin: const EdgeInsets.only(left: 20),
+        child: Align(
+          alignment: Alignment.bottomLeft,
+          child: UiImagePicker(
+            withCompression: true,
+            sizeLimit: 2000000,
+            onSelected: (image) {
+              toPreview(resultImage: image);
+            },
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                  color: image != null ? Colors.white : Colors.grey[300],
+                  borderRadius: BorderRadius.circular(8),
+                  image: image != null ? DecorationImage(
+                      fit: BoxFit.cover,
+                      image: image
+                  ) : null
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   onCapture(context) async {
     try {
       CameraLensDirection lensDirection =
@@ -282,30 +349,32 @@ class _CameraModuleState extends State<CameraModule>
         } else {
           imageCaptured = File(value.path);
         }
-
-        dynamic arguments;
-        if (widget.originSize) {
-          arguments = Get.to(() => PreviewCameraPage(
-                imageFile: imageCaptured,
-                showInfo: widget.showInfo,
-              ));
-        } else {
-          var cropedImg = await squareCropImage(imageCaptured);
-          arguments = Get.to(() => PreviewCameraPage(
-                imageFile: cropedImg,
-                showInfo: widget.showInfo,
-              ));
-        }
-        arguments?.then((value) {
-          if (value != null) {
-            Get.back(result: value);
-          }
-        });
+        toPreview(resultImage: imageCaptured);
       });
     } catch (e) {
-      // showToast(context, 'Error : ${e.toString()}');
       debugPrint('Error : ${e.toString()}');
     }
+  }
+
+  toPreview({required File resultImage}) async {
+    dynamic arguments;
+    if (widget.originSize) {
+      arguments = Get.to(() => PreviewCameraPage(
+        imageFile: resultImage,
+        showInfo: widget.showInfo,
+      ));
+    } else {
+      var cropedImg = await squareCropImage(resultImage);
+      arguments = Get.to(() => PreviewCameraPage(
+        imageFile: cropedImg,
+        showInfo: widget.showInfo,
+      ));
+    }
+    arguments?.then((value) {
+      if (value != null) {
+        Get.back(result: value);
+      }
+    });
   }
 
   Future<File> squareCropImage(File image) async {
@@ -333,7 +402,7 @@ class _CameraModuleState extends State<CameraModule>
   //                     CHANGE CAMERA MODE
   // ---------------------------------------------------------------
 
-  flipCameraButton() {
+  Widget _switchCameraButton() {
     if (cameras == null) {
       return Container();
     }
@@ -371,14 +440,14 @@ class _CameraModuleState extends State<CameraModule>
         ? selectedCameraIndex! + 1
         : 0;
     CameraDescription selectedCamera = cameras![selectedCameraIndex!];
-    initCamera(selectedCamera);
+    initController(selectedCamera);
   }
 
   // ---------------------------------------------------------------
   //                          FLASH MODE
   // ---------------------------------------------------------------
 
-  flashCameraButton() {
+  Widget _flashCameraButton() {
     if (cameras == null) {
       return Container();
     }

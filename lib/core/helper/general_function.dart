@@ -11,6 +11,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:varcore_flutter_base/core/database/get_storage.dart';
 import 'package:varcore_flutter_base/core/network/api_request.dart';
+import 'package:image/image.dart' as img;
 
 class AppFunction {
   static Future<String> getFileSize(String filepath, int decimals) async {
@@ -36,18 +37,22 @@ class AppFunction {
     return result;
   }
 
-  static Future<File?> compressImage(
-      {required File file, required String targetPath}) async {
-    var result = await FlutterImageCompress.compressAndGetFile(
-      file.absolute.path,
-      targetPath,
-      minWidth: 1024,
-      minHeight: 1024,
-      quality: 80,
-    );
-    debugPrint(file.lengthSync().toString());
-    debugPrint(result?.lengthSync().toString());
-    return result;
+  static Future<File> compressImage({required File file, required int limit}) async {
+    var minLimit = 1000000;
+    if(limit < minLimit) limit = minLimit;
+    var size = file.lengthSync();
+    while (size >= limit) {
+      var result = await FlutterImageCompress.compressWithFile(
+        file.absolute.path,
+        minWidth: 1024,
+        minHeight: 1024,
+        quality: 80,
+      );
+      var image = img.decodeJpg(result!)!;
+      File(file.path).writeAsBytesSync(img.encodePng(image));
+      size = file.lengthSync();
+    }
+    return file;
   }
 
   // Download File
@@ -93,7 +98,7 @@ class AppFunction {
   //                                 File/Image Picker
   // ----------------------------------------------------------------------------------------
 
-  static Future<File?> pickGalleryPhoto(
+  static Future<File?> imagePicker(
       ImageSource source, ImagePicker imagePicker) async {
     XFile? _pickedFile = await imagePicker.pickImage(
       source: source,
