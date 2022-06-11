@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
-import 'app_style.dart';
 
 final ThemeData lightTheme = ThemeData(
   primaryColor: AppColors.materialPrimary,
@@ -32,20 +31,33 @@ final ThemeData darkTheme = ThemeData(
 );
 
 extension DarkMode on BuildContext {
-  /// is dark mode currently enabled?
   bool isDarkMode() {
     final brightness = MediaQuery.of(this).platformBrightness;
     return brightness == Brightness.dark;
   }
 }
 
-setStatusBarColor(){
-  return const SystemUiOverlayStyle(
-    statusBarBrightness: Brightness.light,
-    statusBarColor: AppColors.primary,
-  );
+class AppStatusBar {
+  static set({
+    required Brightness brightness,
+    Color color = AppColors.primary,
+  }) {
+    return SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarBrightness: brightness,
+        statusBarColor: color,
+      ),
+    );
+  }
 }
 
+class AppOrientation {
+  static set(DeviceOrientation orientation) {
+    return SystemChrome.setPreferredOrientations([
+      orientation,
+    ]);
+  }
+}
 setPotraitOrientation() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

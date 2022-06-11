@@ -17,10 +17,8 @@ void main() async {
   await AppServices.init();
   await GetStorage.init();
   AppConfig.init(Flavors.PRODUCTION);
-  SystemChrome.setSystemUIOverlayStyle(setStatusBarColor());
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  AppStatusBar.set(brightness: Brightness.light);
+  AppOrientation.set(DeviceOrientation.portraitUp);
   runApp(const MyApp());
 }
 
