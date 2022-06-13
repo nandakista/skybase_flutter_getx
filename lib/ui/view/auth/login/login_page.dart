@@ -77,7 +77,7 @@ class LoginPage extends GetView<LoginController> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        CustomButtonIcon(
+                        CustomButton(
                             onPress: () {
                               FocusScope.of(context).unfocus();
                               controller.login();
