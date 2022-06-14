@@ -58,8 +58,3 @@ class AppOrientation {
     ]);
   }
 }
-setPotraitOrientation() {
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
-}

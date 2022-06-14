@@ -12,7 +12,6 @@ class AppStyle {
   static TextStyle subtitle3 = const TextStyle(fontSize: 18);
   static TextStyle subtitle4 = const TextStyle(fontSize: 16);
 
-  static TextStyle normalBig = const TextStyle(fontSize: 14);
   static TextStyle normalSmall = const TextStyle(fontSize: 11);
 
   static TextStyle headline1 = const TextStyle(

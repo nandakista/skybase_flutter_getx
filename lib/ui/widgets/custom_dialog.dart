@@ -182,7 +182,6 @@ class DialogAlert extends StatelessWidget {
                   const SizedBox(height: 24),
                   Text(
                     description,
-                    style: AppStyle.normalBig,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),

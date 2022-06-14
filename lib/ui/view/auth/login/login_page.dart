@@ -63,7 +63,7 @@ class LoginPage extends GetView<LoginController> {
                         ),
                         const SizedBox(height: 20),
                         Obx(
-                              () => CustomPasswordFieldForm(
+                          () => CustomPasswordFieldForm(
                             label: 'Password',
                             hint: 'Password',
                             controller: controller.passController,
@@ -90,27 +90,31 @@ class LoginPage extends GetView<LoginController> {
                             const SizedBox(height: 30),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text('Belum memiliki akun ? ',
-                                    style: AppStyle.normalBig),
+                              children: const [
+                                Text('Belum memiliki akun ? '),
                                 InkWell(
-                                    child: Text('Daftar',
-                                        style: AppStyle.normalBig.copyWith(
-                                            color: AppColors.primary,
-                                            fontWeight: FontWeight.bold))),
+                                  child: Text(
+                                    'Daftar',
+                                    style: TextStyle(
+                                        color: AppColors.primary,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                               ],
                             ),
                             const SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text('Lupa password ? ',
-                                    style: AppStyle.normalBig),
+                              children: const [
+                                Text('Lupa password ? '),
                                 InkWell(
-                                    child: Text('Reset',
-                                        style: AppStyle.normalBig.copyWith(
-                                            color: AppColors.primary,
-                                            fontWeight: FontWeight.bold))),
+                                  child: Text(
+                                    'Reset',
+                                    style: TextStyle(
+                                        color: AppColors.primary,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                               ],
                             ),
                           ],

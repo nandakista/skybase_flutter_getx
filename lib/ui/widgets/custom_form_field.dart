@@ -173,8 +173,7 @@ class RegisterPasswordRequirement extends StatelessWidget {
         const SizedBox(width: 5),
         Expanded(
           child: Text(message,
-              style: AppStyle.normalBig
-                  .copyWith(color: (isValid) ? Colors.green : Colors.grey)),
+              style: TextStyle(color: (isValid) ? Colors.green : Colors.grey)),
         )
       ],
     );

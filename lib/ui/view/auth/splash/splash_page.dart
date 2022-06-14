@@ -30,7 +30,7 @@ class SplashPage extends GetView<SplashController> {
                 //   backgroundColor: Colors.white,
                 //   backgroundImage: AssetImage('assets/logo_splash.png'),
                 // ),
-                child: FlutterLogo(),
+                child: const FlutterLogo(),
               ),
               const SizedBox(
                 height: 20,
@@ -39,8 +39,8 @@ class SplashPage extends GetView<SplashController> {
                 'VARCORE',
                 style: AppStyle.headline2.copyWith(color: Colors.white),
               ),
-              Text('BASE CODE',
-                  style: AppStyle.normalBig.copyWith(
+              const Text('BASE CODE',
+                  style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold))
             ],
           ),
