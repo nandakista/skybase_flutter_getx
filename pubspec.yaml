@@ -51,6 +51,7 @@ dependencies:
   flutter_keyboard_visibility: ^5.2.0
   lottie: ^1.2.1
   flutter_spinkit: ^5.1.0
+  flutter_svg: ^1.1.0
 
 
 dev_dependencies:

@@ -11,4 +11,9 @@ abstract class AuthDatasource {
     required String email,
     required String password,
   });
+
+  Future<List<User>> getUsers({
+    int page = 1,
+    int perPage = 20,
+  });
 }

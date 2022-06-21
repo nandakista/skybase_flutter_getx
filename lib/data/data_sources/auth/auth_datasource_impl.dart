@@ -48,4 +48,27 @@ class AuthDatasourceImpl implements AuthDatasource {
       rethrow;
     }
   }
+
+  @override
+  Future<List<User>> getUsers({
+    int page = 1,
+    int perPage = 20,
+  }) async {
+    try {
+      var url = 'https://reqres.in/api/';
+      url += 'users?';
+      url += 'page=$page';
+      url += 'per_page=$perPage';
+      final res = await sendRequest(
+        url: url,
+        requestMethod: RequestMethod.GET,
+      );
+      return (res.data)
+          .map((data) => User.fromJson(data))
+          .toList()
+          .cast<User>();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
