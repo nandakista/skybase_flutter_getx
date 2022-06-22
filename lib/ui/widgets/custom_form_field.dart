@@ -77,7 +77,9 @@ class CustomFieldForm extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: Text(
               endText.toString(),
-              style: AppStyle.subtitle4,
+              style: AppStyle.subtitle4.copyWith(
+                color: AppColors.systemDarkGrey,
+              ),
             ),
           ),
           errorText: validate ? 'Field cannot be empty!' : null,
