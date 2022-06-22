@@ -28,10 +28,10 @@ class FieldValidator {
 }
 
 class TelephoneFieldValidator {
-  static String? validate(String? value) {
-    // if (value.isEmpty || !PhoneNumberValidator.validate(value)) {
-    //   return 'No.Telepon tidak valid!';
-    // }
+  static String? validate(String value) {
+    if (value.isEmpty || !PhoneNumberValidator.validate(value)) {
+      return 'No.Telepon tidak valid!';
+    }
     return null;
   }
 }

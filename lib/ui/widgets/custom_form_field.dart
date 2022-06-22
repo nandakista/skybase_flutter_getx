@@ -19,6 +19,7 @@ class CustomFieldForm extends StatelessWidget {
   final bool readOnly;
   final Function(String)? onFieldSubmitted;
   final Function(String)? onChanged;
+  final bool validate;
 
   const CustomFieldForm({
     Key? key,
@@ -39,6 +40,7 @@ class CustomFieldForm extends StatelessWidget {
     this.onFieldSubmitted,
     this.onChanged,
     this.readOnly = false,
+    this.validate = false,
   }) : super(key: key);
 
   @override
@@ -68,6 +70,7 @@ class CustomFieldForm extends StatelessWidget {
           border: InputBorder.none,
           prefixIcon: Icon(icon),
           suffixIcon: Icon(endIcon),
+          errorText: validate ? 'Field cannot be empty!' : null,
           hintText: label,
           labelText: hint,
           floatingLabelStyle: TextStyle(color: textColor),

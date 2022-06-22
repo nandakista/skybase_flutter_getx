@@ -1,11 +1,11 @@
 import 'package:varcore_flutter_base/core/network/api_request.dart';
+import 'package:varcore_flutter_base/core/network/api_response.dart';
 import 'package:varcore_flutter_base/core/network/api_url.dart';
 import 'package:varcore_flutter_base/data/models/user.dart';
 
 import 'auth_datasource.dart';
 
 class AuthDatasourceImpl implements AuthDatasource {
-
   @override
   Future<User> login({
     required String phoneNumber,
@@ -22,7 +22,7 @@ class AuthDatasourceImpl implements AuthDatasource {
           'email': email,
         },
       );
-      return User.fromJson(response.data);
+      return User.fromJson(ApiResponse.fromJson(response.data).data);
     } catch (error) {
       rethrow;
     }
@@ -43,31 +43,8 @@ class AuthDatasourceImpl implements AuthDatasource {
           'token': token,
         },
       );
-      return User.fromJson(response.data);
+      return User.fromJson(ApiResponse.fromJson(response.data).data);
     } catch (error) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<List<User>> getUsers({
-    int page = 1,
-    int perPage = 20,
-  }) async {
-    try {
-      var url = 'https://reqres.in/api/';
-      url += 'users?';
-      url += 'page=$page';
-      url += 'per_page=$perPage';
-      final res = await sendRequest(
-        url: url,
-        requestMethod: RequestMethod.GET,
-      );
-      return (res.data)
-          .map((data) => User.fromJson(data))
-          .toList()
-          .cast<User>();
-    } catch (e) {
       rethrow;
     }
   }

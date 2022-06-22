@@ -16,7 +16,7 @@ Map<String, String> headers = {
   // 'Client-Token': 'EY5WGBIXosmK5f2Jckxt52Gm9p8sv1VEMjYzozArzb0=',
 };
 
-Future<ApiResponse> sendRequest({
+Future<Response> sendRequest({
   required String url,
   Object? body,
   required RequestMethod requestMethod,
@@ -36,19 +36,13 @@ Future<ApiResponse> sendRequest({
       case RequestMethod.POST:
         try {
           debugPrint('Request Body : ${FormData.fromMap(body as Map<String, dynamic>).fields}');
-          final responseBody = await dioClient.post(
+          response = await dioClient.post(
             url,
             data: contentType == Headers.jsonContentType
                 ? jsonEncode(body)
                 : FormData.fromMap(body),
             options: Options(headers: headers, contentType: contentType),
           );
-          final baseResponse = ApiResponse.fromJson(responseBody.data);
-          if(baseResponse.success) {
-            response = responseBody;
-          } else {
-            throw ApiMessage.message(baseResponse.error);
-          }
         } on SocketException {
           throw 'Tidak ada koneksi internet!';
         } on DioError catch (error) {
@@ -57,16 +51,10 @@ Future<ApiResponse> sendRequest({
         break;
       case RequestMethod.GET:
         try {
-          var responseBody = await dioClient.get(
+          response = await dioClient.get(
             url,
             options: Options(contentType: contentType, headers: headers),
           );
-          final baseResponse = ApiResponse.fromJson(responseBody.data);
-          if(baseResponse.success) {
-            response = responseBody;
-          } else {
-            throw ApiMessage.message(baseResponse.error);
-          }
         } on SocketException {
           throw 'Tidak ada koneksi internet!';
         } on DioError catch (error) {
@@ -75,19 +63,13 @@ Future<ApiResponse> sendRequest({
         break;
       case RequestMethod.PATCH:
         try {
-          final responseBody = await dioClient.patch(
+          response = await dioClient.patch(
             url,
             data: contentType == Headers.jsonContentType
                 ? jsonEncode(body)
                 : FormData.fromMap(body as Map<String, dynamic>),
             options: Options(headers: headers, contentType: contentType),
           );
-          final baseResponse = ApiResponse.fromJson(responseBody.data);
-          if(baseResponse.success) {
-            response = responseBody;
-          } else {
-            throw ApiMessage.message(baseResponse.error);
-          }
         } on SocketException {
           throw 'Tidak ada koneksi internet!';
         } on DioError catch (error) {
@@ -122,7 +104,7 @@ Future<ApiResponse> sendRequest({
         }
         break;
     }
-    return ApiResponse.fromJson(response.data);
+    return response;
   } catch (error) {
     rethrow;
   }

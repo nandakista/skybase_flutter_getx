@@ -8,6 +8,7 @@ import 'package:varcore_flutter_base/data/models/user.dart';
 import 'package:varcore_flutter_base/ui/view/auth/intro/intro_page.dart';
 import 'package:varcore_flutter_base/ui/view/auth/login/login_page.dart';
 import 'package:varcore_flutter_base/ui/view/home/home_page.dart';
+import 'package:varcore_flutter_base/ui/view/user/user_list_page.dart';
 
 class SplashController extends GetxController {
   final AuthDatasource dataSource;
@@ -19,7 +20,7 @@ class SplashController extends GetxController {
     bool? onBoarding = prefs.getBool(KeyPrefs.firstOpen);
     if (onBoarding == null || onBoarding == true) {
       prefs.setBool(KeyPrefs.firstOpen, false);
-      Timer(const Duration(seconds: 2), () => Get.toNamed(IntroPage.route));
+      Timer(const Duration(seconds: 3), () => Get.toNamed(IntroPage.route));
     } else {
       verifyToken(token: LocalStorage.to.getToken());
     }

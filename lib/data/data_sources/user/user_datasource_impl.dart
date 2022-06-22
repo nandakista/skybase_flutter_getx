@@ -9,8 +9,9 @@ class UserDatasourceImpl extends UserDatasource {
     int perPage = 20,
   }) async {
     try {
-      var url = 'users?';
-      url += 'page=$page&';
+      var url = 'https://reqres.in/api/';
+      url += 'users?';
+      url += 'page=$page';
       url += 'per_page=$perPage';
       final res = await sendRequest(
         url: url,

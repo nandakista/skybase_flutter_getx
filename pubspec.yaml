@@ -27,6 +27,7 @@ dependencies:
   pdfx: ^2.0.1+1
 
   # File Manager
+  image: ^3.2.0
   camera: ^0.9.4+11
   photo_manager: ^2.1.2
   image_picker: ^0.8.4+6
