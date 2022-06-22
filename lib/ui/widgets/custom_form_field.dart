@@ -4,7 +4,7 @@ import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 
 class CustomFieldForm extends StatelessWidget {
-  final String label, hint;
+  final String? label, hint, endText;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final IconData icon;
@@ -41,6 +41,7 @@ class CustomFieldForm extends StatelessWidget {
     this.onChanged,
     this.readOnly = false,
     this.validate = false,
+    this.endText,
   }) : super(key: key);
 
   @override
@@ -69,7 +70,16 @@ class CustomFieldForm extends StatelessWidget {
         decoration: InputDecoration(
           border: InputBorder.none,
           prefixIcon: Icon(icon),
-          suffixIcon: Icon(endIcon),
+          suffixIcon: (endText == null)
+              ? Icon(endIcon)
+              : Align(
+            widthFactor: 1,
+            alignment: Alignment.centerRight,
+            child: Text(
+              endText.toString(),
+              style: AppStyle.subtitle4,
+            ),
+          ),
           errorText: validate ? 'Field cannot be empty!' : null,
           hintText: label,
           labelText: hint,
@@ -85,7 +95,7 @@ class CustomFieldForm extends StatelessWidget {
 }
 
 class CustomPasswordFieldForm extends StatelessWidget {
-  final String label, hint;
+  final String? label, hint, endText;
   final TextEditingController controller;
   final IconData icon;
   final Widget? endIcon;
@@ -116,6 +126,7 @@ class CustomPasswordFieldForm extends StatelessWidget {
     this.hintColor = Colors.grey,
     this.maxLength,
     this.onSubmit,
+    this.endText,
   }) : super(key: key);
 
   @override
@@ -133,7 +144,16 @@ class CustomPasswordFieldForm extends StatelessWidget {
           errorText: errorText,
           border: InputBorder.none,
           prefixIcon: Icon(icon),
-          suffixIcon: endIcon,
+          suffixIcon: (endText == null)
+              ? endIcon
+              : Align(
+            widthFactor: 1,
+            alignment: Alignment.centerRight,
+            child: Text(
+              endText.toString(),
+              style: AppStyle.subtitle4,
+            ),
+          ),
           hintText: hint,
           labelText: label,
           floatingLabelStyle: TextStyle(color: textColor),
