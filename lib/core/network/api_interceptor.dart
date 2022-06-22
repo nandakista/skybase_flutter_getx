@@ -9,7 +9,7 @@ import 'package:varcore_flutter_base/core/network/api_config.dart';
 import 'package:varcore_flutter_base/core/network/api_exception.dart';
 import 'package:varcore_flutter_base/core/network/api_request.dart';
 import 'package:varcore_flutter_base/core/network/api_url.dart';
-import 'package:varcore_flutter_base/data/models/base_response/api_response.dart';
+import 'package:varcore_flutter_base/core/network/api_response.dart';
 import 'package:varcore_flutter_base/ui/view/auth/login/login_page.dart';
 
 class ApiInterceptors extends QueuedInterceptorsWrapper {

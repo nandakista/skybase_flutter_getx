@@ -52,7 +52,7 @@ class AppStatusBar {
 }
 
 class AppOrientation {
-  static set(DeviceOrientation orientation) {
+  static lock(DeviceOrientation orientation) {
     return SystemChrome.setPreferredOrientations([
       orientation,
     ]);

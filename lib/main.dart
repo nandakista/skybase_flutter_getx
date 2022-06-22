@@ -20,7 +20,7 @@ void main() async {
   await GetStorage.init();
   AppConfig.init(Flavors.PRODUCTION);
   AppStatusBar.set(brightness: Brightness.light);
-  AppOrientation.set(DeviceOrientation.portraitUp);
+  AppOrientation.lock(DeviceOrientation.portraitUp);
   runApp(const MyApp());
 }
 

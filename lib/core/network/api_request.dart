@@ -7,7 +7,7 @@ import 'package:varcore_flutter_base/core/database/get_storage.dart';
 import 'package:varcore_flutter_base/core/network/api_config.dart';
 import 'package:varcore_flutter_base/core/network/api_exception.dart';
 import 'package:varcore_flutter_base/core/network/api_message.dart';
-import 'package:varcore_flutter_base/data/models/base_response/api_response.dart';
+import 'package:varcore_flutter_base/core/network/api_response.dart';
 
 enum RequestMethod { GET, POST, PATCH, PUT, DELETE }
 
