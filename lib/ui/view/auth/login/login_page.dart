@@ -58,8 +58,11 @@ class LoginPage extends GetView<LoginController> {
                           controller: controller.phoneController,
                           keyboardType: TextInputType.phone,
                           icon: Icons.phone,
-                          validator: (value) =>
-                              TelephoneFieldValidator.validate(value!),
+                          validator: (value) => AppValidator.field(
+                            title: 'Nomor Telepon',
+                            value: value.toString(),
+                            regex: AppRegex.phone,
+                          ),
                         ),
                         const SizedBox(height: 20),
                         Obx(
@@ -72,8 +75,11 @@ class LoginPage extends GetView<LoginController> {
                             endIcon: IconButton(
                                 icon: const Icon(Icons.visibility_off),
                                 onPressed: () => controller.hidePassword()),
-                            validator: (value) =>
-                                PasswordLoginFieldValidator.validate(value!),
+                            validator: (value) => AppValidator.field(
+                              title: 'Password',
+                              value: value.toString(),
+                              regex: AppRegex.password,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 20),
