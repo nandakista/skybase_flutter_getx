@@ -6,14 +6,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:varcore_flutter_base/core/database/get_storage.dart';
 import 'package:varcore_flutter_base/core/network/api_config.dart';
 import 'package:varcore_flutter_base/core/network/api_exception.dart';
-import 'package:varcore_flutter_base/core/network/api_message.dart';
 import 'package:varcore_flutter_base/core/network/api_response.dart';
 
+// ignore: constant_identifier_names
 enum RequestMethod { GET, POST, PATCH, PUT, DELETE }
 
 Map<String, String> headers = {
   HttpHeaders.authorizationHeader: '',
-  // 'Client-Token': 'EY5WGBIXosmK5f2Jckxt52Gm9p8sv1VEMjYzozArzb0=',
+  // 'Client-Token': 'EY5WGBIXosmK5asc1Jxt52Gm9p8sv1VEMjasxz1b0=',
 };
 
 Future<Response> sendRequest({
@@ -23,89 +23,85 @@ Future<Response> sendRequest({
   bool useToken = false,
   String? contentType = Headers.jsonContentType,
 }) async {
-  DioClient.setInterceptor();
-  var apiToken = LocalStorage.to.isLoggedIn() ? LocalStorage.to.getToken() : null;
-  if (useToken) {
-    headers[HttpHeaders.authorizationHeader] = 'Bearer $apiToken';
-  } else {
-    headers.clear();
-  }
+  _tokenManager(useToken);
   try {
-    Response response;
     switch (requestMethod) {
       case RequestMethod.POST:
-        try {
-          debugPrint('Request Body : ${FormData.fromMap(body as Map<String, dynamic>).fields}');
-          response = await dioClient.post(
+        debugPrint(
+            'Request Body : ${FormData.fromMap(body as Map<String, dynamic>).fields}');
+        return await _safeFetch(
+              () => dioClient.post(
             url,
             data: contentType == Headers.jsonContentType
                 ? jsonEncode(body)
                 : FormData.fromMap(body),
             options: Options(headers: headers, contentType: contentType),
-          );
-        } on SocketException {
-          throw 'Tidak ada koneksi internet!';
-        } on DioError catch (error) {
-          throw DioException.message(error);
-        }
-        break;
+          ),
+        );
       case RequestMethod.GET:
-        try {
-          response = await dioClient.get(
+        return await _safeFetch(
+              () => dioClient.get(
             url,
-            options: Options(contentType: contentType, headers: headers),
-          );
-        } on SocketException {
-          throw 'Tidak ada koneksi internet!';
-        } on DioError catch (error) {
-          throw DioException.message(error);
-        }
-        break;
+            options: Options(headers: headers, contentType: contentType),
+          ),
+        );
       case RequestMethod.PATCH:
-        try {
-          response = await dioClient.patch(
+        return await _safeFetch(
+              () => dioClient.patch(
             url,
             data: contentType == Headers.jsonContentType
                 ? jsonEncode(body)
                 : FormData.fromMap(body as Map<String, dynamic>),
             options: Options(headers: headers, contentType: contentType),
-          );
-        } on SocketException {
-          throw 'Tidak ada koneksi internet!';
-        } on DioError catch (error) {
-          throw DioException.message(error);
-        }
-        break;
+          ),
+        );
       case RequestMethod.PUT:
-        try {
-          response = await dioClient.put(
+        return await _safeFetch(
+              () => dioClient.put(
             url,
             data: contentType == Headers.jsonContentType
                 ? jsonEncode(body)
                 : FormData.fromMap(body as Map<String, dynamic>),
             options: Options(headers: headers, contentType: contentType),
-          );
-        } on SocketException {
-          throw 'Tidak ada koneksi internet!';
-        } on DioError catch (error) {
-          throw DioException.message(error);
-        }
-        break;
+          ),
+        );
       case RequestMethod.DELETE:
-        try {
-          response = await dioClient.delete(
+        return await _safeFetch(
+              () => dioClient.delete(
             url,
             options: Options(headers: headers),
-          );
-        } on SocketException {
-          throw 'Tidak ada koneksi internet!';
-        } on DioError catch (error) {
-          throw DioException.message(error);
-        }
-        break;
+          ),
+        );
     }
-    return response;
   } catch (error) {
+    rethrow;
+  }
+}
+
+void _tokenManager(bool useToken) {
+  DioClient.setInterceptor();
+  var apiToken =
+  LocalStorage.to.isLoggedIn() ? LocalStorage.to.getToken() : null;
+  if (useToken) {
+    headers[HttpHeaders.authorizationHeader] = 'Bearer $apiToken';
+  } else {
+    headers.clear();
+  }
+}
+
+/// Wrap fetch request with try-catch
+/// & error handling
+Future<Response> _safeFetch(Future<Response> Function() tryFetch) async {
+  try {
+    final response = await tryFetch();
+    return response;
+  } on DioError catch (e) {
+    throw DioException.message(e);
+  } on SocketException catch (e) {
+    throw SocketException(e.toString());
+  } on FormatException catch (_) {
+    throw const FormatException('Unable to process the data');
+  } catch (e) {
     rethrow;
   }
 }
