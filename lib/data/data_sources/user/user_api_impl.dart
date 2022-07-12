@@ -1,8 +1,8 @@
 import 'package:varcore_flutter_base/core/network/api_request.dart';
-import 'package:varcore_flutter_base/data/data_sources/user/user_datasource.dart';
+import 'package:varcore_flutter_base/data/data_sources/user/user_api.dart';
 import 'package:varcore_flutter_base/data/models/user.dart';
 
-class UserDatasourceImpl extends UserDatasource {
+class UserApiImpl extends UserApi {
   @override
   Future<List<User>> getUsers({
     int page = 1,

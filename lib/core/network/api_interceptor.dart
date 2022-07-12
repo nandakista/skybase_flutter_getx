@@ -54,7 +54,7 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
     debugPrint('Error Message : ${err.message} ');
     debugPrint('<-- End error');
 
-    _handleRefreshToken(err, handler);
+    // _handleRefreshToken(err, handler);
     super.onError(err, handler);
   }
 

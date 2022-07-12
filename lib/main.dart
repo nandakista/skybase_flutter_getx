@@ -18,7 +18,7 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
   await AppServices.init();
   await GetStorage.init();
-  AppConfig.init(Flavors.PRODUCTION);
+  AppConfig.set(Flavors.PRODUCTION);
   AppStatusBar.set(brightness: Brightness.light);
   AppOrientation.lock(DeviceOrientation.portraitUp);
   runApp(const MyApp());

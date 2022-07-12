@@ -13,7 +13,6 @@ enum RequestMethod { GET, POST, PATCH, PUT, DELETE }
 
 Map<String, String> headers = {
   HttpHeaders.authorizationHeader: '',
-  // 'Client-Token': 'EY5WGBIXosmK5asc1Jxt52Gm9p8sv1VEMjasxz1b0=',
 };
 
 Future<Response> sendRequest({

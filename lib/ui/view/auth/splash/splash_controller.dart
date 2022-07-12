@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/database/get_storage.dart';
 import 'package:varcore_flutter_base/core/database/shared_prefs.dart';
-import 'package:varcore_flutter_base/data/data_sources/auth/auth_datasource.dart';
+import 'package:varcore_flutter_base/data/data_sources/auth/auth_api.dart';
 import 'package:varcore_flutter_base/data/models/user.dart';
 import 'package:varcore_flutter_base/ui/view/auth/intro/intro_page.dart';
 import 'package:varcore_flutter_base/ui/view/auth/login/login_page.dart';
@@ -11,7 +11,7 @@ import 'package:varcore_flutter_base/ui/view/home/home_page.dart';
 import 'package:varcore_flutter_base/ui/view/user/user_list_page.dart';
 
 class SplashController extends GetxController {
-  final AuthDatasource dataSource;
+  final AuthApi dataSource;
   SplashController({required this.dataSource});
 
   User? user =  LocalStorage.to.getUser();

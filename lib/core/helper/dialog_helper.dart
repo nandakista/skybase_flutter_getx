@@ -29,6 +29,7 @@ enum TypeDialog {
   FAILED,
   SUCCESS,
   WARNING,
+  RETRY,
   SOON,
 }
 
@@ -38,6 +39,7 @@ class AppDialog {
     String? title,
     required String message,
     required VoidCallback onPress,
+    VoidCallback? onCancel,
     bool? dismissible,
   }) {
     switch (typeDialog) {
@@ -69,7 +71,7 @@ class AppDialog {
             title: title ?? 'Peringatan!',
             description: message,
             onConfirm: onPress,
-            onCancel: () => Get.back(),
+            onCancel: onCancel ?? () => Get.back(),
           ),
         );
       case TypeDialog.SOON:
@@ -77,6 +79,17 @@ class AppDialog {
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => const SoonDialog(),
+        );
+      case TypeDialog.RETRY:
+        return showDialog(
+          barrierDismissible: dismissible ?? true,
+          context: Get.context!,
+          builder: (context) => DialogAlert.retry(
+            title: title ?? 'Gagal!',
+            description: message,
+            onConfirm: onPress,
+            onCancel: onCancel ?? () => Get.back(),
+          ),
         );
     }
   }

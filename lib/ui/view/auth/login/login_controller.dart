@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
-import 'package:varcore_flutter_base/data/data_sources/auth/auth_datasource.dart';
+import 'package:varcore_flutter_base/data/data_sources/auth/auth_api.dart';
 import 'package:varcore_flutter_base/ui/view/home/home_page.dart';
 
 class LoginController extends GetxController {
-  final AuthDatasource dataSource;
+  final AuthApi dataSource;
   LoginController({required this.dataSource});
 
   final formKey = GlobalKey<FormState>();

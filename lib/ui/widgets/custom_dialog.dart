@@ -87,7 +87,7 @@ class LoadingDialog extends StatelessWidget {
 }
 
 class DialogAlert extends StatelessWidget {
-  final String title, description;
+  final String title, description, confirmText;
   final VoidCallback? onConfirm, onCancel;
   final Color confirmColor, cancelColor;
   final Widget? header;
@@ -103,6 +103,7 @@ class DialogAlert extends StatelessWidget {
     this.onCancel,
     this.confirmColor = AppColors.primary,
     this.cancelColor = Colors.red,
+    this.confirmText = 'OK',
   }) : super(key: key);
 
   factory DialogAlert.success({
@@ -148,6 +149,25 @@ class DialogAlert extends StatelessWidget {
         onCancel: onCancel,
         confirmColor: Colors.green,
         backgroundColorHeader: Colors.orangeAccent,
+      );
+
+  factory DialogAlert.retry({
+    required String title,
+    required String description,
+    String confirmText = 'Coba Lagi',
+    Widget? header,
+    required VoidCallback onConfirm,
+    required VoidCallback onCancel,
+  }) =>
+      DialogAlert(
+        title: title,
+        description: description,
+        confirmText: confirmText,
+        header: Lottie.asset('assets/anim/anim_failed.json', repeat: false),
+        onConfirm: onConfirm,
+        onCancel: onCancel,
+        confirmColor: AppColors.primary,
+        backgroundColorHeader: Colors.red[100],
       );
 
   @override
@@ -202,7 +222,7 @@ class DialogAlert extends StatelessWidget {
                       Flexible(
                         flex: 1,
                         child: CustomButton(
-                          text: 'OK',
+                          text: confirmText,
                           color: confirmColor,
                           onPress: onConfirm,
                         ),

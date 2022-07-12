@@ -3,9 +3,9 @@ import 'package:varcore_flutter_base/core/network/api_response.dart';
 import 'package:varcore_flutter_base/core/network/api_url.dart';
 import 'package:varcore_flutter_base/data/models/user.dart';
 
-import 'auth_datasource.dart';
+import 'auth_api.dart';
 
-class AuthDatasourceImpl implements AuthDatasource {
+class AuthApiImpl implements AuthApi {
   @override
   Future<User> login({
     required String phoneNumber,

@@ -15,14 +15,14 @@ class AppConfig {
   Config get get => appConfig;
   set setFlavor(Config config) => appConfig = config;
 
-  static init(Flavors flavors) {
+  static set(Flavors flavors) {
     switch (flavors) {
       case Flavors.PRODUCTION:
         AppConfig.to.setFlavor = Config(
-          midtransClientKey: 'Mid-client-KSbEOFAHMtQxlEh9',
-          midtransSnap: 'https://app.midtrans.com/snap/snap.js',
-          baseUrl: 'https://test.infinids.id/api/',
-          socketUrl: 'https://ws.fajarhamdani.com',
+          midtransClientKey: 'Some Client Key',
+          accessToken: 'Some Token',
+          baseUrl: 'https://base-url.com',
+          socketUrl: 'https://address.com',
         );
         break;
       case Flavors.STAGING:
@@ -31,10 +31,10 @@ class AppConfig {
       case Flavors.DEVELOPMENT:
         AppSocket().interceptor();
         AppConfig.to.setFlavor = Config(
-          midtransClientKey: 'SB-Mid-client-jc4soSObl8oZT-m2',
-          midtransSnap: 'https://app.sandbox.midtrans.com/snap/snap.js',
-          baseUrl: 'https://test.infinids.id/api/',
-          socketUrl: 'https://ws.fajarhamdani.com',
+          midtransClientKey: 'Some Client Key',
+          accessToken: 'Some Token',
+          baseUrl: 'https://base-url.com',
+          socketUrl: 'https://address.com',
         );
         break;
     }
@@ -44,12 +44,12 @@ class AppConfig {
 class Config {
   Config({
     required this.midtransClientKey,
-    required this.midtransSnap,
+    required this.accessToken,
     required this.baseUrl,
     required this.socketUrl,
   });
   String midtransClientKey;
-  String midtransSnap;
+  String accessToken;
   String baseUrl;
   String socketUrl;
 }

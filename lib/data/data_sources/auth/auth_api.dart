@@ -1,6 +1,6 @@
 import 'package:varcore_flutter_base/data/models/user.dart';
 
-abstract class AuthDatasource {
+abstract class AuthApi {
   Future<User> verifyToken({
     required int userId,
     required String token,

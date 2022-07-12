@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
-import 'package:varcore_flutter_base/data/data_sources/user/user_datasource.dart';
+import 'package:varcore_flutter_base/data/data_sources/user/user_api.dart';
 import 'package:varcore_flutter_base/data/models/user.dart';
 
 class UserListController extends GetxController {
-  final UserDatasource datasource;
+  final UserApi datasource;
   UserListController({required this.datasource});
 
   final RxList<User> listUser = <User>[].obs;
