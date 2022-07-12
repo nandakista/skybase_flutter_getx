@@ -12,6 +12,7 @@ class AppStyle {
   static TextStyle subtitle3 = const TextStyle(fontSize: 18);
   static TextStyle subtitle4 = const TextStyle(fontSize: 16);
 
+  static TextStyle small = const TextStyle(fontSize: 13);
   static TextStyle normalSmall = const TextStyle(fontSize: 11);
 
   static TextStyle headline1 = const TextStyle(
@@ -20,6 +21,8 @@ class AppStyle {
       fontSize: 26, fontWeight: FontWeight.w800, color: AppColors.primary);
   static TextStyle headline3 = const TextStyle(
       fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.primary);
+  static TextStyle headline4 = const TextStyle(
+      fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.primary);
 
   static TextStyle link = const TextStyle(fontSize: 18, color: Colors.blue);
 

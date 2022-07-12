@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -6,6 +9,14 @@ import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 
 Widget loadingIndicator =
     const SpinKitThreeBounce(size: 45, color: Colors.blue);
+
+Widget platformLoadingIndicator() {
+  if (Platform.isAndroid) {
+    return const Center(child: CircularProgressIndicator());
+  } else {
+    return const Center(child: CupertinoActivityIndicator(radius: 16));
+  }
+}
 
 class CustomCard extends StatelessWidget {
   final Color? borderColor, backgroundColor;
