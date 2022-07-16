@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/database/get_storage.dart';
+import 'package:varcore_flutter_base/core/database/get_storage/get_storage.dart';
 import 'package:varcore_flutter_base/core/database/shared_prefs.dart';
 import 'package:varcore_flutter_base/data/data_sources/auth/auth_api.dart';
 import 'package:varcore_flutter_base/data/models/user.dart';

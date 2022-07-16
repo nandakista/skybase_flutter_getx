@@ -33,9 +33,7 @@ class LocalStorage {
     return null;
   }
 
-  logout() async => clearAllBox();
-
-  void clearAllBox() async {
+  logout() async {
     try {
       await authBox.erase();
       await userBox.erase();

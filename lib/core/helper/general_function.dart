@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:varcore_flutter_base/core/database/get_storage.dart';
+import 'package:varcore_flutter_base/core/database/get_storage/get_storage.dart';
 import 'package:varcore_flutter_base/core/network/api_request.dart';
 import 'package:image/image.dart' as img;
 

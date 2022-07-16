@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:varcore_flutter_base/core/database/get_storage.dart';
+import 'package:varcore_flutter_base/core/database/get_storage/get_storage.dart';
 import 'package:varcore_flutter_base/core/network/api_config.dart';
 import 'package:varcore_flutter_base/core/network/api_exception.dart';
 import 'package:varcore_flutter_base/core/network/api_response.dart';

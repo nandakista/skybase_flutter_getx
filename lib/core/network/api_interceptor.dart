@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' as getx;
-import 'package:varcore_flutter_base/core/database/get_storage.dart';
+import 'package:varcore_flutter_base/core/database/get_storage/get_storage.dart';
 import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
 import 'package:varcore_flutter_base/core/network/api_config.dart';
 import 'package:varcore_flutter_base/core/network/api_exception.dart';

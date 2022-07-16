@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/helper/validator_helper.dart';
+import 'package:varcore_flutter_base/core/localization/lang_const.dart';
+import 'package:varcore_flutter_base/core/localization/locale_helper.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 import 'package:varcore_flutter_base/ui/view/auth/login/login_controller.dart';
@@ -31,9 +33,9 @@ class LoginPage extends GetView<LoginController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Log In ', style: AppStyle.headline2),
+                            Text(MultiLangs.login.tr, style: AppStyle.headline2),
                             const SizedBox(height: 10),
-                            Text('Masukkan No.Handphone dan password anda. ',
+                            Text(MultiLangs.loginSubtitle.tr,
                                 style: AppStyle.subtitle4),
                           ],
                         ),
@@ -53,13 +55,13 @@ class LoginPage extends GetView<LoginController> {
                       children: [
                         const SizedBox(height: 20),
                         CustomFieldForm(
-                          label: 'No.Handphone',
-                          hint: 'No.Handphone',
+                          label: MultiLangs.phone.tr,
+                          hint: MultiLangs.phone.tr,
                           controller: controller.phoneController,
                           keyboardType: TextInputType.phone,
                           icon: Icons.phone,
                           validator: (value) => AppValidator.field(
-                            title: 'Nomor Telepon',
+                            title: MultiLangs.phone.tr,
                             value: value.toString(),
                             regex: AppRegex.phone,
                           ),
@@ -67,8 +69,8 @@ class LoginPage extends GetView<LoginController> {
                         const SizedBox(height: 20),
                         Obx(
                           () => CustomPasswordFieldForm(
-                            label: 'Password',
-                            hint: 'Password',
+                            label: MultiLangs.password.tr,
+                            hint: MultiLangs.password.tr,
                             controller: controller.passController,
                             icon: Icons.lock,
                             hiddenText: controller.isHiddenPassword.value,
@@ -76,7 +78,7 @@ class LoginPage extends GetView<LoginController> {
                                 icon: const Icon(Icons.visibility_off),
                                 onPressed: () => controller.hidePassword()),
                             validator: (value) => AppValidator.field(
-                              title: 'Password',
+                              title: MultiLangs.password.tr,
                               value: value.toString(),
                               regex: AppRegex.password,
                             ),
@@ -88,7 +90,15 @@ class LoginPage extends GetView<LoginController> {
                               FocusScope.of(context).unfocus();
                               controller.login();
                             },
-                            text: 'Log In',
+                            text: MultiLangs.login.tr,
+                            icon: Icons.arrow_forward,
+                            color: AppColors.primary),
+
+                        CustomButton(
+                            onPress: () {
+                              LocaleHelper().showLocaleDialog(context);
+                            },
+                            text: MultiLangs.changeLanguage.tr,
                             icon: Icons.arrow_forward,
                             color: AppColors.primary),
                         Column(
@@ -96,12 +106,12 @@ class LoginPage extends GetView<LoginController> {
                             const SizedBox(height: 30),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                Text('Belum memiliki akun ? '),
+                              children: [
+                                Text(MultiLangs.dontHaveAccount.tr),
                                 InkWell(
                                   child: Text(
-                                    'Daftar',
-                                    style: TextStyle(
+                                    MultiLangs.register.tr,
+                                    style: const TextStyle(
                                         color: AppColors.primary,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -111,12 +121,12 @@ class LoginPage extends GetView<LoginController> {
                             const SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                Text('Lupa password ? '),
-                                InkWell(
+                              children: [
+                                Text(MultiLangs.forgotPassword.tr),
+                                 InkWell(
                                   child: Text(
-                                    'Reset',
-                                    style: TextStyle(
+                                    MultiLangs.reset.tr,
+                                    style: const TextStyle(
                                         color: AppColors.primary,
                                         fontWeight: FontWeight.bold),
                                   ),
