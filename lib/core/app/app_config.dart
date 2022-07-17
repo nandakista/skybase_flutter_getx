@@ -21,7 +21,7 @@ class AppConfig {
         AppConfig.to.setFlavor = Config(
           midtransClientKey: 'Some Client Key',
           accessToken: 'Some Token',
-          baseUrl: 'https://base-url.com',
+          baseUrl: 'https://google.com',
           socketUrl: 'https://address.com',
         );
         break;
@@ -33,7 +33,7 @@ class AppConfig {
         AppConfig.to.setFlavor = Config(
           midtransClientKey: 'Some Client Key',
           accessToken: 'Some Token',
-          baseUrl: 'https://base-url.com',
+          baseUrl: 'https://google.com',
           socketUrl: 'https://address.com',
         );
         break;

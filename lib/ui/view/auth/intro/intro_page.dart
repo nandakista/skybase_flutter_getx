@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:varcore_flutter_base/core/database/shared_prefs.dart';
+import 'package:varcore_flutter_base/core/database/shared_preferences/shared_preference_manager.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 import 'package:varcore_flutter_base/ui/view/auth/login/login_page.dart';
@@ -69,7 +69,7 @@ class IntroPage extends StatelessWidget {
   }
 
   void _onIntroEnd(context) async {
-    prefs.setBool(KeyPrefs.firstOpen, false);
+    sharedPreferences.setBool(KeyPrefs.isFirstInstall, false);
     Get.offAllNamed(LoginPage.route);
   }
 

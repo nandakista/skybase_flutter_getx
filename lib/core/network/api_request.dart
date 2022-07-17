@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:varcore_flutter_base/core/database/get_storage/get_storage.dart';
 import 'package:varcore_flutter_base/core/network/api_config.dart';
 import 'package:varcore_flutter_base/core/network/api_exception.dart';
-import 'package:varcore_flutter_base/core/network/api_response.dart';
 
 // ignore: constant_identifier_names
 enum RequestMethod { GET, POST, PATCH, PUT, DELETE }

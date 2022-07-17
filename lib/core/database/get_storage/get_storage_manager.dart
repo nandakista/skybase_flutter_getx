@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/storage_box.dart';
+import 'package:varcore_flutter_base/core/database/get_storage/get_storage_box.dart';
 
-class GetStorageHelper {
-  static GetStorageHelper get to => Get.find<GetStorageHelper>();
+class GetStorageManager {
+  static GetStorageManager get to => Get.find<GetStorageManager>();
   final _box = Get.find<GetStorage>();
 
   void write(String name, dynamic value) {
