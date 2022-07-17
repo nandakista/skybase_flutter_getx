@@ -2,17 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 
+///  Default button on this project with primary color.
+///  Change it as needed.
 class CustomButton extends StatelessWidget {
-  final Color color, textColor, iconColor;
-  final VoidCallback? onPress;
+
+  /// Background color of button. Default value is primary color.
+  final Color color;
+
+  /// Text color of button, default value is white.
+  final Color textColor;
+
+  /// Text color of leading icon, default value is white.
+  final Color iconColor;
+
+  /// Action or function that called when button pressed.
+  final VoidCallback? onPressed;
+
+  /// Display text in button.
   final String text;
-  final double? height, width, fontSize, borderRadius, elevation;
+
+  /// Width shape of button, default value is 70
+  final double? height;
+
+  /// Width shape of button, default value is match parent.
+  final double? width;
+
+  /// The size of text button.
+  final double? fontSize;
+
+  /// The radius of the button shape.
+  final double? borderRadius;
+
+  /// Elevation value of button.
+  final double? elevation;
+
+  /// Leading icon inside button.
   final IconData? icon;
+
+  /// Font weight text and icon inside button.
   final FontWeight? fontWeight;
 
   const CustomButton({
     Key? key,
-    required this.onPress,
+    required this.onPressed,
     required this.text,
     this.icon,
     this.color = AppColors.primary,
@@ -40,7 +72,7 @@ class CustomButton extends StatelessWidget {
             color: iconColor,
           ),
         ),
-        onPressed: onPress,
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           elevation: elevation,
           padding: (icon != null)

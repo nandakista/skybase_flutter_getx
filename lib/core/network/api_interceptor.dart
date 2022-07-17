@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart' as getx;
 import 'package:varcore_flutter_base/core/auth_manager/auth_manager.dart';
 import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
@@ -11,7 +10,6 @@ import 'package:varcore_flutter_base/core/network/api_exception.dart';
 import 'package:varcore_flutter_base/core/network/api_request.dart';
 import 'package:varcore_flutter_base/core/network/api_url.dart';
 import 'package:varcore_flutter_base/core/network/api_response.dart';
-import 'package:varcore_flutter_base/ui/view/auth/login/login_view.dart';
 
 class ApiInterceptors extends QueuedInterceptorsWrapper {
   ApiInterceptors(this._dio);

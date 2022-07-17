@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/ui/view/home/home_page.dart';
+import 'package:varcore_flutter_base/ui/views/home/home_view.dart';
 
 class NotificationHandler {
     String? title;
@@ -33,8 +33,8 @@ class NotificationHandler {
 String pageDirectionFromNotification(String type, int? id) {
   switch (type) {
     case "*":
-        return HomePage.route;
+        return HomeView.route;
     default:
-        return HomePage.route;
+        return HomeView.route;
   }
 }

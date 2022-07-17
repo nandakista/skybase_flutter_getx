@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage_box.dart';
+import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
 import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manager.dart';
 import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:varcore_flutter_base/core/database/shared_preferences/shared_preference_manager.dart';
 import 'package:varcore_flutter_base/core/auth_manager/auth_state.dart';
-import 'package:varcore_flutter_base/data/data_sources/auth/auth_api_impl.dart';
-import 'package:varcore_flutter_base/data/models/user.dart';
-import 'package:varcore_flutter_base/ui/view/auth/login/login_view.dart';
-import 'package:varcore_flutter_base/ui/view/auth/splash/splash_view.dart';
-import 'package:varcore_flutter_base/ui/view/home/home_page.dart';
+import 'package:varcore_flutter_base/data/data_sources/server/auth/auth_api_impl.dart';
+import 'package:varcore_flutter_base/data/models/user/user.dart';
+import 'package:varcore_flutter_base/ui/views/auth/login/login_view.dart';
+import 'package:varcore_flutter_base/ui/views/auth/splash/splash_view.dart';
+import 'package:varcore_flutter_base/ui/views/home/home_view.dart';
+import 'package:varcore_flutter_base/ui/views/user/list/user_list_view.dart';
 
 /// This class is called first time when your app is open.
 ///
@@ -48,7 +49,8 @@ class AuthManager extends GetxController {
       clearData();
       Get.offAllNamed(LoginView.route);
     } else if (state?.appStatus == AppType.AUTHENTICATED) {
-      Get.offAllNamed(HomePage.route);
+      Get.offAllNamed(UserListView.route);
+      // Get.offAllNamed(HomePage.route);
     } else {
       Get.toNamed(SplashView.route);
     }
@@ -68,21 +70,17 @@ class AuthManager extends GetxController {
   Future<void> checkUser() async {
     AuthApiImpl authApi = AuthApiImpl();
     final String? _token = await secureStorage.getToken();
-    User? _user = getStorage.get(GetStorageBox.USERS);
+    User? _user = getStorage.get(GetStorageKey.USERS);
 
     try {
       await authApi
           .verifyToken(userId: _user?.id ?? 0, token: _token.toString())
           .then((res) async {
-        if (res.isActiveEmail ?? false) {
-          login(
-            user: res,
-            token: res.token.toString(),
-            refreshToken: res.refreshToken.toString(),
-          );
-        } else {
-          logout();
-        }
+        login(
+          user: res,
+          token: res.token.toString(),
+          refreshToken: res.refreshToken.toString(),
+        );
       });
     } catch (err) {
       logout();
@@ -123,22 +121,22 @@ class AuthManager extends GetxController {
     required String token,
     required String refreshToken,
   }) async {
-    getStorage.write(GetStorageBox.USERS, user.toJson());
+    getStorage.save(GetStorageKey.USERS, user.toJson());
     await secureStorage.setToken(value: token);
     await secureStorage.setRefreshToken(value: refreshToken);
   }
 
   void clearData() {
-    if (getStorage.has(GetStorageBox.USERS)) {
-      getStorage.delete(GetStorageBox.USERS);
+    if (getStorage.has(GetStorageKey.USERS)) {
+      getStorage.delete(GetStorageKey.USERS);
     }
   }
 
   /// Get User data from GetStorage
   /// * No need to decode or call fromJson again when you used this helper
   User? get user {
-    if (getStorage.has(GetStorageBox.USERS)) {
-      return User.fromJson(getStorage.get(GetStorageBox.USERS));
+    if (getStorage.has(GetStorageKey.USERS)) {
+      return User.fromJson(getStorage.get(GetStorageKey.USERS));
     } else {
       return null;
     }

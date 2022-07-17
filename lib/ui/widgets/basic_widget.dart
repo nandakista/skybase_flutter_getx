@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -10,6 +11,7 @@ import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 Widget loadingIndicator =
     const SpinKitThreeBounce(size: 45, color: Colors.blue);
 
+/// Loading widget based on platform (android or iOS)
 Widget platformLoadingIndicator() {
   if (Platform.isAndroid) {
     return const Center(child: CircularProgressIndicator());
@@ -18,42 +20,25 @@ Widget platformLoadingIndicator() {
   }
 }
 
-class CustomCard extends StatelessWidget {
-  final Color? borderColor, backgroundColor;
-  final Widget? child;
-  final double? borderRadius;
-  final double? elevation;
-  final EdgeInsetsGeometry? padding;
-
-  const CustomCard({
-    Key? key,
-    this.borderColor,
-    this.backgroundColor = Colors.white,
-    this.borderRadius = 12,
-    this.child,
-    this.padding,
-    this.elevation,
-  }) : super(key: key);
+/// Double back to pop the navigation.
+/// Use in the page that need to double Back
+class DoubleBack extends StatelessWidget {
+  const DoubleBack({Key? key, required this.child}) : super(key: key);
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      elevation: elevation ?? 5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(borderRadius!),
-      ),
-      child: Container(
-        padding: padding,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(borderRadius!),
-          // color: backgroundColor,
-          color: (Get.isDarkMode)
-              ? context.theme.dialogBackgroundColor
-              : Colors.white,
+    return DoubleBackToCloseApp(
+      snackBar: SnackBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
         ),
-        child: child,
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.symmetric(vertical: 100, horizontal: 40),
+        content: const Text("Tap sekali lagi untuk keluar.",
+            textAlign: TextAlign.center),
       ),
+      child: child,
     );
   }
 }
@@ -98,6 +83,8 @@ class CircleIcon extends StatelessWidget {
   }
 }
 
+/// Use this widget for give base padding every content in page.
+/// not required when your page is list
 class ContentWrapper extends StatelessWidget {
   final Widget? child;
   const ContentWrapper({Key? key, required this.child}) : super(key: key);
@@ -105,57 +92,13 @@ class ContentWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.fromLTRB(AppConst.defaultMargin, 0,
-            AppConst.defaultMargin, AppConst.defaultMargin),
+        margin: const EdgeInsets.fromLTRB(
+          AppConst.defaultMargin,
+          0,
+          AppConst.defaultMargin,
+          AppConst.defaultMargin,
+        ),
         child: child);
-  }
-}
-
-class CustomAppBar extends StatelessWidget {
-  final Color? backgroundColor, textColor, iconColor;
-  final VoidCallback? onPress;
-  final String title;
-  final List<Widget>? action;
-
-  const CustomAppBar(
-      {Key? key,
-      required this.onPress,
-      this.title = '',
-      this.iconColor,
-      this.backgroundColor,
-      this.textColor,
-      this.action})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      centerTitle: true,
-      title: Text(
-        title,
-        style: TextStyle(
-            color: (textColor == null)
-                ? (Get.isDarkMode)
-                    ? Colors.white
-                    : Colors.black
-                : textColor),
-      ),
-      backgroundColor:
-          (Get.isDarkMode) ? AppColors.baseDark : AppColors.baseLight,
-      elevation: 0,
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 8.0),
-        child: IconButton(
-            icon: Icon(Icons.arrow_back_ios_rounded,
-                color: (iconColor == null)
-                    ? Get.isDarkMode
-                        ? AppColors.primary
-                        : Colors.black
-                    : iconColor),
-            onPressed: onPress),
-      ),
-      actions: action,
-    );
   }
 }
 

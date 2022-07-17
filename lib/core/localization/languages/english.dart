@@ -22,6 +22,7 @@ const Map<String, String> en = {
   MultiLangs.phone : 'Phone Number',
   MultiLangs.reset : 'Reset',
   MultiLangs.login : 'Login',
+  MultiLangs.skip : 'Skip',
 
   //BUTTON
   MultiLangs.changeLanguage : 'Change Language',

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage_box.dart';
+import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
 
 /// ----<Getx Storage>----
 ///
@@ -15,7 +15,7 @@ class GetStorageManager {
   final _box = Get.find<GetStorage>();
 
   /// If you want to save Object/Model don't forget to encode toJson
-  void write(String name, dynamic value) {
+  void save(String name, dynamic value) {
     _box.write(name, value);
   }
 
@@ -39,7 +39,7 @@ class GetStorageManager {
   /// Delete all data in every box in storage except CurrentLocale
   logout() async {
     try {
-      await GetStorage(GetStorageBox.USERS).erase();
+      await GetStorage(GetStorageKey.USERS).erase();
     } catch (e) {
       debugPrint(e.toString());
     }

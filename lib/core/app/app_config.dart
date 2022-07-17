@@ -18,24 +18,19 @@ class AppConfig {
   static set(Flavors flavors) {
     switch (flavors) {
       case Flavors.PRODUCTION:
-        AppConfig.to.setFlavor = Config(
-          midtransClientKey: 'Some Client Key',
-          accessToken: 'Some Token',
-          baseUrl: 'https://google.com',
-          socketUrl: 'https://address.com',
-        );
+      // TODO: Handle this case.
         break;
       case Flavors.STAGING:
         // TODO: Handle this case.
         break;
       case Flavors.DEVELOPMENT:
-        AppSocket().interceptor();
         AppConfig.to.setFlavor = Config(
           midtransClientKey: 'Some Client Key',
-          accessToken: 'Some Token',
-          baseUrl: 'https://google.com',
+          clientToken: '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',
+          baseUrl: 'https://api.github.com',
           socketUrl: 'https://address.com',
         );
+        AppSocket().interceptor();
         break;
     }
   }
@@ -44,12 +39,12 @@ class AppConfig {
 class Config {
   Config({
     required this.midtransClientKey,
-    required this.accessToken,
+    required this.clientToken,
     required this.baseUrl,
     required this.socketUrl,
   });
   String midtransClientKey;
-  String accessToken;
+  String clientToken;
   String baseUrl;
   String socketUrl;
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage_box.dart';
+import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
 import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manager.dart';
 import 'package:varcore_flutter_base/core/localization/lang_const.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
@@ -50,14 +50,14 @@ class LocaleHelper {
 
   saveLanguagesToCache(String name) {
     if (name == "English") {
-      GetStorageManager.to.write(GetStorageBox.CURRENT_LOCALE, "en");
+      GetStorageManager.to.save(GetStorageKey.CURRENT_LOCALE, "en");
     } else {
-      GetStorageManager.to.write(GetStorageBox.CURRENT_LOCALE, "in");
+      GetStorageManager.to.save(GetStorageKey.CURRENT_LOCALE, "in");
     }
   }
 
   Locale getCurrentLocale() {
-    var currentLocale = GetStorageManager.to.get(GetStorageBox.CURRENT_LOCALE);
+    var currentLocale = GetStorageManager.to.get(GetStorageKey.CURRENT_LOCALE);
     if (currentLocale != null) {
       if (currentLocale == "en") {
         return const Locale('en');

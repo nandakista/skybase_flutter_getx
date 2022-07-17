@@ -13,7 +13,7 @@ class MultiLangs {
   static const String errorMsg = 'txt_error_general';
   static const String retry = 'txt_retry';
   static const String chooseLanguage = 'txt_choose_language';
-  static const String loginSubtitle = 'txt_input_phone';
+  static const String loginSubtitle = 'txt_login_subtitle';
   static const String dontHaveAccount = 'txt_dont_have_account';
   static const String register = 'txt_register';
   static const String forgotPassword = 'txt_forgot_password';
@@ -22,7 +22,8 @@ class MultiLangs {
   static const String login = 'txt_login';
 
   //BUTTON
-  static const String changeLanguage = 'txt_button_change_locale';
+  static const String changeLanguage = 'txt_change_locale';
+  static const String skip = 'txt_skip';
   static const String logout = 'txt_logout';
   static const String camera = 'txt_camera';
   static const String gallery = 'txt_gallery';

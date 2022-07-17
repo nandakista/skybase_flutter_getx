@@ -215,7 +215,7 @@ class DialogAlert extends StatelessWidget {
                           child: CustomButton(
                             text: 'Kembali',
                             color: cancelColor,
-                            onPress: onCancel,
+                            onPressed: onCancel,
                           ),
                         ),
                       ),
@@ -224,7 +224,7 @@ class DialogAlert extends StatelessWidget {
                         child: CustomButton(
                           text: confirmText,
                           color: confirmColor,
-                          onPress: onConfirm,
+                          onPressed: onConfirm,
                         ),
                       ),
                     ],
@@ -275,7 +275,7 @@ class SoonDialog extends StatelessWidget {
           Align(
             alignment: Alignment.bottomRight,
             child: CustomButton(
-              onPress: () => Get.back(),
+              onPressed: () => Get.back(),
               text: 'OK',
               color: AppColors.primary,
             ),

@@ -9,23 +9,27 @@ import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage
 import 'package:varcore_flutter_base/core/database/shared_preferences/shared_preference_manager.dart';
 import 'package:varcore_flutter_base/core/auth_manager/auth_manager.dart';
 import 'package:varcore_flutter_base/core/network/api_config.dart';
+import 'package:varcore_flutter_base/data/data_sources/local/user/user_dao.dart';
 
 class AppServices extends GetxService {
   static Future<void> init() async {
     /// Database
-    /// * [Be Careful] Writing order affects
+    /// * [Be Careful] Writing order can affects
     await Get.putAsync(() async => GetStorage());
     await Get.putAsync(() async => await SharedPreferences.getInstance());
-    Get.put(GetStorageManager(), permanent: true);
     Get.put(const FlutterSecureStorage(), permanent: true);
 
     Get.lazyPut(() => AppConfig());
     Get.lazyPut(() => AppSocket());
     Get.lazyPut(() => DioClient());
+    Get.lazyPut(() => GetStorageManager());
     Get.lazyPut(() => SecureStorageManager());
     Get.lazyPut(() => SharedPreferenceManager());
 
     /// Initialize Apps and checking user auth
     Get.put(AuthManager());
+
+    // Dao
+    Get.put(UserDao());
   }
 }

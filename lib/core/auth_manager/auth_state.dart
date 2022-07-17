@@ -1,4 +1,4 @@
-import 'package:varcore_flutter_base/data/models/user.dart';
+import 'package:varcore_flutter_base/data/models/user/user.dart';
 
 enum AppType { INITIAL, UNAUTHENTICATED, LOAD, AUTHENTICATED }
 

@@ -22,6 +22,7 @@ const Map<String, String> id = {
   MultiLangs.phone : 'No.Telp',
   MultiLangs.reset : 'Ganti',
   MultiLangs.login : 'Masuk',
+  MultiLangs.skip : 'Lewati',
 
   //BUTTON
   MultiLangs.changeLanguage: 'Ganti Bahasa',

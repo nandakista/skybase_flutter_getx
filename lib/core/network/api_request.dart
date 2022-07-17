@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:varcore_flutter_base/core/app/app_config.dart';
 import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:varcore_flutter_base/core/network/api_config.dart';
 import 'package:varcore_flutter_base/core/network/api_exception.dart';
@@ -18,7 +19,7 @@ Future<Response> sendRequest({
   required String url,
   Object? body,
   required RequestMethod requestMethod,
-  bool useToken = false,
+  bool useToken = true,
   String? contentType = Headers.jsonContentType,
 }) async {
   _tokenManager(useToken);
@@ -79,11 +80,12 @@ Future<Response> sendRequest({
 void _tokenManager(bool useToken) async {
   final secureStorage = SecureStorageManager.to;
   DioClient.setInterceptor();
-  String? token = (await secureStorage.isLoggedIn())
-      ? await secureStorage.getToken()
-      : null;
+  // String? token = (await secureStorage.isLoggedIn())
+  //     ? await secureStorage.getToken()
+  //     : null;
+  String? clientToken = AppConfig.to.get.clientToken;
   if (useToken) {
-    headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
+    headers[HttpHeaders.authorizationHeader] = 'token $clientToken';
   } else {
     headers.clear();
   }
