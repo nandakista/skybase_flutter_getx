@@ -3,18 +3,21 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' as getx;
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage.dart';
+import 'package:varcore_flutter_base/core/auth_manager/auth_manager.dart';
+import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
 import 'package:varcore_flutter_base/core/network/api_config.dart';
 import 'package:varcore_flutter_base/core/network/api_exception.dart';
 import 'package:varcore_flutter_base/core/network/api_request.dart';
 import 'package:varcore_flutter_base/core/network/api_url.dart';
 import 'package:varcore_flutter_base/core/network/api_response.dart';
-import 'package:varcore_flutter_base/ui/view/auth/login/login_page.dart';
+import 'package:varcore_flutter_base/ui/view/auth/login/login_view.dart';
 
 class ApiInterceptors extends QueuedInterceptorsWrapper {
-  final Dio _dio;
   ApiInterceptors(this._dio);
+  final Dio _dio;
+  final secureStorage = SecureStorageManager.to;
+  final authManager = AuthManager.to;
 
   @override
   Future<dynamic> onRequest(options, handler) async {
@@ -59,12 +62,12 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
   }
 
   _handleRefreshToken(DioError err, ErrorInterceptorHandler handler) async {
-    String? accessToken = LocalStorage.to.getToken();
-    String? refreshToken = LocalStorage.to.getRefreshToken();
+    String? accessToken = await secureStorage.getToken();
+    String? refreshToken = await secureStorage.getRefreshToken();
     if (accessToken != null && err.response?.statusCode == 401) {
       String? newToken =
           await _getAccessToken(refreshToken: refreshToken.toString());
-      LocalStorage.to.saveToken(newToken.toString());
+      await secureStorage.setToken(value: newToken.toString());
       return handler.resolve(await _retry(err.requestOptions));
     } else {
       super.onError(err, handler);
@@ -72,7 +75,7 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
   }
 
   Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
-    String newAccessToken = LocalStorage.to.getToken() ?? '';
+    String newAccessToken = await secureStorage.getToken() ?? '';
     final options = Options(
         method: requestOptions.method,
         headers: {'Authorization': 'Bearer $newAccessToken'});
@@ -97,7 +100,7 @@ class ApiInterceptors extends QueuedInterceptorsWrapper {
           typeDialog: TypeDialog.FAILED,
           dismissible: false,
           message: 'Anda harus login kembali!',
-          onPress: () => getx.Get.offAllNamed(LoginPage.route));
+          onPress: () => authManager.logout());
     }
   }
 }

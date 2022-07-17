@@ -4,11 +4,11 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:varcore_flutter_base/core/database/shared_preferences/shared_preference_manager.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
-import 'package:varcore_flutter_base/ui/view/auth/login/login_page.dart';
+import 'package:varcore_flutter_base/ui/view/auth/login/login_view.dart';
 
-class IntroPage extends StatelessWidget {
+class IntroView extends StatelessWidget {
   static const String route = '/intro';
-  const IntroPage({Key? key}) : super(key: key);
+  const IntroView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class IntroPage extends StatelessWidget {
 
   void _onIntroEnd(context) async {
     sharedPreferences.setBool(KeyPrefs.isFirstInstall, false);
-    Get.offAllNamed(LoginPage.route);
+    Get.offAllNamed(LoginView.route);
   }
 
   Widget _buildImage(String assetName, [double width = 250]) {

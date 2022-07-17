@@ -4,7 +4,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:varcore_flutter_base/core/app/app_config.dart';
 import 'package:varcore_flutter_base/core/app/app_socket.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage.dart';
 import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manager.dart';
 import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:varcore_flutter_base/core/database/shared_preferences/shared_preference_manager.dart';
@@ -17,7 +16,6 @@ class AppServices extends GetxService {
     /// * [Be Careful] Writing order affects
     await Get.putAsync(() async => GetStorage());
     await Get.putAsync(() async => await SharedPreferences.getInstance());
-    Get.put(LocalStorage(), permanent: true);
     Get.put(GetStorageManager(), permanent: true);
     Get.put(const FlutterSecureStorage(), permanent: true);
 

@@ -11,9 +11,9 @@ import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_button.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_form_field.dart';
 
-class LoginPage extends GetView<LoginController> {
+class LoginView extends GetView<LoginController> {
   static const String route = '/login';
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

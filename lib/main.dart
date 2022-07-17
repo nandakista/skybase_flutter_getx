@@ -12,7 +12,7 @@ import 'package:varcore_flutter_base/core/helper/general_function.dart';
 import 'package:varcore_flutter_base/core/localization/app_translations.dart';
 import 'package:varcore_flutter_base/core/localization/locale_helper.dart';
 import 'package:varcore_flutter_base/core/themes/app_theme.dart';
-import 'package:varcore_flutter_base/ui/view/auth/splash/splash_page.dart';
+import 'package:varcore_flutter_base/ui/view/auth/splash/splash_view.dart';
 import 'package:varcore_flutter_base/ui/routes/app_routes.dart';
 
 void main() async {

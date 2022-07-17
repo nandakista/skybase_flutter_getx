@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
-import 'package:varcore_flutter_base/ui/view/auth/splash/splash_controller.dart';
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
 
-class SplashPage extends GetView<SplashController> {
+class SplashView extends StatelessWidget {
   static const String route = '/splash';
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // controller.init();
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: ContentWrapper(

@@ -8,11 +8,16 @@ class SecureStorageManager {
   final String _tokenKey = "token";
   final String _refreshTokenKey = "token";
 
+  Future<bool> isLoggedIn() async {
+    return await secureStorage.containsKey(key: _tokenKey);
+  }
+
+
   Future<String?> getToken() async {
     return await secureStorage.read(key: _tokenKey);
   }
 
-  Future setToken({String? value}) async {
+  Future setToken({required String? value}) async {
     return await secureStorage.write(key: _tokenKey, value: value);
   }
 
@@ -20,7 +25,7 @@ class SecureStorageManager {
     return await secureStorage.read(key: _refreshTokenKey);
   }
 
-  Future setRefreshToken({String? value}) async {
+  Future setRefreshToken({required String? value}) async {
     return await secureStorage.write(key: _refreshTokenKey, value: value);
   }
 

@@ -7,10 +7,14 @@ import 'package:varcore_flutter_base/core/database/shared_preferences/shared_pre
 import 'package:varcore_flutter_base/core/auth_manager/auth_state.dart';
 import 'package:varcore_flutter_base/data/data_sources/auth/auth_api_impl.dart';
 import 'package:varcore_flutter_base/data/models/user.dart';
-import 'package:varcore_flutter_base/ui/view/auth/login/login_page.dart';
-import 'package:varcore_flutter_base/ui/view/auth/splash/splash_page.dart';
+import 'package:varcore_flutter_base/ui/view/auth/login/login_view.dart';
+import 'package:varcore_flutter_base/ui/view/auth/splash/splash_view.dart';
 import 'package:varcore_flutter_base/ui/view/home/home_page.dart';
 
+/// This class is called first time when your app is open.
+///
+/// This class help you to manage authentication process.
+/// Contains auth general function such as [login], [logout], and first install/[setup]
 class AuthManager extends GetxController {
   static AuthManager get to => Get.find<AuthManager>();
 
@@ -22,14 +26,6 @@ class AuthManager extends GetxController {
   var getStorage = GetStorageManager.to;
   var secureStorage = SecureStorageManager.to;
   var sp = SharedPreferenceManager.to;
-
-  User? get user {
-    if (getStorage.has(GetStorageBox.USERS)) {
-      return User.fromJson(getStorage.get(GetStorageBox.USERS));
-    } else {
-      return null;
-    }
-  }
 
   @override
   void onInit() {
@@ -50,15 +46,25 @@ class AuthManager extends GetxController {
       checkUser();
     } else if (state?.appStatus == AppType.UNAUTHENTICATED) {
       clearData();
-      Get.offAllNamed(LoginPage.route);
+      Get.offAllNamed(LoginView.route);
     } else if (state?.appStatus == AppType.AUTHENTICATED) {
       Get.offAllNamed(HomePage.route);
     } else {
-      Get.toNamed(SplashPage.route);
+      Get.toNamed(SplashView.route);
     }
     update();
   }
 
+  setup() async {
+    final firstInstall = sp.getIsFirstInstall();
+    if (firstInstall) {
+      sp.setIsFirstInstall(value: false);
+      await secureStorage.setToken(value: '');
+    }
+  }
+
+  /// This function to used for checking is valid token to API Server use GET User Endpoint (token required).
+  /// If response is Error it will passed to [logout] process.
   Future<void> checkUser() async {
     AuthApiImpl authApi = AuthApiImpl();
     final String? _token = await secureStorage.getToken();
@@ -81,7 +87,6 @@ class AuthManager extends GetxController {
     } catch (err) {
       logout();
     }
-
     // if (getStorage.has(GetStorageBox.USERS)) {
     //   setAuth();
     // } else {
@@ -89,12 +94,10 @@ class AuthManager extends GetxController {
     // }
   }
 
-  void clearData() {
-    if (getStorage.has(GetStorageBox.USERS)) {
-      getStorage.delete(GetStorageBox.USERS);
-    }
-  }
-
+  /// Just call this function to managed logout process.
+  /// It will stream state and auto redirect your apps to page based on their state
+  /// with [authChanged] function
+  /// * No need to navigate manually (Get.to or Get.off)
   Future<void> logout() async {
     await secureStorage.logout();
     getStorage.logout();
@@ -102,13 +105,17 @@ class AuthManager extends GetxController {
     authState.value = const AuthState(appStatus: AppType.UNAUTHENTICATED);
   }
 
+  /// Just call this function to managed login process.
+  /// It will stream state and auto redirect your apps to page based on their state
+  /// with [authChanged] function
+  /// * No need to navigate manually (Get.to or Get.off).
   Future<void> login({
     required User user,
     required String token,
     required String refreshToken,
   }) async {
     saveAuthData(user: user, token: token, refreshToken: refreshToken);
-    setAuth();
+    authState.value = const AuthState(appStatus: AppType.AUTHENTICATED);
   }
 
   Future<void> saveAuthData({
@@ -121,15 +128,19 @@ class AuthManager extends GetxController {
     await secureStorage.setRefreshToken(value: refreshToken);
   }
 
-  void setAuth() {
-    authState.value = const AuthState(appStatus: AppType.AUTHENTICATED);
+  void clearData() {
+    if (getStorage.has(GetStorageBox.USERS)) {
+      getStorage.delete(GetStorageBox.USERS);
+    }
   }
 
-  setup() async {
-    final firstInstall = sp.getIsFirstInstall();
-    if (firstInstall) {
-      sp.setIsFirstInstall(value: false);
-      await secureStorage.setToken(value: '');
+  /// Get User data from GetStorage
+  /// * No need to decode or call fromJson again when you used this helper
+  User? get user {
+    if (getStorage.has(GetStorageBox.USERS)) {
+      return User.fromJson(getStorage.get(GetStorageBox.USERS));
+    } else {
+      return null;
     }
   }
 }

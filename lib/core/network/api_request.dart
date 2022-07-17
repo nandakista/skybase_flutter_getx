@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage.dart';
+import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:varcore_flutter_base/core/network/api_config.dart';
 import 'package:varcore_flutter_base/core/network/api_exception.dart';
 
@@ -28,7 +28,7 @@ Future<Response> sendRequest({
         debugPrint(
             'Request Body : ${FormData.fromMap(body as Map<String, dynamic>).fields}');
         return await _safeFetch(
-              () => dioClient.post(
+          () => dioClient.post(
             url,
             data: contentType == Headers.jsonContentType
                 ? jsonEncode(body)
@@ -38,14 +38,14 @@ Future<Response> sendRequest({
         );
       case RequestMethod.GET:
         return await _safeFetch(
-              () => dioClient.get(
+          () => dioClient.get(
             url,
             options: Options(headers: headers, contentType: contentType),
           ),
         );
       case RequestMethod.PATCH:
         return await _safeFetch(
-              () => dioClient.patch(
+          () => dioClient.patch(
             url,
             data: contentType == Headers.jsonContentType
                 ? jsonEncode(body)
@@ -55,7 +55,7 @@ Future<Response> sendRequest({
         );
       case RequestMethod.PUT:
         return await _safeFetch(
-              () => dioClient.put(
+          () => dioClient.put(
             url,
             data: contentType == Headers.jsonContentType
                 ? jsonEncode(body)
@@ -65,7 +65,7 @@ Future<Response> sendRequest({
         );
       case RequestMethod.DELETE:
         return await _safeFetch(
-              () => dioClient.delete(
+          () => dioClient.delete(
             url,
             options: Options(headers: headers),
           ),
@@ -76,12 +76,14 @@ Future<Response> sendRequest({
   }
 }
 
-void _tokenManager(bool useToken) {
+void _tokenManager(bool useToken) async {
+  final secureStorage = SecureStorageManager.to;
   DioClient.setInterceptor();
-  var apiToken =
-  LocalStorage.to.isLoggedIn() ? LocalStorage.to.getToken() : null;
+  String? token = (await secureStorage.isLoggedIn())
+      ? await secureStorage.getToken()
+      : null;
   if (useToken) {
-    headers[HttpHeaders.authorizationHeader] = 'Bearer $apiToken';
+    headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
   } else {
     headers.clear();
   }
