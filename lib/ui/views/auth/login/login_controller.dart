@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:varcore_flutter_base/core/auth_manager/auth_manager.dart';
+import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
 import 'package:varcore_flutter_base/data/data_sources/server/auth/auth_api.dart';
 import 'package:varcore_flutter_base/ui/views/home/home_view.dart';
+import 'package:varcore_flutter_base/ui/views/user/list/user_list_view.dart';
 
 class LoginController extends GetxController {
   final AuthApi dataSource;
@@ -47,5 +50,10 @@ class LoginController extends GetxController {
         );
       }
     }
+  }
+
+  bypassLogin() async {
+    await SecureStorageManager.to.setToken(value: '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');
+    AuthManager.to.setAuth();
   }
 }

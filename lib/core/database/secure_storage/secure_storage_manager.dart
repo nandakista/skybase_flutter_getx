@@ -13,7 +13,7 @@ class SecureStorageManager {
   final String _refreshTokenKey = "refresh_token";
 
   Future<bool> isLoggedIn() async {
-    return await secureStorage.containsKey(key: _tokenKey);
+    return (await getToken() != '');
   }
 
   Future<String?> getToken() async {
@@ -33,6 +33,7 @@ class SecureStorageManager {
   }
 
   Future logout() async {
-    await secureStorage.deleteAll();
+    await setToken(value: '');
+    await setRefreshToken(value: '');
   }
 }

@@ -85,7 +85,6 @@ class User {
       repository: json['public_repos'],
       followers: json['followers'],
       following: json['following'],
-      // items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
       repositoryList: (json['repository_list'])
           ?.map((e) => Repo.fromJson(e as Map<String, dynamic>))
           .toList(),

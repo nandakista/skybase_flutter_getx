@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:varcore_flutter_base/core/helper/safe_request_api_helper.dart';
 import 'package:varcore_flutter_base/data/data_sources/local/user/user_dao.dart';
 import 'package:varcore_flutter_base/data/data_sources/server/user/user_api.dart';
 import 'package:varcore_flutter_base/data/models/user/user.dart';
@@ -15,7 +15,8 @@ class UserRepositoryImpl extends UserRepository {
     try {
       if (_userDao.box.isNotEmpty) {
         List<User> _cache = _userDao.getAll();
-        _getListUserApi();
+        SafeRequestAPI.call(() => _getListUserApi());
+        // await _getListUserApi();
         return _cache;
       } else {
         final _res = await _getListUserApi();
@@ -31,7 +32,8 @@ class UserRepositoryImpl extends UserRepository {
     try {
       if (_userDao.containData(user)) {
         User _cache = _userDao.get(user.id);
-        _getDetailApi(_cache.username);
+        SafeRequestAPI.call(() => _getDetailApi(_cache.username));
+        // _getDetailApi(user.username);
         return _cache;
       } else {
         final _res = await _getDetailApi(user.username);
@@ -43,7 +45,7 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   Future<User> _getDetailApi(String username) async {
-    User _res = await apiService.getDetailUser(username: username);
+    final User _res = await apiService.getDetailUser(username: username);
     _res.followersList = await apiService.getFollowers(username: username);
     _res.followingList = await apiService.getFollowings(username: username);
     _res.repositoryList = await apiService.getRepos(username: username);

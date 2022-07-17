@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:varcore_flutter_base/core/app/app_config.dart';
 import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
+import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
 import 'package:varcore_flutter_base/core/network/api_config.dart';
 import 'package:varcore_flutter_base/core/network/api_exception.dart';
 
@@ -15,6 +16,8 @@ Map<String, String> headers = {
   HttpHeaders.authorizationHeader: '',
 };
 
+/// Base Request for calling API.
+/// * Can be modify as needed.
 Future<Response> sendRequest({
   required String url,
   Object? body,
@@ -80,12 +83,9 @@ Future<Response> sendRequest({
 void _tokenManager(bool useToken) async {
   final secureStorage = SecureStorageManager.to;
   DioClient.setInterceptor();
-  // String? token = (await secureStorage.isLoggedIn())
-  //     ? await secureStorage.getToken()
-  //     : null;
-  String? clientToken = AppConfig.to.get.clientToken;
+  String? token = await secureStorage.getToken();
   if (useToken) {
-    headers[HttpHeaders.authorizationHeader] = 'token $clientToken';
+    headers[HttpHeaders.authorizationHeader] = 'token $token';
   } else {
     headers.clear();
   }
@@ -107,3 +107,5 @@ Future<Response> _safeFetch(Future<Response> Function() tryFetch) async {
     rethrow;
   }
 }
+
+

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
 import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manager.dart';
@@ -49,7 +48,7 @@ class AuthManager extends GetxController {
       clearData();
       Get.offAllNamed(LoginView.route);
     } else if (state?.appStatus == AppType.AUTHENTICATED) {
-      Get.offAllNamed(UserListView.route);
+      Get.toNamed(UserListView.route);
       // Get.offAllNamed(HomePage.route);
     } else {
       Get.toNamed(SplashView.route);
@@ -92,6 +91,13 @@ class AuthManager extends GetxController {
     // }
   }
 
+  /// Set auth state to AppType.AUTHENTICATED
+  void setAuth() async {
+    if(await secureStorage.isLoggedIn()) {
+      authState.value = const AuthState(appStatus: AppType.AUTHENTICATED);
+    }
+  }
+
   /// Just call this function to managed logout process.
   /// It will stream state and auto redirect your apps to page based on their state
   /// with [authChanged] function
@@ -112,8 +118,8 @@ class AuthManager extends GetxController {
     required String token,
     required String refreshToken,
   }) async {
-    saveAuthData(user: user, token: token, refreshToken: refreshToken);
-    authState.value = const AuthState(appStatus: AppType.AUTHENTICATED);
+    await saveAuthData(user: user, token: token, refreshToken: refreshToken);
+    setAuth();
   }
 
   Future<void> saveAuthData({

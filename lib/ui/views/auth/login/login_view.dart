@@ -3,11 +3,9 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/helper/validator_helper.dart';
 import 'package:varcore_flutter_base/core/localization/lang_const.dart';
-import 'package:varcore_flutter_base/core/localization/locale_helper.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 import 'package:varcore_flutter_base/ui/views/auth/login/login_controller.dart';
-import 'package:varcore_flutter_base/ui/views/user/list/user_list_view.dart';
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_button.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_form_field.dart';
@@ -95,10 +93,7 @@ class LoginView extends GetView<LoginController> {
                             icon: Icons.arrow_forward,
                             color: AppColors.primary),
                         CustomButton(
-                            onPressed: () {
-                              // LocaleHelper().showLocaleDialog(context);
-                              Get.toNamed(UserListView.route);
-                            },
+                            onPressed: () => controller.bypassLogin(),
                             text: MultiLangs.skip.tr,
                             icon: Icons.arrow_forward,
                             color: AppColors.primary,

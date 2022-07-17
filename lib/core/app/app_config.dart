@@ -26,7 +26,7 @@ class AppConfig {
       case Flavors.DEVELOPMENT:
         AppConfig.to.setFlavor = Config(
           midtransClientKey: 'Some Client Key',
-          clientToken: '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',
+          clientToken: 'Some Client Token',
           baseUrl: 'https://api.github.com',
           socketUrl: 'https://address.com',
         );

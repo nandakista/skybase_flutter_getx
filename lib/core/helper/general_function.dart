@@ -65,9 +65,7 @@ class AppFunction {
     }
     try {
       if (useToken) {
-        String? token = (await SecureStorageManager.to.isLoggedIn())
-            ? await SecureStorageManager.to.getToken()
-            : null;
+        String? token = await SecureStorageManager.to.getToken();
         headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       } else {
         headers.clear();
