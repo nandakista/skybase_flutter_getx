@@ -34,7 +34,7 @@ class CustomDialog extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                         color:
-                        (Get.isDarkMode) ? AppColors.primary : Colors.black,
+                            (Get.isDarkMode) ? AppColors.primary : Colors.black,
                         offset: const Offset(0.0, 0.0),
                         blurRadius: 10.0)
                   ],
@@ -197,7 +197,10 @@ class DialogAlert extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppStyle.title2.copyWith(color: AppColors.primary),
+                    style: AppStyle.title2.copyWith(
+                      color: AppColors.primary,
+                      fontWeight: AppStyle.semiBold,
+                    ),
                   ),
                   const SizedBox(height: 24),
                   Text(
@@ -215,7 +218,7 @@ class DialogAlert extends StatelessWidget {
                           child: CustomButton(
                             text: 'Kembali',
                             color: cancelColor,
-                            onPress: onCancel,
+                            onPressed: onCancel,
                           ),
                         ),
                       ),
@@ -224,7 +227,7 @@ class DialogAlert extends StatelessWidget {
                         child: CustomButton(
                           text: confirmText,
                           color: confirmColor,
-                          onPress: onConfirm,
+                          onPressed: onConfirm,
                         ),
                       ),
                     ],
@@ -275,7 +278,7 @@ class SoonDialog extends StatelessWidget {
           Align(
             alignment: Alignment.bottomRight,
             child: CustomButton(
-              onPress: () => Get.back(),
+              onPressed: () => Get.back(),
               text: 'OK',
               color: AppColors.primary,
             ),

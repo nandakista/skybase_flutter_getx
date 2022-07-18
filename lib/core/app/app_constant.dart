@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +18,10 @@ class AppConst {
   ... Size of everything
    */
   /// The height of SafeArea Widget
-  static double safeAreaHeight = Get.height - MediaQuery.of(Get.context!).padding.top - MediaQuery.of(Get.context!).padding.bottom;
+  static double safeAreaHeight = Get.height -
+      MediaQuery.of(Get.context!).padding.top -
+      MediaQuery.of(Get.context!).padding.bottom;
+
   /// The height of SafeArea - Toolbar or the height of content view
   static double contentHeight = safeAreaHeight - kToolbarHeight;
 }

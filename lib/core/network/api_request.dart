@@ -3,10 +3,11 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage.dart';
+import 'package:varcore_flutter_base/core/app/app_config.dart';
+import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
+import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
 import 'package:varcore_flutter_base/core/network/api_config.dart';
 import 'package:varcore_flutter_base/core/network/api_exception.dart';
-import 'package:varcore_flutter_base/core/network/api_response.dart';
 
 // ignore: constant_identifier_names
 enum RequestMethod { GET, POST, PATCH, PUT, DELETE }
@@ -15,11 +16,13 @@ Map<String, String> headers = {
   HttpHeaders.authorizationHeader: '',
 };
 
+/// Base Request for calling API.
+/// * Can be modify as needed.
 Future<Response> sendRequest({
   required String url,
   Object? body,
   required RequestMethod requestMethod,
-  bool useToken = false,
+  bool useToken = true,
   String? contentType = Headers.jsonContentType,
 }) async {
   _tokenManager(useToken);
@@ -29,7 +32,7 @@ Future<Response> sendRequest({
         debugPrint(
             'Request Body : ${FormData.fromMap(body as Map<String, dynamic>).fields}');
         return await _safeFetch(
-              () => dioClient.post(
+          () => dioClient.post(
             url,
             data: contentType == Headers.jsonContentType
                 ? jsonEncode(body)
@@ -39,14 +42,14 @@ Future<Response> sendRequest({
         );
       case RequestMethod.GET:
         return await _safeFetch(
-              () => dioClient.get(
+          () => dioClient.get(
             url,
             options: Options(headers: headers, contentType: contentType),
           ),
         );
       case RequestMethod.PATCH:
         return await _safeFetch(
-              () => dioClient.patch(
+          () => dioClient.patch(
             url,
             data: contentType == Headers.jsonContentType
                 ? jsonEncode(body)
@@ -56,7 +59,7 @@ Future<Response> sendRequest({
         );
       case RequestMethod.PUT:
         return await _safeFetch(
-              () => dioClient.put(
+          () => dioClient.put(
             url,
             data: contentType == Headers.jsonContentType
                 ? jsonEncode(body)
@@ -66,7 +69,7 @@ Future<Response> sendRequest({
         );
       case RequestMethod.DELETE:
         return await _safeFetch(
-              () => dioClient.delete(
+          () => dioClient.delete(
             url,
             options: Options(headers: headers),
           ),
@@ -77,12 +80,12 @@ Future<Response> sendRequest({
   }
 }
 
-void _tokenManager(bool useToken) {
+void _tokenManager(bool useToken) async {
+  final secureStorage = SecureStorageManager.to;
   DioClient.setInterceptor();
-  var apiToken =
-  LocalStorage.to.isLoggedIn() ? LocalStorage.to.getToken() : null;
+  String? token = await secureStorage.getToken();
   if (useToken) {
-    headers[HttpHeaders.authorizationHeader] = 'Bearer $apiToken';
+    headers[HttpHeaders.authorizationHeader] = 'token $token';
   } else {
     headers.clear();
   }
@@ -104,3 +107,5 @@ Future<Response> _safeFetch(Future<Response> Function() tryFetch) async {
     rethrow;
   }
 }
+
+

@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage.dart';
+import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:varcore_flutter_base/core/network/api_request.dart';
 import 'package:image/image.dart' as img;
 
@@ -37,9 +37,10 @@ class AppFunction {
     return result;
   }
 
-  static Future<File> compressImage({required File file, required int limit}) async {
+  static Future<File> compressImage(
+      {required File file, required int limit}) async {
     var minLimit = 1000000;
-    if(limit < minLimit) limit = minLimit;
+    if (limit < minLimit) limit = minLimit;
     var size = file.lengthSync();
     while (size >= limit) {
       var result = await FlutterImageCompress.compressWithFile(
@@ -56,15 +57,16 @@ class AppFunction {
   }
 
   // Download File
-  static Future<File> downloadFile({required String url, bool useToken = false, name}) async {
+  static Future<File> downloadFile(
+      {required String url, bool useToken = false, name}) async {
     var fileName = 'downloaded_file';
     if (name != null) {
       fileName = name;
     }
     try {
       if (useToken) {
-        var apiToken = LocalStorage.to.isLoggedIn() ? LocalStorage.to.getToken() : null;
-        headers[HttpHeaders.authorizationHeader] = 'Bearer $apiToken';
+        String? token = await SecureStorageManager.to.getToken();
+        headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       } else {
         headers.clear();
       }
