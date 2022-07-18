@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
 import 'package:varcore_flutter_base/core/localization/lang_const.dart';
 import 'package:varcore_flutter_base/core/localization/locale_helper.dart';
+import 'package:varcore_flutter_base/core/themes/theme_manager.dart';
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_button.dart';
 
@@ -33,6 +34,20 @@ class UtilsView extends StatelessWidget {
                 },
                 text: 'Dialog',
                 icon: CupertinoIcons.squares_below_rectangle,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Is Dark Mode'),
+                  GetX<ThemeManager>(
+                    builder: (controller) => Switch(
+                      value: controller.isDark.value,
+                      onChanged: (value) {
+                        controller.changeTheme();
+                      },
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

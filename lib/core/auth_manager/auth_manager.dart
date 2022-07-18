@@ -1,15 +1,17 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
 import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manager.dart';
 import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
-import 'package:varcore_flutter_base/core/database/shared_preferences/shared_preference_manager.dart';
 import 'package:varcore_flutter_base/core/auth_manager/auth_state.dart';
+import 'package:varcore_flutter_base/core/themes/theme_manager.dart';
 import 'package:varcore_flutter_base/data/data_sources/server/auth/auth_api_impl.dart';
 import 'package:varcore_flutter_base/data/models/user/user.dart';
+import 'package:varcore_flutter_base/ui/views/auth/intro/intro_view.dart';
 import 'package:varcore_flutter_base/ui/views/auth/login/login_view.dart';
 import 'package:varcore_flutter_base/ui/views/auth/splash/splash_view.dart';
 import 'package:varcore_flutter_base/ui/views/home/home_view.dart';
-import 'package:varcore_flutter_base/ui/views/user/list/user_list_view.dart';
 
 /// This class is called first time when your app is open.
 ///
@@ -18,14 +20,13 @@ import 'package:varcore_flutter_base/ui/views/user/list/user_list_view.dart';
 class AuthManager extends GetxController {
   static AuthManager get to => Get.find<AuthManager>();
 
-  String TAG = 'AUTH_MANAGER';
   Rxn<AuthState> authState = Rxn<AuthState>();
   Stream<AuthState?> get stream => authState.stream;
   AuthState? get state => authState.value;
 
   var getStorage = GetStorageManager.to;
   var secureStorage = SecureStorageManager.to;
-  var sp = SharedPreferenceManager.to;
+  var themeManager = ThemeManager.to;
 
   @override
   void onInit() {
@@ -41,26 +42,52 @@ class AuthManager extends GetxController {
   }
 
   authChanged(AuthState? state) async {
-    if (state?.appStatus == AppType.INITIAL) {
-      await setup();
-      checkUser();
-    } else if (state?.appStatus == AppType.UNAUTHENTICATED) {
-      clearData();
-      Get.offAllNamed(LoginView.route);
-    } else if (state?.appStatus == AppType.AUTHENTICATED) {
-      // Get.toNamed(UserListView.route);
-      Get.offAllNamed(HomeView.route);
-    } else {
-      Get.toNamed(SplashView.route);
+    switch (state?.appStatus) {
+      case AppType.INITIAL:
+        await setup();
+        break;
+      case AppType.FIRST_INSTALL:
+        Timer(
+          const Duration(seconds: 2),
+          () => Get.offAllNamed(IntroView.route),
+        );
+        break;
+      case AppType.UNAUTHENTICATED:
+        clearData();
+        Get.offAllNamed(LoginView.route);
+        break;
+      case AppType.AUTHENTICATED:
+        Get.offAllNamed(HomeView.route);
+        break;
+      default:
+        Get.toNamed(SplashView.route);
     }
     update();
   }
 
   setup() async {
-    final firstInstall = sp.getIsFirstInstall();
+    checkFirstInstall();
+    await checkAppTheme();
+  }
+
+  /// Check if app is first time installed. It will navigate to Introduction Page
+  void checkFirstInstall() async {
+    final bool firstInstall = getStorage.get(GetStorageKey.FIRST_INSTALL) ?? true;
     if (firstInstall) {
-      sp.setIsFirstInstall(value: false);
       await secureStorage.setToken(value: '');
+      authState.value = const AuthState(appStatus: AppType.FIRST_INSTALL);
+    } else {
+      checkUser();
+    }
+  }
+
+  /// Checking App Theme set it before app display
+  Future<void> checkAppTheme() async {
+    final bool isDarkTheme = await getStorage.getAwait(GetStorageKey.DARK_THEME) ?? false;
+    if(isDarkTheme) {
+      themeManager.toDarkMode();
+    } else {
+      themeManager.toLightMode();
     }
   }
 
@@ -84,16 +111,11 @@ class AuthManager extends GetxController {
     } catch (err) {
       logout();
     }
-    // if (getStorage.has(GetStorageBox.USERS)) {
-    //   setAuth();
-    // } else {
-    //   logout();
-    // }
   }
 
   /// Set auth state to AppType.AUTHENTICATED
   void setAuth() async {
-    if(await secureStorage.isLoggedIn()) {
+    if (await secureStorage.isLoggedIn()) {
       authState.value = const AuthState(appStatus: AppType.AUTHENTICATED);
     }
   }
@@ -105,7 +127,7 @@ class AuthManager extends GetxController {
   Future<void> logout() async {
     await secureStorage.logout();
     getStorage.logout();
-    sp.logout();
+    // sp.logout();
     authState.value = const AuthState(appStatus: AppType.UNAUTHENTICATED);
   }
 

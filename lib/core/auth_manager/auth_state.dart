@@ -1,6 +1,6 @@
 import 'package:varcore_flutter_base/data/models/user/user.dart';
 
-enum AppType { INITIAL, UNAUTHENTICATED, LOAD, AUTHENTICATED }
+enum AppType { INITIAL, FIRST_INSTALL, UNAUTHENTICATED, AUTHENTICATED }
 
 class AuthState {
   final User? user;

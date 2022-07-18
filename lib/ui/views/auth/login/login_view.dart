@@ -24,123 +24,136 @@ class LoginView extends GetView<LoginController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        flex: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(MultiLangs.login.tr, style: AppStyle.headline2),
-                            const SizedBox(height: 10),
-                            Text(MultiLangs.loginSubtitle.tr,
-                                style: AppStyle.subtitle4),
-                          ],
-                        ),
-                      ),
-                      const Flexible(
-                        child: Image(
-                            image: AssetImage('assets/img_login.png'),
-                            width: 250),
-                      )
-                    ],
-                  ),
+                  _buildHeader(),
                   const SizedBox(height: 40),
-                  Form(
-                    key: controller.formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: 20),
-                        CustomFieldForm(
-                          label: MultiLangs.phone.tr,
-                          hint: MultiLangs.phone.tr,
-                          controller: controller.phoneController,
-                          keyboardType: TextInputType.phone,
-                          icon: Icons.phone,
-                          validator: (value) => AppValidator.field(
-                            title: MultiLangs.phone.tr,
-                            value: value.toString(),
-                            regex: AppRegex.phone,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Obx(
-                          () => CustomPasswordFieldForm(
-                            label: MultiLangs.password.tr,
-                            hint: MultiLangs.password.tr,
-                            controller: controller.passController,
-                            icon: Icons.lock,
-                            hiddenText: controller.isHiddenPassword.value,
-                            endIcon: IconButton(
-                                icon: const Icon(Icons.visibility_off),
-                                onPressed: () => controller.hidePassword()),
-                            validator: (value) => AppValidator.field(
-                              title: MultiLangs.password.tr,
-                              value: value.toString(),
-                              regex: AppRegex.password,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        CustomButton(
-                            onPressed: () {
-                              FocusScope.of(context).unfocus();
-                              controller.login();
-                            },
-                            text: MultiLangs.login.tr,
-                            icon: Icons.arrow_forward,
-                            color: AppColors.primary),
-                        CustomButton(
-                            onPressed: () => controller.bypassLogin(),
-                            text: MultiLangs.skip.tr,
-                            icon: Icons.arrow_forward,
-                            color: AppColors.primary,
-                        ),
-                        Column(
-                          children: [
-                            const SizedBox(height: 30),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(MultiLangs.forgotPassword.tr),
-                                 InkWell(
-                                  child: Text(
-                                    MultiLangs.reset.tr,
-                                    style: const TextStyle(
-                                        color: AppColors.primary,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(MultiLangs.dontHaveAccount.tr),
-                                InkWell(
-                                  child: Text(
-                                    MultiLangs.register.tr,
-                                    style: const TextStyle(
-                                        color: AppColors.primary,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  _buildForm(context),
+                  _buildFooter(context),
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  _buildHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          flex: 1,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(MultiLangs.login.tr, style: AppStyle.headline2),
+              const SizedBox(height: 10),
+              Text(MultiLangs.loginSubtitle.tr,
+                  style: AppStyle.subtitle4),
+            ],
+          ),
+        ),
+        const Flexible(
+          child: Image(
+              image: AssetImage('assets/img_login.png'),
+              width: 250),
+        )
+      ],
+    );
+  }
+
+  _buildForm(BuildContext context) {
+    return Form(
+      key: controller.formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(height: 20),
+          CustomFieldForm(
+            label: MultiLangs.phone.tr,
+            hint: MultiLangs.phone.tr,
+            controller: controller.phoneController,
+            keyboardType: TextInputType.phone,
+            icon: Icons.phone,
+            validator: (value) => AppValidator.field(
+              title: MultiLangs.phone.tr,
+              value: value.toString(),
+              regex: AppRegex.phone,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Obx(
+                () => CustomPasswordFieldForm(
+              label: MultiLangs.password.tr,
+              hint: MultiLangs.password.tr,
+              controller: controller.passController,
+              icon: Icons.lock,
+              hiddenText: controller.isHiddenPassword.value,
+              endIcon: IconButton(
+                  icon: const Icon(Icons.visibility_off),
+                  onPressed: () => controller.hidePassword()),
+              validator: (value) => AppValidator.field(
+                title: MultiLangs.password.tr,
+                value: value.toString(),
+                regex: AppRegex.password,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          CustomButton(
+              onPressed: () {
+                FocusScope.of(context).unfocus();
+                controller.login();
+              },
+              text: MultiLangs.login.tr,
+              icon: Icons.arrow_forward,
+              color: AppColors.primary,
+          ),
+        ],
+      ),
+    );
+  }
+
+  _buildFooter(BuildContext context) {
+    return Column(
+      children: [
+        CustomButton(
+          onPressed: () => controller.bypassLogin(),
+          text: MultiLangs.skip.tr,
+          icon: Icons.arrow_forward,
+          color: AppColors.primary,
+        ),
+        const SizedBox(height: 30),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(MultiLangs.forgotPassword.tr),
+            InkWell(
+              child: Text(
+                MultiLangs.reset.tr,
+                style: const TextStyle(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(MultiLangs.dontHaveAccount.tr),
+            InkWell(
+              child: Text(
+                MultiLangs.register.tr,
+                style: const TextStyle(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

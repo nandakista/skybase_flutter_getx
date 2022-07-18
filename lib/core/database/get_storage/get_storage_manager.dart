@@ -36,10 +36,16 @@ class GetStorageManager {
     return json.encode(data);
   }
 
+  /// Get object with await
+  dynamic getAwait(String name) async {
+    return await _box.read(name);
+  }
+
   /// Delete all data in every box in storage except CurrentLocale
   logout() async {
     try {
       await GetStorage(GetStorageKey.USERS).erase();
+      save(GetStorageKey.FIRST_INSTALL, false);
     } catch (e) {
       debugPrint(e.toString());
     }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:varcore_flutter_base/core/database/shared_preferences/shared_preference_manager.dart';
+import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
+import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manager.dart';
 import 'package:varcore_flutter_base/core/localization/lang_const.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
@@ -31,54 +32,39 @@ class IntroView extends StatelessWidget {
           title: 'Varcore Base',
           image: _buildImage('img_pv_1.png'),
           decoration: pageDecoration,
-          bodyWidget: Center(
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                text: 'Created by \n',
-                style: DefaultTextStyle.of(context).style,
-                children: <TextSpan>[
-                  const TextSpan(text: 'Varcant \n\n', style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: 'nanda.kista@gmail.com', style: TextStyle(fontWeight: AppStyle.semiBold)),
-                ],
-              ),
-            ),
+          bodyWidget: Column(
+            children: [
+              const SizedBox(height: 12),
+              Text('Created by', style: AppStyle.subtitle4,),
+              Text('Varcant', style: AppStyle.subtitle3.copyWith(fontWeight: FontWeight.bold)),
+              Text('nanda.kista@gmail.com', style: TextStyle(fontWeight: AppStyle.semiBold)),
+            ],
           ),
         ),
         PageViewModel(
           title: 'Varcore Base',
           image: _buildImage('img_pv_2.png'),
           decoration: pageDecoration,
-          bodyWidget: Center(
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                text: 'Created by \n',
-                style: DefaultTextStyle.of(context).style,
-                children: <TextSpan>[
-                  const TextSpan(text: 'Varcant \n\n', style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: 'nanda.kista@gmail.com', style: TextStyle(fontWeight: AppStyle.semiBold)),
-                ],
-              ),
-            ),
+          bodyWidget: Column(
+            children: [
+              const SizedBox(height: 12),
+              Text('Created by', style: AppStyle.subtitle4,),
+              Text('Varcant', style: AppStyle.subtitle3.copyWith(fontWeight: FontWeight.bold)),
+              Text('nanda.kista@gmail.com', style: TextStyle(fontWeight: AppStyle.semiBold)),
+            ],
           ),
         ),
         PageViewModel(
           title: 'Varcore Base',
           image: _buildImage('img_pv_3.png'),
           decoration: pageDecoration,
-          bodyWidget: Center(
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                text: 'Created by \n',
-                style: DefaultTextStyle.of(context).style,
-                children: <TextSpan>[
-                  const TextSpan(text: 'Varcant \n\n', style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: 'nanda.kista@gmail.com', style: TextStyle(fontWeight: AppStyle.semiBold)),
-                ],
-              ),
-            ),
+          bodyWidget: Column(
+            children: [
+              const SizedBox(height: 12),
+              Text('Created by', style: AppStyle.subtitle4,),
+              Text('Varcant', style: AppStyle.subtitle3.copyWith(fontWeight: FontWeight.bold)),
+              Text('nanda.kista@gmail.com', style: TextStyle(fontWeight: AppStyle.semiBold)),
+            ],
           ),
         ),
       ],
@@ -112,7 +98,7 @@ class IntroView extends StatelessWidget {
   }
 
   void _onIntroEnd(context) async {
-    sharedPreferences.setBool(KeyPrefs.isFirstInstall, false);
+    GetStorageManager.to.save(GetStorageKey.FIRST_INSTALL, false);
     Get.offAllNamed(LoginView.route);
   }
 

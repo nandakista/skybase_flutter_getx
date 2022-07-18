@@ -49,7 +49,7 @@ class LoginController extends GetxController {
 
   bypassLogin() async {
     await SecureStorageManager.to.logout();
-    await SecureStorageManager.to.setToken(value: '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');
+    await SecureStorageManager.to.setToken(value: ' ');
     AuthManager.to.setAuth();
   }
 }
