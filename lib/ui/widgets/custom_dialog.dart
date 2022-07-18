@@ -34,7 +34,7 @@ class CustomDialog extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                         color:
-                        (Get.isDarkMode) ? AppColors.primary : Colors.black,
+                            (Get.isDarkMode) ? AppColors.primary : Colors.black,
                         offset: const Offset(0.0, 0.0),
                         blurRadius: 10.0)
                   ],
@@ -197,7 +197,10 @@ class DialogAlert extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppStyle.title2.copyWith(color: AppColors.primary),
+                    style: AppStyle.title2.copyWith(
+                      color: AppColors.primary,
+                      fontWeight: AppStyle.semiBold,
+                    ),
                   ),
                   const SizedBox(height: 24),
                   Text(

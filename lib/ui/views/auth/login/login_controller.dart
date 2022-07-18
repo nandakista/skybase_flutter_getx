@@ -35,10 +35,6 @@ class LoginController extends GetxController {
             email: emailController.text,
             password: passController.text).then((res) async {
           Loading.hide();
-          // Get.toNamed(OtpPage.routeName, arguments: [
-          //   res.isLogin,
-          //   phoneController.text,
-          // ]);
           Get.offAllNamed(HomeView.route);
         });
       } catch (err) {
@@ -53,7 +49,8 @@ class LoginController extends GetxController {
   }
 
   bypassLogin() async {
-    await SecureStorageManager.to.setToken(value: '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');
+    await SecureStorageManager.to.logout();
+    await SecureStorageManager.to.setToken(value: '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');
     AuthManager.to.setAuth();
   }
 }

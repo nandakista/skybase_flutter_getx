@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:varcore_flutter_base/core/localization/lang_const.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_dialog.dart';
 
 //---------------<Toast>-----------------
@@ -48,7 +49,7 @@ class AppDialog {
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.error(
-            title: title ?? 'Gagal',
+            title: title ?? MultiLangs.failed.tr,
             description: message,
             onConfirm: onPress,
           ),
@@ -58,7 +59,7 @@ class AppDialog {
           barrierDismissible: dismissible ?? false,
           context: Get.context!,
           builder: (context) => DialogAlert.success(
-            title: title ?? 'Berhasil',
+            title: title ?? MultiLangs.success.tr,
             description: message,
             onConfirm: onPress,
           ),
@@ -68,7 +69,7 @@ class AppDialog {
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.warning(
-            title: title ?? 'Peringatan!',
+            title: title ?? MultiLangs.warning.tr,
             description: message,
             onConfirm: onPress,
             onCancel: onCancel ?? () => Get.back(),
@@ -85,7 +86,7 @@ class AppDialog {
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.retry(
-            title: title ?? 'Gagal!',
+            title: title ?? MultiLangs.failed.tr,
             description: message,
             onConfirm: onPress,
             onCancel: onCancel ?? () => Get.back(),

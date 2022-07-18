@@ -48,8 +48,8 @@ class AuthManager extends GetxController {
       clearData();
       Get.offAllNamed(LoginView.route);
     } else if (state?.appStatus == AppType.AUTHENTICATED) {
-      Get.toNamed(UserListView.route);
-      // Get.offAllNamed(HomePage.route);
+      // Get.toNamed(UserListView.route);
+      Get.offAllNamed(HomeView.route);
     } else {
       Get.toNamed(SplashView.route);
     }

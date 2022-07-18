@@ -27,25 +27,21 @@ class CustomAppBar extends StatelessWidget {
       title: Text(
         title,
         style: TextStyle(
-            color: (textColor == null)
-                ? (Get.isDarkMode)
-                    ? Colors.white
-                    : Colors.black
-                : textColor),
+          color: textColor ?? ((Get.isDarkMode) ? Colors.white : Colors.black),
+        ),
       ),
-      backgroundColor:
-          (Get.isDarkMode) ? AppColors.baseDark : AppColors.baseLight,
+      backgroundColor: backgroundColor ??
+          ((Get.isDarkMode) ? AppColors.baseDark : AppColors.baseLight),
       elevation: 0,
       leading: (Navigator.canPop(context))
           ? Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: IconButton(
-                  icon: Icon(Icons.arrow_back_ios_rounded,
-                      color: (iconColor == null)
-                          ? Get.isDarkMode
-                              ? AppColors.primary
-                              : Colors.black
-                          : iconColor),
+                  icon: Icon(
+                    Icons.arrow_back_ios_rounded,
+                    color: iconColor ??
+                        (Get.isDarkMode ? AppColors.primary : Colors.black),
+                  ),
                   onPressed: onPress ?? () => Get.back()),
             )
           : null,

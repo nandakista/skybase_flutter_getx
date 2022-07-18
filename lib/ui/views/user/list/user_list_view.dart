@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:varcore_flutter_base/core/localization/lang_const.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 import 'package:varcore_flutter_base/data/data_sources/local/user/user_dao.dart';
@@ -14,9 +15,9 @@ class UserListView extends GetView<UserListController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: CustomAppBar(title: 'List User'),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: CustomAppBar(title: MultiLangs.userList.tr),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,

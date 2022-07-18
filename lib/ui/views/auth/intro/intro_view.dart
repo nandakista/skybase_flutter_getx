@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:varcore_flutter_base/core/database/shared_preferences/shared_preference_manager.dart';
+import 'package:varcore_flutter_base/core/localization/lang_const.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 import 'package:varcore_flutter_base/ui/views/auth/login/login_view.dart';
@@ -16,7 +17,8 @@ class IntroView extends StatelessWidget {
     const bodyStyle = TextStyle(fontSize: 19.0);
 
     var pageDecoration = PageDecoration(
-      titleTextStyle: AppStyle.subtitle4.copyWith(fontSize: 26.0, fontWeight: FontWeight.w700),
+      titleTextStyle: AppStyle.subtitle4
+          .copyWith(fontSize: 26.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
       descriptionPadding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       imagePadding: EdgeInsets.zero,
@@ -27,22 +29,57 @@ class IntroView extends StatelessWidget {
       pages: [
         PageViewModel(
           title: 'Varcore Base',
-          body: '',
           image: _buildImage('img_pv_1.png'),
           decoration: pageDecoration,
+          bodyWidget: Center(
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: 'Created by \n',
+                style: DefaultTextStyle.of(context).style,
+                children: <TextSpan>[
+                  const TextSpan(text: 'Varcant \n\n', style: TextStyle(fontWeight: FontWeight.bold)),
+                  TextSpan(text: 'nanda.kista@gmail.com', style: TextStyle(fontWeight: AppStyle.semiBold)),
+                ],
+              ),
+            ),
+          ),
         ),
         PageViewModel(
-          title: '',
-          body: '',
+          title: 'Varcore Base',
           image: _buildImage('img_pv_2.png'),
           decoration: pageDecoration,
+          bodyWidget: Center(
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: 'Created by \n',
+                style: DefaultTextStyle.of(context).style,
+                children: <TextSpan>[
+                  const TextSpan(text: 'Varcant \n\n', style: TextStyle(fontWeight: FontWeight.bold)),
+                  TextSpan(text: 'nanda.kista@gmail.com', style: TextStyle(fontWeight: AppStyle.semiBold)),
+                ],
+              ),
+            ),
+          ),
         ),
         PageViewModel(
-          title: '',
-          body: '',
+          title: 'Varcore Base',
           image: _buildImage('img_pv_3.png'),
-
           decoration: pageDecoration,
+          bodyWidget: Center(
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: 'Created by \n',
+                style: DefaultTextStyle.of(context).style,
+                children: <TextSpan>[
+                  const TextSpan(text: 'Varcant \n\n', style: TextStyle(fontWeight: FontWeight.bold)),
+                  TextSpan(text: 'nanda.kista@gmail.com', style: TextStyle(fontWeight: AppStyle.semiBold)),
+                ],
+              ),
+            ),
+          ),
         ),
       ],
       onDone: () => _onIntroEnd(context),
@@ -50,9 +87,15 @@ class IntroView extends StatelessWidget {
       showSkipButton: true,
       skipFlex: 0,
       nextFlex: 0,
-      skip: Text('Skip', style: AppStyle.subtitle4.copyWith(color: AppColors.primary, fontWeight: FontWeight.bold)),
-      next: const Icon(Icons.arrow_forward, color: AppColors.primary,),
-      done: Text('Done', style: AppStyle.subtitle4.copyWith(fontWeight: FontWeight.w600)),
+      skip: Text(MultiLangs.skip.tr,
+          style: AppStyle.subtitle4
+              .copyWith(color: AppColors.primary, fontWeight: FontWeight.bold)),
+      next: const Icon(
+        Icons.arrow_forward,
+        color: AppColors.primary,
+      ),
+      done: Text(MultiLangs.done.tr,
+          style: AppStyle.subtitle4.copyWith(fontWeight: FontWeight.w600)),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),
       controlsPadding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),

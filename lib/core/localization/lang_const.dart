@@ -1,37 +1,42 @@
 class MultiLangs {
-  static const String name = 'txt_name';
-  static const String email = 'txt_email';
-  static const String password = 'txt_password';
-  static const String home = 'txt_home';
-  static const String dialog = 'txt_dialog';
-  static const String map = 'txt_maps';
-  static const String other = 'txt_other';
-  static const String detail = 'txt_detail';
-  static const String userList = 'txt_menu_user_list';
-  static const String emptyUser = 'txt_empty_user';
-  static const String errorTitle = 'txt_error_title';
-  static const String errorMsg = 'txt_error_general';
-  static const String retry = 'txt_retry';
-  static const String chooseLanguage = 'txt_choose_language';
-  static const String loginSubtitle = 'txt_login_subtitle';
-  static const String dontHaveAccount = 'txt_dont_have_account';
-  static const String register = 'txt_register';
-  static const String forgotPassword = 'txt_forgot_password';
-  static const String phone = 'txt_phone';
-  static const String reset = 'txt_reset';
-  static const String login = 'txt_login';
+  static const String name = 'name';
+  static const String email = 'email';
+  static const String password = 'password';
+  static const String home = 'home';
+  static const String dialog = 'dialog';
+  static const String map = 'map';
+  static const String other = 'other';
+  static const String detail = 'detail';
+  static const String userList = 'userList';
+  static const String emptyUser = 'emptyUser';
+  static const String retry = 'retry';
+  static const String register = 'register';
+  static const String phone = 'phone';
+  static const String reset = 'reset';
+  static const String login = 'login';
+  static const String done = 'done';
+  static const String changeLanguage = 'changeLanguage';
+  static const String chooseLanguage = 'chooseLanguage';
+  static const String skip = 'skip';
+  static const String logout = 'logout';
+  static const String camera = 'camera';
+  static const String gallery = 'gallery';
 
-  //BUTTON
-  static const String changeLanguage = 'txt_change_locale';
-  static const String skip = 'txt_skip';
-  static const String logout = 'txt_logout';
-  static const String camera = 'txt_camera';
-  static const String gallery = 'txt_gallery';
+  static const String success = 'success';
+  static const String failed = 'failed';
+  static const String warning = 'warning';
+  static const String notice = 'notice';
 
-  //Validation
-  static const String errEmail = 'txt_valid_email';
-  static const String errPassword = 'txt_valid_password';
-  static const String errName = 'txt_valid_name';
-  static const String errNumber = 'txt_valid_number';
-  static const String errEmpty = 'txt_valid_notEmpty';
+  // Sentence
+  static const String errEmail = 'errEmail';
+  static const String errPassword = 'errPassword';
+  static const String errName = 'errName';
+  static const String errNumber = 'errNumber';
+  static const String errEmpty = 'errEmpty';
+  static const String errGeneralFormal = 'errorTitle';
+  static const String errGeneralNonFormal = 'errorMsg';
+  static const String forgotPassword = 'forgotPassword';
+  static const String loginSubtitle = 'loginSubtitle';
+  static const String dontHaveAccount = 'dontHaveAccount';
+
 }

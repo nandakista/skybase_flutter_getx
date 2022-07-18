@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
@@ -30,16 +29,18 @@ class SplashView extends StatelessWidget {
                 // ),
                 child: const FlutterLogo(),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               Text(
                 'VARCORE',
                 style: AppStyle.headline2.copyWith(color: Colors.white),
               ),
-              const Text('BASE CODE',
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold))
+              const Text(
+                'BASE CODE',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
             ],
           ),
         ),
