@@ -7,13 +7,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:varcore_flutter_base/core/app/app_config.dart';
 import 'package:varcore_flutter_base/core/app/app_services.dart';
-import 'package:varcore_flutter_base/core/auth_manager/auth_manager.dart';
 import 'package:varcore_flutter_base/core/database/hive/hive_db.dart';
 import 'package:varcore_flutter_base/core/helper/general_function.dart';
 import 'package:varcore_flutter_base/core/localization/app_translations.dart';
 import 'package:varcore_flutter_base/core/localization/locale_helper.dart';
 import 'package:varcore_flutter_base/core/themes/app_theme.dart';
-import 'package:varcore_flutter_base/ui/views/auth/splash/splash_view.dart';
 import 'package:varcore_flutter_base/ui/routes/app_routes.dart';
 
 void main() async {

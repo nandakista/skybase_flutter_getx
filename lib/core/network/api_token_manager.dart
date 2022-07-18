@@ -47,7 +47,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
     if (status >= 400 && status <= 500) {
       return AppDialog.show(
         typeDialog: TypeDialog.FAILED,
-        dismissible: true,
+        dismissible: false,
         message: 'Anda harus login kembali!',
         onPress: () {
           authManager.logout();

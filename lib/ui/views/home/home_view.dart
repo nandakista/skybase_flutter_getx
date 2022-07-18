@@ -1,4 +1,3 @@
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +7,7 @@ import 'package:varcore_flutter_base/ui/views/home/home_controller.dart';
 import 'package:varcore_flutter_base/ui/views/user/list/user_list_view.dart';
 import 'package:varcore_flutter_base/ui/views/utils/utils_view.dart';
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
+import 'package:varcore_flutter_base/ui/widgets/colored_status_bar.dart';
 
 class HomeView extends GetView<HomeController> {
   static const String route = '/home';
@@ -16,17 +16,19 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: DoubleBack(
-          child: PageView(
-            controller: controller.pageController,
-            onPageChanged: (index) => controller.index.value = index,
-            children: const [
-              UserListView(),
-              IntroView(),
-              LoginView(),
-              UtilsView(),
-            ],
+      body: ColoredStatusBar(
+        child: SafeArea(
+          child: DoubleBack(
+            child: PageView(
+              controller: controller.pageController,
+              onPageChanged: (index) => controller.index.value = index,
+              children: const [
+                UserListView(),
+                IntroView(),
+                LoginView(),
+                UtilsView(),
+              ],
+            ),
           ),
         ),
       ),

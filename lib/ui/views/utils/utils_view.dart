@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
 import 'package:varcore_flutter_base/core/localization/lang_const.dart';
 import 'package:varcore_flutter_base/core/localization/locale_helper.dart';
-import 'package:varcore_flutter_base/core/themes/app_theme.dart';
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_button.dart';
 
