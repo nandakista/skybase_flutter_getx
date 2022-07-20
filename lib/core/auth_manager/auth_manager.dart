@@ -13,7 +13,7 @@ import 'package:varcore_flutter_base/ui/views/auth/login/login_view.dart';
 import 'package:varcore_flutter_base/ui/views/auth/splash/splash_view.dart';
 import 'package:varcore_flutter_base/ui/views/home/home_view.dart';
 
-/// This class is called first time when your app is open.
+/// This class will called first time before app go to pages.
 ///
 /// This class help you to manage authentication process.
 /// Contains auth general function such as [login], [logout], and first install/[setup]

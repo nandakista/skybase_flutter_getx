@@ -12,28 +12,34 @@ import 'package:varcore_flutter_base/core/network/api_config.dart';
 import 'package:varcore_flutter_base/core/themes/theme_manager.dart';
 import 'package:varcore_flutter_base/data/data_sources/local/user/user_dao.dart';
 
-class AppServices extends GetxService {
-  static Future<void> init() async {
+class Initializer extends GetxService {
+  static Future<void> initConfig() async {
 
-    /// Database
-    /// * [Be Careful] Writing order can affects the algorithm
+    // Database
+    // * [Be Careful] Writing order can affects the algorithm
     await HiveDb.init();
     await GetStorage.init();
     await Get.putAsync(() async => GetStorage());
     Get.put(const FlutterSecureStorage(), permanent: true);
 
-    /// Configuration
+    // Configuration
+    // ---Locale
     await initializeDateFormatting('id_ID', null);
+    // --- App Config
     Get.lazyPut(() => AppConfig());
+    // --- Web Socket
     Get.lazyPut(() => AppSocket());
+    // --- Request Client
     Get.lazyPut(() => DioClient());
   }
 
-  static Future<void> serviceInit() async {
+  static Future<void> initService() async {
     // Initialize Apps and checking user auth
     Get.lazyPut(() => GetStorageManager());
     Get.lazyPut(() => SecureStorageManager());
     Get.put(ThemeManager(), permanent: true);
+
+    // Checking user auth
     Get.put(AuthManager(), permanent: true);
 
     // Dao
