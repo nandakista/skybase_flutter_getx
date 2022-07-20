@@ -15,10 +15,7 @@ class UserListView extends GetView<UserListController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: CustomAppBar(title: MultiLangs.userList.tr),
-      ),
+      appBar: CustomAppBar.secondary(title: MultiLangs.userList.tr),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () {

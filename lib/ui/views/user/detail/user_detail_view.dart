@@ -18,13 +18,7 @@ class UserDetailView extends GetView<UserDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: CustomAppBar(
-          title: '${controller.user.value?.username}',
-          centerTitle: false,
-        ),
-      ),
+      appBar: CustomAppBar.primary(title: controller.user.value?.username),
       body: SafeArea(
         child: Obx(() => controller.isLoading.isTrue
             ? platformLoadingIndicator()
