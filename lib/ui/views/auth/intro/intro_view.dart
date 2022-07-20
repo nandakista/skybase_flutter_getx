@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
 import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manager.dart';
-import 'package:varcore_flutter_base/core/localization/lang_const.dart';
+import 'package:varcore_flutter_base/core/localization/language_const.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 import 'package:varcore_flutter_base/ui/views/auth/login/login_view.dart';
@@ -73,14 +73,14 @@ class IntroView extends StatelessWidget {
       showSkipButton: true,
       skipFlex: 0,
       nextFlex: 0,
-      skip: Text(MultiLangs.skip.tr,
+      skip: Text(International.skip.tr,
           style: AppStyle.subtitle4
               .copyWith(color: AppColors.primary, fontWeight: FontWeight.bold)),
       next: const Icon(
         Icons.arrow_forward,
         color: AppColors.primary,
       ),
-      done: Text(MultiLangs.done.tr,
+      done: Text(International.done.tr,
           style: AppStyle.subtitle4.copyWith(fontWeight: FontWeight.w600)),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),

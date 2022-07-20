@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:varcore_flutter_base/core/app/app_config.dart';
 import 'package:varcore_flutter_base/core/app/app_services.dart';
 import 'package:varcore_flutter_base/core/database/hive/hive_db.dart';
@@ -19,9 +20,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DartPluginRegistrant.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
-  await HiveDb.init();
-  await GetStorage.init();
   await AppServices.init();
+  await AppServices.serviceInit();
   AppConfig.set(Flavors.DEVELOPMENT);
   AppStatusBar.set(brightness: Brightness.light);
   AppOrientation.lock(DeviceOrientation.portraitUp);

@@ -25,7 +25,7 @@ class CameraModule extends StatefulWidget {
   final CameraType cameraType;
   final bool showInfo;
   final bool originSize;
-  final bool userBorder;
+  final bool useBorder;
   final bool fromGallery;
   final ResolutionPreset resolutionPreset;
 
@@ -35,7 +35,7 @@ class CameraModule extends StatefulWidget {
     required this.showInfo,
     this.resolutionPreset = ResolutionPreset.high,
     required this.originSize,
-    required this.userBorder,
+    required this.useBorder,
     required this.fromGallery,
   }) : super(key: key);
 
@@ -231,7 +231,7 @@ class _CameraModuleState extends State<CameraModule>
     final size = MediaQuery.of(context).size;
     var scale = size.aspectRatio * camera.aspectRatio;
     if (scale < 1) scale = 1 / scale;
-    if (widget.userBorder) {
+    if (widget.useBorder) {
       return Stack(
         children: [
           Center(

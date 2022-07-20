@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/localization/lang_const.dart';
+import 'package:varcore_flutter_base/core/localization/language_const.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_dialog.dart';
 
 //---------------<Toast>-----------------
@@ -15,9 +15,9 @@ class Toast {
 
 //---------------<Loading Dialog>-----------------
 class Loading {
-  static show() {
+  static show({bool? dismissible}) {
     return showDialog(
-        barrierDismissible: false,
+        barrierDismissible: dismissible ?? false,
         context: Get.context!,
         builder: (context) => const LoadingDialog());
   }
@@ -49,7 +49,7 @@ class AppDialog {
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.error(
-            title: title ?? MultiLangs.failed.tr,
+            title: title ?? International.failed.tr,
             description: message,
             onConfirm: onPress,
           ),
@@ -59,7 +59,7 @@ class AppDialog {
           barrierDismissible: dismissible ?? false,
           context: Get.context!,
           builder: (context) => DialogAlert.success(
-            title: title ?? MultiLangs.success.tr,
+            title: title ?? International.success.tr,
             description: message,
             onConfirm: onPress,
           ),
@@ -69,7 +69,7 @@ class AppDialog {
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.warning(
-            title: title ?? MultiLangs.warning.tr,
+            title: title ?? International.warning.tr,
             description: message,
             onConfirm: onPress,
             onCancel: onCancel ?? () => Get.back(),
@@ -86,7 +86,7 @@ class AppDialog {
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.retry(
-            title: title ?? MultiLangs.failed.tr,
+            title: title ?? International.failed.tr,
             description: message,
             onConfirm: onPress,
             onCancel: onCancel ?? () => Get.back(),

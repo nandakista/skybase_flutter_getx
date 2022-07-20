@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
 import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manager.dart';
-import 'package:varcore_flutter_base/core/localization/lang_const.dart';
+import 'package:varcore_flutter_base/core/localization/language_const.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 
 class LocaleHelper {
@@ -18,7 +18,7 @@ class LocaleHelper {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(MultiLangs.chooseLanguage.tr, style: const TextStyle(color: AppColors.primary),),
+          title: Text(International.chooseLanguage.tr, style: const TextStyle(color: AppColors.primary),),
           content: SizedBox(
             width: double.maxFinite,
             child: ListView.separated(

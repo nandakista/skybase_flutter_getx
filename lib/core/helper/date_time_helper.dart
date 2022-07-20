@@ -1,13 +1,10 @@
 import 'package:intl/intl.dart';
+import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
+import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manager.dart';
 
-const String dateFormat = 'y-MM-dd';
-const String dateFormatName = 'd MMM y';
-const String FORMAT_LONG_DAY_MONTH_TIME = 'EEEE, dd MMMM yyyy HH:mm:ss';
-const String FORMAT_LONG_DAY_AND_MONTH = 'EEEE, dd MMMM yyyy';
-const String FORMAT_DD_MMM_YYYY = 'dd MMM yyyy';
-const String FORMAT_EEE_DD_MMM_YYYY = 'EEE, dd MMM yyyy';
-const String FORMAT_DEFAULT = 'yyyy-MM-dd HH:mm:ss';
-
+/// If you want to convert 1 date, just fill [date].
+/// If you want to convert range date, you can fill [startDate], [endDate]
+/// * Example : DateHelper(startDate: x, endDate: y).format2()
 class DateHelper {
 
   DateTime? date;
@@ -47,13 +44,14 @@ class DateHelper {
   String? formatDate({String? pattern}) {
     bool isRange = (startDate != null && endDate != null);
     bool isNotRange = (startDate == null && endDate == null);
+    String locale = GetStorageManager.to.get(GetStorageKey.CURRENT_LOCALE);
 
     if(isRange && date == null) {
-      var start = DateFormat(pattern).format(startDate!);
-      var end = DateFormat(pattern).format(endDate!);
+      var start = DateFormat(pattern, locale).format(startDate!);
+      var end = DateFormat(pattern, locale).format(endDate!);
       return '$start - $end';
     } else if (date != null && isNotRange) {
-      return DateFormat(pattern).format(date!);
+      return DateFormat(pattern, locale).format(date!);
     } else {
       return 'Error date converted!';
     }

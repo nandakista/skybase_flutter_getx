@@ -34,6 +34,7 @@ class UserApiImpl extends UserApi {
       final _res = await sendRequest(
         url: '/users/$username',
         requestMethod: RequestMethod.GET,
+        useToken: true,
       );
       return User.fromJson(_res.data);
     } catch (e) {
@@ -47,6 +48,7 @@ class UserApiImpl extends UserApi {
       final _res = await sendRequest(
         url: '/users/$username/followers',
         requestMethod: RequestMethod.GET,
+        useToken: true,
       );
       return (_res.data)
           .map((data) => User.fromJson(data))
@@ -63,6 +65,7 @@ class UserApiImpl extends UserApi {
       final _res = await sendRequest(
         url: '/users/$username/following',
         requestMethod: RequestMethod.GET,
+        useToken: true,
       );
       return (_res.data)
           .map((data) => User.fromJson(data))
@@ -79,6 +82,7 @@ class UserApiImpl extends UserApi {
       final _res = await sendRequest(
         url: '/users/$username/repos?type=all',
         requestMethod: RequestMethod.GET,
+        useToken: true,
       );
       return (_res.data)
           .map((data) => Repo.fromJson(data))

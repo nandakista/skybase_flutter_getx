@@ -9,6 +9,7 @@ import 'package:varcore_flutter_base/ui/views/user/detail/component/following_ta
 import 'package:varcore_flutter_base/ui/views/user/detail/component/repo_tab_view.dart';
 import 'package:varcore_flutter_base/ui/views/user/detail/user_detail_controller.dart';
 import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
+import 'package:varcore_flutter_base/ui/widgets/colored_status_bar.dart';
 import 'package:varcore_flutter_base/ui/widgets/custom_app_bar.dart';
 
 class UserDetailView extends GetView<UserDetailController> {
@@ -17,20 +18,22 @@ class UserDetailView extends GetView<UserDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar.primary(title: controller.user.value?.username),
-      body: SafeArea(
-        child: Obx(() => controller.isLoading.isTrue
-            ? platformLoadingIndicator()
-            : Obx(
-                () => ListView(
-                  children: [
-                    _buildHeader(controller.user.value),
-                    _buildDetailInfo(controller.user.value),
-                    _tabComponent(),
-                  ],
-                ),
-              )),
+    return ColoredStatusBar(
+      child: Scaffold(
+        appBar: CustomAppBar.primary(title: controller.user.value?.username),
+        body: SafeArea(
+          child: Obx(() => controller.isLoading.isTrue
+              ? platformLoadingIndicator()
+              : Obx(
+                  () => ListView(
+                    children: [
+                      _buildHeader(controller.user.value),
+                      _buildDetailInfo(controller.user.value),
+                      _tabComponent(),
+                    ],
+                  ),
+                )),
+        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/localization/lang_const.dart';
+import 'package:varcore_flutter_base/core/localization/language_const.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 import 'package:varcore_flutter_base/data/data_sources/local/user/user_dao.dart';
@@ -15,13 +16,13 @@ class UserListView extends GetView<UserListController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar.secondary(title: MultiLangs.userList.tr),
+      appBar: CustomAppBar.secondary(title: International.userList.tr),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () {
           UserDao.to.deleteAll();
         },
-        child: const Icon(Icons.delete, color: Colors.white),
+        child: const Icon(CupertinoIcons.delete, color: Colors.white),
       ),
       body: RefreshIndicator(
         onRefresh: () => controller.getUser(),

@@ -9,6 +9,7 @@ abstract class CustomAppBar {
   /// Use [CustomAppBar.primary] as a default AppBar globally.
   /// * Can edited for specific requirement.
   static PreferredSize primary({
+    /// test
     String? title,
     Color? backgroundColor,
     Color? textColor,

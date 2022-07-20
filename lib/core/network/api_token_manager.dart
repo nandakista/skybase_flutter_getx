@@ -14,8 +14,13 @@ import 'package:varcore_flutter_base/core/network/api_response.dart';
 import 'package:varcore_flutter_base/core/network/api_url.dart';
 
 enum TokenType {
+  /// When your app no need token authentication.
   NO_TOKEN,
+
+  /// When your app just use Access Token.
   ACCESS_TOKEN,
+
+  /// When your app use Refresh Token Mechanism (Access + Refresh).
   ACCESS_REFRESH_TOKEN,
 }
 

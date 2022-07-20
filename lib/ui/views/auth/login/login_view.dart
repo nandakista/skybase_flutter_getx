@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/helper/validator_helper.dart';
-import 'package:varcore_flutter_base/core/localization/lang_const.dart';
+import 'package:varcore_flutter_base/core/localization/language_const.dart';
 import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 import 'package:varcore_flutter_base/core/themes/app_style.dart';
 import 'package:varcore_flutter_base/ui/views/auth/login/login_controller.dart';
@@ -46,9 +46,9 @@ class LoginView extends GetView<LoginController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(MultiLangs.login.tr, style: AppStyle.headline2),
+              Text(International.login.tr, style: AppStyle.headline2),
               const SizedBox(height: 10),
-              Text(MultiLangs.loginSubtitle.tr,
+              Text(International.loginSubtitle.tr,
                   style: AppStyle.subtitle4),
             ],
           ),
@@ -70,13 +70,13 @@ class LoginView extends GetView<LoginController> {
         children: [
           const SizedBox(height: 20),
           CustomFieldForm(
-            label: MultiLangs.phone.tr,
-            hint: MultiLangs.phone.tr,
+            label: International.phone.tr,
+            hint: International.phone.tr,
             controller: controller.phoneController,
             keyboardType: TextInputType.phone,
             icon: Icons.phone,
             validator: (value) => AppValidator.field(
-              title: MultiLangs.phone.tr,
+              title: International.phone.tr,
               value: value.toString(),
               regex: AppRegex.phone,
             ),
@@ -84,8 +84,8 @@ class LoginView extends GetView<LoginController> {
           const SizedBox(height: 20),
           Obx(
                 () => CustomPasswordFieldForm(
-              label: MultiLangs.password.tr,
-              hint: MultiLangs.password.tr,
+              label: International.password.tr,
+              hint: International.password.tr,
               controller: controller.passController,
               icon: Icons.lock,
               hiddenText: controller.isHiddenPassword.value,
@@ -93,7 +93,7 @@ class LoginView extends GetView<LoginController> {
                   icon: const Icon(Icons.visibility_off),
                   onPressed: () => controller.hidePassword()),
               validator: (value) => AppValidator.field(
-                title: MultiLangs.password.tr,
+                title: International.password.tr,
                 value: value.toString(),
                 regex: AppRegex.password,
               ),
@@ -105,7 +105,7 @@ class LoginView extends GetView<LoginController> {
                 FocusScope.of(context).unfocus();
                 controller.login();
               },
-              text: MultiLangs.login.tr,
+              text: International.login.tr,
               icon: Icons.arrow_forward,
               color: AppColors.primary,
           ),
@@ -119,7 +119,7 @@ class LoginView extends GetView<LoginController> {
       children: [
         CustomButton(
           onPressed: () => controller.bypassLogin(),
-          text: MultiLangs.skip.tr,
+          text: International.skip.tr,
           icon: Icons.arrow_forward,
           color: AppColors.primary,
         ),
@@ -127,10 +127,10 @@ class LoginView extends GetView<LoginController> {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(MultiLangs.forgotPassword.tr),
+            Text(International.forgotPassword.tr),
             InkWell(
               child: Text(
-                MultiLangs.reset.tr,
+                International.reset.tr,
                 style: const TextStyle(
                     color: AppColors.primary,
                     fontWeight: FontWeight.bold),
@@ -142,10 +142,10 @@ class LoginView extends GetView<LoginController> {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(MultiLangs.dontHaveAccount.tr),
+            Text(International.dontHaveAccount.tr),
             InkWell(
               child: Text(
-                MultiLangs.register.tr,
+                International.register.tr,
                 style: const TextStyle(
                     color: AppColors.primary,
                     fontWeight: FontWeight.bold),
