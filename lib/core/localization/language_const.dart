@@ -30,6 +30,7 @@ class International {
   static const String notice = 'txt_notice';
   static const String convert = 'txt_convert';
   static const String date = 'txt_date';
+  static const String price = 'txt_price';
 
   // Sentence
   static const String errEmail = 'txt_err_email';
@@ -42,4 +43,5 @@ class International {
   static const String forgotPassword = 'txt_forgot_password';
   static const String loginSubtitle = 'txt_login_subtitle';
   static const String dontHaveAccount = 'txt_dont_have_account';
+  static const String validSize = 'txt_valid_size';
 }

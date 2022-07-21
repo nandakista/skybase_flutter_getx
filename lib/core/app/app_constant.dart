@@ -9,11 +9,6 @@ class AppConst {
   static const String appName = 'Gitagram';
   static const String appTag = 'Connect every developers';
 
-  /* Validator
-  ... Size Validator
-   */
-  static const String validSize = 'Ukuran file tidak boleh melebihi 2MB.';
-
   /* Size Helper
   ... Size of everything
    */

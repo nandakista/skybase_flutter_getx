@@ -28,6 +28,7 @@ const Map<String, String> id = {
   International.notice: 'Pemberitahuan',
   International.convert: 'Konversi',
   International.date: 'Tanggal',
+  International.price: 'Harga',
 
   //Validation
   International.errEmail: 'Format email masih salah',
@@ -41,4 +42,5 @@ const Map<String, String> id = {
   International.emptyUser : 'Tidak ada data user',
   International.errGeneralFormal : 'Terjadi kesalahan',
   International.errGeneralNonFormal : 'Oops terjadi kesalahan...',
+  International.validSize : 'Ukuran file tidak boleh melebihi 2MB.',
 };

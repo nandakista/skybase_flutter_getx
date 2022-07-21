@@ -7,7 +7,7 @@ class CustomFieldForm extends StatelessWidget {
   final String? label, hint, endText;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
-  final IconData icon;
+  final IconData? icon;
   final IconData? endIcon;
   final int? maxLength, maxLines;
   final VoidCallback? onPress;
@@ -32,7 +32,7 @@ class CustomFieldForm extends StatelessWidget {
     required this.validator,
     this.controller,
     this.keyboardType,
-    required this.icon,
+    this.icon,
     this.backgroundColor,
     this.textColor = AppColors.primary,
     this.hintColor = Colors.grey,
@@ -69,7 +69,7 @@ class CustomFieldForm extends StatelessWidget {
         onChanged: onChanged,
         decoration: InputDecoration(
           border: InputBorder.none,
-          prefixIcon: Icon(icon),
+          prefixIcon: (icon != null) ? Icon(icon) : null,
           suffixIcon: (endText == null)
               ? Icon(endIcon)
               : Align(
@@ -99,7 +99,7 @@ class CustomFieldForm extends StatelessWidget {
 class CustomPasswordFieldForm extends StatelessWidget {
   final String? label, hint, endText;
   final TextEditingController controller;
-  final IconData icon;
+  final IconData? icon;
   final Widget? endIcon;
   final VoidCallback? onPress;
   final int? maxLength;
@@ -122,7 +122,7 @@ class CustomPasswordFieldForm extends StatelessWidget {
     this.onChanged,
     required this.validator,
     required this.controller,
-    required this.icon,
+    this.icon,
     this.backgroundColor,
     this.textColor = AppColors.primary,
     this.hintColor = Colors.grey,
@@ -145,7 +145,7 @@ class CustomPasswordFieldForm extends StatelessWidget {
         decoration: InputDecoration(
           errorText: errorText,
           border: InputBorder.none,
-          prefixIcon: Icon(icon),
+          prefixIcon: (icon != null) ? Icon(icon) : null,
           suffixIcon: (endText == null)
               ? endIcon
               : Align(

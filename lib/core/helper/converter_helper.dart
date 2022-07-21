@@ -27,10 +27,29 @@ class AppConverter {
     }
   }
 
-  static String replaceCharAt(String oldString, int index, String newChar) {
+  /// Convert string into new string at specific index.
+  /// * Example : [oldString] = 'abc', [index] = 2, [newChar] = '$', Result --> a$b
+  static String replaceStringAt(String oldString, int index, String newChar) {
     return oldString.substring(0, index) +
         newChar +
         oldString.substring(index + 1);
+  }
+
+  /// Convert string into new string. Used to hidden string like a email, phone number, etc.
+  /// * Example :
+  ///
+  /// [oldString] = name@email.com,
+  ///
+  /// [index] = 2,
+  ///
+  /// [newChar] = *
+  ///
+  /// --> Result will = na****mail.com
+  static String replaceStringRange(String sentence, int start, int end, String newChar) {
+    for (int i = start; i < end+1 ; i++) {
+      sentence = AppConverter.replaceStringAt(sentence, i, newChar);
+    }
+    return sentence;
   }
 }
 
@@ -57,15 +76,20 @@ extension StringExtension on String {
         .join(' ');
   }
 
-  /// The required format string is "Rp 0.000..."
+  /// Convert string Indonesian Currency to int.
   ///
+  /// The required format string is "Rp 0.000..."
   /// the return is [Int]
+  /// * Example : Rp 1.000 (String) --> 1000
   int fromIDR() {
     return int.tryParse(substring(3, length).replaceAll('.', '')) ?? 0;
   }
 }
 
 extension IntExtension on int {
+
+  /// Convert int to currency format.
+  /// * Example : 1000 (int) --> Rp 1.000 (String)
   String toIDR() {
     return NumberFormat.currency(locale: 'id', symbol: 'Rp ', decimalDigits: 0)
         .format(this);

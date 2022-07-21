@@ -28,6 +28,7 @@ const Map<String, String> en = {
   International.notice: 'Notice',
   International.convert: 'Convert',
   International.date: 'Date',
+  International.price: 'Price',
 
   // Sentence
   International.errEmail : 'Please enter a valid email address.',
@@ -41,4 +42,5 @@ const Map<String, String> en = {
   International.emptyUser : 'Data users not found',
   International.errGeneralFormal : 'Something when wrong',
   International.errGeneralNonFormal : 'Oops something when wrong...',
+  International.validSize : 'File size cannot bigger than 2MB.',
 };

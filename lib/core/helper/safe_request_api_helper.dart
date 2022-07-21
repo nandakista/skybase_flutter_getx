@@ -22,9 +22,8 @@ class SafeRequestAPI {
   /// It's useful when you need to call API outside features like download, etc.
   /// Return the value of Response API.
   Future<dynamic> callWithReturn(Function() function) async {
-    final dynamic data;
     try {
-      data = await function();
+      return await function();
     } catch (e) {
       AppDialog.show(
         typeDialog: TypeDialog.FAILED,
@@ -35,6 +34,5 @@ class SafeRequestAPI {
       );
       rethrow;
     }
-    return data;
   }
 }

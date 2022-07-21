@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:varcore_flutter_base/core/app/app_constant.dart';
 import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
+import 'package:varcore_flutter_base/core/localization/language_const.dart';
 
 class AppRegex {
   static const nik = r'^[1-9]{16}$';
@@ -61,7 +63,7 @@ class AppValidator {
     var size = (bytes / 1024) / 1000;
     debugPrint('Size Validator : $size MB');
     if (size >= sizeMb) {
-      Toast.show(AppConst.validSize);
+      Toast.show(International.validSize.tr);
       return false;
     }
     return true;
