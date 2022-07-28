@@ -42,6 +42,7 @@ dependencies:
   signature: ^5.0.0
 
   # Others
+  calendar_date_picker2: ^0.2.2
   webview_flutter: ^3.0.2
   url_launcher: ^6.1.2
   intl: ^0.17.0
