@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:varcore_flutter_base/core/helper/bottom_sheet_helper.dart';
 import 'package:varcore_flutter_base/core/helper/converter_helper.dart';
+import 'package:varcore_flutter_base/ui/widgets/date_picker_widget.dart';
 import 'package:varcore_flutter_base/core/helper/date_time_helper.dart';
 import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
 import 'package:varcore_flutter_base/core/helper/input_formater.dart';
@@ -82,6 +84,17 @@ class _UtilsViewState extends State<UtilsView> {
                     Toast.show('Date converted :\n $converted');
                   },
                   text: International.convert.tr + ' ' + International.date.tr,
+                ),
+                CustomButton(
+                  onPressed: () {
+                    BottomSheetHelper.show(
+                      context,
+                      child: DatePickerWidget.range(
+                        onSelectionChanged: (selected) {},
+                      ),
+                    );
+                  },
+                  text: 'Bottom Sheet + Date Range',
                   icon: Icons.date_range_outlined,
                 ),
                 CustomButton(

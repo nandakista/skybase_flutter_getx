@@ -12,6 +12,7 @@ import 'package:varcore_flutter_base/core/localization/locale_helper.dart';
 import 'package:varcore_flutter_base/core/themes/app_theme.dart';
 import 'package:varcore_flutter_base/core/themes/theme_manager.dart';
 import 'package:varcore_flutter_base/ui/routes/app_routes.dart';
+import 'package:varcore_flutter_base/ui/views/utils/utils_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         fallbackLocale: LocaleHelper().fallbackLocale,
         getPages: AppPages.routes,
         initialRoute: AppPages.initial,
+        // home: UtilsView(),
       ),
     );
   }
