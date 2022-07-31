@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:varcore_flutter_base/core/helper/filter/filter_action_result.dart';
-import 'package:varcore_flutter_base/ui/widgets/custom_button.dart';
 
 class BottomSheetHelper {
   static show(BuildContext context, {required Widget child}) async {
@@ -16,7 +15,7 @@ class BottomSheetHelper {
     );
   }
 
-  static Future<FilterResult> filter(BuildContext context, {required List<Widget> child, required VoidCallback? onSubmit}) async {
+  static Future<FilterResult> filter(BuildContext context, {required Widget child}) async {
     final result = await showModalBottomSheet(
       context: context,
       isDismissible: true,
@@ -24,13 +23,14 @@ class BottomSheetHelper {
       backgroundColor: Colors.transparent,
       builder: (btmContext) => Container(
         color: Theme.of(context).scaffoldBackgroundColor,
-        child: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ...child,
-              CustomButton(onPressed: onSubmit, text: 'Submit')
-            ],
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                child,
+              ],
+            ),
           ),
         ),
       ),

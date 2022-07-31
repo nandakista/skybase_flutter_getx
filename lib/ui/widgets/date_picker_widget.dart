@@ -90,7 +90,7 @@ class DatePickerWidget extends StatelessWidget {
     this.calendarType,
     this.onSelectionChanged,
     this.initialValue,
-    this.height = 300,
+    this.height,
     this.width,
     this.weekLabelStyle,
     this.weekLabel,
@@ -98,13 +98,13 @@ class DatePickerWidget extends StatelessWidget {
     this.lastDate,
     this.startDate,
     this.selectedHighlightColor,
-    this.viewMode = DatePickerMode.day,
+    this.viewMode,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height,
+      height: height ?? 300,
       width: width,
       child: CalendarDatePicker2(
         config: CalendarDatePicker2Config(

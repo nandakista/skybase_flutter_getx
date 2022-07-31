@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:varcore_flutter_base/ui/views/auth/intro/intro_view.dart';
 import 'package:varcore_flutter_base/ui/views/auth/login/login_view.dart';
+import 'package:varcore_flutter_base/ui/views/order/order_tab.dart';
 import 'package:varcore_flutter_base/ui/views/home/home_controller.dart';
 import 'package:varcore_flutter_base/ui/views/user/list/user_list_view.dart';
 import 'package:varcore_flutter_base/ui/views/utils/utils_view.dart';
@@ -27,6 +28,7 @@ class HomeView extends GetView<HomeController> {
                 IntroView(),
                 LoginView(),
                 UtilsView(),
+                FilterTabView(),
               ],
             ),
           ),
@@ -49,19 +51,23 @@ class HomeView extends GetView<HomeController> {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.home),
-              label: 'Menu 1',
+              label: 'Users',
             ),
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.arrow_turn_down_right),
-              label: 'Menu 2',
+              label: 'Intro',
             ),
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.map),
-              label: 'Menu 3',
+              label: 'Login',
             ),
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.book),
-              label: 'Menu 4',
+              label: 'Utility',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.filter_list_rounded),
+              label: 'Filter',
             ),
           ],
         ),

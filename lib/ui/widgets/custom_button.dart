@@ -42,10 +42,12 @@ class CustomButton extends StatelessWidget {
   /// Font weight text and icon inside button.
   final FontWeight? fontWeight;
 
+  final EdgeInsetsGeometry? margin;
+
   const CustomButton({
     Key? key,
-    required this.onPressed,
     required this.text,
+    required this.onPressed,
     this.icon,
     this.color = AppColors.primary,
     this.iconColor = Colors.white,
@@ -56,6 +58,7 @@ class CustomButton extends StatelessWidget {
     this.fontWeight,
     this.borderRadius = 8,
     this.elevation = 1,
+    this.margin,
   }) : super(key: key);
 
   @override
@@ -64,6 +67,7 @@ class CustomButton extends StatelessWidget {
       width: width,
       height: height,
       padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+      margin: margin,
       child: ElevatedButton.icon(
         icon: Visibility(
           visible: (icon != null),

@@ -5,6 +5,7 @@ import 'package:varcore_flutter_base/core/themes/app_colors.dart';
 final ThemeData lightTheme = ThemeData(
   primaryColor: AppColors.materialPrimary,
   primarySwatch: AppColors.materialPrimary,
+  indicatorColor: AppColors.accent,
   fontFamily: "Poppins",
   brightness: Brightness.light,
   appBarTheme: const AppBarTheme(
@@ -19,6 +20,7 @@ final ThemeData lightTheme = ThemeData(
 final ThemeData darkTheme = ThemeData(
   primaryColor: AppColors.materialPrimary,
   primarySwatch: AppColors.materialPrimary,
+  indicatorColor: AppColors.accent,
   fontFamily: "Poppins",
   brightness: Brightness.dark,
   appBarTheme: const AppBarTheme(
