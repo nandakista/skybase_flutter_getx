@@ -21,16 +21,12 @@ class FilterOrderController extends GetxController {
   void onInit() {
     super.onInit();
     initDefaultData();
-    print('init = ${data}');
-    print('init applied filter= ${_appliedFilter}');
   }
 
   @override
   void onReady() {
     super.onReady();
     _initAppliedData();
-    print('Ready = ${data}');
-    print('Ready applied filter= ${_appliedFilter}');
   }
 
 
@@ -80,7 +76,6 @@ class FilterOrderController extends GetxController {
     if (filterPeriod.value != null) {
       _appliedFilter.add(filterPeriod.value!);
     }
-    // Navigator.pop(Get.context!, _appliedFilter);
     Get.back(result: _appliedFilter);
   }
 }

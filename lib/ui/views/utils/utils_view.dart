@@ -79,7 +79,7 @@ class _UtilsViewState extends State<UtilsView> {
                 ),
                 CustomButton(
                   onPressed: () {
-                    String? converted = DateHelper(
+                    String? converted = DateTimeHelper(
                             startDate: DateTime.now(), endDate: DateTime.now())
                         .format();
                     Toast.show('Date converted :\n $converted');
@@ -152,7 +152,7 @@ class _UtilsViewState extends State<UtilsView> {
                     child: const Padding(
                       padding: EdgeInsets.all(40.0),
                       child: Image(
-                        image: AssetImage('assets/img_man.png'),
+                        image: AssetImage('assets/images/img_man.png'),
                       ),
                     ),
                   ),

@@ -146,7 +146,7 @@ class FilterContentView extends StatelessWidget {
               onSelectionChanged: (selected) {
             if (selected?.startDate != null && selected?.endDate != null) {
               filterPeriod.value = FilterOrder(
-                  label: DateHelper(
+                  label: DateTimeHelper(
                           startDate: selected?.startDate,
                           endDate: selected?.endDate)
                       .format(),

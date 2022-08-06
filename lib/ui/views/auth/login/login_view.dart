@@ -55,7 +55,7 @@ class LoginView extends GetView<LoginController> {
         ),
         const Flexible(
           child: Image(
-              image: AssetImage('assets/img_login.png'),
+              image: AssetImage('assets/images/img_login.png'),
               width: 250),
         )
       ],

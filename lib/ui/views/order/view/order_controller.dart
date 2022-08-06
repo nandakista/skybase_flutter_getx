@@ -25,7 +25,7 @@ class OrderController extends GetxController {
     data.addAll(_defaultData);
   }
 
-  setFilterData() {
+  _setFilterData() {
     data.clear();
     for (var status in selectedFilterLabel) {
       data.addAll(
@@ -51,7 +51,7 @@ class OrderController extends GetxController {
     );
     if (result.action == FilterAction.submit && result.value.isNotEmpty) {
       selectedFilterLabel.value = result.value as List<FilterOrder>;
-      setFilterData();
+      _setFilterData();
     } else if (result.action == FilterAction.submit && result.value.isEmpty) {
       setInitialData();
     }

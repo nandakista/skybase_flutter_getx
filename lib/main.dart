@@ -23,11 +23,11 @@ void main() async {
   AppConfig.set(Flavors.DEVELOPMENT);
   AppStatusBar.set(brightness: Brightness.light);
   AppOrientation.lock(DeviceOrientation.portraitUp);
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetX<ThemeManager>(

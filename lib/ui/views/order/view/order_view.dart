@@ -54,7 +54,7 @@ class OrderView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: [
           InputChip(
-            label: const Text('Filter Rx'),
+            label: const Text('Filter'),
             avatar: const Icon(Icons.filter_list),
             padding: const EdgeInsets.symmetric(horizontal: 4),
             onPressed: () => controller.submitFilter(),

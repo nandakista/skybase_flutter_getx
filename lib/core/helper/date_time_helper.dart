@@ -5,13 +5,13 @@ import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manag
 /// If you want to convert 1 date, just fill [date].
 /// If you want to convert range date, you can fill [startDate], [endDate]
 /// * Example : DateHelper(startDate: x, endDate: y).format2()
-class DateHelper {
+class DateTimeHelper {
 
   DateTime? date;
   DateTime? startDate;
   DateTime? endDate;
 
-  DateHelper({
+  DateTimeHelper({
     this.date,
     this.startDate,
     this.endDate
@@ -22,7 +22,7 @@ class DateHelper {
   }
 
   String? format2() {
-    return formatDate(pattern: 'dd/MM/yyyy');
+    return formatDate(pattern: 'dd MM yyyy');
   }
 
   String? format3() {
@@ -30,15 +30,19 @@ class DateHelper {
   }
 
   String? format4() {
-    return formatDate(pattern: 'EEEE, dd MMMM y');
+    return formatDate(pattern: 'EEEE, dd MM y');
   }
 
   String? format5() {
-    return formatDate(pattern: 'EEEE, dd MMMM yyyy HH:mm:ss');
+    return formatDate(pattern: 'EEEE, dd MMMM yyyy HH:mm');
   }
 
-  String? format6() {
-    return formatDate(pattern: 'yyyy-MM-dd');
+  String? formatDays() {
+    return formatDate(pattern: 'dd');
+  }
+
+  String? formatHours() {
+    return formatDate(pattern: 'HH:mm');
   }
 
   String? formatDate({String? pattern}) {
@@ -55,5 +59,38 @@ class DateHelper {
     } else {
       return 'Error date converted!';
     }
+  }
+}
+
+extension DateHelpers on DateTime {
+  bool isToday() {
+    final now = DateTime.now();
+    return now.day == day &&
+        now.month == month &&
+        now.year == year;
+  }
+
+  bool isYesterday() {
+    final yesterday = DateTime.now().subtract(const Duration(days: 1));
+    return yesterday.day == day &&
+        yesterday.month == month &&
+        yesterday.year == year;
+  }
+
+  bool isTomorrow() {
+    final yesterday = DateTime.now().add(const Duration(days: 1));
+    return yesterday.day == day &&
+        yesterday.month == month &&
+        yesterday.year == year;
+  }
+
+  bool inThisWeek() {
+    final weekAgo = DateTime.now().subtract(const Duration(days: 7));
+    return isAfter(weekAgo);
+  }
+
+  bool inThisYear() {
+    final yearAgo = DateTime.now().subtract(const Duration(days: 365));
+    return isAfter(yearAgo);
   }
 }

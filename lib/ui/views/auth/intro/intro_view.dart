@@ -103,6 +103,6 @@ class IntroView extends StatelessWidget {
   }
 
   Widget _buildImage(String assetName, [double width = 250]) {
-    return Image.asset('assets/$assetName', width: width);
+    return Image.asset('assets/images/$assetName', width: width);
   }
 }
