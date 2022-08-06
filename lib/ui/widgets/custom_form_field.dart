@@ -20,6 +20,7 @@ class CustomFieldForm extends StatelessWidget {
   final Function(String)? onFieldSubmitted;
   final Function(String)? onChanged;
   final bool validate;
+  final String? initialValue;
 
   const CustomFieldForm({
     Key? key,
@@ -38,6 +39,7 @@ class CustomFieldForm extends StatelessWidget {
     this.hintColor = Colors.grey,
     this.inputFormatters,
     this.onFieldSubmitted,
+    this.initialValue,
     this.onChanged,
     this.readOnly = false,
     this.validate = false,
@@ -46,11 +48,18 @@ class CustomFieldForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     List<TextInputFormatter> formatters = [];
     formatters.add(LengthLimitingTextInputFormatter(maxLength));
     if (inputFormatters != null) {
       formatters.addAll(inputFormatters!);
     }
+
+    /// Make controller and initial value can initialize in the same time
+    if(controller != null && controller?.text == '' && initialValue != null) {
+      controller?.text = initialValue.toString();
+    }
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: BoxDecoration(
@@ -65,6 +74,7 @@ class CustomFieldForm extends StatelessWidget {
         keyboardType: keyboardType,
         maxLength: maxLength,
         maxLines: maxLines,
+        initialValue: (controller == null) ? initialValue : null,
         onFieldSubmitted: onFieldSubmitted,
         onChanged: onChanged,
         decoration: InputDecoration(
@@ -90,7 +100,7 @@ class CustomFieldForm extends StatelessWidget {
           hintStyle: TextStyle(color: hintColor),
         ),
         validator: validator,
-        inputFormatters: inputFormatters,
+        inputFormatters: formatters,
       ),
     );
   }
@@ -98,7 +108,7 @@ class CustomFieldForm extends StatelessWidget {
 
 class CustomPasswordFieldForm extends StatelessWidget {
   final String? label, hint, endText;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final IconData? icon;
   final Widget? endIcon;
   final VoidCallback? onPress;
@@ -109,6 +119,7 @@ class CustomPasswordFieldForm extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final Color? hintColor;
+  final String? initialValue;
 
   const CustomPasswordFieldForm({
     Key? key,
@@ -129,10 +140,15 @@ class CustomPasswordFieldForm extends StatelessWidget {
     this.maxLength,
     this.onSubmit,
     this.endText,
+    this.initialValue,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    /// Create
+    if(controller != null && controller?.text == '' && initialValue != null) {
+      controller?.text = initialValue.toString();
+    }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: BoxDecoration(
@@ -142,6 +158,7 @@ class CustomPasswordFieldForm extends StatelessWidget {
       child: TextFormField(
         onEditingComplete: () => FocusScope.of(context).nextFocus(),
         controller: controller,
+        initialValue: (controller == null) ? initialValue : null,
         decoration: InputDecoration(
           errorText: errorText,
           border: InputBorder.none,

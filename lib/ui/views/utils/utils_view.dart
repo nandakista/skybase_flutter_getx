@@ -29,6 +29,7 @@ class UtilsView extends StatefulWidget {
 
 class _UtilsViewState extends State<UtilsView> {
   File? _imageFile;
+  final currencyCtr = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -109,11 +110,16 @@ class _UtilsViewState extends State<UtilsView> {
                 ),
                 const SizedBox(height: 12),
                 CustomFieldForm(
+                  controller: currencyCtr,
+                  initialValue: 0.toIDR(),
                   label: International.price.tr,
                   hint: International.price.tr,
-                  validator: (value) =>
-                      AppValidator.generalField(value.toString()),
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) =>
+                      (value.isEmpty) ? currencyCtr.text = 0.toIDR() : value,
+                  validator: (value) => AppValidator.generalField('$value'),
                   inputFormatters: CustomInputFormatters.idrCurrency,
+                  onFieldSubmitted: (value) => Toast.show(value),
                 ),
                 const SizedBox(height: 20),
                 ..._buildImagePicker(context),
