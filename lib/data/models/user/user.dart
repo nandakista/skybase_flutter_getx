@@ -1,12 +1,12 @@
 import 'package:hive/hive.dart';
-import 'package:varcore_flutter_base/core/database/hive/entity/user_entity.dart';
-import 'package:varcore_flutter_base/core/database/hive/hive_adapters.dart';
-import 'package:varcore_flutter_base/core/database/hive/hive_box.dart';
-import 'package:varcore_flutter_base/data/models/repo/repo.dart';
+import 'package:skybase/core/database/hive/entity/user_entity.dart';
+import 'package:skybase/core/database/hive/hive_adapters.dart';
+import 'package:skybase/core/database/hive/hive_box.dart';
+import 'package:skybase/data/models/repo/repo.dart';
 
 part 'user.g.dart';
 
-@HiveType(typeId: HiveBox.USER, adapterName: HiveAdapters.USER)
+@HiveType(typeId: HiveBox.userId, adapterName: HiveAdapters.USER)
 class User {
   @HiveField(UserEntity.id)
   int id;

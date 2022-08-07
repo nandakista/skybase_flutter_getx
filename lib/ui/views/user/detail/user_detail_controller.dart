@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
-import 'package:varcore_flutter_base/data/models/user/user.dart';
-import 'package:varcore_flutter_base/data/repositories/user/user_repository.dart';
+import 'package:skybase/core/helper/dialog_helper.dart';
+import 'package:skybase/data/models/user/user.dart';
+import 'package:skybase/data/repositories/user/user_repository.dart';
 
 class UserDetailController extends GetxController {
   final UserRepository repository;

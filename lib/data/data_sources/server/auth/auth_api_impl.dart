@@ -1,11 +1,14 @@
-import 'package:varcore_flutter_base/core/network/api_request.dart';
-import 'package:varcore_flutter_base/core/network/api_response.dart';
-import 'package:varcore_flutter_base/core/network/api_url.dart';
-import 'package:varcore_flutter_base/data/models/user/user.dart';
+import 'package:flutter/material.dart';
+import 'package:skybase/core/network/api_request.dart';
+import 'package:skybase/core/network/api_response.dart';
+import 'package:skybase/core/network/api_url.dart';
+import 'package:skybase/data/models/user/user.dart';
 
 import 'auth_api.dart';
 
 class AuthApiImpl implements AuthApi {
+  String tag = 'Auth Api';
+
   @override
   Future<User> login({
     required String phoneNumber,
@@ -23,7 +26,8 @@ class AuthApiImpl implements AuthApi {
         },
       );
       return User.fromJson(ApiResponse.fromJson(response.data).data);
-    } catch (error) {
+    } catch (e) {
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }
@@ -44,7 +48,8 @@ class AuthApiImpl implements AuthApi {
         },
       );
       return User.fromJson(ApiResponse.fromJson(response.data).data);
-    } catch (error) {
+    } catch (e) {
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }

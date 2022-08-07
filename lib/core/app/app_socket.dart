@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:socket_io_client/socket_io_client.dart' as socket;
-import 'package:varcore_flutter_base/core/app/app_config.dart';
+import 'package:skybase/core/app/app_config.dart';
 
 class AppSocket {
-  static AppSocket get to => Get.find<AppSocket>();
+  static AppSocket get find => Get.find<AppSocket>();
   static socket.Socket get io => Get.find<AppSocket>().init();
 
   socket.Socket init() {
     return socket.io(
-      AppConfig.to.get.socketUrl,
+      AppConfig.find.get.socketUrl,
       socket.OptionBuilder()
           .setTransports(['websocket'])
           .disableAutoConnect() // for Flutter or Dart VM

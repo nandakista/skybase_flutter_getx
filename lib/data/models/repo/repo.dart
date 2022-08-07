@@ -1,12 +1,12 @@
 import 'package:hive/hive.dart';
-import 'package:varcore_flutter_base/core/database/hive/entity/repo_entity.dart';
-import 'package:varcore_flutter_base/core/database/hive/hive_adapters.dart';
-import 'package:varcore_flutter_base/core/database/hive/hive_box.dart';
-import 'package:varcore_flutter_base/data/models/user/user.dart';
+import 'package:skybase/core/database/hive/entity/repo_entity.dart';
+import 'package:skybase/core/database/hive/hive_adapters.dart';
+import 'package:skybase/core/database/hive/hive_box.dart';
+import 'package:skybase/data/models/user/user.dart';
 
 part 'repo.g.dart';
 
-@HiveType(typeId: HiveBox.REPO, adapterName: HiveAdapters.REPO)
+@HiveType(typeId: HiveBox.repoId, adapterName: HiveAdapters.REPO)
 class Repo {
   @HiveField(RepoEntity.name)
   String name;

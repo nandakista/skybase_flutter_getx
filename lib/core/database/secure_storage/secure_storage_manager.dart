@@ -7,7 +7,7 @@ FlutterSecureStorage secureStorage = Get.find<FlutterSecureStorage>();
 ///
 /// For credentials data such as token, refresh token, client token, api key, etc.
 class SecureStorageManager {
-  static SecureStorageManager get to => Get.find<SecureStorageManager>();
+  static SecureStorageManager get find => Get.find<SecureStorageManager>();
 
   final String _tokenKey = "token";
   final String _refreshTokenKey = "refresh_token";

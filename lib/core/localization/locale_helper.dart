@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manager.dart';
-import 'package:varcore_flutter_base/core/localization/language_const.dart';
-import 'package:varcore_flutter_base/core/themes/app_colors.dart';
+import 'package:skybase/core/database/get_storage/get_storage_key.dart';
+import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/localization/language_const.dart';
+import 'package:skybase/core/themes/app_colors.dart';
 
 class LocaleHelper {
   final List<Map<String, dynamic>> locales = [
@@ -51,14 +51,14 @@ class LocaleHelper {
 
   saveLocaleToCache(String name) {
     if (name == "English") {
-      GetStorageManager.to.save(GetStorageKey.CURRENT_LOCALE, "en");
+      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "en");
     } else {
-      GetStorageManager.to.save(GetStorageKey.CURRENT_LOCALE, "in");
+      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "in");
     }
   }
 
   Locale getCurrentLocale() {
-    var currentLocale = GetStorageManager.to.get(GetStorageKey.CURRENT_LOCALE);
+    var currentLocale = GetStorageManager.find.get(GetStorageKey.CURRENT_LOCALE);
     if (currentLocale != null) {
       if (currentLocale == "en") {
         return const Locale('en');

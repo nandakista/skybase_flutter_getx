@@ -1,4 +1,4 @@
-package com.example.varcore_flutter_base
+package com.skybase.getx
 
 import io.flutter.embedding.android.FlutterActivity
 

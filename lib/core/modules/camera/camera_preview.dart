@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
-import 'package:varcore_flutter_base/core/helper/general_function.dart';
-import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
+import 'package:skybase/core/helper/dialog_helper.dart';
+import 'package:skybase/core/helper/general_function.dart';
+import 'package:skybase/ui/widgets/basic_widget.dart';
 
 class PreviewCameraPage extends StatelessWidget {
   final File imageFile;

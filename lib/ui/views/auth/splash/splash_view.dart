@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:varcore_flutter_base/core/themes/app_colors.dart';
-import 'package:varcore_flutter_base/core/themes/app_style.dart';
-import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
+import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/ui/widgets/basic_widget.dart';
 
 class SplashView extends StatelessWidget {
   static const String route = '/splash';
@@ -31,15 +31,12 @@ class SplashView extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                'VARCORE',
+                'SKYBASE',
                 style: AppStyle.headline2.copyWith(color: Colors.white),
               ),
               const Text(
-                'BASE CODE',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                'Flutter Getx',
+                style: TextStyle(color: Colors.white),
               )
             ],
           ),

@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/localization/language_const.dart';
-import 'package:varcore_flutter_base/ui/widgets/custom_dialog.dart';
+import 'package:skybase/core/localization/language_const.dart';
+import 'package:skybase/ui/widgets/custom_dialog.dart';
 
 //---------------<Toast>-----------------
 class Toast {

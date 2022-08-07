@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/localization/language_const.dart';
-import 'package:varcore_flutter_base/core/themes/app_colors.dart';
-import 'package:varcore_flutter_base/core/themes/app_style.dart';
-import 'package:varcore_flutter_base/data/data_sources/local/user/user_dao.dart';
-import 'package:varcore_flutter_base/ui/views/user/list/user_list_controller.dart';
-import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
-import 'package:varcore_flutter_base/ui/widgets/custom_app_bar.dart';
+import 'package:skybase/core/localization/language_const.dart';
+import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/data/data_sources/local/user/user_dao.dart';
+import 'package:skybase/ui/views/user/list/user_list_controller.dart';
+import 'package:skybase/ui/widgets/basic_widget.dart';
+import 'package:skybase/ui/widgets/custom_app_bar.dart';
 
 class UserListView extends GetView<UserListController> {
   static const String route = '/user-list';
@@ -20,7 +20,7 @@ class UserListView extends GetView<UserListController> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () {
-          UserDao.to.deleteAll();
+          UserDao.find.deleteAll();
         },
         child: const Icon(CupertinoIcons.delete, color: Colors.white),
       ),

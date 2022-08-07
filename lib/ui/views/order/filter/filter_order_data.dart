@@ -1,4 +1,4 @@
-import 'package:varcore_flutter_base/ui/views/order/filter/filter_order_type_model.dart';
+import 'package:skybase/ui/views/order/filter/filter_order_type_model.dart';
 
 class FilterOrderData {
   static final all = <FilterOrder>[

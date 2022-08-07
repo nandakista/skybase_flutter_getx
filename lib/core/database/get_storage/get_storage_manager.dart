@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
+import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 
 /// ----<Getx Storage>----
 ///
@@ -11,7 +11,7 @@ import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.d
 /// So one box contains one key --> One Box = One Data.
 /// If you want to caching dataList, you can use Hive Database, cause the box Hive can contains multiple key & data
 class GetStorageManager {
-  static GetStorageManager get to => Get.find<GetStorageManager>();
+  static GetStorageManager get find => Get.find<GetStorageManager>();
   final _box = Get.find<GetStorage>();
 
   /// If you want to save Object/Model don't forget to encode toJson

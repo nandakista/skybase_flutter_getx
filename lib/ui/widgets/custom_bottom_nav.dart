@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:varcore_flutter_base/core/themes/app_colors.dart';
-import 'package:varcore_flutter_base/core/themes/app_style.dart';
+import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/core/themes/app_style.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int selectedIndex;

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
-import 'package:varcore_flutter_base/core/themes/app_colors.dart';
-import 'package:varcore_flutter_base/core/themes/app_style.dart';
-import 'package:varcore_flutter_base/ui/widgets/custom_button.dart';
+import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/ui/widgets/custom_button.dart';
 
 class CustomDialog extends StatelessWidget {
   final Widget child;

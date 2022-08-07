@@ -1,14 +1,16 @@
-import 'package:varcore_flutter_base/core/helper/safe_request_api_helper.dart';
-import 'package:varcore_flutter_base/data/data_sources/local/user/user_dao.dart';
-import 'package:varcore_flutter_base/data/data_sources/server/user/user_api.dart';
-import 'package:varcore_flutter_base/data/models/user/user.dart';
-import 'package:varcore_flutter_base/data/repositories/user/user_repository.dart';
+import 'package:flutter/material.dart';
+import 'package:skybase/core/helper/safe_request_api_helper.dart';
+import 'package:skybase/data/data_sources/local/user/user_dao.dart';
+import 'package:skybase/data/data_sources/server/user/user_api.dart';
+import 'package:skybase/data/models/user/user.dart';
+import 'package:skybase/data/repositories/user/user_repository.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final UserApi apiService;
   UserRepositoryImpl({required this.apiService});
 
-  final _userDao = UserDao.to;
+  String tag = 'User Repository';
+  final _userDao = UserDao.find;
 
   @override
   Future<List<User>> getUsers() async {
@@ -23,6 +25,7 @@ class UserRepositoryImpl extends UserRepository {
         return _res;
       }
     } catch (e) {
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }
@@ -40,6 +43,7 @@ class UserRepositoryImpl extends UserRepository {
         return _res;
       }
     } catch (e) {
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }

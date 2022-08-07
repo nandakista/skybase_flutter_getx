@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
-import 'package:varcore_flutter_base/core/network/api_config.dart';
-import 'package:varcore_flutter_base/core/network/api_exception.dart';
+import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
+import 'package:skybase/core/network/api_config.dart';
+import 'package:skybase/core/network/api_exception.dart';
 
 // ignore: constant_identifier_names
 enum RequestMethod { GET, POST, PATCH, PUT, DELETE }
@@ -79,7 +79,7 @@ Future<Response> sendRequest({
 }
 
 void _tokenManager(bool useToken) async {
-  final secureStorage = SecureStorageManager.to;
+  final secureStorage = SecureStorageManager.find;
   DioClient.setInterceptor();
   String? token = await secureStorage.getToken();
   if (useToken) {

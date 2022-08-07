@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:varcore_flutter_base/core/themes/app_colors.dart';
+import 'package:skybase/core/themes/app_colors.dart';
 
 final ThemeData lightTheme = ThemeData(
   primaryColor: AppColors.materialPrimary,

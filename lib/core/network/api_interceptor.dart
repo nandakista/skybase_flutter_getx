@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:varcore_flutter_base/core/network/api_token_manager.dart';
+import 'package:skybase/core/network/api_token_manager.dart';
 
 class ApiInterceptors extends ApiTokenManager
     implements QueuedInterceptorsWrapper {
@@ -43,7 +43,6 @@ class ApiInterceptors extends ApiTokenManager
     debugPrint('Response Path : ${err.response?.requestOptions.uri}');
     debugPrint('<-- End HTTP');
     handleToken(
-      type: TokenType.ACCESS_TOKEN,
       dio: _dio,
       err: err,
       handler: handler,

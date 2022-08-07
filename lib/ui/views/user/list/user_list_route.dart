@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/ui/views/user/list/user_list_binding.dart';
-import 'package:varcore_flutter_base/ui/views/user/list/user_list_view.dart';
+import 'package:skybase/ui/views/user/list/user_list_binding.dart';
+import 'package:skybase/ui/views/user/list/user_list_view.dart';
 
 final userListRoute = [
   GetPage(

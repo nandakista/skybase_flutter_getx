@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manager.dart';
-import 'package:varcore_flutter_base/core/localization/language_const.dart';
-import 'package:varcore_flutter_base/core/themes/app_colors.dart';
-import 'package:varcore_flutter_base/core/themes/app_style.dart';
-import 'package:varcore_flutter_base/ui/views/auth/login/login_view.dart';
+import 'package:skybase/core/database/get_storage/get_storage_key.dart';
+import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/localization/language_const.dart';
+import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/ui/views/auth/login/login_view.dart';
 
 class IntroView extends StatelessWidget {
   static const String route = '/intro';
@@ -29,7 +29,7 @@ class IntroView extends StatelessWidget {
       key: introKey,
       pages: [
         PageViewModel(
-          title: 'Varcore Base',
+          title: 'Skybase',
           image: _buildImage('img_pv_1.png'),
           decoration: pageDecoration,
           bodyWidget: Column(
@@ -42,7 +42,7 @@ class IntroView extends StatelessWidget {
           ),
         ),
         PageViewModel(
-          title: 'Varcore Base',
+          title: 'Skybase',
           image: _buildImage('img_pv_2.png'),
           decoration: pageDecoration,
           bodyWidget: Column(
@@ -55,7 +55,7 @@ class IntroView extends StatelessWidget {
           ),
         ),
         PageViewModel(
-          title: 'Varcore Base',
+          title: 'Skybase',
           image: _buildImage('img_pv_3.png'),
           decoration: pageDecoration,
           bodyWidget: Column(
@@ -98,7 +98,7 @@ class IntroView extends StatelessWidget {
   }
 
   void _onIntroEnd(context) async {
-    GetStorageManager.to.save(GetStorageKey.FIRST_INSTALL, false);
+    GetStorageManager.find.save(GetStorageKey.FIRST_INSTALL, false);
     Get.offAllNamed(LoginView.route);
   }
 

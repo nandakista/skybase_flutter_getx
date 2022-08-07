@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:varcore_flutter_base/core/database/hive/hive_box.dart';
-import 'package:varcore_flutter_base/data/models/user/user.dart';
+import 'package:skybase/core/database/hive/hive_box.dart';
+import 'package:skybase/data/models/user/user.dart';
 
 class UserDao {
-  static UserDao get to => Get.find<UserDao>();
-  final box = Hive.box(HiveBox.USER.toString());
+  static UserDao get find => Get.find<UserDao>();
+  final box = Hive.box(HiveBox.user);
 
   bool containData(User user) {
     User _data = box.get(user.id);

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/ui/views/order/filter/filter_order_type_model.dart';
-import 'package:varcore_flutter_base/ui/views/order/view/order_controller.dart';
-import 'package:varcore_flutter_base/ui/views/order/widgets/empty_order_view.dart';
-import 'package:varcore_flutter_base/ui/views/order/widgets/list_order_view.dart';
+import 'package:skybase/ui/views/order/filter/filter_order_type_model.dart';
+import 'package:skybase/ui/views/order/view/order_controller.dart';
+import 'package:skybase/ui/views/order/widgets/empty_order_view.dart';
+import 'package:skybase/ui/views/order/widgets/list_order_view.dart';
 
 class OrderView extends StatelessWidget {
   const OrderView({

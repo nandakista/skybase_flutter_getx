@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage_key.dart';
-import 'package:varcore_flutter_base/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/database/get_storage/get_storage_key.dart';
+import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 
 /// If you want to convert 1 date, just fill [date].
 /// If you want to convert range date, you can fill [startDate], [endDate]
@@ -48,7 +48,7 @@ class DateTimeHelper {
   String? formatDate({String? pattern}) {
     bool isRange = (startDate != null && endDate != null);
     bool isNotRange = (startDate == null && endDate == null);
-    String locale = GetStorageManager.to.get(GetStorageKey.CURRENT_LOCALE);
+    String locale = GetStorageManager.find.get(GetStorageKey.CURRENT_LOCALE);
 
     if(isRange && date == null) {
       var start = DateFormat(pattern, locale).format(startDate!);

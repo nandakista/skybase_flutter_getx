@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:varcore_flutter_base/ui/views/order/dummy_order_data.dart';
-import 'package:varcore_flutter_base/ui/views/order/search/empty_search_order_view.dart';
-import 'package:varcore_flutter_base/ui/views/order/widgets/list_order_view.dart';
+import 'package:skybase/ui/views/order/dummy_order_data.dart';
+import 'package:skybase/ui/views/order/search/empty_search_order_view.dart';
+import 'package:skybase/ui/views/order/widgets/list_order_view.dart';
 
 class SearchOrderDelegate extends SearchDelegate {
   List allData = dummyOrder();

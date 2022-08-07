@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/themes/app_style.dart';
-import 'package:varcore_flutter_base/data/models/user/user.dart';
-import 'package:varcore_flutter_base/ui/views/user/detail/user_detail_controller.dart';
+import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/data/models/user/user.dart';
+import 'package:skybase/ui/views/user/detail/user_detail_controller.dart';
 
 class FollowerTabView extends GetView<UserDetailController> {
   const FollowerTabView({Key? key}) : super(key: key);

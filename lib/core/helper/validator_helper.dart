@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
-import 'package:varcore_flutter_base/core/localization/language_const.dart';
+import 'package:skybase/core/helper/dialog_helper.dart';
+import 'package:skybase/core/localization/language_const.dart';
 
 class AppRegex {
   static const nik = r'^[1-9]{16}$';

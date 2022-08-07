@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:varcore_flutter_base/core/helper/general_function.dart';
+import 'package:skybase/core/helper/general_function.dart';
 
 class UiImagePicker extends StatelessWidget {
 

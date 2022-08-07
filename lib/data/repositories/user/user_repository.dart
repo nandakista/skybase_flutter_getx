@@ -1,4 +1,4 @@
-import 'package:varcore_flutter_base/data/models/user/user.dart';
+import 'package:skybase/data/models/user/user.dart';
 
 abstract class UserRepository {
   Future<List<User>> getUsers();

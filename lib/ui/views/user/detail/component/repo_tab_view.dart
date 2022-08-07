@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/themes/app_colors.dart';
-import 'package:varcore_flutter_base/core/themes/app_style.dart';
-import 'package:varcore_flutter_base/data/models/repo/repo.dart';
-import 'package:varcore_flutter_base/ui/views/user/detail/user_detail_controller.dart';
+import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/data/models/repo/repo.dart';
+import 'package:skybase/ui/views/user/detail/user_detail_controller.dart';
 
 class RepoTabView extends GetView<UserDetailController> {
   const RepoTabView({Key? key}) : super(key: key);

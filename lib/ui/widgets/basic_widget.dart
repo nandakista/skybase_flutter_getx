@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/app/app_constant.dart';
-import 'package:varcore_flutter_base/core/themes/app_colors.dart';
+import 'package:skybase/core/app/app_constant.dart';
+import 'package:skybase/core/themes/app_colors.dart';
 
 Widget loadingIndicator =
     const SpinKitThreeBounce(size: 45, color: Colors.blue);

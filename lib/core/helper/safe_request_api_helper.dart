@@ -1,4 +1,4 @@
-import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
+import 'package:skybase/core/helper/dialog_helper.dart';
 
 class SafeRequestAPI {
   /// For update cache data.

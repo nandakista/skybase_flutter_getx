@@ -1,4 +1,4 @@
-import 'package:varcore_flutter_base/core/localization/language_const.dart';
+import 'package:skybase/core/localization/language_const.dart';
 
 const Map<String, String> en = {
   International.name : 'name',

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:varcore_flutter_base/core/themes/app_colors.dart';
+import 'package:skybase/core/themes/app_colors.dart';
 
 class AppStyle {
   static TextStyle title1 = const TextStyle(fontSize: 40);

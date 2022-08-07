@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/ui/views/home/home_view.dart';
+import 'package:skybase/ui/views/home/home_view.dart';
 
 class NotificationHandler {
     String? title;

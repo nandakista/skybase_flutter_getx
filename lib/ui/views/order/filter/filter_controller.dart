@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/ui/views/order/filter/filter_order_data.dart';
-import 'package:varcore_flutter_base/ui/views/order/filter/filter_order_type_model.dart';
+import 'package:skybase/ui/views/order/filter/filter_order_data.dart';
+import 'package:skybase/ui/views/order/filter/filter_order_type_model.dart';
 
 class FilterOrderController extends GetxController {
   FilterOrderController({required this.type, required this.data});

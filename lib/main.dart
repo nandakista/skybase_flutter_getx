@@ -4,15 +4,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/app/app_config.dart';
-import 'package:varcore_flutter_base/initializer.dart';
-import 'package:varcore_flutter_base/core/helper/general_function.dart';
-import 'package:varcore_flutter_base/core/localization/app_translations.dart';
-import 'package:varcore_flutter_base/core/localization/locale_helper.dart';
-import 'package:varcore_flutter_base/core/themes/app_theme.dart';
-import 'package:varcore_flutter_base/core/themes/theme_manager.dart';
-import 'package:varcore_flutter_base/ui/routes/app_routes.dart';
-import 'package:varcore_flutter_base/ui/views/utils/utils_view.dart';
+import 'package:skybase/core/app/app_config.dart';
+import 'package:skybase/initializer.dart';
+import 'package:skybase/core/helper/general_function.dart';
+import 'package:skybase/core/localization/app_translations.dart';
+import 'package:skybase/core/localization/locale_helper.dart';
+import 'package:skybase/core/themes/app_theme.dart';
+import 'package:skybase/core/themes/theme_manager.dart';
+import 'package:skybase/ui/routes/app_routes.dart';
+import 'package:skybase/ui/views/utils/utils_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +20,7 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
   await Initializer.initConfig();
   await Initializer.initService();
-  AppConfig.set(Flavors.DEVELOPMENT);
+  AppConfig.set(Env.DEVELOPMENT);
   AppStatusBar.set(brightness: Brightness.light);
   AppOrientation.lock(DeviceOrientation.portraitUp);
   runApp(const App());
@@ -33,7 +33,7 @@ class App extends StatelessWidget {
     return GetX<ThemeManager>(
       builder: (controller) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: "Varcore Base Code",
+        title: "Skybase Flutter Getx",
         theme: lightTheme,
         darkTheme: darkTheme,
         themeMode:

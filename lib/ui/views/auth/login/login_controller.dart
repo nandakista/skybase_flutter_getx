@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/auth_manager/auth_manager.dart';
-import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
-import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
-import 'package:varcore_flutter_base/data/data_sources/server/auth/auth_api.dart';
-import 'package:varcore_flutter_base/ui/views/home/home_view.dart';
+import 'package:skybase/core/auth_manager/auth_manager.dart';
+import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
+import 'package:skybase/core/helper/dialog_helper.dart';
+import 'package:skybase/data/data_sources/server/auth/auth_api.dart';
+import 'package:skybase/ui/views/home/home_view.dart';
 
 class LoginController extends GetxController {
   final AuthApi dataSource;
@@ -25,7 +25,7 @@ class LoginController extends GetxController {
     return false;
   }
 
-  login() async {
+  void login() async {
     if (validateField()) {
       try {
         Loading.show();
@@ -47,9 +47,8 @@ class LoginController extends GetxController {
     }
   }
 
-  bypassLogin() async {
-    await SecureStorageManager.to.logout();
-    await SecureStorageManager.to.setToken(value: ' ');
-    AuthManager.to.setAuth();
+  void bypassLogin() async {
+    await SecureStorageManager.find.setToken(value: 'dummy');
+    AuthManager.find.setAuth();
   }
 }

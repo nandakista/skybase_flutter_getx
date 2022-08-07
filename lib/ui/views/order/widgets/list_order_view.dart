@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:varcore_flutter_base/core/themes/app_colors.dart';
+import 'package:skybase/core/themes/app_colors.dart';
 
 class ListOrderView extends StatelessWidget {
   const ListOrderView({Key? key, required this.data}) : super(key: key);

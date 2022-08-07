@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 import 'package:photo_manager/photo_manager.dart';
-import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
-import 'package:varcore_flutter_base/core/helper/general_function.dart';
-import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
-import 'package:varcore_flutter_base/ui/widgets/image_picker.dart';
+import 'package:skybase/core/helper/dialog_helper.dart';
+import 'package:skybase/core/helper/general_function.dart';
+import 'package:skybase/ui/widgets/basic_widget.dart';
+import 'package:skybase/ui/widgets/image_picker.dart';
 import 'camera_preview.dart';
 
 enum CameraType {

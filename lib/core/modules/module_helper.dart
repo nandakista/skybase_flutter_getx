@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/modules/camera/camera_module.dart';
+import 'package:skybase/core/modules/camera/camera_module.dart';
 
 class ModuleHelper {
   /// Pick Image from [ModuleHelper.pickImage] avoid to crash when picked image using low-end devices.

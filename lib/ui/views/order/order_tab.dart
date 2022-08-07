@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/ui/views/order/dummy_order_data.dart';
-import 'package:varcore_flutter_base/ui/views/order/filter/filter_order_type_model.dart';
-import 'package:varcore_flutter_base/ui/views/order/view/order_controller.dart';
-import 'package:varcore_flutter_base/ui/views/order/view/order_view.dart';
-import 'package:varcore_flutter_base/ui/views/order/search/search_delegate.dart';
-import 'package:varcore_flutter_base/ui/widgets/search_button.dart';
+import 'package:skybase/ui/views/order/dummy_order_data.dart';
+import 'package:skybase/ui/views/order/filter/filter_order_type_model.dart';
+import 'package:skybase/ui/views/order/view/order_controller.dart';
+import 'package:skybase/ui/views/order/view/order_view.dart';
+import 'package:skybase/ui/views/order/search/search_delegate.dart';
+import 'package:skybase/ui/widgets/search_button.dart';
 
 class FilterTabView extends StatelessWidget {
   const FilterTabView({Key? key}) : super(key: key);

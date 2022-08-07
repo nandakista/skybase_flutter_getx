@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:varcore_flutter_base/core/network/api_message.dart';
-import 'package:varcore_flutter_base/core/network/api_response.dart';
+import 'package:skybase/core/network/api_message.dart';
+import 'package:skybase/core/network/api_response.dart';
 
 class DioException {
   static message(DioError dioError){

@@ -9,8 +9,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
-import 'package:varcore_flutter_base/core/network/api_request.dart';
+import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
+import 'package:skybase/core/network/api_request.dart';
 import 'package:image/image.dart' as img;
 
 class AppFunction {
@@ -65,7 +65,7 @@ class AppFunction {
     }
     try {
       if (useToken) {
-        String? token = await SecureStorageManager.to.getToken();
+        String? token = await SecureStorageManager.find.getToken();
         headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       } else {
         headers.clear();

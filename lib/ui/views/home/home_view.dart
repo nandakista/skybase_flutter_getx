@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/ui/views/auth/intro/intro_view.dart';
-import 'package:varcore_flutter_base/ui/views/auth/login/login_view.dart';
-import 'package:varcore_flutter_base/ui/views/order/order_tab.dart';
-import 'package:varcore_flutter_base/ui/views/home/home_controller.dart';
-import 'package:varcore_flutter_base/ui/views/user/list/user_list_view.dart';
-import 'package:varcore_flutter_base/ui/views/utils/utils_view.dart';
-import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
-import 'package:varcore_flutter_base/ui/widgets/colored_status_bar.dart';
+import 'package:skybase/ui/views/auth/intro/intro_view.dart';
+import 'package:skybase/ui/views/auth/login/login_view.dart';
+import 'package:skybase/ui/views/order/order_tab.dart';
+import 'package:skybase/ui/views/home/home_controller.dart';
+import 'package:skybase/ui/views/user/list/user_list_view.dart';
+import 'package:skybase/ui/views/utils/utils_view.dart';
+import 'package:skybase/ui/widgets/basic_widget.dart';
+import 'package:skybase/ui/widgets/colored_status_bar.dart';
 
 class HomeView extends GetView<HomeController> {
   static const String route = '/home';

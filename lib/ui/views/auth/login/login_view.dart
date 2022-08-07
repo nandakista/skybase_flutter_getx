@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
-import 'package:varcore_flutter_base/core/helper/validator_helper.dart';
-import 'package:varcore_flutter_base/core/localization/language_const.dart';
-import 'package:varcore_flutter_base/core/themes/app_colors.dart';
-import 'package:varcore_flutter_base/core/themes/app_style.dart';
-import 'package:varcore_flutter_base/ui/views/auth/login/login_controller.dart';
-import 'package:varcore_flutter_base/ui/widgets/basic_widget.dart';
-import 'package:varcore_flutter_base/ui/widgets/custom_button.dart';
-import 'package:varcore_flutter_base/ui/widgets/custom_form_field.dart';
+import 'package:skybase/core/helper/validator_helper.dart';
+import 'package:skybase/core/localization/language_const.dart';
+import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/ui/views/auth/login/login_controller.dart';
+import 'package:skybase/ui/widgets/basic_widget.dart';
+import 'package:skybase/ui/widgets/custom_button.dart';
+import 'package:skybase/ui/widgets/custom_form_field.dart';
 
 class LoginView extends GetView<LoginController> {
   static const String route = '/login';

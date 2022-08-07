@@ -4,14 +4,15 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:varcore_flutter_base/core/auth_manager/auth_manager.dart';
-import 'package:varcore_flutter_base/core/database/secure_storage/secure_storage_manager.dart';
-import 'package:varcore_flutter_base/core/helper/dialog_helper.dart';
-import 'package:varcore_flutter_base/core/network/api_config.dart';
-import 'package:varcore_flutter_base/core/network/api_exception.dart';
-import 'package:varcore_flutter_base/core/network/api_request.dart';
-import 'package:varcore_flutter_base/core/network/api_response.dart';
-import 'package:varcore_flutter_base/core/network/api_url.dart';
+import 'package:skybase/core/app/app_config.dart';
+import 'package:skybase/core/auth_manager/auth_manager.dart';
+import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
+import 'package:skybase/core/helper/dialog_helper.dart';
+import 'package:skybase/core/network/api_config.dart';
+import 'package:skybase/core/network/api_exception.dart';
+import 'package:skybase/core/network/api_request.dart';
+import 'package:skybase/core/network/api_response.dart';
+import 'package:skybase/core/network/api_url.dart';
 
 enum TokenType {
   /// When your app no need token authentication.
@@ -25,16 +26,16 @@ enum TokenType {
 }
 
 class ApiTokenManager extends QueuedInterceptorsWrapper {
-  final authManager = AuthManager.to;
-  final secureStorage = SecureStorageManager.to;
+  final authManager = AuthManager.find;
+  final secureStorage = SecureStorageManager.find;
+  final appConfig = AppConfig.find;
 
   Future<void> handleToken ({
-    required TokenType type,
     required Dio dio,
     required DioError err,
     required ErrorInterceptorHandler handler,
   }) async {
-    switch (type) {
+    switch (appConfig.get.tokenType) {
       case TokenType.NO_TOKEN:
          super.onError(err, handler);
         break;
