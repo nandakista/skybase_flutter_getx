@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:skybase/core/helper/safe_request_api_helper.dart';
 import 'package:skybase/data/data_sources/local/user/user_dao.dart';
@@ -25,7 +27,7 @@ class UserRepositoryImpl extends UserRepository {
         return _res;
       }
     } catch (e) {
-      debugPrint('$tag Error = $e');
+      log('$tag Error = $e');
       rethrow;
     }
   }
@@ -43,7 +45,7 @@ class UserRepositoryImpl extends UserRepository {
         return _res;
       }
     } catch (e) {
-      debugPrint('$tag Error = $e');
+      log('$tag Error = $e');
       rethrow;
     }
   }

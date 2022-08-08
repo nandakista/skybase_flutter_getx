@@ -1,0 +1,13 @@
+name: sky_view
+description: Bricks for create new sky view included view,route,binding,controller.
+
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.26 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: Enter the name of your view. [lowercase]
+    prompt: View Name [lowercase] =
