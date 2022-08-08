@@ -1,17 +1,1 @@
-{
-  "bricks":
-  {
-    "sky_view":
-    {
-      "path":"bricks/sky_view"
-    },
-    "sky_repo":
-    {
-      "path":"bricks/sky_repo"
-    },
-    "sky_api":
-    {
-      "path":"bricks/sky_api"
-    }
-  }
-}
+{"bricks":{"sky_view":{"path":"bricks/sky_view"},"sky_repo":{"path":"bricks/sky_repo"},"sky_api":{"path":"bricks/sky_api"},"sky_feature":{"path":"bricks/sky_feature"}}}
