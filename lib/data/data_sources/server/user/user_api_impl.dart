@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:skybase/core/network/api_request.dart';
 import 'package:skybase/data/data_sources/server/user/user_api.dart';
@@ -27,7 +29,7 @@ class UserApiImpl extends UserApi {
           .toList()
           .cast<User>();
     } catch (e) {
-      debugPrint('$tag Error = $e');
+      log('$tag Error = $e');
       rethrow;
     }
   }
@@ -42,7 +44,7 @@ class UserApiImpl extends UserApi {
       );
       return User.fromJson(_res.data);
     } catch (e) {
-      debugPrint('$tag Error = $e');
+      log('$tag Error = $e');
       rethrow;
     }
   }
@@ -60,7 +62,7 @@ class UserApiImpl extends UserApi {
           .toList()
           .cast<User>();
     } catch (e) {
-      debugPrint('$tag Error = $e');
+      log('$tag Error = $e');
       rethrow;
     }
   }
@@ -78,7 +80,7 @@ class UserApiImpl extends UserApi {
           .toList()
           .cast<User>();
     } catch (e) {
-      debugPrint('$tag Error = $e');
+      log('$tag Error = $e');
       rethrow;
     }
   }
@@ -97,7 +99,7 @@ class UserApiImpl extends UserApi {
           .cast<Repo>();
       // return List<Repo>.from(_res.data.map((data) => Repo.fromJson(data)));
     } catch (e) {
-      debugPrint('$tag Error = $e');
+      log('$tag Error = $e');
       rethrow;
     }
   }

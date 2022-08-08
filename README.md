@@ -3,9 +3,9 @@
 ## Overview
 A Flutter Base project that developed with :
 - Clean Architecture
-- Getx Ecosystem (State, Storage, Binding, Route)
+- Getx Ecosystem
 - Dio
-- Refresh Token handler
+- Hive
 
 
 ## Initial Setup
@@ -15,8 +15,7 @@ A Flutter Base project that developed with :
     dart pub global activate mason_cli
 
 ### Create Shortcut for Mason
-Open terminal and run this command in terminal
-this command to set alias for mason CLI
+Open terminal and run this command in terminal to set alias for mason CLI
 
     alias sky_create_view="cd mason && mason make sky_view -o ../lib && cd .."
     
@@ -49,7 +48,7 @@ Create Datasource (ApiService) :
 - [Getx Ecosystem](https://medium.com/flutter-community/the-flutter-getx-ecosystem-state-management-881c7235511d)
 - [Refresh Token Handler](https://medium.com/nusanet/flutter-refresh-token-authentication-4c8a58071d75)
 - [QueueInterceptor](https://github.com/flutterchina/dio/issues/1308)
-- [Mason CLI] https://pub.dev/packages/mason_cli
+- [Mason CLI](https://pub.dev/packages/mason_cli)
 
 
 
