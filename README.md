@@ -24,7 +24,7 @@ this command to set alias for mason CLI
     
     alias sky_create_api="cd mason && mason make sky_api -o ../lib && cd .."
     
-    alias sky_create_create_feature="cd mason && mason make sky_feature -o ../lib && cd .."
+    alias sky_create_feature="cd mason && mason make sky_feature -o ../lib && cd .."
 
 ### Mason CLI usage
 Create full feature :
