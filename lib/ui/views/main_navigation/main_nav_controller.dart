@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
+class MainNavController extends GetxController {
   RxInt index = 0.obs;
   PageController pageController = PageController(initialPage: 0);
 

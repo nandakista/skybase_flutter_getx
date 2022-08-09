@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/data/data_sources/server/{{name}}/{{name}}_api.dart';
+import 'package:skybase/data/repositories/{{name}}/{{name}}_repository.dart';
 
 class {{name.pascalCase()}}Controller extends GetxController {
-  final {{name.pascalCase()}}Api dataSource;
-  {{name.pascalCase()}}Controller({required this.dataSource});
+  final {{name.pascalCase()}}Repository repository;
+  {{name.pascalCase()}}Controller({required this.repository});
   String tag = '{{name.pascalCase()}}Controller :';
 
 }

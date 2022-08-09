@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/ui/views/auth/intro/intro_view.dart';
 import 'package:skybase/ui/views/auth/login/login_view.dart';
-import 'package:skybase/ui/views/order/order_tab.dart';
-import 'package:skybase/ui/views/home/home_controller.dart';
+import 'package:skybase/ui/views/main_navigation/main_nav_controller.dart';
 import 'package:skybase/ui/views/user/list/user_list_view.dart';
 import 'package:skybase/ui/views/utils/utils_view.dart';
 import 'package:skybase/ui/widgets/basic_widget.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
 
-class HomeView extends GetView<HomeController> {
+class MainNavView extends GetView<MainNavController> {
   static const String route = '/home';
-  const HomeView({Key? key}) : super(key: key);
+  const MainNavView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,6 @@ class HomeView extends GetView<HomeController> {
                 IntroView(),
                 LoginView(),
                 UtilsView(),
-                FilterTabView(),
               ],
             ),
           ),
@@ -54,20 +52,16 @@ class HomeView extends GetView<HomeController> {
               label: 'Users',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.arrow_turn_down_right),
+              icon: Icon(CupertinoIcons.book),
               label: 'Intro',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.map),
+              icon: Icon(CupertinoIcons.arrow_right_to_line),
               label: 'Login',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.book),
+              icon: Icon(CupertinoIcons.settings),
               label: 'Utility',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.filter_list_rounded),
-              label: 'Filter',
             ),
           ],
         ),

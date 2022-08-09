@@ -21,6 +21,7 @@ class CustomFieldForm extends StatelessWidget {
   final Function(String)? onChanged;
   final bool validate;
   final String? initialValue;
+  final TextStyle? style;
 
   const CustomFieldForm({
     Key? key,
@@ -44,6 +45,7 @@ class CustomFieldForm extends StatelessWidget {
     this.readOnly = false,
     this.validate = false,
     this.endText,
+    this.style,
   }) : super(key: key);
 
   @override
@@ -99,6 +101,7 @@ class CustomFieldForm extends StatelessWidget {
           labelStyle: TextStyle(color: hintColor),
           hintStyle: TextStyle(color: hintColor),
         ),
+        style: style,
         validator: validator,
         inputFormatters: formatters,
       ),
@@ -120,6 +123,7 @@ class CustomPasswordFieldForm extends StatelessWidget {
   final Color? textColor;
   final Color? hintColor;
   final String? initialValue;
+  final TextStyle? style;
 
   const CustomPasswordFieldForm({
     Key? key,
@@ -141,6 +145,7 @@ class CustomPasswordFieldForm extends StatelessWidget {
     this.onSubmit,
     this.endText,
     this.initialValue,
+    this.style,
   }) : super(key: key);
 
   @override
@@ -186,6 +191,7 @@ class CustomPasswordFieldForm extends StatelessWidget {
         onTap: onPress,
         onFieldSubmitted: onSubmit,
         validator: validator,
+        style: style,
       ),
     );
   }

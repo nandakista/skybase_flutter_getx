@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
 import 'package:skybase/core/localization/language_const.dart';
@@ -9,6 +8,7 @@ import 'package:skybase/ui/views/auth/login/login_controller.dart';
 import 'package:skybase/ui/widgets/basic_widget.dart';
 import 'package:skybase/ui/widgets/custom_button.dart';
 import 'package:skybase/ui/widgets/custom_form_field.dart';
+import 'package:skybase/ui/widgets/keyboard_dismisser.dart';
 
 class LoginView extends GetView<LoginController> {
   static const String route = '/login';
@@ -16,7 +16,7 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return KeyboardDismissOnTap(
+    return KeyboardDismisser(
       child: Scaffold(
         body: Center(
           child: SingleChildScrollView(
@@ -70,6 +70,7 @@ class LoginView extends GetView<LoginController> {
         children: [
           const SizedBox(height: 20),
           CustomFieldForm(
+
             label: International.phone.tr,
             hint: International.phone.tr,
             controller: controller.phoneController,

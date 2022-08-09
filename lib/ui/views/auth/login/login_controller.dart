@@ -4,7 +4,7 @@ import 'package:skybase/core/auth_manager/auth_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/data/data_sources/server/auth/auth_api.dart';
-import 'package:skybase/ui/views/home/home_view.dart';
+import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 
 class LoginController extends GetxController {
   final AuthApi dataSource;
@@ -34,7 +34,7 @@ class LoginController extends GetxController {
             email: emailController.text,
             password: passController.text).then((res) async {
           Loading.hide();
-          Get.offAllNamed(HomeView.route);
+          Get.offAllNamed(MainNavView.route);
         });
       } catch (err) {
         Loading.hide();

@@ -17,13 +17,15 @@ A Flutter Base project that developed with :
 ### Create Shortcut for Mason
 Open terminal and run this command in terminal to set alias for mason CLI
 
-    alias sky_create_view="cd mason && mason make sky_view -o ../lib && cd .."
+    alias sky_create_view="cd mason ; mason make sky_view -o ../lib ; cd .."
     
-    alias sky_create_repo="cd mason && mason make sky_repo -o ../lib && cd .."
+    alias sky_create_repo="cd mason ; mason make sky_repo -o ../lib ; cd .."
     
-    alias sky_create_api="cd mason && mason make sky_api -o ../lib && cd .."
+    alias sky_create_api="cd mason ; mason make sky_api -o ../lib ; cd .."
+
+    alias sky_create_dao="cd mason ; mason make sky_dao -o ../lib ; cd .."
     
-    alias sky_create_feature="cd mason && mason make sky_feature -o ../lib && cd .."
+    alias sky_create_feature="cd mason ; mason make sky_feature -o ../lib ; cd .."
 
 ### Mason CLI usage
 Create full feature :
@@ -42,6 +44,9 @@ Create Datasource (ApiService) :
 
     sky_create_api
 
+Create Dao :
+
+    sky_create_dao
 
 ## Reference
 - [Clean Architecture](https://resocoder.com/2019/08/27/flutter-tdd-clean-architecture-course-1-explanation-project-structure/)

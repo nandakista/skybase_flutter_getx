@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:skybase/ui/views/home/home_view.dart';
+import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 
 class NotificationHandler {
     String? title;
@@ -33,8 +33,8 @@ class NotificationHandler {
 String pageDirectionFromNotification(String type, int? id) {
   switch (type) {
     case "*":
-        return HomeView.route;
+        return MainNavView.route;
     default:
-        return HomeView.route;
+        return MainNavView.route;
   }
 }

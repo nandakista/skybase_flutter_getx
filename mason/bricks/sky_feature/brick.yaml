@@ -11,3 +11,13 @@ vars:
     type: string
     description: Enter the name of your feature. [lowercase]
     prompt: Feature Name [lowercase] =
+
+  api:
+    type: string
+    description: Enter the name of your api datasource. [lowercase]
+    prompt: ApiService Name [lowercase] =
+
+  dao:
+    type: string
+    description: Enter the name of your dao. [lowercase]
+    prompt: Dao Name [lowercase] =

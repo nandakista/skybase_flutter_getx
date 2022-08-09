@@ -5,5 +5,7 @@ bricks:
     path: bricks/sky_repo
   sky_api:
     path: bricks/sky_api
+  sky_dao:
+    path: bricks/sky_dao
   sky_feature:
     path: bricks/sky_feature
