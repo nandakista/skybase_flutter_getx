@@ -66,6 +66,7 @@ class LocaleHelper {
         return const Locale('id');
       }
     } else {
+      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "en");
       return const Locale('en');
     }
   }
