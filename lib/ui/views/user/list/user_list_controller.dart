@@ -1,5 +1,8 @@
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/helper/dialog_helper.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:skybase/data/models/user/user.dart';
 import 'package:skybase/data/repositories/user/user_repository.dart';
 import 'package:skybase/ui/views/user/detail/user_detail_view.dart';
@@ -8,38 +11,39 @@ class UserListController extends GetxController {
   final UserRepository repository;
   UserListController({required this.repository});
 
-  final RxList<User> listUser = <User>[].obs;
-  final isLoading = false.obs;
-  showLoading() => isLoading.toggle();
-  hideLoading() => isLoading.toggle();
+  // Pagination
+  int perPage = 10;
+  int page = 1;
+  final pagingController = PagingController<int, User>(firstPageKey: 0);
 
   @override
-  void onReady() async {
-    await getUser();
+  void onInit() {
+    pagingController.addPageRequestListener((page) {
+      getUser();
+    });
+    super.onInit();
+  }
+
+  refreshPage() {
+    page = 1;
+    getUser();
   }
 
   getUser() async {
-    showLoading();
     try {
-      await repository.getUsers().then((data) {
-        hideLoading();
-        listUser.value = data;
+      await repository.getUsers(page: page, perPage: perPage).then((data) {
+        log('Request page = $page, per_page = $perPage');
+        final isLastPage = data.length < perPage;
+        if (isLastPage) {
+          pagingController.appendLastPage(data);
+        } else {
+          final nextPageKey = page++;
+          pagingController.appendPage(data, nextPageKey);
+        }
       });
     } catch (e) {
-      hideLoading();
-      AppDialog.show(
-        typeDialog: TypeDialog.RETRY,
-        message: e.toString(),
-        dismissible: false,
-        onCancel: () {
-          AppDialog.close();
-          Get.back();
-        },
-        onPress: () {
-          AppDialog.close();
-          getUser();
-        },
-      );
+      log('Error : $e');
+      pagingController.error = e;
     }
   }
 
@@ -47,4 +51,3 @@ class UserListController extends GetxController {
     Get.toNamed(UserDetailView.route, arguments: user);
   }
 }
-

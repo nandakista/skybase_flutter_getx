@@ -5,7 +5,6 @@ import 'package:skybase/core/themes/app_style.dart';
 ///  Default button on this project with primary color.
 ///  Change it as needed.
 class CustomButton extends StatelessWidget {
-
   /// Background color of button. Default value is primary color.
   final Color color;
 
@@ -43,6 +42,10 @@ class CustomButton extends StatelessWidget {
   final FontWeight? fontWeight;
 
   final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
+
+  /// Width of button
+  final bool wrapContent;
 
   const CustomButton({
     Key? key,
@@ -52,19 +55,19 @@ class CustomButton extends StatelessWidget {
     this.color = AppColors.primary,
     this.iconColor = Colors.white,
     this.textColor = Colors.white,
-    this.height = 70,
+    this.height = 55,
     this.width = double.infinity,
     this.fontSize,
     this.fontWeight,
     this.borderRadius = 8,
     this.elevation = 1,
-    this.margin,
+    this.margin, this.padding, this.wrapContent = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
+      width: (wrapContent) ? null : width,
       height: height,
       padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
       margin: margin,
@@ -82,20 +85,21 @@ class CustomButton extends StatelessWidget {
           padding: (icon != null)
               ? const EdgeInsets.symmetric(horizontal: 10, vertical: 10)
               : const EdgeInsets.fromLTRB(0, 10, 10, 10),
-          minimumSize: Size(MediaQuery.of(context).size.width, 0),
           primary: color,
-          fixedSize: Size(width ?? MediaQuery.of(context).size.width, height!),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius!),
           ),
         ),
-        label: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: AppStyle.subtitle4.copyWith(
-            fontSize: fontSize,
-            fontWeight: fontWeight,
-            color: textColor,
+        label: Container(
+          padding: padding,
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: AppStyle.subtitle4.copyWith(
+              fontSize: fontSize,
+              fontWeight: fontWeight,
+              color: textColor,
+            ),
           ),
         ),
       ),

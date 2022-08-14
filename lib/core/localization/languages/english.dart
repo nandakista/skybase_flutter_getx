@@ -43,4 +43,8 @@ const Map<String, String> en = {
   International.errGeneralFormal : 'Something when wrong',
   International.errGeneralNonFormal : 'Oops something when wrong...',
   International.validSize : 'File size cannot bigger than 2MB.',
+  International.tapRetry : 'Tap to try again.',
+  International.maxItem : 'All items have been loaded.',
+  International.emptyListTitle : 'Your list is empty!',
+  International.emptyListSubtitle : 'Sorry, list data is empty. Maybe go back latter',
 };

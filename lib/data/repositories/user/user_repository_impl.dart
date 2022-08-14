@@ -13,10 +13,10 @@ class UserRepositoryImpl extends UserRepository {
   String tag = 'User Repository';
 
   @override
-  Future<List<User>> getUsers() async {
+  Future<List<User>> getUsers({required int page, required int perPage}) async {
     try {
       if (dao.boxIsEmpty()) {
-        final _res = await _getListUserApi();
+        final _res = await _getListUserApi(page: page, perPage: perPage);
         return _res;
       } else {
         List<User> _cache = dao.getAll();
@@ -55,8 +55,8 @@ class UserRepositoryImpl extends UserRepository {
     return _res;
   }
 
-  Future<List<User>> _getListUserApi() async {
-    final _res = await apiService.getUsers();
+  Future<List<User>> _getListUserApi({int page = 1, int perPage = 10}) async {
+    final _res = await apiService.getUsers(page: page, perPage: perPage);
     dao.insertAll(_res);
     return _res;
   }

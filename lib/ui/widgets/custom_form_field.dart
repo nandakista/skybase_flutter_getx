@@ -8,7 +8,7 @@ class CustomFieldForm extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final IconData? icon;
-  final IconData? endIcon;
+  final Widget? endIcon;
   final int? maxLength, maxLines;
   final VoidCallback? onPress;
   final String? Function(String?)? validator;
@@ -83,7 +83,7 @@ class CustomFieldForm extends StatelessWidget {
           border: InputBorder.none,
           prefixIcon: (icon != null) ? Icon(icon) : null,
           suffixIcon: (endText == null)
-              ? Icon(endIcon)
+              ? endIcon
               : Align(
             widthFactor: 1,
             alignment: Alignment.centerRight,

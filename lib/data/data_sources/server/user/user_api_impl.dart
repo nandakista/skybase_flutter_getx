@@ -11,8 +11,8 @@ class UserApiImpl extends UserApi {
 
   @override
   Future<List<User>> getUsers({
-    int page = 1,
-    int perPage = 10,
+    required int page,
+    required int perPage,
   }) async {
     try {
       var _url = '/search/users?';

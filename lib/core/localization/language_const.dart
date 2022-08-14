@@ -44,4 +44,8 @@ class International {
   static const String loginSubtitle = 'txt_login_subtitle';
   static const String dontHaveAccount = 'txt_dont_have_account';
   static const String validSize = 'txt_valid_size';
+  static const String tapRetry = 'txt_tap_to_retry';
+  static const String maxItem = 'txt_max_item';
+  static const String emptyListTitle = 'txt_empty_list_title';
+  static const String emptyListSubtitle = 'txt_empty_list_subtitle';
 }

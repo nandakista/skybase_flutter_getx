@@ -20,7 +20,7 @@ Future<Response> sendRequest({
   required String url,
   Object? body,
   required RequestMethod requestMethod,
-  bool useToken = false,
+  bool useToken = true,
   String? contentType = Headers.jsonContentType,
 }) async {
   _tokenManager(useToken);
@@ -83,8 +83,8 @@ void _tokenManager(bool useToken) async {
   DioClient.setInterceptor();
   String? token = await secureStorage.getToken();
   if (useToken) {
-    headers[HttpHeaders.authorizationHeader] = token.toString();
-    // headers[HttpHeaders.authorizationHeader] = 'token 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';
+    // headers[HttpHeaders.authorizationHeader] = token.toString();
+    headers[HttpHeaders.authorizationHeader] = 'token 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';
   } else {
     headers.clear();
   }

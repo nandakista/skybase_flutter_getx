@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:skybase/core/themes/app_colors.dart';
@@ -42,11 +44,19 @@ extension DarkMode on BuildContext {
 class AppStatusBar {
   static set({
     required Brightness brightness,
-    Color color = AppColors.primary,
+    Color color = AppColors.primaryVariant,
   }) {
+    Brightness _iconBrightness;
+    if (Platform.isIOS) {
+      (brightness == Brightness.dark)
+          ? _iconBrightness = Brightness.light
+          : _iconBrightness = Brightness.dark;
+    } else {
+      _iconBrightness = brightness;
+    }
     return SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarBrightness: brightness,
+        statusBarBrightness: _iconBrightness,
         statusBarColor: color,
       ),
     );

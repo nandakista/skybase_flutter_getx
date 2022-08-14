@@ -43,4 +43,8 @@ const Map<String, String> id = {
   International.errGeneralFormal : 'Terjadi kesalahan',
   International.errGeneralNonFormal : 'Oops terjadi kesalahan...',
   International.validSize : 'Ukuran file tidak boleh melebihi 2MB.',
+  International.tapRetry : 'Tap untuk coba lagi',
+  International.maxItem : 'Semua item telah dimuat',
+  International.emptyListTitle : 'Data masih kosong !',
+  International.emptyListSubtitle : 'Maaf tidak ada data yang dapat ditampilkan',
 };

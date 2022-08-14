@@ -36,8 +36,12 @@ class AuthManager extends GetxController {
 
   @override
   void onReady() async {
-    ever(authState, authChanged);
-    authChanged(state);
+    // ever(authState, authChanged);
+    // authChanged(state);
+    Timer(
+      const Duration(seconds: 2),
+          () => Get.offAllNamed(MainNavView.route),
+    );
     super.onReady();
   }
 
