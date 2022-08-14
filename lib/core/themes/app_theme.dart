@@ -44,7 +44,7 @@ extension DarkMode on BuildContext {
 class AppStatusBar {
   static set({
     required Brightness brightness,
-    Color color = AppColors.primaryVariant,
+    Color color = AppColors.primary,
   }) {
     Brightness _iconBrightness;
     if (Platform.isIOS) {

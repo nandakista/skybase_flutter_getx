@@ -47,7 +47,6 @@ abstract class CustomAppBar {
       backgroundColor: backgroundColor,
       titleStyle: TextStyle(color: textColor),
       iconColor: Colors.white,
-      elevation: 8,
     );
   }
 

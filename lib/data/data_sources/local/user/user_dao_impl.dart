@@ -38,16 +38,19 @@ class UserDaoImpl implements UserDao {
     for (var i = 0; i < box.length; i++) {
       _users.add(box.getAt(i));
     }
-    log('------Dao get all data------');
     return _users;
   }
 
   @override
   void deleteAll(List<User> users) {
     box.deleteAll(users);
-    log('------Dao delete all data------');
   }
 
   @override
   void clear() => box.clear();
+
+  @override
+  void delete(User user) {
+    box.delete(user);
+  }
 }
