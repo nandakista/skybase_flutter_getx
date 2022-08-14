@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/data/repositories/{{name}}/{{name}}_repository.dart';
 

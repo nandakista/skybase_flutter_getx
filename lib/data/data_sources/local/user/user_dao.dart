@@ -7,5 +7,6 @@ abstract class UserDao {
   void insert(User user);
   void insertAll(List<User> users);
   List<User> getAll();
-  void deleteAll();
+  void clear();
+  void deleteAll(List<User> users);
 }

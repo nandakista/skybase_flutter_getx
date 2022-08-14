@@ -9,15 +9,15 @@ environment:
 vars:
   name:
     type: string
-    description: Enter the name of your feature. [lowercase]
-    prompt: Feature Name [lowercase] =
+    description: Enter the name of your feature. [snake_case]
+    prompt: Feature Name [snake_case] =
 
   api:
     type: string
-    description: Enter the name of your api datasource. [lowercase]
-    prompt: ApiService Name [lowercase] =
+    description: Enter the name of your api datasource. [snake_case]
+    prompt: ApiService Name [snake_case] =
 
   dao:
     type: string
-    description: Enter the name of your dao. [lowercase]
-    prompt: Dao Name [lowercase] =
+    description: Enter the name of your dao. [snake_case]
+    prompt: Dao Name [snake_case] =

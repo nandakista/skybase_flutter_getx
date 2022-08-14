@@ -57,7 +57,6 @@ class AuthManager extends GetxController {
         );
         break;
       case AppType.UNAUTHENTICATED:
-        clearData();
         Get.offAllNamed(LoginView.route);
         break;
       case AppType.AUTHENTICATED:
@@ -155,12 +154,6 @@ class AuthManager extends GetxController {
     getStorage.save(GetStorageKey.USERS, user.toJson());
     await secureStorage.setToken(value: token);
     await secureStorage.setRefreshToken(value: refreshToken);
-  }
-
-  void clearData() {
-    if (getStorage.has(GetStorageKey.USERS)) {
-      getStorage.delete(GetStorageKey.USERS);
-    }
   }
 
   /// Get User data from GetStorage

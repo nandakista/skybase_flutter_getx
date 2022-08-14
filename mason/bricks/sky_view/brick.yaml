@@ -9,5 +9,5 @@ environment:
 vars:
   name:
     type: string
-    description: Enter the name of your view. [lowercase]
-    prompt: View Name [lowercase] =
+    description: Enter the name of your view. [snake_case]
+    prompt: View Name [snake_case] =

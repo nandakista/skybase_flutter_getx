@@ -9,5 +9,5 @@ environment:
 vars:
   name:
     type: string
-    description: Enter the name of your dao. [lowercase]
-    prompt: Dao Name [lowercase] =
+    description: Enter the name of your dao. [snake_case]
+    prompt: Dao Name [snake_case] =

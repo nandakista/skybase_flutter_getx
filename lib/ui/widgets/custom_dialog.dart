@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/ui/widgets/basic_widget.dart';
 import 'package:skybase/ui/widgets/custom_button.dart';
 
 class CustomDialog extends StatelessWidget {
@@ -34,7 +34,7 @@ class CustomDialog extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                         color:
-                            (Get.isDarkMode) ? AppColors.primary : Colors.black,
+                        (Get.isDarkMode) ? AppColors.primary : Colors.black,
                         offset: const Offset(0.0, 0.0),
                         blurRadius: 10.0)
                   ],
@@ -67,7 +67,7 @@ class LoadingDialog extends StatelessWidget {
             borderRadius: BorderRadius.circular(17),
             boxShadow: [
               BoxShadow(
-                  color: (Get.isDarkMode) ? AppColors.primary : Colors.black26,
+                  color: (!Get.isDarkMode) ? AppColors.primary : Colors.black26,
                   offset: const Offset(0.0, 2.0),
                   blurRadius: 10.0)
             ]),
@@ -78,7 +78,7 @@ class LoadingDialog extends StatelessWidget {
               'Loading',
               style: AppStyle.title4.copyWith(color: Colors.white),
             ),
-            const SpinKitThreeBounce(size: 35, color: Colors.blue),
+            platformLoadingIndicator(),
           ],
         ),
       ),
@@ -170,6 +170,24 @@ class DialogAlert extends StatelessWidget {
         backgroundColorHeader: Colors.red[100],
       );
 
+  factory DialogAlert.permission({
+    required String title,
+    required String confirmText,
+    required String description,
+    Widget? header,
+    required VoidCallback onConfirm,
+    required VoidCallback onCancel,
+  }) =>
+      DialogAlert(
+        title: title,
+        description: description,
+        header: Lottie.asset('assets/anim/anim_warning.json', repeat: false),
+        onConfirm: onConfirm,
+        confirmText: confirmText,
+        backgroundColorHeader: Colors.orangeAccent,
+        confirmColor: Colors.blue,
+      );
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -189,7 +207,7 @@ class DialogAlert extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                         color:
-                            (Get.isDarkMode) ? AppColors.primary : Colors.black,
+                        (Get.isDarkMode) ? AppColors.primary : Colors.black,
                         offset: const Offset(0.0, 0.0),
                         blurRadius: 10.0)
                   ]),

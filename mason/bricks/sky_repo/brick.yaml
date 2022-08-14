@@ -9,5 +9,5 @@ environment:
 vars:
   name:
     type: string
-    description: Enter the name of your repository. [lowercase]
-    prompt: Repo Name [lowercase] =
+    description: Enter the name of your repository. [snake_case]
+    prompt: Repo Name [snake_case] =

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:skybase/core/database/hive/hive_box.dart';
@@ -36,9 +38,16 @@ class UserDaoImpl implements UserDao {
     for (var i = 0; i < box.length; i++) {
       _users.add(box.getAt(i));
     }
+    log('------Dao get all data------');
     return _users;
   }
 
   @override
-  void deleteAll() => box.clear();
+  void deleteAll(List<User> users) {
+    box.deleteAll(users);
+    log('------Dao delete all data------');
+  }
+
+  @override
+  void clear() => box.clear();
 }

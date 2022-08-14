@@ -30,6 +30,7 @@
 .pub-cache/
 .pub/
 /build/
+/mason/.mason
 TOKEN.md
 
 # Web related
