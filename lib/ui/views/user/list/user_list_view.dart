@@ -39,43 +39,6 @@ class UserListView extends GetView<UserListController> {
           );
         },
       ),
-
-      // body: RefreshIndicator(
-      //   onRefresh: () => Future.sync(
-      //     () => controller.pagingController.refresh(),
-      //   ),
-      //   child: PagedListView<int, User>(
-      //     pagingController: controller.pagingController,
-      //     builderDelegate: PagedChildBuilderDelegate<User>(
-      //       animateTransitions: true,
-      //       firstPageProgressIndicatorBuilder: (ctx) => const ShimmerList(),
-      //       noItemsFoundIndicatorBuilder: (ctx) => const PaginationEmptyView(),
-      //       firstPageErrorIndicatorBuilder: (ctx) => PaginationErrorView(
-      //         controller: controller.pagingController,
-      //       ),
-      //       noMoreItemsIndicatorBuilder: (ctx) => const PaginationMaxItemView(),
-      //       newPageErrorIndicatorBuilder: (ctx) =>
-      //           const PaginationErrorLoadView(),
-      //       itemBuilder: (context, user, index) {
-      //         return ListTile(
-      //           onTap: () => controller.onChooseUser(user: user),
-      //           leading: CircleAvatar(
-      //             radius: 30,
-      //             backgroundImage: NetworkImage(
-      //               '${user.avatarUrl}&s=200',
-      //               scale: 0.1,
-      //             ),
-      //           ),
-      //           title: Text(user.username.toString()),
-      //           subtitle: Text(
-      //             user.gitUrl.toString(),
-      //             style: AppStyle.small,
-      //           ),
-      //         );
-      //       },
-      //     ),
-      //   ),
-      // ),
     );
   }
 }

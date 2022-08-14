@@ -31,7 +31,7 @@
 .pub/
 /build/
 /mason/.mason
-TOKEN.md
+/lib/dev_token.dart
 
 # Web related
 lib/generated_plugin_registrant.dart

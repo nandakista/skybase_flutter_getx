@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/network/api_config.dart';
 import 'package:skybase/core/network/api_exception.dart';
+import 'package:skybase/dev_token.dart';
 
 // ignore: constant_identifier_names
 enum RequestMethod { GET, POST, PATCH, PUT, DELETE }
@@ -84,7 +85,7 @@ void _tokenManager(bool useToken) async {
   String? token = await secureStorage.getToken();
   if (useToken) {
     // headers[HttpHeaders.authorizationHeader] = token.toString();
-    headers[HttpHeaders.authorizationHeader] = 'token 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';
+    headers[HttpHeaders.authorizationHeader] = 'token $devToken';
   } else {
     headers.clear();
   }
