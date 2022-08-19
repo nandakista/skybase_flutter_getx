@@ -225,7 +225,7 @@ class _CameraModuleState extends State<CameraModule>
 
   Widget _cameraPreview() {
     if (_cameraController == null || !_cameraController!.value.isInitialized) {
-      return loadingIndicator;
+      return platformLoadingIndicator();
     }
     var camera = _cameraController!.value;
     final size = MediaQuery.of(context).size;
@@ -241,8 +241,8 @@ class _CameraModuleState extends State<CameraModule>
             children: [
               Container(
                 height: (MediaQuery.of(context).size.height -
-                            MediaQuery.of(context).size.width) /
-                        2 -
+                    MediaQuery.of(context).size.width) /
+                    2 -
                     15,
                 color: Colors.black.withOpacity(0.3),
               ),
@@ -260,8 +260,8 @@ class _CameraModuleState extends State<CameraModule>
               ),
               Container(
                 height: (MediaQuery.of(context).size.height -
-                            MediaQuery.of(context).size.width) /
-                        2 -
+                    MediaQuery.of(context).size.width) /
+                    2 -
                     15,
                 color: Colors.black.withOpacity(0.3),
               ),
@@ -386,7 +386,7 @@ class _CameraModuleState extends State<CameraModule>
 
   Future<File> flipSelfieImage(XFile image) async {
     final img.Image? capturedImage =
-        img.decodeImage(await File(image.path).readAsBytes());
+    img.decodeImage(await File(image.path).readAsBytes());
 
     // final img.Image orientedImage = img.flipHorizontal(capturedImage!);
 
@@ -394,7 +394,7 @@ class _CameraModuleState extends State<CameraModule>
     final img.Image orientedImage = img.flipHorizontal(croppedImage);
 
     File flipedImage =
-        await File(image.path).writeAsBytes(img.encodeJpg(orientedImage));
+    await File(image.path).writeAsBytes(img.encodeJpg(orientedImage));
     return flipedImage;
   }
 
@@ -414,9 +414,12 @@ class _CameraModuleState extends State<CameraModule>
         alignment: Alignment.bottomRight,
         child: CircleIcon(
           onPressed: () => onSwitchCamera(),
-          color: Colors.white,
           backgroundColor: Colors.black54.withOpacity(0.8),
-          icon: getCameraLensIcon(lensDirection),
+          icon: Icon(
+            getCameraLensIcon(lensDirection),
+            size: 30,
+            color: Colors.white,
+          ),
         ),
       ),
     );
@@ -455,9 +458,12 @@ class _CameraModuleState extends State<CameraModule>
       margin: const EdgeInsets.only(right: 10),
       child: CircleIcon(
         onPressed: () => onFlashModeButtonPressed(),
-        color: Colors.white,
         backgroundColor: Colors.black54.withOpacity(0),
-        icon: Icons.flash_on,
+        icon: const Icon(
+          Icons.flash_on,
+          size: 30,
+          color: Colors.white,
+        ),
       ),
     );
   }

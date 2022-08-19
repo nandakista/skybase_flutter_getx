@@ -3,13 +3,7 @@ import 'dart:io';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
 import 'package:skybase/core/app/app_constant.dart';
-import 'package:skybase/core/themes/app_colors.dart';
-
-Widget loadingIndicator =
-    const SpinKitThreeBounce(size: 45, color: Colors.blue);
 
 /// Loading widget based on platform (android or iOS)
 Widget platformLoadingIndicator() {
@@ -45,17 +39,15 @@ class DoubleBack extends StatelessWidget {
 
 class CircleIcon extends StatelessWidget {
   final VoidCallback? onPressed;
-  final IconData? icon;
-  final double? iconSize, size;
-  final Color? backgroundColor, color, splashColor;
+  final Widget icon;
+  final double? size;
+  final Color? backgroundColor, splashColor;
 
   const CircleIcon({
     Key? key,
     this.onPressed,
     required this.icon,
     this.backgroundColor = Colors.black,
-    this.color = Colors.white,
-    this.iconSize = 30,
     this.size = 56,
     this.splashColor = Colors.grey,
   }) : super(key: key);
@@ -71,11 +63,7 @@ class CircleIcon extends StatelessWidget {
           child: IconButton(
             onPressed: onPressed,
             splashColor: splashColor,
-            icon: Icon(
-              icon,
-              size: iconSize,
-              color: color,
-            ),
+            icon: icon,
           ),
         ),
       ),
@@ -87,56 +75,18 @@ class CircleIcon extends StatelessWidget {
 /// not required when your page is list
 class ContentWrapper extends StatelessWidget {
   final Widget? child;
-  const ContentWrapper({Key? key, required this.child}) : super(key: key);
+  final bool top;
+  const ContentWrapper({Key? key, required this.child, this.top = false,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.fromLTRB(
+        margin: EdgeInsets.fromLTRB(
           AppConst.defaultMargin,
-          0,
+          top ? AppConst.defaultMargin : 0,
           AppConst.defaultMargin,
           AppConst.defaultMargin,
         ),
         child: child);
-  }
-}
-
-class MyBox extends StatelessWidget {
-  final Widget? child;
-  final Color? color;
-  final EdgeInsets? padding;
-  const MyBox({Key? key, this.child, this.padding, this.color = Colors.white})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: padding,
-      color: (Get.isDarkMode) ? AppColors.baseDark : color,
-      child: child,
-    );
-  }
-}
-
-class Countdown extends AnimatedWidget {
-  Countdown({Key? key, required this.animation})
-      : super(key: key, listenable: animation);
-  Animation<int> animation;
-
-  @override
-  build(BuildContext context) {
-    Duration clockTimer = Duration(seconds: animation.value);
-
-    String timerText =
-        '${clockTimer.inMinutes.remainder(60).toString()}:${(clockTimer.inSeconds.remainder(60) % 60).toString().padLeft(2, '0')}';
-
-    return Text(
-      timerText,
-      style: TextStyle(
-        fontSize: 110,
-        color: Theme.of(context).primaryColor,
-      ),
-    );
   }
 }

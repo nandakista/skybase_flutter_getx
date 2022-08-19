@@ -18,7 +18,7 @@ class DateTimeHelper {
   });
 
   String? format() {
-    return formatDate(pattern: 'dd MMMM y');
+    return formatDate(pattern: 'dd MM yyyy - HH:mm:ss');
   }
 
   String? format2() {

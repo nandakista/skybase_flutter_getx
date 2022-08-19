@@ -47,10 +47,12 @@ class PreviewCameraPage extends StatelessWidget {
                     children: [
                       CircleIcon(
                         onPressed: () => Get.back(),
-                        // backgroundColor: Colors.black54.withOpacity(0.8),
                         backgroundColor: Colors.white,
-                        color: Colors.black,
-                        icon: Icons.close,
+                        icon: const Icon(
+                          Icons.close,
+                          size: 30,
+                          color: Colors.black,
+                        ),
                       ),
                       CircleIcon(
                         onPressed: () async {
@@ -59,10 +61,12 @@ class PreviewCameraPage extends StatelessWidget {
                           }
                           Get.back(result: File(imageFile.path));
                         },
-                        // backgroundColor: Colors.black54.withOpacity(0.8),
                         backgroundColor: Colors.white,
-                        color: Colors.black,
-                        icon: Icons.check,
+                        icon: const Icon(
+                          Icons.check,
+                          size: 30,
+                          color: Colors.black,
+                        ),
                       ),
                     ],
                   ),

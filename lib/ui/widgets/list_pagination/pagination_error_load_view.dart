@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/localization/language_const.dart';
-import 'package:skybase/core/themes/app_style.dart';
 
 class PaginationErrorLoadView extends StatelessWidget {
   const PaginationErrorLoadView({Key? key}) : super(key: key);

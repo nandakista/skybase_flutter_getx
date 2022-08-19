@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skybase/core/base/base_controller.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/data/models/user/user.dart';
 import 'package:skybase/data/repositories/user/user_repository.dart';
 
-class UserDetailController extends GetxController {
+class UserDetailController extends BaseController {
   final UserRepository repository;
   UserDetailController({required this.repository});
 
@@ -14,10 +15,6 @@ class UserDetailController extends GetxController {
   final detailInfoWidget = Rxn<Size>();
 
   final user = Rxn<User>();
-
-  RxBool isLoading = false.obs;
-  showLoading() => isLoading.toggle();
-  hideLoading() => isLoading.toggle();
 
   @override
   void onInit() {

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:skybase/ui/widgets/pagination/pagination_empty_view.dart';
-import 'package:skybase/ui/widgets/pagination/pagination_error_load_view.dart';
-import 'package:skybase/ui/widgets/pagination/pagination_error_view.dart';
-import 'package:skybase/ui/widgets/pagination/pagination_max_item_view.dart';
+import 'package:skybase/ui/widgets/list_pagination/list_empty_view.dart';
+import 'package:skybase/ui/widgets/list_pagination/pagination_error_load_view.dart';
+import 'package:skybase/ui/widgets/list_pagination/pagination_error_view.dart';
+import 'package:skybase/ui/widgets/list_pagination/pagination_max_item_view.dart';
 import 'package:skybase/ui/widgets/shimmer_list.dart';
 
 typedef ItemWidgetBuilder<ItemType> = Widget Function(
-    BuildContext context,
-    ItemType item,
-    int index,
-    );
+  BuildContext context,
+  ItemType item,
+  int index,
+);
 
-class PaginationList<ItemType> extends StatelessWidget {
-  const PaginationList({
+class SkyPaginationView<ItemType> extends StatelessWidget {
+  const SkyPaginationView({
     Key? key,
     required this.pagingController,
     required this.itemBuilder,
@@ -26,7 +26,6 @@ class PaginationList<ItemType> extends StatelessWidget {
   }) : super(key: key);
 
   final PagingController<int, ItemType> pagingController;
-  // final Widget Function(BuildContext, T, int) itemBuilder;
 
   // final ItemWidgetBuilder
   final ItemWidgetBuilder<ItemType> itemBuilder;
@@ -54,7 +53,6 @@ class PaginationList<ItemType> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      // onRefresh: () => Future.sync(() => pagingController.refresh()),
       onRefresh: () => Future.sync(onRefresh),
       child: PagedListView<int, ItemType>(
         pagingController: pagingController,
@@ -63,7 +61,7 @@ class PaginationList<ItemType> extends StatelessWidget {
           firstPageProgressIndicatorBuilder: (ctx) =>
               loadingView ?? const ShimmerList(),
           noItemsFoundIndicatorBuilder: (ctx) =>
-              emptyView ?? const PaginationEmptyView(),
+              emptyView ?? const ListEmptyView(),
           firstPageErrorIndicatorBuilder: (ctx) =>
               errorView ?? PaginationErrorView(controller: pagingController),
           noMoreItemsIndicatorBuilder: (ctx) =>

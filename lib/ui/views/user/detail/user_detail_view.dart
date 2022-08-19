@@ -8,9 +8,10 @@ import 'package:skybase/ui/views/user/detail/component/follower_tab_view.dart';
 import 'package:skybase/ui/views/user/detail/component/following_tab_view.dart';
 import 'package:skybase/ui/views/user/detail/component/repo_tab_view.dart';
 import 'package:skybase/ui/views/user/detail/user_detail_controller.dart';
+import 'package:skybase/ui/widgets/base/sky_view.dart';
 import 'package:skybase/ui/widgets/basic_widget.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
-import 'package:skybase/ui/widgets/appbar/custom_appbar.dart';
+import 'package:skybase/ui/widgets/custom_appbar.dart';
 
 class UserDetailView extends GetView<UserDetailController> {
   static const String route = '/user-detail';
@@ -22,17 +23,20 @@ class UserDetailView extends GetView<UserDetailController> {
       child: Scaffold(
         appBar: CustomAppBar.primary(title: controller.user.value?.username),
         body: SafeArea(
-          child: Obx(() => controller.isLoading.isTrue
-              ? platformLoadingIndicator()
-              : Obx(
-                  () => ListView(
-                    children: [
-                      _buildHeader(controller.user.value),
-                      _buildDetailInfo(controller.user.value),
-                      _tabComponent(),
-                    ],
-                  ),
-                )),
+          child: Obx(
+            () => SkyView(
+              loadingEnabled: controller.isLoading.isTrue,
+              errorEnabled: controller.user.value == null,
+              onRetry: () => controller.getDetailUser(),
+              child: Column(
+                children: [
+                  _buildHeader(controller.user.value),
+                  _buildDetailInfo(controller.user.value),
+                  _tabComponent(),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

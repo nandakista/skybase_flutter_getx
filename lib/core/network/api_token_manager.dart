@@ -40,7 +40,8 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
          super.onError(err, handler);
         break;
       case TokenType.ACCESS_TOKEN:
-        _handleAccessToken(err, handler);
+        super.onError(err, handler);
+        // _handleAccessToken(err, handler);
         break;
       case TokenType.ACCESS_REFRESH_TOKEN:
         _handleRefreshToken(dio, err, handler);

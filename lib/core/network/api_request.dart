@@ -24,7 +24,7 @@ Future<Response> sendRequest({
   bool useToken = true,
   String? contentType = Headers.jsonContentType,
 }) async {
-  _tokenManager(useToken);
+  await _tokenManager(useToken);
   try {
     switch (requestMethod) {
       case RequestMethod.POST:
@@ -79,12 +79,10 @@ Future<Response> sendRequest({
   }
 }
 
-void _tokenManager(bool useToken) async {
-  final secureStorage = SecureStorageManager.find;
+Future<void> _tokenManager(bool useToken) async {
   DioClient.setInterceptor();
-  String? token = await secureStorage.getToken();
+  String? token = await SecureStorageManager.find.getToken();
   if (useToken) {
-    // headers[HttpHeaders.authorizationHeader] = token.toString();
     headers[HttpHeaders.authorizationHeader] = 'token $gitToken';
   } else {
     headers.clear();

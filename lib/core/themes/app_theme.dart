@@ -10,6 +10,15 @@ final ThemeData lightTheme = ThemeData(
   indicatorColor: AppColors.accent,
   fontFamily: "Poppins",
   brightness: Brightness.light,
+  bottomSheetTheme: const BottomSheetThemeData(
+    elevation: 8,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24),
+        topRight: Radius.circular(24),
+      ),
+    ),
+  ),
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
@@ -25,6 +34,15 @@ final ThemeData darkTheme = ThemeData(
   indicatorColor: AppColors.accent,
   fontFamily: "Poppins",
   brightness: Brightness.dark,
+  bottomSheetTheme: const BottomSheetThemeData(
+    elevation: 8,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24),
+        topRight: Radius.circular(24),
+      ),
+    ),
+  ),
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,

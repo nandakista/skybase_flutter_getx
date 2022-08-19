@@ -1,29 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/localization/language_const.dart';
 
-class PaginationEmptyView extends StatelessWidget {
-  const PaginationEmptyView({Key? key}) : super(key: key);
+class ListEmptyView extends StatelessWidget {
+  const ListEmptyView({
+    Key? key,
+    this.emptyImage,
+    this.emptyTitle,
+    this.emptySubtitle,
+    this.isScrollable = true,
+  }) : super(key: key);
+
+  final Widget? emptyImage;
+  final String? emptyTitle;
+  final String? emptySubtitle;
+  final bool isScrollable;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
-        physics: const BouncingScrollPhysics(),
+        physics: (isScrollable)
+            ? const NeverScrollableScrollPhysics()
+            : const BouncingScrollPhysics(),
         child: Column(
           children: [
-            SvgPicture.asset('assets/images/img_search_no_result.svg'),
+            emptyImage ??
+                Image.asset('assets/images/img_empty.png'),
             const SizedBox(height: 24),
             Text(
-              International.emptyListTitle.tr,
+              emptyTitle ?? International.emptyListTitle.tr,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 12),
             Text(
-              International.emptyListSubtitle.tr,
+              emptySubtitle ?? International.emptyListSubtitle.tr,
               textAlign: TextAlign.center,
             ),
           ],

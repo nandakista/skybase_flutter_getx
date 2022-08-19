@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/ui/widgets/appbar/base_appbar.dart';
+import 'package:skybase/ui/widgets/base/base_appbar.dart';
 
 abstract class CustomAppBar {
   /// Use [CustomAppBar.primary] as a default AppBar globally.
   /// * Can edited for specific requirement.
   static PreferredSizeWidget primary({
-    /// test
     String? title,
     Color? backgroundColor,
     Color? textColor,
@@ -18,13 +18,10 @@ abstract class CustomAppBar {
   }) {
     return BaseAppBar(
       title: title,
-      centerTitle: true,
       action: action,
-      backgroundColor: Colors.white,
-      titleStyle: AppStyle.headline4.copyWith(
-        color: textColor,
-        fontWeight: FontWeight.w500,
-      ),
+      backgroundColor: Theme.of(Get.context!).scaffoldBackgroundColor,
+      titleStyle: AppStyle.subtitle4.copyWith(color: AppColors.primary),
+      elevation: 0,
       iconColor: AppColors.systemDarkGrey,
     );
   }

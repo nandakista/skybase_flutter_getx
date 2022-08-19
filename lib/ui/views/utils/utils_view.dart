@@ -88,8 +88,7 @@ class _UtilsViewState extends State<UtilsView> {
                 ),
                 CustomButton(
                   onPressed: () {
-                    BottomSheetHelper.show(
-                      context,
+                    BottomSheetHelper.basic(
                       child: DatePickerWidget.range(
                         onSelectionChanged: (selected) {},
                       ),

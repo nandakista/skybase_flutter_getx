@@ -14,6 +14,7 @@ class AppStyle {
 
   static TextStyle small = const TextStyle(fontSize: 13);
   static TextStyle normalSmall = const TextStyle(fontSize: 11);
+  static TextStyle superSmall = const TextStyle(fontSize: 9);
 
   static TextStyle headline1 = const TextStyle(
       fontSize: 34, fontWeight: FontWeight.w800, color: AppColors.primary);
