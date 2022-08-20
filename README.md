@@ -10,43 +10,51 @@ A Flutter Base project that developed with :
 
 ## Initial Setup
 
+Please follow this instruction to setup codebase.
+
 ### Install Mason
+Run this command if you haven't install mason
 
     dart pub global activate mason_cli
 
-### Create Shortcut for Mason
+### Get Sky Bricks Config
+Get sky bricks from mason cofig by this command
+
+    cd mason && mason get
+
+### Set Sky Brick Globally
 Open terminal and run this command in terminal to set alias for mason CLI
 
-    alias sky_create_view="cd mason ; mason make sky_view -o ../lib ; cd .."
+    mason add -g sky_view --path mason/bricks/sky_view
     
-    alias sky_create_repo="cd mason ; mason make sky_repo -o ../lib ; cd .."
+    mason add -g sky_repo --path mason/bricks/sky_repo
     
-    alias sky_create_api="cd mason ; mason make sky_api -o ../lib ; cd .."
+    mason add -g sky_api --path mason/bricks/sky_api
 
-    alias sky_create_dao="cd mason ; mason make sky_dao -o ../lib ; cd .."
+    mason add -g sky_dao --path mason/bricks/sky_dao
     
-    alias sky_create_feature="cd mason ; mason make sky_feature -o ../lib ; cd .."
+    mason add -g sky_feature --path mason/bricks/sky_feature
 
 ### Mason CLI usage
 Create full feature :
 
-    sky_create_feature
+    mason make sky_feature
 
 Create View/Page :
 
-    sky_create_view
+    mason make sky_view
 
 Create Repository :
 
-    sky_create_repo
+    mason make sky_repo
 
 Create Datasource (ApiService) :
 
-    sky_create_api
+    mason make sky_api
 
 Create Dao :
 
-    sky_create_dao
+    mason make sky_dao
 
 ## Reference
 - [Clean Architecture](https://resocoder.com/2019/08/27/flutter-tdd-clean-architecture-course-1-explanation-project-structure/)
