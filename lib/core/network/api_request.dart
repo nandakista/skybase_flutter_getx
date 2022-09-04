@@ -102,13 +102,10 @@ Future<void> _tokenManager(bool useToken) async {
 Future<Response> _safeFetch(Future<Response> Function() tryFetch) async {
   try {
     final response = await tryFetch();
+    // return ApiResponse.fromJson(response.data);
     return response;
   } on DioError catch (e) {
-    throw DioException.message(e);
-  } on SocketException catch (e) {
-    throw SocketException(e.toString());
-  } on FormatException catch (_) {
-    throw const FormatException('Unable to process the data');
+    throw NetworkException.getErrorException(e);
   } catch (e) {
     rethrow;
   }
