@@ -1,5 +1,9 @@
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:dio/dio.dart';
+import 'package:skybase/core/app/app_config.dart';
+import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/network/api_request.dart';
 import 'package:skybase/core/network/api_response.dart';
 import 'package:skybase/core/network/api_url.dart';
@@ -39,14 +43,19 @@ class AuthApiImpl implements AuthApi {
     required String token,
   }) async {
     try {
-      final response = await sendRequest(
-        url: ApiUrl.verifyToken,
-        requestMethod: RequestMethod.POST,
-        useToken: true,
-        body: {
-          'uid': userId,
-          'token': token,
-        },
+      String? token = await SecureStorageManager.find.getToken();
+      String url = AppConfig.find.get.baseUrl;
+      url += ApiUrl.verifyToken;
+      final response = await Dio().get(
+        url,
+        options: Options(
+          headers: {
+            HttpHeaders.authorizationHeader: 'Bearer $token',
+            'Accept': Headers.jsonContentType,
+            'Client-Token': AppConfig.find.get.clientToken,
+          },
+          contentType: Headers.jsonContentType,
+        ),
       );
       return User.fromJson(ApiResponse.fromJson(response.data).data);
     } catch (e) {

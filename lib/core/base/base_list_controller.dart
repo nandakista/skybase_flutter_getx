@@ -7,13 +7,11 @@ abstract class BaseListController<T> extends GetxController {
   int page = 1;
   final pagingController = PagingController<int, T>(firstPageKey: 0);
 
-
   void getListData();
 
   @override
   void onInit() {
     pagingController.addPageRequestListener((page) {
-      // getUser();
       getListData();
     });
     super.onInit();

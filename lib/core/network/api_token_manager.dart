@@ -30,18 +30,18 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
   final secureStorage = SecureStorageManager.find;
   final appConfig = AppConfig.find;
 
-  Future<void> handleToken ({
+  Future<void> handleToken({
     required Dio dio,
     required DioError err,
     required ErrorInterceptorHandler handler,
   }) async {
     switch (appConfig.get.tokenType) {
       case TokenType.NO_TOKEN:
-         super.onError(err, handler);
+        super.onError(err, handler);
         break;
       case TokenType.ACCESS_TOKEN:
-        super.onError(err, handler);
-        // _handleAccessToken(err, handler);
+        // super.onError(err, handler);
+        _handleAccessToken(err, handler);
         break;
       case TokenType.ACCESS_REFRESH_TOKEN:
         _handleRefreshToken(dio, err, handler);
@@ -51,26 +51,28 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
 
   _handleAccessToken(DioError err, ErrorInterceptorHandler handler) async {
     final int status = err.response?.statusCode ?? 0;
-    if (status >= 400 && status <= 500) {
+    if (status == 401) {
       return AppDialog.show(
         typeDialog: TypeDialog.FAILED,
         dismissible: false,
         message: 'Anda harus login kembali!',
-        onPress: () {
-          authManager.logout();
-        },
+        onPress: () => authManager.logout(),
       );
     } else {
       super.onError(err, handler);
     }
   }
 
-  _handleRefreshToken(Dio dio, DioError err, ErrorInterceptorHandler handler) async {
+  _handleRefreshToken(
+    Dio dio,
+    DioError err,
+    ErrorInterceptorHandler handler,
+  ) async {
     String? accessToken = await secureStorage.getToken();
     String? refreshToken = await secureStorage.getRefreshToken();
     if (accessToken != null && err.response?.statusCode == 401) {
       String? newToken =
-      await _getAccessToken(refreshToken: refreshToken.toString());
+          await _getAccessToken(refreshToken: refreshToken.toString());
       await secureStorage.setToken(value: newToken.toString());
       return handler.resolve(await _retry(dio, err.requestOptions));
     } else {
@@ -84,7 +86,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
         DioClient.baseURL + ApiUrl.refreshToken,
         data: jsonEncode({'refresh_token': refreshToken}),
         options:
-        Options(headers: headers, contentType: Headers.jsonContentType),
+            Options(headers: headers, contentType: Headers.jsonContentType),
       );
       return ApiResponse.fromJson(responseBody.data).data['token'];
     } on DioError catch (error) {
@@ -98,7 +100,10 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
     }
   }
 
-  Future<Response<dynamic>> _retry(Dio dio, RequestOptions requestOptions) async {
+  Future<Response<dynamic>> _retry(
+    Dio dio,
+    RequestOptions requestOptions,
+  ) async {
     String newAccessToken = await secureStorage.getToken() ?? '';
     final options = Options(
         method: requestOptions.method,

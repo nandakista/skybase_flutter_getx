@@ -58,7 +58,10 @@ class AuthManager extends GetxController {
         );
         break;
       case AppType.UNAUTHENTICATED:
-        Get.offAllNamed(LoginView.route);
+        Timer(
+          const Duration(seconds: 2),
+              () => Get.offAllNamed(LoginView.route),
+        );
         break;
       case AppType.AUTHENTICATED:
         Get.offAllNamed(MainNavView.route);
