@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 
 class SearchButton extends StatelessWidget {

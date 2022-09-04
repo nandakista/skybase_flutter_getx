@@ -43,18 +43,22 @@ class SkyListView extends StatefulWidget {
   /// Set scrollable of your empty/error view
   final bool isComponent;
 
+  final String? retryText;
+
   /// Function to controll onPress 'retry' if [errorEnabled] is true
   final void Function()? onRetry;
+
+  final Widget? emptyView;
 
   final Widget child;
 
   const SkyListView({
     Key? key,
-    required this.child,
     required this.emptyEnabled,
     required this.loadingEnabled,
     required this.errorEnabled,
     required this.onRetry,
+    required this.child,
     this.emptyImage,
     this.emptyTitle,
     this.emptySubtitle,
@@ -65,6 +69,8 @@ class SkyListView extends StatefulWidget {
     this.errorSubtitle,
     this.errorTitle,
     this.isComponent = true,
+    this.emptyView,
+    this.retryText,
   }) : super(key: key);
 
   @override
@@ -93,33 +99,35 @@ class _SkyListViewState extends State<SkyListView> {
 
   Widget getLoadingView(Widget loadingWidget) => widget.loadingEnabled
       ? Center(
-          child: AnimatedOpacity(
-            opacity: widget.loadingEnabled ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 200),
-            child: loadingWidget,
-          ),
-        )
+    child: AnimatedOpacity(
+      opacity: widget.loadingEnabled ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 200),
+      child: loadingWidget,
+    ),
+  )
       : Container();
 
   Widget getEmptyView() => widget.visibleOnEmpty &&
-          widget.emptyEnabled &&
-          !widget.errorEnabled &&
-          !widget.loadingEnabled
-      ? ListEmptyView(
-          emptyImage: widget.emptyImage,
-          emptyTitle: widget.emptyTitle,
-          emptySubtitle: widget.emptySubtitle,
-          isScrollable: widget.isComponent,
-        )
+      widget.emptyEnabled &&
+      !widget.errorEnabled &&
+      !widget.loadingEnabled
+      ? widget.emptyView ??
+      ListEmptyView(
+        emptyImage: widget.emptyImage,
+        emptyTitle: widget.emptyTitle,
+        emptySubtitle: widget.emptySubtitle,
+        isScrollable: widget.isComponent,
+      )
       : Container();
 
   Widget getErrorView() => widget.visibleOnError && widget.errorEnabled
       ? ErrorView(
-          errorImage: widget.errorImage,
-          errorTitle: widget.errorTitle,
-          errorSubtitle: widget.errorSubtitle,
-          onRetry: widget.onRetry,
-          isScrollable: widget.isComponent,
-        )
+    errorImage: widget.errorImage,
+    errorTitle: widget.errorTitle,
+    errorSubtitle: widget.errorSubtitle,
+    onRetry: widget.onRetry,
+    retryText: widget.retryText,
+    isScrollable: widget.isComponent,
+  )
       : Container();
 }

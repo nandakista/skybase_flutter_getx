@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/localization/language_const.dart';
-import 'package:skybase/ui/widgets/custom_button.dart';
+import 'package:skybase/ui/widgets/sky_button.dart';
 
 class ErrorView extends StatelessWidget {
   const ErrorView({
@@ -12,11 +12,13 @@ class ErrorView extends StatelessWidget {
     this.errorSubtitle,
     this.onRetry,
     this.isScrollable = true,
+    this.retryText,
   }) : super(key: key);
 
   final Widget? errorImage;
   final String? errorTitle;
   final String? errorSubtitle;
+  final String? retryText;
   final VoidCallback? onRetry;
   final bool isScrollable;
 
@@ -44,11 +46,11 @@ class ErrorView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-            CustomButton(
+            SkyButton(
               wrapContent: true,
               height: 50,
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              text: International.retry.tr,
+              text: retryText ?? International.retry.tr,
               onPressed: onRetry,
             ),
           ],

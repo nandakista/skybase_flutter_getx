@@ -17,8 +17,8 @@ import 'package:skybase/core/modules/module_helper.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
 import 'package:skybase/ui/widgets/basic_widget.dart';
-import 'package:skybase/ui/widgets/custom_button.dart';
-import 'package:skybase/ui/widgets/custom_form_field.dart';
+import 'package:skybase/ui/widgets/sky_button.dart';
+import 'package:skybase/ui/widgets/sky_form_field.dart';
 
 class UtilsView extends StatefulWidget {
   const UtilsView({Key? key}) : super(key: key);
@@ -54,12 +54,12 @@ class _UtilsViewState extends State<UtilsView> {
                     ),
                   ],
                 ),
-                CustomButton(
+                SkyButton(
                   onPressed: () => LocaleHelper().showLocaleDialog(context),
                   text: International.changeLanguage.tr,
                   icon: CupertinoIcons.paintbrush,
                 ),
-                CustomButton(
+                SkyButton(
                   onPressed: () {
                     AppDialog.show(
                       typeDialog: TypeDialog.WARNING,
@@ -70,14 +70,14 @@ class _UtilsViewState extends State<UtilsView> {
                   text: 'Dialog',
                   icon: CupertinoIcons.conversation_bubble,
                 ),
-                CustomButton(
+                SkyButton(
                   onPressed: () {
                     Loading.show(dismissible: true);
                   },
                   text: 'Loading',
                   icon: CupertinoIcons.refresh_thick,
                 ),
-                CustomButton(
+                SkyButton(
                   onPressed: () {
                     String? converted = DateTimeHelper(
                             startDate: DateTime.now(), endDate: DateTime.now())
@@ -86,7 +86,7 @@ class _UtilsViewState extends State<UtilsView> {
                   },
                   text: International.convert.tr + ' ' + International.date.tr,
                 ),
-                CustomButton(
+                SkyButton(
                   onPressed: () {
                     BottomSheetHelper.basic(
                       child: DatePickerWidget.range(
@@ -97,7 +97,7 @@ class _UtilsViewState extends State<UtilsView> {
                   text: 'Bottom Sheet + Date Range',
                   icon: Icons.date_range_outlined,
                 ),
-                CustomButton(
+                SkyButton(
                   onPressed: () {
                     String? converted = AppConverter.replaceStringRange(
                         'name@email.com', 2, 5, '*');
@@ -108,7 +108,7 @@ class _UtilsViewState extends State<UtilsView> {
                   icon: CupertinoIcons.t_bubble,
                 ),
                 const SizedBox(height: 12),
-                CustomFieldForm(
+                SkyFieldForm(
                   controller: currencyCtr,
                   initialValue: 0.toIDR(),
                   label: International.price.tr,

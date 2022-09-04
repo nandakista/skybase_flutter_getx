@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:skybase/core/base/base_list_controller.dart';
+import 'package:skybase/core/base/pagination_controller.dart';
 import 'package:skybase/data/models/user/user.dart';
 import 'package:skybase/data/repositories/user/user_repository.dart';
 import 'package:skybase/ui/views/user/detail/user_detail_view.dart';
 
-class UserListController extends BaseListController<User> {
+class UserListController extends PaginationController<User> {
   final UserRepository repository;
   UserListController({required this.repository});
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/localization/language_const.dart';
-import 'package:skybase/ui/widgets/custom_dialog.dart';
+import 'package:skybase/ui/widgets/sky_dialog.dart';
 
 //---------------<Toast>-----------------
 class Toast {

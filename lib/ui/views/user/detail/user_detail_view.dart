@@ -11,7 +11,7 @@ import 'package:skybase/ui/views/user/detail/user_detail_controller.dart';
 import 'package:skybase/ui/widgets/base/sky_view.dart';
 import 'package:skybase/ui/widgets/basic_widget.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
-import 'package:skybase/ui/widgets/custom_appbar.dart';
+import 'package:skybase/ui/widgets/sky_appbar.dart';
 
 class UserDetailView extends GetView<UserDetailController> {
   static const String route = '/user-detail';
@@ -21,7 +21,7 @@ class UserDetailView extends GetView<UserDetailController> {
   Widget build(BuildContext context) {
     return ColoredStatusBar(
       child: Scaffold(
-        appBar: CustomAppBar.primary(title: controller.user.value?.username),
+        appBar: SkyAppBar.primary(title: controller.user.value?.username),
         body: SafeArea(
           child: Obx(
             () => SkyView(

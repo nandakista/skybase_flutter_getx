@@ -4,12 +4,12 @@ import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/ui/widgets/custom_button.dart';
+import 'package:skybase/ui/widgets/sky_button.dart';
 
-class CustomDialog extends StatelessWidget {
+class SkyDialog extends StatelessWidget {
   final Widget child;
 
-  const CustomDialog({
+  const SkyDialog({
     Key? key,
     required this.child,
   }) : super(key: key);
@@ -254,7 +254,7 @@ class DialogAlert extends StatelessWidget {
                         style: const TextStyle(color: Colors.grey),
                       ),
                       const SizedBox(height: 32),
-                      CustomButton(
+                      SkyButton(
                         text: confirmText,
                         textColor: confirmTextColor ?? AppColors.onPrimary,
                         color: confirmBackgroundColor ?? Colors.white,
@@ -265,7 +265,7 @@ class DialogAlert extends StatelessWidget {
                       const SizedBox(height: 8),
                       Visibility(
                         visible: (onCancel != null),
-                        child: CustomButton(
+                        child: SkyButton(
                           text: 'Tidak',
                           fontWeight: AppStyle.semiBold,
                           color: cancelColor,
@@ -299,7 +299,7 @@ class SoonDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDialog(
+    return SkyDialog(
       child: Column(
         children: [
           SizedBox(
@@ -319,7 +319,7 @@ class SoonDialog extends StatelessWidget {
           const SizedBox(height: 24),
           Align(
             alignment: Alignment.bottomRight,
-            child: CustomButton(
+            child: SkyButton(
               onPressed: () => Get.back(),
               text: 'OK',
               color: AppColors.primary,

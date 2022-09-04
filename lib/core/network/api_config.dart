@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/app/app_config.dart';
+import 'package:skybase/core/app/app_env.dart';
 import 'package:skybase/core/network/api_interceptor.dart';
 
 final Dio dioClient = Get.find<DioClient>().init();
 class DioClient {
-  static String baseURL = AppConfig.find.get.baseUrl;
+  static String baseURL = AppEnv.find.get.baseUrl;
 
   Dio init() {
     Dio _dio = Dio();

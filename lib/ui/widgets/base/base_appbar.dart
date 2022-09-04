@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -11,6 +10,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleStyle,
     this.iconColor,
     this.elevation,
+    this.height,
   }) : super(key: key);
 
   final String? title;
@@ -20,6 +20,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? iconColor;
   final TextStyle? titleStyle;
   final double? elevation;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +30,13 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
         title ?? '',
         style: titleStyle,
       ),
-
       backgroundColor: backgroundColor,
       elevation: elevation,
       actions: action,
-      iconTheme: IconThemeData(
-        color: iconColor, //change your color here
-      ),
+      iconTheme: IconThemeData(color: iconColor),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(height ?? kToolbarHeight);
 }

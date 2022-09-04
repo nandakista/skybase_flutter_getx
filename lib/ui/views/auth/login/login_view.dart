@@ -6,8 +6,8 @@ import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/views/auth/login/login_controller.dart';
 import 'package:skybase/ui/widgets/basic_widget.dart';
-import 'package:skybase/ui/widgets/custom_button.dart';
-import 'package:skybase/ui/widgets/custom_form_field.dart';
+import 'package:skybase/ui/widgets/sky_button.dart';
+import 'package:skybase/ui/widgets/sky_form_field.dart';
 import 'package:skybase/ui/widgets/keyboard_dismisser.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -69,7 +69,7 @@ class LoginView extends GetView<LoginController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 20),
-          CustomFieldForm(
+          SkyFieldForm(
 
             label: International.phone.tr,
             hint: International.phone.tr,
@@ -101,7 +101,7 @@ class LoginView extends GetView<LoginController> {
             ),
           ),
           const SizedBox(height: 20),
-          CustomButton(
+          SkyButton(
               onPressed: () {
                 FocusScope.of(context).unfocus();
                 controller.login();
@@ -118,7 +118,7 @@ class LoginView extends GetView<LoginController> {
   _buildFooter(BuildContext context) {
     return Column(
       children: [
-        CustomButton(
+        SkyButton(
           onPressed: () => controller.bypassLogin(),
           text: International.skip.tr,
           icon: Icons.arrow_forward,

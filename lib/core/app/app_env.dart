@@ -9,12 +9,12 @@ enum Env {
   DEVELOPMENT,
 }
 
-class AppConfig {
-  static AppConfig get find => Get.find<AppConfig>();
+class AppEnv {
+  static AppEnv get find => Get.find<AppEnv>();
 
   late Config appConfig;
   Config get get => appConfig;
-  set setFlavor(Config config) => appConfig = config;
+  set setEnv(Config config) => appConfig = config;
 
   static set(Env env) {
     switch (env) {
@@ -25,7 +25,7 @@ class AppConfig {
         // TODO: Handle this case.
         break;
       case Env.DEVELOPMENT:
-        AppConfig.find.setFlavor = Config(
+        AppEnv.find.setEnv = Config(
           midtransClientKey: 'Some Client Key',
           clientToken: 'Some Client Token',
           baseUrl: 'https://api.github.com',

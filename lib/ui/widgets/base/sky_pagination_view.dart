@@ -7,10 +7,10 @@ import 'package:skybase/ui/widgets/list_pagination/pagination_max_item_view.dart
 import 'package:skybase/ui/widgets/shimmer_list.dart';
 
 typedef ItemWidgetBuilder<ItemType> = Widget Function(
-  BuildContext context,
-  ItemType item,
-  int index,
-);
+    BuildContext context,
+    ItemType item,
+    int index,
+    );
 
 class SkyPaginationView<ItemType> extends StatelessWidget {
   const SkyPaginationView({
@@ -23,6 +23,9 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
     this.errorView,
     this.errorLoadView,
     this.maxItemView,
+    this.emptyImage,
+    this.emptyTitle,
+    this.emptySubtitle,
   }) : super(key: key);
 
   final PagingController<int, ItemType> pagingController;
@@ -50,6 +53,12 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
 
   final VoidCallback onRefresh;
 
+  final Widget? emptyImage;
+
+  final String? emptyTitle;
+
+  final String? emptySubtitle;
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -59,15 +68,20 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
         builderDelegate: PagedChildBuilderDelegate<ItemType>(
           animateTransitions: true,
           firstPageProgressIndicatorBuilder: (ctx) =>
-              loadingView ?? const ShimmerList(),
+          loadingView ?? const ShimmerList(),
           noItemsFoundIndicatorBuilder: (ctx) =>
-              emptyView ?? const ListEmptyView(),
+          emptyView ??
+              ListEmptyView(
+                emptyImage: emptyImage,
+                emptyTitle: emptyTitle,
+                emptySubtitle: emptySubtitle,
+              ),
           firstPageErrorIndicatorBuilder: (ctx) =>
-              errorView ?? PaginationErrorView(controller: pagingController),
-          noMoreItemsIndicatorBuilder: (ctx) =>
-              maxItemView ?? const PaginationMaxItemView(),
+          errorView ?? PaginationErrorView(controller: pagingController),
+          // noMoreItemsIndicatorBuilder: (ctx) =>
+          // maxItemView ?? const PaginationMaxItemView(),
           newPageErrorIndicatorBuilder: (ctx) =>
-              errorLoadView ?? const PaginationErrorLoadView(),
+          errorLoadView ?? const PaginationErrorLoadView(),
           itemBuilder: itemBuilder,
         ),
       ),

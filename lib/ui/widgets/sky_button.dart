@@ -4,7 +4,7 @@ import 'package:skybase/core/themes/app_style.dart';
 
 ///  Default button on this project with primary color.
 ///  Change it as needed.
-class CustomButton extends StatelessWidget {
+class SkyButton extends StatelessWidget {
   /// Background color of button. Default value is primary color.
   final Color color;
 
@@ -53,7 +53,7 @@ class CustomButton extends StatelessWidget {
   /// Width of button
   final bool wrapContent;
 
-  const CustomButton({
+  const SkyButton({
     Key? key,
     required this.text,
     required this.onPressed,

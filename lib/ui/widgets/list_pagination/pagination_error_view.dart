@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:skybase/core/localization/language_const.dart';
-import 'package:skybase/ui/widgets/custom_button.dart';
+import 'package:skybase/ui/widgets/sky_button.dart';
 
 class PaginationErrorView extends StatelessWidget {
   const PaginationErrorView({Key? key, required this.controller})
@@ -31,7 +31,7 @@ class PaginationErrorView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-            CustomButton(
+            SkyButton(
               wrapContent: true,
               height: 50,
               padding: const EdgeInsets.symmetric(horizontal: 20),

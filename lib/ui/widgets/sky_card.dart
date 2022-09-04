@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CustomCard extends StatelessWidget {
+class SkyCard extends StatelessWidget {
   final Color? borderColor, backgroundColor;
   final Widget? child;
   final double? borderRadius;
   final double? elevation;
   final EdgeInsetsGeometry? padding;
 
-  const CustomCard({
+  const SkyCard({
     Key? key,
     this.borderColor,
     this.backgroundColor = Colors.white,

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-abstract class BaseListController<T> extends GetxController {
+abstract class PaginationController<T> extends GetxController {
 
   int perPage = 20;
   int page = 1;

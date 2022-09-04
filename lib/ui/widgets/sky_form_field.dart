@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 
-class CustomFieldForm extends StatelessWidget {
+class SkyFieldForm extends StatelessWidget {
   final String? label, hint, endText;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -23,7 +23,7 @@ class CustomFieldForm extends StatelessWidget {
   final String? initialValue;
   final TextStyle? style;
 
-  const CustomFieldForm({
+  const SkyFieldForm({
     Key? key,
     required this.label,
     required this.hint,

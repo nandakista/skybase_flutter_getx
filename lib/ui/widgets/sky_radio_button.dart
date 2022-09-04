@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomRadioField extends StatelessWidget {
+class SkyRadioField extends StatelessWidget {
   final Widget child;
   final String title;
   final double? elevation;
@@ -9,7 +9,7 @@ class CustomRadioField extends StatelessWidget {
   final double borderRadius;
   final bool useBorder;
 
-  const CustomRadioField({
+  const SkyRadioField({
     Key? key,
     required this.child,
     required this.title,

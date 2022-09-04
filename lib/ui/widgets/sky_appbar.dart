@@ -4,8 +4,8 @@ import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/widgets/base/base_appbar.dart';
 
-abstract class CustomAppBar {
-  /// Use [CustomAppBar.primary] as a default AppBar globally.
+abstract class SkyAppBar {
+  /// Use [SkyAppBar.primary] as a default AppBar globally.
   /// * Can edited for specific requirement.
   static PreferredSizeWidget primary({
     String? title,
@@ -26,7 +26,7 @@ abstract class CustomAppBar {
     );
   }
 
-  /// Use [CustomAppBar.secondary] as an secondary AppBar for some pages.
+  /// Use [SkyAppBar.secondary] as an secondary AppBar for some pages.
   /// * Can edited for specific requirement.
   static PreferredSizeWidget secondary({
     String? title,

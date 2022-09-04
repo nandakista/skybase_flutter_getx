@@ -5,7 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:skybase/core/app/app_config.dart';
+import 'package:skybase/core/app/app_env.dart';
 import 'package:skybase/core/app/app_socket.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 import 'package:skybase/core/database/hive/hive_db.dart';
@@ -39,7 +39,7 @@ class Initializer extends GetxService {
     // ---Locale
     await initializeDateFormatting('id_ID', null);
     // --- App Config
-    Get.lazyPut(() => AppConfig());
+    Get.lazyPut(() => AppEnv());
     // --- Web Socket
     Get.lazyPut(() => AppSocket());
     // --- Request Client

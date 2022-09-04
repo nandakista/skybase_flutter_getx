@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/app/app_config.dart';
+import 'package:skybase/core/app/app_env.dart';
 import 'package:skybase/initializer.dart';
 import 'package:skybase/core/localization/app_translations.dart';
 import 'package:skybase/core/localization/locale_helper.dart';
@@ -11,7 +11,7 @@ import 'package:skybase/ui/routes/app_routes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Initializer.init();
-  AppConfig.set(Env.DEVELOPMENT);
+  AppEnv.set(Env.DEVELOPMENT);
   runApp(const App());
 }
 

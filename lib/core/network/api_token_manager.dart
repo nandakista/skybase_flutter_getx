@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:skybase/core/app/app_config.dart';
+import 'package:skybase/core/app/app_env.dart';
 import 'package:skybase/core/auth_manager/auth_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
@@ -28,7 +28,7 @@ enum TokenType {
 class ApiTokenManager extends QueuedInterceptorsWrapper {
   final authManager = AuthManager.find;
   final secureStorage = SecureStorageManager.find;
-  final appConfig = AppConfig.find;
+  final appConfig = AppEnv.find;
 
   Future<void> handleToken({
     required Dio dio,
