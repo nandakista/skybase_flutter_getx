@@ -20,7 +20,6 @@ abstract class BaseListController<T> extends GetxController {
   refreshPage() {
     page = 1;
     pagingController.refresh();
-    getListData();
   }
 
   loadNextData(List<T> data) {

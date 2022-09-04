@@ -62,7 +62,7 @@ class _UtilsViewState extends State<UtilsView> {
                 CustomButton(
                   onPressed: () {
                     AppDialog.show(
-                      typeDialog: TypeDialog.FAILED,
+                      typeDialog: TypeDialog.WARNING,
                       message: 'Dialog',
                       onPress: () => AppDialog.close(),
                     );

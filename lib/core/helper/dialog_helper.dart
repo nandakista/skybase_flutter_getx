@@ -32,6 +32,7 @@ enum TypeDialog {
   WARNING,
   RETRY,
   SOON,
+  PERMISSION,
 }
 
 class AppDialog {
@@ -42,6 +43,9 @@ class AppDialog {
     required VoidCallback onPress,
     VoidCallback? onCancel,
     bool? dismissible,
+    String? confirmText,
+    Widget? header,
+    Color? backgroundColorHeader = Colors.transparent,
   }) {
     switch (typeDialog) {
       case TypeDialog.FAILED:
@@ -70,6 +74,7 @@ class AppDialog {
           context: Get.context!,
           builder: (context) => DialogAlert.warning(
             title: title ?? International.warning.tr,
+            backgroundColorHeader: Colors.orange,
             description: message,
             onConfirm: onPress,
             onCancel: onCancel ?? () => Get.back(),
@@ -90,6 +95,20 @@ class AppDialog {
             description: message,
             onConfirm: onPress,
             onCancel: onCancel ?? () => Get.back(),
+          ),
+        );
+      case TypeDialog.PERMISSION:
+        return showDialog(
+          barrierDismissible: false,
+          context: Get.context!,
+          builder: (context) => DialogAlert.permission(
+            header: header,
+            backgroundColorHeader: Colors.orange,
+            title: title ?? International.warning.tr,
+            description: message,
+            onConfirm: onPress,
+            onCancel: onCancel ?? () => Get.back(),
+            confirmText: confirmText ?? 'OK',
           ),
         );
     }

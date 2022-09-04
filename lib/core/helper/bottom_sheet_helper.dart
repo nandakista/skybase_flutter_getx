@@ -26,6 +26,51 @@ class BottomSheetHelper {
     );
   }
 
+  static rounded({
+    required Widget child,
+    bool isDismissible = true,
+    bool isScrollControlled = true,
+    Color? backgroundColor = Colors.transparent,
+    Color? barrierColor,
+  }) async {
+    await showModalBottomSheet(
+      context: Get.context!,
+      isDismissible: isDismissible,
+      isScrollControlled: isScrollControlled,
+      backgroundColor: backgroundColor,
+      barrierColor: barrierColor,
+      builder: (btmContext) => Container(
+        decoration: BoxDecoration(
+          color: Theme.of(Get.context!).scaffoldBackgroundColor,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 12),
+                  height: 6,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ),
+              child,
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   static Future<FilterResult> filter(BuildContext context,
       {required Widget child}) async {
     final result = await showModalBottomSheet(

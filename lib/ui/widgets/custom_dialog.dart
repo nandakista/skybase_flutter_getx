@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/ui/widgets/basic_widget.dart';
 import 'package:skybase/ui/widgets/custom_button.dart';
 
 class CustomDialog extends StatelessWidget {
@@ -59,26 +59,30 @@ class LoadingDialog extends StatelessWidget {
       elevation: 0,
       backgroundColor: Colors.transparent,
       child: Container(
-        height: 100,
+        height: 80,
+        margin: const EdgeInsets.all(24),
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-            color: AppColors.systemBlack,
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(17),
-            boxShadow: [
-              BoxShadow(
-                  color: (!Get.isDarkMode) ? AppColors.primary : Colors.black26,
-                  offset: const Offset(0.0, 2.0),
-                  blurRadius: 10.0)
-            ]),
-        child: Column(
+          color: Colors.black,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(17),
+          boxShadow: [
+            BoxShadow(
+                color: (Get.isDarkMode) ? AppColors.primary : Colors.black26,
+                offset: const Offset(0.0, 2.0),
+                blurRadius: 10.0)
+          ],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Loading',
-              style: AppStyle.title4.copyWith(color: Colors.white),
+              style: AppStyle.subtitle1.copyWith(color: Colors.white),
             ),
-            platformLoadingIndicator(),
+            const SizedBox(width: 4),
+            const SpinKitThreeBounce(color: Colors.white, size: 16),
           ],
         ),
       ),
@@ -92,6 +96,7 @@ class DialogAlert extends StatelessWidget {
   final Color confirmColor, cancelColor;
   final Widget? header;
   final Color? backgroundColorHeader;
+  final Color? confirmTextColor, confirmBorderColor, confirmBackgroundColor;
 
   const DialogAlert({
     Key? key,
@@ -102,53 +107,67 @@ class DialogAlert extends StatelessWidget {
     required this.backgroundColorHeader,
     this.onCancel,
     this.confirmColor = AppColors.primary,
-    this.cancelColor = Colors.red,
-    this.confirmText = 'OK',
+    this.cancelColor = AppColors.primary,
+    this.confirmText = 'Ya',
+    this.confirmTextColor,
+    this.confirmBorderColor,
+    this.confirmBackgroundColor,
   }) : super(key: key);
 
   factory DialogAlert.success({
     required String title,
     required String description,
-    Widget? imageOrAnim,
+    Widget? header,
+    Color? backgroundColorHeader,
     required VoidCallback onConfirm,
   }) =>
       DialogAlert(
         title: title,
         description: description,
-        header: Lottie.asset('assets/anim/anim_success.json', repeat: false),
+        header: header ??
+            Lottie.asset('assets/anim/anim_success.json', repeat: false),
         onConfirm: onConfirm,
-        backgroundColorHeader: Colors.green[50],
+        backgroundColorHeader: backgroundColorHeader ?? Colors.green[50],
+        confirmTextColor: Colors.white,
+        confirmBorderColor: Colors.green,
+        confirmBackgroundColor: Colors.green,
       );
 
   factory DialogAlert.error({
     required String title,
     required String description,
     Widget? header,
+    Color? backgroundColorHeader,
     required VoidCallback onConfirm,
   }) =>
       DialogAlert(
         title: title,
         description: description,
-        header: Lottie.asset('assets/anim/anim_failed.json', repeat: false),
+        header: header ??
+            Lottie.asset('assets/anim/anim_failed.json', repeat: false),
         onConfirm: onConfirm,
-        backgroundColorHeader: Colors.red[100],
+        backgroundColorHeader: backgroundColorHeader ?? Colors.red[100],
+        confirmTextColor: Colors.white,
+        confirmBorderColor: AppColors.primaryVariant,
+        confirmBackgroundColor: AppColors.primaryVariant,
       );
 
   factory DialogAlert.warning({
     required String title,
     required String description,
     Widget? header,
+    Color? backgroundColorHeader,
     required VoidCallback onConfirm,
     required VoidCallback onCancel,
   }) =>
       DialogAlert(
         title: title,
         description: description,
-        header: Lottie.asset('assets/anim/anim_warning.json', repeat: false),
+        header: header ??
+            Lottie.asset('assets/anim/anim_warning.json', repeat: false),
         onConfirm: onConfirm,
         onCancel: onCancel,
-        confirmColor: Colors.green,
-        backgroundColorHeader: Colors.orangeAccent,
+        backgroundColorHeader: backgroundColorHeader ?? Colors.orangeAccent,
       );
 
   factory DialogAlert.retry({
@@ -156,6 +175,7 @@ class DialogAlert extends StatelessWidget {
     required String description,
     String confirmText = 'Coba Lagi',
     Widget? header,
+    Color? backgroundColorHeader,
     required VoidCallback onConfirm,
     required VoidCallback onCancel,
   }) =>
@@ -163,11 +183,12 @@ class DialogAlert extends StatelessWidget {
         title: title,
         description: description,
         confirmText: confirmText,
-        header: Lottie.asset('assets/anim/anim_failed.json', repeat: false),
+        header: header ??
+            Lottie.asset('assets/anim/anim_failed.json', repeat: false),
         onConfirm: onConfirm,
         onCancel: onCancel,
         confirmColor: AppColors.primary,
-        backgroundColorHeader: Colors.red[100],
+        backgroundColorHeader: backgroundColorHeader ?? Colors.red[100],
       );
 
   factory DialogAlert.permission({
@@ -175,96 +196,99 @@ class DialogAlert extends StatelessWidget {
     required String confirmText,
     required String description,
     Widget? header,
+    Color? backgroundColorHeader,
     required VoidCallback onConfirm,
     required VoidCallback onCancel,
   }) =>
       DialogAlert(
         title: title,
         description: description,
-        header: Lottie.asset('assets/anim/anim_warning.json', repeat: false),
+        header: header ??
+            Lottie.asset('assets/anim/anim_warning.json', repeat: false),
         onConfirm: onConfirm,
         confirmText: confirmText,
-        backgroundColorHeader: Colors.orangeAccent,
+        backgroundColorHeader: backgroundColorHeader ?? Colors.orangeAccent,
         confirmColor: Colors.blue,
       );
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      child: Stack(
-        children: [
-          Wrap(children: [
-            Container(
-              padding: const EdgeInsets.fromLTRB(16, 100, 16, 16),
-              margin: const EdgeInsets.only(top: 16),
-              decoration: BoxDecoration(
-                  color: (Get.isDarkMode) ? Colors.black : Colors.white,
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(17),
-                  boxShadow: [
-                    BoxShadow(
-                        color:
-                        (Get.isDarkMode) ? AppColors.primary : Colors.black,
-                        offset: const Offset(0.0, 0.0),
-                        blurRadius: 10.0)
-                  ]),
-              child: Column(
-                children: [
-                  Text(
-                    title,
-                    style: AppStyle.title2.copyWith(
-                      color: AppColors.primary,
-                      fontWeight: AppStyle.semiBold,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    description,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        child: Stack(
+          children: [
+            Wrap(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                  margin: const EdgeInsets.only(top: 26),
+                  decoration: BoxDecoration(
+                      color: (Get.isDarkMode) ? Colors.black : Colors.white,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(17),
+                      boxShadow: [
+                        BoxShadow(
+                            color:
+                            (Get.isDarkMode) ? AppColors.primary : Colors.black,
+                            offset: const Offset(0.0, 0.0),
+                            blurRadius: 10.0)
+                      ]),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Visibility(
-                        visible: (onCancel != null),
-                        child: Flexible(
-                          flex: 1,
-                          child: CustomButton(
-                            text: 'Kembali',
-                            color: cancelColor,
-                            onPressed: onCancel,
-                          ),
+                      const SizedBox(height: 64),
+                      Text(
+                        title,
+                        style: AppStyle.subtitle3.copyWith(
+                          fontWeight: AppStyle.semiBold,
                         ),
                       ),
-                      Flexible(
-                        flex: 1,
+                      const SizedBox(height: 4),
+                      Text(
+                        description,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                      const SizedBox(height: 32),
+                      CustomButton(
+                        text: confirmText,
+                        textColor: confirmTextColor ?? AppColors.onPrimary,
+                        color: confirmBackgroundColor ?? Colors.white,
+                        onPressed: onConfirm,
+                        borderColor: confirmBorderColor ?? AppColors.onPrimary,
+                        fontWeight: AppStyle.semiBold,
+                      ),
+                      const SizedBox(height: 8),
+                      Visibility(
+                        visible: (onCancel != null),
                         child: CustomButton(
-                          text: confirmText,
-                          color: confirmColor,
-                          onPressed: onConfirm,
+                          text: 'Tidak',
+                          fontWeight: AppStyle.semiBold,
+                          color: cancelColor,
+                          onPressed: onCancel,
                         ),
                       ),
                     ],
-                  )
-                ],
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              top: 0,
+              left: 16,
+              right: 16,
+              child: CircleAvatar(
+                backgroundColor: backgroundColorHeader,
+                radius: 50,
+                child: header,
               ),
-            ),
-          ]),
-          Positioned(
-            top: 0,
-            left: 16,
-            right: 16,
-            child: CircleAvatar(
-              backgroundColor: backgroundColorHeader,
-              radius: 50,
-              child: header,
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

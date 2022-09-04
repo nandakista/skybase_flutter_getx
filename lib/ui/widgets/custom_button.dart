@@ -11,6 +11,9 @@ class CustomButton extends StatelessWidget {
   /// Text color of button, default value is white.
   final Color textColor;
 
+  /// Text color of button, default value is white.
+  final Color? borderColor;
+
   /// Text color of leading icon, default value is white.
   final Color iconColor;
 
@@ -25,6 +28,8 @@ class CustomButton extends StatelessWidget {
 
   /// Width shape of button, default value is match parent.
   final double? width;
+
+  final double? borderWidth;
 
   /// The size of text button.
   final double? fontSize;
@@ -42,6 +47,7 @@ class CustomButton extends StatelessWidget {
   final FontWeight? fontWeight;
 
   final EdgeInsetsGeometry? margin;
+
   final EdgeInsetsGeometry? padding;
 
   /// Width of button
@@ -61,7 +67,11 @@ class CustomButton extends StatelessWidget {
     this.fontWeight,
     this.borderRadius = 8,
     this.elevation = 1,
-    this.margin, this.padding, this.wrapContent = false,
+    this.margin,
+    this.padding,
+    this.wrapContent = false,
+    this.borderColor,
+    this.borderWidth,
   }) : super(key: key);
 
   @override
@@ -88,6 +98,11 @@ class CustomButton extends StatelessWidget {
           primary: color,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius!),
+            side: BorderSide(
+              color: borderColor ?? Colors.transparent,
+              width: borderWidth ?? 1.5,
+              style: BorderStyle.solid,
+            ),
           ),
         ),
         label: Container(
