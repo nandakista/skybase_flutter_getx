@@ -5,6 +5,7 @@ import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/data/models/repo/repo.dart';
 import 'package:skybase/ui/views/user/detail/user_detail_controller.dart';
+import 'package:skybase/ui/widgets/cached_image.dart';
 
 class RepoTabView extends GetView<UserDetailController> {
   const RepoTabView({Key? key}) : super(key: key);
@@ -25,9 +26,8 @@ class RepoTabView extends GetView<UserDetailController> {
               : ListTile(
                   leading: CircleAvatar(
                     radius: 30,
-                    backgroundImage: NetworkImage(
-                      '${repos.owner.avatarUrl}&s=200',
-                      scale: 0.1,
+                    child: CachedImage(
+                      url: '${repos.owner.avatarUrl}&s=200',
                     ),
                   ),
                   title: Text(repos.name.toString(), style: AppStyle.small),

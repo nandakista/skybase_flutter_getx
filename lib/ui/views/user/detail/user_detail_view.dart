@@ -10,6 +10,7 @@ import 'package:skybase/ui/views/user/detail/component/repo_tab_view.dart';
 import 'package:skybase/ui/views/user/detail/user_detail_controller.dart';
 import 'package:skybase/ui/widgets/base/sky_view.dart';
 import 'package:skybase/ui/widgets/basic_widget.dart';
+import 'package:skybase/ui/widgets/cached_image.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 
@@ -51,8 +52,7 @@ class UserDetailView extends GetView<UserDetailController> {
         children: [
           CircleAvatar(
             radius: 45,
-            backgroundImage:
-                NetworkImage('${user?.avatarUrl}&s=200', scale: 0.1),
+            child: CachedImage(url: '${user?.avatarUrl}&s=200'),
           ),
           Column(
             children: [

@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 import 'package:get/get.dart';
+import 'package:skybase/app_configuration.dart';
 import 'package:skybase/core/app/app_socket.dart';
 import 'package:skybase/core/network/api_token_manager.dart';
 
@@ -19,18 +20,30 @@ class AppEnv {
   static set(Env env) {
     switch (env) {
       case Env.PRODUCTION:
-      // TODO: Handle this case.
+        AppEnv.find.setEnv = Config(
+          baseUrl: AppConfiguration.productionAPI,
+          clientToken: AppConfiguration.clientToken,
+          tokenType: AppConfiguration.tokenType,
+          socketUrl: AppConfiguration.productionSocket,
+          midtransClientKey: AppConfiguration.midtransStagingKey,
+        );
         break;
       case Env.STAGING:
-        // TODO: Handle this case.
+        AppEnv.find.setEnv = Config(
+          baseUrl: AppConfiguration.developmentAPI,
+          clientToken: AppConfiguration.clientToken,
+          tokenType: AppConfiguration.tokenType,
+          socketUrl: AppConfiguration.stagingSocket,
+          midtransClientKey: AppConfiguration.midtransStagingKey,
+        );
         break;
       case Env.DEVELOPMENT:
         AppEnv.find.setEnv = Config(
-          midtransClientKey: 'Some Client Key',
-          clientToken: 'Some Client Token',
-          baseUrl: 'https://api.github.com',
-          socketUrl: 'https://address.com',
-          tokenType: TokenType.ACCESS_TOKEN,
+          baseUrl: AppConfiguration.developmentAPI,
+          clientToken: AppConfiguration.clientToken,
+          tokenType: AppConfiguration.tokenType,
+          socketUrl: AppConfiguration.developmentSocket,
+          midtransClientKey: AppConfiguration.midtransStagingKey,
         );
         AppSocket().interceptor();
         break;
@@ -47,8 +60,8 @@ class Config {
     required this.socketUrl,
   });
   String baseUrl;
-  String socketUrl;
-  TokenType tokenType;
-  String midtransClientKey;
   String clientToken;
+  TokenType tokenType;
+  String socketUrl;
+  String midtransClientKey;
 }

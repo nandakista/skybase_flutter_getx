@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:open_file/open_file.dart';
+import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
@@ -93,7 +93,7 @@ class AppFunction {
     final name = fileName ?? url.split('/').last;
     final file = await downloadFilePath(url, name);
     debugPrint('Path : $file');
-    OpenFile.open(file);
+    OpenFilex.open(file);
   }
 
   // ----------------------------------------------------------------------------------------
