@@ -1,5 +1,5 @@
 class ApiUrl {
-  static const multipartType = 'multipart/form-data';
+  static const multipartFormData = 'multipart/form-data';
 
   // Auth
   static const verifyToken = 'auth/matchtoken';

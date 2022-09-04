@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/network/api_config.dart';
 import 'package:skybase/core/network/api_exception.dart';
+import 'package:skybase/core/network/api_url.dart';
 import 'package:skybase/dev/dev_token.dart';
 
 // ignore: constant_identifier_names
@@ -28,14 +29,11 @@ Future<Response> sendRequest({
   try {
     switch (requestMethod) {
       case RequestMethod.POST:
-        debugPrint(
-            'Request Body : ${FormData.fromMap(body as Map<String, dynamic>).fields}');
+        log('Request Body : ${FormData.fromMap(body as Map<String, dynamic>).fields}');
         return await _safeFetch(
           () => dioClient.post(
             url,
-            data: contentType == Headers.jsonContentType
-                ? jsonEncode(body)
-                : FormData.fromMap(body),
+            data: _setBody(contentType: contentType, body: body),
             options: Options(headers: headers, contentType: contentType),
           ),
         );
@@ -50,9 +48,7 @@ Future<Response> sendRequest({
         return await _safeFetch(
           () => dioClient.patch(
             url,
-            data: contentType == Headers.jsonContentType
-                ? jsonEncode(body)
-                : FormData.fromMap(body as Map<String, dynamic>),
+            data: _setBody(contentType: contentType, body: body),
             options: Options(headers: headers, contentType: contentType),
           ),
         );
@@ -60,9 +56,7 @@ Future<Response> sendRequest({
         return await _safeFetch(
           () => dioClient.put(
             url,
-            data: contentType == Headers.jsonContentType
-                ? jsonEncode(body)
-                : FormData.fromMap(body as Map<String, dynamic>),
+            data: _setBody(contentType: contentType, body: body),
             options: Options(headers: headers, contentType: contentType),
           ),
         );
@@ -77,6 +71,20 @@ Future<Response> sendRequest({
   } catch (error) {
     rethrow;
   }
+}
+
+Object? _setBody({
+  required String? contentType,
+  required Object? body,
+}) {
+  if (contentType == Headers.jsonContentType) {
+    body = jsonEncode(body);
+  } else if (contentType == Headers.formUrlEncodedContentType) {
+    return body;
+  } else if (contentType == ApiUrl.multipartFormData) {
+    return FormData.fromMap(body as Map<String, dynamic>);
+  }
+  return null;
 }
 
 Future<void> _tokenManager(bool useToken) async {
@@ -105,5 +113,3 @@ Future<Response> _safeFetch(Future<Response> Function() tryFetch) async {
     rethrow;
   }
 }
-
-
