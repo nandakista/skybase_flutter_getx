@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:skybase/ui/widgets/basic_widget.dart';
 import 'package:skybase/ui/widgets/list_pagination/error_view.dart';
 import 'package:skybase/ui/widgets/shimmer_detail.dart';
 

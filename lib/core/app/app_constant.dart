@@ -6,8 +6,6 @@ class AppConst {
     ...App General Const
   */
   static const double defaultMargin = 30;
-  static const String appName = 'Gitagram';
-  static const String appTag = 'Connect every developers';
 
   /* Size Helper
   ... Size of everything

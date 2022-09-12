@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:skybase/core/helper/filter/filter_action_result.dart';
 import 'package:skybase/core/themes/app_shadows.dart';
-import 'package:skybase/ui/widgets/basic_widget.dart';
+import 'package:skybase/ui/widgets/common_widget.dart';
 
 class BottomSheetHelper {
   static basic({

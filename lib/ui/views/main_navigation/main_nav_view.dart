@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:skybase/ui/views/auth/intro/intro_view.dart';
 import 'package:skybase/ui/views/auth/login/login_view.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_controller.dart';
-import 'package:skybase/ui/views/user/list/user_list_view.dart';
+import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_view.dart';
 import 'package:skybase/ui/views/utils/utils_view.dart';
-import 'package:skybase/ui/widgets/basic_widget.dart';
+import 'package:skybase/ui/widgets/common_widget.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
 
 class MainNavView extends GetView<MainNavController> {
@@ -23,7 +23,7 @@ class MainNavView extends GetView<MainNavController> {
               controller: controller.pageController,
               onPageChanged: (index) => controller.index.value = index,
               children: const [
-                UserListView(),
+                SampleFeatureListView(),
                 IntroView(),
                 LoginView(),
                 UtilsView(),

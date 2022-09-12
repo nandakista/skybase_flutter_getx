@@ -1,8 +1,8 @@
-class GlobalObject<T, K> {
-  K id;
+class GlobalObject<I, V> {
+  I id;
   String? name;
   String? description;
-  T? value;
+  V? value;
 
   GlobalObject({
     required this.id,

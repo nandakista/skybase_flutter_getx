@@ -2,15 +2,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:skybase/core/network/api_request.dart';
-import 'package:skybase/data/data_sources/server/user/user_api.dart';
+import 'package:skybase/data/data_sources/server/sample_feature/sample_feature_api.dart';
 import 'package:skybase/data/models/repo/repo.dart';
-import 'package:skybase/data/models/user/user.dart';
+import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 
-class UserApiImpl extends UserApi {
+class SampleFeatureApiImpl extends SampleFeatureApi {
   String tag = 'User Api';
 
   @override
-  Future<List<User>> getUsers({
+  Future<List<SampleFeature>> getUsers({
     required int page,
     required int perPage,
   }) async {
@@ -25,9 +25,9 @@ class UserApiImpl extends UserApi {
         useToken: true,
       );
       return (_res.data['items'])
-          .map((data) => User.fromJson(data))
+          .map((data) => SampleFeature.fromJson(data))
           .toList()
-          .cast<User>();
+          .cast<SampleFeature>();
     } catch (e) {
       log('$tag Error = $e');
       rethrow;
@@ -35,14 +35,14 @@ class UserApiImpl extends UserApi {
   }
 
   @override
-  Future<User> getDetailUser({required String username}) async {
+  Future<SampleFeature> getDetailUser({required String username}) async {
     try {
       final _res = await sendRequest(
         url: '/users/$username',
         requestMethod: RequestMethod.GET,
         useToken: true,
       );
-      return User.fromJson(_res.data);
+      return SampleFeature.fromJson(_res.data);
     } catch (e) {
       log('$tag Error = $e');
       rethrow;
@@ -50,7 +50,7 @@ class UserApiImpl extends UserApi {
   }
 
   @override
-  Future<List<User>> getFollowers({required String username}) async {
+  Future<List<SampleFeature>> getFollowers({required String username}) async {
     try {
       final _res = await sendRequest(
         url: '/users/$username/followers',
@@ -58,9 +58,9 @@ class UserApiImpl extends UserApi {
         useToken: true,
       );
       return (_res.data)
-          .map((data) => User.fromJson(data))
+          .map((data) => SampleFeature.fromJson(data))
           .toList()
-          .cast<User>();
+          .cast<SampleFeature>();
     } catch (e) {
       log('$tag Error = $e');
       rethrow;
@@ -68,7 +68,7 @@ class UserApiImpl extends UserApi {
   }
 
   @override
-  Future<List<User>> getFollowings({required String username}) async {
+  Future<List<SampleFeature>> getFollowings({required String username}) async {
     try {
       final _res = await sendRequest(
         url: '/users/$username/following',
@@ -76,9 +76,9 @@ class UserApiImpl extends UserApi {
         useToken: true,
       );
       return (_res.data)
-          .map((data) => User.fromJson(data))
+          .map((data) => SampleFeature.fromJson(data))
           .toList()
-          .cast<User>();
+          .cast<SampleFeature>();
     } catch (e) {
       log('$tag Error = $e');
       rethrow;

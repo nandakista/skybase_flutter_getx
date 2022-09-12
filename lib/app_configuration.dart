@@ -22,8 +22,8 @@ class AppConfiguration {
   static const midtransDevKey = 'Some Key';
 
   //-- App Info
-  static String appName = 'PSC119';
-  static String appTag = 'Kabupaten Lampung Timur';
+  static String appName = 'Skybase';
+  static String appTag = 'Flutter Getx';
   static String appVersion = AppInfo.find.get.version;
   static String buildNumber = AppInfo.find.get.buildNumber;
   static String packageName = AppInfo.find.get.packageName;

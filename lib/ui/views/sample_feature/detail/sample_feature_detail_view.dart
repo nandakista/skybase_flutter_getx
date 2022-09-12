@@ -3,20 +3,19 @@ import 'package:get/get.dart';
 import 'package:skybase/core/app/app_constant.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/data/models/user/user.dart';
-import 'package:skybase/ui/views/user/detail/component/follower_tab_view.dart';
-import 'package:skybase/ui/views/user/detail/component/following_tab_view.dart';
-import 'package:skybase/ui/views/user/detail/component/repo_tab_view.dart';
-import 'package:skybase/ui/views/user/detail/user_detail_controller.dart';
+import 'package:skybase/data/models/sample_feature/sample_feature.dart';
+import 'package:skybase/ui/views/sample_feature/detail/component/follower_tab_view.dart';
+import 'package:skybase/ui/views/sample_feature/detail/component/following_tab_view.dart';
+import 'package:skybase/ui/views/sample_feature/detail/component/repo_tab_view.dart';
+import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/base/sky_view.dart';
-import 'package:skybase/ui/widgets/basic_widget.dart';
 import 'package:skybase/ui/widgets/cached_image.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 
-class UserDetailView extends GetView<UserDetailController> {
+class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
   static const String route = '/user-detail';
-  const UserDetailView({Key? key}) : super(key: key);
+  const SampleFeatureDetailView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class UserDetailView extends GetView<UserDetailController> {
     );
   }
 
-  _buildHeader(User? user) {
+  _buildHeader(SampleFeature? user) {
     return Padding(
       key: controller.headerKey,
       padding: const EdgeInsets.symmetric(horizontal: AppConst.defaultMargin),
@@ -86,7 +85,7 @@ class UserDetailView extends GetView<UserDetailController> {
     );
   }
 
-  _buildDetailInfo(User? user) {
+  _buildDetailInfo(SampleFeature? user) {
     return Padding(
       key: controller.detailInfoKey,
       padding: const EdgeInsets.symmetric(horizontal: AppConst.defaultMargin),

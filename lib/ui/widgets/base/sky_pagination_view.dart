@@ -3,7 +3,6 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:skybase/ui/widgets/list_pagination/list_empty_view.dart';
 import 'package:skybase/ui/widgets/list_pagination/pagination_error_load_view.dart';
 import 'package:skybase/ui/widgets/list_pagination/pagination_error_view.dart';
-import 'package:skybase/ui/widgets/list_pagination/pagination_max_item_view.dart';
 import 'package:skybase/ui/widgets/shimmer_list.dart';
 
 typedef ItemWidgetBuilder<ItemType> = Widget Function(

@@ -16,8 +16,6 @@ import 'package:skybase/core/helper/general_function.dart';
 import 'package:skybase/core/network/api_config.dart';
 import 'package:skybase/core/themes/app_theme.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
-import 'package:skybase/data/data_sources/local/user/user_dao.dart';
-import 'package:skybase/data/data_sources/local/user/user_dao_impl.dart';
 
 class Initializer extends GetxService {
   static Future<void> init() async {
@@ -57,8 +55,5 @@ class Initializer extends GetxService {
 
     // Checking user auth
     Get.put(AuthManager(), permanent: true);
-
-    // Dao
-    Get.put(UserDaoImpl(), permanent: true);
   }
 }

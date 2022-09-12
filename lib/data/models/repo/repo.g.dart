@@ -18,7 +18,7 @@ class RepoAdapter extends TypeAdapter<Repo> {
     };
     return Repo(
       name: fields[0] as String,
-      owner: fields[1] as User,
+      owner: fields[1] as SampleFeature,
       description: fields[2] as String?,
       language: fields[3] as String?,
       totalWatch: fields[4] as int?,

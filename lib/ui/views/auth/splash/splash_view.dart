@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skybase/app_configuration.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/ui/widgets/basic_widget.dart';
+import 'package:skybase/ui/widgets/common_widget.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
 
 class SplashView extends StatelessWidget {

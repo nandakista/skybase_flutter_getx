@@ -67,8 +67,11 @@ class ShimmerDetail extends StatelessWidget {
     );
   }
 
-  Container _buildItem(
-          {required double width, required double height, double? radius}) =>
+  Container _buildItem({
+    required double width,
+    required double height,
+    double? radius,
+  }) =>
       Container(
         width: width,
         height: height,

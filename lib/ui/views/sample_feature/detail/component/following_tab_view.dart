@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/data/models/user/user.dart';
-import 'package:skybase/ui/views/user/detail/user_detail_controller.dart';
+import 'package:skybase/data/models/sample_feature/sample_feature.dart';
+import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/cached_image.dart';
 
-class FollowingTabView extends GetView<UserDetailController> {
+class FollowingTabView extends GetView<SampleFeatureDetailController> {
   const FollowingTabView({Key? key}) : super(key: key);
 
   @override
@@ -14,7 +14,7 @@ class FollowingTabView extends GetView<UserDetailController> {
       separatorBuilder: (context, _) => const Divider(),
       itemCount: controller.user.value?.followingList?.length ?? 0,
       itemBuilder: (_, index) {
-        final User? user = controller.user.value!.followingList![index];
+        final SampleFeature? user = controller.user.value!.followingList![index];
         return (user == null)
             ? const Center(
                 child: Text('User belum mem-follow siapapun'),

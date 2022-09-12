@@ -16,7 +16,7 @@ import 'package:skybase/core/localization/locale_helper.dart';
 import 'package:skybase/core/modules/module_helper.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
-import 'package:skybase/ui/widgets/basic_widget.dart';
+import 'package:skybase/ui/widgets/common_widget.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 import 'package:skybase/ui/widgets/sky_form_field.dart';
 
@@ -108,7 +108,7 @@ class _UtilsViewState extends State<UtilsView> {
                   icon: CupertinoIcons.t_bubble,
                 ),
                 const SizedBox(height: 12),
-                SkyFieldForm(
+                SkyFormField(
                   controller: currencyCtr,
                   initialValue: 0.toIDR(),
                   label: International.price.tr,

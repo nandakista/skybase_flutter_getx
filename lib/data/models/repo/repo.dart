@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:skybase/core/database/hive/entity/repo_entity.dart';
 import 'package:skybase/core/database/hive/hive_adapters.dart';
 import 'package:skybase/core/database/hive/hive_box.dart';
-import 'package:skybase/data/models/user/user.dart';
+import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 
 part 'repo.g.dart';
 
@@ -12,7 +12,7 @@ class Repo {
   String name;
 
   @HiveField(RepoEntity.owner)
-  User owner;
+  SampleFeature owner;
 
   @HiveField(RepoEntity.description)
   String? description;
@@ -42,7 +42,7 @@ class Repo {
   factory Repo.fromJson(Map<dynamic, dynamic> json) {
     return Repo(
       name: json['full_name'],
-      owner: User.fromJson(json['owner']),
+      owner: SampleFeature.fromJson(json['owner']),
       description: json['description'],
       language: json['language'],
       totalWatch: json['watchers_count'],

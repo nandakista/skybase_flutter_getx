@@ -5,7 +5,7 @@ import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/views/auth/login/login_controller.dart';
-import 'package:skybase/ui/widgets/basic_widget.dart';
+import 'package:skybase/ui/widgets/common_widget.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 import 'package:skybase/ui/widgets/sky_form_field.dart';
 import 'package:skybase/ui/widgets/keyboard_dismisser.dart';
@@ -69,7 +69,7 @@ class LoginView extends GetView<LoginController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 20),
-          SkyFieldForm(
+          SkyFormField(
 
             label: International.phone.tr,
             hint: International.phone.tr,

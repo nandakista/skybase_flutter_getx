@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/base/base_controller.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
-import 'package:skybase/data/models/user/user.dart';
-import 'package:skybase/data/repositories/user/user_repository.dart';
+import 'package:skybase/data/models/sample_feature/sample_feature.dart';
+import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
 
-class UserDetailController extends BaseController {
-  final UserRepository repository;
-  UserDetailController({required this.repository});
+class SampleFeatureDetailController extends BaseController {
+  final SampleFeatureRepository repository;
+  SampleFeatureDetailController({required this.repository});
 
   final GlobalKey headerKey = GlobalKey();
   final GlobalKey detailInfoKey = GlobalKey();
   final headerWidget = Rxn<Size>();
   final detailInfoWidget = Rxn<Size>();
 
-  final user = Rxn<User>();
+  final user = Rxn<SampleFeature>();
 
   @override
   void onInit() {

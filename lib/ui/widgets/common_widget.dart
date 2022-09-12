@@ -76,17 +76,22 @@ class CircleIcon extends StatelessWidget {
 class ContentWrapper extends StatelessWidget {
   final Widget? child;
   final bool top;
-  const ContentWrapper({Key? key, required this.child, this.top = false,}) : super(key: key);
+  const ContentWrapper({
+    Key? key,
+    required this.child,
+    this.top = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.fromLTRB(
-          AppConst.defaultMargin,
-          top ? AppConst.defaultMargin : 0,
-          AppConst.defaultMargin,
-          AppConst.defaultMargin,
-        ),
-        child: child);
+      margin: EdgeInsets.fromLTRB(
+        AppConst.defaultMargin,
+        top ? AppConst.defaultMargin : 0,
+        AppConst.defaultMargin,
+        AppConst.defaultMargin,
+      ),
+      child: child,
+    );
   }
 }
