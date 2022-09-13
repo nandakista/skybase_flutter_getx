@@ -11,7 +11,7 @@ class SampleFeatureDetailBinding extends Bindings {
           () => SampleFeatureDetailController(
         repository: SampleFeatureRepositoryImpl(
           apiService: SampleFeatureApiImpl(),
-          dao: SampleFeatureDaoImpl(),
+          // dao: SampleFeatureDaoImpl(),
         ),
       ),
     );

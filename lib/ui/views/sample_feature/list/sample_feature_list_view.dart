@@ -4,12 +4,13 @@ import 'package:get/get.dart';
 import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
+import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_cache_controller.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_controller.dart';
 import 'package:skybase/ui/widgets/cached_image.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/base/sky_pagination_view.dart';
 
-class SampleFeatureListView extends GetView<SampleFeatureListController> {
+class SampleFeatureListView extends GetView<SampleFeatureListCacheController> {
   static const String route = '/user-list';
   const SampleFeatureListView({Key? key}) : super(key: key);
 
