@@ -7,7 +7,8 @@ import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart
 import 'package:skybase/core/network/api_request.dart';
 import 'package:skybase/core/network/api_response.dart';
 import 'package:skybase/core/network/api_url.dart';
-import 'package:skybase/data/models/user/user.dart';
+import 'package:skybase/data/models/user.dart';
+import 'package:skybase/domain/entities/user/user.dart';
 
 import 'auth_api.dart';
 
@@ -30,7 +31,7 @@ class AuthApiImpl implements AuthApi {
           'email': email,
         },
       );
-      return User.fromJson(ApiResponse.fromJson(response.data).data);
+      return UserModel.fromJson(ApiResponse.fromJson(response.data).data);
     } catch (e) {
       log('$tag Error = $e');
       rethrow;
@@ -57,7 +58,7 @@ class AuthApiImpl implements AuthApi {
           contentType: Headers.jsonContentType,
         ),
       );
-      return User.fromJson(ApiResponse.fromJson(response.data).data);
+      return UserModel.fromJson(ApiResponse.fromJson(response.data).data);
     } catch (e) {
       log('$tag Error = $e');
       rethrow;

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/base/base_controller.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
-import 'package:skybase/data/models/sample_feature/sample_feature.dart';
-import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
+import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
+import 'package:skybase/domain/usecases/get_detail_user.dart';
 
 class SampleFeatureDetailController extends BaseController {
-  final SampleFeatureRepository repository;
-  SampleFeatureDetailController({required this.repository});
+  final GetDetailUser getDetailUser;
+  SampleFeatureDetailController({required this.getDetailUser});
 
   final GlobalKey headerKey = GlobalKey();
   final GlobalKey detailInfoKey = GlobalKey();
@@ -26,13 +26,13 @@ class SampleFeatureDetailController extends BaseController {
   void onReady() async {
     headerWidget.value = (headerKey.currentContext?.findRenderObject() as RenderBox).size;
     detailInfoWidget.value = (detailInfoKey.currentContext?.findRenderObject() as RenderBox).size;
-    await getDetailUser();
+    await loadData();
   }
 
-  getDetailUser() async {
+  loadData() async {
     showLoading();
     try {
-      await repository.getDetailUser(user: user.value!).then((res) {
+      await getDetailUser(user: user.value!).then((res) {
         hideLoading();
         user.value = res;
       });
@@ -48,7 +48,7 @@ class SampleFeatureDetailController extends BaseController {
         },
         onPress: () {
           AppDialog.close();
-          getDetailUser();
+          loadData();
         },
       );
     }

@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/data/models/repo/repo.dart';
+import 'package:skybase/domain/entities/repo/repo.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/cached_image.dart';
 

@@ -1,10 +1,10 @@
 import 'package:hive/hive.dart';
-import 'package:skybase/data/models/repo/repo.dart';
-import 'package:skybase/data/models/sample_feature/sample_feature.dart';
+import 'package:skybase/domain/entities/repo/repo.dart';
+import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 
 class HiveAdapters {
-  static const String PERSON = 'PersonAdapter';
-  static const String REPO = 'RepoAdapter';
+  static const String person = 'PersonAdapter';
+  static const String repo = 'RepoAdapter';
 
   static register() {
     Hive.registerAdapter(PersonAdapter());

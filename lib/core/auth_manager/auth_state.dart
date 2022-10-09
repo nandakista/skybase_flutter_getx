@@ -1,4 +1,4 @@
-import 'package:skybase/data/models/user/user.dart';
+import 'package:skybase/domain/entities/user/user.dart';
 
 enum AppType { INITIAL, FIRST_INSTALL, UNAUTHENTICATED, AUTHENTICATED }
 

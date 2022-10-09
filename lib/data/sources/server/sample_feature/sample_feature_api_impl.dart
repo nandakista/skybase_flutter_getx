@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:skybase/core/network/api_request.dart';
+import 'package:skybase/data/models/repo_model.dart';
+import 'package:skybase/data/models/sample_feature_model.dart';
 import 'package:skybase/data/sources/server/sample_feature/sample_feature_api.dart';
-import 'package:skybase/data/models/repo/repo.dart';
-import 'package:skybase/data/models/sample_feature/sample_feature.dart';
+import 'package:skybase/domain/entities/repo/repo.dart';
+import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 
 class SampleFeatureApiImpl extends SampleFeatureApi {
   String tag = 'User Api';
@@ -24,7 +26,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         useToken: true,
       );
       return (_res.data['items'])
-          .map((data) => SampleFeature.fromJson(data))
+          .map((data) => SampleFeatureModel.fromJson(data))
           .toList()
           .cast<SampleFeature>();
     } catch (e) {
@@ -41,7 +43,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         requestMethod: RequestMethod.GET,
         useToken: true,
       );
-      return SampleFeature.fromJson(_res.data);
+      return SampleFeatureModel.fromJson(_res.data);
     } catch (e) {
       log('$tag Error = $e');
       rethrow;
@@ -57,7 +59,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         useToken: true,
       );
       return (_res.data)
-          .map((data) => SampleFeature.fromJson(data))
+          .map((data) => SampleFeatureModel.fromJson(data))
           .toList()
           .cast<SampleFeature>();
     } catch (e) {
@@ -75,7 +77,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         useToken: true,
       );
       return (_res.data)
-          .map((data) => SampleFeature.fromJson(data))
+          .map((data) => SampleFeatureModel.fromJson(data))
           .toList()
           .cast<SampleFeature>();
     } catch (e) {
@@ -93,7 +95,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         useToken: true,
       );
       return (_res.data)
-          .map((data) => Repo.fromJson(data))
+          .map((data) => RepoModel.fromJson(data))
           .toList()
           .cast<Repo>();
       // return List<Repo>.from(_res.data.map((data) => Repo.fromJson(data)));

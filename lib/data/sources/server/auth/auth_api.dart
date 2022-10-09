@@ -1,4 +1,4 @@
-import 'package:skybase/data/models/user/user.dart';
+import 'package:skybase/domain/entities/user/user.dart';
 
 abstract class AuthApi {
   Future<User> verifyToken({

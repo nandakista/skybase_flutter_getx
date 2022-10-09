@@ -1,5 +1,5 @@
-class GlobalObject<I, V> {
-  I id;
+class GlobalObject<K, V> {
+  K id;
   String? name;
   String? description;
   V? value;

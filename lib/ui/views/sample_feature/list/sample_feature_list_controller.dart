@@ -2,18 +2,18 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:skybase/core/base/pagination_controller.dart';
-import 'package:skybase/data/models/sample_feature/sample_feature.dart';
-import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
+import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
+import 'package:skybase/domain/usecases/get_user.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_view.dart';
 
 class SampleFeatureListController extends PaginationController<SampleFeature> {
-  final SampleFeatureRepository repository;
-  SampleFeatureListController({required this.repository});
+  final GetUsers getUsers;
+  SampleFeatureListController({required this.getUsers});
 
   @override
   void getListData() async {
     try {
-      await repository.getUsers(page: page, perPage: perPage).then((data) {
+      await getUsers(page: page, perPage: perPage).then((data) {
         loadNextData(data);
       });
     } catch (e) {
