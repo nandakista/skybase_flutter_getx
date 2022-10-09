@@ -5,7 +5,7 @@ class UserModel extends User {
     int? id,
     String? token,
     String? refreshToken,
-  });
+  }): super(id: id, token: token, refreshToken: refreshToken);
 
   factory UserModel.fromJson(Map<dynamic, dynamic> json) {
     return UserModel(

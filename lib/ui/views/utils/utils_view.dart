@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:skybase/core/helper/bottom_sheet_helper.dart';
 import 'package:skybase/core/helper/converter_helper.dart';
 import 'package:skybase/ui/widgets/date_picker_widget.dart';
@@ -82,7 +83,7 @@ class _UtilsViewState extends State<UtilsView> {
                     String? converted = DateTimeHelper(
                             startDate: DateTime.now(), endDate: DateTime.now())
                         .format();
-                    Toast.show('Date converted :\n $converted');
+                    Toast.show('Date Converted = $converted');
                   },
                   text: International.convert.tr + ' ' + International.date.tr,
                 ),
