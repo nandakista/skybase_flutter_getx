@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/bottom_sheet_helper.dart';
 import 'package:skybase/core/helper/converter_helper.dart';
+import 'package:skybase/core/helper/extension/int_extension.dart';
 import 'package:skybase/ui/widgets/date_picker_widget.dart';
 import 'package:skybase/core/helper/date_time_helper.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
@@ -33,6 +34,7 @@ class _UtilsViewState extends State<UtilsView> {
 
   @override
   Widget build(BuildContext context) {
+    int currency = 125000;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -54,6 +56,8 @@ class _UtilsViewState extends State<UtilsView> {
                     ),
                   ],
                 ),
+                Text('Sample Currency Format = ${currency.currencyFormat()}'),
+                const SizedBox(height: 12),
                 SkyButton(
                   onPressed: () => LocaleHelper().showLocaleDialog(context),
                   text: International.changeLanguage.tr,
@@ -110,12 +114,12 @@ class _UtilsViewState extends State<UtilsView> {
                 const SizedBox(height: 12),
                 SkyFormField(
                   controller: currencyCtr,
-                  initialValue: 0.toIDR(),
+                  initialValue: 0.toStringIDR(),
                   label: International.price.tr,
                   hint: International.price.tr,
                   keyboardType: TextInputType.number,
                   onChanged: (value) =>
-                      (value.isEmpty) ? currencyCtr.text = 0.toIDR() : value,
+                      (value.isEmpty) ? currencyCtr.text = 0.toStringIDR() : value,
                   validator: (value) => AppValidator.generalField('$value'),
                   inputFormatters: CustomInputFormatters.idrCurrency,
                   onFieldSubmitted: (value) => Toast.show(value),

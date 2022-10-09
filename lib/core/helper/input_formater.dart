@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CustomInputFormatters {
 
@@ -19,6 +20,14 @@ class CustomInputFormatters {
     FilteringTextInputFormatter.digitsOnly,
     CurrencyInputFormatter(),
   ];
+
+  static MaskTextInputFormatter maskNpwp({String? initialText}) {
+    return MaskTextInputFormatter(
+      mask: '##.###.###.#-###.###',
+      filter: {"#": RegExp(r'[0-9]')},
+      initialText: initialText,
+    );
+  }
 }
 
 class CurrencyInputFormatter extends TextInputFormatter {

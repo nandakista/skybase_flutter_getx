@@ -59,6 +59,7 @@ dependencies:
   rename: ^2.0.1
   internet_file: ^1.0.0+2
   open_filex: ^4.0.1
+  mask_text_input_formatter: ^2.4.0 # Masking FormTextField
 
 dev_dependencies:
   flutter_test:
