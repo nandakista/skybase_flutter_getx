@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:skybase/data/data_sources/server/auth/auth_api_impl.dart';
+import 'package:skybase/data/sources/server/auth/auth_api_impl.dart';
 import 'package:skybase/ui/views/auth/login/login_controller.dart';
 
 class LoginBinding implements Bindings {

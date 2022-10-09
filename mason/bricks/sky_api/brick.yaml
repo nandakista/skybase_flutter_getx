@@ -9,5 +9,5 @@ environment:
 vars:
   name:
     type: string
-    description: Enter the name of your datasource. [snake_case]
-    prompt: Api Datasource Name [snake_case] =
+    description: Enter the name of your source. [snake_case]
+    prompt: Api Source Name [snake_case] =
