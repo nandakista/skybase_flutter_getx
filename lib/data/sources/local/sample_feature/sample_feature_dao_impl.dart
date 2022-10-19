@@ -6,19 +6,19 @@ import 'package:skybase/data/sources/local/sample_feature/sample_feature_dao.dar
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 
 class SampleFeatureDaoImpl implements SampleFeatureDao {
-  final box = Hive.box(HiveBox.user);
+  final box = Hive.box<SampleFeature>(HiveBox.user);
 
   @override
-  bool boxIsEmpty() => box.isNotEmpty;
+  bool boxIsNotEmpty() => box.isNotEmpty;
 
   @override
   bool containData(SampleFeature user) {
-    SampleFeature _data = box.get(user.id);
-    return (box.containsKey(user.id) && _data.repository != null);
+    SampleFeature? _data = box.get(user.id);
+    return (box.containsKey(user.id) && _data?.repository != null);
   }
 
   @override
-  SampleFeature get(int id) => box.get(id);
+  SampleFeature? get(int id) => box.get(id);
 
   @override
   void insert(SampleFeature user) => box.put(user.id, user);
@@ -34,7 +34,7 @@ class SampleFeatureDaoImpl implements SampleFeatureDao {
   List<SampleFeature> getAll() {
     List<SampleFeature> _users = [];
     for (var i = 0; i < box.length; i++) {
-      _users.add(box.getAt(i));
+      _users.add(box.getAt(i)!);
     }
     return _users;
   }
@@ -45,7 +45,10 @@ class SampleFeatureDaoImpl implements SampleFeatureDao {
   }
 
   @override
-  void clear() => box.clear();
+  Future<void> clear() async {
+    log('Dao Clear');
+    await box.clear();
+  }
 
   @override
   void delete(SampleFeature user) {

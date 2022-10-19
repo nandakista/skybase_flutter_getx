@@ -1,13 +1,13 @@
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 
 abstract class SampleFeatureDao {
-  bool boxIsEmpty();
+  bool boxIsNotEmpty();
   bool containData(SampleFeature user);
-  SampleFeature get(int id);
+  SampleFeature? get(int id);
   void insert(SampleFeature user);
   void insertAll(List<SampleFeature> users);
   List<SampleFeature> getAll();
-  void clear();
+  Future<void> clear();
   void delete(SampleFeature user);
   void deleteAll(List<SampleFeature> users);
 }

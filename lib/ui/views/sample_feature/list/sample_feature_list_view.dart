@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:skybase/core/database/hive/hive_box.dart';
 import 'package:skybase/core/localization/language_const.dart';
+import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_controller.dart';
@@ -33,6 +35,13 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
               style: AppStyle.small,
             ),
           );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.delete, color: Colors.white),
+        backgroundColor: AppColors.primary,
+        onPressed: () {
+          Hive.box<SampleFeature>(HiveBox.user).clear();
         },
       ),
     );

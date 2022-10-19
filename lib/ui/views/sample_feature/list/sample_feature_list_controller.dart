@@ -13,7 +13,9 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
   @override
   void getListData() async {
     try {
-      await repository.getUsers(page: page, perPage: perPage).then((data) {
+      await repository
+          .getUsers(page: page, perPage: perPage, isRefresh: isRefresh)
+          .then((data) {
         loadNextData(data);
       });
     } catch (e) {
