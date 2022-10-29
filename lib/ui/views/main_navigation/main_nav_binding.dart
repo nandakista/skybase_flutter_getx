@@ -6,11 +6,13 @@ import 'package:skybase/data/repositories/sample_feature/sample_feature_reposito
 import 'package:skybase/ui/views/auth/login/login_controller.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_controller.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_controller.dart';
+import 'package:skybase/ui/views/utils/utils_controller.dart';
 
 class MainNavBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => MainNavController());
+    Get.lazyPut(() => UtilsController());
     Get.lazyPut(() => LoginController(dataSource: AuthApiImpl()));
     Get.lazyPut(
       () => SampleFeatureListController(

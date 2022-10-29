@@ -29,6 +29,8 @@ const Map<String, String> en = {
   International.convert: 'Convert',
   International.date: 'Date',
   International.price: 'Price',
+  International.media: 'Media',
+  International.preview: 'Preview',
 
   // Sentence
   International.errEmail : 'Please enter a valid email address.',

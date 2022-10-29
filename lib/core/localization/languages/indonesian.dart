@@ -29,6 +29,8 @@ const Map<String, String> id = {
   International.convert: 'Konversi',
   International.date: 'Tanggal',
   International.price: 'Harga',
+  International.media: 'Media',
+  International.preview: 'Preview',
 
   //Validation
   International.errEmail: 'Format email masih salah',

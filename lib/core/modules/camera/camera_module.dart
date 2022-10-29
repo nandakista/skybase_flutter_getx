@@ -155,7 +155,7 @@ class _CameraModuleState extends State<CameraModule>
 
   Future fetchFirstPhotoFromGallery() async {
     try {
-      final albums = await PhotoManager.getAssetPathList(type: RequestType.all);
+      final albums = await PhotoManager.getAssetPathList(type: RequestType.image);
       final recentAlbum = albums.first;
       final recentAssets = await recentAlbum.getAssetListRange(
         start: 0,

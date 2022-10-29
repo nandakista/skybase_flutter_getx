@@ -48,7 +48,7 @@ class LoginController extends GetxController {
   }
 
   void bypassLogin() async {
-    Get.toNamed(MainNavView.route);
+    Get.offNamed(MainNavView.route);
     // await SecureStorageManager.find.setToken(value: 'dummy');
     // AuthManager.find.setAuth();
   }
