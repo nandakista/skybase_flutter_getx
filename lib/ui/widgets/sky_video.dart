@@ -6,6 +6,10 @@ import 'package:skybase/ui/widgets/media/play_overlay.dart';
 import 'package:skybase/ui/widgets/sky_box.dart';
 import 'package:video_player/video_player.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class SkyVideo extends StatefulWidget {
   final String url;
   final double? width;
@@ -18,8 +22,6 @@ class SkyVideo extends StatefulWidget {
   const SkyVideo({
     Key? key,
     required this.url,
-    // this.width = double.infinity,
-    // this.height = double.infinity,
     this.width,
     this.height,
     this.showControls = true,

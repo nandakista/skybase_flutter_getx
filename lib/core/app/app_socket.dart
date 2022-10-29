@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:socket_io_client/socket_io_client.dart' as socket;
 import 'package:skybase/core/app/app_env.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class AppSocket {
   static AppSocket get find => Get.find<AppSocket>();
   static socket.Socket get io => Get.find<AppSocket>().init();

@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class ErrorView extends StatelessWidget {
   const ErrorView({
     Key? key,

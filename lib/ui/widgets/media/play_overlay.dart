@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/ui/widgets/sky_box.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class PlayOverlay extends StatelessWidget {
   final Widget child;
   final bool visible;

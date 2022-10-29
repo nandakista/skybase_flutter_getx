@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:skybase/core/themes/app_style.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class InfoTable extends StatelessWidget {
   final Map<String, String> data;
   final TextStyle? headerTextStyle;

@@ -5,6 +5,10 @@ import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class LocaleHelper {
   final List<Map<String, dynamic>> locales = [
     {'name': 'English', 'locale': const Locale('en')},

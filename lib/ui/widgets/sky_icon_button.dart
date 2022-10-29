@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 
 /* Created by
-   Nanda K Permana
-   24/05/2022
+   Varcant
+   nanda.kista@gmail.com
 */
-
 class SkyIconButton extends StatelessWidget {
   /// Background color of button. Default value is primary color.
   final Color? color;

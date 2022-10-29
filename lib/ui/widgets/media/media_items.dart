@@ -8,6 +8,10 @@ import 'package:skybase/ui/widgets/media/preview/media_list_preview_page.dart';
 import 'package:skybase/ui/widgets/media/preview/media_preview_page.dart';
 import 'package:skybase/ui/widgets/sky_video.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class MediaItems extends StatelessWidget {
   final VoidCallback? onTapMore;
   final VoidCallback? onTap;

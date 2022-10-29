@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/widgets/bullet_text.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class UnorderedList extends StatelessWidget {
   const UnorderedList({
     Key? key,

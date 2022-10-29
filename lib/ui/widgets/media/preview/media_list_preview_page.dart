@@ -7,6 +7,10 @@ import 'package:skybase/ui/widgets/sky_image.dart';
 import 'package:skybase/ui/widgets/sky_video.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class MediaListPreviewPage extends StatelessWidget {
   const MediaListPreviewPage({Key? key, required this.mediaUrls})
       : super(key: key);

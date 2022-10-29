@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:skybase/ui/widgets/common_widget.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class SkyImage extends StatelessWidget {
   final String url;
   final double? width;

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class BulletText extends StatelessWidget {
   const BulletText({
     Key? key,

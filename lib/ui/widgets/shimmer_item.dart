@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class ShimmerItem extends StatelessWidget {
   const ShimmerItem({Key? key, required this.height}) : super(key: key);
 

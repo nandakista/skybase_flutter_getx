@@ -4,6 +4,10 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class PaginationErrorView extends StatelessWidget {
   const PaginationErrorView({Key? key, required this.controller})
       : super(key: key);

@@ -3,7 +3,11 @@ import 'dart:io';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:skybase/core/app/app_constant.dart';
+
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 
 /// Loading widget based on platform (android or iOS)
 Widget platformLoadingIndicator() {

@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 abstract class PaginationController<T> extends GetxController {
 
   int perPage = 20;

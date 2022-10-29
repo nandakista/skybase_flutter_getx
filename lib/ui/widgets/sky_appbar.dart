@@ -4,6 +4,10 @@ import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/widgets/base/base_appbar.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 abstract class SkyAppBar {
   /// Use [SkyAppBar.primary] as a default AppBar globally.
   /// * Can edited for specific requirement.

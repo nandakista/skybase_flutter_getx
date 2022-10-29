@@ -14,6 +14,10 @@ import 'package:skybase/ui/widgets/common_widget.dart';
 import 'package:skybase/ui/widgets/image_picker.dart';
 import 'camera_preview.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 enum CameraType {
   REAR,
   FRONT,
