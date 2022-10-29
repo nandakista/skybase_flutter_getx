@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/media_helper.dart';
-import 'package:skybase/ui/widgets/media/sky_image.dart';
-import 'package:skybase/ui/widgets/media/sky_video.dart';
+import 'package:skybase/ui/widgets/sky_image.dart';
+import 'package:skybase/ui/widgets/sky_video.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 
 class MediaPreviewPage extends StatelessWidget {

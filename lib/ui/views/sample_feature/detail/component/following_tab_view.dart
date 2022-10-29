@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
-import 'package:skybase/ui/widgets/cached_image.dart';
+import 'package:skybase/ui/widgets/sky_image.dart';
 
 class FollowingTabView extends GetView<SampleFeatureDetailController> {
   const FollowingTabView({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class FollowingTabView extends GetView<SampleFeatureDetailController> {
                 // onTap: () => controller.onChooseUser(user: user),
                 leading: CircleAvatar(
                   radius: 30,
-                  child: CachedImage(url: '${user.avatarUrl}&s=200'),
+                  child: SkyImage(url: '${user.avatarUrl}&s=200'),
                 ),
                 title: Text(user.username.toString()),
                 subtitle: Text(

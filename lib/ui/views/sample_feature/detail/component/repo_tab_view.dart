@@ -5,7 +5,7 @@ import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/data/models/repo/repo.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
-import 'package:skybase/ui/widgets/cached_image.dart';
+import 'package:skybase/ui/widgets/sky_image.dart';
 
 class RepoTabView extends GetView<SampleFeatureDetailController> {
   const RepoTabView({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
               : ListTile(
                   leading: CircleAvatar(
                     radius: 30,
-                    child: CachedImage(
+                    child: SkyImage(
                       url: '${repos.owner.avatarUrl}&s=200',
                     ),
                   ),
