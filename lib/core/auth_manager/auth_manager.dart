@@ -41,7 +41,7 @@ class AuthManager extends GetxController {
     // authChanged(state);
     Timer(
       const Duration(seconds: 2),
-          () => Get.offAllNamed(MainNavView.route),
+          () => Get.offAllNamed(LoginView.route),
     );
     super.onReady();
   }

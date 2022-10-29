@@ -17,6 +17,10 @@ import 'package:skybase/core/network/api_config.dart';
 import 'package:skybase/core/themes/app_theme.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class Initializer extends GetxService {
   static Future<void> init() async {
     HttpOverrides.global = MyHttpOverrides();

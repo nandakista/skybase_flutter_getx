@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/localization/language_const.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class ListEmptyView extends StatelessWidget {
   const ListEmptyView({
     Key? key,

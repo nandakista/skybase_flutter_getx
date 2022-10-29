@@ -1,6 +1,10 @@
 import 'package:skybase/core/app/app_info.dart';
 import 'package:skybase/core/network/api_token_manager.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class AppConfiguration {
   //-- Main Configuration
   static const clientToken = 'Some Client Token';

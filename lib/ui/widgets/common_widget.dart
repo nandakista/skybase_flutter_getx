@@ -3,7 +3,11 @@ import 'dart:io';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:skybase/core/app/app_constant.dart';
+
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 
 /// Loading widget based on platform (android or iOS)
 Widget platformLoadingIndicator() {
@@ -76,20 +80,27 @@ class CircleIcon extends StatelessWidget {
 class ContentWrapper extends StatelessWidget {
   final Widget? child;
   final bool top;
+  final bool bottom;
+  final double? marginTop;
+  final double? marginBottom;
+
   const ContentWrapper({
     Key? key,
     required this.child,
     this.top = false,
+    this.bottom = false,
+    this.marginTop,
+    this.marginBottom,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.fromLTRB(
-        AppConst.defaultMargin,
-        top ? AppConst.defaultMargin : 0,
-        AppConst.defaultMargin,
-        AppConst.defaultMargin,
+        24,
+        top ? marginTop ?? 24 : 0,
+        24,
+        bottom ? marginBottom ?? 24 : 0,
       ),
       child: child,
     );

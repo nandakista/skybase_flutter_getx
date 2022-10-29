@@ -9,8 +9,8 @@ import 'package:skybase/ui/views/sample_feature/detail/component/following_tab_v
 import 'package:skybase/ui/views/sample_feature/detail/component/repo_tab_view.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/base/sky_view.dart';
-import 'package:skybase/ui/widgets/cached_image.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
+import 'package:skybase/ui/widgets/sky_image.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 
 class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
@@ -51,7 +51,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
         children: [
           CircleAvatar(
             radius: 45,
-            child: CachedImage(url: '${user?.avatarUrl}&s=200'),
+            child: SkyImage(url: '${user?.avatarUrl}&s=200'),
           ),
           Column(
             children: [

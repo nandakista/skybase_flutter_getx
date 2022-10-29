@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 abstract class BaseController extends GetxController {
   RxBool isLoading = false.obs;
   RxString errorMessage = ''.obs;

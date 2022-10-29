@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/core/themes/app_style.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class PaginationMaxItemView extends StatelessWidget {
   const PaginationMaxItemView({Key? key}) : super(key: key);
 

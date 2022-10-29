@@ -31,6 +31,8 @@ class International {
   static const String convert = 'txt_convert';
   static const String date = 'txt_date';
   static const String price = 'txt_price';
+  static const String media = 'txt_media';
+  static const String preview = 'txt_preview';
 
   // Sentence
   static const String errEmail = 'txt_err_email';

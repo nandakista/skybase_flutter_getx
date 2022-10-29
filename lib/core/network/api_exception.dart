@@ -2,6 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:skybase/core/network/api_message.dart';
 import 'package:skybase/core/network/api_response.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class NetworkException implements Exception {
   final String? prefix;
   final Response? response;

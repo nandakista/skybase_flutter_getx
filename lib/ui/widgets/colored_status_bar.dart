@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
+
 /// Wrap your Scaffold to this widget for set Status Bar color in specific pages.
 class ColoredStatusBar extends StatelessWidget {
   const ColoredStatusBar({

@@ -1,11 +1,16 @@
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 abstract class PaginationController<T> extends GetxController {
 
   int perPage = 20;
   int page = 1;
   final pagingController = PagingController<int, T>(firstPageKey: 0);
+  bool isRefresh = false;
 
   void getListData();
 
@@ -19,6 +24,7 @@ abstract class PaginationController<T> extends GetxController {
 
   refreshPage() {
     page = 1;
+    isRefresh = true;
     pagingController.refresh();
   }
 

@@ -1,5 +1,5 @@
 import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
-import 'package:skybase/domain/interfaces/sample_feature/sample_feature_repository.dart';
+import 'package:skybase/domain/repositories/sample_feature/sample_feature_repository.dart';
 
 class GetUsers {
   final SampleFeatureRepository repository;
@@ -8,10 +8,12 @@ class GetUsers {
   Future<List<SampleFeature>> call({
     required int page,
     required int perPage,
+    required bool isRefresh,
   }) async {
     return await repository.getUsers(
       page: page,
       perPage: perPage,
+      isRefresh: isRefresh,
     );
   }
 }

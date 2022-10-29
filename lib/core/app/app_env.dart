@@ -4,6 +4,10 @@ import 'package:skybase/app_configuration.dart';
 import 'package:skybase/core/app/app_socket.dart';
 import 'package:skybase/core/network/api_token_manager.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 enum Env {
   PRODUCTION,
   STAGING,

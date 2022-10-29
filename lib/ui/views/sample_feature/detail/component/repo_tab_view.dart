@@ -5,7 +5,7 @@ import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/domain/entities/repo/repo.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
-import 'package:skybase/ui/widgets/cached_image.dart';
+import 'package:skybase/ui/widgets/sky_image.dart';
 
 class RepoTabView extends GetView<SampleFeatureDetailController> {
   const RepoTabView({Key? key}) : super(key: key);
@@ -26,17 +26,17 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
               : ListTile(
                   leading: CircleAvatar(
                     radius: 30,
-                    child: CachedImage(
+                    child: SkyImage(
                       url: '${repos.owner.avatarUrl}&s=200',
                     ),
                   ),
-                  title: Text(repos.name.toString(), style: AppStyle.small),
+                  title: Text(repos.name.toString(), style: AppStyle.body2),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Language: ' + (repos.language ?? '--'),
-                        style: AppStyle.normalSmall,
+                        style: AppStyle.body3,
                       ),
                       const SizedBox(height: 8),
                       Padding(
@@ -51,7 +51,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                   size: 16,
                                 ),
                                 Text(' ${repos.totalStar}',
-                                    style: AppStyle.normalSmall),
+                                    style: AppStyle.body3),
                               ],
                             ),
                             Row(
@@ -59,7 +59,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                 const Icon(Icons.remove_red_eye_outlined,
                                     size: 16),
                                 Text(' ${repos.totalWatch}',
-                                    style: AppStyle.normalSmall),
+                                    style: AppStyle.body3),
                               ],
                             ),
                             Row(
@@ -68,7 +68,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                     height: 14,
                                     color: AppColors.systemDarkGrey),
                                 Text(' ${repos.totalFork}',
-                                    style: AppStyle.normalSmall),
+                                    style: AppStyle.body3),
                               ],
                             )
                           ],

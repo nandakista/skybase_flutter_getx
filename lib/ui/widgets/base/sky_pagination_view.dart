@@ -5,6 +5,10 @@ import 'package:skybase/ui/widgets/list_pagination/pagination_error_load_view.da
 import 'package:skybase/ui/widgets/list_pagination/pagination_error_view.dart';
 import 'package:skybase/ui/widgets/shimmer_list.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 typedef ItemWidgetBuilder<ItemType> = Widget Function(
     BuildContext context,
     ItemType item,

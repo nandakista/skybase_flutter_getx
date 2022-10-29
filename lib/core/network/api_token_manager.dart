@@ -14,6 +14,10 @@ import 'package:skybase/core/network/api_request.dart';
 import 'package:skybase/core/network/api_response.dart';
 import 'package:skybase/core/network/api_url.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 enum TokenType {
   /// When your app no need token authentication.
   NO_TOKEN,

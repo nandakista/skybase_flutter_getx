@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
+
 ///  Default button on this project with primary color.
 ///  Change it as needed.
 class SkyButton extends StatelessWidget {
   /// Background color of button. Default value is primary color.
-  final Color color;
+  final Color? color;
 
   /// Text color of button, default value is white.
   final Color textColor;
@@ -43,6 +48,9 @@ class SkyButton extends StatelessWidget {
   /// Leading icon inside button.
   final IconData? icon;
 
+  /// Leading icon with Widget
+  final Widget? iconWidget;
+
   /// Font weight text and icon inside button.
   final FontWeight? fontWeight;
 
@@ -52,6 +60,9 @@ class SkyButton extends StatelessWidget {
 
   /// Width of button
   final bool wrapContent;
+
+  /// Change style button to outline mode
+  final bool outlineMode;
 
   const SkyButton({
     Key? key,
@@ -72,6 +83,8 @@ class SkyButton extends StatelessWidget {
     this.wrapContent = false,
     this.borderColor,
     this.borderWidth,
+    this.iconWidget,
+    this.outlineMode = false,
   }) : super(key: key);
 
   @override
@@ -83,23 +96,27 @@ class SkyButton extends StatelessWidget {
       margin: margin,
       child: ElevatedButton.icon(
         icon: Visibility(
-          visible: (icon != null),
-          child: Icon(
-            icon,
-            color: iconColor,
-          ),
+          visible: (iconWidget != null || icon != null),
+          child: iconWidget ??
+              Icon(
+                icon,
+                color: (outlineMode) ? AppColors.primary : iconColor,
+              ),
         ),
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           elevation: elevation,
-          padding: (icon != null)
+          backgroundColor:
+              (outlineMode) ? Theme.of(context).scaffoldBackgroundColor : color,
+          padding: (icon != null || iconWidget != null)
               ? const EdgeInsets.symmetric(horizontal: 10, vertical: 10)
               : const EdgeInsets.fromLTRB(0, 10, 10, 10),
-          primary: color,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius!),
             side: BorderSide(
-              color: borderColor ?? Colors.transparent,
+              color: (outlineMode)
+                  ? AppColors.primary
+                  : borderColor ?? Colors.transparent,
               width: borderWidth ?? 1.5,
               style: BorderStyle.solid,
             ),
@@ -113,7 +130,7 @@ class SkyButton extends StatelessWidget {
             style: AppStyle.subtitle4.copyWith(
               fontSize: fontSize,
               fontWeight: fontWeight,
-              color: textColor,
+              color: outlineMode ? AppColors.primary : textColor,
             ),
           ),
         ),

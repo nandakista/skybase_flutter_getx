@@ -2,6 +2,10 @@ import 'package:get/get.dart';
 import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class ThemeManager extends GetxController {
   static ThemeManager get find => Get.find<ThemeManager>();
 

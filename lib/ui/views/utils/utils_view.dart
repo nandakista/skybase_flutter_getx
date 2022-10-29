@@ -1,12 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:skybase/core/helper/bottom_sheet_helper.dart';
 import 'package:skybase/core/helper/converter_helper.dart';
+import 'package:skybase/core/helper/extension/int_extension.dart';
+import 'package:skybase/ui/views/utils/utils_controller.dart';
+import 'package:skybase/ui/views/utils/utils_view_2.dart';
 import 'package:skybase/ui/widgets/date_picker_widget.dart';
 import 'package:skybase/core/helper/date_time_helper.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
@@ -18,29 +18,31 @@ import 'package:skybase/core/modules/module_helper.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
 import 'package:skybase/ui/widgets/common_widget.dart';
+import 'package:skybase/ui/widgets/sky_image.dart';
+import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 import 'package:skybase/ui/widgets/sky_form_field.dart';
 
-class UtilsView extends StatefulWidget {
+class UtilsView extends GetView<UtilsController> {
   const UtilsView({Key? key}) : super(key: key);
-
-  @override
-  State<UtilsView> createState() => _UtilsViewState();
-}
-
-class _UtilsViewState extends State<UtilsView> {
-  File? _imageFile;
-  final currencyCtr = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: SkyAppBar.primary(title: 'Utils 1'),
       body: SafeArea(
         child: SingleChildScrollView(
           child: ContentWrapper(
+            top: true,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SkyButton(
+                  text: 'Page 2',
+                  icon: Icons.ac_unit,
+                  outlineMode: true,
+                  onPressed: () => Get.to(const UtilsView2()),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -55,6 +57,9 @@ class _UtilsViewState extends State<UtilsView> {
                     ),
                   ],
                 ),
+                Text(
+                    'Sample Currency Format = ${controller.currency.currencyFormat()}'),
+                const SizedBox(height: 12),
                 SkyButton(
                   onPressed: () => LocaleHelper().showLocaleDialog(context),
                   text: International.changeLanguage.tr,
@@ -110,13 +115,14 @@ class _UtilsViewState extends State<UtilsView> {
                 ),
                 const SizedBox(height: 12),
                 SkyFormField(
-                  controller: currencyCtr,
-                  initialValue: 0.toIDR(),
+                  controller: controller.currencyCtr,
+                  initialValue: 0.toStringIDR(),
                   label: International.price.tr,
                   hint: International.price.tr,
                   keyboardType: TextInputType.number,
-                  onChanged: (value) =>
-                      (value.isEmpty) ? currencyCtr.text = 0.toIDR() : value,
+                  onChanged: (value) => (value.isEmpty)
+                      ? controller.currencyCtr.text = 0.toStringIDR()
+                      : value,
                   validator: (value) => AppValidator.generalField('$value'),
                   inputFormatters: CustomInputFormatters.idrCurrency,
                   onFieldSubmitted: (value) => Toast.show(value),
@@ -133,30 +139,29 @@ class _UtilsViewState extends State<UtilsView> {
 
   _buildImagePicker(BuildContext context) => [
         const Text('Module Camera'),
-        Container(
-          child: _imageFile != null
-              ? Image.file(
-                  _imageFile!,
-                  height: MediaQuery.of(context).size.width * 1 / 2,
-                  width: MediaQuery.of(context).size.width * 2 / 3,
-                  fit: BoxFit.contain,
-                )
-              : SizedBox(
-                  height: MediaQuery.of(context).size.width * 1 / 2,
-                  width: MediaQuery.of(context).size.width * 1 / 2,
-                  child: Card(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(40.0),
-                      child: Image(
-                        image: AssetImage('assets/images/img_man.png'),
+        Obx(
+          () => Container(
+            child: controller.imageFile.value != null
+                ? SkyImage(
+                    url: controller.imageFile.value!.path,
+                    height: MediaQuery.of(context).size.width * 1 / 2,
+                    width: MediaQuery.of(context).size.width * 2 / 3,
+                  )
+                : SizedBox(
+                    height: MediaQuery.of(context).size.width * 1 / 2,
+                    width: MediaQuery.of(context).size.width * 1 / 2,
+                    child: Card(
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(40.0),
+                        child: SkyImage(url: 'assets/images/img_man.png'),
                       ),
                     ),
                   ),
-                ),
+          ),
         ),
         Card(
           elevation: 5,
@@ -168,7 +173,7 @@ class _UtilsViewState extends State<UtilsView> {
             onTap: () {
               ModuleHelper.pickImage(showInfo: true).then((img) {
                 if (img != null) {
-                  setState(() => _imageFile = img);
+                  controller.imageFile.value = img;
                 }
               });
             },

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class SkyCard extends StatelessWidget {
   final Color? borderColor, backgroundColor;
   final Widget? child;

@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:skybase/core/app/app_env.dart';
 import 'package:skybase/core/network/api_interceptor.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 final Dio dioClient = Get.find<DioClient>().init();
 class DioClient {
   static String baseURL = AppEnv.find.get.baseUrl;
