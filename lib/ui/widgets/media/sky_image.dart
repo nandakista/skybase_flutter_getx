@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:skybase/ui/widgets/common_widget.dart';
 
 class SkyImage extends StatelessWidget {
   final String url;
@@ -50,8 +51,8 @@ class SkyImage extends StatelessWidget {
                     placeholder: (context, url) => SizedBox(
                       height: height,
                       width: width,
-                      child: const Center(
-                        child: CircularProgressIndicator(),
+                      child: Center(
+                        child: platformLoadingIndicator(),
                       ),
                     ),
                     errorWidget: (context, url, error) => SizedBox(

@@ -154,9 +154,7 @@ class UtilsView extends GetView<UtilsController> {
                       ),
                       child: const Padding(
                         padding: EdgeInsets.all(40.0),
-                        child: Image(
-                          image: AssetImage('assets/images/img_man.png'),
-                        ),
+                        child: SkyImage(url: 'assets/images/img_man.png',),
                       ),
                     ),
                   ),

@@ -7,7 +7,7 @@ import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_controller.dart';
-import 'package:skybase/ui/widgets/cached_image.dart';
+import 'package:skybase/ui/widgets/media/sky_image.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/base/sky_pagination_view.dart';
 
@@ -27,7 +27,10 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
             onTap: () => controller.onChooseUser(user: item),
             leading: CircleAvatar(
               radius: 30,
-              child: CachedImage(url: '${item.avatarUrl}&s=200'),
+              child: SkyImage(
+                url: '${item.avatarUrl}&s=200',
+                borderRadius: BorderRadius.circular(30),
+              ),
             ),
             title: Text(item.username.toString()),
             subtitle: Text(
