@@ -1,0 +1,21 @@
+{
+  "package": "skybase",
+  "name": "entity_sample",
+  "variables": [
+    {
+      "type": "double?",
+      "name": "price",
+      "key": "price"
+    },
+    {
+      "type": "double?",
+      "name": "currency",
+      "key": "currency"
+    },
+    {
+      "type": "String?",
+      "name": "product_name",
+      "key": "product_name"
+    }
+  ]
+}

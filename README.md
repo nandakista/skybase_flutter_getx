@@ -56,6 +56,10 @@ Create Dao :
 
     mason make sky_dao
 
+Create by config :
+
+    mason make <brick> -c <config-path>
+
 ## Reference
 - [Clean Architecture](https://resocoder.com/2019/08/27/flutter-tdd-clean-architecture-course-1-explanation-project-structure/)
 - [Getx Ecosystem](https://medium.com/flutter-community/the-flutter-getx-ecosystem-state-management-881c7235511d)

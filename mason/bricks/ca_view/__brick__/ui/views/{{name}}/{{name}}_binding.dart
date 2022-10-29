@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:skybase/ui/views/{{name}}/{{name}}_controller.dart';
+import 'package:{{package}}/ui/views/{{name}}/{{name}}_controller.dart';
 
 class {{name.pascalCase()}}Binding implements Bindings {
   @override

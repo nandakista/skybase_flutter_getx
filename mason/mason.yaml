@@ -1,11 +1,13 @@
 bricks:
-  sky_view:
-    path: bricks/sky_view
-  sky_repo:
-    path: bricks/sky_repo
-  sky_api:
-    path: bricks/sky_api
-  sky_dao:
-    path: bricks/sky_dao
-  sky_feature:
-    path: bricks/sky_feature
+  ca_view:
+    path: bricks/ca_view
+  ca_repo:
+    path: bricks/ca_repo
+  ca_api:
+    path: bricks/ca_api
+  ca_dao:
+    path: bricks/ca_dao
+  ca_feature:
+    path: bricks/ca_feature
+  ca_entity:
+    path: bricks/ca_entity
