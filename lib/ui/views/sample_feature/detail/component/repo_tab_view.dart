@@ -30,13 +30,13 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                       url: '${repos.owner.avatarUrl}&s=200',
                     ),
                   ),
-                  title: Text(repos.name.toString(), style: AppStyle.small),
+                  title: Text(repos.name.toString(), style: AppStyle.body2),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Language: ' + (repos.language ?? '--'),
-                        style: AppStyle.normalSmall,
+                        style: AppStyle.body3,
                       ),
                       const SizedBox(height: 8),
                       Padding(
@@ -51,7 +51,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                   size: 16,
                                 ),
                                 Text(' ${repos.totalStar}',
-                                    style: AppStyle.normalSmall),
+                                    style: AppStyle.body3),
                               ],
                             ),
                             Row(
@@ -59,7 +59,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                 const Icon(Icons.remove_red_eye_outlined,
                                     size: 16),
                                 Text(' ${repos.totalWatch}',
-                                    style: AppStyle.normalSmall),
+                                    style: AppStyle.body3),
                               ],
                             ),
                             Row(
@@ -68,7 +68,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                     height: 14,
                                     color: AppColors.systemDarkGrey),
                                 Text(' ${repos.totalFork}',
-                                    style: AppStyle.normalSmall),
+                                    style: AppStyle.body3),
                               ],
                             )
                           ],

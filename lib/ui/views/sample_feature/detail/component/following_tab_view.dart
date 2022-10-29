@@ -28,7 +28,7 @@ class FollowingTabView extends GetView<SampleFeatureDetailController> {
                 title: Text(user.username.toString()),
                 subtitle: Text(
                   user.gitUrl.toString(),
-                  style: AppStyle.small,
+                  style: AppStyle.body2,
                 ),
               );
       },

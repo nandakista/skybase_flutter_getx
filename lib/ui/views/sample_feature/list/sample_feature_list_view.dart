@@ -35,7 +35,7 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
             title: Text(item.username.toString()),
             subtitle: Text(
               item.gitUrl.toString(),
-              style: AppStyle.small,
+              style: AppStyle.body2,
             ),
           );
         },

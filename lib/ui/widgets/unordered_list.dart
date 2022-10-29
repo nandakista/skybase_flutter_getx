@@ -28,7 +28,7 @@ class UnorderedList extends StatelessWidget {
           ),
           subtitle: Text(
             item.value,
-            style: subtitleStyle ?? AppStyle.small,
+            style: subtitleStyle ?? AppStyle.body2,
           ),
         ),
       );

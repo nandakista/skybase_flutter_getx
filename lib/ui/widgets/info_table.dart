@@ -32,8 +32,8 @@ class InfoTable extends StatelessWidget {
     List<TableRow> children = [];
     final data = this.data.entries;
 
-    final headerTextStyle = this.headerTextStyle ?? AppStyle.small;
-    final cellTextStyle = this.cellTextStyle ?? AppStyle.small;
+    final headerTextStyle = this.headerTextStyle ?? AppStyle.body2;
+    final cellTextStyle = this.cellTextStyle ?? AppStyle.body2;
 
     final evenRowDecoration =
         evenColor != null ? BoxDecoration(color: evenColor) : null;
