@@ -38,6 +38,8 @@ class UtilsView extends GetView<UtilsController> {
               children: [
                 SkyButton(
                   text: 'Page 2',
+                  icon: Icons.ac_unit,
+                  outlineMode: true,
                   onPressed: () => Get.to(const UtilsView2()),
                 ),
                 Row(
