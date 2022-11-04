@@ -17,6 +17,8 @@ import 'package:skybase/core/modules/module_helper.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
 import 'package:skybase/ui/widgets/common_widget.dart';
+import 'package:skybase/ui/widgets/image_picker.dart';
+import 'package:skybase/ui/widgets/sky_box.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
@@ -137,6 +139,13 @@ class UtilsView extends GetView<UtilsController> {
   }
 
   _buildImagePicker(BuildContext context) => [
+        UiImagePicker(
+          onSelected: (file) {
+            print('file = $file');
+          },
+          child: SkyBox(child: Text('Test'),
+          ),
+        ),
         const Text('Module Camera'),
         Obx(
           () => Container(
