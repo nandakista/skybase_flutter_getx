@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:skybase/ui/widgets/common_widget.dart';
+import 'package:skybase/ui/widgets/media/preview/media_preview_page.dart';
 
 /* Created by
    Varcant
@@ -14,7 +16,8 @@ class SkyImage extends StatelessWidget {
   final VoidCallback? onTapImage;
   final VoidCallback? onRemoveImage;
   final BorderRadiusGeometry? borderRadius;
-  final BoxFit? fit;
+  final BoxFit fit;
+  final bool enablePreview;
 
   const SkyImage({
     Key? key,
@@ -25,6 +28,7 @@ class SkyImage extends StatelessWidget {
     this.onRemoveImage,
     this.borderRadius,
     this.fit = BoxFit.fill,
+    this.enablePreview = false,
   }) : super(key: key);
 
   @override
@@ -35,7 +39,10 @@ class SkyImage extends StatelessWidget {
     return Stack(
       children: [
         GestureDetector(
-          onTap: onTapImage,
+          // onTap: onTapImage,
+          onTap: enablePreview
+              ? () => Get.to(MediaPreviewPage(url: url))
+              : onTapImage ?? () {},
           child: isFromRemote
               ? ClipRRect(
                   borderRadius: borderRadius ?? BorderRadius.circular(0),

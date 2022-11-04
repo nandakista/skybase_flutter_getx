@@ -143,7 +143,9 @@ class UtilsView extends GetView<UtilsController> {
           onSelected: (file) {
             print('file = $file');
           },
-          child: SkyBox(child: Text('Test'),
+          child: const SkyBox(
+            margin: EdgeInsets.all(4),
+            child: Text('Sky Box \n Testing'),
           ),
         ),
         const Text('Module Camera'),

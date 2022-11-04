@@ -4,6 +4,7 @@ import 'package:skybase/ui/views/utils/utils_controller.dart';
 import 'package:skybase/ui/widgets/common_widget.dart';
 import 'package:skybase/ui/widgets/media/media_items.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
+import 'package:skybase/ui/widgets/sky_image.dart';
 
 class UtilsView2 extends GetView<UtilsController> {
   const UtilsView2({Key? key}) : super(key: key);
@@ -56,6 +57,8 @@ class UtilsView2 extends GetView<UtilsController> {
                   'assets/images/img_sample.jpeg',
                 ],
               ),
+              SizedBox(height: 24),
+              SkyImage(url: 'assets/images/img_sample.jpeg'),
             ],
           ),
         ),
