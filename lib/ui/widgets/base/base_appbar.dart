@@ -15,6 +15,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.iconColor,
     this.elevation,
     this.height,
+    this.iconSize,
   }) : super(key: key);
 
   final String? title;
@@ -25,6 +26,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TextStyle? titleStyle;
   final double? elevation;
   final double? height;
+  final double? iconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: backgroundColor,
       elevation: elevation,
       actions: action,
-      iconTheme: IconThemeData(color: iconColor),
+      iconTheme: IconThemeData(color: iconColor, size: iconSize),
     );
   }
 

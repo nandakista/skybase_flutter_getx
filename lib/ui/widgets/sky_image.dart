@@ -39,7 +39,6 @@ class SkyImage extends StatelessWidget {
     return Stack(
       children: [
         GestureDetector(
-          // onTap: onTapImage,
           onTap: enablePreview
               ? () => Get.to(MediaPreviewPage(url: url))
               : onTapImage ?? () {},

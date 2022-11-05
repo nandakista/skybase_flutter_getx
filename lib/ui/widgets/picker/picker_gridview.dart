@@ -37,7 +37,6 @@ class PickerGridView<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     RxList<PickerData<T>> tempData = data.obs;
-    List<PickerData<T>> pickedData = [];
     return Obx(
           () => GridView.builder(
         shrinkWrap: shrinkWrap,
@@ -53,10 +52,19 @@ class PickerGridView<T> extends StatelessWidget {
           final item = tempData[index];
           return SkyFilterChip(
             onSelected: (isSelected) {
-              _resetSelected(tempData);
-              _setSelectedData(tempData, item, isSelected);
-              _setPickedData(tempData, pickedData);
-              onChanged(pickedData, pickedData.last);
+              if (!isMultiple) {
+                for (var element in tempData) {
+                  element.isSelected = false;
+                }
+              }
+              tempData.value = tempData.map(
+                    (otherChip) {
+                  return item == otherChip
+                      ? otherChip.copy(isSelected: isSelected)
+                      : otherChip;
+                },
+              ).toList();
+              onChanged(tempData);
             },
             selected: item.isSelected,
             child: child(item),
@@ -64,40 +72,5 @@ class PickerGridView<T> extends StatelessWidget {
         },
       ),
     );
-  }
-
-  void _resetSelected(RxList<PickerData<T>> tempData) {
-    if (!isMultiple) {
-      for (var element in tempData) {
-        element.isSelected = false;
-      }
-    }
-  }
-
-  void _setSelectedData(
-      RxList<PickerData<T>> tempData,
-      PickerData<T> item,
-      bool isSelected,
-      ) {
-    tempData.value = tempData.map(
-          (otherChip) {
-        return item == otherChip
-            ? otherChip.copy(isSelected: isSelected)
-            : otherChip;
-      },
-    ).toList();
-  }
-
-  void _setPickedData(
-      RxList<PickerData<T>> temptData,
-      List<PickerData<T>> pickedData,
-      ) {
-    if (isMultiple) {
-      pickedData.clear();
-      pickedData.addAll(temptData.where((p0) => p0.isSelected));
-    } else {
-      pickedData.clear();
-      pickedData.add(temptData.where((p0) => p0.isSelected).last);
-    }
   }
 }
