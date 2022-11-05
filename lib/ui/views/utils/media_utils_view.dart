@@ -1,6 +1,8 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/bottom_sheet_helper.dart';
 import 'package:skybase/core/localization/language_const.dart';
@@ -8,6 +10,8 @@ import 'package:skybase/core/modules/module_helper.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
 import 'package:skybase/ui/widgets/common_widget.dart';
+import 'package:skybase/ui/widgets/media/box_image_picker.dart';
+import 'package:skybase/ui/widgets/media/box_video_picker.dart';
 import 'package:skybase/ui/widgets/media/image_source_bottom_sheet.dart';
 import 'package:skybase/ui/widgets/media/media_items.dart';
 import 'package:skybase/ui/widgets/media/ui_image_picker.dart';
@@ -151,6 +155,73 @@ class MediaUtilsView extends GetView<UtilsController> {
               ),
             );
           },
+        ),
+        const SizedBox(height: 12),
+        BoxVideoPicker(
+          replace: false,
+          text: 'Add video',
+          iconWidget: SvgPicture.asset(
+            'assets/images/ic_add.svg',
+            color: AppColors.primary,
+          ),
+          onSelectedVideo: (File? file) {
+            log('Picked = $file');
+          },
+        ),
+        const SizedBox(height: 12),
+        BoxImagePicker(
+          text: 'Add Photo',
+          iconWidget: SvgPicture.asset(
+            'assets/images/ic_add.svg',
+            color: AppColors.primary,
+          ),
+          replace: true,
+          onSelectedUiImage: (File? file) {
+            log('Picked file = $file');
+            if (file != null) {
+              controller.imageFile.value = file;
+              // controller.update();
+            }
+          },
+        ),
+        const SizedBox(height: 12),
+        Obx(
+          () => Wrap(
+            spacing: 16,
+            runSpacing: 16,
+            children: [
+              ...controller.pickedImages
+                  .map(
+                    (e) => SkyImage(
+                      url: e.path,
+                      height: 100,
+                      width: 100,
+                      enablePreview: true,
+                      borderRadius: BorderRadius.circular(4),
+                      onRemoveImage: () {
+                        controller.pickedImages.remove(e);
+                        controller.update();
+                      },
+                    ),
+                  )
+                  .toList(),
+              BoxImagePicker(
+                text: 'Add Photos',
+                iconWidget: SvgPicture.asset(
+                  'assets/images/ic_add.svg',
+                  color: AppColors.primary,
+                ),
+                replace: false,
+                onSelectedUiImage: (File? file) {
+                  log('Picked file = $file');
+                  if (file != null) {
+                    controller.pickedImages.add(file);
+                    controller.update();
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ];
 }
