@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/data/models/global/picker_data.dart';
-import 'package:skybase/ui/widgets/picker/picker_listview.dart';
 import 'package:skybase/ui/widgets/picker/sky_filter_chip.dart';
 
 /* Created by

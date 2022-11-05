@@ -16,20 +16,6 @@ class ListUtilsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SkyAppBar.primary(title: 'List Utility'),
-      // body: PickerListView(
-      //   shrinkWrap: true,
-      //   data: dummyData.map((e) => PickerData(data: e)).toList(),
-      //   child: (item) {
-      //     return Text('some text');
-      //   },
-      //   onChanged: (item) {
-      //     final pickedItem = item
-      //         .where((element) => element.isSelected)
-      //         .map((e) => e.data);
-      //     log('Picked item = $pickedItem');
-      //   },
-      //   isMultiple: false,
-      // ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(

@@ -13,6 +13,7 @@ import 'package:skybase/core/database/hive/hive_db.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/auth_manager/auth_manager.dart';
 import 'package:skybase/core/helper/general_function.dart';
+import 'package:skybase/core/modules/timer/timer_module.dart';
 import 'package:skybase/core/network/api_config.dart';
 import 'package:skybase/core/themes/app_theme.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
@@ -55,9 +56,9 @@ class Initializer extends GetxService {
     // Initialize Apps and checking user auth
     Get.lazyPut(() => GetStorageManager());
     Get.lazyPut(() => SecureStorageManager());
-    Get.put(ThemeManager(), permanent: true);
+    Get.put(ThemeManager());
 
     // Checking user auth
-    Get.put(AuthManager(), permanent: true);
+    Get.put(AuthManager());
   }
 }

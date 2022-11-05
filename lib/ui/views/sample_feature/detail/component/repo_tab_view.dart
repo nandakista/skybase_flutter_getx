@@ -28,6 +28,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                     radius: 30,
                     child: SkyImage(
                       url: '${repos.owner.avatarUrl}&s=200',
+                      borderRadius: BorderRadius.circular(90),
                     ),
                   ),
                   title: Text(repos.name.toString(), style: AppStyle.body2),
@@ -50,25 +51,35 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                   Icons.star_border,
                                   size: 16,
                                 ),
-                                Text(' ${repos.totalStar}',
-                                    style: AppStyle.body3),
+                                Text(
+                                  ' ${repos.totalStar}',
+                                  style: AppStyle.body3,
+                                ),
                               ],
                             ),
                             Row(
                               children: [
-                                const Icon(Icons.remove_red_eye_outlined,
-                                    size: 16),
-                                Text(' ${repos.totalWatch}',
-                                    style: AppStyle.body3),
+                                const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  size: 16,
+                                ),
+                                Text(
+                                  ' ${repos.totalWatch}',
+                                  style: AppStyle.body3,
+                                ),
                               ],
                             ),
                             Row(
                               children: [
-                                SvgPicture.asset('assets/images/fork.svg',
-                                    height: 14,
-                                    color: AppColors.systemDarkGrey),
-                                Text(' ${repos.totalFork}',
-                                    style: AppStyle.body3),
+                                SvgPicture.asset(
+                                  'assets/images/fork.svg',
+                                  height: 14,
+                                  color: AppColors.systemDarkGrey,
+                                ),
+                                Text(
+                                  ' ${repos.totalFork}',
+                                  style: AppStyle.body3,
+                                ),
                               ],
                             )
                           ],

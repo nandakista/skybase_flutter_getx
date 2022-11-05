@@ -8,7 +8,7 @@ import 'package:skybase/ui/views/utils/component/bottom_sheet_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/dialog_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/list_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/settings_utils_view.dart';
-import 'package:skybase/ui/views/utils/component/timer_utils_view.dart';
+import 'package:skybase/ui/views/utils/component/timer/timer_utils_view.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
 import 'package:skybase/ui/views/utils/component/media_utils_view.dart';
 import 'package:skybase/ui/widgets/date_picker_widget.dart';
@@ -68,17 +68,17 @@ class UtilsView extends GetView<UtilsController> {
                 ),
                 const SizedBox(height: 12),
                 SkyButton(
-                  text: 'Timer Utility',
-                  icon: Icons.timer_outlined,
-                  outlineMode: true,
-                  onPressed: () => Get.to(() => const TimerUtilsView()),
-                ),
-                const SizedBox(height: 12),
-                SkyButton(
                   text: 'Dialog Utility',
                   icon: CupertinoIcons.conversation_bubble,
                   outlineMode: true,
                   onPressed: () => Get.to(() => const DialogUtilsView()),
+                ),
+                const SizedBox(height: 12),
+                SkyButton(
+                  text: 'Timer Utility',
+                  icon: Icons.timer_outlined,
+                  outlineMode: true,
+                  onPressed: () => Get.toNamed(TimerUtilsView.route),
                 ),
               ],
             ),
