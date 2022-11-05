@@ -56,6 +56,8 @@ class SkyListView extends StatelessWidget {
 
   final Widget child;
 
+  final VoidCallback? onRefresh;
+
   const SkyListView({
     Key? key,
     required this.emptyEnabled,
@@ -75,6 +77,7 @@ class SkyListView extends StatelessWidget {
     this.isComponent = true,
     this.emptyView,
     this.retryText,
+    this.onRefresh,
   }) : super(key: key);
 
   @override
@@ -91,8 +94,14 @@ class SkyListView extends StatelessWidget {
     );
   }
 
-  Widget getBodyWidget() =>
-      loadingEnabled || emptyEnabled || errorEnabled ? Container() : child;
+  Widget getBodyWidget() => loadingEnabled || emptyEnabled || errorEnabled
+      ? Container()
+      : (onRefresh != null)
+          ? RefreshIndicator(
+              onRefresh: () => Future.sync(onRefresh!),
+              child: child,
+            )
+          : child;
 
   Widget getLoadingView(Widget loadingWidget) => loadingEnabled
       ? Center(

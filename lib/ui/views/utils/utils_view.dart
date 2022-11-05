@@ -5,6 +5,7 @@ import 'package:skybase/core/helper/bottom_sheet_helper.dart';
 import 'package:skybase/core/helper/converter_helper.dart';
 import 'package:skybase/core/helper/extension/int_extension.dart';
 import 'package:skybase/ui/views/utils/bottom_sheet_utils_view.dart';
+import 'package:skybase/ui/views/utils/list_utils_view.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
 import 'package:skybase/ui/views/utils/media_utils_view.dart';
 import 'package:skybase/ui/widgets/date_picker_widget.dart';
@@ -46,6 +47,12 @@ class UtilsView extends GetView<UtilsController> {
                   icon: Icons.account_tree_outlined,
                   outlineMode: true,
                   onPressed: () => Get.to(const BottomSheetUtilsView()),
+                ),
+                SkyButton(
+                  text: 'List Utility',
+                  icon: Icons.account_tree_outlined,
+                  outlineMode: true,
+                  onPressed: () => Get.to(const ListUtilsView()),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
