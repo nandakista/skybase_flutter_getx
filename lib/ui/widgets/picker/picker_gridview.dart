@@ -8,6 +8,16 @@ import 'package:skybase/ui/widgets/picker/sky_filter_chip.dart';
    Varcant
    nanda.kista@gmail.com
 */
+typedef SMFilterItemBuilder<T> = Widget Function(
+  T item,
+);
+
+typedef SMFilterOnChanged<T> = Function(
+  BuildContext context,
+  int index,
+  List<PickerData<T>> item,
+);
+
 class PickerGridView<T> extends StatelessWidget {
   const PickerGridView({
     Key? key,
@@ -38,7 +48,7 @@ class PickerGridView<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     RxList<PickerData<T>> tempData = data.obs;
     return Obx(
-          () => GridView.builder(
+      () => GridView.builder(
         shrinkWrap: shrinkWrap,
         physics: physics,
         itemCount: tempData.length,
@@ -58,13 +68,13 @@ class PickerGridView<T> extends StatelessWidget {
                 }
               }
               tempData.value = tempData.map(
-                    (otherChip) {
+                (otherChip) {
                   return item == otherChip
                       ? otherChip.copy(isSelected: isSelected)
                       : otherChip;
                 },
               ).toList();
-              onChanged(tempData);
+              onChanged(context, index, tempData);
             },
             selected: item.isSelected,
             child: child(item),

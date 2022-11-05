@@ -8,20 +8,22 @@ import 'package:skybase/ui/widgets/picker/sky_filter_chip.dart';
    nanda.kista@gmail.com
 */
 typedef SMFilterItemBuilder<T> = Widget Function(
-    T item,
-    );
+  T item,
+);
 
 typedef SMFilterOnChanged<T> = Function(
-    List<PickerData<T>> item,
-    );
+  BuildContext context,
+  int index,
+  List<PickerData<T>> item,
+);
 
 class PickerListView<T> extends StatelessWidget {
   const PickerListView({
     Key? key,
     required this.data,
-    required this.child,
-    required this.onChanged,
     required this.isMultiple,
+    required this.itemBuilder,
+    required this.onChanged,
     this.widthItem,
     this.heightItem,
     this.shrinkWrap = false,
@@ -30,7 +32,7 @@ class PickerListView<T> extends StatelessWidget {
   }) : super(key: key);
 
   final List<PickerData<T>> data;
-  final SMFilterItemBuilder<PickerData<T>> child;
+  final SMFilterItemBuilder<PickerData<T>> itemBuilder;
   final SMFilterOnChanged<T> onChanged;
   final bool isMultiple;
   final double? widthItem;
@@ -43,12 +45,12 @@ class PickerListView<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     RxList<PickerData<T>> tempData = data.obs;
     return Obx(
-          () => ListView.separated(
+      () => ListView.separated(
         shrinkWrap: shrinkWrap,
         physics: physics,
         itemCount: tempData.length,
         separatorBuilder: (BuildContext context, int index) {
-          return separator ?? const Divider(thickness: 1, height: 16);
+          return separator ?? const SizedBox.shrink();
         },
         itemBuilder: (context, index) {
           final item = tempData[index];
@@ -61,20 +63,22 @@ class PickerListView<T> extends StatelessWidget {
                 }
               }
               tempData.value = tempData.map(
-                    (otherChip) {
+                (otherChip) {
                   return item == otherChip
                       ? otherChip.copy(isSelected: isSelected)
                       : otherChip;
                 },
               ).toList();
               onChanged(
-                  tempData.where((element) => element.isSelected).toList());
+                context,
+                index,
+                tempData.where((element) => element.isSelected).toList(),
+              );
             },
-            child: child(item),
+            child: itemBuilder(item),
           );
         },
       ),
     );
   }
 }
-

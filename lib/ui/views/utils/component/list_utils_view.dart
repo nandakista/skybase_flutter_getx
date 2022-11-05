@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/data/models/global/picker_data.dart';
 import 'package:skybase/ui/widgets/base/sky_list_view.dart';
 import 'package:skybase/ui/widgets/common_widget.dart';
+import 'package:skybase/ui/widgets/picker/picker_listview.dart';
 import 'package:skybase/ui/widgets/sky_grouped_listview.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 
@@ -12,24 +16,39 @@ class ListUtilsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SkyAppBar.primary(title: 'List Utility'),
-      body: Column(
-        children: [
-          const SizedBox(height: 12),
-          const Text('Sample Grouped ListView'),
-          Expanded(
-            child: ContentWrapper(
-              top: true,
-              child: SkyListView(
+      // body: PickerListView(
+      //   shrinkWrap: true,
+      //   data: dummyData.map((e) => PickerData(data: e)).toList(),
+      //   child: (item) {
+      //     return Text('some text');
+      //   },
+      //   onChanged: (item) {
+      //     final pickedItem = item
+      //         .where((element) => element.isSelected)
+      //         .map((e) => e.data);
+      //     log('Picked item = $pickedItem');
+      //   },
+      //   isMultiple: false,
+      // ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ..._buildSection(
+              page: 1,
+              title: 'Sample Grouped ListView',
+              content: SkyListView(
                 loadingEnabled: false,
                 errorEnabled: false,
                 onRetry: () {},
                 onRefresh: () {},
                 emptyEnabled: dummyData.isEmpty,
                 child: SkyGroupedListView<dynamic, String>(
-                  // shrinkWrap: true,
-                  // physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   sortBy: SortBy.ASC,
-                  elements: dummyData ,
+                  data: dummyData,
                   separator: const Divider(thickness: 1, height: 12),
                   separatorGroup: const Divider(
                     thickness: 1,
@@ -54,44 +73,70 @@ class ListUtilsView extends StatelessWidget {
                   },
                   groupBy: (element) => element['group'],
                 ),
-                // child: Column(
-                //   crossAxisAlignment: CrossAxisAlignment.center,
-                //   children: [
-                //     Text('Sample Grouped ListView', style: AppStyle.headline3,),
-                //     const SizedBox(height: 24),
-                //     SkyGroupedListView<dynamic, String>(
-                //       shrinkWrap: true,
-                //       physics: const NeverScrollableScrollPhysics(),
-                //       sortBy: SortBy.ASC,
-                //       elements: dummyData,
-                //       separator: const Divider(thickness: 1, height: 12),
-                //       separatorGroup: const Divider(thickness: 1, height: 12, color: Colors.red,),
-                //       groupHeaderBuilder: (group) {
-                //         return Text(
-                //           group.toString(),
-                //           textAlign: TextAlign.center,
-                //           style: AppStyle.headline4.copyWith(
-                //             fontWeight: AppStyle.semiBold,
-                //           ),
-                //         );
-                //       },
-                //       itemBuilder: (context, index, item) {
-                //         return Text(
-                //           item['name'],
-                //           textAlign: TextAlign.start,
-                //           style: AppStyle.body1,
-                //         );
-                //       },
-                //       groupBy: (element) => element['group'],
-                //     ),
-                //   ],
-                // ),
               ),
             ),
-          ),
-        ],
+            ..._buildSection(
+              page: 2,
+              title: 'Sample Picker ListView',
+              content: SkyListView(
+                loadingEnabled: false,
+                errorEnabled: false,
+                onRetry: () {},
+                onRefresh: () {},
+                emptyEnabled: dummyData.isEmpty,
+                child: PickerListView<dynamic>(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  separator: const Divider(thickness: 1, height: 16),
+                  data: dummyData.map((e) => PickerData(data: e)).toList(),
+                  isMultiple: false,
+                  itemBuilder: (PickerData<dynamic> item) {
+                    return SizedBox(
+                      height: 20,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(item.data['name']),
+                          (item.isSelected)
+                              ? const Icon(Icons.check)
+                              : const SizedBox.shrink()
+                        ],
+                      ),
+                    );
+                  },
+                  onChanged: (context, index, item) {
+                    final pickedItem = item
+                        .where((element) => element.isSelected)
+                        .map((e) => e.data);
+                    log('Picked item = $pickedItem');
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
+  }
+
+  List<Widget> _buildSection({
+    required int page,
+    required String title,
+    required Widget content,
+  }) {
+    return [
+      Text('Page $page', style: AppStyle.subtitle2),
+      const SizedBox(height: 12),
+      Center(child: Text(title)),
+      SizedBox(
+        height: 500,
+        child: ContentWrapper(
+          top: true,
+          child: content,
+        ),
+      ),
+      const SizedBox(height: 48),
+    ];
   }
 }
 

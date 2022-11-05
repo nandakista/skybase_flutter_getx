@@ -16,7 +16,7 @@ enum SortBy {
 class SkyGroupedListView<T, G> extends StatelessWidget {
   const SkyGroupedListView({
     Key? key,
-    required this.elements,
+    required this.data,
     required this.groupBy,
     required this.groupHeaderBuilder,
     required this.itemBuilder,
@@ -31,7 +31,7 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
 
   final ScrollPhysics? physics;
   final bool shrinkWrap;
-  final List<T> elements;
+  final List<T> data;
   final Widget Function(G element) groupHeaderBuilder;
   final Widget Function(BuildContext context, int index, T element) itemBuilder;
   final ScrollController? controller;
@@ -47,22 +47,22 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
       shrinkWrap: shrinkWrap,
       physics: physics,
       padding: padding ?? const EdgeInsets.all(0),
-      itemCount: elements.length,
+      itemCount: data.length,
       controller: controller,
       reverse: sortBy == SortBy.ASC ? false : true,
       itemBuilder: (_, index) {
-        (elements).sort(
+        (data).sort(
           (b, a) => (groupBy(b) as dynamic)!.compareTo(
             groupBy(a),
           ),
         );
 
         bool isSame = true;
-        final G item = groupBy(elements[index]);
+        final G item = groupBy(data[index]);
 
         G prevItem;
         if (index != 0) {
-          prevItem = groupBy(elements[index - 1]);
+          prevItem = groupBy(data[index - 1]);
           isSame = item == prevItem;
         } else {
           prevItem = item;
@@ -75,14 +75,14 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
               if (index == 0) _buildHeaderWidget(item),
               if (!isSame) _buildHeaderWidget(item),
               _buildItemWidget(context, index),
-              if (index + 1 != elements.length)
+              if (index + 1 != data.length)
                 _buildSeparatorWidget(separator),
             ],
           );
         } else {
           return Column(
             children: [
-              if (index + 1 == elements.length) _buildHeaderWidget(item),
+              if (index + 1 == data.length) _buildHeaderWidget(item),
               _buildItemWidget(context, index),
               if (!isSame) _buildHeaderWidget(prevItem),
               if (index != 0) _buildSeparatorWidget(separator),
@@ -105,7 +105,7 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
   _buildItemWidget(BuildContext context, int index) {
     return SizedBox(
       width: double.infinity,
-      child: itemBuilder(context, index, elements[index]),
+      child: itemBuilder(context, index, data[index]),
     );
   }
 
