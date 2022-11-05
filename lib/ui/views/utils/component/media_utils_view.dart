@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/bottom_sheet_helper.dart';
-import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/core/modules/module_helper.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
@@ -26,7 +25,7 @@ class MediaUtilsView extends GetView<UtilsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SkyAppBar.secondary(title: 'Media Utility'),
+      appBar: SkyAppBar.primary(title: 'Media Utility'),
       body: SingleChildScrollView(
         child: ContentWrapper(
           top: true,

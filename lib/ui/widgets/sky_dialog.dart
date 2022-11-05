@@ -152,8 +152,8 @@ class DialogAlert extends StatelessWidget {
         onConfirm: onConfirm,
         backgroundColorHeader: backgroundColorHeader ?? Colors.red[100],
         confirmTextColor: Colors.white,
-        confirmBorderColor: AppColors.primaryVariant,
-        confirmBackgroundColor: AppColors.primaryVariant,
+        confirmBorderColor: Colors.red[700],
+        confirmBackgroundColor: Colors.red[700],
       );
 
   factory DialogAlert.warning({

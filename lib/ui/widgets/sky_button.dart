@@ -100,7 +100,7 @@ class SkyButton extends StatelessWidget {
           child: iconWidget ??
               Icon(
                 icon,
-                color: (outlineMode) ? AppColors.primary : iconColor,
+                color: (outlineMode) ? color ?? AppColors.primary : iconColor,
               ),
         ),
         onPressed: onPressed,
@@ -115,7 +115,7 @@ class SkyButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius!),
             side: BorderSide(
               color: (outlineMode)
-                  ? AppColors.primary
+                  ? borderColor ?? color ?? AppColors.primary
                   : borderColor ?? Colors.transparent,
               width: borderWidth ?? 1.5,
               style: BorderStyle.solid,
@@ -130,7 +130,7 @@ class SkyButton extends StatelessWidget {
             style: AppStyle.subtitle4.copyWith(
               fontSize: fontSize,
               fontWeight: fontWeight,
-              color: outlineMode ? AppColors.primary : textColor,
+              color: outlineMode ? color ?? AppColors.primary : textColor,
             ),
           ),
         ),
