@@ -408,7 +408,7 @@ class _CameraModuleState extends State<CameraModule>
 
   Widget _switchCameraButton() {
     if (cameras == null) {
-      return Container();
+      return const SizedBox.shrink();
     }
     CameraDescription selectedCamera = cameras![selectedCameraIndex!];
     CameraLensDirection lensDirection = selectedCamera.lensDirection;
@@ -456,7 +456,7 @@ class _CameraModuleState extends State<CameraModule>
 
   Widget _flashCameraButton() {
     if (cameras == null) {
-      return Container();
+      return const SizedBox.shrink();
     }
     return Container(
       margin: const EdgeInsets.only(right: 10),
