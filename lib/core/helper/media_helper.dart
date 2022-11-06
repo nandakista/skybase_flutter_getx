@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 
 class MediaHelper {
@@ -25,7 +24,7 @@ class MediaHelper {
         ? p.extension(path).replaceFirst(".", "").split("?").first
         : p.extension(path).replaceFirst(".", "");
 
-    log("Extension: $extension");
+    debugPrint("Extension: $extension");
 
     if (imageExtensions.contains(extension.toLowerCase())) {
       return MediaInfo(path, MediaType.image);

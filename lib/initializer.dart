@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,6 @@ import 'package:skybase/core/database/hive/hive_db.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/auth_manager/auth_manager.dart';
 import 'package:skybase/core/helper/general_function.dart';
-import 'package:skybase/core/modules/timer/timer_module.dart';
 import 'package:skybase/core/network/api_config.dart';
 import 'package:skybase/core/themes/app_theme.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
@@ -24,6 +24,7 @@ import 'package:skybase/core/themes/theme_manager.dart';
 */
 class Initializer extends GetxService {
   static Future<void> init() async {
+    if (kReleaseMode) debugPrint = (String? message, {int? wrapWidth}) {};
     HttpOverrides.global = MyHttpOverrides();
     await _initConfig();
     await _initService();
@@ -31,13 +32,12 @@ class Initializer extends GetxService {
   }
 
   static Future<void> _initConfig() async {
-
     // Database
     // * [Be Careful] Writing order can affects the algorithm
     await HiveDb.init();
     await GetStorage.init();
     await Get.putAsync(() async => GetStorage());
-    Get.put(const FlutterSecureStorage(), permanent: true);
+    Get.putAsync(() async => const FlutterSecureStorage());
 
     // Configuration
     // ---Locale

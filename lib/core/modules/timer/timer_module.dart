@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
@@ -34,7 +33,7 @@ class TimerModule extends GetxController {
           _setCurrentTime(currentTime.value -= 1);
           if (onChanged != null) onChanged(currentTime.value);
         }
-        if(kDebugMode) log('TIMER UPDATE: $updateId | $currentTime');
+        if(kDebugMode) debugPrint('TIMER UPDATE: $updateId | $currentTime');
         update([updateId]);
       },
     );
@@ -51,6 +50,12 @@ class TimerModule extends GetxController {
 
   void stopTimer() {
     timer.cancel();
+  }
+
+  @override
+  void onClose() {
+    stopTimer();
+    super.onClose();
   }
 }
 

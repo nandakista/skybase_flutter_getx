@@ -1,7 +1,7 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:skybase/core/app/app_env.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/network/api_request.dart';
@@ -32,7 +32,7 @@ class AuthApiImpl implements AuthApi {
       );
       return User.fromJson(ApiResponse.fromJson(response.data).data);
     } catch (e) {
-      log('$tag Error = $e');
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }
@@ -59,7 +59,7 @@ class AuthApiImpl implements AuthApi {
       );
       return User.fromJson(ApiResponse.fromJson(response.data).data);
     } catch (e) {
-      log('$tag Error = $e');
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }

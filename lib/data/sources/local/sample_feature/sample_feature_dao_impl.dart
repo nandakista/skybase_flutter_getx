@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:skybase/core/database/hive/hive_box.dart';
 import 'package:skybase/data/sources/local/sample_feature/sample_feature_dao.dart';
@@ -46,7 +45,7 @@ class SampleFeatureDaoImpl implements SampleFeatureDao {
 
   @override
   Future<void> clear() async {
-    log('Dao Clear');
+    debugPrint('Dao Clear');
     await box.clear();
   }
 

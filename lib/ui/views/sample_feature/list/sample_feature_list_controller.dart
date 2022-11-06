@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/base/pagination_controller.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
@@ -19,7 +18,7 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
         loadNextData(data);
       });
     } catch (e) {
-      log('Error : $e');
+      debugPrint('Error : $e');
       pagingController.error = e;
     }
   }

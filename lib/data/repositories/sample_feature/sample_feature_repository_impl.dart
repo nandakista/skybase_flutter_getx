@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:flutter/foundation.dart';
 import 'package:skybase/data/sources/local/sample_feature/sample_feature_dao.dart';
 import 'package:skybase/data/sources/server/sample_feature/sample_feature_api.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
@@ -29,7 +28,7 @@ class SampleFeatureRepositoryImpl extends SampleFeatureRepository {
         return _res;
       }
     } catch (e) {
-      log('$tag Error = $e');
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }
@@ -46,7 +45,7 @@ class SampleFeatureRepositoryImpl extends SampleFeatureRepository {
         return _res;
       }
     } catch (e) {
-      log('$tag Error = $e');
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }

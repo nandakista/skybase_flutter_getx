@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -133,7 +132,7 @@ class MediaUtilsView extends GetView<UtilsController> {
         const SizedBox(height: 4),
         UiImagePicker(
           onSelected: (file) {
-            log('file = $file');
+            debugPrint('file = $file');
             controller.imageFile.value = file;
           },
           child: const SkyBox(
@@ -164,7 +163,7 @@ class MediaUtilsView extends GetView<UtilsController> {
             color: AppColors.primary,
           ),
           onSelectedVideo: (File? file) {
-            log('Picked = $file');
+            debugPrint('Picked = $file');
           },
         ),
         const SizedBox(height: 12),
@@ -176,7 +175,7 @@ class MediaUtilsView extends GetView<UtilsController> {
           ),
           replace: true,
           onSelectedUiImage: (File? file) {
-            log('Picked file = $file');
+            debugPrint('Picked file = $file');
             if (file != null) {
               controller.imageFile.value = file;
               // controller.update();
@@ -212,7 +211,7 @@ class MediaUtilsView extends GetView<UtilsController> {
                 ),
                 replace: false,
                 onSelectedUiImage: (File? file) {
-                  log('Picked file = $file');
+                  debugPrint('Picked file = $file');
                   if (file != null) {
                     controller.pickedImages.add(file);
                     controller.update();

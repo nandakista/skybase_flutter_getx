@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/network/api_config.dart';
 import 'package:skybase/core/network/api_exception.dart';
@@ -34,7 +34,7 @@ Future<Response> sendRequest({
   try {
     switch (requestMethod) {
       case RequestMethod.POST:
-        log('Request Body : ${FormData.fromMap(body as Map<String, dynamic>).fields}');
+        debugPrint('Request Body : ${FormData.fromMap(body as Map<String, dynamic>).fields}');
         return await _safeFetch(
           () => dioClient.post(
             url,

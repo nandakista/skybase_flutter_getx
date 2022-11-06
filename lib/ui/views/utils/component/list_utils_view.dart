@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/data/models/global/picker_data.dart';
@@ -94,7 +92,7 @@ class ListUtilsView extends StatelessWidget {
                     final pickedItem = item
                         .where((element) => element.isSelected)
                         .map((e) => e.data);
-                    log('Picked item = $pickedItem');
+                    debugPrint('Picked item = $pickedItem');
                   },
                 ),
               ),
