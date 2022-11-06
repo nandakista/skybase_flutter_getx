@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:skybase/core/themes/app_colors.dart';
-import 'package:skybase/ui/widgets/sky_box.dart';
 
 /* Created by
    Varcant
@@ -16,7 +15,8 @@ class PlayOverlay extends StatelessWidget {
     Key? key,
     required this.child,
     required this.visible,
-    this.onTap, this.borderRadius,
+    this.onTap,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -26,16 +26,23 @@ class PlayOverlay extends StatelessWidget {
       children: [
         child,
         if (visible)
-          SkyBox(
-            borderRadius: borderRadius,
-            onPressed: onTap,
-            padding: const EdgeInsets.all(0),
-            color: Colors.black12,
-            child: const Center(
-              child: Icon(
-                Icons.play_circle,
-                color: AppColors.primary,
-                size: 36,
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              padding: const EdgeInsets.all(0),
+              decoration: BoxDecoration(
+                color: Colors.black12,
+                borderRadius: BorderRadius.circular(borderRadius ?? 12),
+                border: Border.all(
+                  color: Colors.grey.shade300,
+                ),
+              ),
+              child: const Center(
+                child: Icon(
+                  Icons.play_circle,
+                  color: AppColors.primary,
+                  size: 36,
+                ),
               ),
             ),
           )

@@ -1,9 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:skybase/core/app/app_env.dart';
 import 'package:skybase/core/auth_manager/auth_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
@@ -94,7 +94,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
       );
       return ApiResponse.fromJson(responseBody.data).data['token'];
     } on DioError catch (error) {
-      log('${NetworkException.getErrorException(error)}');
+      debugPrint('${NetworkException.getErrorException(error)}');
       return AppDialog.show(
         typeDialog: TypeDialog.FAILED,
         dismissible: false,

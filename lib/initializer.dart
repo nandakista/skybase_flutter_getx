@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,7 @@ import 'package:skybase/core/themes/theme_manager.dart';
 */
 class Initializer extends GetxService {
   static Future<void> init() async {
+    if (kReleaseMode) debugPrint = (String? message, {int? wrapWidth}) {};
     HttpOverrides.global = MyHttpOverrides();
     await _initConfig();
     await _initService();
@@ -30,13 +32,12 @@ class Initializer extends GetxService {
   }
 
   static Future<void> _initConfig() async {
-
     // Database
     // * [Be Careful] Writing order can affects the algorithm
     await HiveDb.init();
     await GetStorage.init();
     await Get.putAsync(() async => GetStorage());
-    Get.put(const FlutterSecureStorage(), permanent: true);
+    Get.putAsync(() async => const FlutterSecureStorage());
 
     // Configuration
     // ---Locale
@@ -55,9 +56,9 @@ class Initializer extends GetxService {
     // Initialize Apps and checking user auth
     Get.lazyPut(() => GetStorageManager());
     Get.lazyPut(() => SecureStorageManager());
-    Get.put(ThemeManager(), permanent: true);
+    Get.put(ThemeManager());
 
     // Checking user auth
-    Get.put(AuthManager(), permanent: true);
+    Get.put(AuthManager());
   }
 }

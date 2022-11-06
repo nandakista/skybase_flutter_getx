@@ -17,6 +17,7 @@ class SkyBox extends StatelessWidget {
     this.color,
     this.gradient,
     this.borderColor,
+    this.elevation = 4,
   }) : super(key: key);
 
   final Widget? child;
@@ -28,25 +29,34 @@ class SkyBox extends StatelessWidget {
   final Color? color;
   final Color? borderColor;
   final Gradient? gradient;
+  final double elevation;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        height: height,
-        width: width,
-        margin: margin,
-        padding: padding ?? const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: color,
-          gradient: gradient,
+    return Container(
+      margin: margin,
+      child: Card(
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 12),
-          border: Border.all(
-            color: borderColor ?? Colors.grey.shade300,
+        ),
+        elevation: elevation,
+        child: GestureDetector(
+          onTap: onPressed,
+          child: Container(
+            padding: padding ?? const EdgeInsets.all(8),
+            height: height,
+            width: width,
+            decoration: BoxDecoration(
+              color: color,
+              gradient: gradient,
+              borderRadius: BorderRadius.circular(borderRadius ?? 12),
+              border: Border.all(
+                color: borderColor ?? Colors.grey.shade300,
+              ),
+            ),
+            child: child,
           ),
         ),
-        child: child,
       ),
     );
   }

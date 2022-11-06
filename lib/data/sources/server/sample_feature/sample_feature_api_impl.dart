@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:flutter/foundation.dart';
 import 'package:skybase/core/network/api_request.dart';
 import 'package:skybase/data/models/repo_model.dart';
 import 'package:skybase/data/models/sample_feature_model.dart';
@@ -30,7 +29,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
           .toList()
           .cast<SampleFeature>();
     } catch (e) {
-      log('$tag Error = $e');
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }
@@ -45,7 +44,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
       );
       return SampleFeatureModel.fromJson(_res.data);
     } catch (e) {
-      log('$tag Error = $e');
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }
@@ -63,7 +62,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
           .toList()
           .cast<SampleFeature>();
     } catch (e) {
-      log('$tag Error = $e');
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }
@@ -81,7 +80,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
           .toList()
           .cast<SampleFeature>();
     } catch (e) {
-      log('$tag Error = $e');
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }
@@ -100,7 +99,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
           .cast<Repo>();
       // return List<Repo>.from(_res.data.map((data) => Repo.fromJson(data)));
     } catch (e) {
-      log('$tag Error = $e');
+      debugPrint('$tag Error = $e');
       rethrow;
     }
   }

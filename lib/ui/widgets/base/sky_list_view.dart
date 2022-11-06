@@ -56,6 +56,8 @@ class SkyListView extends StatelessWidget {
 
   final Widget child;
 
+  final VoidCallback? onRefresh;
+
   const SkyListView({
     Key? key,
     required this.emptyEnabled,
@@ -75,6 +77,7 @@ class SkyListView extends StatelessWidget {
     this.isComponent = true,
     this.emptyView,
     this.retryText,
+    this.onRefresh,
   }) : super(key: key);
 
   @override
@@ -83,46 +86,54 @@ class SkyListView extends StatelessWidget {
 
     return Stack(
       children: [
-        getBodyWidget(),
-        getErrorView(),
-        getEmptyView(),
-        getLoadingView(loadingWidget),
+        if (!loadingEnabled && !emptyEnabled & !errorEnabled) getBodyWidget(),
+        if (visibleOnError && errorEnabled) getErrorView(),
+        if (visibleOnEmpty && emptyEnabled && !errorEnabled && !loadingEnabled)
+          getEmptyView(),
+        if (loadingEnabled) getLoadingView(loadingWidget),
       ],
     );
   }
 
-  Widget getBodyWidget() =>
-      loadingEnabled || emptyEnabled || errorEnabled ? Container() : child;
+  Widget getBodyWidget() {
+    if (onRefresh != null) {
+      return RefreshIndicator(
+        onRefresh: () => Future.sync(onRefresh!),
+        child: child,
+      );
+    } else {
+      return child;
+    }
+  }
 
-  Widget getLoadingView(Widget loadingWidget) => loadingEnabled
-      ? Center(
-          child: AnimatedOpacity(
-            opacity: loadingEnabled ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 200),
-            child: loadingWidget,
-          ),
-        )
-      : Container();
+  Widget getLoadingView(Widget loadingWidget) {
+    return Center(
+      child: AnimatedOpacity(
+        opacity: loadingEnabled ? 1.0 : 0.0,
+        duration: const Duration(milliseconds: 200),
+        child: loadingWidget,
+      ),
+    );
+  }
 
-  Widget getEmptyView() =>
-      visibleOnEmpty && emptyEnabled && !errorEnabled && !loadingEnabled
-          ? emptyView ??
-              ListEmptyView(
-                emptyImage: emptyImage,
-                emptyTitle: emptyTitle,
-                emptySubtitle: emptySubtitle,
-                isScrollable: isComponent,
-              )
-          : Container();
-
-  Widget getErrorView() => visibleOnError && errorEnabled
-      ? ErrorView(
-          errorImage: errorImage,
-          errorTitle: errorTitle,
-          errorSubtitle: errorSubtitle,
-          onRetry: onRetry,
-          retryText: retryText,
+  Widget getEmptyView() {
+    return emptyView ??
+        ListEmptyView(
+          emptyImage: emptyImage,
+          emptyTitle: emptyTitle,
+          emptySubtitle: emptySubtitle,
           isScrollable: isComponent,
-        )
-      : Container();
+        );
+  }
+
+  Widget getErrorView() {
+    return ErrorView(
+      errorImage: errorImage,
+      errorTitle: errorTitle,
+      errorSubtitle: errorSubtitle,
+      onRetry: onRetry,
+      retryText: retryText,
+      isScrollable: isComponent,
+    );
+  }
 }

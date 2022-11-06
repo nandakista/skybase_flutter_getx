@@ -23,7 +23,10 @@ class FollowingTabView extends GetView<SampleFeatureDetailController> {
                 // onTap: () => controller.onChooseUser(user: user),
                 leading: CircleAvatar(
                   radius: 30,
-                  child: SkyImage(url: '${user.avatarUrl}&s=200'),
+                  child: SkyImage(
+                    url: '${user.avatarUrl}&s=200',
+                    borderRadius: BorderRadius.circular(90),
+                  ),
                 ),
                 title: Text(user.username.toString()),
                 subtitle: Text(

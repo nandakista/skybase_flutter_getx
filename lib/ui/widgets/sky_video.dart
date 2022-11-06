@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:skybase/ui/widgets/media/play_overlay.dart';
+import 'package:skybase/ui/widgets/media/preview/media_preview_page.dart';
 import 'package:skybase/ui/widgets/sky_box.dart';
 import 'package:video_player/video_player.dart';
 
@@ -18,6 +20,7 @@ class SkyVideo extends StatefulWidget {
   final VoidCallback? onTapVideo;
   final VoidCallback? onRemoveVideo;
   final double borderRadius;
+  final bool enablePreview;
 
   const SkyVideo({
     Key? key,
@@ -28,6 +31,7 @@ class SkyVideo extends StatefulWidget {
     this.onTapVideo,
     this.onRemoveVideo,
     this.borderRadius = 0,
+    this.enablePreview = false,
   }) : super(key: key);
 
   @override
@@ -77,7 +81,10 @@ class _SkyVideoState extends State<SkyVideo> {
     return Stack(
       children: [
         SkyBox(
-          onPressed: widget.onTapVideo,
+          onPressed: widget.enablePreview
+              ? () => Get.to(MediaPreviewPage(url: widget.url))
+              : widget.onTapVideo ?? () {},
+          // onPressed: widget.onTapVideo,
           borderRadius: widget.borderRadius,
           width: widget.width,
           height: widget.height,

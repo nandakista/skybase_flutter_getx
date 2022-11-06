@@ -9,4 +9,6 @@ class UtilsController extends GetxController {
   final imageFile = Rxn<File>();
   final currencyCtr = TextEditingController();
 
+  final RxList pickedImages = <File>[].obs;
+
 }

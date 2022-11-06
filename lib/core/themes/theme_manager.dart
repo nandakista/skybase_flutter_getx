@@ -6,7 +6,7 @@ import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
    Varcant
    nanda.kista@gmail.com
 */
-class ThemeManager extends GetxController {
+class ThemeManager extends GetxService {
   static ThemeManager get find => Get.find<ThemeManager>();
 
   /// Default value of app theme is Light.

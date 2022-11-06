@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/helper/extension/datetime_extension.dart';
 
 /// If you want to convert 1 date, just fill [date].
 /// If you want to convert range date, you can fill [startDate], [endDate]
@@ -60,37 +61,24 @@ class DateTimeHelper {
       return 'Error date converted!';
     }
   }
-}
 
-extension DateHelpers on DateTime {
-  bool isToday() {
-    final now = DateTime.now();
-    return now.day == day &&
-        now.month == month &&
-        now.year == year;
-  }
-
-  bool isYesterday() {
-    final yesterday = DateTime.now().subtract(const Duration(days: 1));
-    return yesterday.day == day &&
-        yesterday.month == month &&
-        yesterday.year == year;
-  }
-
-  bool isTomorrow() {
-    final yesterday = DateTime.now().add(const Duration(days: 1));
-    return yesterday.day == day &&
-        yesterday.month == month &&
-        yesterday.year == year;
-  }
-
-  bool inThisWeek() {
-    final weekAgo = DateTime.now().subtract(const Duration(days: 7));
-    return isAfter(weekAgo);
-  }
-
-  bool inThisYear() {
-    final yearAgo = DateTime.now().subtract(const Duration(days: 365));
-    return isAfter(yearAgo);
+  static String dateToSentence(DateTime date) {
+    if (date.inThisHours()) {
+      int intDateTime = date.difference(DateTime.now()).inMinutes;
+      if (intDateTime <= 0) {
+        return 'Expired';
+      } else {
+        return intDateTime.toString() + ' minutes';
+      }
+    } else if (date.isToday()) {
+      return date.difference(DateTime.now()).inHours.toString() + ' hours';
+    } else if (date.inNextWeek()) {
+      return (date.difference(DateTime.now()).inDays + 1).toString() + ' days';
+    } else if (date.inThisYear()) {
+      return DateFormat('dd MMM').format(date);
+    } else {
+      return DateFormat('dd/MM/y').format(date);
+    }
   }
 }
+

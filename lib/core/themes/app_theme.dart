@@ -7,18 +7,10 @@ import 'package:skybase/core/themes/app_colors.dart';
 final ThemeData lightTheme = ThemeData(
   primaryColor: AppColors.materialPrimary,
   primarySwatch: AppColors.materialPrimary,
+  toggleableActiveColor: AppColors.materialPrimary,
   indicatorColor: AppColors.accent,
   fontFamily: "Poppins",
   brightness: Brightness.light,
-  // bottomSheetTheme: const BottomSheetThemeData(
-  //   elevation: 8,
-  //   shape: RoundedRectangleBorder(
-  //     borderRadius: BorderRadius.only(
-  //       topLeft: Radius.circular(24),
-  //       topRight: Radius.circular(24),
-  //     ),
-  //   ),
-  // ),
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
@@ -29,8 +21,9 @@ final ThemeData lightTheme = ThemeData(
 );
 
 final ThemeData darkTheme = ThemeData(
-  primaryColor: AppColors.materialPrimary,
   primarySwatch: AppColors.materialPrimary,
+  primaryColor: AppColors.materialPrimary,
+  toggleableActiveColor: AppColors.materialPrimary,
   indicatorColor: AppColors.accent,
   fontFamily: "Poppins",
   brightness: Brightness.dark,
