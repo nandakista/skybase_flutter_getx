@@ -9,7 +9,7 @@ class AppRegex {
   static const nik = r'^[1-9]{16}$';
   static const npwp = r'^[0-9]{15}$';
   static const postal = r'^([1-9])[0-9]{4}$';
-  static const phone = r'^(08)(\d{2,3}-?){2}\d{4,5}$';
+  static const phone = r'^(\+62|62|0)8[1-9][0-9]{7,10}$';
   static const email = r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   static const upperCase = r'^(?=.*[A-Z])';
   static const lowerCase = r'^(?=.*[a-z])';
