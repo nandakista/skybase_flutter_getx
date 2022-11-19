@@ -17,7 +17,7 @@ class ThemeManager extends GetxService {
 
   @override
   void onReady() async {
-    isDark.value = await GetStorageManager.find.getAwait(GetStorageKey.DARK_THEME) ?? false;
+    isDark.value = await GetStorageManager.find.getAwait(GetStorageKey.darkTheme) ?? false;
     super.onReady();
   }
 
@@ -26,9 +26,9 @@ class ThemeManager extends GetxService {
   /// And continuous repeat switching between Dark and Light.
   changeTheme() async {
     if (isDark.isTrue) {
-      GetStorageManager.find.save(GetStorageKey.DARK_THEME, false);
+      GetStorageManager.find.save(GetStorageKey.darkTheme, false);
     } else {
-      GetStorageManager.find.save(GetStorageKey.DARK_THEME, true);
+      GetStorageManager.find.save(GetStorageKey.darkTheme, true);
     }
     return isDark.toggle();
   }

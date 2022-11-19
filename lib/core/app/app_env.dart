@@ -29,7 +29,7 @@ class AppEnv {
           clientToken: AppConfiguration.clientToken,
           tokenType: AppConfiguration.tokenType,
           socketUrl: AppConfiguration.productionSocket,
-          midtransClientKey: AppConfiguration.midtransStagingKey,
+          midtransClientKey: AppConfiguration.someStagingKey,
         );
         break;
       case Env.STAGING:
@@ -38,7 +38,7 @@ class AppEnv {
           clientToken: AppConfiguration.clientToken,
           tokenType: AppConfiguration.tokenType,
           socketUrl: AppConfiguration.stagingSocket,
-          midtransClientKey: AppConfiguration.midtransStagingKey,
+          midtransClientKey: AppConfiguration.someStagingKey,
         );
         break;
       case Env.DEVELOPMENT:
@@ -47,7 +47,7 @@ class AppEnv {
           clientToken: AppConfiguration.clientToken,
           tokenType: AppConfiguration.tokenType,
           socketUrl: AppConfiguration.developmentSocket,
-          midtransClientKey: AppConfiguration.midtransStagingKey,
+          midtransClientKey: AppConfiguration.someStagingKey,
         );
         AppSocket().interceptor();
         break;

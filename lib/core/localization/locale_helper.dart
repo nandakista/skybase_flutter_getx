@@ -55,14 +55,14 @@ class LocaleHelper {
 
   saveLocaleToCache(String name) {
     if (name == "English") {
-      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "en");
+      GetStorageManager.find.save(GetStorageKey.currentLocale, "en");
     } else {
-      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "in");
+      GetStorageManager.find.save(GetStorageKey.currentLocale, "in");
     }
   }
 
   Locale getCurrentLocale() {
-    var currentLocale = GetStorageManager.find.get(GetStorageKey.CURRENT_LOCALE);
+    var currentLocale = GetStorageManager.find.get(GetStorageKey.currentLocale);
     if (currentLocale != null) {
       if (currentLocale == "en") {
         return const Locale('en');
@@ -70,7 +70,7 @@ class LocaleHelper {
         return const Locale('id');
       }
     } else {
-      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "en");
+      GetStorageManager.find.save(GetStorageKey.currentLocale, "en");
       return const Locale('en');
     }
   }
