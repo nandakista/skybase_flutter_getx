@@ -13,7 +13,6 @@ import 'package:skybase/ui/routes/app_routes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Initializer.init();
-  AppInfo.setInfo(await PackageInfo.fromPlatform());
   AppEnv.set(Env.DEVELOPMENT);
   runApp(const App());
 }

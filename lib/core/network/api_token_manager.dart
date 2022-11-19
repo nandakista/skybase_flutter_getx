@@ -56,12 +56,13 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
   _handleAccessToken(DioError err, ErrorInterceptorHandler handler) async {
     final int status = err.response?.statusCode ?? 0;
     if (status == 401) {
-      return AppDialog.show(
+      AppDialog.show(
         typeDialog: TypeDialog.FAILED,
         dismissible: false,
         message: 'Anda harus login kembali!',
         onPress: () => authManager.logout(),
       );
+      super.onError(err, handler);
     } else {
       super.onError(err, handler);
     }

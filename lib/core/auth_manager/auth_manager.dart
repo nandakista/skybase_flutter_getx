@@ -18,16 +18,16 @@ import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 ///
 /// This class help you to manage authentication process.
 /// Contains auth general function such as [login], [logout], and first install/[setup]
-class AuthManager extends GetxController {
+class AuthManager extends GetxService {
   static AuthManager get find => Get.find<AuthManager>();
 
   Rxn<AuthState> authState = Rxn<AuthState>();
   Stream<AuthState?> get stream => authState.stream;
   AuthState? get state => authState.value;
 
-  var getStorage = GetStorageManager.find;
-  var secureStorage = SecureStorageManager.find;
-  var themeManager = ThemeManager.find;
+  GetStorageManager getStorage = GetStorageManager.find;
+  SecureStorageManager secureStorage = SecureStorageManager.find;
+  ThemeManager themeManager = ThemeManager.find;
 
   @override
   void onInit() {
@@ -69,7 +69,6 @@ class AuthManager extends GetxController {
       default:
         Get.toNamed(SplashView.route);
     }
-    update();
   }
 
   setup() async {
