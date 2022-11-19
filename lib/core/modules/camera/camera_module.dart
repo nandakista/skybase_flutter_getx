@@ -118,11 +118,11 @@ class _CameraModuleState extends State<CameraModule>
       }
     }).catchError((e) {
       debugPrint('CameraModule::initCamera() -> $e');
-      AppDialog.show(
-          typeDialog: TypeDialog.FAILED,
+      SkyDialog.show(
+          type: DialogType.FAILED,
           message: 'Terjadi Kesalahan!\n${e.toString()}',
           onPress: () {
-            AppDialog.close();
+            SkyDialog.close();
             Get.back();
           });
     });

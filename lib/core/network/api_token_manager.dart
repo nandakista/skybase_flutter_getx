@@ -56,8 +56,8 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
   _handleAccessToken(DioError err, ErrorInterceptorHandler handler) async {
     final int status = err.response?.statusCode ?? 0;
     if (status == 401) {
-      AppDialog.show(
-        typeDialog: TypeDialog.FAILED,
+      SkyDialog.show(
+        type: DialogType.FAILED,
         dismissible: false,
         message: 'Anda harus login kembali!',
         onPress: () => authManager.logout(),
@@ -96,8 +96,8 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
       return ApiResponse.fromJson(responseBody.data).data['token'];
     } on DioError catch (error) {
       debugPrint('${NetworkException.getErrorException(error)}');
-      return AppDialog.show(
-        typeDialog: TypeDialog.FAILED,
+      return SkyDialog.show(
+        type: DialogType.FAILED,
         dismissible: false,
         message: 'Anda harus login kembali!',
         onPress: () => authManager.logout(),
