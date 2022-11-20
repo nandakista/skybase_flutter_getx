@@ -12,7 +12,7 @@ class SkyFormField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final IconData? icon;
-  final Widget? prefixWidget;
+  final Widget? endIcon;
   final int? maxLength, maxLines;
   final VoidCallback? onPress;
   final String? Function(String?)? validator;
@@ -25,7 +25,7 @@ class SkyFormField extends StatelessWidget {
   final Function(String)? onChanged;
   final bool validate;
   final String? initialValue;
-  final Widget? endIcon;
+  final Widget? prefixWidget;
   final bool disableBorder;
   final bool? enabled;
   final InputBorder? disabledBorder;
