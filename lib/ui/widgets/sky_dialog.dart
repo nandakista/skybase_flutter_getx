@@ -83,7 +83,7 @@ class LoadingDialog extends StatelessWidget {
           children: [
             Text(
               'Loading',
-              style: AppStyle.subtitle1.copyWith(color: Colors.white),
+              style: AppStyle.title1.copyWith(color: Colors.white),
             ),
             const SizedBox(width: 4),
             const SpinKitThreeBounce(color: Colors.white, size: 16),

@@ -25,8 +25,8 @@ class App extends StatelessWidget {
       builder: (ctr) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Skybase Flutter Getx",
-        theme: lightTheme,
-        darkTheme: darkTheme,
+        theme: AppTheme.light(),
+        darkTheme: AppTheme.dark(),
         themeMode: (ctr.isDark.isTrue) ? ThemeMode.dark : ThemeMode.light,
         translations: AppTranslation(),
         locale: LocaleHelper().getCurrentLocale(),
