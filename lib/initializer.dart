@@ -27,7 +27,7 @@ class Initializer {
     HttpOverrides.global = MyHttpOverrides();
     await _initConfig();
     await _initService();
-    AppStatusBar.set(brightness: Brightness.light);
+    AppTheme.setStatusBar(brightness: Brightness.light);
   }
 
   static Future<void> _initConfig() async {
