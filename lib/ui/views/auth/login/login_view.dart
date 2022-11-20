@@ -70,7 +70,6 @@ class LoginView extends GetView<LoginController> {
         children: [
           const SizedBox(height: 20),
           SkyFormField(
-
             label: International.phone.tr,
             hint: International.phone.tr,
             controller: controller.phoneController,
