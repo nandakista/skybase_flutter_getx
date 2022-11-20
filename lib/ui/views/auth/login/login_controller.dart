@@ -38,10 +38,10 @@ class LoginController extends GetxController {
         });
       } catch (err) {
         Loading.hide();
-        AppDialog.show(
-          typeDialog: TypeDialog.FAILED,
+        SkyDialog.show(
+          type: DialogType.FAILED,
           message: err.toString(),
-          onPress: () => AppDialog.close(),
+          onPress: () => SkyDialog.close(),
         );
       }
     }

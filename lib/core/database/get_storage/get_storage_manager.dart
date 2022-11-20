@@ -49,8 +49,8 @@ class GetStorageManager {
   /// Delete all data in every box in storage except CurrentLocale
   logout() async {
     try {
-      await GetStorage(GetStorageKey.USERS).erase();
-      save(GetStorageKey.FIRST_INSTALL, false);
+      await GetStorage(GetStorageKey.users).erase();
+      save(GetStorageKey.firstInstall, false);
     } catch (e) {
       debugPrint(e.toString());
     }

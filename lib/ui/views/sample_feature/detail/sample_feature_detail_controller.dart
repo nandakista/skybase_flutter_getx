@@ -38,16 +38,16 @@ class SampleFeatureDetailController extends BaseController {
       });
     } catch (e) {
       hideLoading();
-      AppDialog.show(
-        typeDialog: TypeDialog.RETRY,
+      SkyDialog.show(
+        type: DialogType.RETRY,
         dismissible: false,
         message: e.toString(),
         onCancel: (){
-          AppDialog.close();
+          SkyDialog.close();
           Get.back();
         },
         onPress: () {
-          AppDialog.close();
+          SkyDialog.close();
           loadData();
         },
       );

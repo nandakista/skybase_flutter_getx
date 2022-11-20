@@ -26,7 +26,7 @@ class Loading {
 }
 
 //---------------<Custom Dialog>-----------------
-enum TypeDialog {
+enum DialogType {
   FAILED,
   SUCCESS,
   WARNING,
@@ -35,9 +35,9 @@ enum TypeDialog {
   PERMISSION,
 }
 
-class AppDialog {
+class SkyDialog {
   static show({
-    required TypeDialog typeDialog,
+    required DialogType type,
     String? title,
     required String message,
     required VoidCallback onPress,
@@ -47,8 +47,8 @@ class AppDialog {
     Widget? header,
     Color? backgroundColorHeader = Colors.transparent,
   }) {
-    switch (typeDialog) {
-      case TypeDialog.FAILED:
+    switch (type) {
+      case DialogType.FAILED:
         return showDialog(
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
@@ -58,7 +58,7 @@ class AppDialog {
             onConfirm: onPress,
           ),
         );
-      case TypeDialog.SUCCESS:
+      case DialogType.SUCCESS:
         return showDialog(
           barrierDismissible: dismissible ?? false,
           context: Get.context!,
@@ -68,7 +68,7 @@ class AppDialog {
             onConfirm: onPress,
           ),
         );
-      case TypeDialog.WARNING:
+      case DialogType.WARNING:
         return showDialog(
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
@@ -80,13 +80,13 @@ class AppDialog {
             onCancel: onCancel ?? () => Get.back(),
           ),
         );
-      case TypeDialog.SOON:
+      case DialogType.SOON:
         return showDialog(
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => const SoonDialog(),
         );
-      case TypeDialog.RETRY:
+      case DialogType.RETRY:
         return showDialog(
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
@@ -97,7 +97,7 @@ class AppDialog {
             onCancel: onCancel ?? () => Get.back(),
           ),
         );
-      case TypeDialog.PERMISSION:
+      case DialogType.PERMISSION:
         return showDialog(
           barrierDismissible: false,
           context: Get.context!,

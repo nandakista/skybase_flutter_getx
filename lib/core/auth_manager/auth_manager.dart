@@ -18,16 +18,16 @@ import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 ///
 /// This class help you to manage authentication process.
 /// Contains auth general function such as [login], [logout], and first install/[setup]
-class AuthManager extends GetxController {
+class AuthManager extends GetxService {
   static AuthManager get find => Get.find<AuthManager>();
 
   Rxn<AuthState> authState = Rxn<AuthState>();
   Stream<AuthState?> get stream => authState.stream;
   AuthState? get state => authState.value;
 
-  var getStorage = GetStorageManager.find;
-  var secureStorage = SecureStorageManager.find;
-  var themeManager = ThemeManager.find;
+  GetStorageManager getStorage = GetStorageManager.find;
+  SecureStorageManager secureStorage = SecureStorageManager.find;
+  ThemeManager themeManager = ThemeManager.find;
 
   @override
   void onInit() {
@@ -69,7 +69,6 @@ class AuthManager extends GetxController {
       default:
         Get.toNamed(SplashView.route);
     }
-    update();
   }
 
   setup() async {
@@ -79,7 +78,7 @@ class AuthManager extends GetxController {
 
   /// Check if app is first time installed. It will navigate to Introduction Page
   void checkFirstInstall() async {
-    final bool firstInstall = getStorage.get(GetStorageKey.FIRST_INSTALL) ?? true;
+    final bool firstInstall = getStorage.get(GetStorageKey.firstInstall) ?? true;
     if (firstInstall) {
       await secureStorage.setToken(value: '');
       authState.value = const AuthState(appStatus: AppType.FIRST_INSTALL);
@@ -90,7 +89,7 @@ class AuthManager extends GetxController {
 
   /// Checking App Theme set it before app display
   Future<void> checkAppTheme() async {
-    final bool isDarkTheme = await getStorage.getAwait(GetStorageKey.DARK_THEME) ?? false;
+    final bool isDarkTheme = await getStorage.getAwait(GetStorageKey.darkTheme) ?? false;
     if(isDarkTheme) {
       themeManager.toDarkMode();
     } else {
@@ -103,7 +102,7 @@ class AuthManager extends GetxController {
   Future<void> checkUser() async {
     AuthApiImpl authApi = AuthApiImpl();
     final String? _token = await secureStorage.getToken();
-    User? _user = getStorage.get(GetStorageKey.USERS);
+    User? _user = getStorage.get(GetStorageKey.users);
 
     try {
       await authApi
@@ -151,7 +150,7 @@ class AuthManager extends GetxController {
     required String token,
     required String refreshToken,
   }) async {
-    getStorage.save(GetStorageKey.USERS, user.toJson());
+    getStorage.save(GetStorageKey.users, user.toJson());
     await secureStorage.setToken(value: token);
     await secureStorage.setRefreshToken(value: refreshToken);
   }
@@ -159,8 +158,8 @@ class AuthManager extends GetxController {
   /// Get User data from GetStorage
   /// * No need to decode or call fromJson again when you used this helper
   User? get user {
-    if (getStorage.has(GetStorageKey.USERS)) {
-      return UserModel.fromJson(getStorage.get(GetStorageKey.USERS));
+    if (getStorage.has(GetStorageKey.users)) {
+      return UserModel.fromJson(getStorage.get(GetStorageKey.users));
     } else {
       return null;
     }

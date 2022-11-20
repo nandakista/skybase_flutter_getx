@@ -13,8 +13,8 @@ FlutterSecureStorage secureStorage = Get.find<FlutterSecureStorage>();
 class SecureStorageManager {
   static SecureStorageManager get find => Get.find<SecureStorageManager>();
 
-  final String _tokenKey = "token";
-  final String _refreshTokenKey = "refresh_token";
+  final String _tokenKey = 'token';
+  final String _refreshTokenKey = 'refresh_token';
 
   Future<bool> isLoggedIn() async {
     return (await getToken() != '');

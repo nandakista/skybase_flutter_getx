@@ -40,7 +40,9 @@ class SkyBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius ?? 12),
         ),
         elevation: elevation,
-        child: GestureDetector(
+        child: InkWell(
+          splashFactory: NoSplash.splashFactory,
+          highlightColor: Colors.transparent,
           onTap: onPressed,
           child: Container(
             padding: padding ?? const EdgeInsets.all(8),

@@ -10,10 +10,10 @@ class SafeRequestAPI {
     try {
       await functionUpdate();
     } catch (e) {
-      AppDialog.show(
-          typeDialog: TypeDialog.FAILED,
+      SkyDialog.show(
+          type: DialogType.FAILED,
           message: e.toString(),
-          onPress: () => AppDialog.close());
+          onPress: () => SkyDialog.close());
       rethrow;
     }
   }
@@ -25,11 +25,11 @@ class SafeRequestAPI {
     try {
       return await function();
     } catch (e) {
-      AppDialog.show(
-        typeDialog: TypeDialog.FAILED,
+      SkyDialog.show(
+        type: DialogType.FAILED,
         message: e.toString(),
         onPress: () {
-          AppDialog.close();
+          SkyDialog.close();
         },
       );
       rethrow;

@@ -13,17 +13,17 @@ class AppConfiguration {
   //-- Production
   static const productionAPI = 'https://api.github.com';
   static const productionSocket = 'https://api.github.com';
-  static const midtransProductionKey = 'Some Key';
+  static const someProductionKey = 'Some Key';
 
   //-- Staging
   static const stagingAPI = 'https://api.github.com';
   static const stagingSocket = 'https://api.github.com';
-  static const midtransStagingKey = 'Some Key';
+  static const someStagingKey = 'Some Key';
 
   //-- Development
   static const developmentAPI = 'https://api.github.com';
   static const developmentSocket = 'https://api.github.com';
-  static const midtransDevKey = 'Some Key';
+  static const someDevKey = 'Some Key';
 
   //-- App Info
   static String appName = 'Skybase';

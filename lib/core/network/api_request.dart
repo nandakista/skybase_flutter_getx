@@ -36,7 +36,7 @@ Future<Response> sendRequest({
       case RequestMethod.POST:
         debugPrint('Request Body : ${FormData.fromMap(body as Map<String, dynamic>).fields}');
         return await _safeFetch(
-          () => dioClient.post(
+          () => DioClient.find.post(
             url,
             data: _setBody(contentType: contentType, body: body),
             options: Options(headers: headers, contentType: contentType),
@@ -44,14 +44,14 @@ Future<Response> sendRequest({
         );
       case RequestMethod.GET:
         return await _safeFetch(
-          () => dioClient.get(
+          () => DioClient.find.get(
             url,
             options: Options(headers: headers, contentType: contentType),
           ),
         );
       case RequestMethod.PATCH:
         return await _safeFetch(
-          () => dioClient.patch(
+          () => DioClient.find.patch(
             url,
             data: _setBody(contentType: contentType, body: body),
             options: Options(headers: headers, contentType: contentType),
@@ -59,7 +59,7 @@ Future<Response> sendRequest({
         );
       case RequestMethod.PUT:
         return await _safeFetch(
-          () => dioClient.put(
+          () => DioClient.find.put(
             url,
             data: _setBody(contentType: contentType, body: body),
             options: Options(headers: headers, contentType: contentType),
@@ -67,7 +67,7 @@ Future<Response> sendRequest({
         );
       case RequestMethod.DELETE:
         return await _safeFetch(
-          () => dioClient.delete(
+          () => DioClient.find.delete(
             url,
             options: Options(headers: headers),
           ),

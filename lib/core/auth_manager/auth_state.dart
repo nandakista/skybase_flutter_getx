@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:skybase/domain/entities/user/user.dart';
 
 enum AppType { INITIAL, FIRST_INSTALL, UNAUTHENTICATED, AUTHENTICATED }

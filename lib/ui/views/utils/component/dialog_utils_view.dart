@@ -31,10 +31,10 @@ class DialogUtilsView extends StatelessWidget {
               outlineMode: true,
               color: Colors.orange,
               onPressed: () {
-                AppDialog.show(
-                  typeDialog: TypeDialog.WARNING,
+                SkyDialog.show(
+                  type: DialogType.WARNING,
                   message: 'Some Description Text',
-                  onPress: () => AppDialog.close(),
+                  onPress: () => SkyDialog.close(),
                 );
               },
             ),
@@ -45,10 +45,10 @@ class DialogUtilsView extends StatelessWidget {
               outlineMode: true,
               color: Colors.red,
               onPressed: () {
-                AppDialog.show(
-                  typeDialog: TypeDialog.FAILED,
+                SkyDialog.show(
+                  type: DialogType.FAILED,
                   message: 'Some Description Text',
-                  onPress: () => AppDialog.close(),
+                  onPress: () => SkyDialog.close(),
                 );
               },
             ),
@@ -59,10 +59,10 @@ class DialogUtilsView extends StatelessWidget {
               outlineMode: true,
               color: Colors.green,
               onPressed: () {
-                AppDialog.show(
-                  typeDialog: TypeDialog.SUCCESS,
+                SkyDialog.show(
+                  type: DialogType.SUCCESS,
                   message: 'Some Description Text',
-                  onPress: () => AppDialog.close(),
+                  onPress: () => SkyDialog.close(),
                 );
               },
             ),
@@ -71,10 +71,10 @@ class DialogUtilsView extends StatelessWidget {
               text: 'Retry',
               icon: CupertinoIcons.refresh_thick,
               onPressed: () {
-                AppDialog.show(
-                  typeDialog: TypeDialog.RETRY,
+                SkyDialog.show(
+                  type: DialogType.RETRY,
                   message: 'Some Description Text',
-                  onPress: () => AppDialog.close(),
+                  onPress: () => SkyDialog.close(),
                 );
               },
             ),
@@ -83,10 +83,10 @@ class DialogUtilsView extends StatelessWidget {
               text: 'Permission',
               icon: CupertinoIcons.exclamationmark_shield,
               onPressed: () {
-                AppDialog.show(
-                  typeDialog: TypeDialog.PERMISSION,
+                SkyDialog.show(
+                  type: DialogType.PERMISSION,
                   message: 'Some Description Text',
-                  onPress: () => AppDialog.close(),
+                  onPress: () => SkyDialog.close(),
                 );
               },
             ),

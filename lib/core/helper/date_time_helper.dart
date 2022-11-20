@@ -49,7 +49,7 @@ class DateTimeHelper {
   String? formatDate({String? pattern}) {
     bool isRange = (startDate != null && endDate != null);
     bool isNotRange = (startDate == null && endDate == null);
-    String locale = GetStorageManager.find.get(GetStorageKey.CURRENT_LOCALE);
+    String locale = GetStorageManager.find.get(GetStorageKey.currentLocale);
 
     if(isRange && date == null) {
       var start = DateFormat(pattern, locale).format(startDate!);

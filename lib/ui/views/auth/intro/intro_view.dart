@@ -98,7 +98,7 @@ class IntroView extends StatelessWidget {
   }
 
   void _onIntroEnd(context) async {
-    GetStorageManager.find.save(GetStorageKey.FIRST_INSTALL, false);
+    GetStorageManager.find.save(GetStorageKey.firstInstall, false);
     Get.offAllNamed(LoginView.route);
   }
 

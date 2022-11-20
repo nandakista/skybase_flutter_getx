@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 */
 
 enum SortBy {
-    ASC,
-    DESC,
+  ASC,
+  DESC,
 }
 
 class SkyGroupedListView<T, G> extends StatelessWidget {
@@ -27,6 +27,7 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
     this.physics,
     this.separator,
     this.separatorGroup,
+    this.groupFooterBuilder,
   }) : super(key: key);
 
   final ScrollPhysics? physics;
@@ -34,6 +35,7 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
   final List<T> data;
   final Widget Function(G element) groupHeaderBuilder;
   final Widget Function(BuildContext context, int index, T element) itemBuilder;
+  final Widget Function(G element)? groupFooterBuilder;
   final ScrollController? controller;
   final SortBy sortBy;
   final G Function(T element) groupBy;
@@ -69,23 +71,38 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
           isSame = item == prevItem;
         }
 
+        G nextItem;
+        if (index == data.length - 1) {
+          nextItem = item;
+        } else {
+          nextItem = groupBy(data[index + 1]);
+        }
+
         if (sortBy == SortBy.ASC) {
           return Column(
             children: [
-              if (index == 0) _buildHeaderWidget(item),
-              if (!isSame) _buildHeaderWidget(item),
-              _buildItemWidget(context, index),
-              if (index + 1 != data.length)
+              if (index == 0 || !isSame) _buildHeaderWidget(item),
+              if (index != 0 && item == prevItem)
                 _buildSeparatorWidget(separator),
+              _buildItemWidget(context, index),
+              if (groupFooterBuilder != null &&
+                  (item != nextItem || index + 1 == data.length))
+                groupFooterBuilder!(item),
             ],
           );
         } else {
           return Column(
             children: [
+              // Last Index
               if (index + 1 == data.length) _buildHeaderWidget(item),
+              // Content
               _buildItemWidget(context, index),
+              if (index != 0 && item == prevItem)
+                _buildSeparatorWidget(separator),
+              if (groupFooterBuilder != null &&
+                  (item != prevItem || index == 0))
+                groupFooterBuilder!(item),
               if (!isSame) _buildHeaderWidget(prevItem),
-              if (index != 0) _buildSeparatorWidget(separator),
             ],
           );
         }
