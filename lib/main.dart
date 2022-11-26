@@ -14,6 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Initializer.init();
   AppEnv.set(Env.DEVELOPMENT);
+  AppInfo.setInfo(await PackageInfo.fromPlatform());
   runApp(const App());
 }
 

@@ -42,7 +42,7 @@ class Initializer {
     // ---Locale
     await initializeDateFormatting('id_ID', null);
     // --- Package Info
-    await Get.putAsync(() async => AppInfo());
+    Get.lazyPut(() => AppInfo());
     // --- App Config
     Get.lazyPut(() => AppEnv());
     // --- Web Socket
