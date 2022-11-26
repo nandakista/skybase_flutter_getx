@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/ui/widgets/sky_dialog.dart';
 
 //---------------<Toast>-----------------
@@ -53,7 +52,7 @@ class SkyDialog {
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.error(
-            title: title ?? International.failed.tr,
+            title: title ?? 'txt_failed'.tr,
             description: message,
             onConfirm: onPress,
           ),
@@ -63,7 +62,7 @@ class SkyDialog {
           barrierDismissible: dismissible ?? false,
           context: Get.context!,
           builder: (context) => DialogAlert.success(
-            title: title ?? International.success.tr,
+            title: title ?? 'txt_success'.tr,
             description: message,
             onConfirm: onPress,
           ),
@@ -73,7 +72,7 @@ class SkyDialog {
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.warning(
-            title: title ?? International.warning.tr,
+            title: title ?? 'txt_warning'.tr,
             backgroundColorHeader: Colors.orange,
             description: message,
             onConfirm: onPress,
@@ -91,7 +90,7 @@ class SkyDialog {
           barrierDismissible: dismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.retry(
-            title: title ?? International.failed.tr,
+            title: title ?? 'txt_failed'.tr,
             description: message,
             onConfirm: onPress,
             onCancel: onCancel ?? () => Get.back(),
@@ -104,7 +103,7 @@ class SkyDialog {
           builder: (context) => DialogAlert.permission(
             header: header,
             backgroundColorHeader: Colors.orange,
-            title: title ?? International.warning.tr,
+            title: title ?? 'txt_warning'.tr,
             description: message,
             onConfirm: onPress,
             onCancel: onCancel ?? () => Get.back(),

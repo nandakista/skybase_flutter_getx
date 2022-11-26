@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/localization/language_const.dart';
 
 /* Created by
    Varcant
@@ -16,11 +15,11 @@ class PaginationErrorLoadView extends StatelessWidget {
       children: [
         const SizedBox(height: 12),
         Text(
-          International.errGeneralFormal.tr,
+          'txt_err_general_formal'.tr,
           style: const TextStyle(color: Colors.grey),
         ),
         Text(
-          International.tapRetry.tr,
+          'txt_tap_retry'.tr,
           style: const TextStyle(color: Colors.grey),
         ),
         const SizedBox(height: 4),

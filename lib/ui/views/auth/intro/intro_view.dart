@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
-import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/views/auth/login/login_view.dart';
@@ -73,14 +72,14 @@ class IntroView extends StatelessWidget {
       showSkipButton: true,
       skipFlex: 0,
       nextFlex: 0,
-      skip: Text(International.skip.tr,
+      skip: Text('txt_skip'.tr,
           style: AppStyle.subtitle4
               .copyWith(color: AppColors.primary, fontWeight: FontWeight.bold)),
       next: const Icon(
         Icons.arrow_forward,
         color: AppColors.primary,
       ),
-      done: Text(International.done.tr,
+      done: Text('txt_done'.tr,
           style: AppStyle.subtitle4.copyWith(fontWeight: FontWeight.w600)),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),

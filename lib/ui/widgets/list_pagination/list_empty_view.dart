@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/localization/language_const.dart';
 
 /* Created by
    Varcant
@@ -30,18 +29,20 @@ class ListEmptyView extends StatelessWidget {
             : const BouncingScrollPhysics(),
         child: Column(
           children: [
-            emptyImage ??
-                Image.asset('assets/images/img_empty.png'),
+            emptyImage ?? Image.asset('assets/images/img_empty.png'),
             const SizedBox(height: 24),
             Text(
-              emptyTitle ?? International.emptyListTitle.tr,
+              emptyTitle ?? 'txt_empty_list_title'.tr,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 12),
-            Text(
-              emptySubtitle ?? International.emptyListSubtitle.tr,
-              textAlign: TextAlign.center,
+            const SizedBox(height: 4),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Text(
+                emptySubtitle ?? 'txt_empty_list_subtitle'.tr,
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
         ),

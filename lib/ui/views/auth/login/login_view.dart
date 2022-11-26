@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
-import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/views/auth/login/login_controller.dart';
@@ -12,6 +11,7 @@ import 'package:skybase/ui/widgets/keyboard_dismisser.dart';
 
 class LoginView extends GetView<LoginController> {
   static const String route = '/login';
+
   const LoginView({Key? key}) : super(key: key);
 
   @override
@@ -46,17 +46,18 @@ class LoginView extends GetView<LoginController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(International.login.tr, style: AppStyle.headline2),
+              Text('txt_login'.tr, style: AppStyle.headline2),
               const SizedBox(height: 10),
-              Text(International.loginSubtitle.tr,
-                  style: AppStyle.subtitle4),
+              Text(
+                'txt_login_subtitle'.tr,
+                style: AppStyle.subtitle4,
+              ),
             ],
           ),
         ),
         const Flexible(
           child: Image(
-              image: AssetImage('assets/images/img_login.png'),
-              width: 250),
+              image: AssetImage('assets/images/img_login.png'), width: 250),
         )
       ],
     );
@@ -70,23 +71,22 @@ class LoginView extends GetView<LoginController> {
         children: [
           const SizedBox(height: 20),
           SkyFormField(
-
-            label: International.phone.tr,
-            hint: International.phone.tr,
+            label: 'txt_phone'.tr,
+            hint: 'txt_phone'.tr,
             controller: controller.phoneController,
             keyboardType: TextInputType.phone,
             icon: Icons.phone,
             validator: (value) => AppValidator.field(
-              title: International.phone.tr,
+              title: 'txt_phone'.tr,
               value: value.toString(),
               regex: AppRegex.phone,
             ),
           ),
           const SizedBox(height: 20),
           Obx(
-                () => CustomPasswordFieldForm(
-              label: International.password.tr,
-              hint: International.password.tr,
+            () => CustomPasswordFieldForm(
+              label: 'txt_password'.tr,
+              hint: 'txt_password'.tr,
               controller: controller.passController,
               icon: Icons.lock,
               hiddenText: controller.isHiddenPassword.value,
@@ -94,7 +94,7 @@ class LoginView extends GetView<LoginController> {
                   icon: const Icon(Icons.visibility_off),
                   onPressed: () => controller.hidePassword()),
               validator: (value) => AppValidator.field(
-                title: International.password.tr,
+                title: 'txt_password'.tr,
                 value: value.toString(),
                 regex: AppRegex.password,
               ),
@@ -102,13 +102,13 @@ class LoginView extends GetView<LoginController> {
           ),
           const SizedBox(height: 20),
           SkyButton(
-              onPressed: () {
-                FocusScope.of(context).unfocus();
-                controller.login();
-              },
-              text: International.login.tr,
-              icon: Icons.arrow_forward,
-              color: AppColors.primary,
+            onPressed: () {
+              FocusScope.of(context).unfocus();
+              controller.login();
+            },
+            text: 'txt_login'.tr,
+            icon: Icons.arrow_forward,
+            color: AppColors.primary,
           ),
         ],
       ),
@@ -120,7 +120,7 @@ class LoginView extends GetView<LoginController> {
       children: [
         SkyButton(
           onPressed: () => controller.bypassLogin(),
-          text: International.skip.tr,
+          text: 'txt_skip'.tr,
           icon: Icons.arrow_forward,
           color: AppColors.primary,
         ),
@@ -128,13 +128,12 @@ class LoginView extends GetView<LoginController> {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(International.forgotPassword.tr),
+            Text('txt_forgot_password'.tr),
             InkWell(
               child: Text(
-                International.reset.tr,
+                'txt_reset'.tr,
                 style: const TextStyle(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.bold),
+                    color: AppColors.primary, fontWeight: FontWeight.bold),
               ),
             ),
           ],
@@ -143,13 +142,12 @@ class LoginView extends GetView<LoginController> {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(International.dontHaveAccount.tr),
+            Text('txt_dont_have_account'.tr),
             InkWell(
               child: Text(
-                International.register.tr,
+                'txt_register'.tr,
                 style: const TextStyle(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.bold),
+                    color: AppColors.primary, fontWeight: FontWeight.bold),
               ),
             ),
           ],

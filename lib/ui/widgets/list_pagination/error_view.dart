@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 
 /* Created by
@@ -35,17 +34,16 @@ class ErrorView extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-            errorImage ??
-                Image.asset('assets/images/img_error.png'),
+            errorImage ?? Image.asset('assets/images/img_error.png'),
             const SizedBox(height: 24),
             const SizedBox(height: 24),
             Text(
-              errorTitle ?? International.errGeneralFormal.tr,
+              errorTitle ?? 'txt_err_general_formal'.tr,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             Text(
-              errorSubtitle ?? International.tapRetry.tr,
+              errorSubtitle ?? 'txt_tap_to_retry'.tr,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
@@ -53,7 +51,7 @@ class ErrorView extends StatelessWidget {
               wrapContent: true,
               height: 50,
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              text: retryText ?? International.retry.tr,
+              text: retryText ?? 'txt_retry'.tr,
               onPressed: onRetry,
             ),
           ],
