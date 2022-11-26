@@ -45,16 +45,6 @@ class SettingsUtilsView extends GetView<UtilsController> {
               icon: CupertinoIcons.paintbrush,
             ),
             const SizedBox(height: 12),
-            SkyButton(
-              onPressed: () {
-                String? converted = DateTimeHelper(
-                    startDate: DateTime.now(), endDate: DateTime.now())
-                    .format();
-                Toast.show('Date converted :\n $converted');
-              },
-              text: 'txt_convert'.tr + ' ' + 'txt_date'.tr,
-            ),
-            const SizedBox(height: 12),
             Text(
                 'Sample Currency Format = ${controller.currency.currencyFormat()}'),
             const SizedBox(height: 12),
