@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/core/themes/app_style.dart';
 
 /* Created by
@@ -16,7 +15,7 @@ class PaginationMaxItemView extends StatelessWidget {
       children: [
         const SizedBox(height: 12),
         Text(
-          International.maxItem.tr,
+          'txt_max_item'.tr,
           style: AppStyle.subtitle4.copyWith(
             color: Colors.grey,
             fontWeight: FontWeight.w600,

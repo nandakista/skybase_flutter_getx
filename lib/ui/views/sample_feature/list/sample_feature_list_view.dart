@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:skybase/core/database/hive/hive_box.dart';
-import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
@@ -18,7 +17,7 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SkyAppBar.secondary(title: International.userList.tr),
+      appBar: SkyAppBar.secondary(title: 'txt_list_users'.tr),
       body: SkyPaginationView<SampleFeature>(
         pagingController: controller.pagingController,
         onRefresh: () => controller.refreshPage(),

@@ -29,6 +29,7 @@ class SkyFormField extends StatelessWidget {
   final bool disableBorder;
   final bool? enabled;
   final InputBorder? disabledBorder;
+  final TextStyle? style;
 
   const SkyFormField({
     Key? key,
@@ -38,7 +39,7 @@ class SkyFormField extends StatelessWidget {
     this.maxLines = 1,
     this.onPress,
     this.endIcon,
-    required this.validator,
+    this.validator,
     this.controller,
     this.keyboardType,
     this.icon,
@@ -56,6 +57,7 @@ class SkyFormField extends StatelessWidget {
     this.disableBorder = false,
     this.prefixWidget,
     this.disabledBorder,
+    this.style,
   }) : super(key: key);
 
   @override
@@ -114,6 +116,7 @@ class SkyFormField extends StatelessWidget {
         labelStyle: AppStyle.body2.copyWith(color: hintColor),
         hintStyle: AppStyle.body2.copyWith(color: hintColor),
       ),
+      style: style,
       validator: validator,
       inputFormatters: formatters,
     );

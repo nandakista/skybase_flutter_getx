@@ -12,10 +12,14 @@ import 'package:skybase/ui/widgets/sky_button.dart';
 */
 class SkyDialog extends StatelessWidget {
   final Widget child;
+  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
 
   const SkyDialog({
     Key? key,
     required this.child,
+    this.padding,
+    this.margin,
   }) : super(key: key);
 
   @override
@@ -29,8 +33,9 @@ class SkyDialog extends StatelessWidget {
           Wrap(
             children: [
               Container(
-                padding: const EdgeInsets.fromLTRB(16, 100, 16, 16),
-                margin: const EdgeInsets.only(top: 16),
+                padding: padding ??
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                margin: margin ?? const EdgeInsets.only(top: 16),
                 decoration: BoxDecoration(
                   color: (Get.isDarkMode) ? Colors.black : Colors.white,
                   shape: BoxShape.rectangle,
@@ -38,7 +43,7 @@ class SkyDialog extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                         color:
-                        (Get.isDarkMode) ? AppColors.primary : Colors.black,
+                            (Get.isDarkMode) ? AppColors.primary : Colors.black,
                         offset: const Offset(0.0, 0.0),
                         blurRadius: 10.0)
                   ],
@@ -228,7 +233,8 @@ class DialogAlert extends StatelessWidget {
             Wrap(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                   margin: const EdgeInsets.only(top: 26),
                   decoration: BoxDecoration(
                       color: (Get.isDarkMode) ? Colors.black : Colors.white,
@@ -236,8 +242,9 @@ class DialogAlert extends StatelessWidget {
                       borderRadius: BorderRadius.circular(17),
                       boxShadow: [
                         BoxShadow(
-                            color:
-                            (Get.isDarkMode) ? AppColors.primary : Colors.black,
+                            color: (Get.isDarkMode)
+                                ? AppColors.primary
+                                : Colors.black,
                             offset: const Offset(0.0, 0.0),
                             blurRadius: 10.0)
                       ]),

@@ -7,7 +7,6 @@ import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/extension/int_extension.dart';
 import 'package:skybase/core/helper/input_formater.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
-import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/core/localization/locale_helper.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
@@ -42,18 +41,8 @@ class SettingsUtilsView extends GetView<UtilsController> {
             ),
             SkyButton(
               onPressed: () => LocaleHelper().showLocaleDialog(context),
-              text: International.changeLanguage.tr,
+              text: 'txt_change_language'.tr,
               icon: CupertinoIcons.paintbrush,
-            ),
-            const SizedBox(height: 12),
-            SkyButton(
-              onPressed: () {
-                String? converted = DateTimeHelper(
-                    startDate: DateTime.now(), endDate: DateTime.now())
-                    .format();
-                Toast.show('Date converted :\n $converted');
-              },
-              text: International.convert.tr + ' ' + International.date.tr,
             ),
             const SizedBox(height: 12),
             Text(
@@ -62,8 +51,8 @@ class SettingsUtilsView extends GetView<UtilsController> {
             SkyFormField(
               controller: controller.currencyCtr,
               initialValue: 0.toStringIDR(),
-              label: International.price.tr,
-              hint: International.price.tr,
+              label: 'txt_price'.tr,
+              hint: 'txt_price'.tr,
               keyboardType: TextInputType.number,
               onChanged: (value) => (value.isEmpty)
                   ? controller.currencyCtr.text = 0.toStringIDR()
@@ -80,7 +69,7 @@ class SettingsUtilsView extends GetView<UtilsController> {
                 debugPrint('Converted = $converted');
                 Toast.show('String converted :\n $converted');
               },
-              text: International.convert.tr + ' String',
+              text: 'txt_convert'.tr + ' String',
               icon: CupertinoIcons.t_bubble,
             ),
           ],

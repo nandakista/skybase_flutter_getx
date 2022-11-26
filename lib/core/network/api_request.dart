@@ -96,7 +96,7 @@ Future<void> _tokenManager(bool useToken) async {
   DioClient.setInterceptor();
   String? token = await SecureStorageManager.find.getToken();
   if (useToken) {
-    headers[HttpHeaders.authorizationHeader] = 'token $gitToken';
+    // headers[HttpHeaders.authorizationHeader] = 'token $gitToken';
   } else {
     headers.clear();
   }
