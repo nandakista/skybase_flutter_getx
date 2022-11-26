@@ -13,6 +13,7 @@ class AppTheme {
       indicatorColor: AppColors.accent,
       fontFamily: "Poppins",
       brightness: Brightness.light,
+      inputDecorationTheme: inputDecorationTheme(),
       appBarTheme: const AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,
@@ -31,6 +32,7 @@ class AppTheme {
       indicatorColor: AppColors.accent,
       fontFamily: "Poppins",
       brightness: Brightness.dark,
+      inputDecorationTheme: inputDecorationTheme(),
       bottomSheetTheme: const BottomSheetThemeData(
         elevation: 8,
         shape: RoundedRectangleBorder(
@@ -46,6 +48,27 @@ class AppTheme {
           systemNavigationBarColor: Colors.black,
           statusBarColor: AppColors.primary,
         ),
+      ),
+    );
+  }
+
+  static InputDecorationTheme inputDecorationTheme() {
+    return InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderSide: const BorderSide(width: 1, color: Colors.transparent),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(width: 1, color: Colors.transparent),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: const BorderSide(width: 1, color: Colors.blue),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: const BorderSide(width: 1, color: Colors.blue),
+        borderRadius: BorderRadius.circular(12),
       ),
     );
   }
