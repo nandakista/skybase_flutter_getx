@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerDetail extends StatelessWidget {
@@ -6,9 +7,12 @@ class ShimmerDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color baseDark = Colors.grey[700] ?? Colors.grey;
+    Color baseLight = Colors.grey[300] ?? Colors.grey;
+
     return SingleChildScrollView(
       child: Shimmer.fromColors(
-        baseColor: Colors.grey[300] ?? Colors.grey,
+        baseColor: Get.isDarkMode ? baseDark : baseLight,
         highlightColor: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -77,7 +81,7 @@ class ShimmerDetail extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius ?? 0),
-          color: Colors.white,
+          color: Colors.black45,
         ),
       );
 }
