@@ -7,6 +7,12 @@ import 'package:skybase/ui/widgets/picker/sky_filter_chip.dart';
    Varcant
    nanda.kista@gmail.com
 */
+enum GridPickerType {
+  single,
+  multiple,
+  radio,
+}
+
 typedef SMFilterItemBuilder<T> = Widget Function(
   T item,
 );
@@ -14,37 +20,41 @@ typedef SMFilterItemBuilder<T> = Widget Function(
 typedef SMFilterOnChanged<T> = Function(
   BuildContext context,
   int index,
-  List<PickerData<T>> item,
+  T? firstitem,
+  List<T?> listItem,
 );
 
 class PickerGridView<T> extends StatelessWidget {
   const PickerGridView({
     Key? key,
+    required this.type,
     required this.data,
     required this.child,
     required this.onChanged,
-    this.isMultiple = true,
     this.widthItem,
     this.heightItem,
     this.crossAxisSpacing,
     this.mainAxisSpacing = 0.0,
     this.shrinkWrap = false,
     this.physics,
+    this.initialValue,
   }) : super(key: key);
 
+  final GridPickerType type;
   final List<PickerData<T>> data;
   final SMFilterItemBuilder<PickerData<T>> child;
   final SMFilterOnChanged<T> onChanged;
-  final bool isMultiple;
   final double? widthItem;
   final double? heightItem;
   final double? crossAxisSpacing;
   final double mainAxisSpacing;
   final bool shrinkWrap;
   final ScrollPhysics? physics;
+  final PickerData<T>? initialValue;
 
   @override
   Widget build(BuildContext context) {
+    _setInitial();
     RxList<PickerData<T>> tempData = data.obs;
     return Obx(
       () => GridView.builder(
@@ -60,8 +70,9 @@ class PickerGridView<T> extends StatelessWidget {
         itemBuilder: (context, index) {
           final item = tempData[index];
           return SkyFilterChip(
+            isRadio: (type == GridPickerType.radio) ? true : false,
             onSelected: (isSelected) {
-              if (!isMultiple) {
+              if (type != GridPickerType.multiple) {
                 for (var element in tempData) {
                   element.isSelected = false;
                 }
@@ -73,7 +84,17 @@ class PickerGridView<T> extends StatelessWidget {
                       : otherChip;
                 },
               ).toList();
-              onChanged(context, index, tempData);
+              onChanged(
+                context,
+                index,
+                tempData
+                    .firstWhereOrNull((element) => element.isSelected)
+                    ?.data,
+                tempData
+                    .where((element) => element.isSelected)
+                    .map((e) => e.data)
+                    .toList(),
+              );
             },
             selected: item.isSelected,
             child: child(item),
@@ -81,5 +102,16 @@ class PickerGridView<T> extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void _setInitial() {
+    if (initialValue != null) {
+      int index = data.indexOf(initialValue!);
+      data[index] = PickerData(
+        isSelected: true,
+        index: initialValue?.index,
+        data: initialValue?.data,
+      );
+    }
   }
 }

@@ -13,10 +13,12 @@ class BulletText extends StatelessWidget {
     this.verticalSpacing = 4,
     this.margin,
     this.padding,
+    this.caption,
   }) : super(key: key);
 
   final Widget title;
   final Widget? subtitle;
+  final Widget? caption;
   final double horizontalSpacing;
   final double verticalSpacing;
   final EdgeInsetsGeometry? margin, padding;
@@ -42,6 +44,13 @@ class BulletText extends StatelessWidget {
               horizontal: 8 + (horizontalSpacing),
             ),
             child: subtitle,
+          ),
+          SizedBox(height: verticalSpacing / 2),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 8 + (horizontalSpacing),
+            ),
+            child: caption,
           )
         ],
       ),

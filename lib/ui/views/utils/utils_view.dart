@@ -12,6 +12,8 @@ import 'package:skybase/ui/widgets/common_widget.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 
+import 'component/other_utils_view.dart';
+
 class UtilsView extends GetView<UtilsController> {
   const UtilsView({Key? key}) : super(key: key);
 
@@ -67,6 +69,13 @@ class UtilsView extends GetView<UtilsController> {
                   icon: Icons.timer_outlined,
                   outlineMode: true,
                   onPressed: () => Get.toNamed(TimerUtilsView.route),
+                ),
+                const SizedBox(height: 12),
+                SkyButton(
+                  text: 'Other',
+                  icon: Icons.add,
+                  outlineMode: true,
+                  onPressed: () => Get.to(() => const OtherUtilsView()),
                 ),
               ],
             ),
