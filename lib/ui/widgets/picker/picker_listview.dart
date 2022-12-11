@@ -84,31 +84,17 @@ class PickerListView<T> extends StatelessWidget {
                       : otherChip;
                 },
               ).toList();
-              if (type != ListPickerType.multiple) {
-                onChanged(
-                  context,
-                  index,
-                  tempData
-                      .firstWhereOrNull((element) => element.isSelected)
-                      ?.data,
-                  tempData
-                      .where((element) => element.isSelected)
-                      .map((e) => e.data)
-                      .toList(),
-                );
-              } else {
-                onChanged(
-                  context,
-                  index,
-                  tempData
-                      .firstWhereOrNull((element) => element.isSelected)
-                      ?.data,
-                  tempData
-                      .where((element) => element.isSelected)
-                      .map((e) => e.data)
-                      .toList(),
-                );
-              }
+              onChanged(
+                context,
+                index,
+                tempData
+                    .firstWhereOrNull((element) => element.isSelected)
+                    ?.data,
+                tempData
+                    .where((element) => element.isSelected)
+                    .map((e) => e.data)
+                    .toList(),
+              );
             },
             child: itemBuilder(item),
           );

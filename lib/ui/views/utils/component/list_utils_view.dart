@@ -69,7 +69,7 @@ class ListUtilsView extends StatelessWidget {
                 onRefresh: () {},
                 emptyEnabled: dummyData.isEmpty,
                 child: PickerListView(
-                  type: ListPickerType.radio,
+                  type: ListPickerType.single,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   separator: const Divider(thickness: 1, height: 16),
