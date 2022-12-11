@@ -79,13 +79,11 @@ class OtherUtilsView extends GetView<UtilsController> {
               ),
               const SizedBox(height: 12),
               Text('Ordered List', style: AppStyle.subtitle4),
-              const OrderedList(
-                data: [
-                  'One',
-                  'Two',
-                  'Three',
-                  'Four',
-                ],
+              OrderedList(
+                itemCount: 3,
+                itemBuilder: (BuildContext context, int index) {
+                  return Text('Data $index');
+                },
               )
             ],
           ),

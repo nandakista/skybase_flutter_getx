@@ -5,32 +5,39 @@ import 'package:skybase/ui/widgets/number_tile.dart';
 class OrderedList extends StatelessWidget {
   const OrderedList({
     Key? key,
-    this.title,
-    required this.data,
+    required this.itemCount,
+    required this.itemBuilder,
+    this.numberStyle,
+    this.spacing = 8,
+    this.itemMargin,
+    this.itemPadding,
   }) : super(key: key);
 
-  final String? title;
-  final List<String> data;
+  final int itemCount;
+  final Widget Function(BuildContext, int) itemBuilder;
+  final TextStyle? numberStyle;
+  final double spacing;
+  final EdgeInsetsGeometry? itemMargin;
+  final EdgeInsetsGeometry? itemPadding;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if(title!=null) Text('$title :', style: AppStyle.headline4),
-        if(title!=null) const SizedBox(height: 8),
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: data.length,
+          itemCount: itemCount,
           padding: const EdgeInsets.only(bottom: 12),
           itemBuilder: (context, index) {
             return NumberTile(
               number: index + 1,
-              title: data[index],
-              titleStyle: AppStyle.body1,
-              padding: EdgeInsets.zero,
-              verticalSpacing: 2,
+              child: itemBuilder(context, index),
+              numberStyle: AppStyle.body1,
+              horizontalSpacing: spacing,
+              margin: itemMargin,
+              padding: itemPadding ?? EdgeInsets.zero,
             );
           },
         ),
