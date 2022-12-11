@@ -3,9 +3,11 @@ import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/data/models/global/picker_data.dart';
 import 'package:skybase/ui/widgets/base/sky_list_view.dart';
 import 'package:skybase/ui/widgets/common_widget.dart';
+import 'package:skybase/ui/widgets/ordered_list.dart';
 import 'package:skybase/ui/widgets/picker/picker_listview.dart';
 import 'package:skybase/ui/widgets/sky_grouped_listview.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
+import 'package:skybase/ui/widgets/unordered_list.dart';
 
 class ListUtilsView extends StatelessWidget {
   const ListUtilsView({Key? key}) : super(key: key);
@@ -59,6 +61,7 @@ class ListUtilsView extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 36),
             ..._buildSection(
               page: 2,
               title: 'Sample Picker ListView',
@@ -94,7 +97,35 @@ class ListUtilsView extends StatelessWidget {
                   },
                 ),
               ),
-            )
+            ),
+            ..._buildSection(
+              page: 3,
+              title: 'Unordered List',
+              content: const UnorderedList(
+                data: {
+                  'Name': 'Product A',
+                  'Weight': '300 gram',
+                  'Spec': 'Lorem ipsum sit dorom amet..'
+                },
+                captionData: {
+                  'Name': 'Some for name',
+                  'Spec': 'Some for Spec',
+                },
+              ),
+            ),
+            const SizedBox(height: 36),
+            ..._buildSection(
+              page: 4,
+              title: 'Ordered List',
+              content: OrderedList(
+                itemCount: 3,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  return Text('Data $index');
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -111,13 +142,11 @@ class ListUtilsView extends StatelessWidget {
       const SizedBox(height: 12),
       Center(child: Text(title)),
       SizedBox(
-        height: 500,
         child: ContentWrapper(
           top: true,
           child: content,
         ),
       ),
-      const SizedBox(height: 48),
     ];
   }
 }

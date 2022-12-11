@@ -11,6 +11,10 @@ class OrderedList extends StatelessWidget {
     this.spacing = 8,
     this.itemMargin,
     this.itemPadding,
+    this.shrinkWrap = false,
+    this.physics,
+    this.scrollDirection = Axis.vertical,
+    this.separator,
   }) : super(key: key);
 
   final int itemCount;
@@ -19,16 +23,24 @@ class OrderedList extends StatelessWidget {
   final double spacing;
   final EdgeInsetsGeometry? itemMargin;
   final EdgeInsetsGeometry? itemPadding;
+  final bool shrinkWrap;
+  final ScrollPhysics? physics;
+  final Axis scrollDirection;
+  final Widget? separator;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
+        ListView.separated(
+          shrinkWrap: shrinkWrap,
+          physics: physics,
+          scrollDirection: scrollDirection,
           itemCount: itemCount,
+          separatorBuilder: (BuildContext context, int index) {
+            return separator ?? const SizedBox.shrink();
+          },
           padding: const EdgeInsets.only(bottom: 12),
           itemBuilder: (context, index) {
             return NumberTile(

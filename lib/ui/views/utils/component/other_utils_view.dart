@@ -64,27 +64,6 @@ class OtherUtilsView extends GetView<UtilsController> {
                   'Spec': 'Lorem ipsum sit dorom amet..'
                 },
               ),
-              const SizedBox(height: 12),
-              Text('Unordered List', style: AppStyle.subtitle4),
-              const UnorderedList(
-                data: {
-                  'Name': 'Product A',
-                  'Weight': '300 gram',
-                  'Spec': 'Lorem ipsum sit dorom amet..'
-                },
-                captionData: {
-                  'Name': 'Some for name',
-                  'Spec': 'Some for Spec',
-                },
-              ),
-              const SizedBox(height: 12),
-              Text('Ordered List', style: AppStyle.subtitle4),
-              OrderedList(
-                itemCount: 3,
-                itemBuilder: (BuildContext context, int index) {
-                  return Text('Data $index');
-                },
-              )
             ],
           ),
         ),

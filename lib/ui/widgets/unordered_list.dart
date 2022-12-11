@@ -35,7 +35,6 @@ class UnorderedList extends StatelessWidget {
             .first
             .value;
       }
-      print('Caption = $caption' );
       children.add(
         BulletText(
           title: Text(
