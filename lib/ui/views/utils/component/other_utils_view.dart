@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:skybase/core/helper/converter_helper.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/extension/int_extension.dart';
@@ -55,7 +56,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                 text: 'txt_convert'.tr + ' String',
                 icon: CupertinoIcons.t_bubble,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 26),
               Text('Info Table', style: AppStyle.subtitle4),
               const InfoTable(
                 data: {
@@ -64,6 +65,11 @@ class OtherUtilsView extends GetView<UtilsController> {
                   'Spec': 'Lorem ipsum sit dorom amet..'
                 },
               ),
+              const SizedBox(height: 26),
+              Text('Date', style: AppStyle.subtitle4),
+              const SizedBox(height: 12),
+              const Text('Date Sample Converter'),
+              Text(DateFormat('dd MMMM yyy').format(DateTime.now()))
             ],
           ),
         ),

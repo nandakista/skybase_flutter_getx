@@ -39,8 +39,6 @@ class Initializer {
     Get.putAsync(() async => const FlutterSecureStorage());
 
     // Configuration
-    // ---Locale
-    await initializeDateFormatting('id_ID', null);
     // --- Package Info
     Get.lazyPut(() => AppInfo());
     // --- App Config
