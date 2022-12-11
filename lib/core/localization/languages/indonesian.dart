@@ -30,7 +30,7 @@ const Map<String, String> id = {
   'txt_media': 'Media',
   'txt_preview': 'Preview',
 
-  //Validation
+  // Sentence
   'txt_restaurant_subtitle': 'Ayo temukan makanan favoritmu...',
   'txt_empty_restaurant_title': 'Restoran tidak ditemukan !',
   'txt_empty_restaurant_subtitle':

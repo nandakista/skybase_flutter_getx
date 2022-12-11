@@ -10,11 +10,13 @@ class SkyFilterChip extends StatelessWidget {
     required this.onSelected,
     required this.child,
     required this.selected,
+    this.isRadio = false,
   }) : super(key: key);
 
   final void Function(bool) onSelected;
   final Widget child;
   final bool selected;
+  final bool isRadio;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class SkyFilterChip extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: () {
         if (selected) {
-          onSelected(false);
+          if (!isRadio) onSelected(false);
         } else {
           onSelected(true);
         }

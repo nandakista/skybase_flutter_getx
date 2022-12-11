@@ -10,6 +10,8 @@ import 'package:skybase/core/themes/app_theme.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
 import 'package:skybase/ui/routes/app_routes.dart';
 
+import 'app_configuration.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Initializer.init();
@@ -25,7 +27,7 @@ class App extends StatelessWidget {
     return GetX<ThemeManager>(
       builder: (ctr) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: "Skybase Flutter Getx",
+        title: AppConfiguration.appName,
         theme: AppTheme.light(),
         darkTheme: AppTheme.dark(),
         themeMode: (ctr.isDark.isTrue) ? ThemeMode.dark : ThemeMode.light,

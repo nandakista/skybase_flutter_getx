@@ -69,11 +69,11 @@ class ListUtilsView extends StatelessWidget {
                 onRefresh: () {},
                 emptyEnabled: dummyData.isEmpty,
                 child: PickerListView<dynamic>(
+                  type: ListPickerType.multiple,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   separator: const Divider(thickness: 1, height: 16),
                   data: dummyData.map((e) => PickerData(data: e)).toList(),
-                  isMultiple: false,
                   itemBuilder: (PickerData<dynamic> item) {
                     return SizedBox(
                       height: 20,
