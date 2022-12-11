@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -17,11 +19,17 @@ void main() async {
   await Initializer.init();
   AppEnv.set(Env.DEVELOPMENT);
   AppInfo.setInfo(await PackageInfo.fromPlatform());
-  runApp(const App());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetX<ThemeManager>(
