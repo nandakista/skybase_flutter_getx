@@ -21,7 +21,8 @@ typedef SMFilterItemBuilder<T> = Widget Function(
 typedef SMFilterOnChanged<T> = Function(
   BuildContext context,
   int index,
-  List<PickerData<T>> item,
+  T? firstitem,
+  List<T?> listItem,
 );
 
 class PickerListView<T> extends StatelessWidget {
@@ -83,11 +84,31 @@ class PickerListView<T> extends StatelessWidget {
                       : otherChip;
                 },
               ).toList();
-              onChanged(
-                context,
-                index,
-                tempData.where((element) => element.isSelected).toList(),
-              );
+              if (type != ListPickerType.multiple) {
+                onChanged(
+                  context,
+                  index,
+                  tempData
+                      .firstWhereOrNull((element) => element.isSelected)
+                      ?.data,
+                  tempData
+                      .where((element) => element.isSelected)
+                      .map((e) => e.data)
+                      .toList(),
+                );
+              } else {
+                onChanged(
+                  context,
+                  index,
+                  tempData
+                      .firstWhereOrNull((element) => element.isSelected)
+                      ?.data,
+                  tempData
+                      .where((element) => element.isSelected)
+                      .map((e) => e.data)
+                      .toList(),
+                );
+              }
             },
             child: itemBuilder(item),
           );
@@ -95,6 +116,7 @@ class PickerListView<T> extends StatelessWidget {
       ),
     );
   }
+
   void _setInitial() {
     if (initialValue != null) {
       int index = data.indexOf(initialValue!);

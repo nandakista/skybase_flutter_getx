@@ -68,8 +68,8 @@ class ListUtilsView extends StatelessWidget {
                 onRetry: () {},
                 onRefresh: () {},
                 emptyEnabled: dummyData.isEmpty,
-                child: PickerListView<dynamic>(
-                  type: ListPickerType.multiple,
+                child: PickerListView(
+                  type: ListPickerType.radio,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   separator: const Divider(thickness: 1, height: 16),
@@ -88,11 +88,9 @@ class ListUtilsView extends StatelessWidget {
                       ),
                     );
                   },
-                  onChanged: (context, index, item) {
-                    final pickedItem = item
-                        .where((element) => element.isSelected)
-                        .map((e) => e.data);
-                    debugPrint('Picked item = $pickedItem');
+                  onChanged: (context, index, firstItem, listItem) {
+                    debugPrint('First item = $firstItem');
+                    debugPrint('All item = $listItem');
                   },
                 ),
               ),
