@@ -13,10 +13,12 @@ import 'package:skybase/core/themes/theme_manager.dart';
 import 'package:skybase/ui/routes/app_routes.dart';
 
 import 'app_configuration.dart';
+import 'core/download_manager/download_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Initializer.init();
+  await DownloadManager.initDownloader();
   AppEnv.set(Env.DEVELOPMENT);
   AppInfo.setInfo(await PackageInfo.fromPlatform());
   runApp(

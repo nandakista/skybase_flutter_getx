@@ -27,6 +27,8 @@ dependencies:
   rxdart: ^0.27.3
 
   # File Manager
+  flutter_downloader: ^1.9.1
+  android_path_provider: ^0.3.0
   image: ^3.2.0
   camera: ^0.10.0+1
   photo_manager: ^2.1.2
@@ -51,6 +53,7 @@ dependencies:
   pin_code_fields: ^7.3.0
   flutter_spinkit: ^5.1.0
   dotted_border: ^2.0.0+3
+  percent_indicator: ^4.2.2
 
   # Others
   package_info_plus: ^1.4.3+1
