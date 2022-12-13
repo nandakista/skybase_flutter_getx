@@ -2,11 +2,12 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
+
 import 'package:android_path_provider/android_path_provider.dart';
-import 'package:get/get.dart';
-import 'package:path/path.dart' as p;
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:get/get.dart';
+import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -42,7 +43,7 @@ class DownloadManager {
     FlutterDownloader.registerCallback(downloadCallback);
   }
 
-  static Future<void> initDownloader() async {
+  Future<void> initDownloader() async {
     await FlutterDownloader.initialize(
       debug: true,
       ignoreSsl: true,
@@ -50,7 +51,7 @@ class DownloadManager {
   }
 
   @pragma('vm:entry-point')
-  static void downloadCallback(
+  void downloadCallback(
       String id,
       DownloadTaskStatus status,
       int progress,
@@ -59,7 +60,7 @@ class DownloadManager {
     send?.send([id, status, progress]);
   }
 
-  static Future<String?> _findLocalPath() async {
+  Future<String?> _findLocalPath() async {
     String? externalStorageDirPath;
     if (Platform.isAndroid) {
       try {

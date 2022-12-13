@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 
 class AppConverter {
   static String toBase64({XFile? imageFile, File? file}) {

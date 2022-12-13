@@ -10,8 +10,8 @@ import 'package:skybase/ui/views/sample_feature/detail/component/repo_tab_view.d
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/base/sky_view.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
-import 'package:skybase/ui/widgets/sky_image.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
+import 'package:skybase/ui/widgets/sky_image.dart';
 
 class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
   static const String route = '/user-detail';

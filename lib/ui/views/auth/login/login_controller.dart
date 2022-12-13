@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/auth_manager/auth_manager.dart';
-import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/data/sources/server/auth/auth_api.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';

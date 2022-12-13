@@ -6,8 +6,8 @@ import 'package:skybase/ui/views/auth/login/login_view.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_controller.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_view.dart';
 import 'package:skybase/ui/views/utils/utils_view.dart';
-import 'package:skybase/ui/widgets/common_widget.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
+import 'package:skybase/ui/widgets/common_widget.dart';
 
 class MainNavView extends GetView<MainNavController> {
   static const String route = '/home';

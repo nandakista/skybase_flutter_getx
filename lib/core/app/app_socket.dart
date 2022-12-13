@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:socket_io_client/socket_io_client.dart' as socket;
 import 'package:skybase/core/app/app_env.dart';
+import 'package:socket_io_client/socket_io_client.dart' as socket;
 
 /* Created by
    Varcant

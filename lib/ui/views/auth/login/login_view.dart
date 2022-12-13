@@ -5,9 +5,9 @@ import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/views/auth/login/login_controller.dart';
 import 'package:skybase/ui/widgets/common_widget.dart';
+import 'package:skybase/ui/widgets/keyboard_dismisser.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 import 'package:skybase/ui/widgets/sky_form_field.dart';
-import 'package:skybase/ui/widgets/keyboard_dismisser.dart';
 
 class LoginView extends GetView<LoginController> {
   static const String route = '/login';

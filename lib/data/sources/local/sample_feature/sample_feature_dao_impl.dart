@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:skybase/core/database/hive/hive_box.dart';
-import 'package:skybase/data/sources/local/sample_feature/sample_feature_dao.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
+import 'package:skybase/data/sources/local/sample_feature/sample_feature_dao.dart';
 
 class SampleFeatureDaoImpl implements SampleFeatureDao {
   final box = Hive.box<SampleFeature>(HiveBox.user);
