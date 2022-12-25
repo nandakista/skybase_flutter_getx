@@ -34,6 +34,8 @@ class MediaUtilsView extends GetView<UtilsController> {
             children: [
               ..._buildImagePicker(context),
               const Divider(thickness: 1, height: 36),
+              const SkyImage(),
+              const Divider(thickness: 1, height: 36),
               const MediaItems(
                 maxItem: 5,
                 mediaUrls: [
