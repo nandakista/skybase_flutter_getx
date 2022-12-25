@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
 import 'package:skybase/core/themes/app_colors.dart';
@@ -53,47 +52,6 @@ class SkyDialog extends StatelessWidget {
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class LoadingDialog extends StatelessWidget {
-  const LoadingDialog({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      child: Container(
-        height: 80,
-        margin: const EdgeInsets.all(24),
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(17),
-          boxShadow: [
-            BoxShadow(
-                color: (Get.isDarkMode) ? AppColors.primary : Colors.black26,
-                offset: const Offset(0.0, 2.0),
-                blurRadius: 10.0)
-          ],
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Loading',
-              style: AppStyle.title1.copyWith(color: Colors.white),
-            ),
-            const SizedBox(width: 4),
-            const SpinKitThreeBounce(color: Colors.white, size: 16),
-          ],
-        ),
       ),
     );
   }

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/extension/string_extension.dart';
-import 'package:skybase/ui/widgets/common_widget.dart';
+import 'package:skybase/ui/widgets/circle_icon.dart';
 import 'package:skybase/ui/widgets/media/preview/media_preview_page.dart';
+
+import 'platform_loading_indicator.dart';
 
 /* Created by
    Varcant
@@ -115,8 +117,8 @@ class DisplayImage extends StatelessWidget {
                     placeholder: (context, url) => SizedBox(
                       height: height,
                       width: width,
-                      child: Center(
-                        child: platformLoadingIndicator(),
+                      child: const Center(
+                        child: PlatformLoadingIndicator(),
                       ),
                     ),
                     errorWidget: (context, url, error) => SizedBox(

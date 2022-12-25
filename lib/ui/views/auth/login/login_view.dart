@@ -4,7 +4,6 @@ import 'package:skybase/core/helper/validator_helper.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/views/auth/login/login_controller.dart';
-import 'package:skybase/ui/widgets/common_widget.dart';
 import 'package:skybase/ui/widgets/keyboard_dismisser.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 import 'package:skybase/ui/widgets/sky_form_field.dart';
@@ -20,16 +19,15 @@ class LoginView extends GetView<LoginController> {
       child: Scaffold(
         body: Center(
           child: SingleChildScrollView(
-            child: ContentWrapper(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildHeader(),
-                  const SizedBox(height: 40),
-                  _buildForm(context),
-                  _buildFooter(context),
-                ],
-              ),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildHeader(),
+                const SizedBox(height: 40),
+                _buildForm(context),
+                _buildFooter(context),
+              ],
             ),
           ),
         ),

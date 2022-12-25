@@ -7,7 +7,6 @@ import 'package:skybase/core/helper/bottom_sheet_helper.dart';
 import 'package:skybase/core/modules/module_helper.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
-import 'package:skybase/ui/widgets/common_widget.dart';
 import 'package:skybase/ui/widgets/media/box_image_picker.dart';
 import 'package:skybase/ui/widgets/media/box_video_picker.dart';
 import 'package:skybase/ui/widgets/media/image_source_bottom_sheet.dart';
@@ -26,56 +25,53 @@ class MediaUtilsView extends GetView<UtilsController> {
     return Scaffold(
       appBar: SkyAppBar.primary(title: 'Media Utility'),
       body: SingleChildScrollView(
-        child: ContentWrapper(
-          top: true,
-          bottom: true,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ..._buildImagePicker(context),
-              const Divider(thickness: 1, height: 36),
-              const SkyImage(),
-              const Divider(thickness: 1, height: 36),
-              const MediaItems(
-                maxItem: 5,
-                mediaUrls: [
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                ],
-              ),
-              const Divider(thickness: 1, height: 36),
-              const MediaItems(
-                isGrid: true,
-                mediaUrls: [
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                ],
-              ),
-              const Divider(thickness: 1, height: 36),
-              const MediaItems(
-                size: 100,
-                maxItem: 3,
-                mediaUrls: [
-                  'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                  'assets/images/img_sample.jpeg',
-                ],
-              ),
-              const SizedBox(height: 24),
-              const SkyImage(url: 'assets/images/img_sample.jpeg'),
-            ],
-          ),
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ..._buildImagePicker(context),
+            const Divider(thickness: 1, height: 36),
+            const SkyImage(),
+            const Divider(thickness: 1, height: 36),
+            const MediaItems(
+              maxItem: 5,
+              mediaUrls: [
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+              ],
+            ),
+            const Divider(thickness: 1, height: 36),
+            const MediaItems(
+              isGrid: true,
+              mediaUrls: [
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+              ],
+            ),
+            const Divider(thickness: 1, height: 36),
+            const MediaItems(
+              size: 100,
+              maxItem: 3,
+              mediaUrls: [
+                'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+                'assets/images/img_sample.jpeg',
+              ],
+            ),
+            const SizedBox(height: 24),
+            const SkyImage(url: 'assets/images/img_sample.jpeg'),
+          ],
         ),
       ),
     );

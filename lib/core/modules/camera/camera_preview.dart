@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/general_function.dart';
-import 'package:skybase/ui/widgets/common_widget.dart';
+import 'package:skybase/ui/widgets/circle_icon.dart';
 
 /* Created by
    Varcant

@@ -10,8 +10,9 @@ import 'package:image/image.dart' as img;
 import 'package:photo_manager/photo_manager.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/general_function.dart';
-import 'package:skybase/ui/widgets/common_widget.dart';
+import 'package:skybase/ui/widgets/circle_icon.dart';
 import 'package:skybase/ui/widgets/media/ui_image_picker.dart';
+import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
 
 import 'camera_preview.dart';
 
@@ -230,7 +231,7 @@ class _CameraModuleState extends State<CameraModule>
 
   Widget _cameraPreview() {
     if (_cameraController == null || !_cameraController!.value.isInitialized) {
-      return platformLoadingIndicator();
+      return const PlatformLoadingIndicator();
     }
     var camera = _cameraController!.value;
     final size = MediaQuery.of(context).size;
