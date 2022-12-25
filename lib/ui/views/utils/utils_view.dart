@@ -6,6 +6,7 @@ import 'package:skybase/ui/views/utils/component/dialog_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/list_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/media_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/settings_utils_view.dart';
+import 'package:skybase/ui/views/utils/component/snackbar_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/timer/timer_utils_view.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
@@ -59,6 +60,13 @@ class UtilsView extends GetView<UtilsController> {
                 icon: CupertinoIcons.conversation_bubble,
                 outlineMode: true,
                 onPressed: () => Get.to(() => const DialogUtilsView()),
+              ),
+              const SizedBox(height: 12),
+              SkyButton(
+                text: 'SnackBar Utility',
+                icon: Icons.table_rows_outlined,
+                outlineMode: true,
+                onPressed: () => Get.to(() => const SnackBarUtilsView()),
               ),
               const SizedBox(height: 12),
               SkyButton(
