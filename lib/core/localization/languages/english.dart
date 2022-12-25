@@ -1,4 +1,9 @@
 const Map<String, String> en = {
+  'txt_expired': 'Expired',
+  'txt_days': 'days',
+  'txt_minutes': 'minutes',
+  'txt_hours': 'hours',
+  'txt_seconds': 'seconds',
   'txt_name': 'name',
   'txt_email': 'Email',
   'txt_password': 'Password',

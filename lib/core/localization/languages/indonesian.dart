@@ -1,4 +1,10 @@
 const Map<String, String> id = {
+  'txt_expired': 'Berakhir',
+  'txt_expired_k': 'Kedaluwarsa',
+  'txt_days': 'Hari',
+  'txt_minutes': 'Menit',
+  'txt_hours': 'Jam',
+  'txt_seconds': 'Detik',
   'txt_name': 'name',
   'txt_email': 'Email',
   'txt_password': 'Password',
