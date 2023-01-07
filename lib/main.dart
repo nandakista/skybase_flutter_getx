@@ -19,12 +19,16 @@ void main() async {
   await Initializer.init();
   AppEnv.set(Env.DEVELOPMENT);
   AppInfo.setInfo(await PackageInfo.fromPlatform());
-  runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const App(),
-    ),
-  );
+  if (kDebugMode) {
+    runApp(
+      DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (context) => const App(),
+      ),
+    );
+  } else {
+    runApp(const App());
+  }
 }
 
 class App extends StatelessWidget {
