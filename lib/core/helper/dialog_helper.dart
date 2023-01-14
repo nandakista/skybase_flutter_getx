@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
 import 'package:skybase/ui/widgets/sky_dialog.dart';
 
 //---------------<Toast>-----------------
@@ -15,10 +16,26 @@ class Toast {
 //---------------<Loading Dialog>-----------------
 class Loading {
   static show({bool? dismissible}) {
-    return showDialog(
-        barrierDismissible: dismissible ?? false,
-        context: Get.context!,
-        builder: (context) => const LoadingDialog());
+    return showGeneralDialog(
+      context: Get.context!,
+      barrierLabel: "Barrier",
+      barrierDismissible: dismissible ?? false,
+      barrierColor: Colors.black.withOpacity(0.5),
+      pageBuilder: (_, __, ___) {
+        return Center(
+          child: Container(
+            height: 80,
+            width: 80,
+            decoration: BoxDecoration(
+              color: Theme.of(Get.context!).scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: const EdgeInsets.all(16),
+            child: const PlatformLoadingIndicator(),
+          ),
+        );
+      },
+    );
   }
 
   static hide() => Get.back();

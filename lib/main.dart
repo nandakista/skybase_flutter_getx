@@ -2,14 +2,15 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:skybase/core/app/app_env.dart';
 import 'package:skybase/core/app/app_info.dart';
-import 'package:skybase/initializer.dart';
 import 'package:skybase/core/localization/app_translations.dart';
 import 'package:skybase/core/localization/locale_helper.dart';
 import 'package:skybase/core/themes/app_theme.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
+import 'package:skybase/initializer.dart';
 import 'package:skybase/ui/routes/app_routes.dart';
 
 import 'app_configuration.dart';
@@ -19,12 +20,17 @@ void main() async {
   await Initializer.init();
   AppEnv.set(Env.DEVELOPMENT);
   AppInfo.setInfo(await PackageInfo.fromPlatform());
-  runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const App(),
-    ),
-  );
+  if (AppEnv.env == Env.DEVELOPMENT) {
+    runApp(
+      DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (context) => const App(),
+      ),
+    );
+  } else {
+    await initializeDateFormatting('id', null);
+    runApp(const App());
+  }
 }
 
 class App extends StatelessWidget {

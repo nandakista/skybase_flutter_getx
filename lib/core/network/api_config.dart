@@ -8,7 +8,7 @@ import 'package:skybase/core/network/api_interceptor.dart';
    nanda.kista@gmail.com
 */
 class DioClient extends GetxService {
-  static String baseURL = AppEnv.find.get.baseUrl;
+  static String baseURL = AppEnv.config.baseUrl;
   late Dio _dio;
   static Dio get find => Get.find<DioClient>()._dio;
 

@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/media_helper.dart';
-import 'package:skybase/ui/widgets/sky_image.dart';
 import 'package:skybase/ui/widgets/media/preview/media_list_preview_page.dart';
 import 'package:skybase/ui/widgets/media/preview/media_preview_page.dart';
+import 'package:skybase/ui/widgets/sky_image.dart';
 import 'package:skybase/ui/widgets/sky_video.dart';
 
 /* Created by

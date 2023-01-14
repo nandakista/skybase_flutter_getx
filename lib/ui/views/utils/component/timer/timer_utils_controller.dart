@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
-import 'package:skybase/core/modules/timer/timer_module.dart';
 import 'package:skybase/core/modules/timer/timer_const.dart';
 import 'package:skybase/core/modules/timer/timer_helper.dart';
+import 'package:skybase/core/modules/timer/timer_module.dart';
 
 class TimerUtilsController extends GetxController {
   final timer1Ctr = Get.find<TimerModule>(tag: TimerTag.timer1);

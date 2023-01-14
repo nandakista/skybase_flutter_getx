@@ -30,3 +30,17 @@ extension StringExtension on String {
     return int.tryParse(substring(3, length).replaceAll('.', '')) ?? 0;
   }
 }
+
+extension StringNullExtension on String? {
+  bool isZeroOrEmpty() {
+    return this == null || this == '0';
+  }
+
+  bool isNullOrEmpty() {
+    return this == null || this == '';
+  }
+
+  bool isNotNullAndNotEmpty() {
+    return this != null && this != '' && this != 'null';
+  }
+}

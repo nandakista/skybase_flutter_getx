@@ -20,7 +20,7 @@ class IntroView extends StatelessWidget {
       titleTextStyle: AppStyle.subtitle4
           .copyWith(fontSize: 26.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
-      descriptionPadding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+      bodyPadding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       imagePadding: EdgeInsets.zero,
     );
 
@@ -70,8 +70,6 @@ class IntroView extends StatelessWidget {
       onDone: () => _onIntroEnd(context),
       onSkip: () => _onIntroEnd(context),
       showSkipButton: true,
-      skipFlex: 0,
-      nextFlex: 0,
       skip: Text('txt_skip'.tr,
           style: AppStyle.subtitle4
               .copyWith(color: AppColors.primary, fontWeight: FontWeight.bold)),

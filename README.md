@@ -12,6 +12,11 @@ A Flutter Base project that developed with :
 
 Please follow this instruction to setup codebase.
 
+### Download Manager
+if you use download manager you need to setup flutter_downloader from this
+[flutter_downloader](https://pub.dev/packages/flutter_downloader)
+
+
 ### Install Mason
 Run this command if you haven't install mason
 
