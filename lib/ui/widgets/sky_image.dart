@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,6 +26,7 @@ class SkyImage extends StatelessWidget {
   final BoxFit? emptyOrNullFit;
   final Widget? emptyOrNullView;
   final String? emptyOrNullUrl;
+  final bool fromFile;
 
   const SkyImage({
     Key? key,
@@ -38,6 +41,7 @@ class SkyImage extends StatelessWidget {
     this.emptyOrNullFit,
     this.emptyOrNullView,
     this.emptyOrNullUrl,
+    this.fromFile = false,
   }) : super(key: key);
 
   @override
@@ -52,6 +56,7 @@ class SkyImage extends StatelessWidget {
         enablePreview: enablePreview,
         onTapImage: onTapImage,
         onRemoveImage: onRemoveImage,
+        fromFile: fromFile,
       );
     } else {
       return DisplayImage(
@@ -74,6 +79,7 @@ class DisplayImage extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final BoxFit fit;
   final bool enablePreview;
+  final bool fromFile;
 
   const DisplayImage({
     Key? key,
@@ -85,6 +91,7 @@ class DisplayImage extends StatelessWidget {
     this.borderRadius,
     this.fit = BoxFit.fill,
     this.enablePreview = false,
+    this.fromFile = false,
   }) : super(key: key);
 
   @override
@@ -97,13 +104,13 @@ class DisplayImage extends StatelessWidget {
         GestureDetector(
           onTap: enablePreview
               ? () => Get.to(MediaPreviewPage(url: url))
-              : onTapImage ?? () {},
+              : onTapImage,
           child: isFromRemote
               ? ClipRRect(
                   borderRadius: borderRadius ?? BorderRadius.circular(0),
                   child: CachedNetworkImage(
                     imageUrl: url,
-                    fit: BoxFit.cover,
+                    fit: fit,
                     imageBuilder: (context, imageProvider) => Container(
                       height: height,
                       width: width,
@@ -136,15 +143,27 @@ class DisplayImage extends StatelessWidget {
                       width: width,
                       height: height,
                     )
-                  : ClipRRect(
-                      borderRadius: borderRadius ?? BorderRadius.circular(0),
-                      child: Image.asset(
-                        url,
-                        width: width,
-                        height: height,
-                        fit: fit,
-                      ),
-                    ),
+                  : (fromFile)
+                      ? ClipRRect(
+                          borderRadius:
+                              borderRadius ?? BorderRadius.circular(0),
+                          child: Image.file(
+                            File(url),
+                            width: width,
+                            height: height,
+                            fit: fit,
+                          ),
+                        )
+                      : ClipRRect(
+                          borderRadius:
+                              borderRadius ?? BorderRadius.circular(0),
+                          child: Image.asset(
+                            url,
+                            width: width,
+                            height: height,
+                            fit: fit,
+                          ),
+                        ),
         ),
         onRemoveImage != null
             ? Positioned(
