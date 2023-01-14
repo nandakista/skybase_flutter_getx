@@ -39,10 +39,6 @@ class Initializer {
     Get.putAsync(() async => const FlutterSecureStorage());
 
     // Configuration
-    // --- Package Info
-    Get.lazyPut(() => AppInfo());
-    // --- App Config
-    Get.lazyPut(() => AppEnv());
     // --- Web Socket
     Get.lazyPut(() => AppSocket());
     // --- Request Client

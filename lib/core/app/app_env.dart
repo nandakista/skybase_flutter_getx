@@ -1,5 +1,4 @@
 // ignore_for_file: constant_identifier_names
-import 'package:get/get.dart';
 import 'package:skybase/app_configuration.dart';
 import 'package:skybase/core/app/app_socket.dart';
 import 'package:skybase/core/network/api_token_manager.dart';
@@ -15,16 +14,14 @@ enum Env {
 }
 
 class AppEnv {
-  static AppEnv get find => Get.find<AppEnv>();
+  static late Config config;
+  static late Env env;
 
-  late Config appConfig;
-  Config get get => appConfig;
-  set setEnv(Config config) => appConfig = config;
-
-  static set(Env env) {
-    switch (env) {
+  static set(Env environment) {
+    env = environment;
+    switch (environment) {
       case Env.PRODUCTION:
-        AppEnv.find.setEnv = Config(
+        config = Config(
           baseUrl: AppConfiguration.productionAPI,
           clientToken: AppConfiguration.clientToken,
           tokenType: AppConfiguration.tokenType,
@@ -33,7 +30,7 @@ class AppEnv {
         );
         break;
       case Env.STAGING:
-        AppEnv.find.setEnv = Config(
+        config = Config(
           baseUrl: AppConfiguration.developmentAPI,
           clientToken: AppConfiguration.clientToken,
           tokenType: AppConfiguration.tokenType,
@@ -42,7 +39,7 @@ class AppEnv {
         );
         break;
       case Env.DEVELOPMENT:
-        AppEnv.find.setEnv = Config(
+        config = Config(
           baseUrl: AppConfiguration.developmentAPI,
           clientToken: AppConfiguration.clientToken,
           tokenType: AppConfiguration.tokenType,

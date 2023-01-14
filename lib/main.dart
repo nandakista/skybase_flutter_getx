@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:skybase/core/app/app_env.dart';
 import 'package:skybase/core/app/app_info.dart';
@@ -19,7 +20,7 @@ void main() async {
   await Initializer.init();
   AppEnv.set(Env.DEVELOPMENT);
   AppInfo.setInfo(await PackageInfo.fromPlatform());
-  if (kDebugMode) {
+  if (AppEnv.env == Env.DEVELOPMENT) {
     runApp(
       DevicePreview(
         enabled: !kReleaseMode,
@@ -27,6 +28,7 @@ void main() async {
       ),
     );
   } else {
+    await initializeDateFormatting('id', null);
     runApp(const App());
   }
 }

@@ -13,7 +13,7 @@ class AppSocket {
 
   socket.Socket init() {
     return socket.io(
-      AppEnv.find.get.socketUrl,
+      AppEnv.config.socketUrl,
       socket.OptionBuilder()
           .setTransports(['websocket'])
           .disableAutoConnect() // for Flutter or Dart VM

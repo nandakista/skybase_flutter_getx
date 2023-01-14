@@ -44,7 +44,7 @@ class AuthApiImpl implements AuthApi {
   }) async {
     try {
       String? token = await SecureStorageManager.find.getToken();
-      String url = AppEnv.find.get.baseUrl;
+      String url = AppEnv.config.baseUrl;
       url += ApiUrl.verifyToken;
       final response = await Dio().get(
         url,
@@ -52,7 +52,7 @@ class AuthApiImpl implements AuthApi {
           headers: {
             HttpHeaders.authorizationHeader: 'Bearer $token',
             'Accept': Headers.jsonContentType,
-            'Client-Token': AppEnv.find.get.clientToken,
+            'Client-Token': AppEnv.config.clientToken,
           },
           contentType: Headers.jsonContentType,
         ),

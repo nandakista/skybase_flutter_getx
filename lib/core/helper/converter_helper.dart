@@ -9,14 +9,12 @@ class AppConverter {
     try {
       if (imageFile != null) {
         final bytes = File(imageFile.path).readAsBytesSync();
-        String _img64Path = base64Encode(bytes);
-        debugPrint('toBase64 Success');
-        return _img64Path;
+        String img64Path = base64Encode(bytes);
+        return img64Path;
       } else if (file != null) {
         final bytes = File(file.path).readAsBytesSync();
-        String _file64Path = base64Encode(bytes);
-        debugPrint('toBase64 Success');
-        return _file64Path;
+        String file64Path = base64Encode(bytes);
+        return file64Path;
       } else {
         return 'Anda belum memilih file';
       }

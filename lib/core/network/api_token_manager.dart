@@ -32,14 +32,13 @@ enum TokenType {
 class ApiTokenManager extends QueuedInterceptorsWrapper {
   final authManager = AuthManager.find;
   final secureStorage = SecureStorageManager.find;
-  final appConfig = AppEnv.find;
 
   Future<void> handleToken({
     required Dio dio,
     required DioError err,
     required ErrorInterceptorHandler handler,
   }) async {
-    switch (appConfig.get.tokenType) {
+    switch (AppEnv.config.tokenType) {
       case TokenType.NO_TOKEN:
         super.onError(err, handler);
         break;
