@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
@@ -105,7 +106,17 @@ class _CameraModuleState extends State<CameraModule>
     );
     debugPrint('CameraModule::initCamera() -> $cameras');
     await availableCameras().then((value) {
-      if (value.isNotEmpty) {
+      if (value.isEmpty && !kDebugMode) {
+        SkyDialog.show(
+          dismissible: false,
+          type: DialogType.FAILED,
+          message: 'You need use the real device',
+          onPress: () {
+            SkyDialog.close();
+            Get.back();
+          },
+        );
+      } else {
         cameras = value;
         if (cameras!.isNotEmpty) {
           if (widget.cameraType == CameraType.REAR) {
