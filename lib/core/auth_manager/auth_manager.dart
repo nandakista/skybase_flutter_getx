@@ -100,12 +100,12 @@ class AuthManager extends GetxService {
   /// If response is Error it will passed to [logout] process.
   Future<void> checkUser() async {
     AuthApiImpl authApi = AuthApiImpl();
-    final String? _token = await secureStorage.getToken();
-    User? _user = getStorage.get(GetStorageKey.users);
+    final String? token = await secureStorage.getToken();
+    User? user = getStorage.get(GetStorageKey.users);
 
     try {
       await authApi
-          .verifyToken(userId: _user?.id ?? 0, token: _token.toString())
+          .verifyToken(userId: user?.id ?? 0, token: token.toString())
           .then((res) async {
         setAuth();
       });

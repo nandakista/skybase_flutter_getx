@@ -6,7 +6,7 @@ import 'package:skybase/data/models/repo/repo.dart';
 
 part 'sample_feature.g.dart';
 
-@HiveType(typeId: HiveBox.userId, adapterName: HiveAdapters.PERSON)
+@HiveType(typeId: HiveBox.userId, adapterName: HiveAdapters.person)
 class SampleFeature {
   @HiveField(UserEntity.id)
   int id;

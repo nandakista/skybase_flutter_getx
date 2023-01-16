@@ -16,7 +16,7 @@ class Loading {
   static show({bool? dismissible}) {
     return showGeneralDialog(
       context: Get.context!,
-      barrierLabel: "Barrier",
+      barrierLabel: 'Barrier',
       barrierDismissible: dismissible ?? false,
       barrierColor: Colors.black.withOpacity(0.5),
       pageBuilder: (_, __, ___) {

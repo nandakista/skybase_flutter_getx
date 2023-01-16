@@ -6,14 +6,18 @@ import 'locale_callback.dart';
 
 class DateTimeHelper {
   static String parseLocalDate({
-    required DateTime date,
+    required DateTime? date,
     String? format,
     String? idFormat,
   }) {
-    return LocaleCallback.builder(
-      enCallback: DateFormat(format).format(date),
-      idCallback: DateFormat(idFormat ?? format, 'id_ID').format(date),
-    );
+    if (date != null) {
+      return LocaleCallback.builder(
+        enCallback: DateFormat(format).format(date),
+        idCallback: DateFormat(idFormat ?? format, 'id').format(date),
+      );
+    } else {
+      return 'Date is null';
+    }
   }
 
   static String dateToSentence(DateTime date) {
@@ -29,15 +33,21 @@ class DateTimeHelper {
     } else if (date.inNextWeek()) {
       return '${date.difference(DateTime.now()).inDays + 1} ${'txt_days'.tr}';
     } else if (date.inThisYear()) {
-      return LocaleCallback.builder<String>(
-        enCallback: DateFormat('dd MMM').format(date),
-        idCallback: DateFormat('dd MMM', 'id_ID').format(date),
-      );
+      return parseLocalDate(date: date, format: 'dd MMM');
     } else {
-      return LocaleCallback.builder<String>(
-        enCallback: DateFormat('dd/MM/y').format(date),
-        idCallback: DateFormat('dd/MM/y', 'id_ID').format(date),
-      );
+      return parseLocalDate(date: date, format: 'dd/MM/y');
+    }
+  }
+
+  static String dateToSentenceInDay({required DateTime date, String? format}) {
+    if (date.isToday()) {
+      return 'txt_today'.tr;
+    } else if (date.isYesterday()) {
+      return 'txt_yesterday'.tr;
+    } else if (date.isTomorrow()) {
+      return 'txt_tommorow'.tr;
+    } else {
+      return parseLocalDate(date: date, format: format ?? 'dd MMM');
     }
   }
 }

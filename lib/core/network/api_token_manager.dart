@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:skybase/core/app/app_env.dart';
 import 'package:skybase/core/auth_manager/auth_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
@@ -58,7 +59,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
       SkyDialog.show(
         type: DialogType.FAILED,
         dismissible: false,
-        message: 'Anda harus login kembali!',
+        message: 'txt_you_must_login_again'.tr,
         onPress: () => authManager.logout(),
       );
       super.onError(err, handler);
@@ -98,7 +99,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
       return SkyDialog.show(
         type: DialogType.FAILED,
         dismissible: false,
-        message: 'Anda harus login kembali!',
+        message: 'txt_you_must_login_again'.tr,
         onPress: () => authManager.logout(),
       );
     }

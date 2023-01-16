@@ -73,7 +73,7 @@ class AppFunction {
       final rs = await Dio().get<List<int>>(url,
           options: Options(responseType: ResponseType.bytes, headers: headers));
       var dir = await getApplicationDocumentsDirectory();
-      File file = File('${dir.path}/' + fileName + '.pdf');
+      File file = File('${dir.path}/$fileName.pdf');
       File urlFile = await file.writeAsBytes(rs.data!);
       return urlFile;
     } catch (e) {
