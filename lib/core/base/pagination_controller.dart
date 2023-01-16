@@ -22,13 +22,13 @@ abstract class PaginationController<T> extends GetxController {
     super.onInit();
   }
 
-  refreshPage() {
+  void onRefresh() {
     page = 1;
     isRefresh = true;
     pagingController.refresh();
   }
 
-  loadNextData(List<T> data) {
+  void loadNextData(List<T> data) {
     final isLastPage = data.length < perPage;
     if (isLastPage) {
       pagingController.appendLastPage(data);

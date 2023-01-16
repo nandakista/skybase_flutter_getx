@@ -29,6 +29,11 @@ class SampleFeatureDetailController extends BaseController {
     await getDetailUser();
   }
 
+  @override
+  void onRefresh() {
+    getDetailUser();
+  }
+
   getDetailUser() async {
     showLoading();
     try {

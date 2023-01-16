@@ -20,7 +20,7 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
       appBar: SkyAppBar.secondary(title: 'txt_list_users'.tr),
       body: SkyPaginationView<SampleFeature>(
         pagingController: controller.pagingController,
-        onRefresh: () => controller.refreshPage(),
+        onRefresh: () => controller.onRefresh(),
         itemBuilder: (BuildContext context, item, int index) {
           return ListTile(
             onTap: () => controller.onChooseUser(user: item),
