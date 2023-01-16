@@ -13,16 +13,16 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
     required int perPage,
   }) async {
     try {
-      var _url = '/search/users?';
-      _url += 'q=nanda&';
-      _url += 'page=$page&';
-      _url += 'per_page=$perPage';
-      final _res = await sendRequest(
-        url: _url,
+      var url = '/search/users?';
+      url += 'q=nanda&';
+      url += 'page=$page&';
+      url += 'per_page=$perPage';
+      final res = await sendRequest(
+        url: url,
         requestMethod: RequestMethod.GET,
         useToken: true,
       );
-      return (_res.data['items'])
+      return (res.data['items'])
           .map((data) => SampleFeature.fromJson(data))
           .toList()
           .cast<SampleFeature>();
@@ -35,12 +35,12 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
   @override
   Future<SampleFeature> getDetailUser({required String username}) async {
     try {
-      final _res = await sendRequest(
+      final res = await sendRequest(
         url: '/users/$username',
         requestMethod: RequestMethod.GET,
         useToken: true,
       );
-      return SampleFeature.fromJson(_res.data);
+      return SampleFeature.fromJson(res.data);
     } catch (e) {
       debugPrint('$tag Error = $e');
       rethrow;
@@ -50,12 +50,12 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
   @override
   Future<List<SampleFeature>> getFollowers({required String username}) async {
     try {
-      final _res = await sendRequest(
+      final res = await sendRequest(
         url: '/users/$username/followers',
         requestMethod: RequestMethod.GET,
         useToken: true,
       );
-      return (_res.data)
+      return (res.data)
           .map((data) => SampleFeature.fromJson(data))
           .toList()
           .cast<SampleFeature>();
@@ -68,12 +68,12 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
   @override
   Future<List<SampleFeature>> getFollowings({required String username}) async {
     try {
-      final _res = await sendRequest(
+      final res = await sendRequest(
         url: '/users/$username/following',
         requestMethod: RequestMethod.GET,
         useToken: true,
       );
-      return (_res.data)
+      return (res.data)
           .map((data) => SampleFeature.fromJson(data))
           .toList()
           .cast<SampleFeature>();
@@ -86,12 +86,12 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
   @override
   Future<List<Repo>> getRepos({required String username}) async {
     try {
-      final _res = await sendRequest(
+      final res = await sendRequest(
         url: '/users/$username/repos?type=all',
         requestMethod: RequestMethod.GET,
         useToken: true,
       );
-      return (_res.data)
+      return (res.data)
           .map((data) => Repo.fromJson(data))
           .toList()
           .cast<Repo>();

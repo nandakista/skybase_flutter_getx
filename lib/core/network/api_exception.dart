@@ -19,8 +19,8 @@ class NetworkException implements Exception {
   String toString() {
     String result = '';
     if (response?.statusCode == 400 || response?.data == 401) {
-      ApiResponse _res = ApiResponse.fromJson(response?.data);
-      result = ApiMessage.message(_res.error.toString());
+      ApiResponse res = ApiResponse.fromJson(response?.data);
+      result = ApiMessage.message(res.error.toString());
     } else {
       result += prefix ?? '';
     }

@@ -12,8 +12,8 @@ class SampleFeatureDaoImpl implements SampleFeatureDao {
 
   @override
   bool containData(SampleFeature user) {
-    SampleFeature? _data = box.get(user.id);
-    return (box.containsKey(user.id) && _data?.repository != null);
+    SampleFeature? data = box.get(user.id);
+    return (box.containsKey(user.id) && data?.repository != null);
   }
 
   @override
@@ -31,11 +31,11 @@ class SampleFeatureDaoImpl implements SampleFeatureDao {
 
   @override
   List<SampleFeature> getAll() {
-    List<SampleFeature> _users = [];
+    List<SampleFeature> users = [];
     for (var i = 0; i < box.length; i++) {
-      _users.add(box.getAt(i)!);
+      users.add(box.getAt(i)!);
     }
-    return _users;
+    return users;
   }
 
   @override

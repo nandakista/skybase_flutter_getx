@@ -19,13 +19,13 @@ class SampleFeatureRepositoryImpl extends SampleFeatureRepository {
   }) async {
     try {
       if (page == 1 && !isRefresh && dao.boxIsNotEmpty()) {
-        List<SampleFeature> _cache = dao.getAll();
+        List<SampleFeature> cache = dao.getAll();
         _getListUserApi(page: page, perPage: perPage);
-        _cache.sort((a,b) => a.username.compareTo(b.username));
-        return _cache;
+        cache.sort((a,b) => a.username.compareTo(b.username));
+        return cache;
       } else {
-        final _res = await _getListUserApi(page: page, perPage: perPage);
-        return _res;
+        final res = await _getListUserApi(page: page, perPage: perPage);
+        return res;
       }
     } catch (e) {
       debugPrint('$tag Error = $e');
@@ -37,12 +37,12 @@ class SampleFeatureRepositoryImpl extends SampleFeatureRepository {
   Future<SampleFeature?> getDetailUser({required SampleFeature user}) async {
     try {
       if (dao.containData(user)) {
-        SampleFeature? _cache = dao.get(user.id);
+        SampleFeature? cache = dao.get(user.id);
         _getDetailApi(user.username);
-        return _cache;
+        return cache;
       } else {
-        final _res = await _getDetailApi(user.username);
-        return _res;
+        final res = await _getDetailApi(user.username);
+        return res;
       }
     } catch (e) {
       debugPrint('$tag Error = $e');
@@ -51,24 +51,24 @@ class SampleFeatureRepositoryImpl extends SampleFeatureRepository {
   }
 
   Future<SampleFeature> _getDetailApi(String username) async {
-    final SampleFeature _res = await apiService.getDetailUser(username: username);
-    _res.followersList = await apiService.getFollowers(username: username);
-    _res.followingList = await apiService.getFollowings(username: username);
-    _res.repositoryList = await apiService.getRepos(username: username);
-    dao.insert(_res);
-    return _res;
+    final SampleFeature res = await apiService.getDetailUser(username: username);
+    res.followersList = await apiService.getFollowers(username: username);
+    res.followingList = await apiService.getFollowings(username: username);
+    res.repositoryList = await apiService.getRepos(username: username);
+    dao.insert(res);
+    return res;
   }
 
   Future<List<SampleFeature>> _getListUserApi({
     required int page,
     required int perPage,
   }) async {
-    final _res = await apiService.getUsers(page: page, perPage: perPage);
-    _res.sort((a,b) => a.username.compareTo(b.username));
+    final res = await apiService.getUsers(page: page, perPage: perPage);
+    res.sort((a,b) => a.username.compareTo(b.username));
     if(page == 1) {
       await dao.clear();
-      dao.insertAll(_res);
+      dao.insertAll(res);
     }
-    return _res;
+    return res;
   }
 }
