@@ -9,11 +9,9 @@ import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 class ThemeManager extends GetxService {
   static ThemeManager get find => Get.find<ThemeManager>();
 
-  /// Default value of app theme is Light.
-  /// So this variable have default value = false
   RxBool isDark = false.obs;
-  toDarkMode() => isDark.value = true;
-  toLightMode() => isDark.value = false;
+  void toDarkMode() => isDark.value = true;
+  void toLightMode() => isDark.value = false;
 
   @override
   void onReady() async {
@@ -21,10 +19,7 @@ class ThemeManager extends GetxService {
     super.onReady();
   }
 
-  /// Default value of theme is Light.
-  /// So, if you want use [changeTheme] it will change theme to Dark.
-  /// And continuous repeat switching between Dark and Light.
-  changeTheme() async {
+  Future<Rx<bool>> changeTheme() async {
     if (isDark.isTrue) {
       GetStorageManager.find.save(GetStorageKey.darkTheme, false);
     } else {

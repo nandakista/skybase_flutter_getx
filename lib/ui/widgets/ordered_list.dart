@@ -45,11 +45,11 @@ class OrderedList extends StatelessWidget {
           itemBuilder: (context, index) {
             return NumberTile(
               number: index + 1,
-              child: itemBuilder(context, index),
               numberStyle: AppStyle.body1,
               horizontalSpacing: spacing,
               margin: itemMargin,
               padding: itemPadding ?? EdgeInsets.zero,
+              child: itemBuilder(context, index),
             );
           },
         ),

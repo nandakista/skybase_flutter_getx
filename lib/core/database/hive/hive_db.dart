@@ -4,7 +4,6 @@ import 'package:skybase/core/database/hive/hive_adapters.dart';
 import 'package:skybase/core/database/hive/hive_box.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 
-
 class HiveDb {
   static Future init() async {
     HiveAdapters.register();

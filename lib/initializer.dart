@@ -36,19 +36,15 @@ class Initializer {
     Get.putAsync(() async => const FlutterSecureStorage());
 
     // Configuration
-    // --- Web Socket
     Get.lazyPut(() => AppSocket());
-    // --- Request Client
     Get.lazyPut(() => DioClient());
   }
 
   static Future<void> _initService() async {
-    // Initialize Apps and checking user auth
     Get.lazyPut(() => GetStorageManager());
     Get.lazyPut(() => SecureStorageManager());
     Get.put(ThemeManager());
 
-    // Checking user auth
     Get.put(AuthManager());
     // TODO : Uncomment code below if want to activate flutter_downloader
     // await DownloadManager().initDownloader();

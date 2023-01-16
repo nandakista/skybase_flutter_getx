@@ -34,11 +34,12 @@ class OtherUtilsView extends GetView<UtilsController> {
               const SizedBox(height: 12),
               SkyFormField(
                 controller: controller.currencyCtr,
-                initialValue: 0.toStringIDR(),
+                initialValue: 0.currencyFormat(symbol: 'Rp'),
                 hint: 'txt_price'.tr,
                 keyboardType: TextInputType.number,
                 onChanged: (value) => (value.isEmpty)
-                    ? controller.currencyCtr.text = 0.toStringIDR()
+                    ? controller.currencyCtr.text =
+                        0.currencyFormat(symbol: 'Rp')
                     : value,
                 validator: (value) => AppValidator.generalField('$value'),
                 inputFormatters: CustomInputFormatters.idrCurrency,

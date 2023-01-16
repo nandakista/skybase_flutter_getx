@@ -102,23 +102,23 @@ class AppFunction {
 
   static Future<File?> imagePicker(
       ImageSource source, ImagePicker imagePicker) async {
-    XFile? _pickedFile = await imagePicker.pickImage(
+    XFile? pickedFile = await imagePicker.pickImage(
       source: source,
       imageQuality: 40,
     );
-    return File(_pickedFile!.path);
+    return File(pickedFile!.path);
   }
 
   static Future<File?> takeVideo(
     ImageSource source,
     ImagePicker filePicker,
   ) async {
-    XFile? _pickedFile = await filePicker.pickVideo(
+    XFile? pickedFile = await filePicker.pickVideo(
       source: source,
       preferredCameraDevice: CameraDevice.rear,
       maxDuration: const Duration(seconds: 20),
     );
-    return File(_pickedFile!.path);
+    return File(pickedFile!.path);
   }
 
   static Future<File?> pickFile(BuildContext context, String type) async {

@@ -6,14 +6,12 @@ import 'package:get/get.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
 import 'package:skybase/ui/widgets/sky_dialog.dart';
 
-//---------------<Toast>-----------------
 class Toast {
   static show(String message) {
     Fluttertoast.showToast(msg: message);
   }
 }
 
-//---------------<Loading Dialog>-----------------
 class Loading {
   static show({bool? dismissible}) {
     return showGeneralDialog(
@@ -41,7 +39,6 @@ class Loading {
   static hide() => Get.back();
 }
 
-//---------------<Custom Dialog>-----------------
 enum DialogType {
   FAILED,
   SUCCESS,
