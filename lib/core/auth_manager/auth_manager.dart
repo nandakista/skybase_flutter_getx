@@ -8,9 +8,9 @@ import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart
 import 'package:skybase/core/themes/theme_manager.dart';
 import 'package:skybase/data/models/user/user.dart';
 import 'package:skybase/data/sources/server/auth/auth_api_impl.dart';
-import 'package:skybase/ui/views/auth/intro/intro_view.dart';
-import 'package:skybase/ui/views/auth/login/login_view.dart';
-import 'package:skybase/ui/views/auth/splash/splash_view.dart';
+import 'package:skybase/ui/views/intro/intro_view.dart';
+import 'package:skybase/ui/views/login/login_view.dart';
+import 'package:skybase/ui/views/splash/splash_view.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 
 /// This class will called first time before app go to pages.

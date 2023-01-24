@@ -5,7 +5,7 @@ import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/ui/views/auth/login/login_view.dart';
+import 'package:skybase/ui/views/login/login_view.dart';
 
 class IntroView extends StatelessWidget {
   static const String route = '/intro';
