@@ -77,17 +77,17 @@ class AppTheme {
     required Brightness brightness,
     Color color = AppColors.primary,
   }) {
-    Brightness _iconBrightness;
+    Brightness iconBrightness;
     if (Platform.isIOS) {
       (brightness == Brightness.dark)
-          ? _iconBrightness = Brightness.light
-          : _iconBrightness = Brightness.dark;
+          ? iconBrightness = Brightness.light
+          : iconBrightness = Brightness.dark;
     } else {
-      _iconBrightness = brightness;
+      iconBrightness = brightness;
     }
     return SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarBrightness: _iconBrightness,
+        statusBarBrightness: iconBrightness,
         statusBarColor: color,
       ),
     );

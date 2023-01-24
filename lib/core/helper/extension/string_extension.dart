@@ -20,15 +20,6 @@ extension StringExtension on String {
         .map((e) => '${e[0]}${e.substring(1)}')
         .join(' ');
   }
-
-  /// Convert string Indonesian Currency to int.
-  ///
-  /// The required format string is "Rp 0.000..."
-  /// the return is [Int]
-  /// * Example : Rp 1.000 (String) --> 1000
-  int fromStringIDR() {
-    return int.tryParse(substring(3, length).replaceAll('.', '')) ?? 0;
-  }
 }
 
 extension StringNullExtension on String? {

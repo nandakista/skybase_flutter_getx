@@ -23,6 +23,11 @@ class SampleFeatureDetailController extends BaseController {
   }
 
   @override
+  void onRefresh() {
+    loadData();
+  }
+
+  @override
   void onReady() async {
     headerWidget.value = (headerKey.currentContext?.findRenderObject() as RenderBox).size;
     detailInfoWidget.value = (detailInfoKey.currentContext?.findRenderObject() as RenderBox).size;

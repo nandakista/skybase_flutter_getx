@@ -7,9 +7,6 @@ import 'package:get/get.dart';
 */
 FlutterSecureStorage secureStorage = Get.find<FlutterSecureStorage>();
 
-/// ----<Secure Storage>----
-///
-/// For credentials data such as token, refresh token, client token, api key, etc.
 class SecureStorageManager {
   static SecureStorageManager get find => Get.find<SecureStorageManager>();
 

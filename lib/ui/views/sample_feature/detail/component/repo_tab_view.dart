@@ -18,7 +18,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
         itemCount: controller.user.value?.repositoryList?.length ?? 0,
         padding: const EdgeInsets.only(top: 8),
         itemBuilder: (_, index) {
-          final Repo? repos = controller.user.value!.repositoryList![index];
+          final Repo? repos = controller.user.value?.repositoryList![index];
           return (repos == null)
               ? const Center(
                   child: Text('User belum mem-follow siapapun'),
@@ -36,7 +36,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Language: ' + (repos.language ?? '--'),
+                        'Language: ${repos.language ?? '--'}',
                         style: AppStyle.body3,
                       ),
                       const SizedBox(height: 8),

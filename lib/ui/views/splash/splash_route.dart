@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:skybase/ui/views/auth/splash/splash_view.dart';
+import 'package:skybase/ui/views/splash/splash_view.dart';
 
 final splashRoute = [
   GetPage(

@@ -34,7 +34,7 @@ class NumberTile extends StatelessWidget {
               SizedBox(
                 width: horizontalSpacing * 2,
                 child: Text(
-                  number.toString() + '.',
+                  '$number.',
                   style: numberStyle ?? AppStyle.headline4,
                 ),
               ),

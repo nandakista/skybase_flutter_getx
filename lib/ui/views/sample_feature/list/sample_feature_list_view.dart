@@ -20,7 +20,7 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
       appBar: SkyAppBar.secondary(title: 'txt_list_users'.tr),
       body: SkyPaginationView<SampleFeature>(
         pagingController: controller.pagingController,
-        onRefresh: () => controller.refreshPage(),
+        onRefresh: () => controller.onRefresh(),
         itemBuilder: (BuildContext context, item, int index) {
           return ListTile(
             onTap: () => controller.onChooseUser(user: item),
@@ -40,11 +40,11 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.delete, color: Colors.white),
         backgroundColor: AppColors.primary,
         onPressed: () {
           Hive.box<SampleFeature>(HiveBox.user).clear();
         },
+        child: const Icon(Icons.delete, color: Colors.white),
       ),
     );
   }

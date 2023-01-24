@@ -6,40 +6,18 @@ import 'package:skybase/core/themes/app_colors.dart';
    nanda.kista@gmail.com
 */
 class SkyIconButton extends StatelessWidget {
-  /// Background color of button. Default value is primary color.
   final Color? color;
-
-  /// Text color of leading icon, default value is white.
   final Color iconColor;
-
-  /// Text color of button, default value is white.
   final Color? borderColor;
-
-  /// Action or function that called when button pressed.
   final VoidCallback? onPressed;
-
-  /// Width shape of button, default value is 70
   final double? height;
-
-  /// Width shape of button, default value is match parent.
   final double? width;
-
-  /// The radius of the button shape.
   final double? borderRadius;
-
   final double? borderWidth;
-
-  /// Leading icon inside button.
   final IconData? icon;
-
-  /// Leading icon with Widget
   final Widget? iconWidget;
-
-  /// Change style button to outline mode
   final bool outlineMode;
-
   final EdgeInsetsGeometry? margin;
-
   final EdgeInsetsGeometry? padding;
 
   const SkyIconButton({

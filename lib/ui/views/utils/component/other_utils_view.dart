@@ -34,11 +34,12 @@ class OtherUtilsView extends GetView<UtilsController> {
               const SizedBox(height: 12),
               SkyFormField(
                 controller: controller.currencyCtr,
-                initialValue: 0.toStringIDR(),
+                initialValue: 0.currencyFormat(symbol: 'Rp'),
                 hint: 'txt_price'.tr,
                 keyboardType: TextInputType.number,
                 onChanged: (value) => (value.isEmpty)
-                    ? controller.currencyCtr.text = 0.toStringIDR()
+                    ? controller.currencyCtr.text =
+                        0.currencyFormat(symbol: 'Rp')
                     : value,
                 validator: (value) => AppValidator.generalField('$value'),
                 inputFormatters: CustomInputFormatters.idrCurrency,
@@ -52,7 +53,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                   debugPrint('Converted = $converted');
                   Toast.show('String converted :\n $converted');
                 },
-                text: 'txt_convert'.tr + ' String',
+                text: '${'txt_convert'.tr} String',
                 icon: CupertinoIcons.t_bubble,
               ),
               const SizedBox(height: 26),

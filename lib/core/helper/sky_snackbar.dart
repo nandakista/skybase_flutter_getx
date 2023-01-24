@@ -8,7 +8,7 @@ abstract class SkySnackBar {
     required String? message,
   }) {
     showDefaultSnackBar(
-      message: message ?? 'Success',
+      message: message ?? 'txt_success'.tr,
       type: SkySnackBarType.normal,
     );
   }
@@ -17,7 +17,7 @@ abstract class SkySnackBar {
     required String? message,
   }) {
     showDefaultSnackBar(
-      message: message ?? 'Success',
+      message: message ?? 'txt_success'.tr,
       type: SkySnackBarType.success,
     );
   }
@@ -26,7 +26,7 @@ abstract class SkySnackBar {
     required String? message,
   }) {
     showDefaultSnackBar(
-      message: message ?? 'Error',
+      message: message ?? 'txt_error'.tr,
       type: SkySnackBarType.error,
     );
   }
@@ -35,7 +35,7 @@ abstract class SkySnackBar {
     required String? message,
   }) {
     showDefaultSnackBar(
-      message: message ?? 'Warning',
+      message: message ?? 'txt_warning'.tr,
       type: SkySnackBarType.warning,
     );
   }

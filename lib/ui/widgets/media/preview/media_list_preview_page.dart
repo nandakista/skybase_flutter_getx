@@ -25,7 +25,7 @@ class MediaListPreviewPage extends StatelessWidget {
     }
     return Scaffold(
       appBar: SkyAppBar.primary(
-        title: 'txt_preview'.tr + ' ' + 'txt_media'.tr,
+        title: '${'txt_preview'.tr} ${'txt_media'.tr}',
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -9,9 +9,9 @@ import 'package:skybase/core/themes/theme_manager.dart';
 import 'package:skybase/data/sources/server/auth/auth_api_impl.dart';
 import 'package:skybase/data/models/user.dart';
 import 'package:skybase/domain/entities/user/user.dart';
-import 'package:skybase/ui/views/auth/intro/intro_view.dart';
-import 'package:skybase/ui/views/auth/login/login_view.dart';
-import 'package:skybase/ui/views/auth/splash/splash_view.dart';
+import 'package:skybase/ui/views/intro/intro_view.dart';
+import 'package:skybase/ui/views/login/login_view.dart';
+import 'package:skybase/ui/views/splash/splash_view.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 
 /// This class will called first time before app go to pages.
@@ -101,12 +101,12 @@ class AuthManager extends GetxService {
   /// If response is Error it will passed to [logout] process.
   Future<void> checkUser() async {
     AuthApiImpl authApi = AuthApiImpl();
-    final String? _token = await secureStorage.getToken();
-    User? _user = getStorage.get(GetStorageKey.users);
+    final String? token = await secureStorage.getToken();
+    User? user = getStorage.get(GetStorageKey.users);
 
     try {
       await authApi
-          .verifyToken(userId: _user?.id ?? 0, token: _token.toString())
+          .verifyToken(userId: user?.id ?? 0, token: token.toString())
           .then((res) async {
         setAuth();
       });

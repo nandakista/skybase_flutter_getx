@@ -18,7 +18,7 @@ class MediaPreviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: SkyAppBar.primary(
-          title: 'txt_media'.tr + ' ' + 'txt_preview'.tr,
+          title: '${'txt_media'.tr} ${'txt_preview'.tr}',
         ),
         body: _determineMedia(url));
   }

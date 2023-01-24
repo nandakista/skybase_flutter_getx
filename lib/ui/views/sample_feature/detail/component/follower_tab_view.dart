@@ -14,7 +14,7 @@ class FollowerTabView extends GetView<SampleFeatureDetailController> {
       separatorBuilder: (context, _) => const Divider(),
       itemCount: controller.user.value?.followersList?.length ?? 0,
       itemBuilder: (_, index) {
-        final SampleFeature? user = controller.user.value!.followersList![index];
+        final SampleFeature? user = controller.user.value?.followersList![index];
         return (user == null)
             ? const Center(
                 child: Text('Tidak ada follower'),

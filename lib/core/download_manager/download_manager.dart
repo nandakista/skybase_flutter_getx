@@ -36,7 +36,7 @@ class DownloadManager {
         final id = data[0];
         final status = data[1];
         final progress = data[2];
-        debugPrint("ID: $id\nStatus: $status\nProgress: $progress");
+        debugPrint('Id: $id\nStatus: $status\nProgress: $progress');
         _eventController.add(DownloadInfo(data[0], data[1], data[2]));
       },
     );
@@ -93,8 +93,8 @@ class DownloadManager {
     try {
       final permissionGranted = await _checkPermission();
       if (!permissionGranted) {
-        debugPrint("Cannot download file, permission not enabled");
-        onError("Izinkan akses terhadap storage terlebih dahulu");
+        debugPrint('Cannot download file, permission not enabled');
+        onError('txt_err_download_permission_msg'.tr);
         return null;
       }
       final fileName =
@@ -109,8 +109,8 @@ class DownloadManager {
       );
       return taskId;
     } on Exception catch (e) {
-      debugPrint("Error downloading file: ${e.toString()}");
-      onError("Terjadi kesalahan saat mengunduh file");
+      debugPrint('Error downloading file: ${e.toString()}');
+      onError('txt_err_download_msg'.tr);
       return null;
     }
   }
@@ -144,12 +144,12 @@ class DownloadManager {
     subs = DownloadManager().downloadInfo.listen((task) {
       if (task.status == DownloadTaskStatus.complete) {
         debugPrint(
-            "ID: ${task.id}\nStatus: ${task.status}\nProgress: ${task.progress}");
+            'Id: ${task.id}\nStatus: ${task.status}\nProgress: ${task.progress}');
         ScaffoldMessenger.of(Get.context!).showSnackBar(
           SnackBar(
-            content: const Text("File berhasil diunduh"),
+            content: Text('txt_download_file_success'.tr),
             action: SnackBarAction(
-              label: "Buka File",
+              label: 'txt_open_file'.tr,
               textColor: Colors.white,
               onPressed: () {
                 DownloadManager().open(task.id);
@@ -160,8 +160,8 @@ class DownloadManager {
         subs.cancel();
       } else if (task.status == DownloadTaskStatus.failed) {
         ScaffoldMessenger.of(Get.context!).showSnackBar(
-          const SnackBar(
-            content: Text("File gagal diunduh"),
+          SnackBar(
+            content: Text('txt_failed_download_file'.tr),
           ),
         );
         subs.cancel();
