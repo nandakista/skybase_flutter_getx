@@ -40,11 +40,11 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.delete, color: Colors.white),
         backgroundColor: AppColors.primary,
         onPressed: () {
           Hive.box<SampleFeature>(HiveBox.user).clear();
         },
+        child: const Icon(Icons.delete, color: Colors.white),
       ),
     );
   }

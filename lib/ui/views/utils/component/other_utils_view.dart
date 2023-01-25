@@ -53,7 +53,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                   debugPrint('Converted = $converted');
                   Toast.show('String converted :\n $converted');
                 },
-                text: 'txt_convert'.tr + ' String',
+                text: '${'txt_convert'.tr} String',
                 icon: CupertinoIcons.t_bubble,
               ),
               const SizedBox(height: 26),

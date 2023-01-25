@@ -14,6 +14,7 @@ import 'package:skybase/core/network/api_url.dart';
    Varcant
    nanda.kista@gmail.com
 */
+// ignore: constant_identifier_names
 enum RequestMethod { GET, POST, PATCH, PUT, DELETE }
 
 Map<String, String> headers = {

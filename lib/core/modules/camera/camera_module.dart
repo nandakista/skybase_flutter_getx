@@ -47,7 +47,7 @@ class CameraModule extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CameraModuleState createState() => _CameraModuleState();
+  State<CameraModule>  createState() => _CameraModuleState();
 }
 
 class _CameraModuleState extends State<CameraModule>
@@ -308,13 +308,13 @@ class _CameraModuleState extends State<CameraModule>
             shape: BoxShape.circle,
           ),
           child: const CircleAvatar(
+            radius: 35,
+            backgroundColor: Colors.black,
             child: Icon(
               Icons.camera,
               size: 55,
               color: Colors.white,
             ),
-            radius: 35,
-            backgroundColor: Colors.black,
           ),
         ),
       ),
