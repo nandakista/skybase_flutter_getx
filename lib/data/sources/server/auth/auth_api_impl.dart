@@ -21,9 +21,8 @@ class AuthApiImpl implements AuthApi {
     required String password,
   }) async {
     try {
-      final response = await sendRequest(
+      final response = await ApiRequest.post(
         url: ApiUrl.login,
-        requestMethod: RequestMethod.POST,
         body: {
           'phone': phoneNumber,
           'password': password,
