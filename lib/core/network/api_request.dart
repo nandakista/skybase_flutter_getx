@@ -7,8 +7,6 @@ import 'package:skybase/core/network/api_config.dart';
 import 'package:skybase/core/network/api_exception.dart';
 import 'package:skybase/core/network/api_url.dart';
 
-// ignore: constant_identifier_names
-
 /* Created by
    Varcant
    nanda.kista@gmail.com
@@ -128,8 +126,6 @@ Future<void> _tokenManager(bool useToken) async {
   }
 }
 
-/// Wrap fetch request with try-catch
-/// & error handling
 Future<Response> _safeFetch(Future<Response> Function() tryFetch) async {
   try {
     final response = await tryFetch();
