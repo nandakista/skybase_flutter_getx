@@ -19,7 +19,7 @@ class NetworkException implements Exception {
   @override
   String toString() {
     String result = '';
-    if (response?.statusCode == 400 || response?.data == 401) {
+    if (response?.statusCode == 400 || response?.statusCode == 401) {
       ApiResponse res = ApiResponse.fromJson(response?.data);
       result = ApiMessage.message(res.error.toString());
     } else {

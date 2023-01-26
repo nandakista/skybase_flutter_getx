@@ -17,9 +17,8 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
       url += 'q=nanda&';
       url += 'page=$page&';
       url += 'per_page=$perPage';
-      final res = await sendRequest(
+      final res = await ApiRequest.get(
         url: url,
-        requestMethod: RequestMethod.GET,
         useToken: true,
       );
       return (res.data['items'])
@@ -35,9 +34,8 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
   @override
   Future<SampleFeature> getDetailUser({required String username}) async {
     try {
-      final res = await sendRequest(
+      final res = await ApiRequest.get(
         url: '/users/$username',
-        requestMethod: RequestMethod.GET,
         useToken: true,
       );
       return SampleFeature.fromJson(res.data);
@@ -50,9 +48,8 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
   @override
   Future<List<SampleFeature>> getFollowers({required String username}) async {
     try {
-      final res = await sendRequest(
+      final res = await ApiRequest.get(
         url: '/users/$username/followers',
-        requestMethod: RequestMethod.GET,
         useToken: true,
       );
       return (res.data)
@@ -68,9 +65,8 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
   @override
   Future<List<SampleFeature>> getFollowings({required String username}) async {
     try {
-      final res = await sendRequest(
+      final res = await ApiRequest.get(
         url: '/users/$username/following',
-        requestMethod: RequestMethod.GET,
         useToken: true,
       );
       return (res.data)
@@ -86,9 +82,8 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
   @override
   Future<List<Repo>> getRepos({required String username}) async {
     try {
-      final res = await sendRequest(
+      final res = await ApiRequest.get(
         url: '/users/$username/repos?type=all',
-        requestMethod: RequestMethod.GET,
         useToken: true,
       );
       return (res.data)
