@@ -55,6 +55,8 @@ const Map<String, String> en = {
   'txt_open_file': 'Open File',
   'txt_download_file_success': 'Download file successful',
   'txt_failed_download_file': 'Failed download file',
+  'txt_camera_not_found': 'Camera not found',
+  'txt_something_went_wrong': 'Something went wrong!',
 
   // Sentence
   'txt_err_download_msg': 'An error occurred while downloading the file',

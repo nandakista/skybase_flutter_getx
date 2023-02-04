@@ -47,13 +47,13 @@ class CameraModule extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CameraModule>  createState() => _CameraModuleState();
+  State<CameraModule> createState() => _CameraModuleState();
 }
 
 class _CameraModuleState extends State<CameraModule>
     with WidgetsBindingObserver, TickerProviderStateMixin {
   CameraController? _cameraController;
-  List<CameraDescription>? cameras;
+  List<CameraDescription> cameras = [];
   int? selectedCameraIndex;
   File? lastImageFromGallery;
 
@@ -118,26 +118,34 @@ class _CameraModuleState extends State<CameraModule>
         );
       } else {
         cameras = value;
-        if (cameras!.isNotEmpty) {
+        if (cameras.isNotEmpty) {
           if (widget.cameraType == CameraType.REAR) {
             selectedCameraIndex = 0;
           } else {
             selectedCameraIndex = 1;
           }
-          initController(cameras![selectedCameraIndex!]).then((_) {});
+          initController(cameras[selectedCameraIndex!]).then((_) {});
         } else {
-          Toast.show('Kamera tidak ditemukan');
+          SkyDialog.show(
+            type: DialogType.FAILED,
+            message: 'txt_camera_not_found'.tr,
+            onPress: () {
+              SkyDialog.close();
+              Get.back();
+            },
+          );
         }
       }
     }).catchError((e) {
       debugPrint('CameraModule::initCamera() -> $e');
       SkyDialog.show(
-          type: DialogType.FAILED,
-          message: 'Terjadi Kesalahan!\n${e.toString()}',
-          onPress: () {
-            SkyDialog.close();
-            Get.back();
-          });
+        type: DialogType.FAILED,
+        message: '${'txt_something_went_wrong'.tr}\n${e.toString()}',
+        onPress: () {
+          SkyDialog.close();
+          Get.back();
+        },
+      );
     });
   }
 
@@ -149,12 +157,10 @@ class _CameraModuleState extends State<CameraModule>
     _cameraController =
         CameraController(cameraDescription, widget.resolutionPreset);
     _cameraController!.addListener(() {
-      if (mounted) {
-        setState(() {});
-      }
+      if (mounted) setState(() {});
     });
     if (_cameraController!.value.hasError) {
-      Toast.show('Terjadi kesalahan pada kamera. ()');
+      Toast.show('txt_something_went_wrong'.tr);
     }
 
     debugPrint('CameraModule::initCameraController()');
@@ -162,24 +168,23 @@ class _CameraModuleState extends State<CameraModule>
       _cameraController!.initialize();
     } catch (e) {
       debugPrint('CameraException::initCameraController() ${e.toString()}');
-      Toast.show('Terjadi kesalahan pada kamera.\n$e');
+      Toast.show('${'txt_something_went_wrong'.tr}.\n$e');
     }
     debugPrint('CameraModule::initCamera() _controller.initialize');
-    if (mounted) {
-      setState(() {});
-    }
+    if (mounted) setState(() {});
   }
 
   Future fetchFirstPhotoFromGallery() async {
     try {
-      final albums = await PhotoManager.getAssetPathList(type: RequestType.image);
+      final albums =
+          await PhotoManager.getAssetPathList(type: RequestType.image);
       final recentAlbum = albums.first;
       final recentAssets = await recentAlbum.getAssetListRange(
         start: 0,
         end: 1,
       );
       var image = await recentAssets.first.file;
-      setState(() {lastImageFromGallery = image;});
+      setState(() => lastImageFromGallery = image);
     } catch (e) {
       debugPrint('e: $e');
     }
@@ -257,16 +262,12 @@ class _CameraModuleState extends State<CameraModule>
           Column(
             children: [
               Container(
-                height: (MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).size.width) /
-                    2 -
-                    15,
+                height: (Get.height - Get.width) / 2 - 15,
                 color: Colors.black.withOpacity(0.3),
               ),
               Center(
                 child: AspectRatio(
-                  aspectRatio: MediaQuery.of(context).size.width /
-                      MediaQuery.of(context).size.width,
+                  aspectRatio: Get.width / Get.width,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomPaint(
@@ -276,10 +277,7 @@ class _CameraModuleState extends State<CameraModule>
                 ),
               ),
               Container(
-                height: (MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).size.width) /
-                    2 -
-                    15,
+                height: (Get.height - Get.width) / 2 - 15,
                 color: Colors.black.withOpacity(0.3),
               ),
             ],
@@ -343,11 +341,9 @@ class _CameraModuleState extends State<CameraModule>
               decoration: BoxDecoration(
                   color: image != null ? Colors.white : Colors.grey[300],
                   borderRadius: BorderRadius.circular(8),
-                  image: image != null ? DecorationImage(
-                      fit: BoxFit.cover,
-                      image: image
-                  ) : null
-              ),
+                  image: image != null
+                      ? DecorationImage(fit: BoxFit.cover, image: image)
+                      : null),
             ),
           ),
         ),
@@ -358,7 +354,7 @@ class _CameraModuleState extends State<CameraModule>
   onCapture(context) async {
     try {
       CameraLensDirection lensDirection =
-          cameras![selectedCameraIndex!].lensDirection;
+          cameras[selectedCameraIndex!].lensDirection;
       await _cameraController!.takePicture().then((value) async {
         File imageCaptured;
         if (lensDirection == CameraLensDirection.front) {
@@ -376,16 +372,20 @@ class _CameraModuleState extends State<CameraModule>
   toPreview({required File resultImage}) async {
     dynamic arguments;
     if (widget.originSize) {
-      arguments = Get.to(() => PreviewCameraPage(
-        imageFile: resultImage,
-        showInfo: widget.showInfo,
-      ));
+      arguments = Get.to(
+        () => PreviewCameraPage(
+          imageFile: resultImage,
+          showInfo: widget.showInfo,
+        ),
+      );
     } else {
-      var cropedImg = await squareCropImage(resultImage);
-      arguments = Get.to(() => PreviewCameraPage(
-        imageFile: cropedImg,
-        showInfo: widget.showInfo,
-      ));
+      var croppedImg = await squareCropImage(resultImage);
+      arguments = Get.to(
+        () => PreviewCameraPage(
+          imageFile: croppedImg,
+          showInfo: widget.showInfo,
+        ),
+      );
     }
     arguments?.then((value) {
       if (value != null) {
@@ -403,16 +403,16 @@ class _CameraModuleState extends State<CameraModule>
 
   Future<File> flipSelfieImage(XFile image) async {
     final img.Image? capturedImage =
-    img.decodeImage(await File(image.path).readAsBytes());
+        img.decodeImage(await File(image.path).readAsBytes());
 
     // final img.Image orientedImage = img.flipHorizontal(capturedImage!);
 
     var croppedImage = img.copyResizeCropSquare(capturedImage!, 1080);
     final img.Image orientedImage = img.flipHorizontal(croppedImage);
 
-    File flipedImage =
-    await File(image.path).writeAsBytes(img.encodeJpg(orientedImage));
-    return flipedImage;
+    File flippedImage =
+        await File(image.path).writeAsBytes(img.encodeJpg(orientedImage));
+    return flippedImage;
   }
 
   // ---------------------------------------------------------------
@@ -420,26 +420,27 @@ class _CameraModuleState extends State<CameraModule>
   // ---------------------------------------------------------------
 
   Widget _switchCameraButton() {
-    if (cameras == null) {
+    if (cameras.isEmpty) {
       return const SizedBox.shrink();
-    }
-    CameraDescription selectedCamera = cameras![selectedCameraIndex!];
-    CameraLensDirection lensDirection = selectedCamera.lensDirection;
-    return Container(
-      margin: const EdgeInsets.only(right: 20),
-      child: Align(
-        alignment: Alignment.bottomRight,
-        child: CircleIcon(
-          onPressed: () => onSwitchCamera(),
-          backgroundColor: Colors.black54.withOpacity(0.8),
-          icon: Icon(
-            getCameraLensIcon(lensDirection),
-            size: 30,
-            color: Colors.white,
+    } else {
+      CameraDescription selectedCamera = cameras[selectedCameraIndex!];
+      CameraLensDirection lensDirection = selectedCamera.lensDirection;
+      return Container(
+        margin: const EdgeInsets.only(right: 20),
+        child: Align(
+          alignment: Alignment.bottomRight,
+          child: CircleIcon(
+            onPressed: () => onSwitchCamera(),
+            backgroundColor: Colors.black54.withOpacity(0.8),
+            icon: Icon(
+              getCameraLensIcon(lensDirection),
+              size: 30,
+              color: Colors.white,
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   getCameraLensIcon(CameraLensDirection lensDirection) {
@@ -456,10 +457,10 @@ class _CameraModuleState extends State<CameraModule>
   }
 
   onSwitchCamera() {
-    selectedCameraIndex = selectedCameraIndex! < cameras!.length - 1
+    selectedCameraIndex = selectedCameraIndex! < cameras.length - 1
         ? selectedCameraIndex! + 1
         : 0;
-    CameraDescription selectedCamera = cameras![selectedCameraIndex!];
+    CameraDescription selectedCamera = cameras[selectedCameraIndex!];
     initController(selectedCamera);
   }
 
@@ -468,7 +469,7 @@ class _CameraModuleState extends State<CameraModule>
   // ---------------------------------------------------------------
 
   Widget _flashCameraButton() {
-    if (cameras == null) {
+    if (cameras.isEmpty) {
       return const SizedBox.shrink();
     }
     return Container(
@@ -545,9 +546,7 @@ class _CameraModuleState extends State<CameraModule>
 
   void onSetFlashModeButtonPressed(FlashMode mode) {
     setFlashMode(mode).then((_) {
-      if (mounted) {
-        setState(() {});
-      }
+      if (mounted) setState(() {});
     });
   }
 
