@@ -47,7 +47,7 @@ class CameraModule extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CameraModule> createState() => _CameraModuleState();
+  State<CameraModule>  createState() => _CameraModuleState();
 }
 
 class _CameraModuleState extends State<CameraModule>
@@ -126,14 +126,14 @@ class _CameraModuleState extends State<CameraModule>
           }
           initController(cameras![selectedCameraIndex!]).then((_) {});
         } else {
-          Toast.show('Kamera tidak ditemukan');
+          Toast.show('txt_camera_not_found'.tr);
         }
       }
     }).catchError((e) {
       debugPrint('CameraModule::initCamera() -> $e');
       SkyDialog.show(
           type: DialogType.FAILED,
-          message: 'Terjadi Kesalahan!\n${e.toString()}',
+          message: '${'txt_something_went_wrong'.tr}\n${e.toString()}',
           onPress: () {
             SkyDialog.close();
             Get.back();
@@ -154,7 +154,7 @@ class _CameraModuleState extends State<CameraModule>
       }
     });
     if (_cameraController!.value.hasError) {
-      Toast.show('Terjadi kesalahan pada kamera. ()');
+      Toast.show('txt_something_went_wrong'.tr);
     }
 
     debugPrint('CameraModule::initCameraController()');
@@ -162,7 +162,7 @@ class _CameraModuleState extends State<CameraModule>
       _cameraController!.initialize();
     } catch (e) {
       debugPrint('CameraException::initCameraController() ${e.toString()}');
-      Toast.show('Terjadi kesalahan pada kamera.\n$e');
+      Toast.show('${'txt_something_went_wrong'.tr}.\n$e');
     }
     debugPrint('CameraModule::initCamera() _controller.initialize');
     if (mounted) {
@@ -381,9 +381,9 @@ class _CameraModuleState extends State<CameraModule>
         showInfo: widget.showInfo,
       ));
     } else {
-      var cropedImg = await squareCropImage(resultImage);
+      var croppedImg = await squareCropImage(resultImage);
       arguments = Get.to(() => PreviewCameraPage(
-        imageFile: cropedImg,
+        imageFile: croppedImg,
         showInfo: widget.showInfo,
       ));
     }
@@ -410,9 +410,9 @@ class _CameraModuleState extends State<CameraModule>
     var croppedImage = img.copyResizeCropSquare(capturedImage!, 1080);
     final img.Image orientedImage = img.flipHorizontal(croppedImage);
 
-    File flipedImage =
+    File flippedImage =
     await File(image.path).writeAsBytes(img.encodeJpg(orientedImage));
-    return flipedImage;
+    return flippedImage;
   }
 
   // ---------------------------------------------------------------

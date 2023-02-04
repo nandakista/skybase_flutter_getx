@@ -55,6 +55,8 @@ const Map<String, String> id = {
   'txt_open_file': 'Buka Berkas',
   'txt_download_file_success': 'Berkas berhasil diunduh',
   'txt_failed_download_file': 'Berkas gagal diunduh',
+  'txt_camera_not_found': 'Kamera tidak ditemukan',
+  'txt_something_went_wrong': 'Terjadi Kesalahan!',
 
   // Sentence
   'txt_err_download_msg': 'Terjadi kesalahan saat mengunduh file',
