@@ -55,7 +55,7 @@ class SkyDialog {
     required String message,
     required VoidCallback onPress,
     VoidCallback? onCancel,
-    bool? dismissible,
+    bool? isDismissible,
     String? confirmText,
     Widget? header,
     Color? backgroundColorHeader = Colors.transparent,
@@ -63,27 +63,29 @@ class SkyDialog {
     switch (type) {
       case DialogType.FAILED:
         return showDialog(
-          barrierDismissible: dismissible ?? true,
+          barrierDismissible: isDismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.error(
             title: title ?? 'txt_failed'.tr,
             description: message,
             onConfirm: onPress,
+            isDismissible: isDismissible?? true,
           ),
         );
       case DialogType.SUCCESS:
         return showDialog(
-          barrierDismissible: dismissible ?? false,
+          barrierDismissible: isDismissible ?? false,
           context: Get.context!,
           builder: (context) => DialogAlert.success(
             title: title ?? 'txt_success'.tr,
             description: message,
             onConfirm: onPress,
+            isDismissible: isDismissible?? false,
           ),
         );
       case DialogType.WARNING:
         return showDialog(
-          barrierDismissible: dismissible ?? true,
+          barrierDismissible: isDismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.warning(
             title: title ?? 'txt_warning'.tr,
@@ -91,23 +93,25 @@ class SkyDialog {
             description: message,
             onConfirm: onPress,
             onCancel: onCancel ?? () => Get.back(),
+            isDismissible: isDismissible?? false,
           ),
         );
       case DialogType.SOON:
         return showDialog(
-          barrierDismissible: dismissible ?? true,
+          barrierDismissible: isDismissible ?? true,
           context: Get.context!,
           builder: (context) => const SoonDialog(),
         );
       case DialogType.RETRY:
         return showDialog(
-          barrierDismissible: dismissible ?? true,
+          barrierDismissible: isDismissible ?? true,
           context: Get.context!,
           builder: (context) => DialogAlert.retry(
             title: title ?? 'txt_failed'.tr,
             description: message,
             onConfirm: onPress,
             onCancel: onCancel ?? () => Get.back(),
+            isDismissible: isDismissible?? true,
           ),
         );
       case DialogType.PERMISSION:
@@ -122,6 +126,7 @@ class SkyDialog {
             onConfirm: onPress,
             onCancel: onCancel ?? () => Get.back(),
             confirmText: confirmText ?? 'OK',
+            isDismissible: isDismissible?? false,
           ),
         );
     }
