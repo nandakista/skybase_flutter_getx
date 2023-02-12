@@ -53,6 +53,7 @@ const Map<String, String> id = {
   'txt_unexpected_error': 'Terjadi kesalahan',
   'txt_unable_to_process': 'Tidak dapat mengirimkan permintaan',
   'txt_open_file': 'Buka Berkas',
+  'txt_downloading': 'Mengunduh berkas..',
   'txt_download_file_success': 'Berkas berhasil diunduh',
   'txt_failed_download_file': 'Berkas gagal diunduh',
   'txt_camera_not_found': 'Kamera tidak ditemukan',

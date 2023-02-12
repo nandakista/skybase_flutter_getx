@@ -53,6 +53,7 @@ const Map<String, String> en = {
   'txt_unexpected_error': 'Unexpected Error!',
   'txt_unable_to_process': 'Unable to process',
   'txt_open_file': 'Open File',
+  'txt_downloading': 'Downloading file..',
   'txt_download_file_success': 'Download file successful',
   'txt_failed_download_file': 'Failed download file',
   'txt_camera_not_found': 'Camera not found',
