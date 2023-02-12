@@ -64,6 +64,7 @@ class DialogAlert extends StatelessWidget {
   final Widget? header;
   final Color? backgroundColorHeader;
   final Color? confirmTextColor, confirmBorderColor, confirmBackgroundColor;
+  final bool isDismissible;
 
   const DialogAlert({
     Key? key,
@@ -72,6 +73,7 @@ class DialogAlert extends StatelessWidget {
     required this.header,
     required this.onConfirm,
     required this.backgroundColorHeader,
+    required this.isDismissible,
     this.onCancel,
     this.confirmColor = AppColors.primary,
     this.cancelColor = AppColors.primary,
@@ -87,10 +89,12 @@ class DialogAlert extends StatelessWidget {
     Widget? header,
     Color? backgroundColorHeader,
     required VoidCallback onConfirm,
+    required bool isDismissible,
   }) =>
       DialogAlert(
         title: title,
         description: description,
+        isDismissible: isDismissible,
         header: header ??
             Lottie.asset('assets/anim/anim_success.json', repeat: false),
         onConfirm: onConfirm,
@@ -106,10 +110,12 @@ class DialogAlert extends StatelessWidget {
     Widget? header,
     Color? backgroundColorHeader,
     required VoidCallback onConfirm,
+    required bool isDismissible,
   }) =>
       DialogAlert(
         title: title,
         description: description,
+        isDismissible: isDismissible,
         header: header ??
             Lottie.asset('assets/anim/anim_failed.json', repeat: false),
         onConfirm: onConfirm,
@@ -126,10 +132,12 @@ class DialogAlert extends StatelessWidget {
     Color? backgroundColorHeader,
     required VoidCallback onConfirm,
     required VoidCallback onCancel,
+    required bool isDismissible,
   }) =>
       DialogAlert(
         title: title,
         description: description,
+        isDismissible: isDismissible,
         header: header ??
             Lottie.asset('assets/anim/anim_warning.json', repeat: false),
         onConfirm: onConfirm,
@@ -145,11 +153,13 @@ class DialogAlert extends StatelessWidget {
     Color? backgroundColorHeader,
     required VoidCallback onConfirm,
     required VoidCallback onCancel,
+    required bool isDismissible,
   }) =>
       DialogAlert(
         title: title,
         description: description,
         confirmText: confirmText,
+        isDismissible: isDismissible,
         header: header ??
             Lottie.asset('assets/anim/anim_failed.json', repeat: false),
         onConfirm: onConfirm,
@@ -166,10 +176,12 @@ class DialogAlert extends StatelessWidget {
     Color? backgroundColorHeader,
     required VoidCallback onConfirm,
     required VoidCallback onCancel,
+    required bool isDismissible,
   }) =>
       DialogAlert(
         title: title,
         description: description,
+        isDismissible: isDismissible,
         header: header ??
             Lottie.asset('assets/anim/anim_warning.json', repeat: false),
         onConfirm: onConfirm,
@@ -181,7 +193,7 @@ class DialogAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () async => isDismissible,
       child: Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         elevation: 0,

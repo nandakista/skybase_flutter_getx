@@ -108,7 +108,7 @@ class _CameraModuleState extends State<CameraModule>
     await availableCameras().then((value) {
       if (value.isEmpty && !kDebugMode) {
         SkyDialog.show(
-          dismissible: false,
+          isDismissible: false,
           type: DialogType.FAILED,
           message: 'You need use the real device',
           onPress: () {

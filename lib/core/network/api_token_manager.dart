@@ -58,7 +58,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
     if (status == 401) {
       SkyDialog.show(
         type: DialogType.FAILED,
-        dismissible: false,
+        isDismissible: false,
         message: 'txt_you_must_login_again'.tr,
         onPress: () => authManager.logout(),
       );
@@ -98,7 +98,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
       debugPrint('${NetworkException.getErrorException(error)}');
       return SkyDialog.show(
         type: DialogType.FAILED,
-        dismissible: false,
+        isDismissible: false,
         message: 'txt_you_must_login_again'.tr,
         onPress: () => authManager.logout(),
       );

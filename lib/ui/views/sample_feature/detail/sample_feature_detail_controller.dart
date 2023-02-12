@@ -45,7 +45,7 @@ class SampleFeatureDetailController extends BaseController {
       hideLoading();
       SkyDialog.show(
         type: DialogType.RETRY,
-        dismissible: false,
+        isDismissible: false,
         message: e.toString(),
         onCancel: (){
           SkyDialog.close();
