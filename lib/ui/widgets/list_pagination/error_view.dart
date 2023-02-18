@@ -15,6 +15,11 @@ class ErrorView extends StatelessWidget {
     this.onRetry,
     this.isScrollable = true,
     this.retryText,
+    this.verticalSpacing = 24,
+    this.horizontalSpacing = 24,
+    this.imageSize,
+    this.titleStyle,
+    this.subtitleStyle,
   }) : super(key: key);
 
   final Widget? errorImage;
@@ -23,6 +28,11 @@ class ErrorView extends StatelessWidget {
   final String? retryText;
   final VoidCallback? onRetry;
   final bool isScrollable;
+  final double verticalSpacing;
+  final double horizontalSpacing;
+  final double? imageSize;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -31,22 +41,27 @@ class ErrorView extends StatelessWidget {
         physics: (isScrollable)
             ? const NeverScrollableScrollPhysics()
             : const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.symmetric(
+            vertical: verticalSpacing, horizontal: horizontalSpacing),
         child: Column(
           children: [
-            errorImage ?? Image.asset('assets/images/img_error.png'),
-            const SizedBox(height: 24),
-            const SizedBox(height: 24),
+            errorImage ??
+                Image.asset(
+                  'assets/images/img_error.png',
+                  height: imageSize,
+                ),
+            SizedBox(height: verticalSpacing * 2),
             Text(
               errorTitle ?? 'txt_err_general_formal'.tr,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: titleStyle ?? Theme.of(context).textTheme.titleLarge,
             ),
             Text(
-              errorSubtitle ?? 'txt_tap_to_retry'.tr,
+              errorSubtitle ?? 'txt_tap_retry'.tr,
               textAlign: TextAlign.center,
+              style: subtitleStyle,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: verticalSpacing),
             SkyButton(
               wrapContent: true,
               height: 50,
