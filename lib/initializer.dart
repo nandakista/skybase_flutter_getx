@@ -47,6 +47,6 @@ class Initializer {
 
     Get.put(AuthManager());
     // TODO : Uncomment code below if want to activate flutter_downloader
-    // await DownloadManager().initDownloader();
+    // await DownloadManager.initDownloader();
   }
 }

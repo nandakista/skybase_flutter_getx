@@ -20,7 +20,7 @@ class DownloadManager {
   factory DownloadManager() => _singleton;
 
   final StreamController<DownloadInfo> _eventController =
-  StreamController<DownloadInfo>.broadcast();
+      StreamController<DownloadInfo>.broadcast();
 
   Stream<DownloadInfo> get downloadInfo {
     return _eventController.stream;
@@ -32,7 +32,7 @@ class DownloadManager {
       portName,
     );
     _port.listen(
-          (data) {
+      (data) {
         final id = data[0];
         final status = data[1];
         final progress = data[2];
@@ -43,7 +43,7 @@ class DownloadManager {
     FlutterDownloader.registerCallback(downloadCallback);
   }
 
-  Future<void> initDownloader() async {
+  static Future<void> initDownloader() async {
     await FlutterDownloader.initialize(
       debug: true,
       ignoreSsl: true,
@@ -51,11 +51,11 @@ class DownloadManager {
   }
 
   @pragma('vm:entry-point')
-  void downloadCallback(
-      String id,
-      DownloadTaskStatus status,
-      int progress,
-      ) {
+  static void downloadCallback(
+    String id,
+    DownloadTaskStatus status,
+    int progress,
+  ) {
     final SendPort? send = IsolateNameServer.lookupPortByName(portName);
     send?.send([id, status, progress]);
   }
@@ -140,6 +140,11 @@ class DownloadManager {
   }
 
   void showDownloadedSnackBar() {
+    ScaffoldMessenger.of(Get.context!).showSnackBar(
+      SnackBar(
+        content: Text('txt_downloading'.tr),
+      ),
+    );
     late StreamSubscription<dynamic> subs;
     subs = DownloadManager().downloadInfo.listen((task) {
       if (task.status == DownloadTaskStatus.complete) {

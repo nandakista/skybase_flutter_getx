@@ -58,6 +58,16 @@ class SkyListView extends StatelessWidget {
 
   final VoidCallback? onRefresh;
 
+  final double? imageSize;
+
+  final double? verticalSpacing;
+
+  final double? horizontalSpacing;
+
+  final TextStyle? titleStyle;
+
+  final TextStyle? subtitleStyle;
+
   const SkyListView({
     Key? key,
     required this.emptyEnabled,
@@ -78,6 +88,11 @@ class SkyListView extends StatelessWidget {
     this.emptyView,
     this.retryText,
     this.onRefresh,
+    this.imageSize,
+    this.verticalSpacing,
+    this.horizontalSpacing,
+    this.titleStyle,
+    this.subtitleStyle,
   }) : super(key: key);
 
   @override
@@ -123,6 +138,11 @@ class SkyListView extends StatelessWidget {
           emptyTitle: emptyTitle,
           emptySubtitle: emptySubtitle,
           isScrollable: isComponent,
+          imageSize: imageSize,
+          horizontalSpacing: horizontalSpacing ?? 24,
+          verticalSpacing: verticalSpacing ?? 24,
+          titleStyle: titleStyle,
+          subtitleStyle: subtitleStyle,
         );
   }
 
@@ -134,6 +154,11 @@ class SkyListView extends StatelessWidget {
       onRetry: onRetry,
       retryText: retryText,
       isScrollable: isComponent,
+      imageSize: imageSize,
+      horizontalSpacing: horizontalSpacing ?? 24,
+      verticalSpacing: verticalSpacing ?? 24,
+      titleStyle: titleStyle,
+      subtitleStyle: subtitleStyle,
     );
   }
 }
