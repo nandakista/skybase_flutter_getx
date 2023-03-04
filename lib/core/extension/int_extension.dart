@@ -39,4 +39,16 @@ extension IntNullExtension on int? {
       symbol: symbol,
     ).format(number);
   }
+
+  String toSoldFormat() {
+    if(this != null) {
+      if(this!>1000) {
+        return '${(this!/1000).toStringAsFixed(2)}K';
+      } else {
+        return this!.toString();
+      }
+    } else {
+      return 0.toString();
+    }
+  }
 }

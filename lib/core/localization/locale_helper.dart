@@ -18,7 +18,17 @@ class LocaleHelper {
 
   final fallbackLocale = const Locale('en');
 
-  /// Show dialog for change App Language
+  static T builder<T>({
+    required T enCallback,
+    required T idCallback,
+  }) {
+    if (LocaleHelper().getCurrentLocale() == const Locale('en')) {
+      return enCallback;
+    } else {
+      return idCallback;
+    }
+  }
+
   showLocaleDialog(BuildContext context) {
     showDialog(
       context: context,

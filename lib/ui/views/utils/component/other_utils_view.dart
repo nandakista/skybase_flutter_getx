@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:skybase/core/helper/converter_helper.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
-import 'package:skybase/core/helper/extension/int_extension.dart';
+import 'package:skybase/core/extension/int_extension.dart';
 import 'package:skybase/core/helper/input_formater.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
 import 'package:skybase/core/themes/app_style.dart';
