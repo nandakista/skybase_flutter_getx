@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
@@ -32,95 +30,123 @@ class Loading {
   static dismiss() => Get.back();
 }
 
-enum DialogType {
-  FAILED,
-  SUCCESS,
-  WARNING,
-  RETRY,
-  FORCE,
-}
-
 class SkyDialog {
-  static show({
-    required DialogType type,
+  static failed({
+    required String message,
+    VoidCallback? onConfirm,
+    Widget? header,
+    bool? isDismissible,
     String? title,
+  }) {
+    return showDialog(
+      barrierDismissible: isDismissible ?? true,
+      context: Get.context!,
+      builder: (context) => DialogAlert.error(
+        header: header,
+        title: title ?? 'txt_failed'.tr,
+        description: message,
+        onConfirm: onConfirm ?? dismiss,
+        isDismissible: isDismissible ?? true,
+      ),
+    );
+  }
+
+  static success({
     required String message,
     required VoidCallback onConfirm,
-    VoidCallback? onCancel,
-    bool? isDismissible,
-    String? confirmText,
     Widget? header,
-    Color? backgroundColorHeader = Colors.transparent,
-    String? cancelText,
+    bool? isDismissible,
+    String? title,
   }) {
-    switch (type) {
-      case DialogType.FAILED:
-        return showDialog(
-          barrierDismissible: isDismissible ?? true,
-          context: Get.context!,
-          builder: (context) => DialogAlert.error(
-            title: title ?? 'txt_failed'.tr,
-            description: message,
-            onConfirm: onConfirm,
-            isDismissible: isDismissible?? true,
-          ),
-        );
-      case DialogType.SUCCESS:
-        return showDialog(
-          barrierDismissible: isDismissible ?? false,
-          context: Get.context!,
-          builder: (context) => DialogAlert.success(
-            title: title ?? 'txt_success'.tr,
-            description: message,
-            onConfirm: onConfirm,
-            isDismissible: isDismissible?? false,
-          ),
-        );
-      case DialogType.WARNING:
-        return showDialog(
-          barrierDismissible: isDismissible ?? true,
-          context: Get.context!,
-          builder: (context) => DialogAlert.warning(
-            title: title ?? 'txt_warning'.tr,
-            backgroundColorHeader: Colors.orange,
-            description: message,
-            onConfirm: onConfirm,
-            confirmText: confirmText,
-            cancelText: cancelText,
-            onCancel: onCancel ?? () => Get.back(),
-            isDismissible: isDismissible?? false,
-          ),
-        );
-      case DialogType.RETRY:
-        return showDialog(
-          barrierDismissible: isDismissible ?? true,
-          context: Get.context!,
-          builder: (context) => DialogAlert.retry(
-            title: title ?? 'txt_failed'.tr,
-            description: message,
-            confirmText: confirmText,
-            cancelText: cancelText,
-            onConfirm: onConfirm,
-            onCancel: onCancel ?? () => Get.back(),
-            isDismissible: isDismissible?? true,
-          ),
-        );
-      case DialogType.FORCE:
-        return showDialog(
-          barrierDismissible: false,
-          context: Get.context!,
-          builder: (context) => DialogAlert.force(
-            header: header,
-            backgroundColorHeader: Colors.orange,
-            title: title ?? 'txt_warning'.tr,
-            description: message,
-            onConfirm: onConfirm,
-            onCancel: onCancel ?? () => Get.back(),
-            confirmText: confirmText ?? 'OK',
-            isDismissible: isDismissible?? false,
-          ),
-        );
-    }
+    return showDialog(
+      barrierDismissible: isDismissible ?? false,
+      context: Get.context!,
+      builder: (context) => DialogAlert.success(
+        header: header,
+        title: title ?? 'txt_success'.tr,
+        description: message,
+        onConfirm: onConfirm,
+        isDismissible: isDismissible ?? false,
+      ),
+    );
+  }
+
+  static warning({
+    required String message,
+    required VoidCallback onConfirm,
+    Widget? header,
+    bool? isDismissible,
+    String? title,
+    String? confirmText,
+    String? cancelText,
+    VoidCallback? onCancel,
+}) {
+    return showDialog(
+      barrierDismissible: isDismissible ?? true,
+      context: Get.context!,
+      builder: (context) => DialogAlert.warning(
+        header: header,
+        isDismissible: isDismissible ?? false,
+        title: title ?? 'txt_warning'.tr,
+        description: message,
+        backgroundColorHeader: Colors.orange,
+        onConfirm: onConfirm,
+        confirmText: confirmText,
+        onCancel: onCancel ?? dismiss,
+        cancelText: cancelText,
+      ),
+    );
+  }
+
+  static retry({
+    required String message,
+    required VoidCallback onConfirm,
+    bool? isDismissible,
+    Widget? header,
+    String? title,
+    String? confirmText,
+    String? cancelText,
+    VoidCallback? onCancel,
+}) {
+    return showDialog(
+      barrierDismissible: isDismissible ?? true,
+      context: Get.context!,
+      builder: (context) => DialogAlert.retry(
+        header: header,
+        title: title ?? 'txt_failed'.tr,
+        description: message,
+        confirmText: confirmText,
+        cancelText: cancelText,
+        onConfirm: onConfirm,
+        onCancel: onCancel ?? dismiss,
+        isDismissible: isDismissible ?? true,
+      ),
+    );
+  }
+
+  static force({
+    required String message,
+    required VoidCallback onConfirm,
+    bool? isDismissible,
+    Widget? header,
+    String? title,
+    VoidCallback? onCancel,
+    String? confirmText,
+  }) {
+    return showDialog(
+      barrierDismissible: false,
+      context: Get.context!,
+      builder: (context) => DialogAlert.force(
+        header: header,
+        backgroundColorHeader: Colors.orange,
+        title: title ?? 'txt_warning'.tr,
+        description: message,
+        onConfirm: onConfirm,
+        onCancel: onCancel ?? dismiss,
+        confirmText: confirmText ?? 'OK',
+        isDismissible: isDismissible ?? false,
+      ),
+    );
   }
 
   static dismiss() => Get.back();

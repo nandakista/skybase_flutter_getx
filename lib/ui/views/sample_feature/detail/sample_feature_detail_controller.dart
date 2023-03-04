@@ -43,8 +43,7 @@ class SampleFeatureDetailController extends BaseController {
       });
     } catch (e) {
       hideLoading();
-      SkyDialog.show(
-        type: DialogType.RETRY,
+      SkyDialog.retry(
         isDismissible: false,
         message: e.toString(),
         onCancel: (){

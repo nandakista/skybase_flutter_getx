@@ -6,6 +6,7 @@ import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 
 class LoginController extends GetxController {
   final AuthApi dataSource;
+
   LoginController({required this.dataSource});
 
   final formKey = GlobalKey<FormState>();
@@ -13,6 +14,7 @@ class LoginController extends GetxController {
   final passController = TextEditingController();
   final emailController = TextEditingController();
   RxBool isHiddenPassword = true.obs;
+
   hidePassword() => isHiddenPassword.toggle();
 
   bool validateField() {
@@ -27,20 +29,18 @@ class LoginController extends GetxController {
     if (validateField()) {
       try {
         Loading.show();
-        await dataSource.login(
-            phoneNumber: phoneController.text,
-            email: emailController.text,
-            password: passController.text).then((res) async {
+        await dataSource
+            .login(
+                phoneNumber: phoneController.text,
+                email: emailController.text,
+                password: passController.text)
+            .then((res) async {
           Loading.dismiss();
           Get.offAllNamed(MainNavView.route);
         });
       } catch (err) {
         Loading.dismiss();
-        SkyDialog.show(
-          type: DialogType.FAILED,
-          message: err.toString(),
-          onConfirm: () => SkyDialog.dismiss(),
-        );
+        SkyDialog.failed(message: err.toString());
       }
     }
   }

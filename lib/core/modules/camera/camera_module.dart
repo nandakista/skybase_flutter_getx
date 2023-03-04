@@ -108,9 +108,8 @@ class _CameraModuleState extends State<CameraModule>
     debugPrint('CameraModule::initCamera() -> $cameras');
     await availableCameras().then((value) {
       if (value.isEmpty && !kDebugMode) {
-        SkyDialog.show(
+        SkyDialog.failed(
           isDismissible: false,
-          type: DialogType.FAILED,
           message: 'You need use the real device',
           onConfirm: () {
             SkyDialog.dismiss();
@@ -127,8 +126,7 @@ class _CameraModuleState extends State<CameraModule>
           }
           initController(cameras[selectedCameraIndex!]).then((_) {});
         } else {
-          SkyDialog.show(
-            type: DialogType.FAILED,
+          SkyDialog.failed(
             message: 'txt_camera_not_found'.tr,
             onConfirm: () {
               SkyDialog.dismiss();
@@ -139,8 +137,7 @@ class _CameraModuleState extends State<CameraModule>
       }
     }).catchError((e) {
       debugPrint('CameraModule::initCamera() -> $e');
-      SkyDialog.show(
-        type: DialogType.FAILED,
+      SkyDialog.failed(
         message: '${'txt_something_went_wrong'.tr}\n${e.toString()}',
         onConfirm: () {
           SkyDialog.dismiss();
