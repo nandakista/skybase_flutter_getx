@@ -52,7 +52,6 @@ dependencies:
   intl: ^0.17.0
   path_provider: ^2.0.11
   double_back_to_close_app: ^2.1.0
-  rename: ^2.1.1
   internet_file: ^1.2.0
   open_filex: ^4.3.2
   mask_text_input_formatter: ^2.4.0
@@ -62,6 +61,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  rename: ^2.1.1
   flutter_lints: ^2.0.1
   hive_generator: ^2.0.0
   build_runner: ^2.3.3
