@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 enum SkySnackBarType { normal, success, error, warning }
 
 abstract class SkySnackBar {
-  static void showNormal({
+  static void show({
     required String? message,
   }) {
     showDefaultSnackBar(
@@ -59,12 +59,10 @@ abstract class SkySnackBar {
       case SkySnackBarType.normal:
         backgroundColor = Colors.black;
         break;
-
     }
 
     final snackBar = SnackBar(
-      content: Text(message),
-      // duration: const Duration(milliseconds: 400),
+      content: Text(message, style: const TextStyle(color: Colors.white)),
       behavior: SnackBarBehavior.floating,
       backgroundColor: backgroundColor,
     );

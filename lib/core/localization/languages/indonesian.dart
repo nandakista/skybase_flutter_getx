@@ -16,6 +16,10 @@ const Map<String, String> id = {
   'txt_friday': 'Jumat',
   'txt_saturday': 'Sabtu',
 
+  'txt_try_again': 'Coba lagi',
+  'txt_no': 'Tidak',
+  'txt_yes': 'Ya',
+  'txt_cancel': 'Kembali',
   'txt_name': 'name',
   'txt_email': 'Email',
   'txt_password': 'Password',

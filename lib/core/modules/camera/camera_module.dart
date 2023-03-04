@@ -11,6 +11,7 @@ import 'package:image/image.dart' as img;
 import 'package:photo_manager/photo_manager.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/general_function.dart';
+import 'package:skybase/core/helper/sky_snackbar.dart';
 import 'package:skybase/ui/widgets/circle_icon.dart';
 import 'package:skybase/ui/widgets/media/ui_image_picker.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
@@ -111,8 +112,8 @@ class _CameraModuleState extends State<CameraModule>
           isDismissible: false,
           type: DialogType.FAILED,
           message: 'You need use the real device',
-          onPress: () {
-            SkyDialog.close();
+          onConfirm: () {
+            SkyDialog.dismiss();
             Get.back();
           },
         );
@@ -129,8 +130,8 @@ class _CameraModuleState extends State<CameraModule>
           SkyDialog.show(
             type: DialogType.FAILED,
             message: 'txt_camera_not_found'.tr,
-            onPress: () {
-              SkyDialog.close();
+            onConfirm: () {
+              SkyDialog.dismiss();
               Get.back();
             },
           );
@@ -141,8 +142,8 @@ class _CameraModuleState extends State<CameraModule>
       SkyDialog.show(
         type: DialogType.FAILED,
         message: '${'txt_something_went_wrong'.tr}\n${e.toString()}',
-        onPress: () {
-          SkyDialog.close();
+        onConfirm: () {
+          SkyDialog.dismiss();
           Get.back();
         },
       );
@@ -160,7 +161,7 @@ class _CameraModuleState extends State<CameraModule>
       if (mounted) setState(() {});
     });
     if (_cameraController!.value.hasError) {
-      Toast.show('txt_something_went_wrong'.tr);
+      SkySnackBar.show(message: 'txt_something_went_wrong'.tr);
     }
 
     debugPrint('CameraModule::initCameraController()');
@@ -168,7 +169,7 @@ class _CameraModuleState extends State<CameraModule>
       _cameraController!.initialize();
     } catch (e) {
       debugPrint('CameraException::initCameraController() ${e.toString()}');
-      Toast.show('${'txt_something_went_wrong'.tr}.\n$e');
+      SkySnackBar.show(message: '${'txt_something_went_wrong'.tr}.\n$e');
     }
     debugPrint('CameraModule::initCamera() _controller.initialize');
     if (mounted) setState(() {});
@@ -559,7 +560,7 @@ class _CameraModuleState extends State<CameraModule>
       await _cameraController!.setFlashMode(mode);
     } on CameraException catch (e) {
       logError(e.code, e.description);
-      Toast.show('Error: ${e.code}\n${e.description}');
+      SkySnackBar.show(message: 'Error: ${e.code}\n${e.description}');
       rethrow;
     }
   }

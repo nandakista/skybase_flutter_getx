@@ -60,7 +60,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
         type: DialogType.FAILED,
         isDismissible: false,
         message: 'txt_you_must_login_again'.tr,
-        onPress: () => authManager.logout(),
+        onConfirm: () => authManager.logout(),
       );
       super.onError(err, handler);
     } else {
@@ -100,7 +100,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
         type: DialogType.FAILED,
         isDismissible: false,
         message: 'txt_you_must_login_again'.tr,
-        onPress: () => authManager.logout(),
+        onConfirm: () => authManager.logout(),
       );
     }
   }

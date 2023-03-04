@@ -13,7 +13,7 @@ class SafeRequestAPI {
       SkyDialog.show(
           type: DialogType.FAILED,
           message: e.toString(),
-          onPress: () => SkyDialog.close());
+          onConfirm: () => SkyDialog.dismiss());
       rethrow;
     }
   }
@@ -28,8 +28,8 @@ class SafeRequestAPI {
       SkyDialog.show(
         type: DialogType.FAILED,
         message: e.toString(),
-        onPress: () {
-          SkyDialog.close();
+        onConfirm: () {
+          SkyDialog.dismiss();
         },
       );
       rethrow;

@@ -48,11 +48,11 @@ class SampleFeatureDetailController extends BaseController {
         isDismissible: false,
         message: e.toString(),
         onCancel: (){
-          SkyDialog.close();
+          SkyDialog.dismiss();
           Get.back();
         },
-        onPress: () {
-          SkyDialog.close();
+        onConfirm: () {
+          SkyDialog.dismiss();
           getDetailUser();
         },
       );

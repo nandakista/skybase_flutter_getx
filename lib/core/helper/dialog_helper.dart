@@ -1,16 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
 import 'package:skybase/ui/widgets/sky_dialog.dart';
-
-class Toast {
-  static show(String message) {
-    Fluttertoast.showToast(msg: message);
-  }
-}
 
 class Loading {
   static show({bool? dismissible}) {
@@ -36,7 +29,7 @@ class Loading {
     );
   }
 
-  static hide() => Get.back();
+  static dismiss() => Get.back();
 }
 
 enum DialogType {
@@ -44,8 +37,7 @@ enum DialogType {
   SUCCESS,
   WARNING,
   RETRY,
-  SOON,
-  PERMISSION,
+  FORCE,
 }
 
 class SkyDialog {
@@ -53,12 +45,13 @@ class SkyDialog {
     required DialogType type,
     String? title,
     required String message,
-    required VoidCallback onPress,
+    required VoidCallback onConfirm,
     VoidCallback? onCancel,
     bool? isDismissible,
     String? confirmText,
     Widget? header,
     Color? backgroundColorHeader = Colors.transparent,
+    String? cancelText,
   }) {
     switch (type) {
       case DialogType.FAILED:
@@ -68,7 +61,7 @@ class SkyDialog {
           builder: (context) => DialogAlert.error(
             title: title ?? 'txt_failed'.tr,
             description: message,
-            onConfirm: onPress,
+            onConfirm: onConfirm,
             isDismissible: isDismissible?? true,
           ),
         );
@@ -79,7 +72,7 @@ class SkyDialog {
           builder: (context) => DialogAlert.success(
             title: title ?? 'txt_success'.tr,
             description: message,
-            onConfirm: onPress,
+            onConfirm: onConfirm,
             isDismissible: isDismissible?? false,
           ),
         );
@@ -91,16 +84,12 @@ class SkyDialog {
             title: title ?? 'txt_warning'.tr,
             backgroundColorHeader: Colors.orange,
             description: message,
-            onConfirm: onPress,
+            onConfirm: onConfirm,
+            confirmText: confirmText,
+            cancelText: cancelText,
             onCancel: onCancel ?? () => Get.back(),
             isDismissible: isDismissible?? false,
           ),
-        );
-      case DialogType.SOON:
-        return showDialog(
-          barrierDismissible: isDismissible ?? true,
-          context: Get.context!,
-          builder: (context) => const SoonDialog(),
         );
       case DialogType.RETRY:
         return showDialog(
@@ -109,21 +98,23 @@ class SkyDialog {
           builder: (context) => DialogAlert.retry(
             title: title ?? 'txt_failed'.tr,
             description: message,
-            onConfirm: onPress,
+            confirmText: confirmText,
+            cancelText: cancelText,
+            onConfirm: onConfirm,
             onCancel: onCancel ?? () => Get.back(),
             isDismissible: isDismissible?? true,
           ),
         );
-      case DialogType.PERMISSION:
+      case DialogType.FORCE:
         return showDialog(
           barrierDismissible: false,
           context: Get.context!,
-          builder: (context) => DialogAlert.permission(
+          builder: (context) => DialogAlert.force(
             header: header,
             backgroundColorHeader: Colors.orange,
             title: title ?? 'txt_warning'.tr,
             description: message,
-            onConfirm: onPress,
+            onConfirm: onConfirm,
             onCancel: onCancel ?? () => Get.back(),
             confirmText: confirmText ?? 'OK',
             isDismissible: isDismissible?? false,
@@ -132,5 +123,5 @@ class SkyDialog {
     }
   }
 
-  static close() => Get.back();
+  static dismiss() => Get.back();
 }

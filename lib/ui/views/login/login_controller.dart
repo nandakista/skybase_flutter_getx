@@ -31,15 +31,15 @@ class LoginController extends GetxController {
             phoneNumber: phoneController.text,
             email: emailController.text,
             password: passController.text).then((res) async {
-          Loading.hide();
+          Loading.dismiss();
           Get.offAllNamed(MainNavView.route);
         });
       } catch (err) {
-        Loading.hide();
+        Loading.dismiss();
         SkyDialog.show(
           type: DialogType.FAILED,
           message: err.toString(),
-          onPress: () => SkyDialog.close(),
+          onConfirm: () => SkyDialog.dismiss(),
         );
       }
     }

@@ -18,7 +18,7 @@ class SnackBarUtilsView extends StatelessWidget {
             const SizedBox(height: 12),
             SkyButton(
               text: 'Normal',
-              onPressed: () => SkySnackBar.showNormal(message: 'Normal'),
+              onPressed: () => SkySnackBar.show(message: 'Normal'),
             ),
             const SizedBox(height: 12),
             SkyButton(

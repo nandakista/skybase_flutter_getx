@@ -15,6 +15,10 @@ const Map<String, String> en = {
   'txt_friday': 'Friday',
   'txt_saturday': 'Saturday',
 
+  'txt_try_again': 'Try again',
+  'txt_no': 'No',
+  'txt_yes': 'Yes',
+  'txt_cancel': 'Cancel',
   'txt_name': 'name',
   'txt_email': 'Email',
   'txt_password': 'Password',

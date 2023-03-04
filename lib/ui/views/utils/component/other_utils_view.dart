@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:skybase/core/helper/converter_helper.dart';
-import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/extension/int_extension.dart';
 import 'package:skybase/core/helper/input_formater.dart';
+import 'package:skybase/core/helper/sky_snackbar.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
@@ -43,7 +43,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                     : value,
                 validator: (value) => AppValidator.generalField('$value'),
                 inputFormatters: CustomInputFormatters.idrCurrency,
-                onFieldSubmitted: (value) => Toast.show(value),
+                onFieldSubmitted: (value) => SkySnackBar.show(message: value),
               ),
               const SizedBox(height: 12),
               SkyButton(
@@ -51,7 +51,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                   String? converted = AppConverter.replaceStringRange(
                       'name@email.com', 2, 5, '*');
                   debugPrint('Converted = $converted');
-                  Toast.show('String converted :\n $converted');
+                  SkySnackBar.show(message: 'String converted :\n $converted');
                 },
                 text: '${'txt_convert'.tr} String',
                 icon: CupertinoIcons.t_bubble,

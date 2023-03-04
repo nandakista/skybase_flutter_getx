@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/general_function.dart';
+import 'package:skybase/core/helper/sky_snackbar.dart';
 import 'package:skybase/ui/widgets/circle_icon.dart';
 
 /* Created by
@@ -86,6 +86,6 @@ class PreviewCameraPage extends StatelessWidget {
   showImageInfo(BuildContext context) async {
     // Show Image Info
     String size = await AppFunction.getFileSize(imageFile.path, 2);
-    Toast.show('$size, ${imageFile.path}');
+    SkySnackBar.show(message: '$size, ${imageFile.path}');
   }
 }

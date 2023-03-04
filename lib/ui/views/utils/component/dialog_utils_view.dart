@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
@@ -34,7 +35,7 @@ class DialogUtilsView extends StatelessWidget {
                 SkyDialog.show(
                   type: DialogType.WARNING,
                   message: 'Some Description Text',
-                  onPress: () => SkyDialog.close(),
+                  onConfirm: () => SkyDialog.dismiss(),
                 );
               },
             ),
@@ -48,7 +49,7 @@ class DialogUtilsView extends StatelessWidget {
                 SkyDialog.show(
                   type: DialogType.FAILED,
                   message: 'Some Description Text',
-                  onPress: () => SkyDialog.close(),
+                  onConfirm: () => SkyDialog.dismiss(),
                 );
               },
             ),
@@ -62,7 +63,7 @@ class DialogUtilsView extends StatelessWidget {
                 SkyDialog.show(
                   type: DialogType.SUCCESS,
                   message: 'Some Description Text',
-                  onPress: () => SkyDialog.close(),
+                  onConfirm: () => SkyDialog.dismiss(),
                 );
               },
             ),
@@ -74,19 +75,19 @@ class DialogUtilsView extends StatelessWidget {
                 SkyDialog.show(
                   type: DialogType.RETRY,
                   message: 'Some Description Text',
-                  onPress: () => SkyDialog.close(),
+                  onConfirm: () => SkyDialog.dismiss(),
                 );
               },
             ),
             const SizedBox(height: 12),
             SkyButton(
-              text: 'Permission',
+              text: 'Force',
               icon: CupertinoIcons.exclamationmark_shield,
               onPressed: () {
                 SkyDialog.show(
-                  type: DialogType.PERMISSION,
+                  type: DialogType.FORCE,
                   message: 'Some Description Text',
-                  onPress: () => SkyDialog.close(),
+                  onConfirm: () => SkyDialog.dismiss(),
                 );
               },
             ),
