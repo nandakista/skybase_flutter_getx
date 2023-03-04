@@ -21,10 +21,6 @@ dependencies:
   flutter_secure_storage: ^7.0.1
   hive: ^2.2.3
 
-  # Notifications
-  socket_io_client: ^2.0.0
-  flutter_local_notifications: ^13.0.0
-
   # File Manager
   flutter_downloader: ^1.9.1
   android_path_provider: ^0.3.0
@@ -47,8 +43,6 @@ dependencies:
   cupertino_icons: ^1.0.5
   lottie: ^2.2.0
   flutter_svg: ^1.1.6
-  fluttertoast: ^8.1.2
-  webview_flutter: ^4.0.1
   introduction_screen: ^3.1.4
   pin_code_fields: ^7.4.0
   dotted_border: ^2.0.0+3

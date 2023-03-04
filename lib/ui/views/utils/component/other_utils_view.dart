@@ -43,7 +43,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                     : value,
                 validator: (value) => AppValidator.generalField('$value'),
                 inputFormatters: CustomInputFormatters.idrCurrency,
-                onFieldSubmitted: (value) => SkySnackBar.show(message: value),
+                onFieldSubmitted: (value) => SkySnackBar.normal(message: value),
               ),
               const SizedBox(height: 12),
               SkyButton(
@@ -51,7 +51,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                   String? converted = AppConverter.replaceStringRange(
                       'name@email.com', 2, 5, '*');
                   debugPrint('Converted = $converted');
-                  SkySnackBar.show(message: 'String converted :\n $converted');
+                  SkySnackBar.normal(message: 'String converted :\n $converted');
                 },
                 text: '${'txt_convert'.tr} String',
                 icon: CupertinoIcons.t_bubble,

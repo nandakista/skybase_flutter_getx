@@ -18,25 +18,25 @@ class SnackBarUtilsView extends StatelessWidget {
             const SizedBox(height: 12),
             SkyButton(
               text: 'Normal',
-              onPressed: () => SkySnackBar.show(message: 'Normal'),
+              onPressed: () => SkySnackBar.normal(message: 'Normal'),
             ),
             const SizedBox(height: 12),
             SkyButton(
               text: 'Error',
               onPressed: () =>
-                  SkySnackBar.showError(message: 'Some Error Message'),
+                  SkySnackBar.error(message: 'Some Error Message'),
             ),
             const SizedBox(height: 12),
             SkyButton(
               text: 'Warning',
               onPressed: () =>
-                  SkySnackBar.showWarning(message: 'Some Warning Message'),
+                  SkySnackBar.warning(message: 'Some Warning Message'),
             ),
             const SizedBox(height: 12),
             SkyButton(
               text: 'Success',
               onPressed: () =>
-                  SkySnackBar.showSuccess(message: 'Some Success Message'),
+                  SkySnackBar.success(message: 'Some Success Message'),
             ),
           ],
         ),

@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:skybase/core/app/app_socket.dart';
 import 'package:skybase/core/auth_manager/auth_manager.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 import 'package:skybase/core/database/hive/hive_db.dart';
@@ -36,7 +35,6 @@ class Initializer {
     Get.putAsync(() async => const FlutterSecureStorage());
 
     // Configuration
-    Get.lazyPut(() => AppSocket());
     Get.lazyPut(() => DioClient());
   }
 

@@ -158,7 +158,7 @@ class _CameraModuleState extends State<CameraModule>
       if (mounted) setState(() {});
     });
     if (_cameraController!.value.hasError) {
-      SkySnackBar.show(message: 'txt_something_went_wrong'.tr);
+      SkySnackBar.normal(message: 'txt_something_went_wrong'.tr);
     }
 
     debugPrint('CameraModule::initCameraController()');
@@ -166,7 +166,7 @@ class _CameraModuleState extends State<CameraModule>
       _cameraController!.initialize();
     } catch (e) {
       debugPrint('CameraException::initCameraController() ${e.toString()}');
-      SkySnackBar.show(message: '${'txt_something_went_wrong'.tr}.\n$e');
+      SkySnackBar.normal(message: '${'txt_something_went_wrong'.tr}.\n$e');
     }
     debugPrint('CameraModule::initCamera() _controller.initialize');
     if (mounted) setState(() {});
@@ -557,7 +557,7 @@ class _CameraModuleState extends State<CameraModule>
       await _cameraController!.setFlashMode(mode);
     } on CameraException catch (e) {
       logError(e.code, e.description);
-      SkySnackBar.show(message: 'Error: ${e.code}\n${e.description}');
+      SkySnackBar.normal(message: 'Error: ${e.code}\n${e.description}');
       rethrow;
     }
   }

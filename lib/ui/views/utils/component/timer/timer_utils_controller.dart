@@ -41,7 +41,7 @@ class TimerUtilsController extends GetxController {
       },
       onFinished: () {
         currTimeTimer2.value = 'Timer End';
-        SkySnackBar.show(message: 'Timer 2 is done');
+        SkySnackBar.normal(message: 'Timer 2 is done');
       },
     );
   }

@@ -62,7 +62,7 @@ class AppValidator {
     var size = (bytes / 1024) / 1000;
     debugPrint('Size Validator : $size MB');
     if (size >= sizeMb) {
-      SkySnackBar.show(message: 'txt_valid_size'.tr);
+      SkySnackBar.normal(message: 'txt_valid_size'.tr);
       return false;
     }
     return true;

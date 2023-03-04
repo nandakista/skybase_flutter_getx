@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names
 import 'package:skybase/app_configuration.dart';
-import 'package:skybase/core/app/app_socket.dart';
 import 'package:skybase/core/network/api_token_manager.dart';
 
 /* Created by
@@ -46,7 +45,6 @@ class AppEnv {
           socketUrl: AppConfiguration.developmentSocket,
           midtransClientKey: AppConfiguration.someStagingKey,
         );
-        AppSocket().interceptor();
         break;
     }
   }
