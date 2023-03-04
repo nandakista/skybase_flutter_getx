@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:skybase/core/helper/dialog_helper.dart';
+import 'package:skybase/core/helper/sky_snackbar.dart';
 import 'package:skybase/core/modules/timer/timer_const.dart';
 import 'package:skybase/core/helper/timer_helper.dart';
 import 'package:skybase/core/modules/timer/timer_module.dart';
@@ -41,7 +41,7 @@ class TimerUtilsController extends GetxController {
       },
       onFinished: () {
         currTimeTimer2.value = 'Timer End';
-        Toast.show('Timer 2 is done');
+        SkySnackBar.normal(message: 'Timer 2 is done');
       },
     );
   }

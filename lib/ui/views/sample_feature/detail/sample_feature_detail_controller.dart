@@ -43,16 +43,15 @@ class SampleFeatureDetailController extends BaseController {
       });
     } catch (e) {
       hideLoading();
-      SkyDialog.show(
-        type: DialogType.RETRY,
+      SkyDialog.retry(
         isDismissible: false,
         message: e.toString(),
         onCancel: (){
-          SkyDialog.close();
+          SkyDialog.dismiss();
           Get.back();
         },
-        onPress: () {
-          SkyDialog.close();
+        onConfirm: () {
+          SkyDialog.dismiss();
           loadData();
         },
       );

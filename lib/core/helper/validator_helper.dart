@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
+import 'package:skybase/core/helper/sky_snackbar.dart';
 
 class AppRegex {
   static const nik = r'^[1-9]{16}$';
@@ -61,7 +62,7 @@ class AppValidator {
     var size = (bytes / 1024) / 1000;
     debugPrint('Size Validator : $size MB');
     if (size >= sizeMb) {
-      Toast.show('txt_valid_size'.tr);
+      SkySnackBar.normal(message: 'txt_valid_size'.tr);
       return false;
     }
     return true;

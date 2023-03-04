@@ -56,11 +56,10 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
   _handleAccessToken(DioError err, ErrorInterceptorHandler handler) async {
     final int status = err.response?.statusCode ?? 0;
     if (status == 401) {
-      SkyDialog.show(
-        type: DialogType.FAILED,
+      SkyDialog.failed(
         isDismissible: false,
         message: 'txt_you_must_login_again'.tr,
-        onPress: () => authManager.logout(),
+        onConfirm: () => authManager.logout(),
       );
       super.onError(err, handler);
     } else {
@@ -96,11 +95,10 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
       return ApiResponse.fromJson(responseBody.data).data['token'];
     } on DioError catch (error) {
       debugPrint('${NetworkException.getErrorException(error)}');
-      return SkyDialog.show(
-        type: DialogType.FAILED,
+      return SkyDialog.failed(
         isDismissible: false,
         message: 'txt_you_must_login_again'.tr,
-        onPress: () => authManager.logout(),
+        onConfirm: () => authManager.logout(),
       );
     }
   }

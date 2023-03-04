@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
@@ -26,43 +27,40 @@ class DialogUtilsView extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             SkyButton(
-              text: 'Warning',
+              text: 'txt_warning'.tr,
               icon: Icons.warning_amber,
               outlineMode: true,
               color: Colors.orange,
               onPressed: () {
-                SkyDialog.show(
-                  type: DialogType.WARNING,
+                SkyDialog.warning(
                   message: 'Some Description Text',
-                  onPress: () => SkyDialog.close(),
+                  onConfirm: () => SkyDialog.dismiss(),
                 );
               },
             ),
             const SizedBox(height: 12),
             SkyButton(
-              text: 'Failed',
+              text: 'txt_failed'.tr,
               icon: Icons.close,
               outlineMode: true,
               color: Colors.red,
               onPressed: () {
-                SkyDialog.show(
-                  type: DialogType.FAILED,
+                SkyDialog.failed(
                   message: 'Some Description Text',
-                  onPress: () => SkyDialog.close(),
+                  onConfirm: () => SkyDialog.dismiss(),
                 );
               },
             ),
             const SizedBox(height: 12),
             SkyButton(
-              text: 'Success',
+              text: 'txt_success'.tr,
               icon: CupertinoIcons.checkmark_alt_circle,
               outlineMode: true,
               color: Colors.green,
               onPressed: () {
-                SkyDialog.show(
-                  type: DialogType.SUCCESS,
+                SkyDialog.success(
                   message: 'Some Description Text',
-                  onPress: () => SkyDialog.close(),
+                  onConfirm: () => SkyDialog.dismiss(),
                 );
               },
             ),
@@ -71,22 +69,20 @@ class DialogUtilsView extends StatelessWidget {
               text: 'Retry',
               icon: CupertinoIcons.refresh_thick,
               onPressed: () {
-                SkyDialog.show(
-                  type: DialogType.RETRY,
+                SkyDialog.retry(
                   message: 'Some Description Text',
-                  onPress: () => SkyDialog.close(),
+                  onConfirm: () => SkyDialog.dismiss(),
                 );
               },
             ),
             const SizedBox(height: 12),
             SkyButton(
-              text: 'Permission',
+              text: 'Force',
               icon: CupertinoIcons.exclamationmark_shield,
               onPressed: () {
-                SkyDialog.show(
-                  type: DialogType.PERMISSION,
+                SkyDialog.force(
                   message: 'Some Description Text',
-                  onPress: () => SkyDialog.close(),
+                  onConfirm: () => SkyDialog.dismiss(),
                 );
               },
             ),
