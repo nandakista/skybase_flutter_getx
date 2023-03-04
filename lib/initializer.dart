@@ -44,7 +44,5 @@ class Initializer {
     Get.put(ThemeManager());
 
     Get.put(AuthManager());
-    // TODO : Uncomment code below if want to activate flutter_downloader
-    // await DownloadManager.initDownloader();
   }
 }

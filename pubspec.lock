@@ -356,13 +356,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
-  flutter_downloader:
-    dependency: "direct main"
-    description:
-      name: flutter_downloader
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.10.1"
   flutter_image_compress:
     dependency: "direct main"
     description:
@@ -819,13 +812,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.11.1"
-  percent_indicator:
-    dependency: "direct main"
-    description:
-      name: percent_indicator
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.2.2"
   permission_handler:
     dependency: "direct main"
     description:
@@ -875,13 +861,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.2"
-  pin_code_fields:
-    dependency: "direct main"
-    description:
-      name: pin_code_fields
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "7.4.0"
   platform:
     dependency: transitive
     description:
