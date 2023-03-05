@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skybase/ui/widgets/list_pagination/error_view.dart';
 import 'package:skybase/ui/widgets/shimmer_detail.dart';
@@ -28,6 +31,14 @@ class SkyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isIOS) {
+      return _iosObjectView();
+    } else {
+      return _androidObjectView();
+    }
+  }
+
+  Widget _androidObjectView() {
     return Center(
       child: RefreshIndicator(
         onRefresh: () => Future.sync(onRetry),
@@ -43,6 +54,30 @@ class SkyView extends StatelessWidget {
                       )
                   : child,
         ),
+      ),
+    );
+  }
+
+  Widget _iosObjectView() {
+    return Center(
+      child: CustomScrollView(
+        slivers: [
+          CupertinoSliverRefreshControl(
+            onRefresh: () => Future.sync(onRetry),
+          ),
+          SliverFillRemaining(
+            child: loadingEnabled
+                ? loadingView ?? const ShimmerDetail()
+                : (errorEnabled)
+                    ? errorView ??
+                        ErrorView(
+                          isScrollable: false,
+                          errorSubtitle: errorMsg,
+                          onRetry: onRetry,
+                        )
+                    : child,
+          )
+        ],
       ),
     );
   }

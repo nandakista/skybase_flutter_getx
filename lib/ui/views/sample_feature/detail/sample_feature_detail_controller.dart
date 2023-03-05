@@ -9,11 +9,6 @@ class SampleFeatureDetailController extends BaseController {
   final SampleFeatureRepository repository;
   SampleFeatureDetailController({required this.repository});
 
-  final GlobalKey headerKey = GlobalKey();
-  final GlobalKey detailInfoKey = GlobalKey();
-  final headerWidget = Rxn<Size>();
-  final detailInfoWidget = Rxn<Size>();
-
   final user = Rxn<SampleFeature>();
 
   @override
@@ -24,8 +19,6 @@ class SampleFeatureDetailController extends BaseController {
 
   @override
   void onReady() async {
-    headerWidget.value = (headerKey.currentContext?.findRenderObject() as RenderBox).size;
-    detailInfoWidget.value = (detailInfoKey.currentContext?.findRenderObject() as RenderBox).size;
     await getDetailUser();
   }
 

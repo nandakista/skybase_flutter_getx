@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/app/app_constant.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
@@ -10,6 +9,7 @@ import 'package:skybase/ui/views/sample_feature/detail/component/repo_tab_view.d
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/base/sky_view.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
+import 'package:skybase/ui/widgets/content_wrapper.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
@@ -22,19 +22,17 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
     return ColoredStatusBar(
       child: Scaffold(
         appBar: SkyAppBar.primary(title: controller.user.value?.username),
-        body: SafeArea(
-          child: Obx(
-            () => SkyView(
-              loadingEnabled: controller.isLoading.isTrue,
-              errorEnabled: controller.user.value == null,
-              onRetry: () => controller.onRefresh(),
-              child: Column(
-                children: [
-                  _buildHeader(controller.user.value),
-                  _buildDetailInfo(controller.user.value),
-                  _tabComponent(),
-                ],
-              ),
+        body: Obx(
+          () => SkyView(
+            loadingEnabled: controller.isLoading.isTrue,
+            errorEnabled: controller.user.value == null,
+            onRetry: () => controller.onRefresh(),
+            child: Column(
+              children: [
+                _buildHeader(controller.user.value),
+                _buildDetailInfo(controller.user.value),
+                _tabComponent(),
+              ],
             ),
           ),
         ),
@@ -43,9 +41,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
   }
 
   _buildHeader(SampleFeature? user) {
-    return Padding(
-      key: controller.headerKey,
-      padding: const EdgeInsets.symmetric(horizontal: AppConst.defaultMargin),
+    return ContentWrapper(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -89,9 +85,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
   }
 
   _buildDetailInfo(SampleFeature? user) {
-    return Padding(
-      key: controller.detailInfoKey,
-      padding: const EdgeInsets.symmetric(horizontal: AppConst.defaultMargin),
+    return ContentWrapper(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -119,32 +113,30 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
   _tabComponent() {
     return DefaultTabController(
       length: 3,
-      child: Column(
-        children: [
-          const TabBar(
-            labelColor: AppColors.primary,
-            unselectedLabelColor: Colors.grey,
-            indicatorColor: AppColors.accent,
-            tabs: [
-              Tab(text: 'Repositories'),
-              Tab(text: 'Followers'),
-              Tab(text: 'Followings'),
-            ],
-          ),
-          Obx(() => SizedBox(
-                height: AppConst.contentHeight -
-                    (controller.headerWidget.value?.height ?? 0) -
-                    (controller.detailInfoWidget.value?.height ?? 0) -
-                    kTextTabBarHeight,
-                child: const TabBarView(
-                  children: [
-                    RepoTabView(),
-                    FollowerTabView(),
-                    FollowingTabView(),
-                  ],
-                ),
-              )),
-        ],
+      child: Expanded(
+        child: Column(
+          children: const [
+            TabBar(
+              labelColor: AppColors.primary,
+              unselectedLabelColor: Colors.grey,
+              indicatorColor: AppColors.accent,
+              tabs: [
+                Tab(text: 'Repositories'),
+                Tab(text: 'Followers'),
+                Tab(text: 'Followings'),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  RepoTabView(),
+                  FollowerTabView(),
+                  FollowingTabView(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
