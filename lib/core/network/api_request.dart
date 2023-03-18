@@ -6,6 +6,7 @@ import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart
 import 'package:skybase/core/network/api_config.dart';
 import 'package:skybase/core/network/api_exception.dart';
 import 'package:skybase/core/network/api_url.dart';
+import 'package:skybase/dev/github_token.dart';
 
 /* Created by
    Varcant
@@ -120,7 +121,7 @@ Future<void> _tokenManager(bool useToken) async {
   DioClient.setInterceptor();
   String? token = await SecureStorageManager.find.getToken();
   if (useToken) {
-    // headers[HttpHeaders.authorizationHeader] = 'token $gitToken';
+    headers[HttpHeaders.authorizationHeader] = 'token $gitToken';
   } else {
     headers.clear();
   }

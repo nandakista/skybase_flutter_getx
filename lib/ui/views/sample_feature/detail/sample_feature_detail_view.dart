@@ -25,13 +25,16 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
         body: Obx(
           () => SkyView(
             loadingEnabled: controller.isLoading.isTrue,
-            errorEnabled: controller.user.value == null,
+            errorEnabled: controller.isError.isTrue,
             onRetry: () => controller.onRefresh(),
+            isFitScreen: true,
             child: Column(
               children: [
                 _buildHeader(controller.user.value),
                 _buildDetailInfo(controller.user.value),
-                _tabComponent(),
+                Container(height: 1000, color: Colors.blue,),
+                Container(height: 1000, color: Colors.red,)
+                // _tabComponent(),
               ],
             ),
           ),

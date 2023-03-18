@@ -19,6 +19,7 @@ class SkyView extends StatelessWidget {
     this.loadingView,
     this.errorView,
     this.errorMsg,
+    this.isFitScreen = false,
   }) : super(key: key);
 
   final bool loadingEnabled;
@@ -28,6 +29,7 @@ class SkyView extends StatelessWidget {
   final Widget child;
   final String? errorMsg;
   final VoidCallback onRetry;
+  final bool isFitScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -42,17 +44,20 @@ class SkyView extends StatelessWidget {
     return Center(
       child: RefreshIndicator(
         onRefresh: () => Future.sync(onRetry),
-        child: SingleChildScrollView(
-          child: loadingEnabled
-              ? loadingView ?? const ShimmerDetail()
-              : (errorEnabled)
-                  ? errorView ??
-                      ErrorView(
-                        isScrollable: false,
-                        errorSubtitle: errorMsg,
-                        onRetry: onRetry,
-                      )
-                  : child,
+        child: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              child: RefreshIndicator(
+                onRefresh: () => Future.sync(onRetry),
+                child: SingleChildScrollView(
+                  physics: (isFitScreen)
+                      ? const NeverScrollableScrollPhysics()
+                      : null,
+                  child: _buildBody(),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -66,19 +71,27 @@ class SkyView extends StatelessWidget {
             onRefresh: () => Future.sync(onRetry),
           ),
           SliverFillRemaining(
-            child: loadingEnabled
-                ? loadingView ?? const ShimmerDetail()
-                : (errorEnabled)
-                    ? errorView ??
-                        ErrorView(
-                          isScrollable: false,
-                          errorSubtitle: errorMsg,
-                          onRetry: onRetry,
-                        )
-                    : child,
+          // child: _buildBody(),
+            child: SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: _buildBody(),
+            ),
           )
         ],
       ),
     );
+  }
+
+  Widget _buildBody() {
+    return loadingEnabled
+        ? loadingView ?? const ShimmerDetail()
+        : (errorEnabled)
+            ? errorView ??
+                ErrorView(
+                  isScrollable: false,
+                  errorSubtitle: errorMsg,
+                  onRetry: onRetry,
+                )
+            : child;
   }
 }
