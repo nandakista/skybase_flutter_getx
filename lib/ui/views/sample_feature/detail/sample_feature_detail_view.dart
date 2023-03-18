@@ -26,8 +26,8 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
           child: Obx(
             () => SkyView(
               loadingEnabled: controller.isLoading.isTrue,
-              errorEnabled: controller.user.value == null,
-              onRetry: () => controller.loadData(),
+              errorEnabled: controller.isError.isTrue,
+              onRetry: () => controller.onRefresh(),
               child: Column(
                 children: [
                   _buildHeader(controller.user.value),

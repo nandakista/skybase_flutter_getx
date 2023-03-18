@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/base/base_controller.dart';
-import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 import 'package:skybase/domain/usecases/get_detail_user.dart';
 
@@ -34,7 +33,7 @@ class SampleFeatureDetailController extends BaseController {
     await loadData();
   }
 
-  loadData() async {
+  Future<void> loadData() async {
     showLoading();
     try {
       await getDetailUser(user: user.value!).then((res) {
@@ -43,18 +42,7 @@ class SampleFeatureDetailController extends BaseController {
       });
     } catch (e) {
       hideLoading();
-      SkyDialog.retry(
-        isDismissible: false,
-        message: e.toString(),
-        onCancel: (){
-          SkyDialog.dismiss();
-          Get.back();
-        },
-        onConfirm: () {
-          SkyDialog.dismiss();
-          loadData();
-        },
-      );
+      showError(e.toString());
     }
   }
 }

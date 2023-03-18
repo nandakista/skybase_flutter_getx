@@ -33,6 +33,7 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
     this.emptyImage,
     this.emptyTitle,
     this.emptySubtitle,
+    this.enableIOSStyle = false,
   }) : super(key: key);
 
   final PagingController<int, ItemType> pagingController;
@@ -66,10 +67,13 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
 
   final String? emptySubtitle;
 
+  final bool enableIOSStyle;
+
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
-      return _iosPaginationView();
+      if (enableIOSStyle) return _iosPaginationView();
+      return _androidPaginationView();
     } else {
       return _androidPaginationView();
     }
