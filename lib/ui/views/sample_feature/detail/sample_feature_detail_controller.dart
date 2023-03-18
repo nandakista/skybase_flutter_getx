@@ -34,7 +34,7 @@ class SampleFeatureDetailController extends BaseController {
     getDetailUser();
   }
 
-  getDetailUser() async {
+  Future<void> getDetailUser() async {
     showLoading();
     try {
       await repository.getDetailUser(user: user.value!).then((res) {
@@ -43,18 +43,7 @@ class SampleFeatureDetailController extends BaseController {
       });
     } catch (e) {
       hideLoading();
-      SkyDialog.retry(
-        isDismissible: false,
-        message: e.toString(),
-        onCancel: (){
-          SkyDialog.dismiss();
-          Get.back();
-        },
-        onConfirm: () {
-          SkyDialog.dismiss();
-          getDetailUser();
-        },
-      );
+      showError(e.toString());
     }
   }
 }
