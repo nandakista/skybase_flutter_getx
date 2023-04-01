@@ -9,4 +9,13 @@ class UtilsController extends GetxController {
   final currencyCtr = TextEditingController();
 
   final RxList pickedImages = <File>[].obs;
+
+  final sampleImage = [
+    'assets/images/img_sample.jpeg',
+    'assets/images/img_sample.jpeg',
+    'assets/images/img_sample.jpeg',
+    'assets/images/img_sample.jpeg',
+    'assets/images/img_sample.jpeg',
+    'assets/images/img_sample.jpeg',
+  ];
 }

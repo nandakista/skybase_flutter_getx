@@ -31,11 +31,6 @@ class MediaPreviewPage extends StatelessWidget {
       case MediaType.image:
         return Center(child: SkyImage(url: mediaType.path));
       case MediaType.video:
-        // return VideoPreviewDisplay(
-        //   url: mediaType.path,
-        //   height: double.infinity,
-        //   width: double.infinity,
-        // );
         return SkyVideo(
           url: mediaType.path,
           height: double.infinity,

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/media_helper.dart';
 import 'package:skybase/ui/widgets/media/preview/media_list_preview_page.dart';
-import 'package:skybase/ui/widgets/media/preview/media_preview_page.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 import 'package:skybase/ui/widgets/sky_video.dart';
 
@@ -14,7 +13,7 @@ import 'package:skybase/ui/widgets/sky_video.dart';
 */
 class MediaItems extends StatelessWidget {
   final VoidCallback? onTapMore;
-  final VoidCallback? onTap;
+  final void Function(int)? onTap;
   final List<String> mediaUrls;
   final MainAxisAlignment mainAxisAlignment;
   final MainAxisSize mainAxisSize;
@@ -22,6 +21,7 @@ class MediaItems extends StatelessWidget {
   final bool isGrid;
   final double size;
   final double itemsSpacing;
+  final String? moreText;
 
   const MediaItems({
     Key? key,
@@ -31,9 +31,10 @@ class MediaItems extends StatelessWidget {
     this.mainAxisSize = MainAxisSize.max,
     this.onTap,
     this.isGrid = false,
-    this.size = 64.0,
+    this.size = 56.0,
     this.maxItem = 4,
     this.itemsSpacing = 5,
+    this.moreText,
   }) : super(key: key);
 
   @override
@@ -63,22 +64,19 @@ class MediaItems extends StatelessWidget {
               width: itemSize,
               height: itemSize,
               child: _MoreItem(
-                text: "+ ${mediaUrls.length - maxItem}",
+                text: moreText ?? "+ ${mediaUrls.length - maxItem}",
                 isGrid: isGrid,
-                child: _determineMedia(mediaUrls[i]),
+                child: _determineMedia(mediaUrls[i], i),
               ),
             ),
           ),
         );
       } else {
         items.add(
-          GestureDetector(
-            onTap: onTap,
-            child: SizedBox(
-              width: itemSize,
-              height: itemSize,
-              child: _determineMedia(mediaUrls[i]),
-            ),
+          SizedBox(
+            width: itemSize,
+            height: itemSize,
+            child: _determineMedia(mediaUrls[i], i),
           ),
         );
       }
@@ -112,7 +110,7 @@ class MediaItems extends StatelessWidget {
           );
   }
 
-  Widget _determineMedia(String path) {
+  Widget _determineMedia(String path, int index) {
     final mediaType = MediaHelper.getMediaType(path);
     switch (mediaType.type) {
       case MediaType.file:
@@ -123,17 +121,23 @@ class MediaItems extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           borderRadius: BorderRadius.circular((isGrid) ? 0 : 8),
-          onTapImage:
-              onTap ?? () => Get.to(MediaPreviewPage(url: mediaType.path)),
+          onTapImage: (onTap != null)
+              ? () {
+                  onTap!(index);
+                }
+              : null,
+          enablePreview: onTap == null,
+          fit: BoxFit.cover,
         );
       case MediaType.video:
         return SkyVideo(
           url: mediaType.path,
           showControls: false,
-          height: double.infinity,
-          width: double.infinity,
-          onTapVideo:
-              onTapMore ?? () => Get.to(MediaPreviewPage(url: mediaType.path)),
+          onTapVideo: onTap != null
+              ? () {
+                  onTap!(index);
+                }
+              : null,
         );
       case MediaType.unknown:
         return const Center(child: Text('Media Unsupported'));

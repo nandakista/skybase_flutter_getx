@@ -14,19 +14,18 @@ abstract class SkyAppBar {
   static PreferredSizeWidget primary({
     String? title,
     Color? backgroundColor,
-    Color? textColor,
     Color? iconColor,
-    VoidCallback? onPressed,
     List<Widget>? action,
     bool? centerTitle = false,
   }) {
     return BaseAppBar(
       title: title,
       action: action,
-      backgroundColor: Theme.of(Get.context!).scaffoldBackgroundColor,
+      backgroundColor: backgroundColor ?? Theme.of(Get.context!).scaffoldBackgroundColor,
       titleStyle: AppStyle.subtitle4.copyWith(color: AppColors.primary),
       elevation: 0,
-      iconColor: AppColors.systemDarkGrey,
+      centerTitle: centerTitle,
+      iconColor: iconColor ?? AppColors.systemDarkGrey,
     );
   }
 
@@ -37,17 +36,16 @@ abstract class SkyAppBar {
     Color? backgroundColor,
     Color? textColor,
     Color? iconColor,
-    VoidCallback? onPressed,
     List<Widget>? action,
     bool? centerTitle,
   }) {
     return BaseAppBar(
       title: title,
-      centerTitle: true,
+      centerTitle: centerTitle ?? true,
       action: action,
       backgroundColor: backgroundColor,
       titleStyle: TextStyle(color: textColor),
-      iconColor: Colors.white,
+      iconColor: iconColor ?? Colors.white,
     );
   }
 

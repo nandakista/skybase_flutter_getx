@@ -6,11 +6,13 @@ import 'package:get/get.dart';
 import 'package:skybase/core/helper/bottom_sheet_helper.dart';
 import 'package:skybase/core/modules/module_helper.dart';
 import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
 import 'package:skybase/ui/widgets/media/box_image_picker.dart';
 import 'package:skybase/ui/widgets/media/box_video_picker.dart';
 import 'package:skybase/ui/widgets/media/image_source_bottom_sheet.dart';
 import 'package:skybase/ui/widgets/media/media_items.dart';
+import 'package:skybase/ui/widgets/media/preview/image_carousel_display.dart';
 import 'package:skybase/ui/widgets/media/ui_image_picker.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_box.dart';
@@ -33,16 +35,54 @@ class MediaUtilsView extends GetView<UtilsController> {
             const Divider(thickness: 1, height: 36),
             const SkyImage(),
             const Divider(thickness: 1, height: 36),
-            const MediaItems(
+            MediaItems(
               maxItem: 5,
-              mediaUrls: [
-                'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
-              ],
+              mediaUrls: controller.sampleImage,
+              onTap: (index) {
+                Get.to(
+                  () => ImageCarouselDisplay(
+                    initialIndex: index,
+                    url: controller.sampleImage,
+                    bottomWidget: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // RatingBar.builder(
+                        //   initialRating: (item.rating ?? 0).toDouble(),
+                        //   minRating: 1,
+                        //   direction: Axis.horizontal,
+                        //   allowHalfRating: true,
+                        //   itemCount: 5,
+                        //   itemSize: 16,
+                        //   unratedColor: Colors.grey,
+                        //   itemBuilder: (context, _) => const Icon(
+                        //     Icons.star,
+                        //     color: Colors.amber,
+                        //   ),
+                        //   onRatingUpdate: (rating) {},
+                        // ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'Name',
+                          style: AppStyle.body1.copyWith(
+                              fontWeight: FontWeight.w600, color: Colors.white),
+                        ),
+                        const SizedBox(height: 4),
+                        Expanded(
+                          child: Text(
+                            'Review description',
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppStyle.headline4.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
             const Divider(thickness: 1, height: 36),
             const MediaItems(
