@@ -132,6 +132,7 @@ class MediaItems extends StatelessWidget {
       case MediaType.video:
         return SkyVideo(
           url: mediaType.path,
+          enablePreview: true,
           showControls: false,
           onTapVideo: onTap != null
               ? () {

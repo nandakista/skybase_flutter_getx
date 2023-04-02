@@ -46,21 +46,7 @@ class MediaUtilsView extends GetView<UtilsController> {
                     bottomWidget: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // RatingBar.builder(
-                        //   initialRating: (item.rating ?? 0).toDouble(),
-                        //   minRating: 1,
-                        //   direction: Axis.horizontal,
-                        //   allowHalfRating: true,
-                        //   itemCount: 5,
-                        //   itemSize: 16,
-                        //   unratedColor: Colors.grey,
-                        //   itemBuilder: (context, _) => const Icon(
-                        //     Icons.star,
-                        //     color: Colors.amber,
-                        //   ),
-                        //   onRatingUpdate: (rating) {},
-                        // ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 16),
                         Text(
                           'Name',
                           style: AppStyle.body1.copyWith(
@@ -88,12 +74,11 @@ class MediaUtilsView extends GetView<UtilsController> {
             const MediaItems(
               isGrid: true,
               mediaUrls: [
+                'https://picsum.photos/200/200.jpg',
+                'https://picsum.photos/200/200.jpg',
                 'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
+                'https://picsum.photos/200/200.jpg',
+                'https://picsum.photos/200/200.jpg',
               ],
             ),
             const Divider(thickness: 1, height: 36),
@@ -103,10 +88,11 @@ class MediaUtilsView extends GetView<UtilsController> {
               mediaUrls: [
                 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
                 'assets/images/img_sample.jpeg',
+                'https://picsum.photos/200/200.jpg',
+                'https://picsum.photos/200/200.jpg',
+                'https://picsum.photos/200/200.jpg',
                 'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
-                'assets/images/img_sample.jpeg',
+                'https://picsum.photos/200/200.jpg',
               ],
             ),
             const SizedBox(height: 24),

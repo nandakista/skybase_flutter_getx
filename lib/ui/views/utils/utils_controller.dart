@@ -11,11 +11,12 @@ class UtilsController extends GetxController {
   final RxList pickedImages = <File>[].obs;
 
   final sampleImage = [
-    'assets/images/img_sample.jpeg',
-    'assets/images/img_sample.jpeg',
-    'assets/images/img_sample.jpeg',
-    'assets/images/img_sample.jpeg',
-    'assets/images/img_sample.jpeg',
-    'assets/images/img_sample.jpeg',
+    'https://picsum.photos/200/200.jpg',
+    'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+    'https://picsum.photos/200/200.jpg',
+    'https://picsum.photos/200/200.jpg',
+    'https://picsum.photos/200/200.jpg',
+    'https://picsum.photos/200/200.jpg',
+    'https://picsum.photos/200/200.jpg',
   ];
 }
