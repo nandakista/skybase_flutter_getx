@@ -69,20 +69,23 @@ class ListUtilsView extends StatelessWidget {
                 errorEnabled: false,
                 onRetry: () {},
                 onRefresh: () {},
-                emptyEnabled: dummyData.isEmpty,
-                child: PickerListView(
+                emptyEnabled: dummyDataWithObject.isEmpty,
+                child: PickerListView<SampleObjectData>(
                   type: ListPickerType.single,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   separator: const Divider(thickness: 1, height: 16),
-                  data: dummyData.map((e) => PickerData(data: e)).toList(),
-                  itemBuilder: (PickerData<dynamic> item) {
+                  initialValue: PickerData(data: dummyDataWithObject.first),
+                  data: dummyDataWithObject
+                      .map((e) => PickerData(data: e))
+                      .toList(),
+                  itemBuilder: (PickerData<SampleObjectData> item) {
                     return SizedBox(
                       height: 20,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(item.data['name']),
+                          Text('${item.data?.name}'),
                           (item.isSelected)
                               ? const Icon(Icons.check)
                               : const SizedBox.shrink()
@@ -206,3 +209,19 @@ final dummyData = [
     'date': DateTime.now().subtract(const Duration(days: 4)),
   },
 ];
+
+var dummyDataWithObject = [
+  SampleObjectData('Jakarta', 'SCBD'),
+  SampleObjectData('Lampung', 'Metro'),
+  SampleObjectData('Bandung', 'Gedebage'),
+  SampleObjectData('Bandung', 'Cihanjuan'),
+  SampleObjectData('Bandung', 'Gedebage'),
+  SampleObjectData('Jakarta', 'Sudirman')
+];
+
+class SampleObjectData {
+  String group;
+  String name;
+
+  SampleObjectData(this.group, this.name);
+}

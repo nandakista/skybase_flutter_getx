@@ -21,7 +21,7 @@ typedef SMFilterItemBuilder<T> = Widget Function(
 typedef SMFilterOnChanged<T> = Function(
   BuildContext context,
   int index,
-  T? firstitem,
+  T? firstItem,
   List<T?> listItem,
 );
 
@@ -70,7 +70,7 @@ class PickerListView<T> extends StatelessWidget {
           final item = tempData[index];
           return SkyFilterChip(
             selected: item.isSelected,
-            isRadio: (type == ListPickerType.radio) ? true : false,
+            isRadio: type == ListPickerType.radio,
             onSelected: (bool isSelected) {
               if (type != ListPickerType.multiple) {
                 for (var element in tempData) {
@@ -104,13 +104,16 @@ class PickerListView<T> extends StatelessWidget {
   }
 
   void _setInitial() {
-    if (initialValue != null) {
-      int index = data.indexOf(initialValue!);
-      data[index] = PickerData(
-        isSelected: true,
-        index: initialValue?.index,
-        data: initialValue?.data,
-      );
+    if (data.isNotEmpty) {
+      if (initialValue != null) {
+        int index =
+            data.indexWhere((element) => element.data == initialValue?.data);
+        data[index] = PickerData(
+          isSelected: true,
+          index: initialValue?.index,
+          data: initialValue?.data,
+        );
+      }
     }
   }
 }

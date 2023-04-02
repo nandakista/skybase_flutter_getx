@@ -20,7 +20,7 @@ typedef SMFilterItemBuilder<T> = Widget Function(
 typedef SMFilterOnChanged<T> = Function(
   BuildContext context,
   int index,
-  T? firstitem,
+  T? firstItem,
   List<T?> listItem,
 );
 
@@ -106,7 +106,8 @@ class PickerGridView<T> extends StatelessWidget {
 
   void _setInitial() {
     if (initialValue != null) {
-      int index = data.indexOf(initialValue!);
+      int index =
+          data.indexWhere((element) => element.data == initialValue?.data);
       data[index] = PickerData(
         isSelected: true,
         index: initialValue?.index,
