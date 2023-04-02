@@ -19,13 +19,13 @@ class LocaleHelper {
   final fallbackLocale = const Locale('en');
 
   static T builder<T>({
-    required T enCallback,
-    required T idCallback,
+    required T en,
+    required T id,
   }) {
     if (LocaleHelper().getCurrentLocale() == const Locale('en')) {
-      return enCallback;
+      return en;
     } else {
-      return idCallback;
+      return id;
     }
   }
 

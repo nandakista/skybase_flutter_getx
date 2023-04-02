@@ -11,8 +11,8 @@ class DateTimeHelper {
   }) {
     if (date != null) {
       return LocaleHelper.builder(
-        enCallback: DateFormat(format).format(date),
-        idCallback: DateFormat(idFormat ?? format, 'id').format(date),
+        en: DateFormat(format).format(date),
+        id: DateFormat(idFormat ?? format, 'id').format(date),
       );
     } else {
       return 'Date is null';

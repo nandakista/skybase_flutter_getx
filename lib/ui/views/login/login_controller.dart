@@ -28,18 +28,18 @@ class LoginController extends GetxController {
   void login() async {
     if (validateField()) {
       try {
-        Loading.show();
+        LoadingDialog.show();
         await dataSource
             .login(
                 phoneNumber: phoneController.text,
                 email: emailController.text,
                 password: passController.text)
             .then((res) async {
-          Loading.dismiss();
+          LoadingDialog.dismiss();
           Get.offAllNamed(MainNavView.route);
         });
       } catch (err) {
-        Loading.dismiss();
+        LoadingDialog.dismiss();
         SkyDialog.failed(message: err.toString());
       }
     }

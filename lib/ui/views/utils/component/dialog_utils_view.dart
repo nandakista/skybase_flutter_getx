@@ -22,7 +22,7 @@ class DialogUtilsView extends StatelessWidget {
               text: 'Loading',
               icon: CupertinoIcons.arrow_2_circlepath,
               onPressed: () {
-                Loading.show(dismissible: true);
+                LoadingDialog.show(dismissible: true);
               },
             ),
             const SizedBox(height: 12),
