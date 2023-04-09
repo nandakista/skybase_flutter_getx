@@ -88,10 +88,12 @@ class PickerListView<T> extends StatelessWidget {
                 context,
                 index,
                 tempData
-                    .firstWhereOrNull((element) => element.isSelected)
+                    .firstWhereOrNull(
+                        (element) => element.isSelected && element.isAvailable)
                     ?.data,
                 tempData
-                    .where((element) => element.isSelected)
+                    .where(
+                        (element) => element.isSelected && element.isAvailable)
                     .map((e) => e.data)
                     .toList(),
               );

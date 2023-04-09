@@ -71,6 +71,7 @@ class PickerGridView<T> extends StatelessWidget {
           final item = tempData[index];
           return SkyFilterChip(
             isRadio: (type == GridPickerType.radio) ? true : false,
+            selected: item.isSelected,
             onSelected: (isSelected) {
               if (type != GridPickerType.multiple) {
                 for (var element in tempData) {
@@ -88,15 +89,14 @@ class PickerGridView<T> extends StatelessWidget {
                 context,
                 index,
                 tempData
-                    .firstWhereOrNull((element) => element.isSelected)
+                    .firstWhereOrNull((element) => element.isSelected && element.isAvailable)
                     ?.data,
                 tempData
-                    .where((element) => element.isSelected)
+                    .where((element) => element.isSelected && element.isAvailable)
                     .map((e) => e.data)
                     .toList(),
               );
             },
-            selected: item.isSelected,
             child: child(item),
           );
         },
