@@ -36,7 +36,7 @@ extension DateTimeExtension on DateTime {
 
   bool inNextWeek() {
     final weekAgo = DateTime.now().add(const Duration(days: 7));
-    return isBefore(weekAgo);
+    return isBefore(weekAgo) && isAfter(DateTime.now());
   }
 
   bool inThisMonth() {

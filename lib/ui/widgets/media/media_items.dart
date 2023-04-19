@@ -22,6 +22,7 @@ class MediaItems extends StatelessWidget {
   final double size;
   final double itemsSpacing;
   final String? moreText;
+  final double borderRadius;
 
   const MediaItems({
     Key? key,
@@ -35,6 +36,7 @@ class MediaItems extends StatelessWidget {
     this.maxItem = 4,
     this.itemsSpacing = 5,
     this.moreText,
+    this.borderRadius = 8,
   }) : super(key: key);
 
   @override
@@ -56,9 +58,11 @@ class MediaItems extends StatelessWidget {
           GestureDetector(
             onTap: onTapMore ??
                 () {
-                  Get.to(MediaListPreviewPage(
-                    mediaUrls: mediaUrls,
-                  ));
+                  Get.to(
+                    () => MediaListPreviewPage(
+                      mediaUrls: mediaUrls,
+                    ),
+                  );
                 },
             child: SizedBox(
               width: itemSize,
@@ -91,7 +95,7 @@ class MediaItems extends StatelessWidget {
                 width: containerSize,
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(borderRadius),
                 ),
                 child: Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
@@ -120,7 +124,7 @@ class MediaItems extends StatelessWidget {
           url: mediaType.path,
           width: double.infinity,
           height: double.infinity,
-          borderRadius: BorderRadius.circular((isGrid) ? 0 : 8),
+          borderRadius: BorderRadius.circular((isGrid) ? 0 : borderRadius),
           onTapImage: (onTap != null)
               ? () {
                   onTap!(index);

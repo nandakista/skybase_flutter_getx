@@ -110,16 +110,8 @@ class DisplayImage extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: url,
                     fit: fit,
-                    imageBuilder: (context, imageProvider) => Container(
-                      height: height,
-                      width: width,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: fit,
-                        ),
-                      ),
-                    ),
+                    width: width,
+                    height: height,
                     placeholder: (context, url) => SizedBox(
                       height: height,
                       width: width,
