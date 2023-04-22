@@ -47,6 +47,7 @@ dependencies:
   dotted_border: ^2.0.0+3
 
   # Others
+  collection_picker: ^0.0.2+3
   package_info_plus: ^3.0.2
   url_launcher: ^6.1.7
   permission_handler: ^10.2.0

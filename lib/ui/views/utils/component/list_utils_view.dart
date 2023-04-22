@@ -1,9 +1,8 @@
+import 'package:collection_picker/collection_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/data/models/global/picker_data.dart';
 import 'package:skybase/ui/widgets/base/sky_list_view.dart';
 import 'package:skybase/ui/widgets/ordered_list.dart';
-import 'package:skybase/ui/widgets/picker/picker_listview.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_grouped_listview.dart';
 import 'package:skybase/ui/widgets/unordered_list.dart';
@@ -70,25 +69,26 @@ class ListUtilsView extends StatelessWidget {
                 onRetry: () {},
                 onRefresh: () {},
                 emptyEnabled: dummyDataWithObject.isEmpty,
-                child: PickerListView<SampleObjectData>(
-                  type: ListPickerType.single,
+                child: ListViewPicker<SampleObjectData>(
+                  type: PickerType.single,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   separator: const Divider(thickness: 1, height: 16),
-                  initialValue: PickerData(data: dummyDataWithObject.first),
-                  data: dummyDataWithObject
-                      .map((e) => PickerData(data: e))
-                      .toList(),
-                  itemBuilder: (PickerData<SampleObjectData> item) {
+                  initialValue: dummyDataWithObject.first,
+                  data: dummyDataWithObject,
+                  unavailableDataIndex: const [2, 3],
+                  itemBuilder: (PickerWrapper<SampleObjectData> item) {
                     return SizedBox(
                       height: 20,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('${item.data?.name}'),
-                          (item.isSelected)
-                              ? const Icon(Icons.check)
-                              : const SizedBox.shrink()
+                          (item.isAvailable)
+                              ? (item.isSelected)
+                                  ? const Icon(Icons.check)
+                                  : const SizedBox.shrink()
+                              : const Text('Unavailable')
                         ],
                       ),
                     );
