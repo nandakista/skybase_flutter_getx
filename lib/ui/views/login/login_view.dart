@@ -68,7 +68,7 @@ class LoginView extends GetView<LoginController> {
                       ),
                       const SizedBox(height: 20),
                       Obx(
-                        () => CustomPasswordFieldForm(
+                        () => SkyPasswordFormField(
                           label: 'txt_password'.tr,
                           hint: 'txt_password'.tr,
                           controller: controller.passController,

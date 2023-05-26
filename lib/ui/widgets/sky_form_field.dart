@@ -30,6 +30,7 @@ class SkyFormField extends StatelessWidget {
   final bool? enabled;
   final InputBorder? disabledBorder;
   final TextStyle? style;
+  final TextStyle? hintStyle;
 
   const SkyFormField({
     Key? key,
@@ -58,6 +59,7 @@ class SkyFormField extends StatelessWidget {
     this.prefixWidget,
     this.disabledBorder,
     this.style,
+    this.hintStyle,
   }) : super(key: key);
 
   @override
@@ -87,7 +89,7 @@ class SkyFormField extends StatelessWidget {
       onChanged: onChanged,
       decoration: InputDecoration(
         filled: true,
-        fillColor: backgroundColor ?? Colors.grey.withOpacity(0.1),
+        fillColor: backgroundColor,
         isDense: true,
         border: disableBorder ? InputBorder.none : null,
         focusedBorder: disableBorder ? InputBorder.none : null,
@@ -114,7 +116,7 @@ class SkyFormField extends StatelessWidget {
         labelText: (label != null) ? label : null,
         floatingLabelStyle: TextStyle(color: textColor),
         labelStyle: AppStyle.body2.copyWith(color: hintColor),
-        hintStyle: AppStyle.body2.copyWith(color: hintColor),
+        hintStyle: hintStyle ?? AppStyle.body2.copyWith(color: hintColor),
       ),
       style: style,
       validator: validator,
@@ -123,7 +125,7 @@ class SkyFormField extends StatelessWidget {
   }
 }
 
-class CustomPasswordFieldForm extends StatelessWidget {
+class SkyPasswordFormField extends StatelessWidget {
   final String? label, hint, endText;
   final TextEditingController? controller;
   final IconData? icon;
@@ -143,9 +145,9 @@ class CustomPasswordFieldForm extends StatelessWidget {
   final bool? enabled;
   final InputBorder? disabledBorder;
 
-  const CustomPasswordFieldForm({
+  const SkyPasswordFormField({
     Key? key,
-    required this.label,
+    this.label,
     required this.hint,
     this.onPress,
     this.endIcon,
@@ -182,7 +184,7 @@ class CustomPasswordFieldForm extends StatelessWidget {
       initialValue: (controller == null) ? initialValue : null,
       decoration: InputDecoration(
         filled: true,
-        fillColor: backgroundColor ?? Colors.grey.withOpacity(0.1),
+        fillColor: backgroundColor,
         isDense: true,
         border: disableBorder ? InputBorder.none : null,
         focusedBorder: disableBorder ? InputBorder.none : null,

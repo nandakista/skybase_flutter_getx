@@ -76,7 +76,7 @@ class ListUtilsView extends StatelessWidget {
                   separator: const Divider(thickness: 1, height: 16),
                   initialValue: dummyDataWithObject.first,
                   data: dummyDataWithObject,
-                  unavailableDataIndex: const [2, 3],
+                  unavailableDataIndex: const [0, 3],
                   itemBuilder: (PickerWrapper<SampleObjectData> item) {
                     return SizedBox(
                       height: 20,
@@ -84,11 +84,8 @@ class ListUtilsView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('${item.data?.name}'),
-                          (item.isAvailable)
-                              ? (item.isSelected)
-                                  ? const Icon(Icons.check)
-                                  : const SizedBox.shrink()
-                              : const Text('Unavailable')
+                          if (item.isSelected) const Icon(Icons.check),
+                          if (!item.isAvailable) const Text('Unavailable')
                         ],
                       ),
                     );
