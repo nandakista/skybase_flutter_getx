@@ -34,6 +34,7 @@ class SkyBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: color,
       margin: margin,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius ?? 12),

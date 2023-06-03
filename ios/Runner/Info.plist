@@ -46,12 +46,10 @@
 
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>To take image from camera/gallery</string>
-
     <key>NSCameraUsageDescription</key>
     <string>To choose photo image</string>
-
     <key>NSMicrophoneUsageDescription</key>
-    <string>Used to capture audio from image_picker plugin</string>
+	<string>To choose video</string>
 
     <key>com.apple.security.network.client</key>
     <true/>
@@ -62,5 +60,9 @@
     </array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>UIFileSharingEnabled</key>
+    <string>true</string>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+    <string>true</string>
 </dict>
 </plist>
