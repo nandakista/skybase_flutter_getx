@@ -14,6 +14,12 @@ class TimerModule extends GetxController {
   RxInt currentTime = RxInt(0);
   late Timer timer;
 
+  String? savedUpdateId;
+  int? savedTime;
+  void Function(int currentTime)? onStartTimer;
+  void Function()? onFinishedTimer;
+  void Function(int currentTime)? onChangedTimer;
+
   void startTimer({
     required String updateId,
     required int time,
@@ -22,6 +28,13 @@ class TimerModule extends GetxController {
     void Function()? onFinished,
     void Function(int currentTime)? onChanged,
   }) {
+    // Save timer info
+    savedUpdateId = updateId;
+    savedTime = time;
+    onStartTimer = onStart;
+    onFinishedTimer = onFinished;
+    onChangedTimer = onChanged;
+
     _setCurrentTime(time);
     if (onStart != null) onStart(time);
     timer = Timer.periodic(
@@ -33,8 +46,9 @@ class TimerModule extends GetxController {
         } else {
           _setCurrentTime(currentTime.value -= 1);
           if (onChanged != null) onChanged(currentTime.value);
+          savedTime = currentTime.value;
         }
-        if(kDebugMode) debugPrint('TIMER UPDATE: $updateId | $currentTime');
+        if (kDebugMode) debugPrint('TIMER UPDATE: $updateId | $currentTime');
         update([updateId]);
       },
     );
@@ -51,6 +65,20 @@ class TimerModule extends GetxController {
 
   void stopTimer() {
     timer.cancel();
+  }
+
+  void pauseTimer() {
+    timer.cancel();
+  }
+
+  void resumeTimer() {
+    startTimer(
+      updateId: savedUpdateId.toString(),
+      time: savedTime ?? 0,
+      onChanged: onChangedTimer,
+      onFinished: onFinishedTimer,
+      onStart: onStartTimer,
+    );
   }
 
   @override
