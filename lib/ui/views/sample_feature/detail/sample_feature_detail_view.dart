@@ -52,7 +52,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
           CircleAvatar(
             radius: 45,
             child: SkyImage(
-              url: '${user?.avatarUrl}&s=200',
+              src: '${user?.avatarUrl}&s=200',
               borderRadius: BorderRadius.circular(90),
             ),
           ),

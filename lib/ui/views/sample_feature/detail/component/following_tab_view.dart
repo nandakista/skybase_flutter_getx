@@ -24,7 +24,7 @@ class FollowingTabView extends GetView<SampleFeatureDetailController> {
                 leading: CircleAvatar(
                   radius: 30,
                   child: SkyImage(
-                    url: '${user.avatarUrl}&s=200',
+                    src: '${user.avatarUrl}&s=200',
                     borderRadius: BorderRadius.circular(90),
                   ),
                 ),

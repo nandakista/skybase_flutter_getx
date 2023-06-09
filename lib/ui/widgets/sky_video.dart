@@ -63,7 +63,7 @@ class _SkyVideoState extends State<SkyVideo> {
         width: widget.width,
         child: (widget.showControls)
             ? const Center(
-                child: SkyImage(url: 'assets/images/img_empty.png'),
+                child: SkyImage(src: 'assets/images/img_empty.png'),
               )
             : null,
       ),

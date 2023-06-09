@@ -17,12 +17,13 @@ abstract class SkyAppBar {
     Color? iconColor,
     List<Widget>? action,
     bool? centerTitle = false,
+    TextStyle? titleStyle,
   }) {
     return BaseAppBar(
       title: title,
       action: action,
       backgroundColor: backgroundColor ?? Theme.of(Get.context!).scaffoldBackgroundColor,
-      titleStyle: AppStyle.subtitle4.copyWith(color: AppColors.primary),
+      titleStyle: titleStyle ?? AppStyle.subtitle4.copyWith(color: AppColors.primary),
       elevation: 0,
       centerTitle: centerTitle,
       iconColor: iconColor ?? AppColors.systemDarkGrey,

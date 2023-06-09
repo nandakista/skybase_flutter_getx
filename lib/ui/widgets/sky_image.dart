@@ -14,7 +14,7 @@ import 'platform_loading_indicator.dart';
    nanda.kista@gmail.com
 */
 class SkyImage extends StatelessWidget {
-  final String? url;
+  final String? src;
   final double? width;
   final double? height;
   final VoidCallback? onTapImage;
@@ -26,28 +26,34 @@ class SkyImage extends StatelessWidget {
   final Widget? emptyOrNullView;
   final String? emptyOrNullUrl;
   final bool fromFile;
+  final Color? color;
+  final String? previewTitle;
+  final TextStyle? previewTitleStyle;
 
   const SkyImage({
     Key? key,
-    this.url,
+    this.src,
     this.width,
     this.height,
     this.onTapImage,
     this.onRemoveImage,
     this.borderRadius,
-    this.fit = BoxFit.fill,
+    this.fit = BoxFit.cover,
     this.enablePreview = false,
     this.emptyOrNullFit,
     this.emptyOrNullView,
     this.emptyOrNullUrl,
     this.fromFile = false,
+    this.color,
+    this.previewTitle,
+    this.previewTitleStyle,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (url.isNotNullAndNotEmpty()) {
+    if (src.isNotNullAndNotEmpty()) {
       return DisplayImage(
-        url: url.toString(),
+        url: src.toString(),
         width: width,
         height: height,
         fit: fit,
@@ -56,6 +62,9 @@ class SkyImage extends StatelessWidget {
         onTapImage: onTapImage,
         onRemoveImage: onRemoveImage,
         fromFile: fromFile,
+        color: color,
+        previewTitle: previewTitle,
+        previewTitleStyle: previewTitleStyle,
       );
     } else {
       return DisplayImage(
@@ -64,6 +73,9 @@ class SkyImage extends StatelessWidget {
         height: height,
         fit: emptyOrNullFit ?? BoxFit.contain,
         borderRadius: borderRadius,
+        color: color,
+        previewTitle: previewTitle,
+        previewTitleStyle: previewTitleStyle,
       );
     }
   }
@@ -79,6 +91,9 @@ class DisplayImage extends StatelessWidget {
   final BoxFit fit;
   final bool enablePreview;
   final bool fromFile;
+  final Color? color;
+  final String? previewTitle;
+  final TextStyle? previewTitleStyle;
 
   const DisplayImage({
     Key? key,
@@ -91,6 +106,9 @@ class DisplayImage extends StatelessWidget {
     this.fit = BoxFit.fill,
     this.enablePreview = false,
     this.fromFile = false,
+    this.color,
+    this.previewTitle,
+    this.previewTitleStyle,
   }) : super(key: key);
 
   @override
@@ -102,7 +120,14 @@ class DisplayImage extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: enablePreview
-              ? () => Get.to(MediaPreviewPage(url: url))
+              ? () => Get.to(
+                    MediaPreviewPage(
+                      url: url,
+                      fromFile: fromFile,
+                      title: previewTitle,
+                      titleStyle: previewTitleStyle,
+                    ),
+                  )
               : onTapImage,
           child: isFromRemote
               ? ClipRRect(
@@ -133,6 +158,8 @@ class DisplayImage extends StatelessWidget {
                       url,
                       width: width,
                       height: height,
+                      color: color,
+                      fit: fit,
                     )
                   : (fromFile)
                       ? ClipRRect(

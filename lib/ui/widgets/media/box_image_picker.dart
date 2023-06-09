@@ -52,7 +52,7 @@ class BoxImagePicker extends StatelessWidget {
       return Obx(
         () => (selectedImage.value != null)
             ? SkyImage(
-                url: selectedImage.value!.path,
+                src: selectedImage.value!.path,
                 height: height,
                 width: width,
                 borderRadius: BorderRadius.circular(4),

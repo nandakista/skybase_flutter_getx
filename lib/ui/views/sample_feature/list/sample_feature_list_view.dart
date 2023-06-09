@@ -27,7 +27,7 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
             leading: CircleAvatar(
               radius: 30,
               child: SkyImage(
-                url: '${item.avatarUrl}&s=200',
+                src: '${item.avatarUrl}&s=200',
                 borderRadius: BorderRadius.circular(30),
               ),
             ),

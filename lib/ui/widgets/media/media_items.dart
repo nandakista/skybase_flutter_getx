@@ -121,7 +121,7 @@ class MediaItems extends StatelessWidget {
         return const Center(child: Text('Media Unsupported'));
       case MediaType.image:
         return SkyImage(
-          url: mediaType.path,
+          src: mediaType.path,
           width: double.infinity,
           height: double.infinity,
           borderRadius: BorderRadius.circular((isGrid) ? 0 : borderRadius),

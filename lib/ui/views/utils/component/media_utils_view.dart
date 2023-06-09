@@ -96,7 +96,7 @@ class MediaUtilsView extends GetView<UtilsController> {
               ],
             ),
             const SizedBox(height: 24),
-            const SkyImage(url: 'assets/images/img_sample.jpeg'),
+            const SkyImage(src: 'assets/images/img_sample.jpeg'),
           ],
         ),
       ),
@@ -110,7 +110,7 @@ class MediaUtilsView extends GetView<UtilsController> {
           () => Container(
             child: controller.imageFile.value != null
                 ? SkyImage(
-                    url: controller.imageFile.value!.path,
+                    src: controller.imageFile.value!.path,
                     height: MediaQuery.of(context).size.width * 1 / 2,
                     width: MediaQuery.of(context).size.width * 2 / 3,
                   )
@@ -124,7 +124,7 @@ class MediaUtilsView extends GetView<UtilsController> {
                       ),
                       child: const Padding(
                         padding: EdgeInsets.all(40.0),
-                        child: SkyImage(url: 'assets/images/img_man.png'),
+                        child: SkyImage(src: 'assets/images/img_man.png'),
                       ),
                     ),
                   ),
@@ -215,7 +215,7 @@ class MediaUtilsView extends GetView<UtilsController> {
               ...controller.pickedImages
                   .map(
                     (e) => SkyImage(
-                      url: e.path,
+                      src: e.path,
                       height: 100,
                       width: 100,
                       enablePreview: true,

@@ -52,7 +52,7 @@ class ImageCarouselDisplay extends StatelessWidget {
                   items: url.isNullOrEmpty()
                       ? [
                           const SkyImage(
-                            url: 'assets/images/img_empty.png',
+                            src: 'assets/images/img_empty.png',
                             width: double.infinity,
                             height: double.infinity,
                             enablePreview: true,
@@ -87,7 +87,7 @@ class ImageCarouselDisplay extends StatelessWidget {
       case MediaType.file:
         return const Center(child: Text('Media Unsupported'));
       case MediaType.image:
-        return SkyImage(url: mediaType.path);
+        return SkyImage(src: mediaType.path);
       case MediaType.video:
         return SkyVideo(
           url: mediaType.path,
