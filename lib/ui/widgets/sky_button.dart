@@ -124,13 +124,20 @@ class SkyButton extends StatelessWidget {
         ),
         label: Container(
           padding: padding,
-          child: Text(
-            text,
-            textAlign: TextAlign.center,
-            style: AppStyle.subtitle4.copyWith(
-              fontSize: fontSize,
-              fontWeight: fontWeight,
-              color: outlineMode ? color ?? AppColors.primary : textColor,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: AppStyle.subtitle4.copyWith(
+                fontSize: fontSize,
+                fontWeight: fontWeight,
+                color: (onPressed == null)
+                    ? Colors.grey.shade400
+                    : outlineMode
+                        ? color ?? AppColors.primary
+                        : textColor,
+              ),
             ),
           ),
         ),
