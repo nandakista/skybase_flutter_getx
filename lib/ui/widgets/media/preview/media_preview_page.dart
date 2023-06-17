@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skybase/core/helper/media_helper.dart';
+import 'package:skybase/ui/widgets/media/preview/components/video_preview_display.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 import 'package:skybase/ui/widgets/sky_video.dart';
@@ -45,7 +46,7 @@ class MediaPreviewPage extends StatelessWidget {
           ),
         );
       case MediaType.video:
-        return SkyVideo(
+        return VideoPreviewDisplay(
           url: mediaType.path,
           height: double.infinity,
           width: double.infinity,

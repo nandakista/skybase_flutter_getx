@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:skybase/core/extension/list_extension.dart';
 import 'package:skybase/core/helper/media_helper.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
+import 'package:skybase/ui/widgets/media/preview/components/video_preview_display.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
-import 'package:skybase/ui/widgets/sky_video.dart';
 
-class ImageCarouselDisplay extends StatelessWidget {
-  const ImageCarouselDisplay({
+class MediaCarouselPreviewPage extends StatelessWidget {
+  const MediaCarouselPreviewPage({
     Key? key,
     required this.url,
     this.initialIndex,
@@ -33,7 +33,8 @@ class ImageCarouselDisplay extends StatelessWidget {
       color: statusBarColor,
       brightness: statusBarBrightness,
       child: Scaffold(
-        appBar: SkyAppBar.primary(backgroundColor: Colors.black, iconColor: Colors.white),
+        appBar: SkyAppBar.primary(
+            backgroundColor: Colors.black, iconColor: Colors.white),
         backgroundColor: Colors.black,
         extendBodyBehindAppBar: true,
         body: SafeArea(
@@ -89,7 +90,7 @@ class ImageCarouselDisplay extends StatelessWidget {
       case MediaType.image:
         return SkyImage(src: mediaType.path);
       case MediaType.video:
-        return SkyVideo(
+        return VideoPreviewDisplay(
           url: mediaType.path,
           height: double.infinity,
           width: double.infinity,

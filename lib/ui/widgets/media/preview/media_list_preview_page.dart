@@ -42,7 +42,7 @@ class MediaListPreviewPage extends StatelessWidget {
       case MediaType.file:
         return const Center(child: Text('Media Unsupported'));
       case MediaType.image:
-        return SkyImage(src: mediaType.path);
+        return SkyImage(src: mediaType.path, enablePreview: true);
       case MediaType.video:
         return SkyVideo(
           url: mediaType.path,

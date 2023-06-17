@@ -12,7 +12,7 @@ import 'package:skybase/ui/widgets/media/box_image_picker.dart';
 import 'package:skybase/ui/widgets/media/box_video_picker.dart';
 import 'package:skybase/ui/widgets/media/image_source_bottom_sheet.dart';
 import 'package:skybase/ui/widgets/media/media_items.dart';
-import 'package:skybase/ui/widgets/media/preview/image_carousel_display.dart';
+import 'package:skybase/ui/widgets/media/preview/media_carousel_preview_page.dart';
 import 'package:skybase/ui/widgets/media/ui_image_picker.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_box.dart';
@@ -40,7 +40,7 @@ class MediaUtilsView extends GetView<UtilsController> {
               mediaUrls: controller.sampleImage,
               onTap: (index) {
                 Get.to(
-                  () => ImageCarouselDisplay(
+                  () => MediaCarouselPreviewPage(
                     initialIndex: index,
                     url: controller.sampleImage,
                     bottomWidget: Column(
@@ -180,7 +180,7 @@ class MediaUtilsView extends GetView<UtilsController> {
         ),
         const SizedBox(height: 12),
         BoxVideoPicker(
-          replace: false,
+          replace: true,
           text: 'Add video',
           iconWidget: SvgPicture.asset(
             'assets/images/ic_add.svg',
