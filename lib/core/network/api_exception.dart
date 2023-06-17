@@ -9,10 +9,12 @@ import 'package:skybase/core/network/api_response.dart';
 */
 class NetworkException implements Exception {
   final String? prefix;
+  final String? message;
   final Response? response;
 
   NetworkException({
     this.prefix,
+    this.message,
     this.response,
   });
 
@@ -23,7 +25,7 @@ class NetworkException implements Exception {
       ApiResponse res = ApiResponse.fromJson(response?.data);
       result = ApiMessage.message(res.error.toString());
     } else {
-      result += prefix ?? '';
+      result += (prefix != null) ? '$prefix, $message' : '$message';
     }
     return result;
   }
@@ -64,30 +66,36 @@ class NetworkException implements Exception {
     if (error is Exception) {
       try {
         NetworkException networkExceptions;
-        if (error is DioError) {
+        if (error is DioException) {
           switch (error.type) {
-            case DioErrorType.cancel:
+            case DioExceptionType.cancel:
               networkExceptions = RequestCancelled();
               break;
-            case DioErrorType.connectTimeout:
+            case DioExceptionType.connectionTimeout:
               networkExceptions = ConnectionTimeOutException();
               break;
-            case DioErrorType.other:
+            case DioExceptionType.unknown:
               if (error.error is SocketException) {
                 networkExceptions = FetchDataException();
               } else {
                 networkExceptions = SocketException();
               }
               break;
-            case DioErrorType.receiveTimeout:
+            case DioExceptionType.receiveTimeout:
               networkExceptions = ReceiveTimeOutException();
               break;
-            case DioErrorType.response:
+            case DioExceptionType.badResponse:
               networkExceptions =
                   NetworkException.handleResponse(error.response!);
               break;
-            case DioErrorType.sendTimeout:
+            case DioExceptionType.sendTimeout:
               networkExceptions = SendTimeOutException();
+              break;
+            case DioExceptionType.badCertificate:
+              networkExceptions = BadCertificateException();
+              break;
+            case DioExceptionType.connectionError:
+              networkExceptions = ConnectionTimeOutException();
               break;
           }
         } else if (error is SocketException) {
@@ -112,71 +120,78 @@ class NetworkException implements Exception {
 }
 
 class ConnectionTimeOutException extends NetworkException {
-  ConnectionTimeOutException() : super(prefix: 'txt_connection_timeout'.tr);
+  ConnectionTimeOutException() : super(message: 'txt_connection_timeout'.tr);
 }
 
 class ReceiveTimeOutException extends NetworkException {
-  ReceiveTimeOutException() : super(prefix: 'txt_connection_timeout'.tr);
+  ReceiveTimeOutException() : super(message: 'txt_connection_timeout'.tr);
 }
 
 class SendTimeOutException extends NetworkException {
-  SendTimeOutException() : super(prefix: 'txt_connection_timeout'.tr);
+  SendTimeOutException() : super(message: 'txt_connection_timeout'.tr);
 }
 
 class InternalServerErrorException extends NetworkException {
   InternalServerErrorException()
-      : super(prefix: 'txt_internal_server_error'.tr);
+      : super(message: 'txt_internal_server_error'.tr);
 }
 
 class RequestEntityTooLargeException extends NetworkException {
-  RequestEntityTooLargeException({String? message, Response? response})
-      : super(prefix: 'txt_request_entity_to_large'.tr, response: response);
+  RequestEntityTooLargeException({Response? response})
+      : super(message: 'txt_request_entity_to_large'.tr, response: response);
 }
 
 class FetchDataException extends NetworkException {
   FetchDataException({String? message, Response? response})
-      : super(prefix: 'txt_error_during_communication'.tr, response: response);
+      : super(
+            message: message ?? 'txt_error_during_communication'.tr,
+            response: response);
 }
 
 class NotFoundException extends NetworkException {
   NotFoundException({String? message, Response? response})
-      : super(prefix: 'txt_not_found'.tr, response: response);
+      : super(message: message ?? 'txt_not_found'.tr, response: response);
 }
 
 class BadRequestException extends NetworkException {
-  BadRequestException({String? message, Response? response})
+  BadRequestException({Response? response})
       : super(
-            prefix:
-                '${'txt_bad_request'.tr}, ${'txt_message'.tr}: ${response?.statusMessage}',
+            prefix: 'txt_bad_request'.tr,
+            message: '${'txt_message'.tr}: ${response?.statusMessage}',
             response: response);
 }
 
+class BadCertificateException extends NetworkException {
+  BadCertificateException({Response? response})
+      : super(message: 'txt_bad_certificate'.tr, response: response);
+}
+
 class UnauthorisedException extends NetworkException {
-  UnauthorisedException({String? message, Response? response})
-      : super(prefix: 'txt_unauthorized'.tr, response: response);
+  UnauthorisedException({Response? response})
+      : super(message: 'txt_unauthorized'.tr, response: response);
 }
 
 class InvalidInputException extends NetworkException {
-  InvalidInputException({String? message, Response? response})
-      : super(prefix: 'txt_invalid_input'.tr, response: response);
+  InvalidInputException({Response? response})
+      : super(message: 'txt_invalid_input'.tr, response: response);
 }
 
 class RequestCancelled extends NetworkException {
-  RequestCancelled({String? message, Response? response})
-      : super(prefix: 'txt_request_cancel'.tr, response: response);
+  RequestCancelled({Response? response})
+      : super(message: 'txt_request_cancel'.tr, response: response);
 }
 
 class SocketException extends NetworkException {
-  SocketException({String? message, Response? response})
-      : super(prefix: 'txt_no_internet_connection'.tr, response: response);
+  SocketException({Response? response})
+      : super(message: 'txt_no_internet_connection'.tr, response: response);
 }
 
 class UnexpectedError extends NetworkException {
-  UnexpectedError({String? message, Response? response})
-      : super(prefix: 'txt_unexpected_error'.tr, response: response);
+  UnexpectedError({Response? response})
+      : super(message: 'txt_unexpected_error'.tr, response: response);
 }
 
 class UnableToProcess extends NetworkException {
-  UnableToProcess({String? message, Response? response})
-      : super(prefix: 'txt_unable_to_process'.tr, response: response);
+  UnableToProcess({Response? response})
+      : super(message: 'txt_unable_to_process'.tr, response: response);
 }
