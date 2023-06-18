@@ -108,28 +108,29 @@ class MediaUtilsView extends GetView<UtilsController> {
       const Text('Preview File'),
       const SizedBox(height: 4),
       Obx(
-            () => Container(
+        () => Container(
           child: controller.imageFile.value != null
               ? SkyImage(
-            fromFile: !controller.imageFile.value!.path.startsWith('http'),
-            src: controller.imageFile.value!.path,
-            height: MediaQuery.of(context).size.width * 1 / 2,
-            width: MediaQuery.of(context).size.width * 2 / 3,
-          )
+                  fromFile:
+                      !controller.imageFile.value!.path.startsWith('http'),
+                  src: controller.imageFile.value!.path,
+                  height: MediaQuery.of(context).size.width * 1 / 2,
+                  width: MediaQuery.of(context).size.width * 2 / 3,
+                )
               : SizedBox(
-            height: MediaQuery.of(context).size.width * 1 / 2,
-            width: MediaQuery.of(context).size.width * 1 / 2,
-            child: Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(40.0),
-                child: SkyImage(src: 'assets/images/img_man.png'),
-              ),
-            ),
-          ),
+                  height: MediaQuery.of(context).size.width * 1 / 2,
+                  width: MediaQuery.of(context).size.width * 1 / 2,
+                  child: Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(40.0),
+                      child: SkyImage(src: 'assets/images/img_man.png'),
+                    ),
+                  ),
+                ),
         ),
       ),
       const SizedBox(height: 12),
@@ -144,8 +145,8 @@ class MediaUtilsView extends GetView<UtilsController> {
             }
           });
         },
-        child: Column(
-          children: const [
+        child: const Column(
+          children: [
             Icon(
               Icons.add_a_photo_outlined,
               size: 30,
@@ -210,24 +211,24 @@ class MediaUtilsView extends GetView<UtilsController> {
       ),
       const SizedBox(height: 12),
       Obx(
-            () => Wrap(
+        () => Wrap(
           spacing: 16,
           runSpacing: 16,
           children: [
             ...controller.pickedImages
                 .map(
                   (e) => SkyImage(
-                src: e.path,
-                height: 100,
-                width: 100,
-                enablePreview: true,
-                borderRadius: BorderRadius.circular(4),
-                onRemoveImage: () {
-                  controller.pickedImages.remove(e);
-                  controller.update();
-                },
-              ),
-            )
+                    src: e.path,
+                    height: 100,
+                    width: 100,
+                    enablePreview: true,
+                    borderRadius: BorderRadius.circular(4),
+                    onRemoveImage: () {
+                      controller.pickedImages.remove(e);
+                      controller.update();
+                    },
+                  ),
+                )
                 .toList(),
             BoxImagePicker(
               text: 'Add Photos',

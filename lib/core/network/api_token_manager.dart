@@ -36,7 +36,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
 
   Future<void> handleToken({
     required Dio dio,
-    required DioError err,
+    required DioException err,
     required ErrorInterceptorHandler handler,
   }) async {
     switch (AppEnv.config.tokenType) {
@@ -53,7 +53,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
     }
   }
 
-  _handleAccessToken(DioError err, ErrorInterceptorHandler handler) async {
+  _handleAccessToken(DioException err, ErrorInterceptorHandler handler) async {
     final int status = err.response?.statusCode ?? 0;
     if (status == 401) {
       SkyDialog.failed(
@@ -69,7 +69,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
 
   _handleRefreshToken(
     Dio dio,
-    DioError err,
+    DioException err,
     ErrorInterceptorHandler handler,
   ) async {
     String? accessToken = await secureStorage.getToken();
@@ -93,7 +93,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
             Options(headers: headers, contentType: Headers.jsonContentType),
       );
       return ApiResponse.fromJson(responseBody.data).data['token'];
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       debugPrint('${NetworkException.getErrorException(error)}');
       return SkyDialog.failed(
         isDismissible: false,

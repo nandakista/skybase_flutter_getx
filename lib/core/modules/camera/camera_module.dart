@@ -181,7 +181,7 @@ class _CameraModuleState extends State<CameraModule>
         start: 0,
         end: 1,
       );
-      var image = await recentAssets.first.file;
+      File? image = await recentAssets.first.file;
       setState(() => lastImageFromGallery = image);
     } catch (e) {
       debugPrint('e: $e');
@@ -247,9 +247,9 @@ class _CameraModuleState extends State<CameraModule>
     if (_cameraController == null || !_cameraController!.value.isInitialized) {
       return const PlatformLoadingIndicator();
     }
-    var camera = _cameraController!.value;
+    CameraValue camera = _cameraController!.value;
     final size = MediaQuery.of(context).size;
-    var scale = size.aspectRatio * camera.aspectRatio;
+    double scale = size.aspectRatio * camera.aspectRatio;
     if (scale < 1) scale = 1 / scale;
     if (widget.useBorder) {
       return Stack(
@@ -318,7 +318,7 @@ class _CameraModuleState extends State<CameraModule>
   }
 
   Widget _buildGalleryButton() {
-    var image = (lastImageFromGallery != null)
+    FileImage?  image = (lastImageFromGallery != null)
         ? FileImage(lastImageFromGallery!)
         : null;
     return Visibility(
@@ -377,7 +377,7 @@ class _CameraModuleState extends State<CameraModule>
         ),
       );
     } else {
-      var croppedImg = await squareCropImage(resultImage);
+      File croppedImg = await squareCropImage(resultImage);
       arguments = Get.to(
         () => PreviewCameraPage(
           imageFile: croppedImg,
@@ -394,7 +394,7 @@ class _CameraModuleState extends State<CameraModule>
 
   Future<File> squareCropImage(File image) async {
     final img.Image? capturedImage = img.decodeImage(await image.readAsBytes());
-    var croppedImg = img.copyResizeCropSquare(capturedImage!, size: 1080);
+    img.Image croppedImg = img.copyResizeCropSquare(capturedImage!, size: 1080);
     File result = await image.writeAsBytes(img.encodeJpg(croppedImg));
     return result;
   }
@@ -405,7 +405,7 @@ class _CameraModuleState extends State<CameraModule>
 
     // final img.Image orientedImage = img.flipHorizontal(capturedImage!);
 
-    var croppedImage = img.copyResizeCropSquare(capturedImage!, size: 1080);
+    img.Image croppedImage = img.copyResizeCropSquare(capturedImage!, size: 1080);
     final img.Image orientedImage = img.flipHorizontal(croppedImage);
 
     File flippedImage =
