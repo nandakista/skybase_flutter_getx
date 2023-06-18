@@ -121,7 +121,7 @@ class DatePickerWidget extends StatelessWidget {
           selectedDayHighlightColor: selectedHighlightColor,
           calendarViewMode: viewMode,
         ),
-        initialValue: [initialValue?.startDate, initialValue?.endDate],
+        value: [initialValue?.startDate, initialValue?.endDate],
         onValueChanged: onSelectionChanged,
       ),
     );
