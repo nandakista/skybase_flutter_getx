@@ -103,147 +103,150 @@ class MediaUtilsView extends GetView<UtilsController> {
     );
   }
 
-  _buildImagePicker(BuildContext context) => [
-        const Text('Preview File'),
-        const SizedBox(height: 4),
-        Obx(
-          () => Container(
-            child: controller.imageFile.value != null
-                ? SkyImage(
-                    src: controller.imageFile.value!.path,
-                    height: MediaQuery.of(context).size.width * 1 / 2,
-                    width: MediaQuery.of(context).size.width * 2 / 3,
-                  )
-                : SizedBox(
-                    height: MediaQuery.of(context).size.width * 1 / 2,
-                    width: MediaQuery.of(context).size.width * 1 / 2,
-                    child: Card(
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(40.0),
-                        child: SkyImage(src: 'assets/images/img_man.png'),
-                      ),
-                    ),
-                  ),
+  _buildImagePicker(BuildContext context) {
+    return [
+      const Text('Preview File'),
+      const SizedBox(height: 4),
+      Obx(
+            () => Container(
+          child: controller.imageFile.value != null
+              ? SkyImage(
+            fromFile: !controller.imageFile.value!.path.startsWith('http'),
+            src: controller.imageFile.value!.path,
+            height: MediaQuery.of(context).size.width * 1 / 2,
+            width: MediaQuery.of(context).size.width * 2 / 3,
+          )
+              : SizedBox(
+            height: MediaQuery.of(context).size.width * 1 / 2,
+            width: MediaQuery.of(context).size.width * 1 / 2,
+            child: Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(40.0),
+                child: SkyImage(src: 'assets/images/img_man.png'),
+              ),
+            ),
           ),
         ),
-        const SizedBox(height: 12),
-        SkyBox(
-          borderRadius: 8,
-          padding: const EdgeInsets.all(10),
-          width: 140,
-          onPressed: () {
-            ModuleHelper.pickImage(showInfo: true).then((image) {
-              if (image != null) {
+      ),
+      const SizedBox(height: 12),
+      SkyBox(
+        borderRadius: 8,
+        padding: const EdgeInsets.all(10),
+        width: 140,
+        onPressed: () {
+          ModuleHelper.pickImage(showInfo: true).then((image) {
+            if (image != null) {
+              controller.imageFile.value = image;
+            }
+          });
+        },
+        child: Column(
+          children: const [
+            Icon(
+              Icons.add_a_photo_outlined,
+              size: 30,
+              color: AppColors.primary,
+            ),
+            Text('Module Camera', textAlign: TextAlign.center)
+          ],
+        ),
+      ),
+      const SizedBox(height: 4),
+      UiImagePicker(
+        onSelected: (file) {
+          debugPrint('file = $file');
+          controller.imageFile.value = file;
+        },
+        child: const SkyBox(
+          margin: EdgeInsets.all(4),
+          child: Text('UI Image Picker'),
+        ),
+      ),
+      const SizedBox(height: 4),
+      SkyButton(
+        text: 'Image BottomSheet',
+        onPressed: () {
+          BottomSheetHelper.material(
+            child: ImageSourceBottomSheet(
+              onImageSelected: (image) {
                 controller.imageFile.value = image;
-              }
-            });
-          },
-          child: Column(
-            children: const [
-              Icon(
-                Icons.add_a_photo_outlined,
-                size: 30,
+                Get.back();
+              },
+            ),
+          );
+        },
+      ),
+      const SizedBox(height: 12),
+      BoxVideoPicker(
+        replace: true,
+        text: 'Add video',
+        iconWidget: SvgPicture.asset(
+          'assets/images/ic_add.svg',
+          color: AppColors.primary,
+        ),
+        onSelectedVideo: (File? file) {
+          debugPrint('Picked = $file');
+        },
+      ),
+      const SizedBox(height: 12),
+      BoxImagePicker(
+        text: 'Add Photo',
+        iconWidget: SvgPicture.asset(
+          'assets/images/ic_add.svg',
+          color: AppColors.primary,
+        ),
+        replace: true,
+        onSelectedUiImage: (File? file) {
+          debugPrint('Picked file = $file');
+          if (file != null) {
+            controller.imageFile.value = file;
+            // controller.update();
+          }
+        },
+      ),
+      const SizedBox(height: 12),
+      Obx(
+            () => Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            ...controller.pickedImages
+                .map(
+                  (e) => SkyImage(
+                src: e.path,
+                height: 100,
+                width: 100,
+                enablePreview: true,
+                borderRadius: BorderRadius.circular(4),
+                onRemoveImage: () {
+                  controller.pickedImages.remove(e);
+                  controller.update();
+                },
+              ),
+            )
+                .toList(),
+            BoxImagePicker(
+              text: 'Add Photos',
+              iconWidget: SvgPicture.asset(
+                'assets/images/ic_add.svg',
                 color: AppColors.primary,
               ),
-              Text('Module Camera', textAlign: TextAlign.center)
-            ],
-          ),
+              replace: false,
+              onSelectedUiImage: (File? file) {
+                debugPrint('Picked file = $file');
+                if (file != null) {
+                  controller.pickedImages.add(file);
+                  controller.update();
+                }
+              },
+            ),
+          ],
         ),
-        const SizedBox(height: 4),
-        UiImagePicker(
-          onSelected: (file) {
-            debugPrint('file = $file');
-            controller.imageFile.value = file;
-          },
-          child: const SkyBox(
-            margin: EdgeInsets.all(4),
-            child: Text('UI Image Picker'),
-          ),
-        ),
-        const SizedBox(height: 4),
-        SkyButton(
-          text: 'Image BottomSheet',
-          onPressed: () {
-            BottomSheetHelper.material(
-              child: ImageSourceBottomSheet(
-                onImageSelected: (image) {
-                  controller.imageFile.value = image;
-                  Get.back();
-                },
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 12),
-        BoxVideoPicker(
-          replace: true,
-          text: 'Add video',
-          iconWidget: SvgPicture.asset(
-            'assets/images/ic_add.svg',
-            color: AppColors.primary,
-          ),
-          onSelectedVideo: (File? file) {
-            debugPrint('Picked = $file');
-          },
-        ),
-        const SizedBox(height: 12),
-        BoxImagePicker(
-          text: 'Add Photo',
-          iconWidget: SvgPicture.asset(
-            'assets/images/ic_add.svg',
-            color: AppColors.primary,
-          ),
-          replace: true,
-          onSelectedUiImage: (File? file) {
-            debugPrint('Picked file = $file');
-            if (file != null) {
-              controller.imageFile.value = file;
-              // controller.update();
-            }
-          },
-        ),
-        const SizedBox(height: 12),
-        Obx(
-          () => Wrap(
-            spacing: 16,
-            runSpacing: 16,
-            children: [
-              ...controller.pickedImages
-                  .map(
-                    (e) => SkyImage(
-                      src: e.path,
-                      height: 100,
-                      width: 100,
-                      enablePreview: true,
-                      borderRadius: BorderRadius.circular(4),
-                      onRemoveImage: () {
-                        controller.pickedImages.remove(e);
-                        controller.update();
-                      },
-                    ),
-                  )
-                  .toList(),
-              BoxImagePicker(
-                text: 'Add Photos',
-                iconWidget: SvgPicture.asset(
-                  'assets/images/ic_add.svg',
-                  color: AppColors.primary,
-                ),
-                replace: false,
-                onSelectedUiImage: (File? file) {
-                  debugPrint('Picked file = $file');
-                  if (file != null) {
-                    controller.pickedImages.add(file);
-                    controller.update();
-                  }
-                },
-              ),
-            ],
-          ),
-        ),
-      ];
+      ),
+    ];
+  }
 }

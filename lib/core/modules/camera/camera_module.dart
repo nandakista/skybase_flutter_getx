@@ -394,7 +394,7 @@ class _CameraModuleState extends State<CameraModule>
 
   Future<File> squareCropImage(File image) async {
     final img.Image? capturedImage = img.decodeImage(await image.readAsBytes());
-    var croppedImg = img.copyResizeCropSquare(capturedImage!, 1080);
+    var croppedImg = img.copyResizeCropSquare(capturedImage!, size: 1080);
     File result = await image.writeAsBytes(img.encodeJpg(croppedImg));
     return result;
   }
@@ -405,7 +405,7 @@ class _CameraModuleState extends State<CameraModule>
 
     // final img.Image orientedImage = img.flipHorizontal(capturedImage!);
 
-    var croppedImage = img.copyResizeCropSquare(capturedImage!, 1080);
+    var croppedImage = img.copyResizeCropSquare(capturedImage!, size: 1080);
     final img.Image orientedImage = img.flipHorizontal(croppedImage);
 
     File flippedImage =
