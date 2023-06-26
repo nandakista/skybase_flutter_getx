@@ -26,7 +26,7 @@ class AppRegex {
   // static const password4 = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+=-{};:'",<.>?`\/\|~-])[A-Za-z\d!@#$%^&*()_+=-{};:'",<.>?`\/\|~-]{8,}$';
 }
 
-class AppValidator {
+class ValidatorHelper {
   static bool validateForm(GlobalKey<FormState> formKey) {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();

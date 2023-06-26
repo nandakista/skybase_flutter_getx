@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -21,13 +19,13 @@ import 'package:skybase/core/network/api_url.dart';
 */
 enum TokenType {
   /// When your app no need token authentication.
-  NO_TOKEN,
+  noToken,
 
   /// When your app just use Access Token.
-  ACCESS_TOKEN,
+  accessToken,
 
   /// When your app use Refresh Token Mechanism (Access + Refresh).
-  ACCESS_REFRESH_TOKEN,
+  accessRefreshToken,
 }
 
 class ApiTokenManager extends QueuedInterceptorsWrapper {
@@ -40,14 +38,14 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
     required ErrorInterceptorHandler handler,
   }) async {
     switch (AppEnv.config.tokenType) {
-      case TokenType.NO_TOKEN:
+      case TokenType.noToken:
         super.onError(err, handler);
         break;
-      case TokenType.ACCESS_TOKEN:
+      case TokenType.accessToken:
         // super.onError(err, handler);
         _handleAccessToken(err, handler);
         break;
-      case TokenType.ACCESS_REFRESH_TOKEN:
+      case TokenType.accessRefreshToken:
         _handleRefreshToken(dio, err, handler);
         break;
     }
@@ -56,7 +54,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
   _handleAccessToken(DioException err, ErrorInterceptorHandler handler) async {
     final int status = err.response?.statusCode ?? 0;
     if (status == 401) {
-      SkyDialog.failed(
+      DialogHelper.failed(
         isDismissible: false,
         message: 'txt_you_must_login_again'.tr,
         onConfirm: () => authManager.logout(),
@@ -95,7 +93,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
       return ApiResponse.fromJson(responseBody.data).data['token'];
     } on DioException catch (error) {
       debugPrint('${NetworkException.getErrorException(error)}');
-      return SkyDialog.failed(
+      return DialogHelper.failed(
         isDismissible: false,
         message: 'txt_you_must_login_again'.tr,
         onConfirm: () => authManager.logout(),

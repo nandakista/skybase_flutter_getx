@@ -29,7 +29,7 @@ class LocaleHelper {
     }
   }
 
-  showLocaleDialog(BuildContext context) {
+  void showLocaleDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
@@ -69,13 +69,13 @@ class LocaleHelper {
     );
   }
 
-  updateLocale(BuildContext context, Locale locale, String name) {
+  void updateLocale(BuildContext context, Locale locale, String name) {
     saveLocaleToCache(name);
     Navigator.of(context).pop();
     Get.updateLocale(locale);
   }
 
-  saveLocaleToCache(String name) {
+  void saveLocaleToCache(String name) {
     if (name == "English") {
       GetStorageManager.find.save(GetStorageKey.currentLocale, "en");
     } else {

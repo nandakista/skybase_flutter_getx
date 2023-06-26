@@ -1,4 +1,5 @@
 const Map<String, String> en = {
+  'txt_version': 'App Version',
   'txt_expired': 'Expired',
   'txt_days': 'days',
   'txt_minutes': 'minutes',

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 enum SkySnackBarType { normal, success, error, warning }
 
-abstract class SkySnackBar {
+abstract class SnackBarHelper {
   static void custom ({
     required String? message,
     SnackBarBehavior? behavior,

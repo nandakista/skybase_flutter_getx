@@ -32,9 +32,9 @@ class DialogUtilsView extends StatelessWidget {
               outlineMode: true,
               color: Colors.orange,
               onPressed: () {
-                SkyDialog.warning(
+                DialogHelper.warning(
                   message: 'Some Description Text',
-                  onConfirm: () => SkyDialog.dismiss(),
+                  onConfirm: () => DialogHelper.dismiss(),
                 );
               },
             ),
@@ -45,9 +45,9 @@ class DialogUtilsView extends StatelessWidget {
               outlineMode: true,
               color: Colors.red,
               onPressed: () {
-                SkyDialog.failed(
+                DialogHelper.failed(
                   message: 'Some Description Text',
-                  onConfirm: () => SkyDialog.dismiss(),
+                  onConfirm: () => DialogHelper.dismiss(),
                 );
               },
             ),
@@ -58,9 +58,9 @@ class DialogUtilsView extends StatelessWidget {
               outlineMode: true,
               color: Colors.green,
               onPressed: () {
-                SkyDialog.success(
+                DialogHelper.success(
                   message: 'Some Description Text',
-                  onConfirm: () => SkyDialog.dismiss(),
+                  onConfirm: () => DialogHelper.dismiss(),
                 );
               },
             ),
@@ -69,9 +69,9 @@ class DialogUtilsView extends StatelessWidget {
               text: 'Retry',
               icon: CupertinoIcons.refresh_thick,
               onPressed: () {
-                SkyDialog.retry(
+                DialogHelper.retry(
                   message: 'Some Description Text',
-                  onConfirm: () => SkyDialog.dismiss(),
+                  onConfirm: () => DialogHelper.dismiss(),
                 );
               },
             ),
@@ -80,9 +80,9 @@ class DialogUtilsView extends StatelessWidget {
               text: 'Force',
               icon: CupertinoIcons.exclamationmark_shield,
               onPressed: () {
-                SkyDialog.force(
+                DialogHelper.force(
                   message: 'Some Description Text',
-                  onConfirm: () => SkyDialog.dismiss(),
+                  onConfirm: () => DialogHelper.dismiss(),
                 );
               },
             ),

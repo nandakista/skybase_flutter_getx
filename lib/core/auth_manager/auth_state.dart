@@ -1,14 +1,12 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:skybase/data/models/user/user.dart';
 
-enum AppType { INITIAL, FIRST_INSTALL, UNAUTHENTICATED, AUTHENTICATED }
+enum AppType { initial, firstInstall, unauthenticated, authenticated }
 
 class AuthState {
   final User? user;
   final AppType appStatus;
 
-  const AuthState({this.user, this.appStatus = AppType.INITIAL});
+  const AuthState({this.user, this.appStatus = AppType.initial});
 
   AuthState copyWith({
     User? user,

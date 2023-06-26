@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
@@ -71,8 +70,8 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                             ),
                             Row(
                               children: [
-                                SvgPicture.asset(
-                                  'assets/images/fork.svg',
+                                const SkyImage(
+                                  src: 'assets/images/fork.svg',
                                   height: 14,
                                   color: AppColors.systemDarkGrey,
                                 ),

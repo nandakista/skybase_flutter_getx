@@ -4,7 +4,7 @@ import 'package:skybase/core/helper/validator_helper.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/views/login/login_controller.dart';
-import 'package:skybase/ui/widgets/keyboard_dismisser.dart';
+import 'package:skybase/ui/widgets/keyboard_dismissible.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 import 'package:skybase/ui/widgets/sky_form_field.dart';
 
@@ -15,7 +15,7 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return KeyboardDismisser(
+    return KeyboardDismissible(
       child: Scaffold(
         body: Center(
           child: SingleChildScrollView(
@@ -60,7 +60,7 @@ class LoginView extends GetView<LoginController> {
                         controller: controller.phoneController,
                         keyboardType: TextInputType.phone,
                         icon: Icons.phone,
-                        validator: (value) => AppValidator.field(
+                        validator: (value) => ValidatorHelper.field(
                           title: 'txt_phone'.tr,
                           value: value.toString(),
                           regex: AppRegex.phone,
@@ -77,7 +77,7 @@ class LoginView extends GetView<LoginController> {
                           endIcon: IconButton(
                               icon: const Icon(Icons.visibility_off),
                               onPressed: () => controller.hidePassword()),
-                          validator: (value) => AppValidator.field(
+                          validator: (value) => ValidatorHelper.field(
                             title: 'txt_password'.tr,
                             value: value.toString(),
                             regex: AppRegex.password,

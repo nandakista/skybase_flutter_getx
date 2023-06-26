@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'dart:io';
 
 import 'package:camera/camera.dart';
@@ -11,7 +9,7 @@ import 'package:image/image.dart' as img;
 import 'package:photo_manager/photo_manager.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/general_function.dart';
-import 'package:skybase/core/helper/sky_snackbar.dart';
+import 'package:skybase/core/helper/snackbar_helper.dart';
 import 'package:skybase/ui/widgets/circle_icon.dart';
 import 'package:skybase/ui/widgets/media/ui_image_picker.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
@@ -23,8 +21,8 @@ import 'camera_preview.dart';
    nanda.kista@gmail.com
 */
 enum CameraType {
-  REAR,
-  FRONT,
+  rear,
+  front,
 }
 
 T? _ambiguate<T>(T? value) => value;
@@ -108,28 +106,28 @@ class _CameraModuleState extends State<CameraModule>
     debugPrint('CameraModule::initCamera() -> $cameras');
     await availableCameras().then((value) {
       if (value.isEmpty && !kDebugMode) {
-        SkyDialog.failed(
+        DialogHelper.failed(
           isDismissible: false,
           message: 'You need use the real device',
           onConfirm: () {
-            SkyDialog.dismiss();
+            DialogHelper.dismiss();
             Get.back();
           },
         );
       } else {
         cameras = value;
         if (cameras.isNotEmpty) {
-          if (widget.cameraType == CameraType.REAR) {
+          if (widget.cameraType == CameraType.rear) {
             selectedCameraIndex = 0;
           } else {
             selectedCameraIndex = 1;
           }
           initController(cameras[selectedCameraIndex!]).then((_) {});
         } else {
-          SkyDialog.failed(
+          DialogHelper.failed(
             message: 'txt_camera_not_found'.tr,
             onConfirm: () {
-              SkyDialog.dismiss();
+              DialogHelper.dismiss();
               Get.back();
             },
           );
@@ -137,10 +135,10 @@ class _CameraModuleState extends State<CameraModule>
       }
     }).catchError((e) {
       debugPrint('CameraModule::initCamera() -> $e');
-      SkyDialog.failed(
+      DialogHelper.failed(
         message: '${'txt_something_went_wrong'.tr}\n${e.toString()}',
         onConfirm: () {
-          SkyDialog.dismiss();
+          DialogHelper.dismiss();
           Get.back();
         },
       );
@@ -158,7 +156,7 @@ class _CameraModuleState extends State<CameraModule>
       if (mounted) setState(() {});
     });
     if (_cameraController!.value.hasError) {
-      SkySnackBar.normal(message: 'txt_something_went_wrong'.tr);
+      SnackBarHelper.normal(message: 'txt_something_went_wrong'.tr);
     }
 
     debugPrint('CameraModule::initCameraController()');
@@ -166,7 +164,7 @@ class _CameraModuleState extends State<CameraModule>
       _cameraController!.initialize();
     } catch (e) {
       debugPrint('CameraException::initCameraController() ${e.toString()}');
-      SkySnackBar.normal(message: '${'txt_something_went_wrong'.tr}.\n$e');
+      SnackBarHelper.normal(message: '${'txt_something_went_wrong'.tr}.\n$e');
     }
     debugPrint('CameraModule::initCamera() _controller.initialize');
     if (mounted) setState(() {});
@@ -557,7 +555,7 @@ class _CameraModuleState extends State<CameraModule>
       await _cameraController!.setFlashMode(mode);
     } on CameraException catch (e) {
       logError(e.code, e.description);
-      SkySnackBar.normal(message: 'Error: ${e.code}\n${e.description}');
+      SnackBarHelper.normal(message: 'Error: ${e.code}\n${e.description}');
       rethrow;
     }
   }

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/file_helper.dart';
-import 'package:skybase/core/helper/sky_snackbar.dart';
+import 'package:skybase/core/helper/snackbar_helper.dart';
 import 'package:skybase/ui/widgets/circle_icon.dart';
 
 /* Created by
@@ -85,6 +85,6 @@ class PreviewCameraPage extends StatelessWidget {
 
   showImageInfo() {
     String size = FileHelper.getFileSizeString(imageFile.path, 2);
-    SkySnackBar.normal(message: '$size, ${imageFile.path}');
+    SnackBarHelper.normal(message: '$size, ${imageFile.path}');
   }
 }

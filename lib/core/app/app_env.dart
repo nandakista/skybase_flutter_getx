@@ -1,4 +1,3 @@
-// ignore_for_file: constant_identifier_names
 import 'package:skybase/app_configuration.dart';
 import 'package:skybase/core/network/api_token_manager.dart';
 
@@ -7,9 +6,9 @@ import 'package:skybase/core/network/api_token_manager.dart';
    nanda.kista@gmail.com
 */
 enum Env {
-  PRODUCTION,
-  STAGING,
-  DEVELOPMENT,
+  production,
+  staging,
+  development,
 }
 
 class AppEnv {
@@ -19,7 +18,7 @@ class AppEnv {
   static set(Env environment) {
     env = environment;
     switch (environment) {
-      case Env.PRODUCTION:
+      case Env.production:
         config = Config(
           baseUrl: AppConfiguration.productionAPI,
           clientToken: AppConfiguration.clientToken,
@@ -28,7 +27,7 @@ class AppEnv {
           midtransClientKey: AppConfiguration.someStagingKey,
         );
         break;
-      case Env.STAGING:
+      case Env.staging:
         config = Config(
           baseUrl: AppConfiguration.developmentAPI,
           clientToken: AppConfiguration.clientToken,
@@ -37,7 +36,7 @@ class AppEnv {
           midtransClientKey: AppConfiguration.someStagingKey,
         );
         break;
-      case Env.DEVELOPMENT:
+      case Env.development:
         config = Config(
           baseUrl: AppConfiguration.developmentAPI,
           clientToken: AppConfiguration.clientToken,

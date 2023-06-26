@@ -8,7 +8,7 @@ class SampleFeatureDetailBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-          () => SampleFeatureDetailController(
+      () => SampleFeatureDetailController(
         repository: SampleFeatureRepositoryImpl(
           apiService: SampleFeatureApiImpl(),
           dao: SampleFeatureDaoImpl(),

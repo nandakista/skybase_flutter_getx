@@ -5,7 +5,7 @@ import 'package:skybase/core/themes/app_colors.dart';
    Varcant
    nanda.kista@gmail.com
 */
-class SkyIconButton extends StatelessWidget {
+class SkyWidgetButton extends StatelessWidget {
   final Color? color;
   final Color iconColor;
   final Color? borderColor;
@@ -14,13 +14,18 @@ class SkyIconButton extends StatelessWidget {
   final double? width;
   final double? borderRadius;
   final double? borderWidth;
+
+  // Only can assign if [child] is null
   final IconData? icon;
-  final Widget? iconWidget;
+
+  // If child is not null and icon is not null, the value of icon will be ignored
+  final Widget? child;
+
   final bool outlineMode;
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
 
-  const SkyIconButton({
+  const SkyWidgetButton({
     Key? key,
     this.color = AppColors.primary,
     this.iconColor = Colors.white,
@@ -29,7 +34,7 @@ class SkyIconButton extends StatelessWidget {
     this.width = 24,
     this.borderRadius,
     this.icon,
-    this.iconWidget,
+    this.child,
     this.outlineMode = false,
     this.margin,
     this.padding,
@@ -63,7 +68,7 @@ class SkyIconButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius ?? 8),
           ),
           onTap: onPressed,
-          child: iconWidget ??
+          child: child ??
               Icon(
                 icon,
                 color: (outlineMode) ? AppColors.primary : iconColor,

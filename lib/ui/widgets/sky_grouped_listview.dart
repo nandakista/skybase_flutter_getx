@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:flutter/material.dart';
 
 /* Created by
@@ -9,8 +7,8 @@ import 'package:flutter/material.dart';
 */
 
 enum SortBy {
-  ASC,
-  DESC,
+  asc,
+  desc,
 }
 
 class SkyGroupedListView<T, G> extends StatelessWidget {
@@ -21,7 +19,7 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
     required this.groupHeaderBuilder,
     required this.itemBuilder,
     this.controller,
-    this.sortBy = SortBy.ASC,
+    this.sortBy = SortBy.asc,
     this.padding,
     this.shrinkWrap = false,
     this.physics,
@@ -51,7 +49,7 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
       padding: padding ?? const EdgeInsets.all(0),
       itemCount: data.length,
       controller: controller,
-      reverse: sortBy == SortBy.ASC ? false : true,
+      reverse: sortBy == SortBy.asc ? false : true,
       itemBuilder: (_, index) {
         (data).sort(
           (b, a) => (groupBy(b) as dynamic)!.compareTo(
@@ -78,7 +76,7 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
           nextItem = groupBy(data[index + 1]);
         }
 
-        if (sortBy == SortBy.ASC) {
+        if (sortBy == SortBy.asc) {
           return Column(
             children: [
               if (index == 0 || !isSame) _buildHeaderWidget(item),

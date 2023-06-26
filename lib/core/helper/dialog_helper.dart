@@ -30,7 +30,7 @@ class LoadingDialog {
   static dismiss() => Get.back();
 }
 
-class SkyDialog {
+class DialogHelper {
   static failed({
     required String message,
     VoidCallback? onConfirm,

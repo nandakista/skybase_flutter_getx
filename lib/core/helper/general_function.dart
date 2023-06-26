@@ -135,11 +135,4 @@ class BorderPainter extends CustomPainter {
   bool shouldRebuildSemantics(BorderPainter oldDelegate) => false;
 }
 
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-}
+

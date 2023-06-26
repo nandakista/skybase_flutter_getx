@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:skybase/core/helper/sky_snackbar.dart';
+import 'package:skybase/core/helper/snackbar_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FileHelper {
@@ -47,7 +47,7 @@ class FileHelper {
         }
         if (isMatches == false) {
           data?.removeAt(i);
-          SkySnackBar.error(message: 'Extension not allowed');
+          SnackBarHelper.error(message: 'Extension not allowed');
         }
       }
     }

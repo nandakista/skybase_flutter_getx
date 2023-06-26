@@ -19,7 +19,7 @@ class LoginController extends GetxController {
   hidePassword() => isHiddenPassword.toggle();
 
   void login() async {
-    if (AppValidator.validateForm(formKey)) {
+    if (ValidatorHelper.validateForm(formKey)) {
       try {
         LoadingDialog.show();
         await dataSource
@@ -33,7 +33,7 @@ class LoginController extends GetxController {
         });
       } catch (err) {
         LoadingDialog.dismiss();
-        SkyDialog.failed(message: err.toString());
+        DialogHelper.failed(message: err.toString());
       }
     }
   }

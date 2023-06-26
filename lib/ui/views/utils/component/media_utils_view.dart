@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/bottom_sheet_helper.dart';
 import 'package:skybase/core/modules/module_helper.dart';
@@ -185,8 +184,8 @@ class MediaUtilsView extends GetView<UtilsController> {
       BoxVideoPicker(
         replace: true,
         text: 'Add video',
-        iconWidget: SvgPicture.asset(
-          'assets/images/ic_add.svg',
+        iconWidget: const SkyImage(
+          src: 'assets/images/ic_add.svg',
           color: AppColors.primary,
         ),
         onSelectedVideo: (File? file) {
@@ -196,8 +195,8 @@ class MediaUtilsView extends GetView<UtilsController> {
       const SizedBox(height: 12),
       BoxImagePicker(
         text: 'Add Photo',
-        iconWidget: SvgPicture.asset(
-          'assets/images/ic_add.svg',
+        iconWidget: const SkyImage(
+          src: 'assets/images/ic_add.svg',
           color: AppColors.primary,
         ),
         replace: true,
@@ -232,8 +231,8 @@ class MediaUtilsView extends GetView<UtilsController> {
                 .toList(),
             BoxImagePicker(
               text: 'Add Photos',
-              iconWidget: SvgPicture.asset(
-                'assets/images/ic_add.svg',
+              iconWidget: const SkyImage(
+                src: 'assets/images/ic_add.svg',
                 color: AppColors.primary,
               ),
               replace: false,
