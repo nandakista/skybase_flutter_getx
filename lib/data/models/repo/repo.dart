@@ -53,7 +53,7 @@ class Repo {
 
   Map<String, dynamic> toJson() => {
     'full_name': name,
-    'owner': owner,
+    'owner': owner.toJson(),
     'description': description,
     'language': language,
     'watchers_count': totalWatch,

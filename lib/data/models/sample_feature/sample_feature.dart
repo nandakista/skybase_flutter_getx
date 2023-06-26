@@ -50,7 +50,6 @@ class SampleFeature {
   @HiveField(UserEntity.followingList)
   List<SampleFeature>? followingList;
 
-
   SampleFeature({
     required this.id,
     required this.username,
@@ -81,13 +80,13 @@ class SampleFeature {
       repository: json['public_repos'],
       followers: json['followers'],
       following: json['following'],
-      repositoryList: (json['repository_list'])
+      repositoryList: (json['repository_list'] as List?)
           ?.map((e) => Repo.fromJson(e as Map<String, dynamic>))
           .toList(),
-      followersList: (json['followers_list'])
+      followersList: (json['followers_list'] as List?)
           ?.map((e) => SampleFeature.fromJson(e as Map<String, dynamic>))
           .toList(),
-      followingList: (json['following_list'])
+      followingList: (json['following_list'] as List?)
           ?.map((e) => SampleFeature.fromJson(e as Map<String, dynamic>))
           .toList(),
       // token: json['token'],
@@ -107,9 +106,9 @@ class SampleFeature {
         'public_repos': repository,
         'followers': followers,
         'following': following,
-        'repository_list': repositoryList,
-        'following_list': followingList,
-        'followers_list': followersList,
+        'repository_list': repositoryList?.map((e) => e.toJson()),
+        'following_list': followingList?.map((e) => e.toJson()),
+        'followers_list': followersList?.map((e) => e.toJson()),
         // 'token': token,
         // 'refresh_token': refreshToken,
       };

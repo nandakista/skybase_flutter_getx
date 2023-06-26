@@ -158,7 +158,9 @@ class DisplayImage extends StatelessWidget {
                       url,
                       width: width,
                       height: height,
-                      color: color,
+                      colorFilter: color != null
+                          ? ColorFilter.mode(color!, BlendMode.srcIn)
+                          : null,
                       fit: fit,
                     )
                   : (fromFile)
