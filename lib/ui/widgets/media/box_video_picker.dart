@@ -40,7 +40,6 @@ class BoxVideoPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectedImage = Rxn<File>();
-    print('selected video ${selectedImage.value}');
     if (replace) {
       return Obx(
         () => (selectedImage.value != null)

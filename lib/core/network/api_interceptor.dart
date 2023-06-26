@@ -45,7 +45,7 @@ class ApiInterceptors extends ApiTokenManager
   }
 
   @override
-  Future<dynamic> onError(DioError err, handler) async {
+  Future<dynamic> onError(DioException err, handler) async {
     if(kDebugMode) {
       debugPrint('');
       debugPrint('# ERROR');

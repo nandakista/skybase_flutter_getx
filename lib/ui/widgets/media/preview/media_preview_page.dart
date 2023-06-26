@@ -3,7 +3,6 @@ import 'package:skybase/core/helper/media_helper.dart';
 import 'package:skybase/ui/widgets/media/preview/components/video_preview_display.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
-import 'package:skybase/ui/widgets/sky_video.dart';
 
 /* Created by
    Varcant
