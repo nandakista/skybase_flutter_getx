@@ -8,6 +8,7 @@ import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_view.da
 import 'package:skybase/ui/views/utils/utils_view.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
 import 'package:skybase/ui/widgets/double_back_wrapper.dart';
+import 'package:skybase/ui/widgets/sky_box.dart';
 
 class MainNavView extends GetView<MainNavController> {
   static const String route = '/home';
@@ -33,37 +34,41 @@ class MainNavView extends GetView<MainNavController> {
         ),
       ),
       bottomNavigationBar: Obx(
-        ()=> BottomNavigationBar(
-          currentIndex: controller.index.value,
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          unselectedItemColor: Colors.grey,
-          onTap: (index) {
-            controller.pageController.animateToPage(
-              index,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.ease,
-            );
-          },
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.home),
-              label: 'Users',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.book),
-              label: 'Intro',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.arrow_right_to_line),
-              label: 'Login',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.settings),
-              label: 'Utility',
-            ),
-          ],
+        () => SkyBox(
+          borderRadius: 0,
+          margin: EdgeInsets.zero,
+          padding: EdgeInsets.zero,
+          child: BottomNavigationBar(
+            currentIndex: controller.index.value,
+            type: BottomNavigationBarType.fixed,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            onTap: (index) {
+              controller.pageController.animateToPage(
+                index,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.ease,
+              );
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.home),
+                label: 'Users',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.book),
+                label: 'Intro',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.arrow_right_to_line),
+                label: 'Login',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.settings),
+                label: 'Utility',
+              ),
+            ],
+          ),
         ),
       ),
     );
