@@ -9,17 +9,66 @@ class AppTheme {
     return ThemeData(
       primaryColor: AppColors.materialPrimary,
       primarySwatch: AppColors.materialPrimary,
-      toggleableActiveColor: AppColors.materialPrimary,
       indicatorColor: AppColors.accent,
       fontFamily: "Poppins",
       brightness: Brightness.light,
       inputDecorationTheme: inputDecorationTheme(),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: Colors.grey,
+      ),
       appBarTheme: const AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,
           systemNavigationBarColor: Colors.black,
           statusBarColor: AppColors.primary,
         ),
+      ),
+      checkboxTheme: CheckboxThemeData(
+        fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.materialPrimary;
+          }
+          return null;
+        }),
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.materialPrimary;
+          }
+          return null;
+        }),
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.materialPrimary[200];
+          }
+          return null;
+        }),
+        trackColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.materialPrimary;
+          }
+          return null;
+        }),
       ),
     );
   }
@@ -28,7 +77,6 @@ class AppTheme {
     return ThemeData(
       primarySwatch: AppColors.materialPrimary,
       primaryColor: AppColors.materialPrimary,
-      toggleableActiveColor: AppColors.materialPrimary,
       indicatorColor: AppColors.accent,
       fontFamily: "Poppins",
       brightness: Brightness.dark,
@@ -42,12 +90,63 @@ class AppTheme {
           ),
         ),
       ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: Colors.grey,
+        elevation: 2,
+      ),
       appBarTheme: const AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,
           systemNavigationBarColor: Colors.black,
           statusBarColor: AppColors.primary,
         ),
+      ),
+      checkboxTheme: CheckboxThemeData(
+        fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.accent;
+          }
+          return null;
+        }),
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.materialPrimary;
+          }
+          return null;
+        }),
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.materialPrimary[200];
+          }
+          return null;
+        }),
+        trackColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.materialPrimary;
+          }
+          return null;
+        }),
       ),
     );
   }

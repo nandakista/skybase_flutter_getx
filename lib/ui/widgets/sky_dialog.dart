@@ -239,7 +239,7 @@ class DialogAlert extends StatelessWidget {
                       const SizedBox(height: 32),
                       SkyButton(
                         text: confirmText,
-                        color: confirmColor,
+                        color: confirmColor ?? AppColors.primary,
                         onPressed: onConfirm,
                         fontWeight: AppStyle.semiBold,
                       ),
@@ -249,7 +249,7 @@ class DialogAlert extends StatelessWidget {
                         child: SkyButton(
                           text: cancelText ?? 'txt_no'.tr,
                           fontWeight: AppStyle.semiBold,
-                          color: cancelColor,
+                          color: cancelColor ?? AppColors.primary,
                           onPressed: onCancel,
                           outlineMode: true,
                         ),

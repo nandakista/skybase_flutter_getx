@@ -11,24 +11,24 @@ import 'package:skybase/core/themes/app_style.dart';
 ///  Change it as needed.
 class SkyButton extends StatelessWidget {
   /// Background color of button. Default value is primary color.
-  final Color? color;
+  final Color color;
 
   /// Text color of button, default value is white.
-  final Color textColor;
+  final Color? textColor;
 
   /// Text color of button, default value is white.
   final Color? borderColor;
 
   /// Text color of leading icon, default value is white.
-  final Color iconColor;
+  final Color? iconColor;
 
   /// Action or function that called when button pressed.
   final VoidCallback? onPressed;
 
   /// Display text in button.
-  final String text;
+  final String? text;
 
-  /// Width shape of button, default value is 70
+  /// Width shape of button
   final double? height;
 
   /// Width shape of button, default value is match parent.
@@ -39,8 +39,11 @@ class SkyButton extends StatelessWidget {
   /// The size of text button.
   final double? fontSize;
 
+  /// Border radius of the button
+  final BorderRadiusGeometry? borderRadius;
+
   /// The radius of the button shape.
-  final double? borderRadius;
+  final double radiusValue;
 
   /// Elevation value of button.
   final double? elevation;
@@ -49,7 +52,7 @@ class SkyButton extends StatelessWidget {
   final IconData? icon;
 
   /// Leading icon with Widget
-  final Widget? iconWidget;
+  final Widget? leading;
 
   /// Font weight text and icon inside button.
   final FontWeight? fontWeight;
@@ -64,59 +67,80 @@ class SkyButton extends StatelessWidget {
   /// Change style button to outline mode
   final bool outlineMode;
 
+  /// Widget inside the button
+  final Widget? child;
+
+  /// the option to change button color
+  final Gradient? gradient;
+
+  /// wether the button is can be clicked or not
+  final bool enabled;
+
   const SkyButton({
     Key? key,
-    required this.text,
+    this.text,
     required this.onPressed,
     this.icon,
     this.color = AppColors.primary,
-    this.iconColor = Colors.white,
-    this.textColor = Colors.white,
-    this.height = 55,
+    this.iconColor,
+    this.textColor,
+    this.height = 48,
     this.width = double.infinity,
     this.fontSize,
     this.fontWeight,
-    this.borderRadius = 8,
-    this.elevation = 1,
+    this.borderRadius,
+    this.elevation,
     this.margin,
     this.padding,
     this.wrapContent = false,
     this.borderColor,
     this.borderWidth,
-    this.iconWidget,
+    this.leading,
     this.outlineMode = false,
+    this.radiusValue = 8,
+    this.child,
+    this.gradient,
+    this.enabled = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: (wrapContent) ? null : width,
-      height: height,
-      padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+      height: (wrapContent) ? null : height,
       margin: margin,
+      decoration: BoxDecoration(
+        gradient: gradient,
+        borderRadius: borderRadius ?? BorderRadius.circular(radiusValue),
+      ),
       child: ElevatedButton.icon(
         icon: Visibility(
-          visible: (iconWidget != null || icon != null),
-          child: iconWidget ??
+          visible: (leading != null || icon != null),
+          child: leading ??
               Icon(
                 icon,
-                color: (outlineMode) ? color ?? AppColors.primary : iconColor,
+                color: iconColor ?? ((outlineMode) ? color : Colors.white),
               ),
         ),
-        onPressed: onPressed,
+        onPressed: (enabled) ? onPressed : null,
         style: ElevatedButton.styleFrom(
           elevation: elevation,
-          backgroundColor:
-              (outlineMode) ? Theme.of(context).scaffoldBackgroundColor : color,
-          padding: (icon != null || iconWidget != null)
+          backgroundColor: gradient != null
+              ? Colors.transparent
+              : (outlineMode)
+                  ? Theme.of(context).scaffoldBackgroundColor
+                  : color,
+          padding: (icon != null || leading != null)
               ? const EdgeInsets.symmetric(horizontal: 10, vertical: 10)
               : const EdgeInsets.fromLTRB(0, 10, 10, 10),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius!),
+            borderRadius: borderRadius ?? BorderRadius.circular(radiusValue),
             side: BorderSide(
-              color: (outlineMode)
-                  ? borderColor ?? color ?? AppColors.primary
-                  : borderColor ?? Colors.transparent,
+              color: enabled
+                  ? (outlineMode)
+                      ? borderColor ?? color
+                      : borderColor ?? Colors.transparent
+                  : Colors.transparent,
               width: borderWidth ?? 1.5,
               style: BorderStyle.solid,
             ),
@@ -126,19 +150,18 @@ class SkyButton extends StatelessWidget {
           padding: padding,
           child: FittedBox(
             fit: BoxFit.scaleDown,
-            child: Text(
-              text,
-              textAlign: TextAlign.center,
-              style: AppStyle.subtitle4.copyWith(
-                fontSize: fontSize,
-                fontWeight: fontWeight,
-                color: (onPressed == null)
-                    ? Colors.grey.shade400
-                    : outlineMode
-                        ? color ?? AppColors.primary
-                        : textColor,
-              ),
-            ),
+            child: child ??
+                Text(
+                  text ?? ' ',
+                  textAlign: TextAlign.center,
+                  style: AppStyle.subtitle4.copyWith(
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    color: (!enabled)
+                        ? Colors.grey.shade400
+                        : textColor ?? (outlineMode ? color : textColor),
+                  ),
+                ),
           ),
         ),
       ),
