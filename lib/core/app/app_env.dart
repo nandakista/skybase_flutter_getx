@@ -20,29 +20,23 @@ class AppEnv {
     switch (environment) {
       case Env.production:
         config = Config(
-          baseUrl: AppConfiguration.productionAPI,
-          clientToken: AppConfiguration.clientToken,
+          baseUrl: AppConfiguration.prodBaseUrl,
           tokenType: AppConfiguration.tokenType,
-          socketUrl: AppConfiguration.productionSocket,
-          midtransClientKey: AppConfiguration.someStagingKey,
+          clientToken: AppConfiguration.prodClientToken,
         );
         break;
       case Env.staging:
         config = Config(
-          baseUrl: AppConfiguration.developmentAPI,
-          clientToken: AppConfiguration.clientToken,
+          baseUrl: AppConfiguration.stagingBaseUrl,
           tokenType: AppConfiguration.tokenType,
-          socketUrl: AppConfiguration.stagingSocket,
-          midtransClientKey: AppConfiguration.someStagingKey,
+          clientToken: AppConfiguration.stagingClientToken,
         );
         break;
       case Env.development:
         config = Config(
-          baseUrl: AppConfiguration.developmentAPI,
-          clientToken: AppConfiguration.clientToken,
+          baseUrl: AppConfiguration.devBaseUrl,
           tokenType: AppConfiguration.tokenType,
-          socketUrl: AppConfiguration.developmentSocket,
-          midtransClientKey: AppConfiguration.someStagingKey,
+          clientToken: AppConfiguration.devClientToken,
         );
         break;
     }
@@ -54,12 +48,9 @@ class Config {
     required this.baseUrl,
     required this.clientToken,
     required this.tokenType,
-    required this.midtransClientKey,
-    required this.socketUrl,
   });
+
   String baseUrl;
   String clientToken;
   TokenType tokenType;
-  String socketUrl;
-  String midtransClientKey;
 }

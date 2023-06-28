@@ -38,6 +38,15 @@ class MainNavView extends GetView<MainNavController> {
           borderRadius: 0,
           margin: EdgeInsets.zero,
           padding: EdgeInsets.zero,
+          borderColor: Colors.transparent,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 5,
+              blurRadius: 3,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
           child: BottomNavigationBar(
             currentIndex: controller.index.value,
             type: BottomNavigationBarType.fixed,

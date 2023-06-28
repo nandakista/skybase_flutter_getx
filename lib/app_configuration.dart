@@ -7,23 +7,19 @@ import 'package:skybase/core/network/api_token_manager.dart';
 */
 class AppConfiguration {
   //-- Main Configuration
-  static const clientToken = 'Some Client Token';
   static const tokenType = TokenType.accessToken;
 
   //-- Production
-  static const productionAPI = 'https://api.github.com';
-  static const productionSocket = 'production socket url';
-  static const someProductionKey = 'Some Key';
+  static const prodBaseUrl = 'https://api.github.com';
+  static const prodClientToken = 'Some Client Token';
 
   //-- Staging
-  static const stagingAPI = 'https://api.github.com';
-  static const stagingSocket = 'staging socket url';
-  static const someStagingKey = 'Some Key';
+  static const stagingBaseUrl = 'https://api.github.com';
+  static const stagingClientToken = 'Some Client Token';
 
   //-- Development
-  static const developmentAPI = 'https://api.github.com';
-  static const developmentSocket = 'development socket url';
-  static const someDevKey = 'Some Key';
+  static const devBaseUrl = 'https://api.github.com';
+  static const devClientToken = 'Some Client Token';
 
   //-- App Info
   static String appName = 'Skybase';

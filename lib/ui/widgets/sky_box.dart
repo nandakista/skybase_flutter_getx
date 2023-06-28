@@ -18,6 +18,7 @@ class SkyBox extends StatelessWidget {
     this.gradient,
     this.borderColor,
     this.elevation = 4,
+    this.boxShadow,
   }) : super(key: key);
 
   final Widget? child;
@@ -30,6 +31,7 @@ class SkyBox extends StatelessWidget {
   final Color? borderColor;
   final Gradient? gradient;
   final double elevation;
+  final List<BoxShadow>? boxShadow;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,7 @@ class SkyBox extends StatelessWidget {
             border: Border.all(
               color: borderColor ?? Colors.grey.shade300,
             ),
+            boxShadow: boxShadow,
           ),
           child: child,
         ),
