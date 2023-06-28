@@ -99,6 +99,7 @@ class LoginView extends GetView<LoginController> {
                 ),
                 Column(
                   children: [
+                    const SizedBox(height: 12),
                     SkyButton(
                       onPressed: () => controller.bypassLogin(),
                       text: 'txt_skip'.tr,

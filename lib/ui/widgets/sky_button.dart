@@ -84,7 +84,7 @@ class SkyButton extends StatelessWidget {
     this.color = AppColors.primary,
     this.iconColor,
     this.textColor,
-    this.height = 55,
+    this.height = 48,
     this.width = double.infinity,
     this.fontSize,
     this.fontWeight,
@@ -152,7 +152,7 @@ class SkyButton extends StatelessWidget {
             fit: BoxFit.scaleDown,
             child: child ??
                 Text(
-                  text.toString(),
+                  text ?? ' ',
                   textAlign: TextAlign.center,
                   style: AppStyle.subtitle4.copyWith(
                     fontSize: fontSize,

@@ -166,7 +166,7 @@ class MediaUtilsView extends GetView<UtilsController> {
           child: Text('UI Image Picker'),
         ),
       ),
-      const SizedBox(height: 4),
+      const SizedBox(height: 16),
       SkyButton(
         text: 'Image BottomSheet',
         onPressed: () {
@@ -180,7 +180,7 @@ class MediaUtilsView extends GetView<UtilsController> {
           );
         },
       ),
-      const SizedBox(height: 12),
+      const SizedBox(height: 24),
       BoxVideoPicker(
         replace: true,
         text: 'Add video',
