@@ -7,7 +7,7 @@ import 'package:skybase/core/themes/app_colors.dart';
 class AppTheme {
   static ThemeData light() {
     return ThemeData(
-      primaryColor: AppColors.materialPrimary,
+      primaryColor: AppColors.primary,
       primarySwatch: AppColors.materialPrimary,
       indicatorColor: AppColors.accent,
       fontFamily: "Poppins",
@@ -31,7 +31,7 @@ class AppTheme {
             return null;
           }
           if (states.contains(MaterialState.selected)) {
-            return AppColors.materialPrimary;
+            return AppColors.accent;
           }
           return null;
         }),
@@ -43,7 +43,7 @@ class AppTheme {
             return null;
           }
           if (states.contains(MaterialState.selected)) {
-            return AppColors.materialPrimary;
+            return AppColors.accent;
           }
           return null;
         }),
@@ -55,7 +55,7 @@ class AppTheme {
             return null;
           }
           if (states.contains(MaterialState.selected)) {
-            return AppColors.materialPrimary[200];
+            return AppColors.materialAccent[200];
           }
           return null;
         }),
@@ -65,7 +65,7 @@ class AppTheme {
             return null;
           }
           if (states.contains(MaterialState.selected)) {
-            return AppColors.materialPrimary;
+            return AppColors.accent;
           }
           return null;
         }),
@@ -75,8 +75,8 @@ class AppTheme {
 
   static ThemeData dark() {
     return ThemeData(
+      primaryColor: AppColors.primary,
       primarySwatch: AppColors.materialPrimary,
-      primaryColor: AppColors.materialPrimary,
       indicatorColor: AppColors.accent,
       fontFamily: "Poppins",
       brightness: Brightness.dark,
@@ -121,7 +121,7 @@ class AppTheme {
             return null;
           }
           if (states.contains(MaterialState.selected)) {
-            return AppColors.materialPrimary;
+            return AppColors.accent;
           }
           return null;
         }),
@@ -133,7 +133,7 @@ class AppTheme {
             return null;
           }
           if (states.contains(MaterialState.selected)) {
-            return AppColors.materialPrimary[200];
+            return AppColors.materialAccent[200];
           }
           return null;
         }),
@@ -143,7 +143,7 @@ class AppTheme {
             return null;
           }
           if (states.contains(MaterialState.selected)) {
-            return AppColors.materialPrimary;
+            return AppColors.accent;
           }
           return null;
         }),
@@ -162,11 +162,11 @@ class AppTheme {
         borderRadius: BorderRadius.circular(12),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(width: 1, color: Colors.blue),
+        borderSide: const BorderSide(width: 1, color: AppColors.primary),
         borderRadius: BorderRadius.circular(12),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderSide: const BorderSide(width: 1, color: Colors.blue),
+        borderSide: const BorderSide(width: 1, color: AppColors.primary),
         borderRadius: BorderRadius.circular(12),
       ),
     );

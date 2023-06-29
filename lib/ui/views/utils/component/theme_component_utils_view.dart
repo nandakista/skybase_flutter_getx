@@ -11,7 +11,7 @@ class ThemeComponentUtilsView extends StatelessWidget {
     RxBool switchValue = false.obs;
 
     return Scaffold(
-      appBar: SkyAppBar.primary(title: 'Theme Component'),
+      appBar: SkyAppBar.secondary(title: 'Theme Component'),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
