@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 class IntroIndicator extends StatelessWidget {
@@ -21,7 +22,10 @@ class IntroIndicator extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 2),
             child: (index == currentIndex)
-                ? const SkyImage(src: 'assets/images/oval_horizontal.svg')
+                ? const SkyImage(
+                    src: 'assets/images/oval_horizontal.svg',
+                    color: AppColors.primary,
+                  )
                 : Icon(Icons.circle, size: 10, color: Colors.grey.shade400),
           );
         },

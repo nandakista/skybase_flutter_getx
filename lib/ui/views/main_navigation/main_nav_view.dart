@@ -18,6 +18,7 @@ class MainNavView extends GetView<MainNavController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ColoredStatusBar(
+        brightness: Brightness.light,
         child: SafeArea(
           child: DoubleBack(
             child: PageView(
