@@ -5,11 +5,15 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/snackbar_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'permission_helper.dart';
 
 class FileHelper {
   static String getFileSizeString(String path, int decimals) {
@@ -94,7 +98,13 @@ class FileHelper {
       final downloadDir = Uri.tryParse("shareddocuments://$folderPath")!;
       await launchUrl(downloadDir);
     } else if (Platform.isAndroid) {
-      if (await Permission.manageExternalStorage.request().isGranted) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+
+      if (androidInfo.version.sdkInt > 29) {
+        bool isGranted = await PermissionHelper.manageExternalStorage();
+        if (isGranted) await FileHelper.openDownloadedFolder(folderPath);
+      } else {
         await FileHelper.openDownloadedFolder(folderPath);
       }
     }
@@ -134,18 +144,38 @@ class FileHelper {
     if (Platform.isAndroid) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-      if (androidInfo.version.sdkInt <= 28) {
-        final status = await Permission.storage.status;
-        if (status != PermissionStatus.granted) {
-          final result = await Permission.storage.request();
-          if (result == PermissionStatus.granted) {
-            return true;
-          }
-        } else {
+
+      if (androidInfo.version.sdkInt < 33) {
+        final permission = await Permission.storage.request();
+        if (permission.isPermanentlyDenied) {
+          LoadingDialog.dismiss();
+          PermissionHelper.showOpenSettings("txt_need_permission_storage".tr);
+          return false;
+        } else if (permission.isGranted) {
           return true;
+        } else if (permission.isDenied) {
+          SnackBarHelper.error(message: 'txt_need_permission_storage'.tr);
+          return false;
         }
       } else {
-        return true;
+        ///
+        /// For android 13+ (API 33+) you don't need permission pdf or file
+        /// But you need to define every media permission
+        /// Permission.photos
+        /// Permission.videos
+        /// Permission.audio
+        ///
+        final permission = await Permission.photos.request();
+        if (permission.isPermanentlyDenied) {
+          LoadingDialog.dismiss();
+          PermissionHelper.showOpenSettings("txt_need_permission_storage".tr);
+          return false;
+        } else if (permission.isGranted) {
+          return true;
+        } else if (permission.isDenied) {
+          SnackBarHelper.error(message: 'txt_need_permission_storage'.tr);
+          return false;
+        }
       }
     } else if (Platform.isIOS) {
       return true;

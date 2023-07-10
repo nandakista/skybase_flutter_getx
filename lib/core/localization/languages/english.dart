@@ -96,4 +96,6 @@ const Map<String, String> en = {
   'txt_max_item': 'All items have been loaded.',
   'txt_empty_list_title': 'Your list is empty!',
   'txt_empty_list_subtitle': 'Sorry, list data is empty. Maybe go back latter',
+
+  'txt_need_permission_storage': '',
 };
