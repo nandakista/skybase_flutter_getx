@@ -20,7 +20,7 @@ import 'core/helper/http_overrides.dart';
    Varcant
    nanda.kista@gmail.com
 */
-class Initializer {
+class ServiceLocator {
   static Future<void> init() async {
     if (kReleaseMode) debugPrint = (String? message, {int? wrapWidth}) {};
     HttpOverrides.global = MyHttpOverrides();

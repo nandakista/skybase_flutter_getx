@@ -13,7 +13,7 @@ enum Env {
 
 class AppEnv {
   static late Config config;
-  static late Env env;
+  static Env env = Env.development;
 
   static set(Env environment) {
     env = environment;

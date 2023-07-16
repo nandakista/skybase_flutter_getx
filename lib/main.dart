@@ -8,15 +8,14 @@ import 'package:skybase/core/localization/app_translations.dart';
 import 'package:skybase/core/localization/locale_helper.dart';
 import 'package:skybase/core/themes/app_theme.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
-import 'package:skybase/initializer.dart';
+import 'package:skybase/service_locator.dart';
 import 'package:skybase/ui/routes/app_routes.dart';
 
 import 'app_configuration.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Initializer.init();
-  AppEnv.set(Env.development);
+  await ServiceLocator.init();
   if (AppEnv.env == Env.development) {
     runApp(
       DevicePreview(

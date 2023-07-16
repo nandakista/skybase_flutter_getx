@@ -25,6 +25,10 @@ class AppTheme {
         ),
       ),
       checkboxTheme: CheckboxThemeData(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+        ),
+        side: const BorderSide(width: 1, color: Color(0xFFCFCFCF)),
         fillColor: MaterialStateProperty.resolveWith<Color?>(
             (Set<MaterialState> states) {
           if (states.contains(MaterialState.disabled)) {
