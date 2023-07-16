@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
 import 'package:skybase/ui/widgets/sky_dialog.dart';
 
-class Loading {
+class LoadingDialog {
   static show({bool? dismissible}) {
     return showGeneralDialog(
       context: Get.context!,
@@ -30,7 +30,7 @@ class Loading {
   static dismiss() => Get.back();
 }
 
-class SkyDialog {
+class DialogHelper {
   static failed({
     required String message,
     VoidCallback? onConfirm,

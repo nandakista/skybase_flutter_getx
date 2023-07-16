@@ -11,8 +11,8 @@ class DateTimeHelper {
   }) {
     if (date != null) {
       return LocaleHelper.builder(
-        enCallback: DateFormat(format).format(date),
-        idCallback: DateFormat(idFormat ?? format, 'id').format(date),
+        en: DateFormat(format).format(date),
+        id: DateFormat(idFormat ?? format, 'id').format(date),
       );
     } else {
       return 'Date is null';
@@ -31,6 +31,8 @@ class DateTimeHelper {
       return '${date.difference(DateTime.now()).inHours} ${'txt_hours'.tr}';
     } else if (date.inNextWeek()) {
       return '${date.difference(DateTime.now()).inDays + 1} ${'txt_days'.tr}';
+    } else if (date.isBefore(DateTime.now())) {
+      return 'txt_expired'.tr;
     } else if (date.inThisYear()) {
       return parseLocalDate(date: date, format: 'dd MMM');
     } else {

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
+// import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/network/api_config.dart';
 import 'package:skybase/core/network/api_exception.dart';
 import 'package:skybase/core/network/api_url.dart';
@@ -118,7 +118,7 @@ Object? _setBody({
 
 Future<void> _tokenManager(bool useToken) async {
   DioClient.setInterceptor();
-  String? token = await SecureStorageManager.find.getToken();
+  // String? token = await SecureStorageManager.find.getToken();
   if (useToken) {
     // headers[HttpHeaders.authorizationHeader] = 'token $gitToken';
   } else {
@@ -131,7 +131,7 @@ Future<Response> _safeFetch(Future<Response> Function() tryFetch) async {
     final response = await tryFetch();
     // return ApiResponse.fromJson(response.data);
     return response;
-  } on DioError catch (e) {
+  } on DioException catch (e) {
     throw NetworkException.getErrorException(e);
   } catch (e) {
     rethrow;

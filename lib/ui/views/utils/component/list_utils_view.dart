@@ -1,9 +1,8 @@
+import 'package:collection_picker/collection_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/data/models/global/picker_data.dart';
 import 'package:skybase/ui/widgets/base/sky_list_view.dart';
 import 'package:skybase/ui/widgets/ordered_list.dart';
-import 'package:skybase/ui/widgets/picker/picker_listview.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_grouped_listview.dart';
 import 'package:skybase/ui/widgets/unordered_list.dart';
@@ -69,23 +68,24 @@ class ListUtilsView extends StatelessWidget {
                 errorEnabled: false,
                 onRetry: () {},
                 onRefresh: () {},
-                emptyEnabled: dummyData.isEmpty,
-                child: PickerListView(
-                  type: ListPickerType.single,
+                emptyEnabled: dummyDataWithObject.isEmpty,
+                child: ListViewPicker<SampleObjectData>(
+                  type: PickerType.single,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   separator: const Divider(thickness: 1, height: 16),
-                  data: dummyData.map((e) => PickerData(data: e)).toList(),
-                  itemBuilder: (PickerData<dynamic> item) {
+                  initialValue: dummyDataWithObject.first,
+                  data: dummyDataWithObject,
+                  unavailableDataIndex: const [0, 3],
+                  itemBuilder: (PickerWrapper<SampleObjectData> item) {
                     return SizedBox(
                       height: 20,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(item.data['name']),
-                          (item.isSelected)
-                              ? const Icon(Icons.check)
-                              : const SizedBox.shrink()
+                          Text('${item.data?.name}'),
+                          if (item.isSelected) const Icon(Icons.check),
+                          if (!item.isAvailable) const Text('Unavailable')
                         ],
                       ),
                     );
@@ -206,3 +206,19 @@ final dummyData = [
     'date': DateTime.now().subtract(const Duration(days: 4)),
   },
 ];
+
+var dummyDataWithObject = [
+  SampleObjectData('Jakarta', 'SCBD'),
+  SampleObjectData('Lampung', 'Metro'),
+  SampleObjectData('Bandung', 'Gedebage'),
+  SampleObjectData('Bandung', 'Cihanjuan'),
+  SampleObjectData('Bandung', 'Gedebage'),
+  SampleObjectData('Jakarta', 'Sudirman')
+];
+
+class SampleObjectData {
+  String group;
+  String name;
+
+  SampleObjectData(this.group, this.name);
+}

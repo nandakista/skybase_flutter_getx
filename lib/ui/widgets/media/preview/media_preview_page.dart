@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:skybase/core/helper/media_helper.dart';
+import 'package:skybase/ui/widgets/media/preview/components/video_preview_display.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
-import 'package:skybase/ui/widgets/sky_video.dart';
 
 /* Created by
    Varcant
@@ -11,14 +10,24 @@ import 'package:skybase/ui/widgets/sky_video.dart';
 */
 class MediaPreviewPage extends StatelessWidget {
   final String url;
+  final bool fromFile;
+  final String? title;
+  final TextStyle? titleStyle;
 
-  const MediaPreviewPage({Key? key, required this.url}) : super(key: key);
+  const MediaPreviewPage({
+    Key? key,
+    required this.url,
+    this.fromFile = true,
+    this.title,
+    this.titleStyle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: SkyAppBar.primary(
-          title: '${'txt_media'.tr} ${'txt_preview'.tr}',
+          title: title ?? 'Media Preview',
+          titleStyle: titleStyle,
         ),
         body: _determineMedia(url));
   }
@@ -26,22 +35,22 @@ class MediaPreviewPage extends StatelessWidget {
   Widget _determineMedia(String path) {
     final mediaType = MediaHelper.getMediaType(path);
     switch (mediaType.type) {
-      case MediaType.file:
+      case MediaType.FILE:
         return const Center(child: Text('Media Unsupported'));
-      case MediaType.image:
-        return Center(child: SkyImage(url: mediaType.path));
-      case MediaType.video:
-        // return VideoPreviewDisplay(
-        //   url: mediaType.path,
-        //   height: double.infinity,
-        //   width: double.infinity,
-        // );
-        return SkyVideo(
+      case MediaType.IMAGE:
+        return Center(
+          child: SkyImage(
+            src: mediaType.path,
+            fromFile: fromFile,
+          ),
+        );
+      case MediaType.VIDEO:
+        return VideoPreviewDisplay(
           url: mediaType.path,
           height: double.infinity,
           width: double.infinity,
         );
-      case MediaType.unknown:
+      case MediaType.UNKNOWN:
         return const Center(child: Text('Media Unsupported'));
     }
   }

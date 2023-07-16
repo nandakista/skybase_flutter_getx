@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 
-class AppConverter {
+class ConverterHelper {
   static String toBase64({XFile? imageFile, File? file}) {
     try {
       if (imageFile != null) {
@@ -44,7 +44,7 @@ class AppConverter {
   /// --> Result will = na****mail.com
   static String replaceStringRange(String sentence, int start, int end, String newChar) {
     for (int i = start; i < end+1 ; i++) {
-      sentence = AppConverter.replaceStringAt(sentence, i, newChar);
+      sentence = ConverterHelper.replaceStringAt(sentence, i, newChar);
     }
     return sentence;
   }

@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'dart:io';
 
 import 'package:camera/camera.dart';
@@ -11,7 +9,7 @@ import 'package:image/image.dart' as img;
 import 'package:photo_manager/photo_manager.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/general_function.dart';
-import 'package:skybase/core/helper/sky_snackbar.dart';
+import 'package:skybase/core/helper/snackbar_helper.dart';
 import 'package:skybase/ui/widgets/circle_icon.dart';
 import 'package:skybase/ui/widgets/media/ui_image_picker.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
@@ -108,11 +106,11 @@ class _CameraModuleState extends State<CameraModule>
     debugPrint('CameraModule::initCamera() -> $cameras');
     await availableCameras().then((value) {
       if (value.isEmpty && !kDebugMode) {
-        SkyDialog.failed(
+        DialogHelper.failed(
           isDismissible: false,
           message: 'You need use the real device',
           onConfirm: () {
-            SkyDialog.dismiss();
+            DialogHelper.dismiss();
             Get.back();
           },
         );
@@ -126,10 +124,10 @@ class _CameraModuleState extends State<CameraModule>
           }
           initController(cameras[selectedCameraIndex!]).then((_) {});
         } else {
-          SkyDialog.failed(
+          DialogHelper.failed(
             message: 'txt_camera_not_found'.tr,
             onConfirm: () {
-              SkyDialog.dismiss();
+              DialogHelper.dismiss();
               Get.back();
             },
           );
@@ -137,10 +135,10 @@ class _CameraModuleState extends State<CameraModule>
       }
     }).catchError((e) {
       debugPrint('CameraModule::initCamera() -> $e');
-      SkyDialog.failed(
+      DialogHelper.failed(
         message: '${'txt_something_went_wrong'.tr}\n${e.toString()}',
         onConfirm: () {
-          SkyDialog.dismiss();
+          DialogHelper.dismiss();
           Get.back();
         },
       );
@@ -158,7 +156,7 @@ class _CameraModuleState extends State<CameraModule>
       if (mounted) setState(() {});
     });
     if (_cameraController!.value.hasError) {
-      SkySnackBar.normal(message: 'txt_something_went_wrong'.tr);
+      SnackBarHelper.normal(message: 'txt_something_went_wrong'.tr);
     }
 
     debugPrint('CameraModule::initCameraController()');
@@ -166,7 +164,7 @@ class _CameraModuleState extends State<CameraModule>
       _cameraController!.initialize();
     } catch (e) {
       debugPrint('CameraException::initCameraController() ${e.toString()}');
-      SkySnackBar.normal(message: '${'txt_something_went_wrong'.tr}.\n$e');
+      SnackBarHelper.normal(message: '${'txt_something_went_wrong'.tr}.\n$e');
     }
     debugPrint('CameraModule::initCamera() _controller.initialize');
     if (mounted) setState(() {});
@@ -181,7 +179,7 @@ class _CameraModuleState extends State<CameraModule>
         start: 0,
         end: 1,
       );
-      var image = await recentAssets.first.file;
+      File? image = await recentAssets.first.file;
       setState(() => lastImageFromGallery = image);
     } catch (e) {
       debugPrint('e: $e');
@@ -247,9 +245,9 @@ class _CameraModuleState extends State<CameraModule>
     if (_cameraController == null || !_cameraController!.value.isInitialized) {
       return const PlatformLoadingIndicator();
     }
-    var camera = _cameraController!.value;
+    CameraValue camera = _cameraController!.value;
     final size = MediaQuery.of(context).size;
-    var scale = size.aspectRatio * camera.aspectRatio;
+    double scale = size.aspectRatio * camera.aspectRatio;
     if (scale < 1) scale = 1 / scale;
     if (widget.useBorder) {
       return Stack(
@@ -318,7 +316,7 @@ class _CameraModuleState extends State<CameraModule>
   }
 
   Widget _buildGalleryButton() {
-    var image = (lastImageFromGallery != null)
+    FileImage?  image = (lastImageFromGallery != null)
         ? FileImage(lastImageFromGallery!)
         : null;
     return Visibility(
@@ -377,7 +375,7 @@ class _CameraModuleState extends State<CameraModule>
         ),
       );
     } else {
-      var croppedImg = await squareCropImage(resultImage);
+      File croppedImg = await squareCropImage(resultImage);
       arguments = Get.to(
         () => PreviewCameraPage(
           imageFile: croppedImg,
@@ -394,7 +392,7 @@ class _CameraModuleState extends State<CameraModule>
 
   Future<File> squareCropImage(File image) async {
     final img.Image? capturedImage = img.decodeImage(await image.readAsBytes());
-    var croppedImg = img.copyResizeCropSquare(capturedImage!, 1080);
+    img.Image croppedImg = img.copyResizeCropSquare(capturedImage!, size: 1080);
     File result = await image.writeAsBytes(img.encodeJpg(croppedImg));
     return result;
   }
@@ -405,7 +403,7 @@ class _CameraModuleState extends State<CameraModule>
 
     // final img.Image orientedImage = img.flipHorizontal(capturedImage!);
 
-    var croppedImage = img.copyResizeCropSquare(capturedImage!, 1080);
+    img.Image croppedImage = img.copyResizeCropSquare(capturedImage!, size: 1080);
     final img.Image orientedImage = img.flipHorizontal(croppedImage);
 
     File flippedImage =
@@ -557,7 +555,7 @@ class _CameraModuleState extends State<CameraModule>
       await _cameraController!.setFlashMode(mode);
     } on CameraException catch (e) {
       logError(e.code, e.description);
-      SkySnackBar.normal(message: 'Error: ${e.code}\n${e.description}');
+      SnackBarHelper.normal(message: 'Error: ${e.code}\n${e.description}');
       rethrow;
     }
   }

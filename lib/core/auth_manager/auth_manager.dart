@@ -41,7 +41,7 @@ class AuthManager extends GetxService {
     // authChanged(state);
     Timer(
       const Duration(seconds: 2),
-          () => Get.offAllNamed(LoginView.route),
+      () => Get.offAllNamed(LoginView.route),
     );
     super.onReady();
   }
@@ -60,7 +60,7 @@ class AuthManager extends GetxService {
       case AppType.UNAUTHENTICATED:
         Timer(
           const Duration(seconds: 2),
-              () => Get.offAllNamed(LoginView.route),
+          () => Get.offAllNamed(LoginView.route),
         );
         break;
       case AppType.AUTHENTICATED:
@@ -78,7 +78,8 @@ class AuthManager extends GetxService {
 
   /// Check if app is first time installed. It will navigate to Introduction Page
   void checkFirstInstall() async {
-    final bool firstInstall = getStorage.get(GetStorageKey.firstInstall) ?? true;
+    final bool firstInstall =
+        getStorage.get(GetStorageKey.firstInstall) ?? true;
     if (firstInstall) {
       await secureStorage.setToken(value: '');
       authState.value = const AuthState(appStatus: AppType.FIRST_INSTALL);
@@ -89,8 +90,9 @@ class AuthManager extends GetxService {
 
   /// Checking App Theme set it before app display
   Future<void> checkAppTheme() async {
-    final bool isDarkTheme = await getStorage.getAwait(GetStorageKey.darkTheme) ?? false;
-    if(isDarkTheme) {
+    final bool isDarkTheme =
+        await getStorage.getAwait(GetStorageKey.darkTheme) ?? false;
+    if (isDarkTheme) {
       themeManager.toDarkMode();
     } else {
       themeManager.toLightMode();

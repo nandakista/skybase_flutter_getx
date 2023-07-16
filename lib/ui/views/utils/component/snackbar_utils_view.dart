@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skybase/core/helper/sky_snackbar.dart';
+import 'package:skybase/core/helper/snackbar_helper.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 
@@ -18,25 +18,25 @@ class SnackBarUtilsView extends StatelessWidget {
             const SizedBox(height: 12),
             SkyButton(
               text: 'Normal',
-              onPressed: () => SkySnackBar.normal(message: 'Normal'),
+              onPressed: () => SnackBarHelper.normal(message: 'Normal'),
             ),
             const SizedBox(height: 12),
             SkyButton(
               text: 'Error',
               onPressed: () =>
-                  SkySnackBar.error(message: 'Some Error Message'),
+                  SnackBarHelper.error(message: 'Some Error Message'),
             ),
             const SizedBox(height: 12),
             SkyButton(
               text: 'Warning',
               onPressed: () =>
-                  SkySnackBar.warning(message: 'Some Warning Message'),
+                  SnackBarHelper.warning(message: 'Some Warning Message'),
             ),
             const SizedBox(height: 12),
             SkyButton(
               text: 'Success',
               onPressed: () =>
-                  SkySnackBar.success(message: 'Some Success Message'),
+                  SnackBarHelper.success(message: 'Some Success Message'),
             ),
           ],
         ),

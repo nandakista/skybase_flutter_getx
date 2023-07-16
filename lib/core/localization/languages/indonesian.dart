@@ -1,4 +1,5 @@
 const Map<String, String> id = {
+  'txt_version': 'Versi Aplikasi',
   'txt_expired': 'Berakhir',
   'txt_expired_k': 'Kedaluwarsa',
   'txt_days': 'Hari',

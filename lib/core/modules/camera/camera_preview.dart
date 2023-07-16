@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/helper/general_function.dart';
-import 'package:skybase/core/helper/sky_snackbar.dart';
+import 'package:skybase/core/helper/file_helper.dart';
+import 'package:skybase/core/helper/snackbar_helper.dart';
 import 'package:skybase/ui/widgets/circle_icon.dart';
 
 /* Created by
@@ -61,7 +61,7 @@ class PreviewCameraPage extends StatelessWidget {
                       CircleIcon(
                         onPressed: () async {
                           if (showInfo) {
-                            showImageInfo(context);
+                            showImageInfo();
                           }
                           Get.back(result: File(imageFile.path));
                         },
@@ -83,9 +83,8 @@ class PreviewCameraPage extends StatelessWidget {
     );
   }
 
-  showImageInfo(BuildContext context) async {
-    // Show Image Info
-    String size = await AppFunction.getFileSize(imageFile.path, 2);
-    SkySnackBar.normal(message: '$size, ${imageFile.path}');
+  showImageInfo() {
+    String size = FileHelper.getFileSizeString(imageFile.path, 2);
+    SnackBarHelper.normal(message: '$size, ${imageFile.path}');
   }
 }

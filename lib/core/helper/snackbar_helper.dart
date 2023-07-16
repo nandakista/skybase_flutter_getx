@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-enum SkySnackBarType { normal, success, error, warning }
+enum SkySnackBarType { NORMAL, SUCCESS, ERROR, WARNING }
 
-abstract class SkySnackBar {
+abstract class SnackBarHelper {
   static void custom ({
     required String? message,
     SnackBarBehavior? behavior,
@@ -17,7 +17,7 @@ abstract class SkySnackBar {
   }) {
     showDefaultSnackBar(
       message: message ?? 'txt_success'.tr,
-      type: SkySnackBarType.normal,
+      type: SkySnackBarType.NORMAL,
       behavior: behavior,
       action: action,
       backgroundColor: backgroundColor,
@@ -36,7 +36,7 @@ abstract class SkySnackBar {
   }) {
     showDefaultSnackBar(
       message: message ?? 'txt_success'.tr,
-      type: SkySnackBarType.normal,
+      type: SkySnackBarType.NORMAL,
       behavior: behavior,
       action: action,
     );
@@ -49,7 +49,7 @@ abstract class SkySnackBar {
   }) {
     showDefaultSnackBar(
       message: message ?? 'txt_success'.tr,
-      type: SkySnackBarType.success,
+      type: SkySnackBarType.SUCCESS,
       behavior: behavior,
       action: action,
     );
@@ -62,7 +62,7 @@ abstract class SkySnackBar {
   }) {
     showDefaultSnackBar(
       message: message ?? 'txt_error'.tr,
-      type: SkySnackBarType.error,
+      type: SkySnackBarType.ERROR,
       behavior: behavior,
       action: action,
     );
@@ -75,7 +75,7 @@ abstract class SkySnackBar {
   }) {
     showDefaultSnackBar(
       message: message ?? 'txt_warning'.tr,
-      type: SkySnackBarType.warning,
+      type: SkySnackBarType.WARNING,
       behavior: behavior,
       action: action,
     );
@@ -83,7 +83,7 @@ abstract class SkySnackBar {
 
   static void showDefaultSnackBar({
     required String message,
-    SkySnackBarType type = SkySnackBarType.normal,
+    SkySnackBarType type = SkySnackBarType.NORMAL,
     SnackBarBehavior? behavior,
     SnackBarAction? action,
     EdgeInsets? margin,
@@ -96,16 +96,16 @@ abstract class SkySnackBar {
     Color bgColor = backgroundColor ?? Theme.of(Get.context!).primaryColor;
 
     switch (type) {
-      case SkySnackBarType.error:
+      case SkySnackBarType.ERROR:
         bgColor = Colors.red;
         break;
-      case SkySnackBarType.success:
+      case SkySnackBarType.SUCCESS:
         bgColor = Colors.green;
         break;
-      case SkySnackBarType.warning:
+      case SkySnackBarType.WARNING:
         bgColor = Colors.orange;
         break;
-      case SkySnackBarType.normal:
+      case SkySnackBarType.NORMAL:
         bgColor = Colors.black;
         break;
     }

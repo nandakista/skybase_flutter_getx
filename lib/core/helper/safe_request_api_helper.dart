@@ -10,7 +10,7 @@ class SafeRequestAPI {
     try {
       await functionUpdate();
     } catch (e) {
-      SkyDialog.failed(message: e.toString());
+      DialogHelper.failed(message: e.toString());
       rethrow;
     }
   }
@@ -22,7 +22,7 @@ class SafeRequestAPI {
     try {
       return await function();
     } catch (e) {
-      SkyDialog.failed(message: e.toString());
+      DialogHelper.failed(message: e.toString());
       rethrow;
     }
   }

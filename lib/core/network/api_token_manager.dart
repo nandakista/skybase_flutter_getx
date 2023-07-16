@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -21,13 +19,13 @@ import 'package:skybase/core/network/api_url.dart';
 */
 enum TokenType {
   /// When your app no need token authentication.
-  NO_TOKEN,
+  NONE,
 
   /// When your app just use Access Token.
   ACCESS_TOKEN,
 
   /// When your app use Refresh Token Mechanism (Access + Refresh).
-  ACCESS_REFRESH_TOKEN,
+  REFRESH_TOKEN,
 }
 
 class ApiTokenManager extends QueuedInterceptorsWrapper {
@@ -36,27 +34,27 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
 
   Future<void> handleToken({
     required Dio dio,
-    required DioError err,
+    required DioException err,
     required ErrorInterceptorHandler handler,
   }) async {
     switch (AppEnv.config.tokenType) {
-      case TokenType.NO_TOKEN:
+      case TokenType.NONE:
         super.onError(err, handler);
         break;
       case TokenType.ACCESS_TOKEN:
         // super.onError(err, handler);
         _handleAccessToken(err, handler);
         break;
-      case TokenType.ACCESS_REFRESH_TOKEN:
+      case TokenType.REFRESH_TOKEN:
         _handleRefreshToken(dio, err, handler);
         break;
     }
   }
 
-  _handleAccessToken(DioError err, ErrorInterceptorHandler handler) async {
+  _handleAccessToken(DioException err, ErrorInterceptorHandler handler) async {
     final int status = err.response?.statusCode ?? 0;
     if (status == 401) {
-      SkyDialog.failed(
+      DialogHelper.failed(
         isDismissible: false,
         message: 'txt_you_must_login_again'.tr,
         onConfirm: () => authManager.logout(),
@@ -69,7 +67,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
 
   _handleRefreshToken(
     Dio dio,
-    DioError err,
+    DioException err,
     ErrorInterceptorHandler handler,
   ) async {
     String? accessToken = await secureStorage.getToken();
@@ -93,9 +91,9 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
             Options(headers: headers, contentType: Headers.jsonContentType),
       );
       return ApiResponse.fromJson(responseBody.data).data['token'];
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       debugPrint('${NetworkException.getErrorException(error)}');
-      return SkyDialog.failed(
+      return DialogHelper.failed(
         isDismissible: false,
         message: 'txt_you_must_login_again'.tr,
         onConfirm: () => authManager.logout(),

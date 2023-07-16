@@ -30,30 +30,35 @@ class BottomSheetUtilsView extends StatelessWidget {
                 BottomSheetHelper.basic(child: _imageSource());
               },
             ),
+            const SizedBox(height: 12),
             SkyButton(
               text: 'Rounded',
               onPressed: () {
                 BottomSheetHelper.rounded(child: _imageSource());
               },
             ),
+            const SizedBox(height: 12),
             SkyButton(
               text: 'Bar',
               onPressed: () {
                 BottomSheetHelper.bar(child: _imageSource());
               },
             ),
+            const SizedBox(height: 12),
             SkyButton(
               text: 'Cupertino',
               onPressed: () {
                 BottomSheetHelper.cupertino(child: _imageSource());
               },
             ),
+            const SizedBox(height: 12),
             SkyButton(
               text: 'Material',
               onPressed: () {
                 BottomSheetHelper.material(child: _imageSource());
               },
             ),
+            const SizedBox(height: 12),
             SkyButton(
               onPressed: () {
                 BottomSheetHelper.basic(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
+import 'package:skybase/core/helper/validator_helper.dart';
 import 'package:skybase/data/sources/server/auth/auth_api.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 
@@ -13,34 +14,25 @@ class LoginController extends GetxController {
   final phoneController = TextEditingController();
   final passController = TextEditingController();
   final emailController = TextEditingController();
+
   RxBool isHiddenPassword = true.obs;
 
-  hidePassword() => isHiddenPassword.toggle();
-
-  bool validateField() {
-    if (formKey.currentState!.validate()) {
-      formKey.currentState!.save();
-      return true;
-    }
-    return false;
-  }
+  void hidePassword() => isHiddenPassword.toggle();
 
   void login() async {
-    if (validateField()) {
+    if (ValidatorHelper.validateForm(formKey)) {
       try {
-        Loading.show();
-        await dataSource
-            .login(
-                phoneNumber: phoneController.text,
-                email: emailController.text,
-                password: passController.text)
-            .then((res) async {
-          Loading.dismiss();
-          Get.offAllNamed(MainNavView.route);
-        });
+        LoadingDialog.show();
+        await dataSource.login(
+          phoneNumber: phoneController.text,
+          email: emailController.text,
+          password: passController.text,
+        );
+        LoadingDialog.dismiss();
+        Get.offAllNamed(MainNavView.route);
       } catch (err) {
-        Loading.dismiss();
-        SkyDialog.failed(message: err.toString());
+        LoadingDialog.dismiss();
+        DialogHelper.failed(message: err.toString());
       }
     }
   }

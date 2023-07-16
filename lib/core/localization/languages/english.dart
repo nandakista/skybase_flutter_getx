@@ -1,4 +1,5 @@
 const Map<String, String> en = {
+  'txt_version': 'App Version',
   'txt_expired': 'Expired',
   'txt_days': 'days',
   'txt_minutes': 'minutes',
@@ -95,4 +96,6 @@ const Map<String, String> en = {
   'txt_max_item': 'All items have been loaded.',
   'txt_empty_list_title': 'Your list is empty!',
   'txt_empty_list_subtitle': 'Sorry, list data is empty. Maybe go back latter',
+
+  'txt_need_permission_storage': '',
 };

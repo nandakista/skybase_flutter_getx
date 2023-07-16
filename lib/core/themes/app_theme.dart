@@ -7,13 +7,16 @@ import 'package:skybase/core/themes/app_colors.dart';
 class AppTheme {
   static ThemeData light() {
     return ThemeData(
-      primaryColor: AppColors.materialPrimary,
+      primaryColor: AppColors.primary,
       primarySwatch: AppColors.materialPrimary,
-      toggleableActiveColor: AppColors.materialPrimary,
       indicatorColor: AppColors.accent,
       fontFamily: "Poppins",
       brightness: Brightness.light,
       inputDecorationTheme: inputDecorationTheme(),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: Colors.grey,
+      ),
       appBarTheme: const AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,
@@ -21,14 +24,63 @@ class AppTheme {
           statusBarColor: AppColors.primary,
         ),
       ),
+      checkboxTheme: CheckboxThemeData(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+        ),
+        side: const BorderSide(width: 1, color: Color(0xFFCFCFCF)),
+        fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.accent;
+          }
+          return null;
+        }),
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.accent;
+          }
+          return null;
+        }),
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.materialAccent[200];
+          }
+          return null;
+        }),
+        trackColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.accent;
+          }
+          return null;
+        }),
+      ),
     );
   }
 
   static ThemeData dark() {
     return ThemeData(
+      primaryColor: AppColors.primary,
       primarySwatch: AppColors.materialPrimary,
-      primaryColor: AppColors.materialPrimary,
-      toggleableActiveColor: AppColors.materialPrimary,
       indicatorColor: AppColors.accent,
       fontFamily: "Poppins",
       brightness: Brightness.dark,
@@ -42,12 +94,63 @@ class AppTheme {
           ),
         ),
       ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: Colors.grey,
+        elevation: 2,
+      ),
       appBarTheme: const AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,
           systemNavigationBarColor: Colors.black,
           statusBarColor: AppColors.primary,
         ),
+      ),
+      checkboxTheme: CheckboxThemeData(
+        fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.accent;
+          }
+          return null;
+        }),
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.accent;
+          }
+          return null;
+        }),
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.materialAccent[200];
+          }
+          return null;
+        }),
+        trackColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.accent;
+          }
+          return null;
+        }),
       ),
     );
   }
@@ -63,11 +166,11 @@ class AppTheme {
         borderRadius: BorderRadius.circular(12),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(width: 1, color: Colors.blue),
+        borderSide: const BorderSide(width: 1, color: AppColors.primary),
         borderRadius: BorderRadius.circular(12),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderSide: const BorderSide(width: 1, color: Colors.blue),
+        borderSide: const BorderSide(width: 1, color: AppColors.primary),
         borderRadius: BorderRadius.circular(12),
       ),
     );
