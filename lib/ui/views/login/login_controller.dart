@@ -14,23 +14,22 @@ class LoginController extends GetxController {
   final phoneController = TextEditingController();
   final passController = TextEditingController();
   final emailController = TextEditingController();
+
   RxBool isHiddenPassword = true.obs;
 
-  hidePassword() => isHiddenPassword.toggle();
+  void hidePassword() => isHiddenPassword.toggle();
 
   void login() async {
     if (ValidatorHelper.validateForm(formKey)) {
       try {
         LoadingDialog.show();
-        await dataSource
-            .login(
-                phoneNumber: phoneController.text,
-                email: emailController.text,
-                password: passController.text)
-            .then((res) async {
-          LoadingDialog.dismiss();
-          Get.offAllNamed(MainNavView.route);
-        });
+        await dataSource.login(
+          phoneNumber: phoneController.text,
+          email: emailController.text,
+          password: passController.text,
+        );
+        LoadingDialog.dismiss();
+        Get.offAllNamed(MainNavView.route);
       } catch (err) {
         LoadingDialog.dismiss();
         DialogHelper.failed(message: err.toString());

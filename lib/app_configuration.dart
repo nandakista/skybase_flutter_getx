@@ -10,11 +10,11 @@ class AppConfiguration {
   static const tokenType = TokenType.ACCESS_TOKEN;
 
   //-- Production
-  static const prodBaseUrl = 'https://api.github.com';
+  static const prodBaseUrl = 'https://api.github.production.com';
   static const prodClientToken = 'Some Client Token';
 
   //-- Staging
-  static const stagingBaseUrl = 'https://api.github.com';
+  static const stagingBaseUrl = 'https://api.github.staging.com';
   static const stagingClientToken = 'Some Client Token';
 
   //-- Development

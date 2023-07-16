@@ -7,23 +7,25 @@ import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_vie
 
 class SampleFeatureListController extends PaginationController<SampleFeature> {
   final SampleFeatureRepository repository;
+
   SampleFeatureListController({required this.repository});
 
   @override
   void getListData() async {
     try {
-      await repository
-          .getUsers(page: page, perPage: perPage, isRefresh: isRefresh)
-          .then((data) {
-        loadNextData(data);
-      });
+      final response = await repository.getUsers(
+        page: page,
+        perPage: perPage,
+        isRefresh: isRefresh,
+      );
+      loadNextData(response);
     } catch (e) {
       debugPrint('Error : $e');
       pagingController.error = e;
     }
   }
 
-  onChooseUser({required SampleFeature user}) {
+  void onChooseUser({required SampleFeature user}) {
     Get.toNamed(SampleFeatureDetailView.route, arguments: user);
   }
 }

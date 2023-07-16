@@ -12,7 +12,11 @@ enum Env {
 }
 
 class AppEnv {
-  static late Config config;
+  static Config config = Config(
+    baseUrl: AppConfiguration.devBaseUrl,
+    tokenType: AppConfiguration.tokenType,
+    clientToken: AppConfiguration.devClientToken,
+  );
   static Env env = Env.DEVELOPMENT;
 
   static set(Env environment) {
