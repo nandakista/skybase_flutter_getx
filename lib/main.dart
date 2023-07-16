@@ -16,7 +16,7 @@ import 'app_configuration.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ServiceLocator.init();
-  if (AppEnv.env == Env.development) {
+  if (AppEnv.env == Env.DEVELOPMENT) {
     runApp(
       DevicePreview(
         enabled: !kReleaseMode,

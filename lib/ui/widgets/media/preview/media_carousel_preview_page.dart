@@ -85,17 +85,17 @@ class MediaCarouselPreviewPage extends StatelessWidget {
   Widget _determineMedia(String path) {
     final mediaType = MediaHelper.getMediaType(path);
     switch (mediaType.type) {
-      case MediaType.file:
+      case MediaType.FILE:
         return const Center(child: Text('Media Unsupported'));
-      case MediaType.image:
+      case MediaType.IMAGE:
         return SkyImage(src: mediaType.path);
-      case MediaType.video:
+      case MediaType.VIDEO:
         return VideoPreviewDisplay(
           url: mediaType.path,
           height: double.infinity,
           width: double.infinity,
         );
-      case MediaType.unknown:
+      case MediaType.UNKNOWN:
         return const Center(child: Text('Media Unsupported'));
     }
   }

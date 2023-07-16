@@ -6,33 +6,33 @@ import 'package:skybase/core/network/api_token_manager.dart';
    nanda.kista@gmail.com
 */
 enum Env {
-  production,
-  staging,
-  development,
+  PRODUCTION,
+  STAGING,
+  DEVELOPMENT,
 }
 
 class AppEnv {
   static late Config config;
-  static Env env = Env.development;
+  static Env env = Env.DEVELOPMENT;
 
   static set(Env environment) {
     env = environment;
     switch (environment) {
-      case Env.production:
+      case Env.PRODUCTION:
         config = Config(
           baseUrl: AppConfiguration.prodBaseUrl,
           tokenType: AppConfiguration.tokenType,
           clientToken: AppConfiguration.prodClientToken,
         );
         break;
-      case Env.staging:
+      case Env.STAGING:
         config = Config(
           baseUrl: AppConfiguration.stagingBaseUrl,
           tokenType: AppConfiguration.tokenType,
           clientToken: AppConfiguration.stagingClientToken,
         );
         break;
-      case Env.development:
+      case Env.DEVELOPMENT:
         config = Config(
           baseUrl: AppConfiguration.devBaseUrl,
           tokenType: AppConfiguration.tokenType,

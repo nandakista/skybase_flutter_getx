@@ -19,13 +19,13 @@ import 'package:skybase/core/network/api_url.dart';
 */
 enum TokenType {
   /// When your app no need token authentication.
-  noToken,
+  NONE,
 
   /// When your app just use Access Token.
-  accessToken,
+  ACCESS_TOKEN,
 
   /// When your app use Refresh Token Mechanism (Access + Refresh).
-  accessRefreshToken,
+  REFRESH_TOKEN,
 }
 
 class ApiTokenManager extends QueuedInterceptorsWrapper {
@@ -38,14 +38,14 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
     required ErrorInterceptorHandler handler,
   }) async {
     switch (AppEnv.config.tokenType) {
-      case TokenType.noToken:
+      case TokenType.NONE:
         super.onError(err, handler);
         break;
-      case TokenType.accessToken:
+      case TokenType.ACCESS_TOKEN:
         // super.onError(err, handler);
         _handleAccessToken(err, handler);
         break;
-      case TokenType.accessRefreshToken:
+      case TokenType.REFRESH_TOKEN:
         _handleRefreshToken(dio, err, handler);
         break;
     }

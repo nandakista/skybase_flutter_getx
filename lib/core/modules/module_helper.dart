@@ -24,7 +24,7 @@ class ModuleHelper {
   ///
   /// * [showInfo] to true will show information of picked image like size, path.
   static Future<File?> pickImage({
-    CameraType cameraType = CameraType.rear,
+    CameraType cameraType = CameraType.REAR,
     ResolutionPreset resolution = ResolutionPreset.high,
     bool originSize = false,
     bool showInfo = false,

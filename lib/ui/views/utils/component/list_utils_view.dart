@@ -31,7 +31,7 @@ class ListUtilsView extends StatelessWidget {
                 child: SkyGroupedListView<dynamic, String>(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  sortBy: SortBy.asc,
+                  sortBy: SortBy.ASC,
                   data: dummyData,
                   separator: const Divider(thickness: 1, height: 12),
                   separatorGroup: const Divider(

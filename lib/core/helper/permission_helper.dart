@@ -17,7 +17,7 @@ class PermissionHelper {
         onPressed: openAppSettings,
         child: Text(
           "Open Setting",
-          style: Get.textTheme.caption?.copyWith(
+          style: Get.textTheme.bodySmall?.copyWith(
             color: AppColors.secondary,
           ),
         ),

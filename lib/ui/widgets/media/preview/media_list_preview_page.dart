@@ -39,18 +39,18 @@ class MediaListPreviewPage extends StatelessWidget {
   Widget _determineMedia(String path) {
     final mediaType = MediaHelper.getMediaType(path);
     switch (mediaType.type) {
-      case MediaType.file:
+      case MediaType.FILE:
         return const Center(child: Text('Media Unsupported'));
-      case MediaType.image:
+      case MediaType.IMAGE:
         return SkyImage(src: mediaType.path, enablePreview: true);
-      case MediaType.video:
+      case MediaType.VIDEO:
         return SkyVideo(
           url: mediaType.path,
           height: 400,
           showControls: false,
           onTapVideo: () => Get.to(MediaPreviewPage(url: mediaType.path)),
         );
-      case MediaType.unknown:
+      case MediaType.UNKNOWN:
         return const Center(child: Text('Media Unsupported'));
     }
   }

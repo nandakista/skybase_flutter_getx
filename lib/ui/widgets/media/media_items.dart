@@ -117,9 +117,9 @@ class MediaItems extends StatelessWidget {
   Widget _determineMedia(String path, int index) {
     final mediaType = MediaHelper.getMediaType(path);
     switch (mediaType.type) {
-      case MediaType.file:
+      case MediaType.FILE:
         return const Center(child: Text('Media Unsupported'));
-      case MediaType.image:
+      case MediaType.IMAGE:
         return SkyImage(
           src: mediaType.path,
           width: double.infinity,
@@ -133,7 +133,7 @@ class MediaItems extends StatelessWidget {
           enablePreview: onTap == null,
           fit: BoxFit.cover,
         );
-      case MediaType.video:
+      case MediaType.VIDEO:
         return SkyVideo(
           url: mediaType.path,
           enablePreview: true,
@@ -144,7 +144,7 @@ class MediaItems extends StatelessWidget {
                 }
               : null,
         );
-      case MediaType.unknown:
+      case MediaType.UNKNOWN:
         return const Center(child: Text('Media Unsupported'));
     }
   }

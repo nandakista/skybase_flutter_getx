@@ -24,13 +24,13 @@ class MediaHelper {
         : p.extension(path).replaceFirst(".", "");
 
     if (imageExtensions.contains(extension.toLowerCase())) {
-      return MediaInfo(path, MediaType.image);
+      return MediaInfo(path, MediaType.IMAGE);
     } else if (videoExtensions.contains(extension.toLowerCase())) {
-      return MediaInfo(path, MediaType.video);
+      return MediaInfo(path, MediaType.VIDEO);
     } else if (fileExtensions.contains(extension.toLowerCase())) {
-      return MediaInfo(path, MediaType.file);
+      return MediaInfo(path, MediaType.FILE);
     } else {
-      return MediaInfo(path, MediaType.unknown);
+      return MediaInfo(path, MediaType.UNKNOWN);
     }
   }
 }
@@ -42,8 +42,8 @@ class MediaInfo {
 }
 
 enum MediaType {
-  file,
-  image,
-  video,
-  unknown,
+  FILE,
+  IMAGE,
+  VIDEO,
+  UNKNOWN,
 }

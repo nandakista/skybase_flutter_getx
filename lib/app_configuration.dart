@@ -7,7 +7,7 @@ import 'package:skybase/core/network/api_token_manager.dart';
 */
 class AppConfiguration {
   //-- Main Configuration
-  static const tokenType = TokenType.accessToken;
+  static const tokenType = TokenType.ACCESS_TOKEN;
 
   //-- Production
   static const prodBaseUrl = 'https://api.github.com';

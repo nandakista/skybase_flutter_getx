@@ -21,8 +21,8 @@ import 'camera_preview.dart';
    nanda.kista@gmail.com
 */
 enum CameraType {
-  rear,
-  front,
+  REAR,
+  FRONT,
 }
 
 T? _ambiguate<T>(T? value) => value;
@@ -117,7 +117,7 @@ class _CameraModuleState extends State<CameraModule>
       } else {
         cameras = value;
         if (cameras.isNotEmpty) {
-          if (widget.cameraType == CameraType.rear) {
+          if (widget.cameraType == CameraType.REAR) {
             selectedCameraIndex = 0;
           } else {
             selectedCameraIndex = 1;
