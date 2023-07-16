@@ -15,9 +15,9 @@ class SampleFeatureModel extends SampleFeature {
     int? repository,
     int? followers,
     int? following,
-    List<Repo>? repositoryList,
-    List<SampleFeature>? followersList,
-    List<SampleFeature>? followingList,
+    List<RepoModel>? repositoryList,
+    List<SampleFeatureModel>? followersList,
+    List<SampleFeatureModel>? followingList,
   }) : super(
           id: id,
           username: username,
@@ -48,13 +48,13 @@ class SampleFeatureModel extends SampleFeature {
       repository: json['public_repos'],
       followers: json['followers'],
       following: json['following'],
-      repositoryList: (json['repository_list'])
+      repositoryList: (json['repository_list'] as List?)
           ?.map((e) => RepoModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      followersList: (json['followers_list'])
+      followersList: (json['followers_list'] as List?)
           ?.map((e) => SampleFeatureModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      followingList: (json['following_list'])
+      followingList: (json['following_list'] as List?)
           ?.map((e) => SampleFeatureModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -72,9 +72,9 @@ class SampleFeatureModel extends SampleFeature {
         'public_repos': repository,
         'followers': followers,
         'following': following,
-        'repository_list': repositoryList,
-        'following_list': followingList,
-        'followers_list': followersList,
+        'repository_list': repositoryList?.map((e) => e.toModel().toJson()),
+        'following_list': followingList?.map((e) => e.toModel().toJson()),
+        'followers_list': followersList?.map((e) => e.toModel().toJson()),
         // 'token': token,
         // 'refresh_token': refreshToken,
       };

@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:skybase/core/database/hive/entity/repo_entity.dart';
 import 'package:skybase/core/database/hive/hive_adapters.dart';
 import 'package:skybase/core/database/hive/hive_box.dart';
+import 'package:skybase/data/models/repo_model.dart';
 import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 
 part 'repo.g.dart';
@@ -38,4 +39,16 @@ class Repo {
     this.totalFork,
     this.totalStar,
   });
+
+  RepoModel toModel() {
+    return RepoModel(
+      name: name,
+      owner: owner.toModel(),
+      totalWatch: totalWatch,
+      totalStar: totalStar,
+      totalFork: totalFork,
+      language: language,
+      description: description,
+    );
+  }
 }

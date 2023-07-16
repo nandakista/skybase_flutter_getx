@@ -23,7 +23,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         url: url,
         useToken: true,
       );
-      return (res.data['items'])
+      return (res.data['items'] as List)
           .map((data) => SampleFeatureModel.fromJson(data))
           .toList()
           .cast<SampleFeature>();
@@ -54,7 +54,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         url: '/users/$username/followers',
         useToken: true,
       );
-      return (res.data)
+      return (res.data as List)
           .map((data) => SampleFeatureModel.fromJson(data))
           .toList()
           .cast<SampleFeature>();
@@ -71,7 +71,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         url: '/users/$username/following',
         useToken: true,
       );
-      return (res.data)
+      return (res.data as List)
           .map((data) => SampleFeatureModel.fromJson(data))
           .toList()
           .cast<SampleFeature>();
@@ -88,11 +88,16 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         url: '/users/$username/repos?type=all',
         useToken: true,
       );
-      return (res.data)
+      return (res.data as List)
           .map((data) => RepoModel.fromJson(data))
           .toList()
           .cast<Repo>();
-      // return List<Repo>.from(_res.data.map((data) => Repo.fromJson(data)));
+
+      // return List<Repo>.from(
+      //   (res.data as List).map(
+      //     (data) => RepoModel.fromJson(data),
+      //   ),
+      // );
     } catch (e) {
       debugPrint('$tag Error = $e');
       rethrow;

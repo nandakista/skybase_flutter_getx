@@ -1,11 +1,10 @@
 import 'package:skybase/data/models/sample_feature_model.dart';
 import 'package:skybase/domain/entities/repo/repo.dart';
-import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 
 class RepoModel extends Repo {
   RepoModel({
     required String name,
-    required SampleFeature owner,
+    required SampleFeatureModel owner,
     String? description,
     String? language,
     int? totalWatch,
@@ -35,7 +34,7 @@ class RepoModel extends Repo {
 
   Map<String, dynamic> toJson() => {
         'full_name': name,
-        'owner': owner,
+        'owner': owner.toModel().toJson(),
         'description': description,
         'language': language,
         'watchers_count': totalWatch,

@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:skybase/core/database/hive/entity/user_entity.dart';
 import 'package:skybase/core/database/hive/hive_adapters.dart';
 import 'package:skybase/core/database/hive/hive_box.dart';
+import 'package:skybase/data/models/sample_feature_model.dart';
 import 'package:skybase/domain/entities/repo/repo.dart';
 
 part 'sample_feature.g.dart';
@@ -50,7 +51,6 @@ class SampleFeature {
   @HiveField(UserEntity.followingList)
   List<SampleFeature>? followingList;
 
-
   SampleFeature({
     required this.id,
     required this.username,
@@ -67,4 +67,23 @@ class SampleFeature {
     this.followersList,
     this.followingList,
   });
+
+  SampleFeatureModel toModel() {
+    return SampleFeatureModel(
+      id: id,
+      username: username,
+      name: name,
+      location: location,
+      company: company,
+      gitUrl: gitUrl,
+      bio: bio,
+      avatarUrl: avatarUrl,
+      repository: repository,
+      followers: followers,
+      following: following,
+      repositoryList: repositoryList?.map((e) => e.toModel()).toList(),
+      followersList: followersList?.map((e) => e.toModel()).toList(),
+      followingList: followingList?.map((e) => e.toModel()).toList(),
+    );
+  }
 }
