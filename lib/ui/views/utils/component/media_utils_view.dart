@@ -110,8 +110,6 @@ class MediaUtilsView extends GetView<UtilsController> {
         () => Container(
           child: controller.imageFile.value != null
               ? SkyImage(
-                  fromFile:
-                      !controller.imageFile.value!.path.startsWith('http'),
                   src: controller.imageFile.value!.path,
                   height: MediaQuery.of(context).size.width * 1 / 2,
                   width: MediaQuery.of(context).size.width * 2 / 3,
@@ -216,16 +214,41 @@ class MediaUtilsView extends GetView<UtilsController> {
           children: [
             ...controller.pickedImages
                 .map(
-                  (e) => SkyImage(
-                    src: e.path,
-                    height: 100,
-                    width: 100,
-                    enablePreview: true,
-                    borderRadius: BorderRadius.circular(4),
-                    onRemoveImage: () {
-                      controller.pickedImages.remove(e);
-                      controller.update();
-                    },
+                  (e) => Stack(
+                    children: [
+                      SkyImage(
+                        src: e.path,
+                        height: 100,
+                        width: 100,
+                        enablePreview: true,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: GestureDetector(
+                          onTap: () {
+                            controller.pickedImages.remove(e);
+                            controller.update();
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.5),
+                              borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                              ),
+                            ),
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 )
                 .toList(),

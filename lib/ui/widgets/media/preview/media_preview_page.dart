@@ -10,14 +10,14 @@ import 'package:skybase/ui/widgets/sky_image.dart';
 */
 class MediaPreviewPage extends StatelessWidget {
   final String url;
-  final bool fromFile;
+  final bool isAsset;
   final String? title;
   final TextStyle? titleStyle;
 
   const MediaPreviewPage({
     Key? key,
     required this.url,
-    this.fromFile = true,
+    this.isAsset = true,
     this.title,
     this.titleStyle,
   }) : super(key: key);
@@ -41,7 +41,7 @@ class MediaPreviewPage extends StatelessWidget {
         return Center(
           child: SkyImage(
             src: mediaType.path,
-            fromFile: fromFile,
+            isAsset: isAsset,
           ),
         );
       case MediaType.VIDEO:

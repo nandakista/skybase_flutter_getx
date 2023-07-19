@@ -125,7 +125,7 @@ class MediaItems extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           borderRadius: BorderRadius.circular((isGrid) ? 0 : borderRadius),
-          onTapImage: (onTap != null)
+          onTap: (onTap != null)
               ? () {
                   onTap!(index);
                 }
