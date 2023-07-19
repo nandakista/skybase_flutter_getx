@@ -14,6 +14,38 @@ Read [this documentation](https://docs.google.com/document/d/1ZwO60uk2SnqVBfL-L7
 ## Mason CLI Supported
 This codebase supports the use of the Mason CLI library. Follow [this instruction](https://docs.google.com/document/d/1JfoTDzJ8FqCatVjTdzOn_9rDcIJBqadaSlvUZn53UCc/edit?usp=share_link) if you want to use or setup Mason CLI.
 
+## Build
+
+Open terminal in root project and input command below.
+
+Note: `<env>` is `staging` | `production`
+
+### Android
+
+    // Choose one
+
+    // build apk
+    sh build_apk.sh <env> 1.0.0-beta.1 1
+
+    // build apk menggunakan version dari pubspec.yaml
+    sh build_pub_apk.sh <env>
+
+### iOS
+
+    // Choose one
+
+    // generate archive
+    sh build_ios.sh <env> 1.0.0-beta.1 1
+
+    // generate ipa adhoc
+    sh build_ipa_adhoc.sh <env> 1.0.0-beta.1 1
+
+    // build archive menggunakan version dari pubspec.yaml
+    sh build_pub_ios.sh <env>
+
+    // build ipa menggunakan version dari pubspec.yaml
+    sh build_pub_ipa_adhoc.sh <env>
+
 ## Download Manager
 If you use download manager you need to setup flutter_downloader from this
 [flutter_downloader](https://pub.dev/packages/flutter_downloader)
@@ -31,4 +63,6 @@ If you use download manager you need to setup flutter_downloader from this
 ### Created by
 Varcant
 ( nanda.kista@gmail.com )
+
+Copyright ©2021 Skybase. All rights reserved.
 

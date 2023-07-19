@@ -13,6 +13,9 @@ class AppTheme {
       fontFamily: "Poppins",
       brightness: Brightness.light,
       inputDecorationTheme: inputDecorationTheme(),
+      checkboxTheme: checkboxThemeData(),
+      radioTheme: radioThemeData(),
+      switchTheme: switchThemeData(),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: AppColors.primary,
         unselectedItemColor: Colors.grey,
@@ -23,56 +26,6 @@ class AppTheme {
           systemNavigationBarColor: Colors.black,
           statusBarColor: AppColors.primary,
         ),
-      ),
-      checkboxTheme: CheckboxThemeData(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(4)),
-        ),
-        side: const BorderSide(width: 1, color: Color(0xFFCFCFCF)),
-        fillColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return null;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return AppColors.accent;
-          }
-          return null;
-        }),
-      ),
-      radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return null;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return AppColors.accent;
-          }
-          return null;
-        }),
-      ),
-      switchTheme: SwitchThemeData(
-        thumbColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return null;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return AppColors.materialAccent[200];
-          }
-          return null;
-        }),
-        trackColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return null;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return AppColors.accent;
-          }
-          return null;
-        }),
       ),
     );
   }
@@ -85,6 +38,9 @@ class AppTheme {
       fontFamily: "Poppins",
       brightness: Brightness.dark,
       inputDecorationTheme: inputDecorationTheme(),
+      checkboxTheme: checkboxThemeData(),
+      radioTheme: radioThemeData(),
+      switchTheme: switchThemeData(),
       bottomSheetTheme: const BottomSheetThemeData(
         elevation: 8,
         shape: RoundedRectangleBorder(
@@ -106,52 +62,65 @@ class AppTheme {
           statusBarColor: AppColors.primary,
         ),
       ),
-      checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return null;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return AppColors.accent;
-          }
-          return null;
-        }),
+    );
+  }
+
+  static CheckboxThemeData checkboxThemeData() {
+    return CheckboxThemeData(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
       ),
-      radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return null;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return AppColors.accent;
-          }
+      side: const BorderSide(width: 1, color: Color(0xFFCFCFCF)),
+      fillColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
           return null;
-        }),
-      ),
-      switchTheme: SwitchThemeData(
-        thumbColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return null;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return AppColors.materialAccent[200];
-          }
+        }
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.accent;
+        }
+        return null;
+      }),
+    );
+  }
+
+  static RadioThemeData radioThemeData() {
+    return RadioThemeData(
+      fillColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
           return null;
-        }),
-        trackColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return null;
-          }
-          if (states.contains(MaterialState.selected)) {
-            return AppColors.accent;
-          }
+        }
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.accent;
+        }
+        return null;
+      }),
+    );
+  }
+
+  static SwitchThemeData switchThemeData() {
+    return SwitchThemeData(
+      thumbColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
           return null;
-        }),
-      ),
+        }
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.materialAccent[200];
+        }
+        return null;
+      }),
+      trackColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.accent;
+        }
+        return null;
+      }),
     );
   }
 

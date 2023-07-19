@@ -35,12 +35,12 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetX<ThemeManager>(
-      builder: (ctr) => GetMaterialApp(
+      builder: (theme) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: AppConfiguration.appName,
         theme: AppTheme.light(),
         darkTheme: AppTheme.dark(),
-        themeMode: (ctr.isDark.isTrue) ? ThemeMode.dark : ThemeMode.light,
+        themeMode: (theme.isDark.isTrue) ? ThemeMode.dark : ThemeMode.light,
         translations: AppTranslation(),
         locale: LocaleHelper().getCurrentLocale(),
         fallbackLocale: LocaleHelper().fallbackLocale,
