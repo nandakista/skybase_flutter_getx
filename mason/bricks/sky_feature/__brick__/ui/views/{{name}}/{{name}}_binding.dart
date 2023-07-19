@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:skybase/ui/views/{{name}}/{{name}}_controller.dart';
 import 'package:skybase/data/repositories/{{name}}/{{name}}_repository_impl.dart';
-import 'package:skybase/data/data_sources/server/{{api}}/{{api}}_api_impl.dart';
-import 'package:skybase/data/data_sources/local/{{dao}}/{{dao}}_dao_impl.dart';
+import 'package:skybase/data/sources/server/{{api}}/{{api}}_api_impl.dart';
+import 'package:skybase/data/sources/local/{{dao}}/{{dao}}_dao_impl.dart';
 
 class {{name.pascalCase()}}Binding implements Bindings {
   @override

@@ -1,9 +1,8 @@
-// ignore_for_file: constant_identifier_names
-
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:skybase/core/app/app_env.dart';
 import 'package:skybase/core/auth_manager/auth_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
@@ -14,50 +13,53 @@ import 'package:skybase/core/network/api_request.dart';
 import 'package:skybase/core/network/api_response.dart';
 import 'package:skybase/core/network/api_url.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 enum TokenType {
   /// When your app no need token authentication.
-  NO_TOKEN,
+  NONE,
 
   /// When your app just use Access Token.
   ACCESS_TOKEN,
 
   /// When your app use Refresh Token Mechanism (Access + Refresh).
-  ACCESS_REFRESH_TOKEN,
+  REFRESH_TOKEN,
 }
 
 class ApiTokenManager extends QueuedInterceptorsWrapper {
   final authManager = AuthManager.find;
   final secureStorage = SecureStorageManager.find;
-  final appConfig = AppEnv.find;
 
   Future<void> handleToken({
     required Dio dio,
-    required DioError err,
+    required DioException err,
     required ErrorInterceptorHandler handler,
   }) async {
-    switch (appConfig.get.tokenType) {
-      case TokenType.NO_TOKEN:
+    switch (AppEnv.config.tokenType) {
+      case TokenType.NONE:
         super.onError(err, handler);
         break;
       case TokenType.ACCESS_TOKEN:
         // super.onError(err, handler);
         _handleAccessToken(err, handler);
         break;
-      case TokenType.ACCESS_REFRESH_TOKEN:
+      case TokenType.REFRESH_TOKEN:
         _handleRefreshToken(dio, err, handler);
         break;
     }
   }
 
-  _handleAccessToken(DioError err, ErrorInterceptorHandler handler) async {
+  _handleAccessToken(DioException err, ErrorInterceptorHandler handler) async {
     final int status = err.response?.statusCode ?? 0;
     if (status == 401) {
-      return AppDialog.show(
-        typeDialog: TypeDialog.FAILED,
-        dismissible: false,
-        message: 'Anda harus login kembali!',
-        onPress: () => authManager.logout(),
+      DialogHelper.failed(
+        isDismissible: false,
+        message: 'txt_you_must_login_again'.tr,
+        onConfirm: () => authManager.logout(),
       );
+      super.onError(err, handler);
     } else {
       super.onError(err, handler);
     }
@@ -65,7 +67,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
 
   _handleRefreshToken(
     Dio dio,
-    DioError err,
+    DioException err,
     ErrorInterceptorHandler handler,
   ) async {
     String? accessToken = await secureStorage.getToken();
@@ -89,13 +91,12 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
             Options(headers: headers, contentType: Headers.jsonContentType),
       );
       return ApiResponse.fromJson(responseBody.data).data['token'];
-    } on DioError catch (error) {
-      log('${NetworkException.getErrorException(error)}');
-      return AppDialog.show(
-        typeDialog: TypeDialog.FAILED,
-        dismissible: false,
-        message: 'Anda harus login kembali!',
-        onPress: () => authManager.logout(),
+    } on DioException catch (error) {
+      debugPrint('${NetworkException.getErrorException(error)}');
+      return DialogHelper.failed(
+        isDismissible: false,
+        message: 'txt_you_must_login_again'.tr,
+        onConfirm: () => authManager.logout(),
       );
     }
   }

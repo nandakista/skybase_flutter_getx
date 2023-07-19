@@ -14,7 +14,7 @@ vars:
 
   api:
     type: string
-    description: Enter the name of your api datasource. [snake_case]
+    description: Enter the name of your api source. [snake_case]
     prompt: ApiService Name [snake_case] =
 
   dao:

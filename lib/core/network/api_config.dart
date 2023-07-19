@@ -3,20 +3,26 @@ import 'package:get/get.dart';
 import 'package:skybase/core/app/app_env.dart';
 import 'package:skybase/core/network/api_interceptor.dart';
 
-final Dio dioClient = Get.find<DioClient>().init();
-class DioClient {
-  static String baseURL = AppEnv.find.get.baseUrl;
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
+class DioClient extends GetxService {
+  static String baseURL = AppEnv.config.baseUrl;
+  late Dio _dio;
+  static Dio get find => Get.find<DioClient>()._dio;
 
-  Dio init() {
-    Dio _dio = Dio();
+  @override
+  void onInit() {
+    _dio = Dio();
     _dio.options.baseUrl = baseURL;
-    _dio.options.connectTimeout = 10 * 1000; //60s
-    _dio.options.receiveTimeout = 3 * 1000; //3s
-    return _dio;
+    _dio.options.connectTimeout = const Duration(seconds: 60); //60s
+    _dio.options.receiveTimeout = const Duration(seconds: 3); //3s
+    super.onInit();
   }
 
   static setInterceptor(){
-    dioClient.interceptors.clear();
-    dioClient.interceptors.add(ApiInterceptors(dioClient));
+    DioClient.find.interceptors.clear();
+    DioClient.find.interceptors.add(ApiInterceptors(DioClient.find));
   }
 }

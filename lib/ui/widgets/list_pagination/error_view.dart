@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class ErrorView extends StatelessWidget {
   const ErrorView({
     Key? key,
@@ -12,6 +15,11 @@ class ErrorView extends StatelessWidget {
     this.onRetry,
     this.isScrollable = true,
     this.retryText,
+    this.verticalSpacing = 24,
+    this.horizontalSpacing = 24,
+    this.imageSize,
+    this.titleStyle,
+    this.subtitleStyle,
   }) : super(key: key);
 
   final Widget? errorImage;
@@ -20,6 +28,11 @@ class ErrorView extends StatelessWidget {
   final String? retryText;
   final VoidCallback? onRetry;
   final bool isScrollable;
+  final double verticalSpacing;
+  final double horizontalSpacing;
+  final double? imageSize;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -28,28 +41,32 @@ class ErrorView extends StatelessWidget {
         physics: (isScrollable)
             ? const NeverScrollableScrollPhysics()
             : const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.symmetric(
+            vertical: verticalSpacing, horizontal: horizontalSpacing),
         child: Column(
           children: [
             errorImage ??
-                Image.asset('assets/images/img_error.png'),
-            const SizedBox(height: 24),
-            const SizedBox(height: 24),
+                Image.asset(
+                  'assets/images/img_error.png',
+                  height: imageSize,
+                ),
+            SizedBox(height: verticalSpacing * 2),
             Text(
-              errorTitle ?? International.errGeneralFormal.tr,
+              errorTitle ?? 'txt_err_general_formal'.tr,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: titleStyle ?? Theme.of(context).textTheme.titleLarge,
             ),
             Text(
-              errorSubtitle ?? International.tapRetry.tr,
+              errorSubtitle ?? 'txt_tap_retry'.tr,
               textAlign: TextAlign.center,
+              style: subtitleStyle,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: verticalSpacing),
             SkyButton(
               wrapContent: true,
               height: 50,
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              text: retryText ?? International.retry.tr,
+              text: retryText ?? 'txt_retry'.tr,
               onPressed: onRetry,
             ),
           ],

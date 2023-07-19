@@ -10,10 +10,7 @@ class SafeRequestAPI {
     try {
       await functionUpdate();
     } catch (e) {
-      AppDialog.show(
-          typeDialog: TypeDialog.FAILED,
-          message: e.toString(),
-          onPress: () => AppDialog.close());
+      DialogHelper.failed(message: e.toString());
       rethrow;
     }
   }
@@ -25,13 +22,7 @@ class SafeRequestAPI {
     try {
       return await function();
     } catch (e) {
-      AppDialog.show(
-        typeDialog: TypeDialog.FAILED,
-        message: e.toString(),
-        onPress: () {
-          AppDialog.close();
-        },
-      );
+      DialogHelper.failed(message: e.toString());
       rethrow;
     }
   }

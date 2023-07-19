@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/base/base_controller.dart';
-import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
 
@@ -29,28 +28,20 @@ class SampleFeatureDetailController extends BaseController {
     await getDetailUser();
   }
 
-  getDetailUser() async {
+  @override
+  void onRefresh() {
+    getDetailUser();
+  }
+
+  Future<void> getDetailUser() async {
     showLoading();
     try {
-      await repository.getDetailUser(user: user.value!).then((res) {
-        hideLoading();
-        user.value = res;
-      });
+      hideLoading();
+      final response = await repository.getDetailUser(user: user.value!);
+      user.value = response;
     } catch (e) {
       hideLoading();
-      AppDialog.show(
-        typeDialog: TypeDialog.RETRY,
-        dismissible: false,
-        message: e.toString(),
-        onCancel: (){
-          AppDialog.close();
-          Get.back();
-        },
-        onPress: () {
-          AppDialog.close();
-          getDetailUser();
-        },
-      );
+      showError(e.toString());
     }
   }
 }

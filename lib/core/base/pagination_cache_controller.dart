@@ -11,8 +11,8 @@ abstract class PaginationCacheController<T> extends GetxController {
 
   getListData();
 
-  openBox(String _cacheBoxName) {
-    box = Hive.box<T>(_cacheBoxName);
+  openBox(String cacheBoxName) {
+    box = Hive.box<T>(cacheBoxName);
   }
 
   Future<List<T>> loadData() async {
@@ -20,11 +20,11 @@ abstract class PaginationCacheController<T> extends GetxController {
       return getListData();
     } else {
       getListData();
-      List<T> _users = [];
+      List<T> users = [];
       for (var i = 0; i < box.length; i++) {
-        _users.add(box.getAt(i)!);
+        users.add(box.getAt(i) as T);
       }
-      return _users;
+      return users;
     }
   }
 

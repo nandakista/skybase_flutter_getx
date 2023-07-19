@@ -5,6 +5,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
+
 /// ----<Getx Storage>----
 ///
 /// Format -> Key == BoxName,
@@ -36,16 +41,14 @@ class GetStorageManager {
     return json.encode(data);
   }
 
-  /// Get object with await
   dynamic getAwait(String name) async {
     return await _box.read(name);
   }
 
-  /// Delete all data in every box in storage except CurrentLocale
   logout() async {
     try {
-      await GetStorage(GetStorageKey.USERS).erase();
-      save(GetStorageKey.FIRST_INSTALL, false);
+      await GetStorage(GetStorageKey.users).erase();
+      save(GetStorageKey.firstInstall, false);
     } catch (e) {
       debugPrint(e.toString());
     }

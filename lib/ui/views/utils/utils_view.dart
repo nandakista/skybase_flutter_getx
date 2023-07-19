@@ -1,191 +1,107 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/helper/bottom_sheet_helper.dart';
-import 'package:skybase/core/helper/converter_helper.dart';
-import 'package:skybase/ui/widgets/date_picker_widget.dart';
-import 'package:skybase/core/helper/date_time_helper.dart';
-import 'package:skybase/core/helper/dialog_helper.dart';
-import 'package:skybase/core/helper/input_formater.dart';
-import 'package:skybase/core/helper/validator_helper.dart';
-import 'package:skybase/core/localization/language_const.dart';
-import 'package:skybase/core/localization/locale_helper.dart';
-import 'package:skybase/core/modules/module_helper.dart';
-import 'package:skybase/core/themes/app_colors.dart';
-import 'package:skybase/core/themes/theme_manager.dart';
-import 'package:skybase/ui/widgets/common_widget.dart';
+import 'package:skybase/app_configuration.dart';
+import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/core/themes/gradient_color.dart';
+import 'package:skybase/ui/views/utils/component/bottom_sheet_utils_view.dart';
+import 'package:skybase/ui/views/utils/component/dialog_utils_view.dart';
+import 'package:skybase/ui/views/utils/component/list_utils_view.dart';
+import 'package:skybase/ui/views/utils/component/media_utils_view.dart';
+import 'package:skybase/ui/views/utils/component/settings_utils_view.dart';
+import 'package:skybase/ui/views/utils/component/snackbar_utils_view.dart';
+import 'package:skybase/ui/views/utils/component/theme_component_utils_view.dart';
+import 'package:skybase/ui/views/utils/component/timer/timer_utils_view.dart';
+import 'package:skybase/ui/views/utils/utils_controller.dart';
+import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
-import 'package:skybase/ui/widgets/sky_form_field.dart';
 
-class UtilsView extends StatefulWidget {
+import 'component/other_utils_view.dart';
+
+class UtilsView extends GetView<UtilsController> {
   const UtilsView({Key? key}) : super(key: key);
-
-  @override
-  State<UtilsView> createState() => _UtilsViewState();
-}
-
-class _UtilsViewState extends State<UtilsView> {
-  File? _imageFile;
-  final currencyCtr = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: SkyAppBar.secondary(title: 'Utility'),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: ContentWrapper(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Is Dark Mode'),
-                    GetX<ThemeManager>(
-                      builder: (controller) => Switch(
-                        value: controller.isDark.value,
-                        onChanged: (value) {
-                          controller.changeTheme();
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                SkyButton(
-                  onPressed: () => LocaleHelper().showLocaleDialog(context),
-                  text: International.changeLanguage.tr,
-                  icon: CupertinoIcons.paintbrush,
-                ),
-                SkyButton(
-                  onPressed: () {
-                    AppDialog.show(
-                      typeDialog: TypeDialog.WARNING,
-                      message: 'Dialog',
-                      onPress: () => AppDialog.close(),
-                    );
-                  },
-                  text: 'Dialog',
-                  icon: CupertinoIcons.conversation_bubble,
-                ),
-                SkyButton(
-                  onPressed: () {
-                    Loading.show(dismissible: true);
-                  },
-                  text: 'Loading',
-                  icon: CupertinoIcons.refresh_thick,
-                ),
-                SkyButton(
-                  onPressed: () {
-                    String? converted = DateTimeHelper(
-                            startDate: DateTime.now(), endDate: DateTime.now())
-                        .format();
-                    Toast.show('Date converted :\n $converted');
-                  },
-                  text: International.convert.tr + ' ' + International.date.tr,
-                ),
-                SkyButton(
-                  onPressed: () {
-                    BottomSheetHelper.basic(
-                      child: DatePickerWidget.range(
-                        onSelectionChanged: (selected) {},
-                      ),
-                    );
-                  },
-                  text: 'Bottom Sheet + Date Range',
-                  icon: Icons.date_range_outlined,
-                ),
-                SkyButton(
-                  onPressed: () {
-                    String? converted = AppConverter.replaceStringRange(
-                        'name@email.com', 2, 5, '*');
-                    debugPrint('Converted = $converted');
-                    Toast.show('String converted :\n $converted');
-                  },
-                  text: International.convert.tr + ' String',
-                  icon: CupertinoIcons.t_bubble,
-                ),
-                const SizedBox(height: 12),
-                SkyFormField(
-                  controller: currencyCtr,
-                  initialValue: 0.toIDR(),
-                  label: International.price.tr,
-                  hint: International.price.tr,
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) =>
-                      (value.isEmpty) ? currencyCtr.text = 0.toIDR() : value,
-                  validator: (value) => AppValidator.generalField('$value'),
-                  inputFormatters: CustomInputFormatters.idrCurrency,
-                  onFieldSubmitted: (value) => Toast.show(value),
-                ),
-                const SizedBox(height: 20),
-                ..._buildImagePicker(context),
-              ],
-            ),
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SkyButton(
+                text: 'Settings Utility',
+                icon: CupertinoIcons.settings,
+                outlineMode: true,
+                onPressed: () => Get.to(() => const SettingsUtilsView()),
+              ),
+              const SizedBox(height: 12),
+              SkyButton(
+                text: 'Media Utility',
+                icon: Icons.photo_library_outlined,
+                outlineMode: true,
+                onPressed: () => Get.to(() => const MediaUtilsView()),
+              ),
+              const SizedBox(height: 12),
+              SkyButton(
+                text: 'BottomSheet Utility',
+                icon: Icons.account_tree_outlined,
+                outlineMode: true,
+                onPressed: () => Get.to(() => const BottomSheetUtilsView()),
+              ),
+              const SizedBox(height: 12),
+              SkyButton(
+                text: 'List Utility',
+                icon: Icons.list,
+                outlineMode: true,
+                onPressed: () => Get.to(() => const ListUtilsView()),
+              ),
+              const SizedBox(height: 12),
+              SkyButton(
+                text: 'Dialog Utility',
+                icon: CupertinoIcons.conversation_bubble,
+                outlineMode: true,
+                onPressed: () => Get.to(() => const DialogUtilsView()),
+              ),
+              const SizedBox(height: 12),
+              SkyButton(
+                text: 'SnackBar Utility',
+                icon: Icons.table_rows_outlined,
+                outlineMode: true,
+                onPressed: () => Get.to(() => const SnackBarUtilsView()),
+              ),
+              const SizedBox(height: 12),
+              SkyButton(
+                text: 'Timer Utility',
+                icon: Icons.timer_outlined,
+                outlineMode: true,
+                onPressed: () => Get.toNamed(TimerUtilsView.route),
+              ),
+              const SizedBox(height: 12),
+              SkyButton(
+                text: 'Other',
+                icon: Icons.add,
+                outlineMode: true,
+                onPressed: () => Get.to(() => const OtherUtilsView()),
+              ),
+              const SizedBox(height: 12),
+              SkyButton(
+                text: 'Theme Component',
+                icon: CupertinoIcons.paintbrush,
+                gradient: GradientColor.gradientType2,
+                onPressed: () => Get.to(() => const ThemeComponentUtilsView()),
+              ),
+              const SizedBox(height: 28),
+              Text(
+                '${'txt_version'.tr} ${AppConfiguration.appVersion}',
+                style: AppStyle.body1,
+              ),
+            ],
           ),
         ),
       ),
     );
   }
-
-  _buildImagePicker(BuildContext context) => [
-        const Text('Module Camera'),
-        Container(
-          child: _imageFile != null
-              ? Image.file(
-                  _imageFile!,
-                  height: MediaQuery.of(context).size.width * 1 / 2,
-                  width: MediaQuery.of(context).size.width * 2 / 3,
-                  fit: BoxFit.contain,
-                )
-              : SizedBox(
-                  height: MediaQuery.of(context).size.width * 1 / 2,
-                  width: MediaQuery.of(context).size.width * 1 / 2,
-                  child: Card(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(40.0),
-                      child: Image(
-                        image: AssetImage('assets/images/img_man.png'),
-                      ),
-                    ),
-                  ),
-                ),
-        ),
-        Card(
-          elevation: 5,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(8.0),
-            onTap: () {
-              ModuleHelper.pickImage(showInfo: true).then((img) {
-                if (img != null) {
-                  setState(() => _imageFile = img);
-                }
-              });
-            },
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              width: 100,
-              child: Column(
-                children: [
-                  const Icon(
-                    Icons.add_a_photo_outlined,
-                    size: 30,
-                    color: AppColors.primary,
-                  ),
-                  Text(International.camera.tr)
-                ],
-              ),
-            ),
-          ),
-        )
-      ];
 }

@@ -1,6 +1,10 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class DatePickerWidget extends StatelessWidget {
   factory DatePickerWidget.range({
     required Function(PickerDateRange? selected) onSelectionChanged,
@@ -117,7 +121,7 @@ class DatePickerWidget extends StatelessWidget {
           selectedDayHighlightColor: selectedHighlightColor,
           calendarViewMode: viewMode,
         ),
-        initialValue: [initialValue?.startDate, initialValue?.endDate],
+        value: [initialValue?.startDate, initialValue?.endDate],
         onValueChanged: onSelectionChanged,
       ),
     );

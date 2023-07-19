@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:skybase/ui/widgets/list_pagination/error_view.dart';
-import 'package:skybase/ui/widgets/shimmer_detail.dart';
+import 'package:skybase/ui/widgets/shimmer/shimmer_detail.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class SkyView extends StatelessWidget {
   const SkyView({
     Key? key,

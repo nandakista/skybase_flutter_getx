@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
-import 'package:skybase/core/localization/language_const.dart';
 import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/ui/widgets/sky_dialog.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class LocaleHelper {
   final List<Map<String, dynamic>> locales = [
     {'name': 'English', 'locale': const Locale('en')},
@@ -13,52 +18,73 @@ class LocaleHelper {
 
   final fallbackLocale = const Locale('en');
 
-  /// Show dialog for change App Language
-  showLocaleDialog(BuildContext context) {
+  static T builder<T>({
+    required T en,
+    required T id,
+  }) {
+    if (LocaleHelper().getCurrentLocale() == const Locale('en')) {
+      return en;
+    } else {
+      return id;
+    }
+  }
+
+  void showLocaleDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: Text(International.chooseLanguage.tr, style: const TextStyle(color: AppColors.primary),),
-          content: SizedBox(
-            width: double.maxFinite,
-            child: ListView.separated(
+        return SkyDialog(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'txt_choose_language'.tr,
+                style: AppStyle.subtitle2.copyWith(color: AppColors.primary),
+              ),
+              const SizedBox(height: 16),
+              ListView.separated(
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: locales.length,
+                separatorBuilder: (context, index) =>
+                    const Divider(thickness: 1.5),
                 itemBuilder: (context, index) => InkWell(
-                    onTap: () {
-                      updateLocale(context, locales[index]['locale'],
-                          locales[index]['name'].toString());
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(locales[index]['name'].toString()),
-                    )),
-                separatorBuilder: (context, index) => const Divider(
-                  color: Colors.black,
+                  onTap: () {
+                    updateLocale(context, locales[index]['locale'],
+                        locales[index]['name'].toString());
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      locales[index]['name'].toString(),
+                      style: AppStyle.body1,
+                    ),
+                  ),
                 ),
-                itemCount: locales.length),
+              )
+            ],
           ),
         );
       },
     );
   }
 
-  updateLocale(BuildContext context, Locale locale, String name) {
+  void updateLocale(BuildContext context, Locale locale, String name) {
     saveLocaleToCache(name);
     Navigator.of(context).pop();
     Get.updateLocale(locale);
   }
 
-  saveLocaleToCache(String name) {
+  void saveLocaleToCache(String name) {
     if (name == "English") {
-      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "en");
+      GetStorageManager.find.save(GetStorageKey.currentLocale, "en");
     } else {
-      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "in");
+      GetStorageManager.find.save(GetStorageKey.currentLocale, "in");
     }
   }
 
   Locale getCurrentLocale() {
-    var currentLocale = GetStorageManager.find.get(GetStorageKey.CURRENT_LOCALE);
+    var currentLocale = GetStorageManager.find.get(GetStorageKey.currentLocale);
     if (currentLocale != null) {
       if (currentLocale == "en") {
         return const Locale('en');
@@ -66,7 +92,7 @@ class LocaleHelper {
         return const Locale('id');
       }
     } else {
-      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "en");
+      GetStorageManager.find.save(GetStorageKey.currentLocale, "en");
       return const Locale('en');
     }
   }

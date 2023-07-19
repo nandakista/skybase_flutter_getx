@@ -1,30 +1,30 @@
 import 'package:skybase/core/app/app_info.dart';
 import 'package:skybase/core/network/api_token_manager.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class AppConfiguration {
   //-- Main Configuration
-  static const clientToken = 'Some Client Token';
   static const tokenType = TokenType.ACCESS_TOKEN;
 
   //-- Production
-  static const productionAPI = 'https://api.github.com';
-  static const productionSocket = 'https://api.github.com';
-  static const midtransProductionKey = 'Some Key';
+  static const prodBaseUrl = 'https://api.github.production.com';
+  static const prodClientToken = 'Some Client Token';
 
   //-- Staging
-  static const stagingAPI = 'https://api.github.com';
-  static const stagingSocket = 'https://api.github.com';
-  static const midtransStagingKey = 'Some Key';
+  static const stagingBaseUrl = 'https://api.github.staging.com';
+  static const stagingClientToken = 'Some Client Token';
 
   //-- Development
-  static const developmentAPI = 'https://api.github.com';
-  static const developmentSocket = 'https://api.github.com';
-  static const midtransDevKey = 'Some Key';
+  static const devBaseUrl = 'https://api.github.com';
+  static const devClientToken = 'Some Client Token';
 
   //-- App Info
   static String appName = 'Skybase';
   static String appTag = 'Flutter Getx';
-  static String appVersion = AppInfo.find.get.version;
-  static String buildNumber = AppInfo.find.get.buildNumber;
-  static String packageName = AppInfo.find.get.packageName;
+  static String appVersion = AppInfo.packageInfo.version;
+  static String buildNumber = AppInfo.packageInfo.buildNumber;
+  static String packageName = AppInfo.packageInfo.packageName;
 }

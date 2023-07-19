@@ -1,10 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/localization/language_const.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class PaginationErrorLoadView extends StatelessWidget {
-  const PaginationErrorLoadView({Key? key}) : super(key: key);
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
+class PaginationErrorLoadView<ItemType> extends StatelessWidget {
+  const PaginationErrorLoadView({
+    Key? key,
+    required this.pagingController,
+  }) : super(key: key);
+
+  final PagingController<int, ItemType> pagingController;
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +21,15 @@ class PaginationErrorLoadView extends StatelessWidget {
       children: [
         const SizedBox(height: 12),
         Text(
-          International.errGeneralFormal.tr,
+          'txt_err_general_formal'.tr,
           style: const TextStyle(color: Colors.grey),
         ),
-        Text(
-          International.tapRetry.tr,
-          style: const TextStyle(color: Colors.grey),
+        TextButton(
+          onPressed: () => pagingController.retryLastFailedRequest(),
+          child: Text(
+            'txt_tap_retry'.tr,
+            style: const TextStyle(color: Colors.grey),
+          ),
         ),
         const SizedBox(height: 4),
         const Icon(

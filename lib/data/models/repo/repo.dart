@@ -6,7 +6,7 @@ import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 
 part 'repo.g.dart';
 
-@HiveType(typeId: HiveBox.repoId, adapterName: HiveAdapters.REPO)
+@HiveType(typeId: HiveBox.repoId, adapterName: HiveAdapters.repo)
 class Repo {
   @HiveField(RepoEntity.name)
   String name;
@@ -53,7 +53,7 @@ class Repo {
 
   Map<String, dynamic> toJson() => {
     'full_name': name,
-    'owner': owner,
+    'owner': owner.toJson(),
     'description': description,
     'language': language,
     'watchers_count': totalWatch,

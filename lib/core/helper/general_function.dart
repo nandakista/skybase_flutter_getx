@@ -1,30 +1,16 @@
 import 'dart:io';
-import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:open_filex/open_filex.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:image/image.dart' as img;
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/network/api_request.dart';
-import 'package:image/image.dart' as img;
 
 class AppFunction {
-  static Future<String> getFileSize(String filepath, int decimals) async {
-    var file = File(filepath);
-    int bytes = await file.length();
-    debugPrint('Path : $filepath');
-    debugPrint('Size : $bytes');
-    if (bytes <= 0) return '0 B';
-    const suffixes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    var i = (log(bytes) / log(1024)).floor();
-    return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) + suffixes[i];
-  }
-
   static Future<Uint8List> compressBytes(Uint8List list) async {
     var result = await FlutterImageCompress.compressWithList(
       list,
@@ -37,8 +23,10 @@ class AppFunction {
     return result;
   }
 
-  static Future<File> compressImage(
-      {required File file, required int limit}) async {
+  static Future<File> compressImage({
+    required File file,
+    required int limit,
+  }) async {
     var minLimit = 1000000;
     if (limit < minLimit) limit = minLimit;
     var size = file.lengthSync();
@@ -70,10 +58,15 @@ class AppFunction {
       } else {
         headers.clear();
       }
-      final rs = await Dio().get<List<int>>(url,
-          options: Options(responseType: ResponseType.bytes, headers: headers));
+      final rs = await Dio().get<List<int>>(
+        url,
+        options: Options(
+          responseType: ResponseType.bytes,
+          headers: headers,
+        ),
+      );
       var dir = await getApplicationDocumentsDirectory();
-      File file = File('${dir.path}/' + fileName + '.pdf');
+      File file = File('${dir.path}/$fileName.pdf');
       File urlFile = await file.writeAsBytes(rs.data!);
       return urlFile;
     } catch (e) {
@@ -81,54 +74,31 @@ class AppFunction {
       throw Exception('Error opening url file');
     }
   }
-
-  static Future<String> downloadFilePath(String url, String fileName) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final filePath = '${directory.path}/$fileName';
-    await Dio().download(url, filePath);
-    return filePath;
-  }
-
-  static openFile({required String url, String? fileName}) async {
-    final name = fileName ?? url.split('/').last;
-    final file = await downloadFilePath(url, name);
-    debugPrint('Path : $file');
-    OpenFilex.open(file);
-  }
-
   // ----------------------------------------------------------------------------------------
-  //                                 File/Image Picker
+  //                                 Video Image Picker
   // ----------------------------------------------------------------------------------------
 
   static Future<File?> imagePicker(
-      ImageSource source, ImagePicker imagePicker) async {
-    XFile? _pickedFile = await imagePicker.pickImage(
+    ImageSource source,
+    ImagePicker imagePicker,
+  ) async {
+    XFile? pickedFile = await imagePicker.pickImage(
       source: source,
       imageQuality: 40,
     );
-    return File(_pickedFile!.path);
+    return File(pickedFile!.path);
   }
 
   static Future<File?> takeVideo(
     ImageSource source,
     ImagePicker filePicker,
   ) async {
-    XFile? _pickedFile = await filePicker.pickVideo(
+    XFile? pickedFile = await filePicker.pickVideo(
       source: source,
       preferredCameraDevice: CameraDevice.rear,
       maxDuration: const Duration(seconds: 20),
     );
-    return File(_pickedFile!.path);
-  }
-
-  static Future<File?> pickFile(BuildContext context, String type) async {
-    FilePickerResult? result = await FilePicker.platform
-        .pickFiles(type: FileType.custom, allowedExtensions: ['pdf']);
-    if (result != null) {
-      File file = File(result.files.single.path!);
-      return file;
-    }
-    return null;
+    return File(pickedFile!.path);
   }
 }
 
@@ -165,11 +135,4 @@ class BorderPainter extends CustomPainter {
   bool shouldRebuildSemantics(BorderPainter oldDelegate) => false;
 }
 
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-}
+

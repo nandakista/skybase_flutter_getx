@@ -1,33 +1,32 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:skybase/core/auth_manager/auth_state.dart';
 import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
-import 'package:skybase/core/auth_manager/auth_state.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
-import 'package:skybase/data/data_sources/server/auth/auth_api_impl.dart';
 import 'package:skybase/data/models/user/user.dart';
-import 'package:skybase/ui/views/auth/intro/intro_view.dart';
-import 'package:skybase/ui/views/auth/login/login_view.dart';
-import 'package:skybase/ui/views/auth/splash/splash_view.dart';
-import 'package:skybase/dev/dev_view.dart';
+import 'package:skybase/data/sources/server/auth/auth_api_impl.dart';
+import 'package:skybase/ui/views/intro/intro_view.dart';
+import 'package:skybase/ui/views/login/login_view.dart';
+import 'package:skybase/ui/views/splash/splash_view.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 
 /// This class will called first time before app go to pages.
 ///
 /// This class help you to manage authentication process.
 /// Contains auth general function such as [login], [logout], and first install/[setup]
-class AuthManager extends GetxController {
+class AuthManager extends GetxService {
   static AuthManager get find => Get.find<AuthManager>();
 
   Rxn<AuthState> authState = Rxn<AuthState>();
   Stream<AuthState?> get stream => authState.stream;
   AuthState? get state => authState.value;
 
-  var getStorage = GetStorageManager.find;
-  var secureStorage = SecureStorageManager.find;
-  var themeManager = ThemeManager.find;
+  GetStorageManager getStorage = GetStorageManager.find;
+  SecureStorageManager secureStorage = SecureStorageManager.find;
+  ThemeManager themeManager = ThemeManager.find;
 
   @override
   void onInit() {
@@ -41,7 +40,7 @@ class AuthManager extends GetxController {
     // authChanged(state);
     Timer(
       const Duration(seconds: 2),
-          () => Get.offAllNamed(MainNavView.route),
+      () => Get.offAllNamed(LoginView.route),
     );
     super.onReady();
   }
@@ -60,7 +59,7 @@ class AuthManager extends GetxController {
       case AppType.UNAUTHENTICATED:
         Timer(
           const Duration(seconds: 2),
-              () => Get.offAllNamed(LoginView.route),
+          () => Get.offAllNamed(LoginView.route),
         );
         break;
       case AppType.AUTHENTICATED:
@@ -69,7 +68,6 @@ class AuthManager extends GetxController {
       default:
         Get.toNamed(SplashView.route);
     }
-    update();
   }
 
   setup() async {
@@ -79,7 +77,8 @@ class AuthManager extends GetxController {
 
   /// Check if app is first time installed. It will navigate to Introduction Page
   void checkFirstInstall() async {
-    final bool firstInstall = getStorage.get(GetStorageKey.FIRST_INSTALL) ?? true;
+    final bool firstInstall =
+        getStorage.get(GetStorageKey.firstInstall) ?? true;
     if (firstInstall) {
       await secureStorage.setToken(value: '');
       authState.value = const AuthState(appStatus: AppType.FIRST_INSTALL);
@@ -90,8 +89,9 @@ class AuthManager extends GetxController {
 
   /// Checking App Theme set it before app display
   Future<void> checkAppTheme() async {
-    final bool isDarkTheme = await getStorage.getAwait(GetStorageKey.DARK_THEME) ?? false;
-    if(isDarkTheme) {
+    final bool isDarkTheme =
+        await getStorage.getAwait(GetStorageKey.darkTheme) ?? false;
+    if (isDarkTheme) {
       themeManager.toDarkMode();
     } else {
       themeManager.toLightMode();
@@ -102,12 +102,12 @@ class AuthManager extends GetxController {
   /// If response is Error it will passed to [logout] process.
   Future<void> checkUser() async {
     AuthApiImpl authApi = AuthApiImpl();
-    final String? _token = await secureStorage.getToken();
-    User? _user = getStorage.get(GetStorageKey.USERS);
+    final String? token = await secureStorage.getToken();
+    User? user = getStorage.get(GetStorageKey.users);
 
     try {
       await authApi
-          .verifyToken(userId: _user?.id ?? 0, token: _token.toString())
+          .verifyToken(userId: user?.id ?? 0, token: token.toString())
           .then((res) async {
         setAuth();
       });
@@ -151,7 +151,7 @@ class AuthManager extends GetxController {
     required String token,
     required String refreshToken,
   }) async {
-    getStorage.save(GetStorageKey.USERS, user.toJson());
+    getStorage.save(GetStorageKey.users, user.toJson());
     await secureStorage.setToken(value: token);
     await secureStorage.setRefreshToken(value: refreshToken);
   }
@@ -159,8 +159,8 @@ class AuthManager extends GetxController {
   /// Get User data from GetStorage
   /// * No need to decode or call fromJson again when you used this helper
   User? get user {
-    if (getStorage.has(GetStorageKey.USERS)) {
-      return User.fromJson(getStorage.get(GetStorageKey.USERS));
+    if (getStorage.has(GetStorageKey.users)) {
+      return User.fromJson(getStorage.get(GetStorageKey.users));
     } else {
       return null;
     }

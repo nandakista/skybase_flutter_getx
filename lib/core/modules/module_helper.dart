@@ -4,6 +4,10 @@ import 'package:camera/camera.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/modules/camera/camera_module.dart';
 
+/* Created by
+   Varcant
+   nanda.kista@gmail.com
+*/
 class ModuleHelper {
   /// Pick Image from [ModuleHelper.pickImage] avoid to crash when picked image using low-end devices.
   ///

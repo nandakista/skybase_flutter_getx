@@ -1,96 +1,75 @@
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:skybase/core/database/get_storage/get_storage_key.dart';
-import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/extension/datetime_extension.dart';
+import 'package:skybase/core/localization/locale_helper.dart';
 
-/// If you want to convert 1 date, just fill [date].
-/// If you want to convert range date, you can fill [startDate], [endDate]
-/// * Example : DateHelper(startDate: x, endDate: y).format2()
 class DateTimeHelper {
-
-  DateTime? date;
-  DateTime? startDate;
-  DateTime? endDate;
-
-  DateTimeHelper({
-    this.date,
-    this.startDate,
-    this.endDate
-  });
-
-  String? format() {
-    return formatDate(pattern: 'dd MM yyyy - HH:mm:ss');
-  }
-
-  String? format2() {
-    return formatDate(pattern: 'dd MM yyyy');
-  }
-
-  String? format3() {
-    return formatDate(pattern: 'dd-MM-yyyy');
-  }
-
-  String? format4() {
-    return formatDate(pattern: 'EEEE, dd MM y');
-  }
-
-  String? format5() {
-    return formatDate(pattern: 'EEEE, dd MMMM yyyy HH:mm');
-  }
-
-  String? formatDays() {
-    return formatDate(pattern: 'dd');
-  }
-
-  String? formatHours() {
-    return formatDate(pattern: 'HH:mm');
-  }
-
-  String? formatDate({String? pattern}) {
-    bool isRange = (startDate != null && endDate != null);
-    bool isNotRange = (startDate == null && endDate == null);
-    String locale = GetStorageManager.find.get(GetStorageKey.CURRENT_LOCALE);
-
-    if(isRange && date == null) {
-      var start = DateFormat(pattern, locale).format(startDate!);
-      var end = DateFormat(pattern, locale).format(endDate!);
-      return '$start - $end';
-    } else if (date != null && isNotRange) {
-      return DateFormat(pattern, locale).format(date!);
+  static String parseLocalDate({
+    required DateTime? date,
+    String? format,
+    String? idFormat,
+  }) {
+    if (date != null) {
+      return LocaleHelper.builder(
+        en: DateFormat(format).format(date),
+        id: DateFormat(idFormat ?? format, 'id').format(date),
+      );
     } else {
-      return 'Error date converted!';
+      return 'Date is null';
+    }
+  }
+
+  static String dateToSentence(DateTime date) {
+    if (date.inThisHours()) {
+      int intDateTime = date.difference(DateTime.now()).inMinutes;
+      if (intDateTime <= 0) {
+        return 'txt_expired'.tr;
+      } else {
+        return '$intDateTime ${'txt_minutes'.tr}';
+      }
+    } else if (date.isToday()) {
+      return '${date.difference(DateTime.now()).inHours} ${'txt_hours'.tr}';
+    } else if (date.inNextWeek()) {
+      return '${date.difference(DateTime.now()).inDays + 1} ${'txt_days'.tr}';
+    } else if (date.isBefore(DateTime.now())) {
+      return 'txt_expired'.tr;
+    } else if (date.inThisYear()) {
+      return parseLocalDate(date: date, format: 'dd MMM');
+    } else {
+      return parseLocalDate(date: date, format: 'dd/MM/y');
+    }
+  }
+
+  static String dateToSentenceInDay({required DateTime date, String? format}) {
+    if (date.isToday()) {
+      return 'txt_today'.tr;
+    } else if (date.isYesterday()) {
+      return 'txt_yesterday'.tr;
+    } else if (date.isTomorrow()) {
+      return 'txt_tomorrow'.tr;
+    } else {
+      return parseLocalDate(date: date, format: format ?? 'dd MMM');
+    }
+  }
+
+  static String toLocalizeDay({required String dayName}) {
+    if(dayName == 'Sunday') {
+      return 'txt_sunday'.tr;
+    } else if (dayName == 'Monday') {
+      return 'txt_monday'.tr;
+    } else if (dayName == 'Tuesday') {
+      return 'txt_tuesday'.tr;
+    } else if (dayName == 'Wednesday') {
+      return 'txt_wednesday'.tr;
+    } else if (dayName == 'Thursday') {
+      return 'txt_thursday'.tr;
+    } else if (dayName == 'Friday') {
+      return 'txt_friday'.tr;
+    } else if (dayName == 'Saturday'){
+      return 'txt_saturday'.tr;
+    } else {
+      return dayName;
     }
   }
 }
 
-extension DateHelpers on DateTime {
-  bool isToday() {
-    final now = DateTime.now();
-    return now.day == day &&
-        now.month == month &&
-        now.year == year;
-  }
-
-  bool isYesterday() {
-    final yesterday = DateTime.now().subtract(const Duration(days: 1));
-    return yesterday.day == day &&
-        yesterday.month == month &&
-        yesterday.year == year;
-  }
-
-  bool isTomorrow() {
-    final yesterday = DateTime.now().add(const Duration(days: 1));
-    return yesterday.day == day &&
-        yesterday.month == month &&
-        yesterday.year == year;
-  }
-
-  bool inThisWeek() {
-    final weekAgo = DateTime.now().subtract(const Duration(days: 7));
-    return isAfter(weekAgo);
-  }
-
-  bool inThisYear() {
-    final yearAgo = DateTime.now().subtract(const Duration(days: 365));
-    return isAfter(yearAgo);
-  }
-}

@@ -4,80 +4,172 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 
-final ThemeData lightTheme = ThemeData(
-  primaryColor: AppColors.materialPrimary,
-  primarySwatch: AppColors.materialPrimary,
-  indicatorColor: AppColors.accent,
-  fontFamily: "Poppins",
-  brightness: Brightness.light,
-  // bottomSheetTheme: const BottomSheetThemeData(
-  //   elevation: 8,
-  //   shape: RoundedRectangleBorder(
-  //     borderRadius: BorderRadius.only(
-  //       topLeft: Radius.circular(24),
-  //       topRight: Radius.circular(24),
-  //     ),
-  //   ),
-  // ),
-  appBarTheme: const AppBarTheme(
-    systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.light,
-      systemNavigationBarColor: Colors.black,
-      statusBarColor: AppColors.primary,
-    ),
-  ),
-);
-
-final ThemeData darkTheme = ThemeData(
-  primaryColor: AppColors.materialPrimary,
-  primarySwatch: AppColors.materialPrimary,
-  indicatorColor: AppColors.accent,
-  fontFamily: "Poppins",
-  brightness: Brightness.dark,
-  bottomSheetTheme: const BottomSheetThemeData(
-    elevation: 8,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(24),
-        topRight: Radius.circular(24),
+class AppTheme {
+  static ThemeData light() {
+    return ThemeData(
+      primaryColor: AppColors.primary,
+      primarySwatch: AppColors.materialPrimary,
+      indicatorColor: AppColors.accent,
+      fontFamily: "Poppins",
+      brightness: Brightness.light,
+      inputDecorationTheme: inputDecorationTheme(),
+      checkboxTheme: checkboxThemeData(),
+      radioTheme: radioThemeData(),
+      switchTheme: switchThemeData(),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: Colors.grey,
       ),
-    ),
-  ),
-  appBarTheme: const AppBarTheme(
-    systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.light,
-      systemNavigationBarColor: Colors.black,
-      statusBarColor: AppColors.primary,
-    ),
-  ),
-);
+      appBarTheme: const AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+          systemNavigationBarColor: Colors.black,
+          statusBarColor: AppColors.primary,
+        ),
+      ),
+    );
+  }
+
+  static ThemeData dark() {
+    return ThemeData(
+      primaryColor: AppColors.primary,
+      primarySwatch: AppColors.materialPrimary,
+      indicatorColor: AppColors.accent,
+      fontFamily: "Poppins",
+      brightness: Brightness.dark,
+      inputDecorationTheme: inputDecorationTheme(),
+      checkboxTheme: checkboxThemeData(),
+      radioTheme: radioThemeData(),
+      switchTheme: switchThemeData(),
+      bottomSheetTheme: const BottomSheetThemeData(
+        elevation: 8,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+        ),
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: Colors.grey,
+        elevation: 2,
+      ),
+      appBarTheme: const AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+          systemNavigationBarColor: Colors.black,
+          statusBarColor: AppColors.primary,
+        ),
+      ),
+    );
+  }
+
+  static CheckboxThemeData checkboxThemeData() {
+    return CheckboxThemeData(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+      ),
+      side: const BorderSide(width: 1, color: Color(0xFFCFCFCF)),
+      fillColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.accent;
+        }
+        return null;
+      }),
+    );
+  }
+
+  static RadioThemeData radioThemeData() {
+    return RadioThemeData(
+      fillColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.accent;
+        }
+        return null;
+      }),
+    );
+  }
+
+  static SwitchThemeData switchThemeData() {
+    return SwitchThemeData(
+      thumbColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.materialAccent[200];
+        }
+        return null;
+      }),
+      trackColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+        if (states.contains(MaterialState.disabled)) {
+          return null;
+        }
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.accent;
+        }
+        return null;
+      }),
+    );
+  }
+
+  static InputDecorationTheme inputDecorationTheme() {
+    return InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderSide: const BorderSide(width: 1, color: Colors.transparent),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(width: 1, color: Colors.transparent),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: const BorderSide(width: 1, color: AppColors.primary),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: const BorderSide(width: 1, color: AppColors.primary),
+        borderRadius: BorderRadius.circular(12),
+      ),
+    );
+  }
+
+  static setStatusBar({
+    required Brightness brightness,
+    Color color = AppColors.primary,
+  }) {
+    Brightness iconBrightness;
+    if (Platform.isIOS) {
+      (brightness == Brightness.dark)
+          ? iconBrightness = Brightness.light
+          : iconBrightness = Brightness.dark;
+    } else {
+      iconBrightness = brightness;
+    }
+    return SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarBrightness: iconBrightness,
+        statusBarColor: color,
+      ),
+    );
+  }
+}
 
 extension DarkMode on BuildContext {
   bool isDarkMode() {
     final brightness = MediaQuery.of(this).platformBrightness;
     return brightness == Brightness.dark;
-  }
-}
-
-class AppStatusBar {
-  static set({
-    required Brightness brightness,
-    Color color = AppColors.primary,
-  }) {
-    Brightness _iconBrightness;
-    if (Platform.isIOS) {
-      (brightness == Brightness.dark)
-          ? _iconBrightness = Brightness.light
-          : _iconBrightness = Brightness.dark;
-    } else {
-      _iconBrightness = brightness;
-    }
-    return SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarBrightness: _iconBrightness,
-        statusBarColor: color,
-      ),
-    );
   }
 }
 

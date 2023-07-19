@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:skybase/core/helper/filter/filter_action_result.dart';
-import 'package:skybase/core/themes/app_shadows.dart';
-import 'package:skybase/ui/widgets/common_widget.dart';
+import 'package:skybase/ui/widgets/content_wrapper.dart';
 
 class BottomSheetHelper {
   static basic({
@@ -12,16 +10,26 @@ class BottomSheetHelper {
     bool isScrollControlled = true,
     Color? backgroundColor = Colors.transparent,
     Color? barrierColor,
+    bool enableDrag = true,
   }) async {
-    await showModalBottomSheet(
+    return await showModalBottomSheet(
       context: Get.context!,
       isDismissible: isDismissible,
       isScrollControlled: isScrollControlled,
       backgroundColor: backgroundColor,
       barrierColor: barrierColor,
+      enableDrag: enableDrag,
       builder: (btmContext) => Container(
         color: Theme.of(Get.context!).scaffoldBackgroundColor,
-        child: SafeArea(child: child),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: Get.height - 50),
+          child: ContentWrapper(
+            top: true,
+            bottom: true,
+            marginTop: 12,
+            child: child,
+          ),
+        ),
       ),
     );
   }
@@ -32,71 +40,61 @@ class BottomSheetHelper {
     bool isScrollControlled = true,
     Color? backgroundColor = Colors.transparent,
     Color? barrierColor,
+    bool enableDrag = true,
+    double? height,
+    bool expand = false,
   }) async {
-    await showModalBottomSheet(
+    return await showModalBottomSheet(
       context: Get.context!,
       isDismissible: isDismissible,
       isScrollControlled: isScrollControlled,
       backgroundColor: backgroundColor,
+      enableDrag: enableDrag,
       barrierColor: barrierColor,
-      builder: (btmContext) => Container(
-        decoration: BoxDecoration(
-          color: Theme.of(Get.context!).scaffoldBackgroundColor,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(24),
-            topRight: Radius.circular(24),
-          ),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  margin: const EdgeInsets.only(top: 12),
-                  height: 6,
-                  width: 80,
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
+      builder: (btmContext) {
+        return ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: Get.height - 50),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(Get.context!).scaffoldBackgroundColor,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(24),
+                topRight: Radius.circular(24),
               ),
-              child,
-            ],
+            ),
+            child: ContentWrapper(
+              top: true,
+              bottom: true,
+              marginTop: 12,
+              child: child,
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
-  static Future<FilterResult> filter(BuildContext context,
-      {required Widget child}) async {
-    final result = await showModalBottomSheet(
-      context: context,
-      isDismissible: true,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (btmContext) => Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: SingleChildScrollView(
-          child: SafeArea(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                child,
-              ],
-            ),
-          ),
-        ),
+  static bar({
+    required Widget child,
+    bool isDismissible = true,
+    bool isScrollControlled = true,
+    Color? backgroundColor,
+    Color? barrierColor,
+    bool expand = false,
+  }) async {
+    return await showBarModalBottomSheet(
+      context: Get.context!,
+      isDismissible: isDismissible,
+      expand: expand,
+      backgroundColor: backgroundColor,
+      barrierColor: barrierColor ?? Colors.black54,
+      builder: (btmContext) => ContentWrapper(
+        top: true,
+        bottom: true,
+        marginTop: 12,
+        child: child,
       ),
     );
-    if (result != null) {
-      return FilterResult(action: FilterAction.submit, value: result);
-    } else {
-      return FilterResult(action: FilterAction.cancel, value: []);
-    }
   }
 
   static Future cupertino({
@@ -105,6 +103,7 @@ class BottomSheetHelper {
     bool isScrollControlled = true,
     bool enableDrag = true,
     bool enableBack = true,
+    bool expand = false,
     Color? barrierColor,
   }) async {
     return await showCupertinoModalBottomSheet(
@@ -114,16 +113,19 @@ class BottomSheetHelper {
       topRadius: const Radius.circular(24),
       duration: const Duration(milliseconds: 600),
       backgroundColor: Theme.of(Get.context!).scaffoldBackgroundColor,
-      barrierColor: barrierColor,
+      barrierColor: barrierColor ?? Colors.black54,
+      expand: expand,
+      bounce: true,
       builder: (btmContext) => WillPopScope(
         onWillPop: () async {
           return enableBack;
         },
-        child: SafeArea(
+        child: Material(
           child: Stack(
+            alignment: Alignment.topCenter,
             children: [
-              Align(
-                alignment: Alignment.topCenter,
+              Positioned(
+                top: 0,
                 child: Container(
                   margin: const EdgeInsets.only(top: 12),
                   height: 6,
@@ -136,10 +138,43 @@ class BottomSheetHelper {
               ),
               ContentWrapper(
                 top: true,
+                bottom: true,
                 child: child,
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  static Future material({
+    required Widget child,
+    bool isDismissible = true,
+    bool isScrollControlled = true,
+    bool enableDrag = true,
+    bool enableBack = true,
+    bool expand = false,
+    Color? barrierColor,
+  }) async {
+    return await showMaterialModalBottomSheet(
+      context: Get.context!,
+      isDismissible: isDismissible,
+      enableDrag: enableDrag,
+      duration: const Duration(milliseconds: 600),
+      backgroundColor: Theme.of(Get.context!).scaffoldBackgroundColor,
+      barrierColor: barrierColor ?? Colors.black54,
+      expand: expand,
+      bounce: true,
+      builder: (btmContext) => WillPopScope(
+        onWillPop: () async {
+          return enableBack;
+        },
+        child: ContentWrapper(
+          top: true,
+          bottom: true,
+          marginTop: 12,
+          child: child,
         ),
       ),
     );
