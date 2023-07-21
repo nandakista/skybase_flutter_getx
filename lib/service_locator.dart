@@ -35,7 +35,7 @@ class ServiceLocator {
     // Database
     // * [Be Careful] Writing order can affects the algorithm
     await HiveDb.init();
-    await GetStorage.init(GetStorageKey.storageName);
+    await GetStorage.init(GetStorageKey.STORAGE_NAME);
     await Get.putAsync(() async => GetStorage());
     Get.putAsync(() async => const FlutterSecureStorage());
 

@@ -17,7 +17,7 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
   }
 
   @override
-  String get storageName => GetStorageKey.sampleFeature;
+  String get storageName => GetStorageKey.SAMPLE_FEATURE;
 
   void getListData() async {
     try {

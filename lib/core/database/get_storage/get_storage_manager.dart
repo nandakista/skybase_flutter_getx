@@ -14,7 +14,6 @@ import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 ///
 /// Format -> Key == BoxName,
 /// So one box contains one key --> One Box = One Data.
-/// If you want to caching dataList, you can use Hive Database, cause the box Hive can contains multiple key & data
 class GetStorageManager {
   static GetStorageManager get find => Get.find<GetStorageManager>();
   final _box = Get.find<GetStorage>();
@@ -51,8 +50,8 @@ class GetStorageManager {
 
   logout() async {
     try {
-      await GetStorage(GetStorageKey.users).erase();
-      save(GetStorageKey.firstInstall, false);
+      await GetStorage(GetStorageKey.USERS).erase();
+      save(GetStorageKey.FIRST_INSTALL, false);
     } catch (e) {
       debugPrint(e.toString());
     }

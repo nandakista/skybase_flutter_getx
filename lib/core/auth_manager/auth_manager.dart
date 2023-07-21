@@ -78,7 +78,7 @@ class AuthManager extends GetxService {
   /// Check if app is first time installed. It will navigate to Introduction Page
   void checkFirstInstall() async {
     final bool firstInstall =
-        getStorage.get(GetStorageKey.firstInstall) ?? true;
+        getStorage.get(GetStorageKey.FIRST_INSTALL) ?? true;
     if (firstInstall) {
       await secureStorage.setToken(value: '');
       authState.value = const AuthState(appStatus: AppType.FIRST_INSTALL);
@@ -90,7 +90,7 @@ class AuthManager extends GetxService {
   /// Checking App Theme set it before app display
   Future<void> checkAppTheme() async {
     final bool isDarkTheme =
-        await getStorage.getAwait(GetStorageKey.darkTheme) ?? false;
+        await getStorage.getAwait(GetStorageKey.IS_DARK_THEME) ?? false;
     if (isDarkTheme) {
       themeManager.toDarkMode();
     } else {
@@ -103,7 +103,7 @@ class AuthManager extends GetxService {
   Future<void> checkUser() async {
     AuthApiImpl authApi = AuthApiImpl();
     final String? token = await secureStorage.getToken();
-    User? user = getStorage.get(GetStorageKey.users);
+    User? user = getStorage.get(GetStorageKey.USERS);
 
     try {
       await authApi
@@ -151,7 +151,7 @@ class AuthManager extends GetxService {
     required String token,
     required String refreshToken,
   }) async {
-    getStorage.save(GetStorageKey.users, user.toJson());
+    getStorage.save(GetStorageKey.USERS, user.toJson());
     await secureStorage.setToken(value: token);
     await secureStorage.setRefreshToken(value: refreshToken);
   }
@@ -159,8 +159,8 @@ class AuthManager extends GetxService {
   /// Get User data from GetStorage
   /// * No need to decode or call fromJson again when you used this helper
   User? get user {
-    if (getStorage.has(GetStorageKey.users)) {
-      return User.fromJson(getStorage.get(GetStorageKey.users));
+    if (getStorage.has(GetStorageKey.USERS)) {
+      return User.fromJson(getStorage.get(GetStorageKey.USERS));
     } else {
       return null;
     }

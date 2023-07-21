@@ -15,15 +15,15 @@ class ThemeManager extends GetxService {
 
   @override
   void onReady() async {
-    isDark.value = await GetStorageManager.find.getAwait(GetStorageKey.darkTheme) ?? false;
+    isDark.value = await GetStorageManager.find.getAwait(GetStorageKey.IS_DARK_THEME) ?? false;
     super.onReady();
   }
 
   Future<Rx<bool>> changeTheme() async {
     if (isDark.isTrue) {
-      GetStorageManager.find.save(GetStorageKey.darkTheme, false);
+      GetStorageManager.find.save(GetStorageKey.IS_DARK_THEME, false);
     } else {
-      GetStorageManager.find.save(GetStorageKey.darkTheme, true);
+      GetStorageManager.find.save(GetStorageKey.IS_DARK_THEME, true);
     }
     return isDark.toggle();
   }
