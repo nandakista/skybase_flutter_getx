@@ -20,8 +20,8 @@ class GetStorageManager {
   final _box = Get.find<GetStorage>();
 
   /// If you want to save Object/Model don't forget to encode toJson
-  void save(String name, dynamic value) {
-    _box.write(name, value);
+  Future<void> save(String name, dynamic value) async {
+    await _box.write(name, value);
   }
 
   void delete(String name) {
@@ -29,8 +29,8 @@ class GetStorageManager {
   }
 
   /// If you want to get Object/Model don't forget to decode fromJson
-  dynamic get(String name) {
-    return _box.read(name);
+  dynamic get<T>(String name) {
+    return _box.read<T>(name);
   }
 
   bool has(String name) {
@@ -39,6 +39,10 @@ class GetStorageManager {
 
   String encodeList<T>(List<T> data) {
     return json.encode(data);
+  }
+
+  List<T> decodeList<T>(String data) {
+    return json.decode(data);
   }
 
   dynamic getAwait(String name) async {
