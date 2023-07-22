@@ -14,10 +14,10 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
     return Obx(
       () => ListView.separated(
         separatorBuilder: (context, _) => const Divider(),
-        itemCount: controller.user.value?.repositoryList?.length ?? 0,
+        itemCount: controller.dataObj.value?.repositoryList?.length ?? 0,
         padding: const EdgeInsets.only(top: 8),
         itemBuilder: (_, index) {
-          final Repo? repos = controller.user.value?.repositoryList![index];
+          final Repo? repos = controller.dataObj.value?.repositoryList![index];
           return (repos == null)
               ? const Center(
                   child: Text('User belum mem-follow siapapun'),

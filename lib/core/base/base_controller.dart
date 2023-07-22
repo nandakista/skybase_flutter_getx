@@ -14,17 +14,28 @@ abstract class BaseController<T> extends GetxController {
   RxString errorMessage = ''.obs;
   RxBool isError = false.obs;
 
-  void refreshData() {}
+  final dataObj = Rxn<T>();
+
+  String get storageName;
+
+  String get cacheId;
+
+  /// **NOTE:**
+  /// call this [refreshPage] instead of [onRefresh] when you need to dispose anything
+  void refreshPage() {}
 
   void onRefresh() {
     storage.delete(storageName);
-    refreshData();
+    dataObj.value = null;
+    refreshPage();
   }
 
   void showLoading() {
-    isLoading.value = true;
-    isError.value = false;
-    errorMessage.value = '';
+    if (dataObj.value == null) {
+      isLoading.value = true;
+      isError.value = false;
+      errorMessage.value = '';
+    }
   }
 
   void hideLoading() => isLoading.value = false;
@@ -34,37 +45,54 @@ abstract class BaseController<T> extends GetxController {
     isError.value = true;
   }
 
-  String get storageName;
-
-  String get cacheId;
-
   void loadData(Function() onLoad) {
     onLoad();
   }
 
   /// **NOTE:**
-  /// make sure you call this method at initial state, before you call method [saveCache]
-  Future<T?> getCache(Function() onLoad) async {
+  /// make sure you call this method at initial state,
+  /// before you call method [saveCacheAndFinish]
+  Future<void> getCache(Function() onLoad) async {
     var cache = storage.get(storageName);
     if (storage.has(storageName) && cache.toString().isNotEmpty) {
       if (cacheId == getId(cache)) {
-        return CacheModelConverter<T>().fromJson(cache);
+        dataObj.value = CacheModelConverter<T>().fromJson(cache);
       }
     }
     onLoad();
-    return null;
   }
 
   String getId(Map<String, dynamic> cache) {
     return (cache['id']).toString();
   }
 
-  Future<void> saveCache({required T data}) async {
+  /// **NOTE:**
+  /// call this to finish the load data,
+  /// don't need to call [finishLoadData] anymore
+  Future<void> saveCacheAndFinish({required T data}) async {
     try {
       await storage.save(storageName, CacheModelConverter<T>().toJson(data));
+      finishLoadData(data: data);
     } catch (e) {
+      debugPrint('Failed save cache, $e');
       showError(e.toString());
-      debugPrint('Error save cache data $e');
     }
+  }
+
+  /// **NOTE:**
+  /// call this [finishLoadData] instead [saveCacheAndFinish] if the data
+  /// is not require to saved in local data
+  finishLoadData({required T data}) {
+    dataObj.value = data;
+  }
+
+  /// **NOTE:**
+  /// call this [closePage] instead of [onClose] when you need to dispose anything
+  void closePage() {}
+
+  @override
+  void onClose() {
+    closePage();
+    super.onClose();
   }
 }

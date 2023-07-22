@@ -29,11 +29,13 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
         page: page,
         perPage: perPage,
       );
-      saveCache(data: response);
-      loadNextData(data: response);
+      saveCacheAndFinish(data: response);
+
+      // Only fetch data
+      // finishLoadData(data: response);
     } catch (e) {
       debugPrint('Error : $e');
-      pagingController.error = e;
+      showError(e.toString());
     }
   }
 

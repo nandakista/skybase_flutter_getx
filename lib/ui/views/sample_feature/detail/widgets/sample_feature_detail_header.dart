@@ -20,14 +20,14 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
             CircleAvatar(
               radius: 45,
               child: SkyImage(
-                src: '${controller.user.value?.avatarUrl}&s=200',
+                src: '${controller.dataObj.value?.avatarUrl}&s=200',
                 borderRadius: BorderRadius.circular(90),
               ),
             ),
             Column(
               children: [
                 Text(
-                  '${controller.user.value?.repository ?? 0}',
+                  '${controller.dataObj.value?.repository ?? 0}',
                   style: AppStyle.headline3,
                 ),
                 const Text('Repository'),
@@ -36,7 +36,7 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
             Column(
               children: [
                 Text(
-                  '${controller.user.value?.followers ?? 0}',
+                  '${controller.dataObj.value?.followers ?? 0}',
                   style: AppStyle.headline3,
                 ),
                 const Text('Follower'),
@@ -45,7 +45,7 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
             Column(
               children: [
                 Text(
-                  '${controller.user.value?.following ?? 0}',
+                  '${controller.dataObj.value?.following ?? 0}',
                   style: AppStyle.headline3,
                 ),
                 const Text('Following'),

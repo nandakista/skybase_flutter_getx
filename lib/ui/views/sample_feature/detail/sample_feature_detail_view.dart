@@ -18,7 +18,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
     return ColoredStatusBar(
       brightness: Brightness.light,
       child: Scaffold(
-        appBar: SkyAppBar.primary(title: controller.user.value?.username),
+        appBar: SkyAppBar.primary(title: controller.dataObj.value?.username),
         body: SafeArea(
           child: Obx(
             () => SkyView(

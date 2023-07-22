@@ -17,20 +17,20 @@ class SampleFeatureDetailInfo extends GetView<SampleFeatureDetailController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 12),
-            Text(controller.user.value?.name ?? '--',
+            Text(controller.dataObj.value?.name ?? '--',
                 style: AppStyle.headline4),
-            Text(controller.user.value?.bio ?? '--'),
+            Text(controller.dataObj.value?.bio ?? '--'),
             const SizedBox(height: 8),
             Row(
               children: [
                 const Icon(Icons.location_city),
-                Text(' ${controller.user.value?.company ?? '--'}'),
+                Text(' ${controller.dataObj.value?.company ?? '--'}'),
               ],
             ),
             Row(
               children: [
                 const Icon(Icons.location_on),
-                Text(' ${controller.user.value?.location ?? '--'}'),
+                Text(' ${controller.dataObj.value?.location ?? '--'}'),
               ],
             ),
           ],

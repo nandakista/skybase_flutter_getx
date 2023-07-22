@@ -18,8 +18,6 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
   late int idArgs;
   late String usernameArgs;
 
-  final user = Rxn<SampleFeature>();
-
   @override
   void onInit() {
     super.onInit();
@@ -30,14 +28,14 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
   @override
   void onReady() async {
     _initScreenPref();
-    user.value = await getCache(() => getDetailUser());
+    getCache(() => getDetailUser());
 
     // Only fetch data
     // loadData(() => getDetailUser());
   }
 
   @override
-  void refreshData() {
+  void refreshPage() {
     getDetailUser();
   }
 
@@ -45,7 +43,11 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
   String get cacheId => idArgs.toString();
 
   @override
+  // Only save last cache
   String get storageName => GetStorageKey.SAMPLE_FEATURE_DETAIL;
+
+  // Save every detail cache
+  // String get storageName => GetStorageKey.SAMPLE_FEATURE_DETAIL + cacheId;
 
   Future<void> getDetailUser() async {
     showLoading();
@@ -54,8 +56,10 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
         id: idArgs,
         username: usernameArgs,
       );
-      saveCache(data: response);
-      user.value = response;
+      saveCacheAndFinish(data: response);
+
+      // Only fetch data
+      // finishLoadData(data: response);
       hideLoading();
     } catch (e) {
       hideLoading();
