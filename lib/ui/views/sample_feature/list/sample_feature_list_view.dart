@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
-import 'package:skybase/core/database/hive/hive_box.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
@@ -48,7 +47,6 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () {
-          Hive.box<SampleFeature>(HiveBox.user).clear();
           GetStorageManager.find.delete(GetStorageKey.SAMPLE_FEATURE_LIST);
           GetStorageManager.find.delete(GetStorageKey.SAMPLE_FEATURE_DETAIL);
         },

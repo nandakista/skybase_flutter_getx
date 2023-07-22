@@ -8,7 +8,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:skybase/core/auth_manager/auth_manager.dart';
 import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
-import 'package:skybase/core/database/hive/hive_db.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/network/api_config.dart';
 import 'package:skybase/core/themes/app_theme.dart';
@@ -32,9 +31,6 @@ class ServiceLocator {
   }
 
   static Future<void> _initConfig() async {
-    // Database
-    // * [Be Careful] Writing order can affects the algorithm
-    await HiveDb.init();
     await GetStorage.init(GetStorageKey.STORAGE_NAME);
     await Get.putAsync(() async => GetStorage());
     Get.putAsync(() async => const FlutterSecureStorage());
