@@ -12,20 +12,24 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
   SampleFeatureListController({required this.repository});
 
   @override
-  void onInitData() {
-    getCache().then((_) => getListData());
+  void onInit() {
+    getCache(() => getUsers());
+
+    // Only fetch data
+    // loadData(() => getUsers());
+    super.onInit();
   }
 
   @override
   String get storageName => GetStorageKey.SAMPLE_FEATURE;
 
-  void getListData() async {
+  void getUsers() async {
     try {
       final response = await repository.getUsers(
         page: page,
         perPage: perPage,
       );
-      saveCache(list: response);
+      saveCache(data: response);
       loadNextData(data: response);
     } catch (e) {
       debugPrint('Error : $e');

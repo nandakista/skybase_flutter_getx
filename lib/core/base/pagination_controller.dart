@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:skybase/core/cache_manager/cache_model_converter.dart';
@@ -15,25 +16,50 @@ abstract class PaginationController<T> extends GetxController {
   int perPage = 20;
   int page = 1;
   final pagingController = PagingController<int, T>(firstPageKey: 0);
-  bool isRefresh = false;
 
   String get storageName;
 
-  void onInitData();
+  void _initListener(void Function() onLoad) {
+    pagingController.addPageRequestListener((page) => onLoad());
+  }
 
-  @override
-  void onInit() {
-    pagingController.addPageRequestListener((page) {
-      onInitData();
-    });
-    super.onInit();
+  void loadData(Function() onLoad) {
+    _initListener(onLoad);
   }
 
   void onRefresh() {
     storage.delete(storageName);
     page = 1;
-    isRefresh = true;
     pagingController.refresh();
+  }
+
+  /// **NOTE:**
+  /// make sure you call this method at initial state, before you call method [saveCache]
+  Future<void> getCache(Function() onLoad) async {
+    if (page == 1) _getCacheData();
+    _initListener(onLoad);
+  }
+
+  void _getCacheData() {
+    var cache = storage.get(storageName);
+    if (storage.has(storageName) && cache.toString().isNotEmpty) {
+      loadNextData(
+        data: List<T>.from(
+          (json.decode(cache) as List).map(
+            (x) => CacheModelConverter<T>().fromJson(x),
+          ),
+        ),
+      );
+    }
+  }
+
+  void saveCache({List<T>? data}) async {
+    try {
+      if (page == 1) await storage.save(storageName, json.encode(data ?? []));
+    } catch (e) {
+      debugPrint('Failed save cache $e');
+      pagingController.error = e;
+    }
   }
 
   void loadNextData({required List<T> data, int? page}) {
@@ -41,37 +67,13 @@ abstract class PaginationController<T> extends GetxController {
     if (isLastPage) {
       pagingController.appendLastPage(data);
     } else {
-      final nextPage = page ?? this.page++;
-      pagingController.appendPage(data, nextPage);
+      pagingController.appendPage(data, page ?? this.page++);
     }
   }
 
-  /// **NOTE:**
-  /// make sure you call this method at initial state, before you call method [saveCache]
-  Future<void> getCache({String id = '0'}) async {
-    var cache = storage.get(storageName);
-    if (storage.has(storageName)) {
-      if (cache != null && cache.toString().isNotEmpty) {
-        loadNextData(
-          data: List<T>.from(
-            (json.decode(cache) as List).map(
-              (x) => CacheModelConverter<T>().fromJson(x),
-            ),
-          ),
-          page: 1,
-        );
-      }
-    }
-  }
-
-  Future<void> saveCache({
-    List<T>? list,
-    T? data,
-  }) async {
-    try {
-      await storage.save(storageName, json.encode(list ?? []));
-    } catch (e) {
-      pagingController.error = e;
-    }
+  @override
+  void onClose() {
+    pagingController.dispose();
+    super.onClose();
   }
 }
