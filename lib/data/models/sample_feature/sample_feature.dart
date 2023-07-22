@@ -106,9 +106,12 @@ class SampleFeature {
         'public_repos': repository,
         'followers': followers,
         'following': following,
-        'repository_list': repositoryList?.map((e) => e.toJson()),
-        'following_list': followingList?.map((e) => e.toJson()),
-        'followers_list': followersList?.map((e) => e.toJson()),
+        'repository_list':
+            List<dynamic>.from(repositoryList?.map((x) => x.toJson()) ?? []),
+        'following_list':
+            List<dynamic>.from(followingList?.map((x) => x.toJson()) ?? []),
+        'followers_list':
+            List<dynamic>.from(followersList?.map((x) => x.toJson()) ?? []),
         // 'token': token,
         // 'refresh_token': refreshToken,
       };

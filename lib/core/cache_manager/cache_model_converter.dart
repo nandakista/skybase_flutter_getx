@@ -7,6 +7,9 @@ bool typeEqualN<S, T>() {
   return typeEqual<S, T>() || typeEqual<S?, T?>();
 }
 
+///
+/// Every cache model must be registered here
+///
 class CacheModelConverter<T> implements JsonConverter<T, Object> {
   const CacheModelConverter();
 
@@ -16,6 +19,10 @@ class CacheModelConverter<T> implements JsonConverter<T, Object> {
     if (typeEqualN<T, SampleFeature>()) {
       return SampleFeature.fromJson(json) as T;
     }
+    ///
+    /// Add other models
+    ///
+    ///
     throw UnimplementedError('`$T` fromJson factory unimplemented.');
   }
 
@@ -24,6 +31,9 @@ class CacheModelConverter<T> implements JsonConverter<T, Object> {
     if (typeEqualN<T, SampleFeature>()) {
       return (obj as SampleFeature).toJson();
     }
+    ///
+    /// Add other models
+    ///
 
     throw UnimplementedError('`$T` toJson factory unimplemented.');
   }

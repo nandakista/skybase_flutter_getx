@@ -16,6 +16,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
   @override
   Widget build(BuildContext context) {
     return ColoredStatusBar(
+      brightness: Brightness.light,
       child: Scaffold(
         appBar: SkyAppBar.primary(title: controller.user.value?.username),
         body: SafeArea(

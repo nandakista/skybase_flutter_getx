@@ -19,18 +19,21 @@ abstract class PaginationController<T> extends GetxController {
 
   String get storageName;
 
+  void refreshData() {}
+
+  void onRefresh() {
+    storage.delete(storageName);
+    page = 1;
+    pagingController.refresh();
+    refreshData();
+  }
+
   void _initListener(void Function() onLoad) {
     pagingController.addPageRequestListener((page) => onLoad());
   }
 
   void loadData(Function() onLoad) {
     _initListener(onLoad);
-  }
-
-  void onRefresh() {
-    storage.delete(storageName);
-    page = 1;
-    pagingController.refresh();
   }
 
   /// **NOTE:**

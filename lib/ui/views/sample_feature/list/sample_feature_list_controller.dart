@@ -21,7 +21,7 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
   }
 
   @override
-  String get storageName => GetStorageKey.SAMPLE_FEATURE;
+  String get storageName => GetStorageKey.SAMPLE_FEATURE_LIST;
 
   void getUsers() async {
     try {
@@ -37,7 +37,13 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
     }
   }
 
-  void onChooseUser({required SampleFeature user}) {
-    Get.toNamed(SampleFeatureDetailView.route, arguments: user);
+  void onChooseUser({required int id, required String username}) {
+    Get.toNamed(
+      SampleFeatureDetailView.route,
+      arguments: {
+        'id': id,
+        'username': username,
+      },
+    );
   }
 }

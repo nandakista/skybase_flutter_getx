@@ -12,26 +12,29 @@ class SampleFeatureDetailInfo extends GetView<SampleFeatureDetailController> {
     return Padding(
       key: controller.detailInfoKey,
       padding: const EdgeInsets.symmetric(horizontal: AppConst.defaultMargin),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 12),
-          Text(controller.user.value?.name ?? '--', style: AppStyle.headline4),
-          Text(controller.user.value?.bio ?? '--'),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              const Icon(Icons.location_city),
-              Text(' ${controller.user.value?.company ?? '--'}'),
-            ],
-          ),
-          Row(
-            children: [
-              const Icon(Icons.location_on),
-              Text(' ${controller.user.value?.location ?? '--'}'),
-            ],
-          ),
-        ],
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 12),
+            Text(controller.user.value?.name ?? '--',
+                style: AppStyle.headline4),
+            Text(controller.user.value?.bio ?? '--'),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                const Icon(Icons.location_city),
+                Text(' ${controller.user.value?.company ?? '--'}'),
+              ],
+            ),
+            Row(
+              children: [
+                const Icon(Icons.location_on),
+                Text(' ${controller.user.value?.location ?? '--'}'),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
