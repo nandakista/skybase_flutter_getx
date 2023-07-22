@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/cache_manager/cache_model_converter.dart';
+import 'package:skybase/data/sources/local/cached_model_converter.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 
 /* Created by
@@ -16,16 +16,16 @@ abstract class BaseController<T> extends GetxController {
 
   final dataObj = Rxn<T>();
 
-  String get storageName;
+  String get cachedKey;
 
-  String get cacheId;
+  String get cachedId;
 
   /// **NOTE:**
   /// call this [refreshPage] instead of [onRefresh] when you need to dispose anything
   void refreshPage() {}
 
   void onRefresh() {
-    storage.delete(storageName);
+    storage.delete(cachedKey);
     dataObj.value = null;
     refreshPage();
   }
@@ -53,10 +53,10 @@ abstract class BaseController<T> extends GetxController {
   /// make sure you call this method at initial state,
   /// before you call method [saveCacheAndFinish]
   Future<void> getCache(Function() onLoad) async {
-    var cache = storage.get(storageName);
-    if (storage.has(storageName) && cache.toString().isNotEmpty) {
-      if (cacheId == getId(cache)) {
-        dataObj.value = CacheModelConverter<T>().fromJson(cache);
+    var cache = storage.get(cachedKey);
+    if (storage.has(cachedKey) && cache.toString().isNotEmpty) {
+      if (cachedId == getId(cache)) {
+        dataObj.value = CachedModelConverter<T>().fromJson(cache);
       }
     }
     onLoad();
@@ -71,7 +71,7 @@ abstract class BaseController<T> extends GetxController {
   /// don't need to call [finishLoadData] anymore
   Future<void> saveCacheAndFinish({required T data}) async {
     try {
-      await storage.save(storageName, CacheModelConverter<T>().toJson(data));
+      await storage.save(cachedKey, CachedModelConverter<T>().toJson(data));
       finishLoadData(data: data);
     } catch (e) {
       debugPrint('Failed save cache, $e');

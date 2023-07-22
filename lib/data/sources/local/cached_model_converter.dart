@@ -10,8 +10,8 @@ bool typeEqualN<S, T>() {
 ///
 /// Every cache model must be registered here
 ///
-class CacheModelConverter<T> implements JsonConverter<T, Object> {
-  const CacheModelConverter();
+class CachedModelConverter<T> implements JsonConverter<T, Object> {
+  const CachedModelConverter();
 
   @override
   T fromJson(Object? json) {

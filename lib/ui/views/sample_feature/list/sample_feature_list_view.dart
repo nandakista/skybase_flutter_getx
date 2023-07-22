@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
-import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
+import 'package:skybase/data/sources/local/cached_key.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_controller.dart';
 import 'package:skybase/ui/widgets/base/sky_pagination_view.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
@@ -47,8 +46,8 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () {
-          GetStorageManager.find.delete(GetStorageKey.SAMPLE_FEATURE_LIST);
-          GetStorageManager.find.delete(GetStorageKey.SAMPLE_FEATURE_DETAIL);
+          GetStorageManager.find.delete(CachedKey.SAMPLE_FEATURE_LIST);
+          GetStorageManager.find.delete(CachedKey.SAMPLE_FEATURE_DETAIL);
         },
         child: const Icon(Icons.delete, color: Colors.white),
       ),

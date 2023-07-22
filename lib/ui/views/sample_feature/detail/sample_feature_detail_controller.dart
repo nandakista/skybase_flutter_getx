@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/base/base_controller.dart';
-import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
+import 'package:skybase/data/sources/local/cached_key.dart';
 
 class SampleFeatureDetailController extends BaseController<SampleFeature> {
   final SampleFeatureRepository repository;
@@ -40,14 +40,14 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
   }
 
   @override
-  String get cacheId => idArgs.toString();
+  String get cachedId => idArgs.toString();
 
   @override
   // Only save last cache
-  String get storageName => GetStorageKey.SAMPLE_FEATURE_DETAIL;
+  String get cachedKey => CachedKey.SAMPLE_FEATURE_DETAIL;
 
   // Save every detail cache
-  // String get storageName => GetStorageKey.SAMPLE_FEATURE_DETAIL + cacheId;
+  // String get storageName => CachedKey.SAMPLE_FEATURE_DETAIL + cacheId;
 
   Future<void> getDetailUser() async {
     showLoading();

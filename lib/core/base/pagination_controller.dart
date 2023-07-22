@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:skybase/core/cache_manager/cache_model_converter.dart';
+import 'package:skybase/data/sources/local/cached_model_converter.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 
 /* Created by
@@ -19,14 +19,14 @@ abstract class PaginationController<T> extends GetxController {
 
   RxList<T> dataList = RxList<T>([]);
 
-  String get storageName;
+  String get cachedKey;
 
   /// **NOTE:**
   /// call this [refreshPage] instead of [onRefresh] when you need to dispose anything
   void refreshPage() {}
 
   void onRefresh() {
-    storage.delete(storageName);
+    storage.delete(cachedKey);
     dataList.clear();
     page = 1;
     pagingController.refresh();
@@ -53,12 +53,12 @@ abstract class PaginationController<T> extends GetxController {
   }
 
   void _getCacheData() {
-    var cache = storage.get(storageName);
-    if (storage.has(storageName) && cache.toString().isNotEmpty) {
+    var cache = storage.get(cachedKey);
+    if (storage.has(cachedKey) && cache.toString().isNotEmpty) {
       finishLoadData(
         data: List<T>.from(
           (json.decode(cache) as List).map(
-            (x) => CacheModelConverter<T>().fromJson(x),
+            (x) => CachedModelConverter<T>().fromJson(x),
           ),
         ),
       );
@@ -70,7 +70,7 @@ abstract class PaginationController<T> extends GetxController {
   /// don't need to call [finishLoadData] anymore
   void saveCacheAndFinish({List<T>? data}) async {
     try {
-      if (page == 1) await storage.save(storageName, json.encode(data ?? []));
+      if (page == 1) await storage.save(cachedKey, json.encode(data ?? []));
       finishLoadData(data: data ?? []);
     } catch (e) {
       debugPrint('Failed save cache, $e');
