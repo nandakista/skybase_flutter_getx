@@ -109,27 +109,31 @@ class SkyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        if (!loadingEnabled && !emptyEnabled & !errorEnabled) getBodyWidget(),
-        if (visibleOnError && errorEnabled) getErrorView(),
-        if (visibleOnEmpty && emptyEnabled && !errorEnabled && !loadingEnabled)
-          getEmptyView(),
-        if (loadingEnabled)
-          getLoadingView(loadingView ?? const PlatformLoadingIndicator()),
-      ],
+    return RefreshIndicator(
+      onRefresh: () => Future.sync(onRefresh!),
+      child: Stack(
+        children: [
+          ListView(),
+          if (!loadingEnabled && !emptyEnabled & !errorEnabled) getBodyView(),
+          if (visibleOnError &&
+              errorEnabled &&
+              !emptyEnabled &&
+              !loadingEnabled)
+            getErrorView(),
+          if (visibleOnEmpty &&
+              emptyEnabled &&
+              !errorEnabled &&
+              !loadingEnabled)
+            getEmptyView(),
+          if (loadingEnabled)
+            getLoadingView(loadingView ?? const PlatformLoadingIndicator()),
+        ],
+      ),
     );
   }
 
-  Widget getBodyWidget() {
-    if (onRefresh != null) {
-      return RefreshIndicator(
-        onRefresh: () => Future.sync(onRefresh!),
-        child: child,
-      );
-    } else {
-      return child;
-    }
+  Widget getBodyView() {
+    return child;
   }
 
   Widget getLoadingView(Widget loadingWidget) {
