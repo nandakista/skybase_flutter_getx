@@ -6,6 +6,7 @@ import 'package:skybase/ui/views/sample_feature/detail/widgets/sample_feature_de
 import 'package:skybase/ui/views/sample_feature/detail/widgets/sample_feature_detail_tab.dart';
 import 'package:skybase/ui/widgets/base/sky_view.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
+import 'package:skybase/ui/widgets/shimmer/shimmer_detail.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 
 class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
@@ -22,6 +23,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
           child: Obx(
             () => SkyView(
               loadingEnabled: controller.isLoading.isTrue,
+              loadingView: const ShimmerDetail(),
               errorEnabled: controller.isError.isTrue,
               errorTitle: controller.errorMessage.value,
               onRefresh: () => controller.onRefresh(),
