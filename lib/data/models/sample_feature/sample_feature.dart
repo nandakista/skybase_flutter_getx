@@ -1,53 +1,19 @@
-import 'package:hive/hive.dart';
-import 'package:skybase/core/database/hive/entity/user_entity.dart';
-import 'package:skybase/core/database/hive/hive_adapters.dart';
-import 'package:skybase/core/database/hive/hive_box.dart';
 import 'package:skybase/data/models/repo/repo.dart';
 
-part 'sample_feature.g.dart';
-
-@HiveType(typeId: HiveBox.userId, adapterName: HiveAdapters.person)
 class SampleFeature {
-  @HiveField(UserEntity.id)
   int id;
-
-  @HiveField(UserEntity.username)
   String username;
-
-  @HiveField(UserEntity.name)
   String? name;
-
-  @HiveField(UserEntity.location)
   String? location;
-
-  @HiveField(UserEntity.company)
   String? company;
-
-  @HiveField(UserEntity.gitUrl)
   String? gitUrl;
-
-  @HiveField(UserEntity.bio)
   String? bio;
-
-  @HiveField(UserEntity.avatarUrl)
   String? avatarUrl;
-
-  @HiveField(UserEntity.repository)
   int? repository;
-
-  @HiveField(UserEntity.followers)
   int? followers;
-
-  @HiveField(UserEntity.following)
   int? following;
-
-  @HiveField(UserEntity.repositoryList)
   List<Repo>? repositoryList;
-
-  @HiveField(UserEntity.followersList)
   List<SampleFeature>? followersList;
-
-  @HiveField(UserEntity.followingList)
   List<SampleFeature>? followingList;
 
   SampleFeature({
@@ -106,9 +72,12 @@ class SampleFeature {
         'public_repos': repository,
         'followers': followers,
         'following': following,
-        'repository_list': repositoryList?.map((e) => e.toJson()),
-        'following_list': followingList?.map((e) => e.toJson()),
-        'followers_list': followersList?.map((e) => e.toJson()),
+        'repository_list':
+            List<dynamic>.from(repositoryList?.map((x) => x.toJson()) ?? []),
+        'following_list':
+            List<dynamic>.from(followingList?.map((x) => x.toJson()) ?? []),
+        'followers_list':
+            List<dynamic>.from(followersList?.map((x) => x.toJson()) ?? []),
         // 'token': token,
         // 'refresh_token': refreshToken,
       };

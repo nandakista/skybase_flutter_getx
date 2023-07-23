@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/app/app_constant.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
@@ -12,7 +11,7 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
   Widget build(BuildContext context) {
     return Padding(
       key: controller.headerKey,
-      padding: const EdgeInsets.symmetric(horizontal: AppConst.defaultMargin),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Obx(
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -20,14 +19,14 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
             CircleAvatar(
               radius: 45,
               child: SkyImage(
-                src: '${controller.user.value?.avatarUrl}&s=200',
+                src: '${controller.dataObj.value?.avatarUrl}&s=200',
                 borderRadius: BorderRadius.circular(90),
               ),
             ),
             Column(
               children: [
                 Text(
-                  '${controller.user.value?.repository ?? 0}',
+                  '${controller.dataObj.value?.repository ?? 0}',
                   style: AppStyle.headline3,
                 ),
                 const Text('Repository'),
@@ -36,7 +35,7 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
             Column(
               children: [
                 Text(
-                  '${controller.user.value?.followers ?? 0}',
+                  '${controller.dataObj.value?.followers ?? 0}',
                   style: AppStyle.headline3,
                 ),
                 const Text('Follower'),
@@ -45,7 +44,7 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
             Column(
               children: [
                 Text(
-                  '${controller.user.value?.following ?? 0}',
+                  '${controller.dataObj.value?.following ?? 0}',
                   style: AppStyle.headline3,
                 ),
                 const Text('Following'),

@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:skybase/core/base/base_controller.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
+import 'package:skybase/data/sources/local/cached_key.dart';
 
-class SampleFeatureDetailController extends BaseController {
+class SampleFeatureDetailController extends BaseController<SampleFeature> {
   final SampleFeatureRepository repository;
+
   SampleFeatureDetailController({required this.repository});
 
   final GlobalKey headerKey = GlobalKey();
@@ -13,31 +15,50 @@ class SampleFeatureDetailController extends BaseController {
   final headerWidget = Rxn<Size>();
   final detailInfoWidget = Rxn<Size>();
 
-  final user = Rxn<SampleFeature>();
+  late int idArgs;
+  late String usernameArgs;
 
   @override
   void onInit() {
     super.onInit();
-    user.value = Get.arguments;
+    idArgs = Get.arguments['id'];
+    usernameArgs = Get.arguments['username'];
   }
 
   @override
   void onReady() async {
-    headerWidget.value = (headerKey.currentContext?.findRenderObject() as RenderBox).size;
-    detailInfoWidget.value = (detailInfoKey.currentContext?.findRenderObject() as RenderBox).size;
-    await getDetailUser();
+    getCache(() => getDetailUser());
+
+    // Only fetch data
+    // loadData(() => getDetailUser());
   }
 
   @override
-  void onRefresh() {
+  void refreshPage() {
     getDetailUser();
   }
+
+  @override
+  String get cachedId => idArgs.toString();
+
+  @override
+  // Only save last cache
+  String get cachedKey => CachedKey.SAMPLE_FEATURE_DETAIL;
+
+  // Save every detail cache
+  // String get storageName => CachedKey.SAMPLE_FEATURE_DETAIL + cacheId;
 
   Future<void> getDetailUser() async {
     showLoading();
     try {
-      final response = await repository.getDetailUser(user: user.value!);
-      user.value = response;
+      final response = await repository.getDetailUser(
+        id: idArgs,
+        username: usernameArgs,
+      );
+      saveCacheAndFinish(data: response);
+
+      // Only fetch data
+      // finishLoadData(data: response);
       hideLoading();
     } catch (e) {
       hideLoading();

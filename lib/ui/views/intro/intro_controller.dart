@@ -28,7 +28,7 @@ class IntroController extends GetxController {
         duration: const Duration(milliseconds: 260),
       );
     } else {
-      GetStorageManager.find.save(GetStorageKey.firstInstall, false);
+      GetStorageManager.find.save(GetStorageKey.FIRST_INSTALL, false);
       Get.offAllNamed(LoginView.route);
     }
   }

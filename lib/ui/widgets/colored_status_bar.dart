@@ -24,9 +24,9 @@ class ColoredStatusBar extends StatelessWidget {
 
   /// Icon Color in Status Bar.
   ///
-  /// Brightness.dark == Icon White.
+  /// Brightness.dark == Icon Black.
   ///
-  /// Brightness.light == Icon Black
+  /// Brightness.light == Icon White
   final Brightness brightness;
 
   /// Color of bottom bar (under navigation bar).

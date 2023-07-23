@@ -78,9 +78,9 @@ class SkyView extends StatelessWidget {
 
   const SkyView({
     Key? key,
-    required this.emptyEnabled,
     required this.loadingEnabled,
     required this.errorEnabled,
+    required this.emptyEnabled,
     required this.onRetry,
     required this.child,
     this.emptyImage,

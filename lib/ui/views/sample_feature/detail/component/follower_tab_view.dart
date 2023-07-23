@@ -12,9 +12,9 @@ class FollowerTabView extends GetView<SampleFeatureDetailController> {
   Widget build(BuildContext context) {
     return ListView.separated(
       separatorBuilder: (context, _) => const Divider(),
-      itemCount: controller.user.value?.followersList?.length ?? 0,
+      itemCount: controller.dataObj.value?.followersList?.length ?? 0,
       itemBuilder: (_, index) {
-        final SampleFeature? user = controller.user.value?.followersList![index];
+        final SampleFeature? user = controller.dataObj.value?.followersList![index];
         return (user == null)
             ? const Center(
                 child: Text('Tidak ada follower'),
