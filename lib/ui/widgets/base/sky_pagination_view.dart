@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/widgets/base/empty_view.dart';
-import 'package:skybase/ui/widgets/list_pagination/pagination_error_load_view.dart';
-import 'package:skybase/ui/widgets/list_pagination/pagination_error_view.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
 import 'package:skybase/ui/widgets/shimmer/shimmer_list.dart';
+
+import 'error_view.dart';
 
 /* Created by
    Varcant
@@ -74,25 +76,15 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
   final Widget? errorLoadView;
 
   final VoidCallback onRefresh;
-
   final Widget? emptyImageWidget;
-
   final String? emptyImage;
-
   final String? errorTitle;
-
   final String? errorSubtitle;
-
   final String? emptyTitle;
-
   final String? emptySubtitle;
-
   final TextStyle? emptyTitleStyle;
-
   final TextStyle? emptySubtitleStyle;
-
   final bool enableIOSStyle;
-
   final String? errorImage;
   final Widget? errorImageWidget;
   final String? retryText;
@@ -159,12 +151,12 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
           ),
       firstPageErrorIndicatorBuilder: (ctx) =>
           errorView ??
-          PaginationErrorView(
+          ErrorView(
             errorImage: errorImage,
             errorImageWidget: errorImageWidget,
-            errorTitle: errorTitle,
+            errorTitle:
+                '${errorTitle ?? pagingController.error ?? 'txt_err_general_formal'.tr}',
             errorSubtitle: errorSubtitle,
-            controller: pagingController,
             horizontalSpacing: horizontalSpacing ?? 24,
             verticalSpacing: verticalSpacing ?? 24,
             titleStyle: errorTitleStyle,
@@ -172,6 +164,8 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
             imageSize: imageSize,
             retryText: retryText,
             retryWidget: retryWidget,
+            physics: const BouncingScrollPhysics(),
+            onRetry: () => pagingController.retryLastFailedRequest(),
           ),
       // noMoreItemsIndicatorBuilder: (ctx) =>
       //     maxItemView ?? const PaginationMaxItemView(),
@@ -181,6 +175,62 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
             pagingController: pagingController,
           ),
       itemBuilder: itemBuilder,
+    );
+  }
+}
+
+class PaginationErrorLoadView<ItemType> extends StatelessWidget {
+  const PaginationErrorLoadView({
+    Key? key,
+    required this.pagingController,
+  }) : super(key: key);
+
+  final PagingController<int, ItemType> pagingController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 12),
+        Text(
+          'txt_err_general_formal'.tr,
+          style: const TextStyle(color: Colors.grey),
+        ),
+        TextButton(
+          onPressed: () => pagingController.retryLastFailedRequest(),
+          child: Text(
+            'txt_tap_retry'.tr,
+            style: const TextStyle(color: Colors.grey),
+          ),
+        ),
+        const SizedBox(height: 4),
+        const Icon(
+          CupertinoIcons.refresh_thick,
+          color: Colors.grey,
+        ),
+        const SizedBox(height: 8),
+      ],
+    );
+  }
+}
+
+class PaginationMaxItemView extends StatelessWidget {
+  const PaginationMaxItemView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 12),
+        Text(
+          'txt_max_item'.tr,
+          style: AppStyle.subtitle4.copyWith(
+            color: Colors.grey,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 24),
+      ],
     );
   }
 }

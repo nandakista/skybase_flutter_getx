@@ -14,7 +14,6 @@ class ErrorView extends StatelessWidget {
     this.errorTitle,
     this.errorSubtitle,
     this.onRetry,
-    this.isScrollable = true,
     this.retryText,
     this.verticalSpacing = 24,
     this.horizontalSpacing = 24,
@@ -22,6 +21,7 @@ class ErrorView extends StatelessWidget {
     this.titleStyle,
     this.subtitleStyle,
     this.retryWidget,
+    this.physics,
   }) : super(key: key);
 
   final String? errorImage;
@@ -30,21 +30,19 @@ class ErrorView extends StatelessWidget {
   final String? errorSubtitle;
   final String? retryText;
   final VoidCallback? onRetry;
-  final bool isScrollable;
   final double verticalSpacing;
   final double horizontalSpacing;
   final double? imageSize;
   final TextStyle? titleStyle;
   final TextStyle? subtitleStyle;
   final Widget? retryWidget;
+  final ScrollPhysics? physics;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
-        physics: (isScrollable)
-            ? const NeverScrollableScrollPhysics()
-            : const BouncingScrollPhysics(),
+        physics: physics,
         padding: EdgeInsets.symmetric(
           vertical: verticalSpacing,
           horizontal: horizontalSpacing,

@@ -167,7 +167,9 @@ class SkyView extends StatelessWidget {
           errorSubtitle: errorSubtitle,
           onRetry: onRetry,
           retryText: retryText,
-          isScrollable: isComponent,
+          physics: isComponent
+              ? const NeverScrollableScrollPhysics()
+              : const BouncingScrollPhysics(),
           imageSize: imageSize,
           horizontalSpacing: horizontalSpacing ?? 24,
           verticalSpacing: verticalSpacing ?? 24,
