@@ -51,16 +51,41 @@ class BoxImagePicker extends StatelessWidget {
     if (replace) {
       return Obx(
         () => (selectedImage.value != null)
-            ? SkyImage(
-                src: selectedImage.value!.path,
-                height: height,
-                width: width,
-                borderRadius: BorderRadius.circular(4),
-                enablePreview: true,
-                onRemoveImage: () {
-                  selectedImage.value = null;
-                  onSelectedUiImage(null);
-                },
+            ? Stack(
+                children: [
+                  SkyImage(
+                    src: selectedImage.value!.path,
+                    height: height,
+                    width: width,
+                    borderRadius: BorderRadius.circular(4),
+                    enablePreview: true,
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: GestureDetector(
+                      onTap: () {
+                        selectedImage.value = null;
+                        onSelectedUiImage(null);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                          borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.close,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               )
             : _buildBoxPicker(
                 context,

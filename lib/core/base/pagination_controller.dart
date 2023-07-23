@@ -11,6 +11,7 @@ abstract class PaginationController<T> extends GetxController {
   int page = 1;
   final pagingController = PagingController<int, T>(firstPageKey: 0);
   bool isRefresh = false;
+  RxString errorMessage = ''.obs;
 
   void getListData();
 
@@ -36,5 +37,10 @@ abstract class PaginationController<T> extends GetxController {
       final nextPage = page++;
       pagingController.appendPage(data, nextPage);
     }
+  }
+
+  void showError(String message) {
+    errorMessage.value = message;
+    pagingController.error = message;
   }
 }

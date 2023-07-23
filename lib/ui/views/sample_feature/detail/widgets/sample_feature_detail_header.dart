@@ -13,44 +13,46 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
     return Padding(
       key: controller.headerKey,
       padding: const EdgeInsets.symmetric(horizontal: AppConst.defaultMargin),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CircleAvatar(
-            radius: 45,
-            child: SkyImage(
-              src: '${controller.user.value?.avatarUrl}&s=200',
-              borderRadius: BorderRadius.circular(90),
+      child: Obx(
+        () => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CircleAvatar(
+              radius: 45,
+              child: SkyImage(
+                src: '${controller.user.value?.avatarUrl}&s=200',
+                borderRadius: BorderRadius.circular(90),
+              ),
             ),
-          ),
-          Column(
-            children: [
-              Text(
-                '${controller.user.value?.repository ?? 0}',
-                style: AppStyle.headline3,
-              ),
-              const Text('Repository'),
-            ],
-          ),
-          Column(
-            children: [
-              Text(
-                '${controller.user.value?.followers ?? 0}',
-                style: AppStyle.headline3,
-              ),
-              const Text('Follower'),
-            ],
-          ),
-          Column(
-            children: [
-              Text(
-                '${controller.user.value?.following ?? 0}',
-                style: AppStyle.headline3,
-              ),
-              const Text('Following'),
-            ],
-          ),
-        ],
+            Column(
+              children: [
+                Text(
+                  '${controller.user.value?.repository ?? 0}',
+                  style: AppStyle.headline3,
+                ),
+                const Text('Repository'),
+              ],
+            ),
+            Column(
+              children: [
+                Text(
+                  '${controller.user.value?.followers ?? 0}',
+                  style: AppStyle.headline3,
+                ),
+                const Text('Follower'),
+              ],
+            ),
+            Column(
+              children: [
+                Text(
+                  '${controller.user.value?.following ?? 0}',
+                  style: AppStyle.headline3,
+                ),
+                const Text('Following'),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

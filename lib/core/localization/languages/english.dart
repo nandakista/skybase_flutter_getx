@@ -89,13 +89,13 @@ const Map<String, String> en = {
   'txt_dont_have_account': "Don't have account ? ",
   'txt_forgot_password': 'Forgot Password ? ',
   'txt_data_users_not_found': 'Data users not found',
-  'txt_err_general_formal': 'Something when wrong',
+  'txt_err_general_formal': 'Something went wrong',
   'txt_err_general_non_formal': 'Oops something when wrong...',
   'txt_valid_size': 'File size cannot bigger than 2MB.',
   'txt_tap_retry': 'Tap to try again.',
   'txt_max_item': 'All items have been loaded.',
-  'txt_empty_list_title': 'Your list is empty!',
-  'txt_empty_list_subtitle': 'Sorry, list data is empty. Maybe go back latter',
+  'txt_empty_list_title': 'Your data is empty!',
+  'txt_empty_list_subtitle': 'Sorry, data is empty. Maybe go back latter',
 
   'txt_need_permission_storage': '',
 };

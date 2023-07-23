@@ -21,7 +21,7 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
       });
     } catch (e) {
       debugPrint('Error : $e');
-      pagingController.error = e;
+      showError(e.toString());
     }
   }
 
