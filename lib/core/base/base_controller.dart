@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:skybase/data/sources/local/cached_model_converter.dart';
@@ -10,11 +12,16 @@ import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 abstract class BaseController<T> extends GetxController {
   GetStorageManager storage = GetStorageManager.find;
 
-  RxBool isLoading = false.obs;
+  RxBool loadingStatus = false.obs;
   RxString errorMessage = ''.obs;
-  RxBool isError = false.obs;
 
   final dataObj = Rxn<T>();
+  RxList<T> dataList = RxList<T>([]);
+
+  bool get isLoading => loadingStatus.isTrue;
+  bool get isError => errorMessage.value.isNotEmpty;
+  bool get isEmpty => dataList.isEmpty && dataObj.value == null;
+  bool get isSuccess => !isEmpty && !isError && !isLoading;
 
   String get cachedKey;
 
@@ -31,18 +38,16 @@ abstract class BaseController<T> extends GetxController {
   }
 
   void showLoading() {
-    if (dataObj.value == null) {
-      isLoading.value = true;
-      isError.value = false;
+    if (dataObj.value == null && dataList.isEmpty) {
+      loadingStatus.value = true;
       errorMessage.value = '';
     }
   }
 
-  void hideLoading() => isLoading.value = false;
+  void hideLoading() => loadingStatus.value = false;
 
   void showError(String message) {
     errorMessage.value = message;
-    isError.value = true;
   }
 
   void loadData(Function() onLoad) {
@@ -55,8 +60,16 @@ abstract class BaseController<T> extends GetxController {
   Future<void> getCache(Function() onLoad) async {
     var cache = storage.get(cachedKey);
     if (storage.has(cachedKey) && cache.toString().isNotEmpty) {
-      if (cachedId == getId(cache)) {
-        dataObj.value = CachedModelConverter<T>().fromJson(cache);
+      if (cache is String) {
+        dataList.value = List<T>.from(
+          (json.decode(cache) as List).map(
+            (x) => CachedModelConverter<T>().fromJson(x),
+          ),
+        );
+      } else {
+        if (cachedId == getId(cache)) {
+          dataObj.value = CachedModelConverter<T>().fromJson(cache);
+        }
       }
     }
     onLoad();
@@ -69,10 +82,18 @@ abstract class BaseController<T> extends GetxController {
   /// **NOTE:**
   /// call this to finish the load data,
   /// don't need to call [finishLoadData] anymore
-  Future<void> saveCacheAndFinish({required T data}) async {
+  Future<void> saveCacheAndFinish({
+    T? data,
+    List<T> list = const [],
+  }) async {
     try {
-      await storage.save(cachedKey, CachedModelConverter<T>().toJson(data));
-      finishLoadData(data: data);
+      if (data != null) {
+        await storage.save(cachedKey, CachedModelConverter<T>().toJson(data));
+      }
+      if (list.isNotEmpty) {
+        await storage.save(cachedKey, json.encode(list));
+      }
+      finishLoadData(data: data, list: list);
     } catch (e) {
       debugPrint('Failed save cache, $e');
       showError(e.toString());
@@ -82,8 +103,12 @@ abstract class BaseController<T> extends GetxController {
   /// **NOTE:**
   /// call this [finishLoadData] instead [saveCacheAndFinish] if the data
   /// is not require to saved in local data
-  finishLoadData({required T data}) {
-    dataObj.value = data;
+  finishLoadData({
+    T? data,
+    List<T> list = const [],
+  }) {
+    if (data != null) dataObj.value = data;
+    if (list.isNotEmpty) dataList.value = list;
   }
 
   /// **NOTE:**

@@ -17,7 +17,7 @@ abstract class PaginationController<T> extends GetxController {
   int page = 1;
   final pagingController = PagingController<int, T>(firstPageKey: 0);
 
-  RxList<T> dataList = RxList<T>([]);
+  // RxList<T> dataList = RxList<T>([]);
 
   String get cachedKey;
 
@@ -27,7 +27,7 @@ abstract class PaginationController<T> extends GetxController {
 
   void onRefresh() {
     storage.delete(cachedKey);
-    dataList.clear();
+    // dataList.clear();
     page = 1;
     pagingController.refresh();
     refreshPage();
@@ -87,7 +87,7 @@ abstract class PaginationController<T> extends GetxController {
     } else {
       pagingController.appendPage(data, page ?? this.page++);
     }
-    dataList.value = pagingController.itemList ?? [];
+    // dataList.value = pagingController.itemList ?? [];
   }
 
   /// **NOTE:**

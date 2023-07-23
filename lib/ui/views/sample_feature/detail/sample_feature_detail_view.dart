@@ -23,13 +23,13 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
         body: SafeArea(
           child: Obx(
             () => SkyView(
-              loadingEnabled: controller.isLoading.isTrue,
+              loadingEnabled: controller.isLoading,
+              errorEnabled: controller.isError,
+              emptyEnabled: controller.isEmpty,
               loadingView: const ShimmerDetail(),
-              errorEnabled: controller.isError.isTrue,
               errorTitle: controller.errorMessage.value,
               onRefresh: () => controller.onRefresh(),
               onRetry: () => controller.onRefresh(),
-              emptyEnabled: false,
               child: const SingleChildScrollView(
                 child: Column(
                   children: [

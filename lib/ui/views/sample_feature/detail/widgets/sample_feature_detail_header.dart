@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/app/app_constant.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
@@ -12,7 +11,7 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
   Widget build(BuildContext context) {
     return Padding(
       key: controller.headerKey,
-      padding: const EdgeInsets.symmetric(horizontal: AppConst.defaultMargin),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Obx(
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

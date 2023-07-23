@@ -27,7 +27,6 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
 
   @override
   void onReady() async {
-    _initScreenPref();
     getCache(() => getDetailUser());
 
     // Only fetch data
@@ -65,10 +64,5 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
       hideLoading();
       showError(e.toString());
     }
-  }
-
-  void _initScreenPref() {
-    headerWidget.value = (headerKey.currentContext?.findRenderObject() as RenderBox).size;
-    detailInfoWidget.value = (detailInfoKey.currentContext?.findRenderObject() as RenderBox).size;
   }
 }
