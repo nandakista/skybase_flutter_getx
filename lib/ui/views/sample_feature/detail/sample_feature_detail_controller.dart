@@ -36,9 +36,9 @@ class SampleFeatureDetailController extends BaseController {
   Future<void> getDetailUser() async {
     showLoading();
     try {
-      hideLoading();
       final response = await repository.getDetailUser(user: user.value!);
       user.value = response;
+      hideLoading();
     } catch (e) {
       hideLoading();
       showError(e.toString());

@@ -10,6 +10,7 @@ class ErrorView extends StatelessWidget {
   const ErrorView({
     Key? key,
     this.errorImage,
+    this.errorImageWidget,
     this.errorTitle,
     this.errorSubtitle,
     this.onRetry,
@@ -20,9 +21,11 @@ class ErrorView extends StatelessWidget {
     this.imageSize,
     this.titleStyle,
     this.subtitleStyle,
+    this.retryWidget,
   }) : super(key: key);
 
-  final Widget? errorImage;
+  final String? errorImage;
+  final Widget? errorImageWidget;
   final String? errorTitle;
   final String? errorSubtitle;
   final String? retryText;
@@ -33,6 +36,7 @@ class ErrorView extends StatelessWidget {
   final double? imageSize;
   final TextStyle? titleStyle;
   final TextStyle? subtitleStyle;
+  final Widget? retryWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +46,14 @@ class ErrorView extends StatelessWidget {
             ? const NeverScrollableScrollPhysics()
             : const BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(
-            vertical: verticalSpacing, horizontal: horizontalSpacing),
+          vertical: verticalSpacing,
+          horizontal: horizontalSpacing,
+        ),
         child: Column(
           children: [
-            errorImage ??
+            errorImageWidget ??
                 Image.asset(
-                  'assets/images/img_error.png',
+                  errorImage ?? 'assets/images/img_error.png',
                   height: imageSize,
                 ),
             SizedBox(height: verticalSpacing * 2),
@@ -62,13 +68,14 @@ class ErrorView extends StatelessWidget {
               style: subtitleStyle,
             ),
             SizedBox(height: verticalSpacing),
-            SkyButton(
-              wrapContent: true,
-              height: 50,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              text: retryText ?? 'txt_retry'.tr,
-              onPressed: onRetry,
-            ),
+            retryWidget ??
+                SkyButton(
+                  wrapContent: true,
+                  height: 50,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  text: retryText ?? 'txt_retry'.tr,
+                  onPressed: onRetry,
+                ),
           ],
         ),
       ),

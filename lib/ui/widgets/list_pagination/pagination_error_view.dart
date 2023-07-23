@@ -8,36 +8,69 @@ import 'package:skybase/ui/widgets/sky_button.dart';
    nanda.kista@gmail.com
 */
 class PaginationErrorView extends StatelessWidget {
-  const PaginationErrorView({Key? key, required this.controller})
-      : super(key: key);
+  const PaginationErrorView({
+    Key? key,
+    required this.controller,
+    this.errorTitle,
+    this.errorSubtitle,
+    this.errorImage,
+    this.errorImageWidget,
+    this.verticalSpacing = 24,
+    this.horizontalSpacing = 24,
+    this.imageSize,
+    this.titleStyle,
+    this.subtitleStyle,
+    this.retryWidget,
+    this.retryText,
+  }) : super(key: key);
+
+  final String? errorImage;
+  final Widget? errorImageWidget;
+  final String? errorTitle;
+  final String? errorSubtitle;
   final PagingController controller;
+  final double verticalSpacing;
+  final double horizontalSpacing;
+  final double? imageSize;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
+  final Widget? retryWidget;
+  final String? retryText;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
         physics: const BouncingScrollPhysics(),
+        padding: EdgeInsets.symmetric(
+          vertical: verticalSpacing,
+          horizontal: horizontalSpacing,
+        ),
         child: Column(
           children: [
-            Image.asset('assets/images/img_error.png'),
-            const SizedBox(height: 24),
+            errorImageWidget ??
+                Image.asset(
+                  errorImage ?? 'assets/images/img_error.png',
+                  height: imageSize,
+                ),
+            SizedBox(height: verticalSpacing),
             Text(
-              'txt_err_general_formal'.tr,
+              '${errorTitle ?? controller.error ?? 'txt_err_general_formal'.tr}',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: titleStyle ?? Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 12),
             Text(
-              'txt_tap_retry'.tr,
+              errorSubtitle ?? 'txt_tap_retry'.tr,
               textAlign: TextAlign.center,
+              style: subtitleStyle,
             ),
-            const SizedBox(height: 24),
-            SkyButton(
+            SizedBox(height: verticalSpacing),
+            retryWidget ?? SkyButton(
               wrapContent: true,
               height: 50,
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              text: 'txt_retry'.tr,
+              text: retryText ?? 'txt_retry'.tr,
               onPressed: () => controller.retryLastFailedRequest(),
             ),
           ],

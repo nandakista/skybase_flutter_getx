@@ -34,6 +34,20 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
     this.emptyTitle,
     this.emptySubtitle,
     this.enableIOSStyle = false,
+    this.errorTitle,
+    this.errorSubtitle,
+    this.errorImage,
+    this.errorImageWidget,
+    this.retryText,
+    this.verticalSpacing,
+    this.horizontalSpacing,
+    this.imageSize,
+    this.errorTitleStyle,
+    this.errorSubtitleStyle,
+    this.retryWidget,
+    this.emptyImageWidget,
+    this.emptyTitleStyle,
+    this.emptySubtitleStyle,
   }) : super(key: key);
 
   final PagingController<int, ItemType> pagingController;
@@ -61,13 +75,33 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
 
   final VoidCallback onRefresh;
 
-  final Widget? emptyImage;
+  final Widget? emptyImageWidget;
+
+  final String? emptyImage;
+
+  final String? errorTitle;
+
+  final String? errorSubtitle;
 
   final String? emptyTitle;
 
   final String? emptySubtitle;
 
+  final TextStyle? emptyTitleStyle;
+
+  final TextStyle? emptySubtitleStyle;
+
   final bool enableIOSStyle;
+
+  final String? errorImage;
+  final Widget? errorImageWidget;
+  final String? retryText;
+  final double? verticalSpacing;
+  final double? horizontalSpacing;
+  final double? imageSize;
+  final TextStyle? errorTitleStyle;
+  final TextStyle? errorSubtitleStyle;
+  final Widget? retryWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -114,11 +148,31 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
           emptyView ??
           ListEmptyView(
             emptyImage: emptyImage,
+            emptyImageWidget: emptyImageWidget,
             emptyTitle: emptyTitle,
             emptySubtitle: emptySubtitle,
+            titleStyle: emptyTitleStyle,
+            subtitleStyle: emptySubtitleStyle,
+            horizontalSpacing: horizontalSpacing ?? 24,
+            verticalSpacing: verticalSpacing ?? 24,
+            imageSize: imageSize,
           ),
       firstPageErrorIndicatorBuilder: (ctx) =>
-          errorView ?? PaginationErrorView(controller: pagingController),
+          errorView ??
+          PaginationErrorView(
+            errorImage: errorImage,
+            errorImageWidget: errorImageWidget,
+            errorTitle: errorTitle,
+            errorSubtitle: errorSubtitle,
+            controller: pagingController,
+            horizontalSpacing: horizontalSpacing ?? 24,
+            verticalSpacing: verticalSpacing ?? 24,
+            titleStyle: errorTitleStyle,
+            subtitleStyle: errorSubtitleStyle,
+            imageSize: imageSize,
+            retryText: retryText,
+            retryWidget: retryWidget,
+          ),
       // noMoreItemsIndicatorBuilder: (ctx) =>
       //     maxItemView ?? const PaginationMaxItemView(),
       newPageErrorIndicatorBuilder: (ctx) =>

@@ -9,6 +9,7 @@ class ListEmptyView extends StatelessWidget {
   const ListEmptyView({
     Key? key,
     this.emptyImage,
+    this.emptyImageWidget,
     this.emptyTitle,
     this.emptySubtitle,
     this.isScrollable = true,
@@ -19,7 +20,8 @@ class ListEmptyView extends StatelessWidget {
     this.subtitleStyle,
   }) : super(key: key);
 
-  final Widget? emptyImage;
+  final Widget? emptyImageWidget;
+  final String? emptyImage;
   final String? emptyTitle;
   final String? emptySubtitle;
   final bool isScrollable;
@@ -42,9 +44,9 @@ class ListEmptyView extends StatelessWidget {
             : const BouncingScrollPhysics(),
         child: Column(
           children: [
-            emptyImage ??
+            emptyImageWidget ??
                 Image.asset(
-                  'assets/images/img_empty.png',
+                  emptyImage ?? 'assets/images/img_empty.png',
                   height: imageSize,
                 ),
             SizedBox(height: verticalSpacing),

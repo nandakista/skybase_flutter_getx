@@ -23,6 +23,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
             () => SkyView(
               loadingEnabled: controller.isLoading.isTrue,
               errorEnabled: controller.isError.isTrue,
+              errorTitle: controller.errorMessage.value,
               onRetry: () => controller.onRefresh(),
               child: const Column(
                 children: [

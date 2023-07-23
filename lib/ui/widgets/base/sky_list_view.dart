@@ -27,7 +27,9 @@ class SkyListView extends StatelessWidget {
   final Widget? loadingView;
 
   /// Image that will show if [emptyEnabled] is true
-  final Widget? emptyImage;
+  final Widget? emptyImageWidget;
+
+  final String? emptyImage;
 
   /// Title that will show if [emptyEnabled] is true
   final String? emptyTitle;
@@ -36,7 +38,9 @@ class SkyListView extends StatelessWidget {
   final String? emptySubtitle;
 
   /// Image that will show if [errorEnabled] is true
-  final Widget? errorImage;
+  final Widget? errorImageWidget;
+
+  final String? errorImage;
 
   /// Title that will show if [errorEnabled] is true
   final String? errorTitle;
@@ -48,6 +52,8 @@ class SkyListView extends StatelessWidget {
   final bool isComponent;
 
   final String? retryText;
+
+  final Widget? retryWidget;
 
   /// Function to controll onPress 'retry' if [errorEnabled] is true
   final void Function()? onRetry;
@@ -81,7 +87,7 @@ class SkyListView extends StatelessWidget {
     this.loadingView,
     this.visibleOnEmpty = true,
     this.visibleOnError = true,
-    this.errorImage,
+    this.errorImageWidget,
     this.errorSubtitle,
     this.errorTitle,
     this.isComponent = true,
@@ -93,6 +99,9 @@ class SkyListView extends StatelessWidget {
     this.horizontalSpacing,
     this.titleStyle,
     this.subtitleStyle,
+    this.errorImage,
+    this.retryWidget,
+    this.emptyImageWidget,
   }) : super(key: key);
 
   @override
@@ -135,6 +144,7 @@ class SkyListView extends StatelessWidget {
     return emptyView ??
         ListEmptyView(
           emptyImage: emptyImage,
+          emptyImageWidget: emptyImageWidget,
           emptyTitle: emptyTitle,
           emptySubtitle: emptySubtitle,
           isScrollable: isComponent,
@@ -149,6 +159,7 @@ class SkyListView extends StatelessWidget {
   Widget getErrorView() {
     return ErrorView(
       errorImage: errorImage,
+      errorImageWidget: errorImageWidget,
       errorTitle: errorTitle,
       errorSubtitle: errorSubtitle,
       onRetry: onRetry,
@@ -159,6 +170,7 @@ class SkyListView extends StatelessWidget {
       verticalSpacing: verticalSpacing ?? 24,
       titleStyle: titleStyle,
       subtitleStyle: subtitleStyle,
+      retryWidget: retryWidget,
     );
   }
 }
