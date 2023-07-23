@@ -25,31 +25,29 @@ class ShimmerDetail extends StatelessWidget {
             SampleFeatureDetailHeader(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24),
-              child: Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 12),
-                    ShimmerText(),
-                    SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Icon(Icons.location_city),
-                        Expanded(
-                          child: ShimmerText(),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.location_on),
-                        Expanded(
-                          child: ShimmerText(),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 12),
+                  ShimmerText(),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(Icons.location_city),
+                      Expanded(
+                        child: ShimmerText(),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.location_on),
+                      Expanded(
+                        child: ShimmerText(),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             DefaultTabController(
