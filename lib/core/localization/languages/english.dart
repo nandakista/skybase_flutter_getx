@@ -94,8 +94,8 @@ const Map<String, String> en = {
   'txt_valid_size': 'File size cannot bigger than 2MB.',
   'txt_tap_retry': 'Tap to try again.',
   'txt_max_item': 'All items have been loaded.',
-  'txt_empty_list_title': 'Your list is empty!',
-  'txt_empty_list_subtitle': 'Sorry, list data is empty. Maybe go back latter',
+  'txt_empty_list_title': 'Your data is empty!',
+  'txt_empty_list_subtitle': 'Sorry, data is empty. Maybe go back latter',
 
   'txt_need_permission_storage': '',
 };

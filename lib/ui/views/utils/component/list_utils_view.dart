@@ -1,7 +1,7 @@
 import 'package:collection_picker/collection_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/ui/widgets/base/sky_list_view.dart';
+import 'package:skybase/ui/widgets/base/sky_view.dart';
 import 'package:skybase/ui/widgets/ordered_list.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_grouped_listview.dart';
@@ -22,7 +22,7 @@ class ListUtilsView extends StatelessWidget {
             ..._buildSection(
               page: 1,
               title: 'Sample Grouped ListView',
-              content: SkyListView(
+              content: SkyView(
                 loadingEnabled: false,
                 errorEnabled: false,
                 onRetry: () {},
@@ -63,7 +63,7 @@ class ListUtilsView extends StatelessWidget {
             ..._buildSection(
               page: 2,
               title: 'Sample Picker ListView',
-              content: SkyListView(
+              content: SkyView(
                 loadingEnabled: false,
                 errorEnabled: false,
                 onRetry: () {},

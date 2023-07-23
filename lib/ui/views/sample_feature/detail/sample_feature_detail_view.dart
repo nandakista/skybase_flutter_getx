@@ -24,13 +24,17 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
               loadingEnabled: controller.isLoading.isTrue,
               errorEnabled: controller.isError.isTrue,
               errorTitle: controller.errorMessage.value,
+              onRefresh: () => controller.onRefresh(),
               onRetry: () => controller.onRefresh(),
-              child: const Column(
-                children: [
-                  SampleFeatureDetailHeader(),
-                  SampleFeatureDetailInfo(),
-                  SampleFeatureDetailTab(),
-                ],
+              emptyEnabled: false,
+              child: const SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SampleFeatureDetailHeader(),
+                    SampleFeatureDetailInfo(),
+                    SampleFeatureDetailTab(),
+                  ],
+                ),
               ),
             ),
           ),

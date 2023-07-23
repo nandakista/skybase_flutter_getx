@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:skybase/ui/widgets/list_pagination/list_empty_view.dart';
+import 'package:skybase/ui/widgets/base/empty_view.dart';
 import 'package:skybase/ui/widgets/list_pagination/pagination_error_load_view.dart';
 import 'package:skybase/ui/widgets/list_pagination/pagination_error_view.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
@@ -146,7 +146,7 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
           loadingView ?? const ShimmerList(),
       noItemsFoundIndicatorBuilder: (ctx) =>
           emptyView ??
-          ListEmptyView(
+          EmptyView(
             emptyImage: emptyImage,
             emptyImageWidget: emptyImageWidget,
             emptyTitle: emptyTitle,

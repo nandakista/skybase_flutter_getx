@@ -5,8 +5,8 @@ import 'package:get/get.dart';
    Varcant
    nanda.kista@gmail.com
 */
-class ListEmptyView extends StatelessWidget {
-  const ListEmptyView({
+class EmptyView extends StatelessWidget {
+  const EmptyView({
     Key? key,
     this.emptyImage,
     this.emptyImageWidget,
