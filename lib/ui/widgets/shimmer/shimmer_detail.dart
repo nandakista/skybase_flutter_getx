@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/ui/views/sample_feature/detail/widgets/sample_feature_detail_header.dart';
+import 'package:skybase/ui/widgets/shimmer/shimmer_list.dart';
+
+import 'shimmer_text.dart';
 
 class ShimmerDetail extends StatelessWidget {
   const ShimmerDetail({Key? key}) : super(key: key);
@@ -14,54 +19,54 @@ class ShimmerDetail extends StatelessWidget {
       child: Shimmer.fromColors(
         baseColor: Get.isDarkMode ? baseDark : baseLight,
         highlightColor: Colors.white,
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _buildItem(width: double.infinity, height: 200),
+            SampleFeatureDetailHeader(),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 12),
+                    ShimmerText(),
+                    SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Icon(Icons.location_city),
+                        Expanded(
+                          child: ShimmerText(),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.location_on),
+                        Expanded(
+                          child: ShimmerText(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            DefaultTabController(
+              length: 3,
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildItem(width: 130, height: 18),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          _buildItem(width: 195, height: 18),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          _buildItem(width: 80, height: 18),
-                        ],
-                      ),
-                      _buildItem(width: 30, height: 30)
+                  TabBar(
+                    labelColor: AppColors.primary,
+                    unselectedLabelColor: Colors.grey,
+                    indicatorColor: AppColors.accent,
+                    tabs: [
+                      Tab(text: 'Repositories'),
+                      Tab(text: 'Followers'),
+                      Tab(text: 'Followings'),
                     ],
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  _buildItem(width: double.infinity, height: 60),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _buildItem(width: 110, height: 110, radius: 10),
-                      _buildItem(width: 110, height: 110, radius: 10),
-                      _buildItem(width: 110, height: 110, radius: 10),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  _buildItem(width: double.infinity, height: 150),
+                  ShimmerList(),
                 ],
               ),
             )
@@ -70,18 +75,4 @@ class ShimmerDetail extends StatelessWidget {
       ),
     );
   }
-
-  Container _buildItem({
-    required double width,
-    required double height,
-    double? radius,
-  }) =>
-      Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radius ?? 0),
-          color: Colors.black45,
-        ),
-      );
 }

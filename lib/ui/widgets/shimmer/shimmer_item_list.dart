@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:skybase/ui/widgets/shimmer/shimmer_text.dart';
 
 /* Created by
    Varcant
    nanda.kista@gmail.com
 */
-class ShimmerItem extends StatelessWidget {
-  const ShimmerItem({Key? key, required this.height}) : super(key: key);
+class ShimmerItemList extends StatelessWidget {
+  const ShimmerItemList({Key? key, required this.height}) : super(key: key);
 
   final double height;
 
@@ -17,9 +18,9 @@ class ShimmerItem extends StatelessWidget {
     Color baseDark = Colors.grey[700]?? Colors.grey;
     Color baseLight = Colors.grey[300] ?? Colors.grey;
     return SizedBox(
-      height: height * 1.3,
+      height: height * 1.5,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: Shimmer.fromColors(
           baseColor: Get.isDarkMode ?  baseDark : baseLight,
           highlightColor: shimmerColor,
@@ -28,33 +29,20 @@ class ShimmerItem extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Container(
-                    width: height,
-                    height: height,
-                    color: shimmerColor,
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: shimmerColor,
                   ),
                   const SizedBox(width: 8),
-                  Expanded(
+                  const Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Container(
-                          width: double.infinity,
-                          height: 10,
-                          color: shimmerColor,
-                        ),
-                        const SizedBox(height: 4),
-                        Container(
-                          width: double.infinity,
-                          height: 10,
-                          color: shimmerColor,
-                        ),
-                        const SizedBox(height: 4),
-                        Container(
-                          width: 40.0,
-                          height: 10,
-                          color: shimmerColor,
-                        ),
+                        ShimmerText(),
+                        SizedBox(height: 4),
+                        ShimmerText(),
+                        SizedBox(height: 4),
+                        ShimmerText(width: 40),
                       ],
                     ),
                   ),

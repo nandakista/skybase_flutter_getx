@@ -17,8 +17,7 @@ class SampleFeatureDetailInfo extends GetView<SampleFeatureDetailController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 12),
-            Text(controller.dataObj.value?.name ?? '--',
-                style: AppStyle.headline4),
+            Text(controller.dataObj.value?.name ?? '--', style: AppStyle.headline4),
             Text(controller.dataObj.value?.bio ?? '--'),
             const SizedBox(height: 8),
             Row(
