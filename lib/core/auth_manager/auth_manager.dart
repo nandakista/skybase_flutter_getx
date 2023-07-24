@@ -7,7 +7,6 @@ import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
 import 'package:skybase/data/models/user/user.dart';
-import 'package:skybase/data/sources/server/auth/auth_api_impl.dart';
 import 'package:skybase/ui/views/intro/intro_view.dart';
 import 'package:skybase/ui/views/login/login_view.dart';
 import 'package:skybase/ui/views/splash/splash_view.dart';
@@ -36,16 +35,12 @@ class AuthManager extends GetxService {
 
   @override
   void onReady() async {
-    // ever(authState, authChanged);
-    // authChanged(state);
-    Timer(
-      const Duration(seconds: 2),
-      () => Get.offAllNamed(LoginView.route),
-    );
+    ever(authState, authChanged);
+    authChanged(state);
     super.onReady();
   }
 
-  authChanged(AuthState? state) async {
+  void authChanged(AuthState? state) async {
     switch (state?.appStatus) {
       case AppType.INITIAL:
         await setup();
@@ -70,16 +65,16 @@ class AuthManager extends GetxService {
     }
   }
 
-  setup() async {
+  Future<void> setup() async {
     checkFirstInstall();
     await checkAppTheme();
   }
 
   /// Check if app is first time installed. It will navigate to Introduction Page
   void checkFirstInstall() async {
-    final bool firstInstall =
-        getStorage.get(GetStorageKey.FIRST_INSTALL) ?? true;
-    if (firstInstall) {
+    final bool isFirstInstall =
+        await getStorage.getAwait(GetStorageKey.FIRST_INSTALL) ?? true;
+    if (isFirstInstall) {
       await secureStorage.setToken(value: '');
       authState.value = const AuthState(appStatus: AppType.FIRST_INSTALL);
     } else {
@@ -101,17 +96,11 @@ class AuthManager extends GetxService {
   /// This function to used for checking is valid token to API Server use GET User Endpoint (token required).
   /// If response is Error it will passed to [logout] process.
   Future<void> checkUser() async {
-    AuthApiImpl authApi = AuthApiImpl();
+    // TODO : Add your logic check user here
     final String? token = await secureStorage.getToken();
-    User? user = getStorage.get(GetStorageKey.USERS);
-
-    try {
-      await authApi
-          .verifyToken(userId: user?.id ?? 0, token: token.toString())
-          .then((res) async {
-        setAuth();
-      });
-    } catch (err) {
+    if(token != null && token != '') {
+      setAuth();
+    } else {
       logout();
     }
   }

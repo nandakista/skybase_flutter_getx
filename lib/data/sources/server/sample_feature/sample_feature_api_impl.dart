@@ -5,7 +5,7 @@ import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/sources/server/sample_feature/sample_feature_api.dart';
 
 class SampleFeatureApiImpl extends SampleFeatureApi {
-  String tag = 'User Api';
+  String tag = 'SampleFeatureApiImpl::->';
 
   @override
   Future<List<SampleFeature>> getUsers({
@@ -21,7 +21,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         url: url,
         useToken: true,
       );
-      return (res.data['items'])
+      return (res.data['items'] as List)
           .map((data) => SampleFeature.fromJson(data))
           .toList()
           .cast<SampleFeature>();
@@ -52,7 +52,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         url: '/users/$username/followers',
         useToken: true,
       );
-      return (res.data)
+      return (res.data as List)
           .map((data) => SampleFeature.fromJson(data))
           .toList()
           .cast<SampleFeature>();
@@ -69,7 +69,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         url: '/users/$username/following',
         useToken: true,
       );
-      return (res.data)
+      return (res.data as List)
           .map((data) => SampleFeature.fromJson(data))
           .toList()
           .cast<SampleFeature>();
@@ -86,7 +86,7 @@ class SampleFeatureApiImpl extends SampleFeatureApi {
         url: '/users/$username/repos?type=all',
         useToken: true,
       );
-      return (res.data)
+      return (res.data as List)
           .map((data) => Repo.fromJson(data))
           .toList()
           .cast<Repo>();

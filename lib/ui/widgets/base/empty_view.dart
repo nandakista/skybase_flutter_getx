@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skybase/ui/widgets/sky_button.dart';
 
 /* Created by
    Varcant
@@ -12,24 +13,30 @@ class EmptyView extends StatelessWidget {
     this.emptyImageWidget,
     this.emptyTitle,
     this.emptySubtitle,
-    this.isScrollable = true,
+    this.physics,
     this.imageSize,
     this.verticalSpacing = 24,
     this.horizontalSpacing = 24,
     this.titleStyle,
     this.subtitleStyle,
+    this.retryText,
+    this.onRetry,
+    this.retryWidget,
   }) : super(key: key);
 
   final Widget? emptyImageWidget;
   final String? emptyImage;
   final String? emptyTitle;
   final String? emptySubtitle;
-  final bool isScrollable;
+  final ScrollPhysics? physics;
   final double? imageSize;
   final double verticalSpacing;
   final double horizontalSpacing;
   final TextStyle? titleStyle;
   final TextStyle? subtitleStyle;
+  final String? retryText;
+  final VoidCallback? onRetry;
+  final Widget? retryWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +46,7 @@ class EmptyView extends StatelessWidget {
           vertical: verticalSpacing,
           horizontal: horizontalSpacing,
         ),
-        physics: (isScrollable)
-            ? const NeverScrollableScrollPhysics()
-            : const BouncingScrollPhysics(),
+        physics: physics,
         child: Column(
           children: [
             emptyImageWidget ??
@@ -64,6 +69,15 @@ class EmptyView extends StatelessWidget {
                 style: subtitleStyle,
               ),
             ),
+            SizedBox(height: verticalSpacing),
+            retryWidget ??
+                SkyButton(
+                  wrapContent: true,
+                  height: 50,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  text: retryText ?? 'txt_reload'.tr,
+                  onPressed: onRetry,
+                ),
           ],
         ),
       ),

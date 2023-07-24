@@ -34,8 +34,9 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
   }
 
   @override
-  void refreshPage() {
+  void onRefresh() {
     getDetailUser();
+    super.onRefresh();
   }
 
   @override
@@ -59,9 +60,9 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
 
       // Only fetch data
       // finishLoadData(data: response);
-      hideLoading();
+      dismissLoading();
     } catch (e) {
-      hideLoading();
+      dismissLoading();
       showError(e.toString());
     }
   }

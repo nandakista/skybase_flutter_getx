@@ -1,5 +1,7 @@
 import 'package:skybase/ui/views/intro/intro_route.dart';
 import 'package:skybase/ui/views/login/login_route.dart';
+import 'package:skybase/ui/views/profile/profile_route.dart';
+import 'package:skybase/ui/views/settings/setting_route.dart';
 import 'package:skybase/ui/views/splash/splash_route.dart';
 import 'package:skybase/ui/views/splash/splash_view.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_route.dart';
@@ -18,5 +20,7 @@ class AppPages {
     ...sampleFeatureRoute,
     ...sampleFeatureDetailPage,
     ...timerUtilsRoute,
+    ...profileRoute,
+    ...settingRoute,
   ];
 }

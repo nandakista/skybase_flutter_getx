@@ -22,7 +22,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
         appBar: SkyAppBar.primary(title: controller.dataObj.value?.username),
         body: SafeArea(
           child: Obx(
-            () => SkyView(
+            () => SkyView.page(
               loadingEnabled: controller.isLoading,
               errorEnabled: controller.isError,
               emptyEnabled: controller.isEmpty,
@@ -31,6 +31,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
               onRefresh: () => controller.onRefresh(),
               onRetry: () => controller.onRefresh(),
               child: const SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
                 child: Column(
                   children: [
                     SampleFeatureDetailHeader(),

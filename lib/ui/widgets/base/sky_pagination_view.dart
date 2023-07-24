@@ -148,6 +148,7 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
             horizontalSpacing: horizontalSpacing ?? 24,
             verticalSpacing: verticalSpacing ?? 24,
             imageSize: imageSize,
+            physics: const NeverScrollableScrollPhysics(),
           ),
       firstPageErrorIndicatorBuilder: (ctx) =>
           errorView ??

@@ -75,7 +75,7 @@ class LoginView extends GetView<LoginController> {
                           () => SkyPasswordFormField(
                             label: 'txt_password'.tr,
                             hint: 'txt_password'.tr,
-                            controller: controller.passController,
+                            controller: controller.passwordController,
                             icon: Icons.lock,
                             hiddenText: controller.isHiddenPassword.value,
                             endIcon: IconButton(

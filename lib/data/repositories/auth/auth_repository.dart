@@ -1,7 +1,7 @@
 import 'package:skybase/data/models/repo/repo.dart';
 import 'package:skybase/data/models/user/user.dart';
 
-abstract class AuthApi {
+abstract class AuthRepository {
   Future<User> verifyToken({
     required int userId,
     required String token,

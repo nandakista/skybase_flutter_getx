@@ -23,8 +23,8 @@ class GetStorageManager {
     await _box.write(name, value);
   }
 
-  void delete(String name) {
-    _box.remove(name);
+  Future<void> delete(String name) async {
+    await _box.remove(name);
   }
 
   /// If you want to get Object/Model don't forget to decode fromJson
@@ -48,9 +48,9 @@ class GetStorageManager {
     return await _box.read(name);
   }
 
-  logout() async {
+  void logout() async {
     try {
-      await GetStorage(GetStorageKey.USERS).erase();
+      await GetStorage(GetStorageKey.STORAGE_NAME).erase();
       save(GetStorageKey.FIRST_INSTALL, false);
     } catch (e) {
       debugPrint(e.toString());

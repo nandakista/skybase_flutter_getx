@@ -22,7 +22,7 @@ class ListUtilsView extends StatelessWidget {
             ..._buildSection(
               page: 1,
               title: 'Sample Grouped ListView',
-              content: SkyView(
+              content: SkyView.component(
                 loadingEnabled: false,
                 errorEnabled: false,
                 onRetry: () {},
@@ -63,7 +63,7 @@ class ListUtilsView extends StatelessWidget {
             ..._buildSection(
               page: 2,
               title: 'Sample Picker ListView',
-              content: SkyView(
+              content: SkyView.component(
                 loadingEnabled: false,
                 errorEnabled: false,
                 onRetry: () {},
@@ -76,14 +76,14 @@ class ListUtilsView extends StatelessWidget {
                   separator: const Divider(thickness: 1, height: 16),
                   initialValue: dummyDataWithObject.first,
                   data: dummyDataWithObject,
-                  unavailableDataIndex: const [0, 3],
-                  itemBuilder: (PickerWrapper<SampleObjectData> item) {
+                  unavailableDataIndex: const [1, 3],
+                  itemBuilder: (context, index, item) {
                     return SizedBox(
                       height: 20,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('${item.data?.name}'),
+                          Text(item.data.name),
                           if (item.isSelected) const Icon(Icons.check),
                           if (!item.isAvailable) const Text('Unavailable')
                         ],

@@ -16,6 +16,9 @@ const Map<String, String> en = {
   'txt_friday': 'Friday',
   'txt_saturday': 'Saturday',
 
+  'txt_setting': 'Settings',
+  'txt_language': 'Language',
+  'txt_dark_mode': 'Dark Mode',
   'txt_try_again': 'Try again',
   'txt_no': 'No',
   'txt_yes': 'Yes',
@@ -30,6 +33,7 @@ const Map<String, String> en = {
   'txt_detail': 'Detail',
   'txt_list_users': 'List Users',
   'txt_retry': 'Retry',
+  'txt_reload': 'Reload',
   'txt_choose_language': 'Choose Language',
   'txt_register': 'Register',
   'txt_phone': 'Phone Number',

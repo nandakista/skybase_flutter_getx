@@ -261,10 +261,10 @@ packages:
     dependency: "direct main"
     description:
       name: collection_picker
-      sha256: fb982afaeeac855d6f830a11587530a043911da7aca6f7e15e0483d50d47f296
+      sha256: bb7368e6b00fbd57c3b3dd591c21be261b2cb2675c74036183258f1b60348554
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2+3"
+    version: "0.0.2+9"
   convert:
     dependency: transitive
     description:

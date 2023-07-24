@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:skybase/data/models/repo/repo.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
+import 'package:skybase/data/models/user/user.dart';
 
 bool typeEqual<S, T>() => S == T;
 
@@ -18,6 +20,10 @@ class CachedModelConverter<T> implements JsonConverter<T, Object> {
     json = json as Map<String, dynamic>;
     if (typeEqualN<T, SampleFeature>()) {
       return SampleFeature.fromJson(json) as T;
+    } else if (typeEqualN<T, User>()) {
+      return User.fromJson(json) as T;
+    } else if (typeEqualN<T, Repo>()) {
+      return Repo.fromJson(json) as T;
     }
     ///
     /// Add other models
@@ -30,6 +36,10 @@ class CachedModelConverter<T> implements JsonConverter<T, Object> {
   Map<String, dynamic> toJson(T obj) {
     if (typeEqualN<T, SampleFeature>()) {
       return (obj as SampleFeature).toJson();
+    } else if (typeEqualN<T, User>()) {
+      return (obj as User).toJson();
+    } else if (typeEqualN<T, Repo>()) {
+      return (obj as Repo).toJson();
     }
     ///
     /// Add other models

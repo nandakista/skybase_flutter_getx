@@ -17,6 +17,9 @@ const Map<String, String> id = {
   'txt_friday': 'Jumat',
   'txt_saturday': 'Sabtu',
 
+  'txt_setting': 'Pengaturan',
+  'txt_language': 'Bahasa',
+  'txt_dark_mode': 'Mode Gelap',
   'txt_try_again': 'Coba lagi',
   'txt_no': 'Tidak',
   'txt_yes': 'Ya',
@@ -31,6 +34,7 @@ const Map<String, String> id = {
   'txt_detail': 'Detil',
   'txt_list_users': 'Daftar Pengguna',
   'txt_retry': 'Coba Lagi',
+  'txt_reload': 'Muat ulang',
   'txt_choose_language': 'Pilih Bahasa',
   'txt_register': 'Daftar',
   'txt_phone': 'No. Telepon',

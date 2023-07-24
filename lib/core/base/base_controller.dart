@@ -19,32 +19,32 @@ abstract class BaseController<T> extends GetxController {
   RxList<T> dataList = RxList<T>([]);
 
   bool get isLoading => loadingStatus.isTrue;
+
   bool get isError => errorMessage.value.isNotEmpty;
+
   bool get isEmpty => dataList.isEmpty && dataObj.value == null;
+
   bool get isSuccess => !isEmpty && !isError && !isLoading;
+
+  /// **NOTE:**
+  /// Must be implemented when you cached object data,
+  /// optional when you cached list data
+  String get cachedId;
 
   String get cachedKey;
 
-  String get cachedId;
-
-  /// **NOTE:**
-  /// call this [refreshPage] instead of [onRefresh] when you need to dispose anything
-  void refreshPage() {}
-
-  void onRefresh() {
-    storage.delete(cachedKey);
+  void onRefresh() async {
     dataObj.value = null;
-    refreshPage();
+    dataList.clear();
+    await storage.delete(cachedKey);
   }
 
   void showLoading() {
-    if (dataObj.value == null && dataList.isEmpty) {
-      loadingStatus.value = true;
-      errorMessage.value = '';
-    }
+    loadingStatus.value = true;
+    errorMessage.value = '';
   }
 
-  void hideLoading() => loadingStatus.value = false;
+  void dismissLoading() => loadingStatus.value = false;
 
   void showError(String message) {
     errorMessage.value = message;
@@ -69,10 +69,13 @@ abstract class BaseController<T> extends GetxController {
       } else {
         if (cachedId == getId(cache)) {
           dataObj.value = CachedModelConverter<T>().fromJson(cache);
+        } else {
+          onLoad();
         }
       }
+    } else {
+      onLoad();
     }
-    onLoad();
   }
 
   String getId(Map<String, dynamic> cache) {

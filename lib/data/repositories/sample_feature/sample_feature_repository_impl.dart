@@ -6,13 +6,12 @@ class SampleFeatureRepositoryImpl extends SampleFeatureRepository {
   final SampleFeatureApi apiService;
   SampleFeatureRepositoryImpl({required this.apiService});
 
-  String tag = 'User Repository';
+  String tag = 'SampleFeatureRepository::->';
 
   @override
   Future<List<SampleFeature>> getUsers({
     required int page,
     required int perPage,
-    bool isRefresh = false,
   }) async {
     return await apiService.getUsers(page: page, perPage: perPage);
   }

@@ -31,8 +31,8 @@ class ServiceLocator {
   }
 
   static Future<void> _initConfig() async {
-    await GetStorage.init(GetStorageKey.STORAGE_NAME);
     await Get.putAsync(() async => GetStorage());
+    await GetStorage.init(GetStorageKey.STORAGE_NAME);
     Get.putAsync(() async => const FlutterSecureStorage());
 
     // Configuration
