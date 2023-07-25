@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 
 class ConverterHelper {
-  static String toBase64({XFile? imageFile, File? file}) {
+  static String toBase64({File? imageFile, File? file}) {
     try {
       if (imageFile != null) {
-        final bytes = File(imageFile.path).readAsBytesSync();
+        final bytes = imageFile.readAsBytesSync();
         String img64Path = base64Encode(bytes);
         return img64Path;
       } else if (file != null) {

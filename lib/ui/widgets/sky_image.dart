@@ -98,7 +98,6 @@ class SkyImage extends StatelessWidget {
             enablePreview: enablePreview,
             onTapImage: onTap,
             isAsset: isAsset,
-            color: color ?? Colors.grey,
             previewTitle: previewTitle,
             previewTitleStyle: previewTitleStyle,
             shapeImage: shapeImage,

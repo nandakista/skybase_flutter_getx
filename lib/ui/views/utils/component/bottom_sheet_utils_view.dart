@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/bottom_sheet_helper.dart';
-import 'package:skybase/ui/widgets/date_picker_widget.dart';
 import 'package:skybase/ui/widgets/media/image_source_bottom_sheet.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
@@ -57,18 +56,6 @@ class BottomSheetUtilsView extends StatelessWidget {
               onPressed: () {
                 BottomSheetHelper.material(child: _imageSource());
               },
-            ),
-            const SizedBox(height: 12),
-            SkyButton(
-              onPressed: () {
-                BottomSheetHelper.basic(
-                  child: DatePickerWidget.range(
-                    onSelectionChanged: (selected) {},
-                  ),
-                );
-              },
-              text: 'Bottom Sheet + Date Range',
-              icon: Icons.date_range_outlined,
             ),
           ],
         ),

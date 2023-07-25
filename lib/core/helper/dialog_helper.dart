@@ -89,7 +89,6 @@ class DialogHelper {
         isDismissible: isDismissible ?? false,
         title: title ?? 'txt_warning'.tr,
         description: message,
-        backgroundColorHeader: Colors.orange,
         onConfirm: onConfirm,
         confirmText: confirmText,
         onCancel: onCancel ?? dismiss,
@@ -138,7 +137,6 @@ class DialogHelper {
       context: Get.context!,
       builder: (context) => DialogAlert.force(
         header: header,
-        backgroundColorHeader: Colors.orange,
         title: title ?? 'txt_warning'.tr,
         description: message,
         onConfirm: onConfirm,

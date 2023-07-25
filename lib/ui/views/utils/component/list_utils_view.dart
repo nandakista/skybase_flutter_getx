@@ -1,11 +1,8 @@
-import 'package:collection_picker/collection_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/widgets/base/sky_view.dart';
-import 'package:skybase/ui/widgets/ordered_list.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_grouped_listview.dart';
-import 'package:skybase/ui/widgets/unordered_list.dart';
 
 class ListUtilsView extends StatelessWidget {
   const ListUtilsView({Key? key}) : super(key: key);
@@ -60,72 +57,6 @@ class ListUtilsView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 36),
-            ..._buildSection(
-              page: 2,
-              title: 'Sample Picker ListView',
-              content: SkyView.component(
-                loadingEnabled: false,
-                errorEnabled: false,
-                onRetry: () {},
-                onRefresh: () {},
-                emptyEnabled: dummyDataWithObject.isEmpty,
-                child: ListViewPicker<SampleObjectData>(
-                  type: PickerType.single,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  separator: const Divider(thickness: 1, height: 16),
-                  initialValue: dummyDataWithObject.first,
-                  data: dummyDataWithObject,
-                  unavailableDataIndex: const [1, 3],
-                  itemBuilder: (context, index, item) {
-                    return SizedBox(
-                      height: 20,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(item.data.name),
-                          if (item.isSelected) const Icon(Icons.check),
-                          if (!item.isAvailable) const Text('Unavailable')
-                        ],
-                      ),
-                    );
-                  },
-                  onChanged: (context, index, firstItem, listItem) {
-                    debugPrint('First item = $firstItem');
-                    debugPrint('All item = $listItem');
-                  },
-                ),
-              ),
-            ),
-            const SizedBox(height: 36),
-            ..._buildSection(
-              page: 3,
-              title: 'Unordered List',
-              content: const UnorderedList(
-                data: {
-                  'Name': 'Product A',
-                  'Weight': '300 gram',
-                  'Spec': 'Lorem ipsum sit dorom amet..'
-                },
-                captionData: {
-                  'Name': 'Some for name',
-                  'Spec': 'Some for Spec',
-                },
-              ),
-            ),
-            const SizedBox(height: 36),
-            ..._buildSection(
-              page: 4,
-              title: 'Ordered List',
-              content: OrderedList(
-                itemCount: 3,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) {
-                  return Text('Data $index');
-                },
-              ),
-            ),
           ],
         ),
       ),

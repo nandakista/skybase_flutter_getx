@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/media_helper.dart';
-import 'package:skybase/ui/widgets/media/preview/media_preview_page.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
-import 'package:skybase/ui/widgets/sky_video.dart';
 
 /* Created by
    Varcant
@@ -44,12 +42,7 @@ class MediaListPreviewPage extends StatelessWidget {
       case MediaType.IMAGE:
         return SkyImage(src: mediaType.path, enablePreview: true);
       case MediaType.VIDEO:
-        return SkyVideo(
-          url: mediaType.path,
-          height: 400,
-          showControls: false,
-          onTapVideo: () => Get.to(MediaPreviewPage(url: mediaType.path)),
-        );
+        return const Center(child: Text('Media Unsupported'));
       case MediaType.UNKNOWN:
         return const Center(child: Text('Media Unsupported'));
     }

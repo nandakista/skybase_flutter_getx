@@ -14,7 +14,6 @@ import 'package:skybase/core/themes/app_theme.dart';
 import 'package:skybase/core/themes/theme_manager.dart';
 
 import 'core/app/app_info.dart';
-import 'core/helper/http_overrides.dart';
 
 /* Created by
    Varcant
@@ -23,7 +22,6 @@ import 'core/helper/http_overrides.dart';
 class ServiceLocator {
   static Future<void> init() async {
     if (kReleaseMode) debugPrint = (String? message, {int? wrapWidth}) {};
-    HttpOverrides.global = MyHttpOverrides();
     await _initConfig();
     await _initService();
     AppTheme.setStatusBar(brightness: Brightness.light);

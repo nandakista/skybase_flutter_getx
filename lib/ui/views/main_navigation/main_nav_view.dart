@@ -6,7 +6,6 @@ import 'package:skybase/ui/views/profile/profile_view.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_view.dart';
 import 'package:skybase/ui/views/utils/utils_view.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
-import 'package:skybase/ui/widgets/double_back_wrapper.dart';
 import 'package:skybase/ui/widgets/sky_box.dart';
 
 class MainNavView extends GetView<MainNavController> {
@@ -19,16 +18,14 @@ class MainNavView extends GetView<MainNavController> {
       body: ColoredStatusBar(
         brightness: Brightness.light,
         child: SafeArea(
-          child: DoubleBack(
-            child: PageView(
-              controller: controller.pageController,
-              onPageChanged: (index) => controller.index.value = index,
-              children: const [
-                SampleFeatureListView(),
-                UtilsView(),
-                ProfileView(),
-              ],
-            ),
+          child: PageView(
+            controller: controller.pageController,
+            onPageChanged: (index) => controller.index.value = index,
+            children: const [
+              SampleFeatureListView(),
+              UtilsView(),
+              ProfileView(),
+            ],
           ),
         ),
       ),

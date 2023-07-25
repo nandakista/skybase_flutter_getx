@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:skybase/core/helper/media_helper.dart';
 import 'package:skybase/ui/widgets/media/preview/media_list_preview_page.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
-import 'package:skybase/ui/widgets/sky_video.dart';
 
 /* Created by
    Varcant
@@ -134,16 +133,7 @@ class MediaItems extends StatelessWidget {
           fit: BoxFit.cover,
         );
       case MediaType.VIDEO:
-        return SkyVideo(
-          url: mediaType.path,
-          enablePreview: true,
-          showControls: false,
-          onTapVideo: onTap != null
-              ? () {
-                  onTap!(index);
-                }
-              : null,
-        );
+        return const Center(child: Text('Media Unsupported'));
       case MediaType.UNKNOWN:
         return const Center(child: Text('Media Unsupported'));
     }

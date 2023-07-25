@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:skybase/core/themes/app_colors.dart';
 import 'package:skybase/core/themes/app_style.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
@@ -97,10 +96,13 @@ class DialogAlert extends StatelessWidget {
         title: title,
         description: description,
         isDismissible: isDismissible,
-        header: header ??
-            Lottie.asset('assets/anim/anim_success.json', repeat: false),
+        header: Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: header ?? Image.asset('assets/images/ic_success.png'),
+        ),
         onConfirm: onConfirm,
-        backgroundColorHeader: backgroundColorHeader ?? Colors.green[50],
+        backgroundColorHeader:
+            backgroundColorHeader ?? Get.theme.scaffoldBackgroundColor,
         confirmColor: Colors.green,
       );
 
@@ -116,10 +118,13 @@ class DialogAlert extends StatelessWidget {
         title: title,
         description: description,
         isDismissible: isDismissible,
-        header: header ??
-            Lottie.asset('assets/anim/anim_failed.json', repeat: false),
+        header: Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: header ?? Image.asset('assets/images/ic_failed.png'),
+        ),
         onConfirm: onConfirm,
-        backgroundColorHeader: backgroundColorHeader ?? Colors.red[100],
+        backgroundColorHeader:
+            backgroundColorHeader ?? Get.theme.scaffoldBackgroundColor,
         confirmColor: Colors.red[700],
       );
 
@@ -139,12 +144,16 @@ class DialogAlert extends StatelessWidget {
         description: description,
         isDismissible: isDismissible,
         header: header ??
-            Lottie.asset('assets/anim/anim_warning.json', repeat: false),
+            Image.asset(
+              'assets/images/ic_warning.png',
+              color: Colors.orange,
+            ),
         onConfirm: onConfirm,
         onCancel: onCancel,
         confirmText: confirmText ?? 'Ya',
         cancelText: cancelText,
-        backgroundColorHeader: backgroundColorHeader ?? Colors.orangeAccent,
+        backgroundColorHeader:
+            backgroundColorHeader ?? Get.theme.scaffoldBackgroundColor,
       );
 
   factory DialogAlert.retry({
@@ -164,11 +173,14 @@ class DialogAlert extends StatelessWidget {
         confirmText: confirmText ?? 'txt_try_again'.tr,
         cancelText: cancelText,
         isDismissible: isDismissible,
-        header: header ??
-            Lottie.asset('assets/anim/anim_failed.json', repeat: false),
+        header: Padding(
+          padding: const EdgeInsets.all(6),
+          child: header ?? Image.asset('assets/images/ic_failed.png'),
+        ),
         onConfirm: onConfirm,
         onCancel: onCancel,
-        backgroundColorHeader: backgroundColorHeader ?? Colors.red[100],
+        backgroundColorHeader:
+            backgroundColorHeader ?? Get.theme.scaffoldBackgroundColor,
       );
 
   factory DialogAlert.force({
@@ -186,10 +198,14 @@ class DialogAlert extends StatelessWidget {
         description: description,
         isDismissible: isDismissible,
         header: header ??
-            Lottie.asset('assets/anim/anim_warning.json', repeat: false),
+            Image.asset(
+              'assets/images/ic_warning.png',
+              color: Colors.orange,
+            ),
         onConfirm: onConfirm,
         confirmText: confirmText,
-        backgroundColorHeader: backgroundColorHeader ?? Colors.orangeAccent,
+        backgroundColorHeader:
+            backgroundColorHeader ?? Get.theme.scaffoldBackgroundColor,
       );
 
   @override
