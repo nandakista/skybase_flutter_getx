@@ -74,6 +74,8 @@ class AuthManager extends GetxService {
   void checkFirstInstall() async {
     final bool isFirstInstall =
         await getStorage.getAwait(GetStorageKey.FIRST_INSTALL) ?? true;
+    print('is first install nih $isFirstInstall');
+    print('is first install nih ${await getStorage.getAwait(GetStorageKey.FIRST_INSTALL)}');
     if (isFirstInstall) {
       await secureStorage.setToken(value: '');
       authState.value = const AuthState(appStatus: AppType.FIRST_INSTALL);
