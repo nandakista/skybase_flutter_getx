@@ -7,15 +7,15 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:skybase/core/auth_manager/auth_manager.dart';
-import 'package:skybase/core/database/get_storage/get_storage_key.dart';
-import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
-import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
-import 'package:skybase/core/network/api_config.dart';
-import 'package:skybase/core/themes/app_theme.dart';
-import 'package:skybase/core/themes/theme_manager.dart';
 
+import 'config/auth_manager/auth_manager.dart';
+import 'config/network/api_config.dart';
+import 'config/themes/app_theme.dart';
+import 'config/themes/theme_manager.dart';
 import 'core/app/app_info.dart';
+import 'core/database/get_storage/get_storage_key.dart';
+import 'core/database/get_storage/get_storage_manager.dart';
+import 'core/database/secure_storage/secure_storage_manager.dart';
 
 /* Created by
    Varcant

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/snackbar_helper.dart';
-import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/config/themes/app_colors.dart';
 
 class PermissionHelper {
   static void showOpenSettings(String message) {

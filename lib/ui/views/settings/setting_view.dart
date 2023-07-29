@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/app_configuration.dart';
-import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/core/themes/theme_manager.dart';
+import 'package:skybase/config/app/app_configuration.dart';
+import 'package:skybase/config/themes/app_style.dart';
+import 'package:skybase/config/themes/theme_manager.dart';
 import 'package:skybase/ui/views/settings/setting_controller.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';

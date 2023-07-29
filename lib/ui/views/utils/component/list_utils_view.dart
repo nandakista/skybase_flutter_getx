@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/widgets/base/sky_view.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_grouped_listview.dart';

@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:skybase/core/localization/locale_helper.dart';
+import 'package:skybase/config/localization/locale_helper.dart';
 
 class DateTimeHelper {
   static String parseLocalDate({

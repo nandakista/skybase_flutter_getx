@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/themes/gradient_color.dart';
 import 'package:skybase/ui/views/utils/component/bottom_sheet_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/dialog_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/list_utils_view.dart';
@@ -81,7 +80,11 @@ class UtilsView extends GetView<UtilsController> {
               SkyButton(
                 text: 'Theme Component',
                 icon: CupertinoIcons.paintbrush,
-                gradient: GradientColor.gradientType2,
+                gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Color(0xff003EA1), Color(0xff9F0077)]
+                ),
                 onPressed: () => Get.to(() => const ThemeComponentUtilsView()),
               ),
               const SizedBox(height: 28),

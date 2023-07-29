@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/themes/app_colors.dart';
-import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/config/themes/app_colors.dart';
+import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/profile/component/repository/profile_repository_controller.dart';
 import 'package:skybase/ui/widgets/base/sky_view.dart';
 import 'package:skybase/ui/widgets/shimmer/shimmer_list.dart';

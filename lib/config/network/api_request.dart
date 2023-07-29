@@ -3,9 +3,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 // import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
-import 'package:skybase/core/network/api_config.dart';
-import 'package:skybase/core/network/api_exception.dart';
-import 'package:skybase/core/network/api_url.dart';
+import 'package:skybase/config/network/api_config.dart';
+import 'package:skybase/config/network/api_exception.dart';
 import 'package:skybase/dev/dev_token.dart';
 
 /* Created by
@@ -110,7 +109,7 @@ Object? _setBody({
     return body = jsonEncode(body);
   } else if (contentType == Headers.formUrlEncodedContentType) {
     return body;
-  } else if (contentType == ApiUrl.multipartFormData) {
+  } else if (contentType == 'multipart/form-data') {
     return FormData.fromMap(body as Map<String, dynamic>);
   } else {
     return null;

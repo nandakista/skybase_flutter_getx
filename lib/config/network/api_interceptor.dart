@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:skybase/core/network/api_token_manager.dart';
 
-import 'api_url.dart';
+import 'api_token_manager.dart';
 
 /* Created by
    Varcant
@@ -22,7 +21,7 @@ class ApiInterceptors extends ApiTokenManager
       debugPrint('Headers: ${options.headers}');
       debugPrint('Query Params: ${options.queryParameters}');
       debugPrint('Body: ${options.data}');
-      if (options.contentType == ApiUrl.multipartFormData) {
+      if (options.contentType == 'multipart/form-data') {
         debugPrint('Data: ${options.data.fields}');
       }
       debugPrint('--> END ${options.method.toUpperCase()}');

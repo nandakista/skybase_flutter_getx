@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/auth_manager/auth_manager.dart';
+import 'package:skybase/config/auth_manager/auth_manager.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
 import 'package:skybase/data/repositories/auth/auth_repository.dart';

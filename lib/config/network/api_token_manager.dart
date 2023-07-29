@@ -3,15 +3,14 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:skybase/core/app/app_env.dart';
-import 'package:skybase/core/auth_manager/auth_manager.dart';
+import 'package:skybase/config/app/app_env.dart';
+import 'package:skybase/config/auth_manager/auth_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
-import 'package:skybase/core/network/api_config.dart';
-import 'package:skybase/core/network/api_exception.dart';
-import 'package:skybase/core/network/api_request.dart';
-import 'package:skybase/core/network/api_response.dart';
-import 'package:skybase/core/network/api_url.dart';
+import 'package:skybase/config/network/api_config.dart';
+import 'package:skybase/config/network/api_exception.dart';
+import 'package:skybase/config/network/api_request.dart';
+import 'package:skybase/config/network/api_response.dart';
 
 /* Created by
    Varcant
@@ -85,7 +84,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
   Future<String?> _getAccessToken({required String refreshToken}) async {
     try {
       final responseBody = await Dio().post(
-        DioClient.baseURL + ApiUrl.refreshToken,
+        '${DioClient.baseURL}auth/refresh',
         data: jsonEncode({'refresh_token': refreshToken}),
         options:
             Options(headers: headers, contentType: Headers.jsonContentType),

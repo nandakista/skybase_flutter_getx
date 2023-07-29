@@ -2,11 +2,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:skybase/core/app/app_env.dart';
+import 'package:skybase/config/app/app_env.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
-import 'package:skybase/core/network/api_request.dart';
-import 'package:skybase/core/network/api_response.dart';
-import 'package:skybase/core/network/api_url.dart';
+import 'package:skybase/config/network/api_request.dart';
+import 'package:skybase/config/network/api_response.dart';
 import 'package:skybase/data/models/repo/repo.dart';
 import 'package:skybase/data/models/user/user.dart';
 
@@ -23,7 +22,7 @@ class AuthApiImpl implements AuthApi {
   }) async {
     try {
       final response = await ApiRequest.post(
-        url: ApiUrl.login,
+        url: 'auth/login',
         body: {
           'phone': phoneNumber,
           'password': password,
@@ -45,7 +44,7 @@ class AuthApiImpl implements AuthApi {
     try {
       String? token = await SecureStorageManager.find.getToken();
       String url = AppEnv.config.baseUrl;
-      url += ApiUrl.verifyToken;
+      url += 'auth/verify-token';
       final response = await Dio().get(
         url,
         options: Options(
