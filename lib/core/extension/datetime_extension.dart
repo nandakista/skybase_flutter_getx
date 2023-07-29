@@ -5,14 +5,14 @@ extension DateTimeExtension on DateTime {
         day == other.day;
   }
 
-  bool isYesterday() {
+  bool get isYesterday {
     final yesterday = DateTime.now().subtract(const Duration(days: 1));
     return yesterday.day == day &&
         yesterday.month == month &&
         yesterday.year == year;
   }
 
-  bool inThisHours() {
+  bool get inThisHours {
     final now = DateTime.now();
     return now.hour == hour &&
         now.day == day &&
@@ -20,39 +20,39 @@ extension DateTimeExtension on DateTime {
         now.year == year;
   }
 
-  bool isToday() {
+  bool get isToday {
     final now = DateTime.now();
     return now.day == day &&
         now.month == month &&
         now.year == year;
   }
 
-  bool isTomorrow() {
+  bool get isTomorrow {
     final yesterday = DateTime.now().add(const Duration(days: 1));
     return yesterday.day == day &&
         yesterday.month == month &&
         yesterday.year == year;
   }
 
-  bool inNextWeek() {
+  bool get inNextWeek {
     final weekAgo = DateTime.now().add(const Duration(days: 7));
     return isBefore(weekAgo) && isAfter(DateTime.now());
   }
 
-  bool inThisMonth() {
+  bool get inThisMonth {
     return month == DateTime.now().month;
   }
 
-  bool inThisYear() {
+  bool get inThisYear {
     return year == DateTime.now().year;
   }
 
-  bool inLastWeek() {
+  bool get inLastWeek {
     final weekAgo = DateTime.now().subtract(const Duration(days: 7));
     return isAfter(weekAgo);
   }
 
-  bool inLastYear() {
+  bool get inLastYear {
     final yearAgo = DateTime.now().subtract(const Duration(days: 365));
     return isAfter(yearAgo);
   }

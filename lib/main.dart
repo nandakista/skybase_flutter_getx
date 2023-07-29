@@ -3,15 +3,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:skybase/core/app/app_env.dart';
-import 'package:skybase/core/localization/app_translations.dart';
-import 'package:skybase/core/localization/locale_helper.dart';
-import 'package:skybase/core/themes/app_theme.dart';
-import 'package:skybase/core/themes/theme_manager.dart';
+import 'package:skybase/config/app/app_env.dart';
+import 'package:skybase/config/localization/app_translations.dart';
+import 'package:skybase/config/localization/locale_helper.dart';
+import 'package:skybase/config/themes/app_theme.dart';
+import 'package:skybase/config/themes/theme_manager.dart';
 import 'package:skybase/service_locator.dart';
 import 'package:skybase/ui/routes/app_routes.dart';
 
-import 'app_configuration.dart';
+import 'config/app/app_configuration.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

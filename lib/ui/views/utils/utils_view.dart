@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/app_configuration.dart';
-import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/core/themes/gradient_color.dart';
+import 'package:skybase/config/app/app_configuration.dart';
+import 'package:skybase/config/themes/app_style.dart';
+import 'package:skybase/config/themes/gradient_color.dart';
 import 'package:skybase/ui/views/utils/component/bottom_sheet_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/dialog_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/list_utils_view.dart';

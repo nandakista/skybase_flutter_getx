@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:skybase/core/helper/general_function.dart';
+import 'package:skybase/core/helper/media_helper.dart';
 
 class UiImagePicker extends StatelessWidget {
   final Function(File)? onSelected;
@@ -26,7 +26,7 @@ class UiImagePicker extends StatelessWidget {
       onTap: () async {
         await _pickImage(imageSource, (file) async {
           if (withCompression) {
-            file = await AppFunction.compressImage(
+            file = await MediaHelper.compressImage(
               file: file,
               limit: sizeLimit,
             );

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:skybase/core/extension/datetime_extension.dart';
-import 'package:skybase/core/localization/locale_helper.dart';
+import 'package:skybase/config/localization/locale_helper.dart';
 
 class DateTimeHelper {
   static String parseLocalDate({
@@ -20,20 +20,20 @@ class DateTimeHelper {
   }
 
   static String dateToSentence(DateTime date) {
-    if (date.inThisHours()) {
+    if (date.inThisHours) {
       int intDateTime = date.difference(DateTime.now()).inMinutes;
       if (intDateTime <= 0) {
         return 'txt_expired'.tr;
       } else {
         return '$intDateTime ${'txt_minutes'.tr}';
       }
-    } else if (date.isToday()) {
+    } else if (date.isToday) {
       return '${date.difference(DateTime.now()).inHours} ${'txt_hours'.tr}';
-    } else if (date.inNextWeek()) {
+    } else if (date.inNextWeek) {
       return '${date.difference(DateTime.now()).inDays + 1} ${'txt_days'.tr}';
     } else if (date.isBefore(DateTime.now())) {
       return 'txt_expired'.tr;
-    } else if (date.inThisYear()) {
+    } else if (date.inThisYear) {
       return parseLocalDate(date: date, format: 'dd MMM');
     } else {
       return parseLocalDate(date: date, format: 'dd/MM/y');
@@ -41,11 +41,11 @@ class DateTimeHelper {
   }
 
   static String dateToSentenceInDay({required DateTime date, String? format}) {
-    if (date.isToday()) {
+    if (date.isToday) {
       return 'txt_today'.tr;
-    } else if (date.isYesterday()) {
+    } else if (date.isYesterday) {
       return 'txt_yesterday'.tr;
-    } else if (date.isTomorrow()) {
+    } else if (date.isTomorrow) {
       return 'txt_tomorrow'.tr;
     } else {
       return parseLocalDate(date: date, format: format ?? 'dd MMM');

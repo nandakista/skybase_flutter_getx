@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/config/themes/app_colors.dart';
 
 class AppStyle {
   static TextStyle headline1 = const TextStyle(

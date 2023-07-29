@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:skybase/core/network/api_message.dart';
-import 'package:skybase/core/network/api_response.dart';
+import 'package:skybase/config/network/api_message.dart';
+import 'package:skybase/config/network/api_response.dart';
 
 /* Created by
    Varcant

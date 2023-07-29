@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/themes/theme_manager.dart';
+import 'package:skybase/config/themes/theme_manager.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 
 class ThemeComponentUtilsView extends StatelessWidget {

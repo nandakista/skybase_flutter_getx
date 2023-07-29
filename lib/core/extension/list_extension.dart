@@ -15,7 +15,7 @@ extension ListExtension<T> on List<T> {
 }
 
 extension ListNullExtension<T> on List<T>? {
-  bool isNullOrEmpty() {
+  bool get isNullOrEmpty {
     if (this == null) {
       return true;
     } else {
@@ -27,7 +27,7 @@ extension ListNullExtension<T> on List<T>? {
     }
   }
 
-  T? firstOrNull() {
+  T? get firstOrNull {
     if (this != null) {
       if (this!.isNotEmpty) {
         return this![0];

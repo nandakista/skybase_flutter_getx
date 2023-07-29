@@ -47,8 +47,8 @@ class GetStorageManager {
 
   logout() async {
     try {
-      await GetStorage(GetStorageKey.users).erase();
-      save(GetStorageKey.firstInstall, false);
+      await GetStorage(GetStorageKey.USERS).erase();
+      save(GetStorageKey.FIRST_INSTALL, false);
     } catch (e) {
       debugPrint(e.toString());
     }

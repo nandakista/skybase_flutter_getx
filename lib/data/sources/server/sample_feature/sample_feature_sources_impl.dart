@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
-import 'package:skybase/core/network/api_request.dart';
+import 'package:skybase/config/network/api_request.dart';
 import 'package:skybase/data/models/repo_model.dart';
 import 'package:skybase/data/models/sample_feature_model.dart';
-import 'package:skybase/data/sources/server/sample_feature/sample_feature_api.dart';
+import 'package:skybase/data/sources/server/sample_feature/sample_feature_sources.dart';
 import 'package:skybase/domain/entities/repo/repo.dart';
 import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 
-class SampleFeatureApiImpl extends SampleFeatureApi {
+class SampleFeatureSourcesImpl extends SampleFeatureSources {
   String tag = 'User Api';
 
   @override

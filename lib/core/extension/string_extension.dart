@@ -1,11 +1,11 @@
 extension StringExtension on String {
-  String capitalize() {
+  String get capitalize {
     return split(' ')
         .map((e) => '${e[0].toUpperCase()}${e.substring(1)}')
         .join(' ');
   }
 
-  String toSnakeCase() {
+  String get toSnakeCase {
     return replaceAll(' ', '_')
         .toLowerCase()
         .split(' ')
@@ -13,7 +13,7 @@ extension StringExtension on String {
         .join(' ');
   }
 
-  String snakeToNormalCase() {
+  String get snakeToNormalCase {
     return replaceAll('_', ' ')
         .toLowerCase()
         .split(' ')
@@ -21,7 +21,7 @@ extension StringExtension on String {
         .join(' ');
   }
 
-  String fixJsonString() {
+  String get fixJsonString {
     return replaceAll('{', '{"')
         .replaceAll(': ', '": "')
         .replaceAll(', ', '", "')
@@ -37,15 +37,15 @@ extension StringNullExtension on String? {
     return this;
   }
 
-  bool isZeroOrEmpty() {
+  bool get isZeroOrEmpty {
     return this == null || this == '0';
   }
 
-  bool isNullOrEmpty() {
+  bool get isNullOrEmpty {
     return this == null || this == '';
   }
 
-  bool isNotNullAndNotEmpty() {
+  bool get isNotNullAndNotEmpty {
     return this != null && this != '' && this != 'null';
   }
 }

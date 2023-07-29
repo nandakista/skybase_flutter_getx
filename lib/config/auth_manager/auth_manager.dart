@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
-import 'package:skybase/core/auth_manager/auth_state.dart';
-import 'package:skybase/core/themes/theme_manager.dart';
-import 'package:skybase/data/sources/server/auth/auth_api_impl.dart';
+import 'package:skybase/config/auth_manager/auth_state.dart';
+import 'package:skybase/config/themes/theme_manager.dart';
+import 'package:skybase/data/sources/server/auth/auth_sources_impl.dart';
 import 'package:skybase/data/models/user.dart';
 import 'package:skybase/domain/entities/user/user.dart';
 import 'package:skybase/ui/views/intro/intro_view.dart';
@@ -79,7 +79,7 @@ class AuthManager extends GetxService {
   /// Check if app is first time installed. It will navigate to Introduction Page
   void checkFirstInstall() async {
     final bool firstInstall =
-        getStorage.get(GetStorageKey.firstInstall) ?? true;
+        getStorage.get(GetStorageKey.FIRST_INSTALL) ?? true;
     if (firstInstall) {
       await secureStorage.setToken(value: '');
       authState.value = const AuthState(appStatus: AppType.FIRST_INSTALL);
@@ -91,7 +91,7 @@ class AuthManager extends GetxService {
   /// Checking App Theme set it before app display
   Future<void> checkAppTheme() async {
     final bool isDarkTheme =
-        await getStorage.getAwait(GetStorageKey.darkTheme) ?? false;
+        await getStorage.getAwait(GetStorageKey.DARK_THEME) ?? false;
     if (isDarkTheme) {
       themeManager.toDarkMode();
     } else {
@@ -102,9 +102,9 @@ class AuthManager extends GetxService {
   /// This function to used for checking is valid token to API Server use GET User Endpoint (token required).
   /// If response is Error it will passed to [logout] process.
   Future<void> checkUser() async {
-    AuthApiImpl authApi = AuthApiImpl();
+    AuthSourcesImpl authApi = AuthSourcesImpl();
     final String? token = await secureStorage.getToken();
-    User? user = getStorage.get(GetStorageKey.users);
+    User? user = getStorage.get(GetStorageKey.USERS);
 
     try {
       await authApi
@@ -139,7 +139,7 @@ class AuthManager extends GetxService {
   /// with [authChanged] function
   /// * No need to navigate manually (Get.to or Get.off).
   Future<void> login({
-    required UserModel user,
+    required User user,
     required String token,
     required String refreshToken,
   }) async {
@@ -148,11 +148,11 @@ class AuthManager extends GetxService {
   }
 
   Future<void> saveAuthData({
-    required UserModel user,
+    required User user,
     required String token,
     required String refreshToken,
   }) async {
-    getStorage.save(GetStorageKey.users, user.toJson());
+    getStorage.save(GetStorageKey.USERS, user.toModel().toJson());
     await secureStorage.setToken(value: token);
     await secureStorage.setRefreshToken(value: refreshToken);
   }
@@ -160,8 +160,8 @@ class AuthManager extends GetxService {
   /// Get User data from GetStorage
   /// * No need to decode or call fromJson again when you used this helper
   User? get user {
-    if (getStorage.has(GetStorageKey.users)) {
-      return UserModel.fromJson(getStorage.get(GetStorageKey.users));
+    if (getStorage.has(GetStorageKey.USERS)) {
+      return UserModel.fromJson(getStorage.get(GetStorageKey.USERS));
     } else {
       return null;
     }

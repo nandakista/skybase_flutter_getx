@@ -50,7 +50,7 @@ class MediaCarouselPreviewPage extends StatelessWidget {
                     enableInfiniteScroll: false,
                     height: double.infinity,
                   ),
-                  items: url.isNullOrEmpty()
+                  items: url.isNullOrEmpty
                       ? [
                           const SkyImage(
                             src: 'assets/images/img_empty.png',

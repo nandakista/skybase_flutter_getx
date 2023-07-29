@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
-import 'package:skybase/data/sources/server/auth/auth_api.dart';
+import 'package:skybase/domain/usecases/login.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 
 class LoginController extends GetxController {
-  final AuthApi dataSource;
-
-  LoginController({required this.dataSource});
+  final Login login;
+  LoginController({required this.login});
 
   final formKey = GlobalKey<FormState>();
   final phoneController = TextEditingController();
@@ -19,11 +18,11 @@ class LoginController extends GetxController {
 
   void hidePassword() => isHiddenPassword.toggle();
 
-  void login() async {
+  void onLogin() async {
     if (ValidatorHelper.validateForm(formKey)) {
       try {
         LoadingDialog.show();
-        await dataSource.login(
+        await login(
           phoneNumber: phoneController.text,
           email: emailController.text,
           password: passController.text,

@@ -14,7 +14,7 @@ extension IntNullExtension on double? {
     ).format(number);
   }
 
-  String toSoldFormat() {
+  String get toSoldFormat {
     if(this != null) {
       if(this!>1000) {
         return '${(this!/1000).toStringAsFixed(2)}K';

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/localization/locale_helper.dart';
-import 'package:skybase/core/themes/theme_manager.dart';
+import 'package:skybase/config/localization/locale_helper.dart';
+import 'package:skybase/config/themes/theme_manager.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';

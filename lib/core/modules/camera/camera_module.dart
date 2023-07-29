@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 import 'package:photo_manager/photo_manager.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
-import 'package:skybase/core/helper/general_function.dart';
 import 'package:skybase/core/helper/snackbar_helper.dart';
 import 'package:skybase/ui/widgets/circle_icon.dart';
 import 'package:skybase/ui/widgets/media/ui_image_picker.dart';
@@ -567,4 +566,39 @@ class _CameraModuleState extends State<CameraModule>
       debugPrint('Error: $code');
     }
   }
+}
+
+
+
+class BorderPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    double sh = size.height; // for convenient shortage
+    double sw = size.width; // for convenient shortage
+    double cornerSide = sh * 0.07; // desirable value for corners side
+
+    Paint paint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 2.5
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+
+    Path path = Path()
+      ..moveTo(cornerSide, 0)
+      ..quadraticBezierTo(0, 0, 0, cornerSide)
+      ..moveTo(0, sh - cornerSide)
+      ..quadraticBezierTo(0, sh, cornerSide, sh)
+      ..moveTo(sw - cornerSide, sh)
+      ..quadraticBezierTo(sw, sh, sw, sh - cornerSide)
+      ..moveTo(sw, cornerSide)
+      ..quadraticBezierTo(sw, 0, sw - cornerSide, 0);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(BorderPainter oldDelegate) => false;
+
+  @override
+  bool shouldRebuildSemantics(BorderPainter oldDelegate) => false;
 }

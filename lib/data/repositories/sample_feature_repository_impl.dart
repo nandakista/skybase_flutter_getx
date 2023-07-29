@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:skybase/data/sources/local/sample_feature/sample_feature_dao.dart';
-import 'package:skybase/data/sources/server/sample_feature/sample_feature_api.dart';
+import 'package:skybase/data/sources/server/sample_feature/sample_feature_sources.dart';
 import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 import 'package:skybase/domain/repositories/sample_feature_repository.dart';
 
 class SampleFeatureRepositoryImpl extends SampleFeatureRepository {
-  final SampleFeatureApi apiService;
+  final SampleFeatureSources apiService;
   final SampleFeatureDao dao;
   SampleFeatureRepositoryImpl({required this.apiService, required this.dao});
 

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/app/app_env.dart';
-import 'package:skybase/core/network/api_interceptor.dart';
+import 'package:skybase/config/app/app_env.dart';
+import 'package:skybase/config/network/api_interceptor.dart';
 
 /* Created by
    Varcant
