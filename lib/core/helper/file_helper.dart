@@ -61,18 +61,18 @@ class FileHelper {
 
   static List<String> get _defaultExtensions => [
     'pdf',
-    'png',
-    'jpeg',
-    'jpg',
-    'docx',
     'doc',
+    'docx',
+    "odt",
     'ppt',
     'pptx',
     'xls',
     'xlsx',
-    'mp4',
-    'mkv',
-    'mov',
+    "csv",
+    "psd",
+    "txt",
+    "zip",
+    "rar"
   ];
 
   static Future<void> viewDownloadedFile(String savePath) async {

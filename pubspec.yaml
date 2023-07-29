@@ -25,6 +25,8 @@ dependencies:
   image_picker: ^0.8.9
   file_picker: ^5.3.2
   flutter_image_compress: ^2.0.3
+  image: 4.0.17
+  path: ^1.8.3
 
   # Widget
   modal_bottom_sheet: ^3.0.0-pre

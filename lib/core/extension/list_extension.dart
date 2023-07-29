@@ -1,5 +1,5 @@
 extension ListNullExtension<T> on List<T>? {
-  bool isNullOrEmpty() {
+  bool get isNullOrEmpty {
     if (this == null) {
       return true;
     } else {

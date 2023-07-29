@@ -43,8 +43,6 @@ class ServiceLocator {
       await GetStorage(GetStorageKey.STORAGE_NAME).initStorage;
     }
     Get.putAsync(() async => const FlutterSecureStorage());
-
-    // Configuration
     Get.lazyPut(() => DioClient());
   }
 
@@ -52,7 +50,6 @@ class ServiceLocator {
     Get.lazyPut(() => GetStorageManager());
     Get.lazyPut(() => SecureStorageManager());
     Get.put(ThemeManager());
-
     Get.put(AuthManager());
   }
 }
