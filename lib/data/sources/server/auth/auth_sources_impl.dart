@@ -9,9 +9,9 @@ import 'package:skybase/config/network/api_response.dart';
 import 'package:skybase/data/models/repo/repo.dart';
 import 'package:skybase/data/models/user/user.dart';
 
-import 'auth_api.dart';
+import 'auth_sources.dart';
 
-class AuthApiImpl implements AuthApi {
+class AuthSourcesImpl implements AuthSources {
   String tag = 'Auth Api';
 
   @override

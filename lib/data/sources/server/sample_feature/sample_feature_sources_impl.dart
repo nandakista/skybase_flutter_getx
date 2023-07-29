@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:skybase/config/network/api_request.dart';
 import 'package:skybase/data/models/repo/repo.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
-import 'package:skybase/data/sources/server/sample_feature/sample_feature_api.dart';
+import 'package:skybase/data/sources/server/sample_feature/sample_feature_sources.dart';
 
-class SampleFeatureApiImpl extends SampleFeatureApi {
+class SampleFeatureSourcesImpl extends SampleFeatureSources {
   String tag = 'SampleFeatureApiImpl::->';
 
   @override
