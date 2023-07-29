@@ -1,5 +1,4 @@
 import 'package:skybase/data/models/repo_model.dart';
-import 'package:skybase/domain/entities/repo/repo.dart';
 import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 
 class SampleFeatureModel extends SampleFeature {
@@ -72,10 +71,11 @@ class SampleFeatureModel extends SampleFeature {
         'public_repos': repository,
         'followers': followers,
         'following': following,
-        'repository_list': repositoryList?.map((e) => e.toModel().toJson()),
-        'following_list': followingList?.map((e) => e.toModel().toJson()),
-        'followers_list': followersList?.map((e) => e.toModel().toJson()),
-        // 'token': token,
-        // 'refresh_token': refreshToken,
+        'repository_list': List<dynamic>.from(
+            repositoryList?.map((e) => e.toModel().toJson()) ?? []),
+        'following_list': List<dynamic>.from(
+            followingList?.map((e) => e.toModel().toJson()) ?? []),
+        'followers_list': List<dynamic>.from(
+            followersList?.map((e) => e.toModel().toJson()) ?? []),
       };
 }

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:skybase/core/helper/general_function.dart';
+import 'package:skybase/core/helper/media_helper.dart';
 
 class ImageSourceBottomSheet extends StatelessWidget {
   final double? maxHeight;
@@ -68,7 +68,7 @@ class ImageSourceBottomSheet extends StatelessWidget {
         if (null != onImageBytesSelected) {
           Uint8List imageBytes = await pickedFile.readAsBytes();
           if (withCompression) {
-            imageBytes = await AppFunction.compressBytes(imageBytes);
+            imageBytes = await MediaHelper.compressBytes(imageBytes);
           }
           onImageBytesSelected!(imageBytes);
         }
@@ -78,7 +78,7 @@ class ImageSourceBottomSheet extends StatelessWidget {
           // will instead point to a network resource.
           File imageFile = File(pickedFile.path);
           if (withCompression) {
-            imageFile = await AppFunction.compressImage(
+            imageFile = await MediaHelper.compressImage(
               file: imageFile,
               limit: sizeLimit,
             );

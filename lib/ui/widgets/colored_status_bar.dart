@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/config/themes/app_colors.dart';
 
 /* Created by
    Varcant
@@ -24,9 +24,9 @@ class ColoredStatusBar extends StatelessWidget {
 
   /// Icon Color in Status Bar.
   ///
-  /// Brightness.dark == Icon White.
+  /// Brightness.dark == Icon Black.
   ///
-  /// Brightness.light == Icon Black
+  /// Brightness.light == Icon White
   final Brightness brightness;
 
   /// Color of bottom bar (under navigation bar).

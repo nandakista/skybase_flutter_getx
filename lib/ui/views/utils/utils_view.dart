@@ -1,14 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/app_configuration.dart';
-import 'package:skybase/core/themes/app_style.dart';
-import 'package:skybase/core/themes/gradient_color.dart';
 import 'package:skybase/ui/views/utils/component/bottom_sheet_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/dialog_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/list_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/media_utils_view.dart';
-import 'package:skybase/ui/views/utils/component/settings_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/snackbar_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/theme_component_utils_view.dart';
 import 'package:skybase/ui/views/utils/component/timer/timer_utils_view.dart';
@@ -31,12 +27,6 @@ class UtilsView extends GetView<UtilsController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SkyButton(
-                text: 'Settings Utility',
-                icon: CupertinoIcons.settings,
-                outlineMode: true,
-                onPressed: () => Get.to(() => const SettingsUtilsView()),
-              ),
               const SizedBox(height: 12),
               SkyButton(
                 text: 'Media Utility',
@@ -90,14 +80,14 @@ class UtilsView extends GetView<UtilsController> {
               SkyButton(
                 text: 'Theme Component',
                 icon: CupertinoIcons.paintbrush,
-                gradient: GradientColor.gradientType2,
+                gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Color(0xff003EA1), Color(0xff9F0077)]
+                ),
                 onPressed: () => Get.to(() => const ThemeComponentUtilsView()),
               ),
               const SizedBox(height: 28),
-              Text(
-                '${'txt_version'.tr} ${AppConfiguration.appVersion}',
-                style: AppStyle.body1,
-              ),
             ],
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/config/themes/app_colors.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
 
 class SplashView extends StatelessWidget {

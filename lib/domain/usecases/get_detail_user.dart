@@ -3,9 +3,13 @@ import 'package:skybase/domain/repositories/sample_feature_repository.dart';
 
 class GetDetailUser {
   final SampleFeatureRepository repository;
+
   GetDetailUser({required this.repository});
 
-  Future<SampleFeature?> call({required SampleFeature user}) async {
-    return await repository.getDetailUser(user: user);
+  Future<SampleFeature> call({
+    required int id,
+    required String username,
+  }) async {
+    return await repository.getDetailUser(id: id, username: username);
   }
 }

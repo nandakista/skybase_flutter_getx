@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/themes/app_colors.dart';
-import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/config/themes/app_colors.dart';
+import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/widgets/base/base_appbar.dart';
 
 /* Created by
@@ -15,14 +15,14 @@ abstract class SkyAppBar {
     String? title,
     Color? backgroundColor,
     Color? iconColor,
-    List<Widget>? action,
+    List<Widget>? actions,
     bool? centerTitle = false,
     TextStyle? titleStyle,
   }) {
     return BaseAppBar(
       title: title,
-      action: action,
-      backgroundColor: backgroundColor ?? Theme.of(Get.context!).scaffoldBackgroundColor,
+      action: actions,
+      backgroundColor: backgroundColor ?? Get.theme.scaffoldBackgroundColor,
       titleStyle: titleStyle ?? AppStyle.subtitle4.copyWith(color: AppColors.primary),
       elevation: 0,
       centerTitle: centerTitle,
@@ -44,7 +44,7 @@ abstract class SkyAppBar {
       title: title,
       centerTitle: centerTitle ?? true,
       action: action,
-      backgroundColor: backgroundColor,
+      backgroundColor: AppColors.primary,
       titleStyle: TextStyle(color: textColor),
       iconColor: iconColor ?? Colors.white,
     );

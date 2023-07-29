@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:skybase/core/helper/media_helper.dart';
-import 'package:skybase/ui/widgets/media/preview/components/video_preview_display.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
@@ -45,11 +44,7 @@ class MediaPreviewPage extends StatelessWidget {
           ),
         );
       case MediaType.VIDEO:
-        return VideoPreviewDisplay(
-          url: mediaType.path,
-          height: double.infinity,
-          width: double.infinity,
-        );
+        return const Center(child: Text('Media Unsupported'));
       case MediaType.UNKNOWN:
         return const Center(child: Text('Media Unsupported'));
     }

@@ -69,7 +69,7 @@ class SkyImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (src.isNotNullAndNotEmpty()) {
+    if (src.isNotNullAndNotEmpty) {
       return BaseImage(
         src: src.toString(),
         width: width,
@@ -98,7 +98,6 @@ class SkyImage extends StatelessWidget {
             enablePreview: enablePreview,
             onTapImage: onTap,
             isAsset: isAsset,
-            color: color ?? Colors.grey,
             previewTitle: previewTitle,
             previewTitleStyle: previewTitleStyle,
             shapeImage: shapeImage,

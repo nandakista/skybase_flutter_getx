@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skybase/config/auth_manager/auth_manager.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
-import 'package:skybase/data/sources/server/auth/auth_api.dart';
+import 'package:skybase/domain/repositories/auth_repository.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 
 class LoginController extends GetxController {
-  final AuthApi dataSource;
+  final AuthRepository repository;
 
-  LoginController({required this.dataSource});
+  LoginController({required this.repository});
 
   final formKey = GlobalKey<FormState>();
   final phoneController = TextEditingController();
-  final passController = TextEditingController();
+  final passwordController = TextEditingController();
   final emailController = TextEditingController();
 
   RxBool isHiddenPassword = true.obs;
@@ -23,10 +24,10 @@ class LoginController extends GetxController {
     if (ValidatorHelper.validateForm(formKey)) {
       try {
         LoadingDialog.show();
-        await dataSource.login(
+        await repository.login(
           phoneNumber: phoneController.text,
           email: emailController.text,
-          password: passController.text,
+          password: passwordController.text,
         );
         LoadingDialog.dismiss();
         Get.offAllNamed(MainNavView.route);
@@ -38,8 +39,18 @@ class LoginController extends GetxController {
   }
 
   void bypassLogin() async {
-    Get.offNamed(MainNavView.route);
-    // await SecureStorageManager.find.setToken(value: 'dummy');
-    // AuthManager.find.setAuth();
+    LoadingDialog.show();
+    try {
+      final response = await repository.getProfile(username: 'nandakista');
+      LoadingDialog.dismiss();
+      AuthManager.find.login(
+        user: response,
+        token: 'dummy',
+        refreshToken: 'dummyRefresh',
+      );
+    } catch (e) {
+      LoadingDialog.dismiss();
+      DialogHelper.failed(message: e.toString());
+    }
   }
 }

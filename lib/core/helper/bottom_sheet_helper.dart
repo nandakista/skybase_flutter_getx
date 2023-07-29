@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:skybase/ui/widgets/content_wrapper.dart';
 
 class BottomSheetHelper {
   static basic({
@@ -23,10 +22,8 @@ class BottomSheetHelper {
         color: Theme.of(Get.context!).scaffoldBackgroundColor,
         child: ConstrainedBox(
           constraints: BoxConstraints(maxHeight: Get.height - 50),
-          child: ContentWrapper(
-            top: true,
-            bottom: true,
-            marginTop: 12,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
             child: child,
           ),
         ),
@@ -62,10 +59,8 @@ class BottomSheetHelper {
                 topRight: Radius.circular(24),
               ),
             ),
-            child: ContentWrapper(
-              top: true,
-              bottom: true,
-              marginTop: 12,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
               child: child,
             ),
           ),
@@ -88,10 +83,8 @@ class BottomSheetHelper {
       expand: expand,
       backgroundColor: backgroundColor,
       barrierColor: barrierColor ?? Colors.black54,
-      builder: (btmContext) => ContentWrapper(
-        top: true,
-        bottom: true,
-        marginTop: 12,
+      builder: (btmContext) => Padding(
+        padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
         child: child,
       ),
     );
@@ -136,9 +129,8 @@ class BottomSheetHelper {
                   ),
                 ),
               ),
-              ContentWrapper(
-                top: true,
-                bottom: true,
+              Padding(
+                padding: const EdgeInsets.all(24),
                 child: child,
               ),
             ],
@@ -170,10 +162,8 @@ class BottomSheetHelper {
         onWillPop: () async {
           return enableBack;
         },
-        child: ContentWrapper(
-          top: true,
-          bottom: true,
-          marginTop: 12,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
           child: child,
         ),
       ),

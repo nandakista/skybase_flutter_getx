@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 class IntroContent extends StatelessWidget {

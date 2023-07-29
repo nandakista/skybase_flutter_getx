@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
@@ -12,9 +12,9 @@ class FollowingTabView extends GetView<SampleFeatureDetailController> {
   Widget build(BuildContext context) {
     return ListView.separated(
       separatorBuilder: (context, _) => const Divider(),
-      itemCount: controller.user.value?.followingList?.length ?? 0,
+      itemCount: controller.dataObj.value?.followingList?.length ?? 0,
       itemBuilder: (_, index) {
-        final SampleFeature? user = controller.user.value?.followingList![index];
+        final SampleFeature? user = controller.dataObj.value?.followingList![index];
         return (user == null)
             ? const Center(
                 child: Text('User belum mem-follow siapapun'),

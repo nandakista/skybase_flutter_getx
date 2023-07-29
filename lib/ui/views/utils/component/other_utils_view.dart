@@ -7,9 +7,8 @@ import 'package:skybase/core/extension/int_extension.dart';
 import 'package:skybase/core/helper/input_formater.dart';
 import 'package:skybase/core/helper/snackbar_helper.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
-import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
-import 'package:skybase/ui/widgets/info_table.dart';
 import 'package:skybase/ui/widgets/keyboard_dismissible.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
@@ -54,15 +53,6 @@ class OtherUtilsView extends GetView<UtilsController> {
                 },
                 text: '${'txt_convert'.tr} String',
                 icon: CupertinoIcons.t_bubble,
-              ),
-              const SizedBox(height: 26),
-              Text('Info Table', style: AppStyle.subtitle4),
-              const InfoTable(
-                data: {
-                  'Name': 'Product A',
-                  'Weight': '300 gram',
-                  'Spec': 'Lorem ipsum sit dorom amet..'
-                },
               ),
               const SizedBox(height: 26),
               Text('Date', style: AppStyle.subtitle4),

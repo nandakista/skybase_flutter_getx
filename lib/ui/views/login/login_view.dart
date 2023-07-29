@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
-import 'package:skybase/core/themes/app_colors.dart';
-import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/config/themes/app_colors.dart';
+import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/login/login_controller.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
 import 'package:skybase/ui/widgets/keyboard_dismissible.dart';
@@ -75,7 +75,7 @@ class LoginView extends GetView<LoginController> {
                           () => SkyPasswordFormField(
                             label: 'txt_password'.tr,
                             hint: 'txt_password'.tr,
-                            controller: controller.passController,
+                            controller: controller.passwordController,
                             icon: Icons.lock,
                             hiddenText: controller.isHiddenPassword.value,
                             endIcon: IconButton(

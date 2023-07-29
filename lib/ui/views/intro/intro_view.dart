@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/themes/app_colors.dart';
+import 'package:skybase/config/themes/app_colors.dart';
 import 'package:skybase/ui/views/intro/intro_controller.dart';
 import 'package:skybase/ui/views/intro/intro_data.dart';
 import 'package:skybase/ui/views/intro/widgets/intro_indicator.dart';

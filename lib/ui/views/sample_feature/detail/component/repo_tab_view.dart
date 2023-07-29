@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/themes/app_colors.dart';
-import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/config/themes/app_colors.dart';
+import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/domain/entities/repo/repo.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
@@ -14,10 +14,10 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
     return Obx(
       () => ListView.separated(
         separatorBuilder: (context, _) => const Divider(),
-        itemCount: controller.user.value?.repositoryList?.length ?? 0,
+        itemCount: controller.dataObj.value?.repositoryList?.length ?? 0,
         padding: const EdgeInsets.only(top: 8),
         itemBuilder: (_, index) {
-          final Repo? repos = controller.user.value?.repositoryList![index];
+          final Repo? repos = controller.dataObj.value?.repositoryList![index];
           return (repos == null)
               ? const Center(
                   child: Text('User belum mem-follow siapapun'),

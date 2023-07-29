@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:skybase/core/themes/app_style.dart';
+import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/widgets/base/empty_view.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
 import 'package:skybase/ui/widgets/shimmer/shimmer_list.dart';
@@ -148,6 +148,7 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
             horizontalSpacing: horizontalSpacing ?? 24,
             verticalSpacing: verticalSpacing ?? 24,
             imageSize: imageSize,
+            physics: const NeverScrollableScrollPhysics(),
           ),
       firstPageErrorIndicatorBuilder: (ctx) =>
           errorView ??
