@@ -14,15 +14,15 @@ class ApiInterceptors extends ApiTokenManager
 
   @override
   Future<dynamic> onRequest(options, handler) async {
-    if(kDebugMode) {
+    if (kDebugMode) {
       debugPrint('');
       debugPrint('# REQUEST');
       debugPrint('--> ${options.method.toUpperCase()} - ${options.uri}');
       debugPrint('Headers: ${options.headers}');
       debugPrint('Query Params: ${options.queryParameters}');
       debugPrint('Body: ${options.data}');
-      if (options.contentType == 'multipart/form-data') {
-        debugPrint('Data: ${options.data.fields}');
+      if (options.data is FormData) {
+        debugPrint('Body: ${(options.data as FormData).fields}');
       }
       debugPrint('--> END ${options.method.toUpperCase()}');
     }
@@ -31,7 +31,7 @@ class ApiInterceptors extends ApiTokenManager
 
   @override
   Future<dynamic> onResponse(Response response, handler) async {
-    if(kDebugMode) {
+    if (kDebugMode) {
       debugPrint('');
       debugPrint('# RESPONSE');
       debugPrint('<-- ${(response.requestOptions.uri)}');
@@ -45,7 +45,7 @@ class ApiInterceptors extends ApiTokenManager
 
   @override
   Future<dynamic> onError(DioException err, handler) async {
-    if(kDebugMode) {
+    if (kDebugMode) {
       debugPrint('');
       debugPrint('# ERROR');
       debugPrint('<-- ${err.response?.requestOptions.baseUrl}');

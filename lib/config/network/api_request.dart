@@ -109,8 +109,9 @@ Object? _setBody({
     return body = jsonEncode(body);
   } else if (contentType == Headers.formUrlEncodedContentType) {
     return body;
-  } else if (contentType == 'multipart/form-data') {
-    return FormData.fromMap(body as Map<String, dynamic>);
+  } else if (contentType == Headers.multipartFormDataContentType) {
+    (body as Map<String, dynamic>).removeWhere((k, v) => v == null);
+    return FormData.fromMap(body);
   } else {
     return null;
   }

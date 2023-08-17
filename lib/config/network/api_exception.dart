@@ -76,9 +76,9 @@ class NetworkException implements Exception {
               break;
             case DioExceptionType.unknown:
               if (error.error is SocketException) {
-                networkExceptions = FetchDataException();
-              } else {
                 networkExceptions = SocketException();
+              } else {
+                networkExceptions = FetchDataException();
               }
               break;
             case DioExceptionType.receiveTimeout:

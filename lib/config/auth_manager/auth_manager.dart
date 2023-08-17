@@ -145,6 +145,10 @@ class AuthManager extends GetxService {
     await secureStorage.setRefreshToken(value: refreshToken);
   }
 
+  void saveUserData({required User user}) {
+    getStorage.save(GetStorageKey.USERS, user.toJson());
+  }
+
   /// Get User data from GetStorage
   /// * No need to decode or call fromJson again when you used this helper
   User? get user {
