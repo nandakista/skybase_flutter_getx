@@ -39,7 +39,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                     ? controller.currencyCtr.text =
                         0.currencyFormat(symbol: 'Rp')
                     : value,
-                validator: (value) => ValidatorHelper.generalField('$value'),
+                validator: (value) => ValidatorHelper.required('$value'),
                 inputFormatters: CustomInputFormatters.idrCurrency,
                 onFieldSubmitted: (value) => SnackBarHelper.normal(message: value),
               ),

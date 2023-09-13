@@ -16,6 +16,9 @@ const Map<String, String> en = {
   'txt_friday': 'Friday',
   'txt_saturday': 'Saturday',
 
+  'txt_field_cannot_be_empty': 'Field cannot be empty!',
+  'txt_cannot_be_empty': 'cannot be empty!',
+  'txt_is_not_valid': 'is not valid!',
   'txt_setting': 'Settings',
   'txt_language': 'Language',
   'txt_dark_mode': 'Dark Mode',

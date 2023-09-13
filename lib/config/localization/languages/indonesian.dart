@@ -17,6 +17,9 @@ const Map<String, String> id = {
   'txt_friday': 'Jumat',
   'txt_saturday': 'Sabtu',
 
+  'txt_field_cannot_be_empty': 'Kolom tidak boleh kosong!',
+  'txt_cannot_be_empty': 'tidak boleh kosong!',
+  'txt_is_not_valid': 'tidak valid!',
   'txt_setting': 'Pengaturan',
   'txt_language': 'Bahasa',
   'txt_dark_mode': 'Mode Gelap',

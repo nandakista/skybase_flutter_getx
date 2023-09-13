@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-// import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
-import 'package:skybase/config/network/api_config.dart';
-import 'package:skybase/config/network/api_exception.dart';
+import 'package:flutter/material.dart';
 import 'package:skybase/dev/dev_token.dart';
+
+import 'api_config.dart';
+import 'api_exception.dart';
 
 /* Created by
    Varcant
@@ -132,9 +133,11 @@ Future<Response> _safeFetch(Future<Response> Function() tryFetch) async {
     final response = await tryFetch();
     // return ApiResponse.fromJson(response.data);
     return response;
-  } on DioException catch (e) {
+  } on DioException catch (e, stackTrace) {
+    debugPrint('Api Request -> $e, $stackTrace');
     throw NetworkException.getErrorException(e);
-  } catch (e) {
+  } catch (e, stackTrace) {
+    debugPrint('Api Request -> $e, $stackTrace');
     rethrow;
   }
 }

@@ -1,4 +1,4 @@
-import 'package:skybase/config/app/app_configuration.dart';
+import 'package:skybase/app_configuration.dart';
 import 'package:skybase/config/network/api_token_manager.dart';
 
 /* Created by
