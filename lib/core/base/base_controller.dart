@@ -15,6 +15,9 @@ abstract class BaseController<T> extends GetxController {
   RxBool loadingStatus = false.obs;
   RxString errorMessage = ''.obs;
 
+  int perPage = 30;
+  int page = 1;
+
   final dataObj = Rxn<T>();
   RxList<T> dataList = RxList<T>([]);
 
@@ -33,10 +36,27 @@ abstract class BaseController<T> extends GetxController {
 
   String get cachedKey;
 
-  void onRefresh() async {
+  /// **NOTE:**
+  /// call this [refreshPage] instead of [onRefresh] when you need to dispose anything
+  void refreshPage() {}
+
+  Future<void> onRefresh() async {
+    try {
+      await storage.delete(cachedKey);
+      _resetData();
+      refreshPage();
+    } on UnimplementedError {
+      debugPrint('BaseController::--> Cached Data not active');
+      _resetData();
+      refreshPage();
+    } catch (e) {
+      debugPrint('BaseController::--> Error $e');
+    }
+  }
+
+  void _resetData() {
     dataObj.value = null;
     dataList.clear();
-    await storage.delete(cachedKey);
   }
 
   void showLoading() {
@@ -48,6 +68,7 @@ abstract class BaseController<T> extends GetxController {
 
   void showError(String message) {
     errorMessage.value = message;
+    dismissLoading();
   }
 
   void loadData(Function() onLoad) {
@@ -59,6 +80,7 @@ abstract class BaseController<T> extends GetxController {
   /// before you call method [saveCacheAndFinish]
   Future<void> getCache(Function() onLoad) async {
     var cache = storage.get(cachedKey);
+    onLoad();
     if (storage.has(cachedKey) && cache.toString().isNotEmpty) {
       if (cache is String) {
         dataList.value = List<T>.from(
@@ -66,15 +88,13 @@ abstract class BaseController<T> extends GetxController {
             (x) => CachedModelConverter<T>().fromJson(x),
           ),
         );
+        dismissLoading();
       } else {
         if (cachedId == getId(cache)) {
           dataObj.value = CachedModelConverter<T>().fromJson(cache);
-        } else {
-          onLoad();
+          dismissLoading();
         }
       }
-    } else {
-      onLoad();
     }
   }
 
@@ -112,6 +132,7 @@ abstract class BaseController<T> extends GetxController {
   }) {
     if (data != null) dataObj.value = data;
     if (list.isNotEmpty) dataList.value = list;
+    dismissLoading();
   }
 
   /// **NOTE:**

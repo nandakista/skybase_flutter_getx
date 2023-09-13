@@ -14,9 +14,9 @@ class ProfileRepositoryController extends BaseController<Repo> {
   }
 
   @override
-  void onRefresh() {
+  void refreshPage() {
     getRepository();
-    super.onRefresh();
+    super.refreshPage();
   }
 
   @override

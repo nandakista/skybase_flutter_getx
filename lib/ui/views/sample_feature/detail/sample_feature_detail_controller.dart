@@ -34,7 +34,7 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
   }
 
   @override
-  void onRefresh() {
+  void refreshPage() {
     getDetailUser();
     super.onRefresh();
   }

@@ -12,7 +12,7 @@ class ProfileController extends BaseController<User> {
 
   @override
   void onInit() {
-    getCache(() => getProfile());
+    getCache(() => onGetProfile());
     super.onInit();
   }
 
@@ -23,13 +23,13 @@ class ProfileController extends BaseController<User> {
   String get cachedKey => CachedKey.PROFILE;
 
   @override
-  void onRefresh() {
-    getProfile();
+  void refreshPage() {
+    onGetProfile();
     Get.find<ProfileRepositoryController>().onRefresh();
-    super.onRefresh();
+    super.refreshPage();
   }
 
-  void getProfile() async {
+  void onGetProfile() async {
     showLoading();
     try {
       final response = await repository.getProfile(username: 'nandakista');
