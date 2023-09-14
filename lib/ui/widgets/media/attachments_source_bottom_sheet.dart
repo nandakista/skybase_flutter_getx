@@ -83,7 +83,7 @@ class AttachmentsSourceBottomSheet extends StatelessWidget {
     if (source == ImageSource.camera) {
       final permission = await Permission.camera.request();
       if (permission.isPermanentlyDenied) {
-        PermissionHelper.showOpenSettings('txt_need_permission_camera'.tr);
+        PermissionHelper.openSettings('txt_need_permission_camera'.tr);
       } else if (permission.isGranted) {
         _pickSingleImage(ImageSource.camera);
       }
@@ -104,8 +104,7 @@ class AttachmentsSourceBottomSheet extends StatelessWidget {
     if (Platform.isIOS) {
       permission = await Permission.photos.request();
       if (permission.isPermanentlyDenied) {
-        PermissionHelper.showOpenSettings(
-            'txt_need_permission_gallery_photo'.tr);
+        PermissionHelper.openSettings('txt_need_permission_gallery_photo'.tr);
         return false;
       }
       return true;
@@ -115,15 +114,31 @@ class AttachmentsSourceBottomSheet extends StatelessWidget {
       if (androidInfo.version.sdkInt < 33) {
         permission = await Permission.storage.request();
         if (permission.isPermanentlyDenied) {
-          PermissionHelper.showOpenSettings(
-              'txt_need_permission_gallery_photo'.tr);
+          PermissionHelper.openSettings('txt_need_permission_gallery_photo'.tr);
           return false;
         } else if (permission.isGranted) {
           return true;
+        } else if (permission.isDenied) {
+          PermissionHelper.error('txt_need_permission_storage'.tr);
+          return false;
+        }
+        return false;
+      } else {
+        Map<Permission, PermissionStatus> statuses = await [
+          Permission.photos,
+          Permission.videos,
+        ].request();
+        if (statuses.values.contains(PermissionStatus.permanentlyDenied)) {
+          PermissionHelper.openSettings("txt_need_permission_storage".tr);
+          return false;
+        } else if (statuses.values.every((e) => e.isGranted)) {
+          return true;
+        } else if (statuses.values.contains(PermissionStatus.denied)) {
+          PermissionHelper.error('txt_need_permission_storage'.tr);
+          return false;
         }
         return false;
       }
-      return true;
     }
   }
 
