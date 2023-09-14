@@ -11,10 +11,10 @@ import 'package:skybase/ui/widgets/sky_dialog.dart';
    nanda.kista@gmail.com
 */
 class LocaleHelper {
-  final List<Map<String, dynamic>> locales = [
-    {'name': 'English', 'locale': const Locale('en')},
-    {'name': 'Indonesia', 'locale': const Locale('id')}
-  ];
+  final Map<String, Locale> locales = {
+    'English': const Locale('en'),
+    'Indonesia': const Locale('id'),
+  };
 
   final fallbackLocale = const Locale('en');
 
@@ -50,13 +50,14 @@ class LocaleHelper {
                     const Divider(thickness: 1.5),
                 itemBuilder: (context, index) => InkWell(
                   onTap: () {
-                    updateLocale(context, locales[index]['locale'],
-                        locales[index]['name'].toString());
+                    final locale = locales.entries.toList()[index].value;
+                    updateLocale(locale);
+                    Get.back();
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: Text(
-                      locales[index]['name'].toString(),
+                      locales.entries.toList()[index].key,
                       style: AppStyle.body1,
                     ),
                   ),
@@ -69,24 +70,19 @@ class LocaleHelper {
     );
   }
 
-  void updateLocale(BuildContext context, Locale locale, String name) {
-    saveLocaleToCache(name);
-    Navigator.of(context).pop();
+  void updateLocale(Locale locale) {
+    GetStorageManager.find.save(
+      GetStorageKey.CURRENT_LOCALE,
+      locale.languageCode,
+    );
     Get.updateLocale(locale);
   }
 
-  void saveLocaleToCache(String name) {
-    if (name == "English") {
-      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "en");
-    } else {
-      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "in");
-    }
-  }
-
   Locale getCurrentLocale() {
-    var currentLocale = GetStorageManager.find.get(GetStorageKey.CURRENT_LOCALE);
-    if (currentLocale != null) {
-      if (currentLocale == "en") {
+    String? currentLanguageCode =
+        GetStorageManager.find.get(GetStorageKey.CURRENT_LOCALE);
+    if (currentLanguageCode != null) {
+      if (currentLanguageCode == 'en') {
         return const Locale('en');
       } else {
         return const Locale('id');
