@@ -61,18 +61,18 @@ class AttachmentsSourceBottomSheet extends StatelessWidget {
       children: <Widget>[
         ListTile(
           leading: cameraIcon,
-          title: cameraLabel ?? const Text('Kamera'),
+          title: cameraLabel ?? Text('txt_camera'.tr),
           onTap: () => _onPickImage(ImageSource.camera),
         ),
         ListTile(
           leading: galleryIcon,
-          title: galleryLabel ?? const Text('Galeri'),
+          title: galleryLabel ?? Text('txt_gallery'.tr),
           onTap: () => _onPickImage(ImageSource.gallery),
         ),
         if (enabledFileSource)
           ListTile(
             leading: fileIcon,
-            title: fileLabel ?? const Text('Dokumen'),
+            title: fileLabel ?? Text('txt_document'.tr),
             onTap: () => _onPickFile(),
           ),
       ],
@@ -83,7 +83,7 @@ class AttachmentsSourceBottomSheet extends StatelessWidget {
     if (source == ImageSource.camera) {
       final permission = await Permission.camera.request();
       if (permission.isPermanentlyDenied) {
-        PermissionHelper.showOpenSettings('Izinkan aplikasi mengakses kamera');
+        PermissionHelper.showOpenSettings('txt_need_permission_camera'.tr);
       } else if (permission.isGranted) {
         _pickSingleImage(ImageSource.camera);
       }
@@ -105,7 +105,7 @@ class AttachmentsSourceBottomSheet extends StatelessWidget {
       permission = await Permission.photos.request();
       if (permission.isPermanentlyDenied) {
         PermissionHelper.showOpenSettings(
-            'Izinkan aplikasi untuk mengakses Galeri dan Foto');
+            'txt_need_permission_gallery_photo'.tr);
         return false;
       }
       return true;
@@ -116,7 +116,7 @@ class AttachmentsSourceBottomSheet extends StatelessWidget {
         permission = await Permission.storage.request();
         if (permission.isPermanentlyDenied) {
           PermissionHelper.showOpenSettings(
-              'Izinkan aplikasi untuk mengakses Galeri dan Foto');
+              'txt_need_permission_gallery_photo'.tr);
           return false;
         } else if (permission.isGranted) {
           return true;
