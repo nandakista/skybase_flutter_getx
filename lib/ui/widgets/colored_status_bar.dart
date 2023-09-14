@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:skybase/config/themes/app_colors.dart';
@@ -24,9 +22,9 @@ class ColoredStatusBar extends StatelessWidget {
 
   /// Icon Color in Status Bar.
   ///
-  /// Brightness.dark == Icon Black.
+  /// Brightness.dark == Icon White.
   ///
-  /// Brightness.light == Icon White
+  /// Brightness.light == Icon Black
   final Brightness brightness;
 
   /// Color of bottom bar (under navigation bar).
@@ -36,23 +34,16 @@ class ColoredStatusBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Brightness iconBrightness;
-    if (Platform.isIOS) {
-      (brightness == Brightness.dark)
-          ? iconBrightness = Brightness.light
-          : iconBrightness = Brightness.dark;
-    } else {
-      iconBrightness = brightness;
-    }
-    const defaultColor = AppColors.primary;
+    final androidIconBrightness =
+        brightness == Brightness.dark ? Brightness.light : Brightness.dark;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
-        statusBarColor: color ?? defaultColor,
-        statusBarIconBrightness: iconBrightness,
-        statusBarBrightness: iconBrightness,
+        statusBarColor: color,
+        statusBarIconBrightness: androidIconBrightness,
+        statusBarBrightness: brightness,
       ),
       child: Container(
-        color: color ?? defaultColor,
+        color: color,
         child: SafeArea(
           left: false,
           right: false,

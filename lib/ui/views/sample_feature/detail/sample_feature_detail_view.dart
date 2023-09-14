@@ -16,29 +16,26 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredStatusBar(
-      brightness: Brightness.light,
-      child: Scaffold(
-        appBar: SkyAppBar.primary(title: controller.dataObj.value?.username),
-        body: SafeArea(
-          child: Obx(
-            () => SkyView.page(
-              loadingEnabled: controller.isLoading,
-              errorEnabled: controller.isError,
-              emptyEnabled: controller.isEmpty,
-              loadingView: const ShimmerDetail(),
-              errorTitle: controller.errorMessage.value,
-              onRefresh: () => controller.onRefresh(),
-              onRetry: () => controller.onRefresh(),
-              child: const SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                child: Column(
-                  children: [
-                    SampleFeatureDetailHeader(),
-                    SampleFeatureDetailInfo(),
-                    SampleFeatureDetailTab(),
-                  ],
-                ),
+    return Scaffold(
+      appBar: SkyAppBar.primary(title: controller.dataObj.value?.username),
+      body: SafeArea(
+        child: Obx(
+          () => SkyView.page(
+            loadingEnabled: controller.isLoading,
+            errorEnabled: controller.isError,
+            emptyEnabled: controller.isEmpty,
+            loadingView: const ShimmerDetail(),
+            errorTitle: controller.errorMessage.value,
+            onRefresh: () => controller.onRefresh(),
+            onRetry: () => controller.onRefresh(),
+            child: const SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              child: Column(
+                children: [
+                  SampleFeatureDetailHeader(),
+                  SampleFeatureDetailInfo(),
+                  SampleFeatureDetailTab(),
+                ],
               ),
             ),
           ),

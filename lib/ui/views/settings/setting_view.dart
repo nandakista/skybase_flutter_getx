@@ -18,7 +18,7 @@ class SettingView extends GetView<SettingController> {
   @override
   Widget build(BuildContext context) {
     return ColoredStatusBar(
-      brightness: Brightness.light,
+      brightness: Brightness.dark,
       child: Scaffold(
         appBar: SkyAppBar.secondary(title: 'txt_setting'.tr),
         bottomNavigationBar: Padding(
