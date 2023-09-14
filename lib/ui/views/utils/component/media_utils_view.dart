@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/bottom_sheet_helper.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
-import 'package:skybase/ui/widgets/media/image_source_bottom_sheet.dart';
+import 'package:skybase/ui/widgets/media/attachments_source_bottom_sheet.dart';
 import 'package:skybase/ui/widgets/media/media_items.dart';
 import 'package:skybase/ui/widgets/media/ui_image_picker.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
@@ -102,11 +104,13 @@ class MediaUtilsView extends GetView<UtilsController> {
         text: 'Image BottomSheet',
         onPressed: () {
           BottomSheetHelper.material(
-            child: ImageSourceBottomSheet(
-              onImageSelected: (image) {
-                controller.imageFile.value = image;
+            child: AttachmentsSourceBottomSheet(
+              enabledFileSource: false,
+              onAttachmentsSelected: (file) {
+                controller.imageFile.value = file;
                 Get.back();
               },
+              onMultipleAttachmentsSelected: (List<File> files) {},
             ),
           );
         },
