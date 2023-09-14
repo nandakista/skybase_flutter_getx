@@ -23,12 +23,10 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                   child: Text('User belum mem-follow siapapun'),
                 )
               : ListTile(
-                  leading: CircleAvatar(
-                    radius: 30,
-                    child: SkyImage(
-                      src: '${repos.owner.avatarUrl}&s=200',
-                      borderRadius: BorderRadius.circular(90),
-                    ),
+                  leading: SkyImage(
+                    size: 30,
+                    shapeImage: ShapeImage.circle,
+                    src: '${repos.owner.avatarUrl}&s=200',
                   ),
                   title: Text(repos.name.toString(), style: AppStyle.body2),
                   subtitle: Column(

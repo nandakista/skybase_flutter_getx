@@ -18,6 +18,7 @@ class SkyImage extends StatelessWidget {
   final String? src;
   final double? width;
   final double? height;
+  final double? size;
   final VoidCallback? onTap;
   final BorderRadiusGeometry? borderRadius;
   final BoxFit fit;
@@ -65,6 +66,7 @@ class SkyImage extends StatelessWidget {
     this.loadingWidget,
     this.shapeImage = ShapeImage.react,
     this.alignment = Alignment.center,
+    this.size,
   }) : super(key: key);
 
   @override
@@ -86,6 +88,7 @@ class SkyImage extends StatelessWidget {
         loadingWidget: loadingWidget,
         shapeImage: shapeImage,
         alignment: alignment,
+        size: size,
       );
     } else {
       return placeholderWidget ??
@@ -102,6 +105,7 @@ class SkyImage extends StatelessWidget {
             previewTitleStyle: previewTitleStyle,
             shapeImage: shapeImage,
             alignment: alignment,
+            size: size,
           );
     }
   }
@@ -111,6 +115,7 @@ class BaseImage extends StatelessWidget {
   final String src;
   final double? width;
   final double? height;
+  final double? size;
   final VoidCallback? onTapImage;
   final BorderRadiusGeometry? borderRadius;
   final BoxFit fit;
@@ -141,14 +146,15 @@ class BaseImage extends StatelessWidget {
     this.loadingWidget,
     this.shapeImage = ShapeImage.react,
     this.alignment = Alignment.center,
+    this.size,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (shapeImage == ShapeImage.circle) {
       assert(
-        height != null && width != null,
-        "Height and Width cannot be null if shapeImage is ShapeImage.circle, ",
+        size != null,
+        "Size cannot be null if shapeImage is ShapeImage.circle, ",
       );
     }
 
@@ -170,9 +176,12 @@ class BaseImage extends StatelessWidget {
   Widget _determineShapeImage() {
     switch (shapeImage) {
       case ShapeImage.circle:
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(height! / 2),
-          child: _determineImageWidget(),
+        return CircleAvatar(
+          radius: size,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(size!),
+            child: _determineImageWidget(),
+          ),
         );
       case ShapeImage.oval:
         return ClipOval(child: _determineImageWidget());

@@ -28,12 +28,10 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
             final item = controller.dataList[index];
             return ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: CircleAvatar(
-                radius: 30,
-                child: SkyImage(
-                  src: '${item.owner.avatarUrl}&s=200',
-                  borderRadius: BorderRadius.circular(90),
-                ),
+              leading: SkyImage(
+                shapeImage: ShapeImage.circle,
+                size: 30,
+                src: '${item.owner.avatarUrl}&s=200',
               ),
               title: Text(item.name.toString(), style: AppStyle.body2),
               subtitle: Column(

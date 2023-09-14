@@ -45,8 +45,8 @@ class ProfileView extends GetView<ProfileController> {
               children: [
                 SkyImage(
                   shapeImage: ShapeImage.circle,
+                  size: 40,
                   src: '${controller.dataObj.value?.avatarUrl}&s=200',
-                  borderRadius: BorderRadius.circular(90),
                 ),
                 const SizedBox(height: 12),
                 Text(

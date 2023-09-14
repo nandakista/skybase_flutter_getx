@@ -28,12 +28,10 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
               id: item.id,
               username: item.username,
             ),
-            leading: CircleAvatar(
-              radius: 30,
-              child: SkyImage(
-                src: '${item.avatarUrl}&s=200',
-                borderRadius: BorderRadius.circular(30),
-              ),
+            leading: SkyImage(
+              shapeImage: ShapeImage.circle,
+              size: 30,
+              src: '${item.avatarUrl}&s=200',
             ),
             title: Text(item.username.toString()),
             subtitle: Text(
