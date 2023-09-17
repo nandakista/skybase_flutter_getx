@@ -59,6 +59,7 @@ class ErrorView extends StatelessWidget {
             textAlign: TextAlign.center,
             style: titleStyle ?? Theme.of(context).textTheme.titleLarge,
           ),
+          const SizedBox(height: 8),
           Text(
             errorSubtitle ?? 'txt_tap_retry'.tr,
             textAlign: TextAlign.center,

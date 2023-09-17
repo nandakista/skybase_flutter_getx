@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:skybase/ui/widgets/base/error_view.dart';
-import 'package:skybase/ui/widgets/base/empty_view.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
+
+import 'empty_view.dart';
+import 'error_view.dart';
 
 /* Created by
    Varcant
@@ -76,6 +77,8 @@ class BaseView extends StatelessWidget {
 
   final Widget? errorView;
 
+  final bool emptyRetryEnabled;
+
   const BaseView({
     Key? key,
     required this.loadingEnabled,
@@ -83,6 +86,7 @@ class BaseView extends StatelessWidget {
     required this.emptyEnabled,
     required this.onRetry,
     required this.child,
+    this.emptyRetryEnabled = false,
     this.emptyImage,
     this.emptyTitle,
     this.emptySubtitle,
@@ -109,18 +113,18 @@ class BaseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget body = Stack(
-      children: [
-        if (!loadingEnabled && !emptyEnabled & !errorEnabled)
-          getBodyView(context),
-        if (visibleOnError && errorEnabled && !emptyEnabled && !loadingEnabled)
-          getErrorView(context),
-        if (visibleOnEmpty && emptyEnabled && !errorEnabled && !loadingEnabled)
-          getEmptyView(context),
-        if (loadingEnabled)
-          getLoadingView(loadingView ?? const PlatformLoadingIndicator()),
-      ],
-    );
+    Widget body;
+    if (loadingEnabled) {
+      body = loadingView ?? const PlatformLoadingIndicator();
+    } else if (visibleOnError && errorEnabled) {
+      body = getErrorView(context);
+    } else if (visibleOnEmpty && emptyEnabled) {
+      body = getEmptyView(context);
+    } else if (!loadingEnabled && !emptyEnabled && !errorEnabled) {
+      body = getBodyView(context);
+    } else {
+      body = const SizedBox.shrink();
+    }
 
     if (onRefresh != null) {
       return RefreshIndicator(
@@ -168,6 +172,7 @@ class BaseView extends StatelessWidget {
           retryWidget: retryWidget,
           onRetry: onRetry,
           retryText: retryText,
+          emptyRetryEnabled: emptyRetryEnabled,
         );
   }
 

@@ -22,6 +22,7 @@ class EmptyView extends StatelessWidget {
     this.retryText,
     this.onRetry,
     this.retryWidget,
+    this.emptyRetryEnabled = false,
   }) : super(key: key);
 
   final Widget? emptyImageWidget;
@@ -37,6 +38,7 @@ class EmptyView extends StatelessWidget {
   final String? retryText;
   final VoidCallback? onRetry;
   final Widget? retryWidget;
+  final bool emptyRetryEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -70,14 +72,15 @@ class EmptyView extends StatelessWidget {
               ),
             ),
             SizedBox(height: verticalSpacing),
-            retryWidget ??
-                SkyButton(
-                  wrapContent: true,
-                  height: 50,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  text: retryText ?? 'txt_reload'.tr,
-                  onPressed: onRetry,
-                ),
+            if (emptyRetryEnabled && onRetry != null)
+              retryWidget ??
+                  SkyButton(
+                    wrapContent: true,
+                    height: 50,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    text: retryText ?? 'txt_reload'.tr,
+                    onPressed: onRetry,
+                  )
           ],
         ),
       ),

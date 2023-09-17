@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/snackbar_helper.dart';
-import 'package:skybase/core/modules/timer/timer_const.dart';
-import 'package:skybase/core/helper/timer_helper.dart';
+import 'package:skybase/core/modules/timer/timer_tag.dart';
+import 'package:skybase/core/modules/timer/timer_helper.dart';
 import 'package:skybase/core/modules/timer/timer_module.dart';
 
 class TimerUtilsController extends GetxController {

@@ -39,6 +39,10 @@ class MediaHelper {
     "rar"
   ];
 
+  static String generateAvatarByName(String name) {
+    return 'https://ui-avatars.com/api/?size=256&name=$name';
+  }
+
   static MediaInfo getMediaType(String path) {
     final extension = path.startsWith('http')
         ? p.extension(path).replaceFirst(".", "").split("?").first
