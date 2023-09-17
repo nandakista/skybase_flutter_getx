@@ -8,14 +8,14 @@ import 'package:skybase/ui/widgets/sky_image.dart';
    nanda.kista@gmail.com
 */
 class MediaPreviewPage extends StatelessWidget {
-  final String url;
+  final String src;
   final bool isAsset;
   final String? title;
   final TextStyle? titleStyle;
 
   const MediaPreviewPage({
     Key? key,
-    required this.url,
+    required this.src,
     this.isAsset = true,
     this.title,
     this.titleStyle,
@@ -28,7 +28,7 @@ class MediaPreviewPage extends StatelessWidget {
           title: title ?? 'Media Preview',
           titleStyle: titleStyle,
         ),
-        body: _determineMedia(url));
+        body: _determineMedia(src));
   }
 
   Widget _determineMedia(String path) {
