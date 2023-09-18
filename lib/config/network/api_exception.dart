@@ -23,7 +23,7 @@ class NetworkException implements Exception {
     String result = '';
     if (response?.statusCode == 400 || response?.statusCode == 401) {
       ApiResponse res = ApiResponse.fromJson(response?.data);
-      result = ApiMessage.message(res.error.toString());
+      result = ApiMessage.message(res.error ?? res.message);
     } else {
       result += (prefix != null) ? '$prefix, $message' : '$message';
     }

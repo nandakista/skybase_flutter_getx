@@ -16,6 +16,9 @@ const Map<String, String> en = {
   'txt_friday': 'Friday',
   'txt_saturday': 'Saturday',
 
+  'txt_field_cannot_be_empty': 'Field cannot be empty!',
+  'txt_cannot_be_empty': 'cannot be empty!',
+  'txt_is_not_valid': 'is not valid!',
   'txt_setting': 'Settings',
   'txt_language': 'Language',
   'txt_dark_mode': 'Dark Mode',
@@ -44,6 +47,7 @@ const Map<String, String> en = {
   'txt_logout': 'Log out',
   'txt_camera': 'Camera',
   'txt_gallery': 'Gallery',
+  'txt_document': 'Document',
   'txt_done': 'Done',
   'txt_failed': 'Failed',
   'txt_success': 'Success',
@@ -101,5 +105,10 @@ const Map<String, String> en = {
   'txt_empty_list_title': 'Your data is empty!',
   'txt_empty_list_subtitle': 'Sorry, data is empty. Maybe go back latter',
 
-  'txt_need_permission_storage': '',
+  // Permission
+  'txt_permission_warning': 'Need Permission',
+  'txt_need_permission_storage': 'This app need your storage permission',
+  'txt_need_permission_camera': 'This app need your camera permission',
+  'txt_need_permission_gallery_photo':
+      'This app need your gallery and photo permission',
 };

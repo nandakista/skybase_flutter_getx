@@ -17,6 +17,9 @@ const Map<String, String> id = {
   'txt_friday': 'Jumat',
   'txt_saturday': 'Sabtu',
 
+  'txt_field_cannot_be_empty': 'Kolom tidak boleh kosong!',
+  'txt_cannot_be_empty': 'tidak boleh kosong!',
+  'txt_is_not_valid': 'tidak valid!',
   'txt_setting': 'Pengaturan',
   'txt_language': 'Bahasa',
   'txt_dark_mode': 'Mode Gelap',
@@ -46,6 +49,7 @@ const Map<String, String> id = {
   'txt_logout': 'Keluar',
   'txt_camera': 'Kamera',
   'txt_gallery': 'Galeri',
+  'txt_document': 'Document',
   'txt_failed': 'Gagal',
   'txt_success': 'Berhasil',
   'txt_warning': 'Peringatan',
@@ -101,4 +105,11 @@ const Map<String, String> id = {
   'txt_max_item': 'Semua item telah dimuat',
   'txt_empty_list_title': 'Data masih kosong !',
   'txt_empty_list_subtitle': 'Maaf tidak ada data yang dapat ditampilkan',
+
+  // Permission
+  'txt_permission_warning': 'Izin diperlukan',
+  'txt_need_permission_storage': 'Izinkan aplikasi mengakses penyimpanan',
+  'txt_need_permission_camera': 'Izinkan aplikasi mengakses kamera',
+  'txt_need_permission_gallery_photo':
+      'Izinkan aplikasi mengakses galeri dan foto',
 };

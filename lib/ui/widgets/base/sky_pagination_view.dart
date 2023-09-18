@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:skybase/config/themes/app_style.dart';
-import 'package:skybase/ui/widgets/base/empty_view.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
-import 'package:skybase/ui/widgets/shimmer/shimmer_list.dart';
 
+import 'empty_view.dart';
 import 'error_view.dart';
 
 /* Created by
@@ -26,7 +25,7 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
     Key? key,
     required this.pagingController,
     required this.itemBuilder,
-    required this.onRefresh,
+    this.onRefresh,
     this.loadingView,
     this.emptyView,
     this.errorView,
@@ -50,12 +49,23 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
     this.emptyImageWidget,
     this.emptyTitleStyle,
     this.emptySubtitleStyle,
+    this.shrinkWrap = false,
+    this.physics,
+    this.separator,
+    this.scrollDirection = Axis.vertical,
+    this.padding,
+    this.emptyEnabled = true,
+    this.errorEnabled = true,
   }) : super(key: key);
 
   final PagingController<int, ItemType> pagingController;
 
   // final ItemWidgetBuilder
   final ItemWidgetBuilder<ItemType> itemBuilder;
+
+  final bool emptyEnabled;
+
+  final bool errorEnabled;
 
   final Widget? loadingView;
 
@@ -75,7 +85,11 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
   /// View when load pagination error
   final Widget? errorLoadView;
 
-  final VoidCallback onRefresh;
+  final bool shrinkWrap;
+  final ScrollPhysics? physics;
+  final Widget? separator;
+
+  final VoidCallback? onRefresh;
   final Widget? emptyImageWidget;
   final String? emptyImage;
   final String? errorTitle;
@@ -94,6 +108,8 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
   final TextStyle? errorTitleStyle;
   final TextStyle? errorSubtitleStyle;
   final Widget? retryWidget;
+  final Axis scrollDirection;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -106,27 +122,69 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
   }
 
   Widget _androidPaginationView() {
-    return RefreshIndicator(
-      onRefresh: () => Future.sync(onRefresh),
-      child: PagedListView(
+    if (onRefresh != null) {
+      return RefreshIndicator(
+        onRefresh: () => Future.sync(onRefresh!),
+        child: PagedListView.separated(
+          scrollDirection: scrollDirection,
+          padding: padding,
+          pagingController: pagingController,
+          builderDelegate: _builderDelete(),
+          separatorBuilder: (BuildContext context, int index) {
+            return separator ?? const SizedBox.shrink();
+          },
+        ),
+      );
+    } else {
+      return PagedListView.separated(
+        shrinkWrap: shrinkWrap,
+        physics: physics,
+        scrollDirection: scrollDirection,
+        padding: padding,
         pagingController: pagingController,
         builderDelegate: _builderDelete(),
-      ),
-    );
+        separatorBuilder: (BuildContext context, int index) {
+          return separator ?? const SizedBox.shrink();
+        },
+      );
+    }
   }
 
   Widget _iosPaginationView() {
-    return CustomScrollView(
-      slivers: [
-        CupertinoSliverRefreshControl(
-          onRefresh: () => Future.sync(onRefresh),
+    if (onRefresh != null) {
+      return Padding(
+        padding: padding ?? EdgeInsets.zero,
+        child: CustomScrollView(
+          shrinkWrap: shrinkWrap,
+          physics: physics,
+          scrollDirection: scrollDirection,
+          slivers: [
+            CupertinoSliverRefreshControl(
+              onRefresh: () => Future.sync(onRefresh!),
+            ),
+            PagedSliverList(
+              pagingController: pagingController,
+              builderDelegate: _builderDelete(),
+            ),
+          ],
         ),
-        PagedSliverList(
-          pagingController: pagingController,
-          builderDelegate: _builderDelete(),
+      );
+    } else {
+      return Padding(
+        padding: padding ?? EdgeInsets.zero,
+        child: CustomScrollView(
+          shrinkWrap: shrinkWrap,
+          physics: physics,
+          scrollDirection: scrollDirection,
+          slivers: [
+            PagedSliverList(
+              pagingController: pagingController,
+              builderDelegate: _builderDelete(),
+            ),
+          ],
         ),
-      ],
-    );
+      );
+    }
   }
 
   PagedChildBuilderDelegate<ItemType> _builderDelete() {
@@ -134,40 +192,44 @@ class SkyPaginationView<ItemType> extends StatelessWidget {
       animateTransitions: true,
       newPageProgressIndicatorBuilder: (ctx) =>
           const PlatformLoadingIndicator(),
-      firstPageProgressIndicatorBuilder: (ctx) =>
-          loadingView ?? const ShimmerList(),
-      noItemsFoundIndicatorBuilder: (ctx) =>
-          emptyView ??
-          EmptyView(
-            emptyImage: emptyImage,
-            emptyImageWidget: emptyImageWidget,
-            emptyTitle: emptyTitle,
-            emptySubtitle: emptySubtitle,
-            titleStyle: emptyTitleStyle,
-            subtitleStyle: emptySubtitleStyle,
-            horizontalSpacing: horizontalSpacing ?? 24,
-            verticalSpacing: verticalSpacing ?? 24,
-            imageSize: imageSize,
-            physics: const NeverScrollableScrollPhysics(),
-          ),
-      firstPageErrorIndicatorBuilder: (ctx) =>
-          errorView ??
-          ErrorView(
-            errorImage: errorImage,
-            errorImageWidget: errorImageWidget,
-            errorTitle:
-                '${errorTitle ?? pagingController.error ?? 'txt_err_general_formal'.tr}',
-            errorSubtitle: errorSubtitle,
-            horizontalSpacing: horizontalSpacing ?? 24,
-            verticalSpacing: verticalSpacing ?? 24,
-            titleStyle: errorTitleStyle,
-            subtitleStyle: errorSubtitleStyle,
-            imageSize: imageSize,
-            retryText: retryText,
-            retryWidget: retryWidget,
-            physics: const BouncingScrollPhysics(),
-            onRetry: () => pagingController.retryLastFailedRequest(),
-          ),
+      firstPageProgressIndicatorBuilder: (ctx) => Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: loadingView ?? const PlatformLoadingIndicator(),
+      ),
+      noItemsFoundIndicatorBuilder: (ctx) => emptyEnabled
+          ? emptyView ??
+              EmptyView(
+                emptyImage: emptyImage,
+                emptyImageWidget: emptyImageWidget,
+                emptyTitle: emptyTitle,
+                emptySubtitle: emptySubtitle,
+                titleStyle: emptyTitleStyle,
+                subtitleStyle: emptySubtitleStyle,
+                horizontalSpacing: horizontalSpacing ?? 24,
+                verticalSpacing: verticalSpacing ?? 24,
+                imageSize: imageSize,
+                physics: const NeverScrollableScrollPhysics(),
+              )
+          : const SizedBox.shrink(),
+      firstPageErrorIndicatorBuilder: (ctx) => errorEnabled
+          ? errorView ??
+              ErrorView(
+                errorImage: errorImage,
+                errorImageWidget: errorImageWidget,
+                errorTitle:
+                    '${errorTitle ?? pagingController.error ?? 'txt_err_general_formal'.tr}',
+                errorSubtitle: errorSubtitle,
+                horizontalSpacing: horizontalSpacing ?? 24,
+                verticalSpacing: verticalSpacing ?? 24,
+                titleStyle: errorTitleStyle,
+                subtitleStyle: errorSubtitleStyle,
+                imageSize: imageSize,
+                retryText: retryText,
+                retryWidget: retryWidget,
+                physics: const BouncingScrollPhysics(),
+                onRetry: () => pagingController.retryLastFailedRequest(),
+              )
+          : const SizedBox.shrink(),
       // noMoreItemsIndicatorBuilder: (ctx) =>
       //     maxItemView ?? const PaginationMaxItemView(),
       newPageErrorIndicatorBuilder: (ctx) =>

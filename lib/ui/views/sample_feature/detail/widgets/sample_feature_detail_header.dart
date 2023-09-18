@@ -16,12 +16,10 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CircleAvatar(
-              radius: 45,
-              child: SkyImage(
-                src: '${controller.dataObj.value?.avatarUrl}&s=200',
-                borderRadius: BorderRadius.circular(90),
-              ),
+            SkyImage(
+              size: 45,
+              shapeImage: ShapeImage.circle,
+              src: '${controller.dataObj.value?.avatarUrl}&s=200',
             ),
             Column(
               children: [

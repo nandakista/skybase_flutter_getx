@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:skybase/core/modules/timer/timer_const.dart';
+import 'package:skybase/core/modules/timer/timer_tag.dart';
 import 'package:skybase/core/modules/timer/timer_module.dart';
 import 'package:skybase/ui/views/utils/component/timer/timer_utils_controller.dart';
 

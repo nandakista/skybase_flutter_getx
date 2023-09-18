@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:skybase/config/themes/app_colors.dart';
@@ -149,17 +147,12 @@ class AppTheme {
     required Brightness brightness,
     Color color = AppColors.primary,
   }) {
-    Brightness iconBrightness;
-    if (Platform.isIOS) {
-      (brightness == Brightness.dark)
-          ? iconBrightness = Brightness.light
-          : iconBrightness = Brightness.dark;
-    } else {
-      iconBrightness = brightness;
-    }
+    final androidIconBrightness =
+        brightness == Brightness.dark ? Brightness.light : Brightness.dark;
     return SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarBrightness: iconBrightness,
+        statusBarIconBrightness: androidIconBrightness,
+        statusBarBrightness: brightness,
         statusBarColor: color,
       ),
     );

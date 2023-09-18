@@ -14,19 +14,18 @@ class FollowingTabView extends GetView<SampleFeatureDetailController> {
       separatorBuilder: (context, _) => const Divider(),
       itemCount: controller.dataObj.value?.followingList?.length ?? 0,
       itemBuilder: (_, index) {
-        final SampleFeature? user = controller.dataObj.value?.followingList![index];
+        final SampleFeature? user =
+            controller.dataObj.value?.followingList![index];
         return (user == null)
             ? const Center(
                 child: Text('User belum mem-follow siapapun'),
               )
             : ListTile(
-                // onTap: () => controller.onChooseUser(user: user),
-                leading: CircleAvatar(
-                  radius: 30,
-                  child: SkyImage(
-                    src: '${user.avatarUrl}&s=200',
-                    borderRadius: BorderRadius.circular(90),
-                  ),
+                leading: SkyImage(
+                  size: 30,
+                  shapeImage: ShapeImage.circle,
+                  src: '${user.avatarUrl}&s=200',
+                  // onTap: () => controller.onChooseUser(user: user),
                 ),
                 title: Text(user.username.toString()),
                 subtitle: Text(

@@ -21,19 +21,17 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
       appBar: SkyAppBar.secondary(title: 'txt_list_users'.tr),
       body: SkyPaginationView<SampleFeature>(
         pagingController: controller.pagingController,
-        onRefresh: () => controller.onRefresh(),
+        onRefresh: controller.onRefresh,
         itemBuilder: (BuildContext context, item, int index) {
           return ListTile(
             onTap: () => controller.onChooseUser(
               id: item.id,
               username: item.username,
             ),
-            leading: CircleAvatar(
-              radius: 30,
-              child: SkyImage(
-                src: '${item.avatarUrl}&s=200',
-                borderRadius: BorderRadius.circular(30),
-              ),
+            leading: SkyImage(
+              shapeImage: ShapeImage.circle,
+              size: 30,
+              src: '${item.avatarUrl}&s=200',
             ),
             title: Text(item.username.toString()),
             subtitle: Text(

@@ -17,20 +17,29 @@ abstract class PaginationController<T> extends GetxController {
   int page = 1;
   final pagingController = PagingController<int, T>(firstPageKey: 0);
 
-  // RxList<T> dataList = RxList<T>([]);
-
   String get cachedKey;
 
   /// **NOTE:**
   /// call this [refreshPage] instead of [onRefresh] when you need to dispose anything
   void refreshPage() {}
 
-  void onRefresh() {
-    storage.delete(cachedKey);
-    // dataList.clear();
+  Future<void> onRefresh() async {
+    try {
+      await storage.delete(cachedKey);
+      refreshToPageOne();
+      refreshPage();
+    } on UnimplementedError {
+      debugPrint('PaginationController::--> Cached Data not active');
+      refreshToPageOne();
+      refreshPage();
+    } catch (e) {
+      debugPrint('PaginationController::--> Error $e');
+    }
+  }
+
+  void refreshToPageOne() {
     page = 1;
     pagingController.refresh();
-    refreshPage();
   }
 
   void _initListener(void Function() onLoad) {
@@ -50,18 +59,23 @@ abstract class PaginationController<T> extends GetxController {
   Future<void> getCache(Function() onLoad) async {
     if (page == 1) _getCacheData();
     _initListener(onLoad);
+    onLoad();
   }
 
   void _getCacheData() {
-    var cache = storage.get(cachedKey);
-    if (storage.has(cachedKey) && cache.toString().isNotEmpty) {
-      finishLoadData(
-        data: List<T>.from(
-          (json.decode(cache) as List).map(
-            (x) => CachedModelConverter<T>().fromJson(x),
+    try {
+      var cache = storage.get(cachedKey);
+      if (storage.has(cachedKey) && cache.toString().isNotEmpty) {
+        finishLoadData(
+          data: List<T>.from(
+            (json.decode(cache) as List).map(
+              (x) => CachedModelConverter<T>().fromJson(x),
+            ),
           ),
-        ),
-      );
+        );
+      }
+    } catch (e) {
+      showError(e.toString());
     }
   }
 
@@ -70,8 +84,12 @@ abstract class PaginationController<T> extends GetxController {
   /// don't need to call [finishLoadData] anymore
   void saveCacheAndFinish({List<T>? data}) async {
     try {
-      if (page == 1) await storage.save(cachedKey, json.encode(data ?? []));
-      finishLoadData(data: data ?? []);
+      if (page == 1) {
+        if (!storage.has(cachedKey)) finishLoadData(data: data ?? []);
+        await storage.save(cachedKey, json.encode(data ?? []));
+      } else {
+        finishLoadData(data: data ?? []);
+      }
     } catch (e) {
       debugPrint('Failed save cache, $e');
       showError(e.toString());
@@ -87,7 +105,6 @@ abstract class PaginationController<T> extends GetxController {
     } else {
       pagingController.appendPage(data, page ?? this.page++);
     }
-    // dataList.value = pagingController.itemList ?? [];
   }
 
   /// **NOTE:**

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:skybase/core/extension/string_extension.dart';
 
 class AppRegex {
+  static const name = r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
   static const nik = r'^[1-9]{16}$';
   static const npwp = r'^[0-9]{15}$';
   static const postal = r'^([1-9])[0-9]{4}$';
-  static const phone = r'^(08)(\d{2,3}-?){2}\d{4,5}$';
+  static const phone = r'^(\+62|62|0|8)[1-9][0-9]{8,11}$';
   static const email = r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   static const upperCase = r'^(?=.*[A-Z])';
   static const lowerCase = r'^(?=.*[a-z])';
@@ -39,18 +42,19 @@ class ValidatorHelper {
     required String title,
     required String value,
     required String regex,
+    String? message,
   }) {
     if (value.isEmpty) {
-      return '$title tidak boleh kosong!';
+      return '$title ${'txt_cannot_be_empty'.tr}';
     } else if (!RegExp(regex).hasMatch(value)) {
-      return '$title tidak valid!';
+      return message ?? '$title ${'txt_is_not_valid'.tr}';
     }
     return null;
   }
 
-  static String? generalField(String value) {
-    if (value.isEmpty) {
-      return 'Kolom tidak boleh kosong!';
+  static String? required(String? value) {
+    if (value.isNullOrEmpty) {
+      return 'txt_field_cannot_be_empty'.tr;
     }
     return null;
   }
@@ -64,12 +68,5 @@ class ValidatorHelper {
       return errMessage;
     }
     return null;
-  }
-
-  static regex(String value, String regex) {
-    if (!RegExp(regex).hasMatch(value)) {
-      return false;
-    }
-    return true;
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/extension/string_extension.dart';
+import 'package:skybase/core/helper/media_helper.dart';
 import 'package:skybase/ui/widgets/media/preview/media_preview_page.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
 
@@ -18,12 +19,11 @@ class SkyImage extends StatelessWidget {
   final String? src;
   final double? width;
   final double? height;
+  final double? size;
   final VoidCallback? onTap;
   final BorderRadiusGeometry? borderRadius;
   final BoxFit fit;
   final Color? color;
-  final String? previewTitle;
-  final TextStyle? previewTitleStyle;
   final Widget? errorWidget;
   final Widget? loadingWidget;
   final Alignment alignment;
@@ -40,10 +40,16 @@ class SkyImage extends StatelessWidget {
 
   /// if true -> enable on tap to redirect MediaPreview Page
   final bool enablePreview;
+  final String? previewTitle;
+  final TextStyle? previewTitleStyle;
 
   /// When your src image from asset but not from dir **assets/images/..**
   /// you need to set this to true manually
   final bool isAsset;
+
+  /// Fill this to generated network image source by given Name.
+  /// If you fill this field and [placeholderSrc], the placeholderSrc will not work
+  final String? generateByName;
 
   const SkyImage({
     Key? key,
@@ -65,6 +71,8 @@ class SkyImage extends StatelessWidget {
     this.loadingWidget,
     this.shapeImage = ShapeImage.react,
     this.alignment = Alignment.center,
+    this.size,
+    this.generateByName,
   }) : super(key: key);
 
   @override
@@ -86,11 +94,14 @@ class SkyImage extends StatelessWidget {
         loadingWidget: loadingWidget,
         shapeImage: shapeImage,
         alignment: alignment,
+        size: size,
       );
     } else {
       return placeholderWidget ??
           BaseImage(
-            src: placeholderSrc ?? 'assets/images/img_empty.png',
+            src: generateByName.isNotNullAndNotEmpty
+                ? MediaHelper.generateAvatarByName(generateByName ?? 'user')
+                : placeholderSrc ?? 'assets/images/img_empty.png',
             width: width,
             height: height,
             fit: placeholderFit ?? BoxFit.contain,
@@ -102,6 +113,7 @@ class SkyImage extends StatelessWidget {
             previewTitleStyle: previewTitleStyle,
             shapeImage: shapeImage,
             alignment: alignment,
+            size: size,
           );
     }
   }
@@ -111,6 +123,7 @@ class BaseImage extends StatelessWidget {
   final String src;
   final double? width;
   final double? height;
+  final double? size;
   final VoidCallback? onTapImage;
   final BorderRadiusGeometry? borderRadius;
   final BoxFit fit;
@@ -141,14 +154,15 @@ class BaseImage extends StatelessWidget {
     this.loadingWidget,
     this.shapeImage = ShapeImage.react,
     this.alignment = Alignment.center,
+    this.size,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (shapeImage == ShapeImage.circle) {
       assert(
-        height != null && width != null,
-        "Height and Width cannot be null if shapeImage is ShapeImage.circle, ",
+        size != null,
+        "Size cannot be null if shapeImage is ShapeImage.circle, ",
       );
     }
 
@@ -156,7 +170,7 @@ class BaseImage extends StatelessWidget {
       onTap: enablePreview
           ? () => Get.to(
                 MediaPreviewPage(
-                  url: src,
+                  src: src,
                   isAsset: isAsset,
                   title: previewTitle,
                   titleStyle: previewTitleStyle,
@@ -170,9 +184,12 @@ class BaseImage extends StatelessWidget {
   Widget _determineShapeImage() {
     switch (shapeImage) {
       case ShapeImage.circle:
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(height! / 2),
-          child: _determineImageWidget(),
+        return CircleAvatar(
+          radius: size,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(size!),
+            child: _determineImageWidget(),
+          ),
         );
       case ShapeImage.oval:
         return ClipOval(child: _determineImageWidget());

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import 'config/app/app_configuration.dart';
+import 'app_configuration.dart';
 import 'config/app/app_env.dart';
 import 'config/themes/app_theme.dart';
 import 'config/themes/theme_manager.dart';

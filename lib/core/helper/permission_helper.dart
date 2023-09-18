@@ -8,7 +8,7 @@ import 'package:skybase/core/helper/snackbar_helper.dart';
 import 'package:skybase/config/themes/app_colors.dart';
 
 class PermissionHelper {
-  static void showOpenSettings(String message) {
+  static void openSettings(String message) {
     Get.snackbar(
       "txt_permission_warning".tr,
       message,
@@ -25,6 +25,14 @@ class PermissionHelper {
     );
   }
 
+  static void error(String message) {
+    Get.snackbar(
+      "txt_permission_warning".tr,
+      message,
+      duration: const Duration(seconds: 5),
+    );
+  }
+
   /// This permission to open folder downloaded
   /// But it's very sensitive
   /// As much as posible avoid request this permission
@@ -33,7 +41,7 @@ class PermissionHelper {
       final mPermission = await Permission.manageExternalStorage.request();
       if (mPermission.isPermanentlyDenied) {
         LoadingDialog.dismiss();
-        PermissionHelper.showOpenSettings("txt_need_permission_storage".tr);
+        PermissionHelper.openSettings("txt_need_permission_storage".tr);
         return false;
       } else if (mPermission.isGranted) {
         return true;

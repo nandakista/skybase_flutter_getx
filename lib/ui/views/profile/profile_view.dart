@@ -36,19 +36,17 @@ class ProfileView extends GetView<ProfileController> {
           loadingEnabled: controller.isLoading,
           errorEnabled: controller.isError,
           emptyEnabled: controller.isEmpty,
-          onRetry: () => controller.onRefresh(),
-          onRefresh: () => controller.onRefresh(),
+          onRetry: controller.onRefresh,
+          onRefresh: controller.onRefresh,
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
-                CircleAvatar(
-                  radius: 45,
-                  child: SkyImage(
-                    src: '${controller.dataObj.value?.avatarUrl}&s=200',
-                    borderRadius: BorderRadius.circular(90),
-                  ),
+                SkyImage(
+                  shapeImage: ShapeImage.circle,
+                  size: 40,
+                  src: '${controller.dataObj.value?.avatarUrl}&s=200',
                 ),
                 const SizedBox(height: 12),
                 Text(
