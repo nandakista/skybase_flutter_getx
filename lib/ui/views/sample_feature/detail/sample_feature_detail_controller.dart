@@ -31,12 +31,13 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
 
     // Only fetch data
     // loadData(() => getDetailUser());
+    super.onReady();
   }
 
   @override
   void refreshPage() {
     getDetailUser();
-    super.onRefresh();
+    super.refreshPage();
   }
 
   @override

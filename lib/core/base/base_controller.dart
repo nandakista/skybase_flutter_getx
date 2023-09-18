@@ -40,7 +40,7 @@ abstract class BaseController<T> extends GetxController {
   /// call this [refreshPage] instead of [onRefresh] when you need to dispose anything
   void refreshPage() {}
 
-  Future<void> onRefresh() async {
+  void onRefresh() async {
     try {
       await storage.delete(cachedKey);
       _resetData();
