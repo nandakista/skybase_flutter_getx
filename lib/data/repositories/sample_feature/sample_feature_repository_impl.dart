@@ -2,7 +2,7 @@ import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
 import 'package:skybase/data/sources/server/sample_feature/sample_feature_sources.dart';
 
-class SampleFeatureRepositoryImpl extends SampleFeatureRepository {
+class SampleFeatureRepositoryImpl implements SampleFeatureRepository {
   final SampleFeatureSources apiService;
   SampleFeatureRepositoryImpl({required this.apiService});
 

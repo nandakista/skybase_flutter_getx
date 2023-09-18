@@ -4,7 +4,7 @@ import 'package:skybase/data/models/repo/repo.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/sources/server/sample_feature/sample_feature_sources.dart';
 
-class SampleFeatureSourcesImpl extends SampleFeatureSources {
+class SampleFeatureSourcesImpl implements SampleFeatureSources {
   String tag = 'SampleFeatureApiImpl::->';
 
   @override
