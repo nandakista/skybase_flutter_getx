@@ -48,7 +48,7 @@ class GetStorageManager {
     return await _box.read(name);
   }
 
-  void logout() async {
+  Future<void> logout() async {
     try {
       await GetStorage(GetStorageKey.STORAGE_NAME).erase();
       save(GetStorageKey.FIRST_INSTALL, false);

@@ -27,6 +27,9 @@ class AuthManager extends GetxService {
   SecureStorageManager secureStorage = SecureStorageManager.find;
   ThemeManager themeManager = ThemeManager.find;
 
+  bool get isAuthenticated => state?.appStatus == AppType.AUTHENTICATED;
+  bool get isUnauthenticated => state?.appStatus == AppType.UNAUTHENTICATED;
+
   @override
   void onInit() {
     authState.value = const AuthState(appStatus: AppType.INITIAL);
@@ -117,9 +120,13 @@ class AuthManager extends GetxService {
   /// with [authChanged] function
   /// * No need to navigate manually (Get.to or Get.off)
   Future<void> logout() async {
-    await secureStorage.logout();
-    getStorage.logout();
+    await clearData();
     authState.value = const AuthState(appStatus: AppType.UNAUTHENTICATED);
+  }
+
+  Future<void> clearData() async {
+    await secureStorage.logout();
+    await getStorage.logout();
   }
 
   /// Just call this function to managed login process.
@@ -140,13 +147,13 @@ class AuthManager extends GetxService {
     required String token,
     required String refreshToken,
   }) async {
-    getStorage.save(GetStorageKey.USERS, user.toJson());
+    await saveUserData(user: user);
     await secureStorage.setToken(value: token);
     await secureStorage.setRefreshToken(value: refreshToken);
   }
 
-  void saveUserData({required User user}) {
-    getStorage.save(GetStorageKey.USERS, user.toJson());
+  Future<void> saveUserData({required User user}) async {
+    await getStorage.save(GetStorageKey.USERS, user.toJson());
   }
 
   /// Get User data from GetStorage
