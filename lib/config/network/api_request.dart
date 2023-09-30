@@ -25,6 +25,7 @@ class ApiRequest {
     bool useToken = true,
     String? contentType = Headers.jsonContentType,
     Object? body,
+    Map<String, dynamic>? queryParameters,
   }) async {
     await _tokenManager(useToken);
     final response = await _safeFetch(
@@ -32,6 +33,8 @@ class ApiRequest {
         url,
         data: _setBody(contentType: contentType, body: body),
         options: Options(headers: headers, contentType: contentType),
+        queryParameters: queryParameters,
+        cancelToken: CancelToken(),
       ),
     );
     return response;
@@ -41,12 +44,15 @@ class ApiRequest {
     required String url,
     bool useToken = true,
     String? contentType = Headers.jsonContentType,
+    Map<String, dynamic>? queryParameters,
   }) async {
     await _tokenManager(useToken);
     final response = await _safeFetch(
       () => DioClient.find.get(
         url,
         options: Options(headers: headers, contentType: contentType),
+        queryParameters: queryParameters,
+        cancelToken: CancelToken(),
       ),
     );
     return response;
@@ -57,6 +63,7 @@ class ApiRequest {
     bool useToken = true,
     String? contentType = Headers.jsonContentType,
     Object? body,
+    Map<String, dynamic>? queryParameters,
   }) async {
     await _tokenManager(useToken);
     final response = await _safeFetch(
@@ -64,6 +71,8 @@ class ApiRequest {
         url,
         data: _setBody(contentType: contentType, body: body),
         options: Options(headers: headers, contentType: contentType),
+        queryParameters: queryParameters,
+        cancelToken: CancelToken(),
       ),
     );
     return response;
@@ -74,6 +83,7 @@ class ApiRequest {
     bool useToken = true,
     String? contentType = Headers.jsonContentType,
     Object? body,
+    Map<String, dynamic>? queryParameters,
   }) async {
     await _tokenManager(useToken);
     final response = await _safeFetch(
@@ -81,6 +91,8 @@ class ApiRequest {
         url,
         data: _setBody(contentType: contentType, body: body),
         options: Options(headers: headers, contentType: contentType),
+        queryParameters: queryParameters,
+        cancelToken: CancelToken(),
       ),
     );
     return response;
@@ -90,12 +102,14 @@ class ApiRequest {
     required String url,
     bool useToken = true,
     String? contentType = Headers.jsonContentType,
+    Map<String, dynamic>? queryParameters,
   }) async {
     await _tokenManager(useToken);
     final response = await _safeFetch(
       () => DioClient.find.delete(
         url,
         options: Options(headers: headers),
+        queryParameters: queryParameters,
       ),
     );
     return response;

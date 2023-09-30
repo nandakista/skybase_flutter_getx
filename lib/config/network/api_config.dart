@@ -16,12 +16,12 @@ class DioClient extends GetxService {
   void onInit() {
     _dio = Dio();
     _dio.options.baseUrl = baseURL;
-    _dio.options.connectTimeout = const Duration(seconds: 60); //60s
-    _dio.options.receiveTimeout = const Duration(seconds: 3); //3s
+    _dio.options.connectTimeout = const Duration(seconds: 30); //30s
+    _dio.options.receiveTimeout = const Duration(seconds: 30); //30s
     super.onInit();
   }
 
-  static setInterceptor(){
+  static setInterceptor() {
     DioClient.find.interceptors.clear();
     DioClient.find.interceptors.add(ApiInterceptors(DioClient.find));
   }
