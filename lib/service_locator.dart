@@ -7,12 +7,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:skybase/config/localization/locale_manager.dart';
 
 import 'config/auth_manager/auth_manager.dart';
 import 'config/network/api_config.dart';
 import 'config/themes/app_theme.dart';
 import 'config/themes/theme_manager.dart';
-import 'core/app/app_info.dart';
+import 'config/app/app_info.dart';
 import 'core/database/get_storage/get_storage_key.dart';
 import 'core/database/get_storage/get_storage_manager.dart';
 import 'core/database/secure_storage/secure_storage_manager.dart';
@@ -49,7 +50,8 @@ class ServiceLocator {
   static Future<void> _initService() async {
     Get.lazyPut(() => GetStorageManager());
     Get.lazyPut(() => SecureStorageManager());
-    Get.put(ThemeManager());
+    Get.lazyPut(() => ThemeManager());
+    Get.lazyPut(() => LocaleManager());
     Get.put(AuthManager());
   }
 }
