@@ -21,7 +21,6 @@ class AuthSourcesImpl implements AuthSources {
     required String password,
   }) async {
     try {
-      ApiRequest();
       final response = await ApiRequest.post(
         url: 'auth/login',
         body: {
