@@ -34,35 +34,20 @@ sealed class NetworkExceptionData with ApiMessage {
 
 mixin NetworkException implements Exception {
   NetworkExceptionData handleResponse(Response response) {
-    var statusCode = response.statusCode!;
-    switch (statusCode) {
-      case 400:
-        return BadRequestException(response: response);
-      case 401:
-        return UnauthorisedException(response: response);
-      case 403:
-        return BadRequestException(response: response);
-      case 404:
-        return NotFoundException(response: response);
-      case 409:
-        return FetchDataException(response: response);
-      case 408:
-        return SendTimeOutException();
-      case 413:
-        return RequestEntityTooLargeException(response: response);
-      case 422:
-        return BadRequestException(response: response);
-      case 500:
-        return InternalServerErrorException();
-      case 503:
-        return InternalServerErrorException();
-      default:
-        var responseCode = statusCode;
-        return FetchDataException(
-          message: 'Received invalid status code: $responseCode',
+    int statusCode = response.statusCode!;
+    return switch (statusCode) {
+      400 || 403 || 422  => BadRequestException(response: response),
+      401 => UnauthorisedException(response: response),
+      404 => NotFoundException(response: response),
+      409 => FetchDataException(response: response),
+      408 => SendTimeOutException(),
+      413 => RequestEntityTooLargeException(response: response),
+      500 || 503 => InternalServerErrorException(),
+      _ => FetchDataException(
+          message: 'Received invalid status code: $statusCode',
           response: response,
-        );
-    }
+        ),
+    };
   }
 
   NetworkExceptionData getErrorException(error) {
@@ -70,36 +55,18 @@ mixin NetworkException implements Exception {
       try {
         NetworkExceptionData networkExceptions;
         if (error is DioException) {
-          switch (error.type) {
-            case DioExceptionType.cancel:
-              networkExceptions = RequestCancelled();
-              break;
-            case DioExceptionType.connectionTimeout:
-              networkExceptions = ConnectionTimeOutException();
-              break;
-            case DioExceptionType.unknown:
-              if (error.error is SocketException) {
-                networkExceptions = SocketException();
-              } else {
-                networkExceptions = FetchDataException();
-              }
-              break;
-            case DioExceptionType.receiveTimeout:
-              networkExceptions = ReceiveTimeOutException();
-              break;
-            case DioExceptionType.badResponse:
-              networkExceptions = handleResponse(error.response!);
-              break;
-            case DioExceptionType.sendTimeout:
-              networkExceptions = SendTimeOutException();
-              break;
-            case DioExceptionType.badCertificate:
-              networkExceptions = BadCertificateException();
-              break;
-            case DioExceptionType.connectionError:
-              networkExceptions = ConnectionTimeOutException();
-              break;
-          }
+          networkExceptions = switch (error.type) {
+            DioExceptionType.cancel => RequestCancelled(),
+            DioExceptionType.connectionTimeout => ConnectionTimeOutException(),
+            DioExceptionType.receiveTimeout => ReceiveTimeOutException(),
+            DioExceptionType.sendTimeout => SendTimeOutException(),
+            DioExceptionType.unknown => error.error is SocketException
+                ? SocketException()
+                : FetchDataException(),
+            DioExceptionType.badResponse => handleResponse(error.response!),
+            DioExceptionType.badCertificate => BadCertificateException(),
+            DioExceptionType.connectionError => ConnectionTimeOutException(),
+          };
         } else if (error is SocketException) {
           networkExceptions = SocketException();
         } else {

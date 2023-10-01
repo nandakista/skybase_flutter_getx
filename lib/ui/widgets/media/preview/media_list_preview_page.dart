@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/helper/media_helper.dart';
+import 'package:skybase/ui/widgets/media/determine_media_widget.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
@@ -18,7 +18,12 @@ class MediaListPreviewPage extends StatelessWidget {
     List<Widget> children = [];
 
     for (var item in mediaUrls) {
-      children.add(_determineMedia(item));
+      children.add(
+        DetermineMediaWidget(
+          path: item,
+          image: SkyImage(src: item, enablePreview: true),
+        ),
+      );
       children.add(const Divider());
     }
     return Scaffold(
@@ -32,19 +37,5 @@ class MediaListPreviewPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget _determineMedia(String path) {
-    final mediaType = MediaHelper.getMediaType(path);
-    switch (mediaType.type) {
-      case MediaType.FILE:
-        return const Center(child: Text('Media Unsupported'));
-      case MediaType.IMAGE:
-        return SkyImage(src: mediaType.path, enablePreview: true);
-      case MediaType.VIDEO:
-        return const Center(child: Text('Media Unsupported'));
-      case MediaType.UNKNOWN:
-        return const Center(child: Text('Media Unsupported'));
-    }
   }
 }

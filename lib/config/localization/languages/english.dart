@@ -1,5 +1,38 @@
 const Map<String, String> en = {
-  'txt_version': 'App Version',
+  // Permission
+  'txt_permission_warning': 'Need Permission',
+  'txt_need_permission_storage': 'This app need your storage permission',
+  'txt_need_permission_camera': 'This app need your camera permission',
+  'txt_need_permission_gallery_photo':
+      'This app need your gallery and photo permission',
+  'txt_open_setting': 'Open Setting',
+  'txt_need_several_permission': 'This app need your several permission',
+
+  // Network
+  'txt_connection_timeout': 'Connection Timeout',
+  'txt_internal_server_error': 'Sorry, internal server error',
+  'txt_request_entity_to_large': 'Request Entity Too Large',
+  'txt_error_during_communication': 'Error During Communication',
+  'txt_not_found': 'Not Found',
+  'txt_bad_request': 'Bad Request',
+  'txt_message': 'Message',
+  'txt_invalid_input': 'Invalid Input',
+  'txt_unauthorized': 'Sorry, Unauthorized',
+  'txt_request_cancel': 'Request Cancelled',
+  'txt_no_internet_connection': 'No Internet Connection',
+  'txt_unexpected_error': 'Unexpected Error!',
+  'txt_unable_to_process': 'Unable to process',
+  'txt_open_file': 'Open File',
+  'txt_downloading': 'Downloading file..',
+  'txt_download_file_success': 'Download file successful',
+  'txt_failed_download_file': 'Failed download file',
+  'txt_camera_not_found': 'Camera not found',
+  'txt_something_went_wrong': 'Something went wrong!',
+  // Api Translation
+  'txt_api_user_not_found':
+      'Pengguna tidak ditemukan. \nSilahkan melakukan pendaftaran terlebih dahulu.',
+
+  // Date Time
   'txt_expired': 'Expired',
   'txt_days': 'days',
   'txt_minutes': 'minutes',
@@ -16,6 +49,9 @@ const Map<String, String> en = {
   'txt_friday': 'Friday',
   'txt_saturday': 'Saturday',
 
+  // General
+  'txt_version': 'App Version',
+  'txt_media_unsupported': 'Media Unsupported',
   'txt_field_cannot_be_empty': 'Field cannot be empty!',
   'txt_cannot_be_empty': 'cannot be empty!',
   'txt_is_not_valid': 'is not valid!',
@@ -60,27 +96,6 @@ const Map<String, String> en = {
   'txt_preview': 'Preview',
   'txt_oops': 'Oops',
   'txt_error': 'Error',
-  'txt_connection_timeout': 'Connection Timeout',
-  'txt_internal_server_error': 'Sorry, internal server error',
-  'txt_request_entity_to_large': 'Request Entity Too Large',
-  'txt_error_during_communication': 'Error During Communication',
-  'txt_not_found': 'Not Found',
-  'txt_bad_request': 'Bad Request',
-  'txt_message': 'Message',
-  'txt_invalid_input': 'Invalid Input',
-  'txt_unauthorized': 'Sorry, Unauthorized',
-  'txt_request_cancel': 'Request Cancelled',
-  'txt_no_internet_connection': 'No Internet Connection',
-  'txt_unexpected_error': 'Unexpected Error!',
-  'txt_unable_to_process': 'Unable to process',
-  'txt_open_file': 'Open File',
-  'txt_downloading': 'Downloading file..',
-  'txt_download_file_success': 'Download file successful',
-  'txt_failed_download_file': 'Failed download file',
-  'txt_camera_not_found': 'Camera not found',
-  'txt_something_went_wrong': 'Something went wrong!',
-
-  // Sentence
   'txt_err_download_msg': 'An error occurred while downloading the file',
   'txt_err_download_permission_msg': 'Please allow access to storage first',
   'txt_you_must_login_again': 'Please login again!',
@@ -104,11 +119,4 @@ const Map<String, String> en = {
   'txt_max_item': 'All items have been loaded.',
   'txt_empty_list_title': 'Your data is empty!',
   'txt_empty_list_subtitle': 'Sorry, data is empty. Maybe go back latter',
-
-  // Permission
-  'txt_permission_warning': 'Need Permission',
-  'txt_need_permission_storage': 'This app need your storage permission',
-  'txt_need_permission_camera': 'This app need your camera permission',
-  'txt_need_permission_gallery_photo':
-      'This app need your gallery and photo permission',
 };

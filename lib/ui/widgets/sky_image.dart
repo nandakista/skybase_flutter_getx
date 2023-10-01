@@ -182,25 +182,20 @@ class BaseImage extends StatelessWidget {
   }
 
   Widget _determineShapeImage() {
-    switch (shapeImage) {
-      case ShapeImage.circle:
-        return CircleAvatar(
+    return switch (shapeImage) {
+      ShapeImage.oval => ClipOval(child: _determineImageWidget()),
+      ShapeImage.circle => CircleAvatar(
           radius: size,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(size!),
             child: _determineImageWidget(),
           ),
-        );
-      case ShapeImage.oval:
-        return ClipOval(child: _determineImageWidget());
-      case ShapeImage.react:
-        return ClipRRect(
+        ),
+      ShapeImage.react => ClipRRect(
           borderRadius: borderRadius ?? BorderRadius.circular(0),
           child: _determineImageWidget(),
-        );
-      default:
-        return _determineImageWidget();
-    }
+        ),
+    };
   }
 
   Widget _determineImageWidget() {

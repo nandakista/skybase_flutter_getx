@@ -6,9 +6,7 @@ import 'package:skybase/core/helper/bottom_sheet_helper.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
 import 'package:skybase/ui/widgets/media/attachments_source_bottom_sheet.dart';
 import 'package:skybase/ui/widgets/media/media_items.dart';
-import 'package:skybase/ui/widgets/media/ui_image_picker.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
-import 'package:skybase/ui/widgets/sky_box.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
@@ -86,17 +84,6 @@ class MediaUtilsView extends GetView<UtilsController> {
                     ),
                   ),
                 ),
-        ),
-      ),
-      const SizedBox(height: 12),
-      UiImagePicker(
-        onSelected: (file) {
-          debugPrint('file = $file');
-          controller.imageFile.value = file;
-        },
-        child: const SkyBox(
-          margin: EdgeInsets.all(4),
-          child: Text('UI Image Picker'),
         ),
       ),
       const SizedBox(height: 16),

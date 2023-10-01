@@ -1,5 +1,34 @@
 const Map<String, String> id = {
-  'txt_version': 'Versi Aplikasi',
+  // Permission
+  'txt_permission_warning': 'Izin diperlukan',
+  'txt_need_permission_storage': 'Izinkan aplikasi mengakses penyimpanan',
+  'txt_need_permission_camera': 'Izinkan aplikasi mengakses kamera',
+  'txt_need_permission_gallery_photo':
+      'Izinkan aplikasi mengakses galeri dan foto',
+  'txt_open_setting': 'Buka Pengaturan',
+  'txt_need_several_permission': 'Aplikasi membutuhkan beberapa izin',
+
+  // Network
+  'txt_connection_timeout': 'Koneksi Timeout',
+  'txt_internal_server_error': 'Mohon maaf, terjadi kesalahan pada Server.',
+  'txt_request_entity_to_large': 'Ukuran terlalu besar',
+  'txt_error_during_communication': 'Terjadi kesalahan',
+  'txt_not_found': 'Alamat tidak ditemukan',
+  'txt_bad_request': 'Permintaan Ditolak',
+  'txt_message': 'Pesan',
+  'txt_unauthorized': 'Maaf, tidak memiliki hak akses',
+  'txt_request_cancel': 'Permintaan dibatalkan',
+  'txt_no_internet_connection': 'Pastikan anda memiliki koneksi internet',
+  'txt_unexpected_error': 'Terjadi kesalahan',
+  'txt_unable_to_process': 'Tidak dapat mengirimkan permintaan',
+  'txt_open_file': 'Buka Berkas',
+  'txt_downloading': 'Mengunduh berkas..',
+  'txt_download_file_success': 'Berkas berhasil diunduh',
+  'txt_failed_download_file': 'Berkas gagal diunduh',
+  'txt_camera_not_found': 'Kamera tidak ditemukan',
+  'txt_something_went_wrong': 'Terjadi Kesalahan!',
+
+  // Date Time
   'txt_expired': 'Berakhir',
   'txt_expired_k': 'Kedaluwarsa',
   'txt_days': 'Hari',
@@ -17,6 +46,9 @@ const Map<String, String> id = {
   'txt_friday': 'Jumat',
   'txt_saturday': 'Sabtu',
 
+  // General
+  'txt_version': 'Versi Aplikasi',
+  'txt_media_unsupported': 'Media tidak didukung',
   'txt_field_cannot_be_empty': 'Kolom tidak boleh kosong!',
   'txt_cannot_be_empty': 'tidak boleh kosong!',
   'txt_is_not_valid': 'tidak valid!',
@@ -61,26 +93,6 @@ const Map<String, String> id = {
   'txt_preview': 'Preview',
   'txt_oops': 'Oops',
   'txt_error': 'Error',
-  'txt_connection_timeout': 'Koneksi Timeout',
-  'txt_internal_server_error': 'Mohon maaf, terjadi kesalahan pada Server.',
-  'txt_request_entity_to_large': 'Ukuran terlalu besar',
-  'txt_error_during_communication': 'Terjadi kesalahan',
-  'txt_not_found': 'Alamat tidak ditemukan',
-  'txt_bad_request': 'Permintaan Ditolak',
-  'txt_message': 'Pesan',
-  'txt_unauthorized': 'Maaf, tidak memiliki hak akses',
-  'txt_request_cancel': 'Permintaan dibatalkan',
-  'txt_no_internet_connection': 'Pastikan anda memiliki koneksi internet',
-  'txt_unexpected_error': 'Terjadi kesalahan',
-  'txt_unable_to_process': 'Tidak dapat mengirimkan permintaan',
-  'txt_open_file': 'Buka Berkas',
-  'txt_downloading': 'Mengunduh berkas..',
-  'txt_download_file_success': 'Berkas berhasil diunduh',
-  'txt_failed_download_file': 'Berkas gagal diunduh',
-  'txt_camera_not_found': 'Kamera tidak ditemukan',
-  'txt_something_went_wrong': 'Terjadi Kesalahan!',
-
-  // Sentence
   'txt_err_download_msg': 'Terjadi kesalahan saat mengunduh file',
   'txt_err_download_permission_msg':
       'Izinkan akses terhadap storage terlebih dahulu',
@@ -105,11 +117,4 @@ const Map<String, String> id = {
   'txt_max_item': 'Semua item telah dimuat',
   'txt_empty_list_title': 'Data masih kosong !',
   'txt_empty_list_subtitle': 'Maaf tidak ada data yang dapat ditampilkan',
-
-  // Permission
-  'txt_permission_warning': 'Izin diperlukan',
-  'txt_need_permission_storage': 'Izinkan aplikasi mengakses penyimpanan',
-  'txt_need_permission_camera': 'Izinkan aplikasi mengakses kamera',
-  'txt_need_permission_gallery_photo':
-      'Izinkan aplikasi mengakses galeri dan foto',
 };

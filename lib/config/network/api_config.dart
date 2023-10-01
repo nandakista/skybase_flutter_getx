@@ -21,7 +21,7 @@ class DioClient extends GetxService {
     super.onInit();
   }
 
-  static setInterceptor() {
+  static void setInterceptor() {
     DioClient.find.interceptors.clear();
     DioClient.find.interceptors.add(ApiInterceptors(DioClient.find));
   }
