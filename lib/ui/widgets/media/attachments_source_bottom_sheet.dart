@@ -81,12 +81,8 @@ class AttachmentsSourceBottomSheet extends StatelessWidget {
 
   Future<void> _onPickImage(ImageSource source) async {
     if (source == ImageSource.camera) {
-      final permission = await Permission.camera.request();
-      if (permission.isPermanentlyDenied) {
-        PermissionHelper.openSettings('txt_need_permission_camera'.tr);
-      } else if (permission.isGranted) {
-        _pickSingleImage(ImageSource.camera);
-      }
+      bool isGranted = await PermissionHelper.isCameraGranted();
+      if (isGranted) _pickSingleImage(ImageSource.camera);
     } else {
       bool isGranted = await _checkPermission();
       if (isGranted) {
@@ -100,65 +96,36 @@ class AttachmentsSourceBottomSheet extends StatelessWidget {
   }
 
   Future<bool> _checkPermission() async {
-    final PermissionStatus permission;
     if (Platform.isIOS) {
-      permission = await Permission.photos.request();
-      if (permission.isPermanentlyDenied) {
-        PermissionHelper.openSettings('txt_need_permission_gallery_photo'.tr);
-        return false;
-      }
-      return true;
+      return await PermissionHelper.isPhotoGranted();
     } else {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
       if (androidInfo.version.sdkInt < 33) {
-        permission = await Permission.storage.request();
-        if (permission.isPermanentlyDenied) {
-          PermissionHelper.openSettings('txt_need_permission_gallery_photo'.tr);
-          return false;
-        } else if (permission.isGranted) {
-          return true;
-        } else if (permission.isDenied) {
-          PermissionHelper.error('txt_need_permission_storage'.tr);
-          return false;
-        }
-        return false;
+        return await PermissionHelper.isStorageGranted(
+          permanentlyDeniedMsg: 'txt_need_permission_gallery_photo'.tr,
+        );
       } else {
-        Map<Permission, PermissionStatus> statuses = await [
-          Permission.photos,
-          Permission.videos,
-        ].request();
-        if (statuses.values.contains(PermissionStatus.permanentlyDenied)) {
-          PermissionHelper.openSettings("txt_need_permission_storage".tr);
-          return false;
-        } else if (statuses.values.every((e) => e.isGranted)) {
-          return true;
-        } else if (statuses.values.contains(PermissionStatus.denied)) {
-          PermissionHelper.error('txt_need_permission_storage'.tr);
-          return false;
-        }
-        return false;
+        return await PermissionHelper.isMultiplePermissionGranted(
+          [Permission.photos, Permission.videos],
+          deniedMsg: 'txt_need_permission_storage'.tr,
+        );
       }
     }
   }
 
   Future<void> _pickSingleImage(ImageSource source) async {
-    final XFile? pickedFile = await ImagePicker().pickImage(
+    final File? pickedFile = await MediaHelper.pickImage(
       source: source,
-      maxHeight: withImageCompression ? 1024 : maxHeight,
-      maxWidth: withImageCompression ? 1024 : maxWidth,
+      withCompression: withImageCompression,
+      maxHeight: maxHeight,
+      maxWidth: maxWidth,
       imageQuality: imageQuality,
       preferredCameraDevice: preferredCameraDevice,
+      sizeLimit: sizeLimit,
     );
     if (null != pickedFile) {
-      File imageFile = File(pickedFile.path);
-      if (withImageCompression) {
-        imageFile = await MediaHelper.compressImage(
-          file: imageFile,
-          limit: sizeLimit,
-        );
-      }
-      onAttachmentsSelected(imageFile);
+      onAttachmentsSelected(pickedFile);
       Get.back();
     }
   }
