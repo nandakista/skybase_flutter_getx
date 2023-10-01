@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:skybase/config/app/app_env.dart';
+import 'package:skybase/config/environment/app_env.dart';
 import 'package:skybase/config/auth_manager/auth_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
@@ -27,7 +27,8 @@ enum TokenType {
   REFRESH_TOKEN,
 }
 
-class ApiTokenManager extends QueuedInterceptorsWrapper {
+abstract base class ApiTokenManager extends QueuedInterceptorsWrapper
+    with NetworkException {
   final authManager = AuthManager.find;
   final secureStorage = SecureStorageManager.find;
 
@@ -50,7 +51,10 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
     }
   }
 
-  _handleAccessToken(DioException err, ErrorInterceptorHandler handler) async {
+  void _handleAccessToken(
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
     final int status = err.response?.statusCode ?? 0;
     if (status == 401) {
       DialogHelper.failed(
@@ -64,7 +68,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
     }
   }
 
-  _handleRefreshToken(
+  void _handleRefreshToken(
     Dio dio,
     DioException err,
     ErrorInterceptorHandler handler,
@@ -91,7 +95,7 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
       );
       return ApiResponse.fromJson(responseBody.data).data['token'];
     } on DioException catch (error) {
-      debugPrint('${NetworkException.getErrorException(error)}');
+      debugPrint(getErrorException(error).toString());
       return DialogHelper.failed(
         isDismissible: false,
         message: 'txt_you_must_login_again'.tr,
@@ -106,11 +110,14 @@ class ApiTokenManager extends QueuedInterceptorsWrapper {
   ) async {
     String newAccessToken = await secureStorage.getToken() ?? '';
     final options = Options(
-        method: requestOptions.method,
-        headers: {'Authorization': 'Bearer $newAccessToken'});
-    return dio.request<dynamic>(requestOptions.path,
-        data: requestOptions.data,
-        queryParameters: requestOptions.queryParameters,
-        options: options);
+      method: requestOptions.method,
+      headers: {'Authorization': 'Bearer $newAccessToken'},
+    );
+    return dio.request<dynamic>(
+      requestOptions.path,
+      data: requestOptions.data,
+      queryParameters: requestOptions.queryParameters,
+      options: options,
+    );
   }
 }

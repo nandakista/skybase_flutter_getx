@@ -5,18 +5,18 @@ import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'app_configuration.dart';
-import 'config/app/app_env.dart';
+import 'config/environment/app_env.dart';
 import 'config/themes/app_theme.dart';
 import 'config/themes/theme_manager.dart';
 import 'config/localization/app_translations.dart';
-import 'config/localization/locale_helper.dart';
+import 'config/localization/locale_manager.dart';
 import 'service_locator.dart';
 import 'ui/routes/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ServiceLocator.init();
-  if (AppEnv.env == Env.DEVELOPMENT) {
+  if (AppEnv.env == Environment.DEVELOPMENT) {
     runApp(
       DevicePreview(
         enabled: !kReleaseMode,
@@ -42,8 +42,8 @@ class App extends StatelessWidget {
         darkTheme: AppTheme.dark(),
         themeMode: (theme.isDark.isTrue) ? ThemeMode.dark : ThemeMode.light,
         translations: AppTranslation(),
-        locale: LocaleHelper().getCurrentLocale(),
-        fallbackLocale: LocaleHelper().fallbackLocale,
+        locale: LocaleManager.find.getCurrentLocale(),
+        fallbackLocale: LocaleManager.find.fallbackLocale,
         getPages: AppPages.routes,
         initialRoute: AppPages.initial,
       ),
