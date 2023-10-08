@@ -10,7 +10,6 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      key: controller.headerKey,
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Obx(
         () => Row(

@@ -10,11 +10,6 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
 
   SampleFeatureDetailController({required this.repository});
 
-  final GlobalKey headerKey = GlobalKey();
-  final GlobalKey detailInfoKey = GlobalKey();
-  final headerWidget = Rxn<Size>();
-  final detailInfoWidget = Rxn<Size>();
-
   late int idArgs;
   late String usernameArgs;
 
