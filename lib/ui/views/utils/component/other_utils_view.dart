@@ -51,7 +51,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                   debugPrint('Converted = $converted');
                   SnackBarHelper.normal(message: 'String converted :\n $converted');
                 },
-                text: '${'txt_convert'.tr} String',
+                text: 'Convert String',
                 icon: CupertinoIcons.t_bubble,
               ),
               const SizedBox(height: 26),
