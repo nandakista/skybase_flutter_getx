@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/app_configuration.dart';
@@ -53,10 +51,8 @@ class SettingView extends GetView<SettingController> {
                         const Text('ENG'),
                         Obx(
                           () => Radio(
-                            value: jsonEncode(
-                              {'name': 'English', 'locale': 'en'},
-                            ),
-                            groupValue: jsonEncode(controller.language.value),
+                            value: 'en',
+                            groupValue: controller.languageCode.value,
                             onChanged: (value) {
                               controller.onUpdateLocale(value.toString());
                             },
@@ -65,10 +61,8 @@ class SettingView extends GetView<SettingController> {
                         const Text('ID'),
                         Obx(
                           () => Radio(
-                            value: jsonEncode(
-                              {'name': 'Indonesia', 'locale': 'id'},
-                            ),
-                            groupValue: jsonEncode(controller.language.value),
+                            value: 'id',
+                            groupValue: controller.languageCode.value,
                             onChanged: (value) {
                               controller.onUpdateLocale(value.toString());
                             },

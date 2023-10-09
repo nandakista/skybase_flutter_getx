@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -44,6 +45,12 @@ class App extends StatelessWidget {
         translations: AppTranslation(),
         locale: LocaleManager.find.getCurrentLocale(),
         fallbackLocale: LocaleManager.find.fallbackLocale,
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: LocaleManager.find.locales.values,
         getPages: AppPages.routes,
         initialRoute: AppPages.initial,
       ),

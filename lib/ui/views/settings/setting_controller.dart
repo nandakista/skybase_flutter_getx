@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/config/auth_manager/auth_manager.dart';
@@ -9,34 +7,18 @@ import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/config/localization/locale_manager.dart';
 
 class SettingController extends GetxController {
-  final language = Rxn<Map<String, dynamic>>();
+  final languageCode = Rxn<String>();
 
   @override
   void onInit() {
-    Locale currentLocale = LocaleManager.find.getCurrentLocale();
-    if (currentLocale == const Locale('en')) {
-      language.value = {
-        'name': 'English',
-        'locale': 'en',
-      };
-    } else {
-      language.value = {
-        'name': 'Indonesia',
-        'locale': 'id',
-      };
-    }
+    languageCode.value = LocaleManager.find.getCurrentLocale().languageCode;
     super.onInit();
   }
 
-  void onUpdateLocale(String value) {
-    Map<String, dynamic> lang = jsonDecode(value.toString());
-    language.value = lang;
-    if (lang['name'].toString() == "English") {
-      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "en");
-    } else {
-      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "in");
-    }
-    Get.updateLocale(Locale(lang['locale']));
+  void onUpdateLocale(String languageCode) {
+    this.languageCode.value = languageCode;
+    GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, languageCode);
+    Get.updateLocale(Locale(languageCode));
   }
 
   void onLogout() async {
