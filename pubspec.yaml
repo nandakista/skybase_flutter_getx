@@ -1,5 +1,5 @@
 name: skybase
-description: A new Flutter project.
+description: Code base for flutter using getx.
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 

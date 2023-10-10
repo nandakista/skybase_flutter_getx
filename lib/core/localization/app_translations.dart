@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:skybase/config/localization/languages/english.dart';
-import 'package:skybase/config/localization/languages/indonesian.dart';
+import 'package:skybase/core/localization/languages/english.dart';
+import 'package:skybase/core/localization/languages/indonesian.dart';
 
 class AppTranslation extends Translations {
   @override

@@ -1,4 +1,4 @@
-import 'package:skybase/core/base/base_controller.dart';
+import 'package:skybase/config/base/base_controller.dart';
 import 'package:skybase/data/models/repo/repo.dart';
 import 'package:skybase/data/repositories/auth/auth_repository.dart';
 import 'package:skybase/data/sources/local/cached_key.dart';

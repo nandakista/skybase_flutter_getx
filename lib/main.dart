@@ -9,8 +9,8 @@ import 'app_configuration.dart';
 import 'config/environment/app_env.dart';
 import 'config/themes/app_theme.dart';
 import 'config/themes/theme_manager.dart';
-import 'config/localization/app_translations.dart';
-import 'config/localization/locale_manager.dart';
+import 'core/localization/app_translations.dart';
+import 'core/localization/locale_manager.dart';
 import 'service_locator.dart';
 import 'ui/routes/app_routes.dart';
 
