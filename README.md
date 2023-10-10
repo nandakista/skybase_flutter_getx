@@ -5,7 +5,6 @@ A Flutter Base project that developed with :
 - Clean Architecture
 - Getx Ecosystem
 - Dio
-- Hive
 
 ## Skybase Documentation
 Read [this documentation](https://docs.google.com/document/d/1ZwO60uk2SnqVBfL-L7tmIu6ykHCB8MCHP9VxE-ijXYM/edit?usp=share_link) to understand architecture, state, pattern, and style guide of the skybase.
@@ -45,9 +44,6 @@ Note: `<env>` is `staging` | `production`
     // build ipa menggunakan version dari pubspec.yaml
     sh build_pub_ipa_adhoc.sh <env>
 
-## Download Manager
-If you use download manager you need to setup flutter_downloader from this
-[flutter_downloader](https://pub.dev/packages/flutter_downloader)
 
 ## Reference
 - [Skybase Documentation](https://docs.google.com/document/d/1ZwO60uk2SnqVBfL-L7tmIu6ykHCB8MCHP9VxE-ijXYM/edit?usp=share_link)
