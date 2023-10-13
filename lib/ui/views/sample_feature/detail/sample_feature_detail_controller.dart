@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:skybase/config/base/base_controller.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
-import 'package:skybase/data/sources/local/cached_key.dart';
 
 class SampleFeatureDetailController extends BaseController<SampleFeature> {
   final SampleFeatureRepository repository;
@@ -14,35 +13,21 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
 
   @override
   void onInit() {
-    super.onInit();
     idArgs = Get.arguments['id'];
     usernameArgs = Get.arguments['username'];
+    super.onInit();
   }
 
   @override
   void onReady() async {
-    getCache(() => getDetailUser());
-
-    // Only fetch data
-    // loadData(() => getDetailUser());
+    loadData(() => getDetailUser());
     super.onReady();
   }
 
   @override
-  void refreshPage() {
+  void onRefresh() {
     getDetailUser();
-    super.refreshPage();
   }
-
-  @override
-  String get cachedId => idArgs.toString();
-
-  @override
-  // Only save last cache
-  String get cachedKey => CachedKey.SAMPLE_FEATURE_DETAIL;
-
-  // Save every detail cache
-  // String get storageName => CachedKey.SAMPLE_FEATURE_DETAIL + cacheId;
 
   Future<void> getDetailUser() async {
     showLoading();
@@ -52,10 +37,7 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
         id: idArgs,
         username: usernameArgs,
       );
-      saveCacheAndFinish(data: response);
-
-      // Only fetch data
-      // finishLoadData(data: response);
+      finishLoadData(data: response);
       dismissLoading();
     } catch (e) {
       dismissLoading();

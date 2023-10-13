@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
-import 'package:skybase/config/auth_manager/auth_manager.dart';
 import 'package:skybase/config/base/base_controller.dart';
 import 'package:skybase/data/models/user/user.dart';
 import 'package:skybase/data/repositories/auth/auth_repository.dart';
-import 'package:skybase/data/sources/local/cached_key.dart';
 import 'package:skybase/ui/views/profile/component/repository/profile_repository_controller.dart';
 
 class ProfileController extends BaseController<User> {
@@ -13,21 +11,14 @@ class ProfileController extends BaseController<User> {
 
   @override
   void onInit() {
-    getCache(() => onGetProfile());
+    loadData(() => onGetProfile());
     super.onInit();
   }
 
   @override
-  String get cachedId => AuthManager.find.user!.id.toString();
-
-  @override
-  String get cachedKey => CachedKey.PROFILE;
-
-  @override
-  void refreshPage() {
+  void onRefresh() {
     onGetProfile();
     Get.find<ProfileRepositoryController>().onRefresh();
-    super.refreshPage();
   }
 
   void onGetProfile() async {
@@ -37,7 +28,7 @@ class ProfileController extends BaseController<User> {
         cancelToken: cancelToken,
         username: 'nandakista',
       );
-      saveCacheAndFinish(data: response);
+      finishLoadData(data: response);
       dismissLoading();
     } catch (e) {
       dismissLoading();
