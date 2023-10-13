@@ -48,22 +48,49 @@ class SampleFeatureRepositoryImpl
     required int id,
     required String username,
   }) async {
-    final SampleFeature res = await apiService.getDetailUser(
-      cancelToken: cancelToken,
-      username: username,
+    // Using cache
+    return await getCache(
+      cachedKey: CachedKey.SAMPLE_FEATURE_DETAIL,
+      cachedId: id.toString(),
+      onLoad: () async => await apiService
+          .getDetailUser(cancelToken: cancelToken, username: username)
+          .then(
+            (res) async {
+          res.followersList = await apiService.getFollowers(
+            cancelToken: cancelToken,
+            username: username,
+          );
+          res.followingList = await apiService.getFollowings(
+            cancelToken: cancelToken,
+            username: username,
+          );
+          res.repositoryList = await apiService.getRepos(
+            cancelToken: cancelToken,
+            username: username,
+          );
+          return res;
+        },
+      ),
     );
-    res.followersList = await apiService.getFollowers(
-      cancelToken: cancelToken,
-      username: username,
-    );
-    res.followingList = await apiService.getFollowings(
-      cancelToken: cancelToken,
-      username: username,
-    );
-    res.repositoryList = await apiService.getRepos(
-      cancelToken: cancelToken,
-      username: username,
-    );
-    return res;
+
+    // return await apiService
+    //     .getDetailUser(cancelToken: cancelToken, username: username)
+    //     .then(
+    //   (res) async {
+    //     res.followersList = await apiService.getFollowers(
+    //       cancelToken: cancelToken,
+    //       username: username,
+    //     );
+    //     res.followingList = await apiService.getFollowings(
+    //       cancelToken: cancelToken,
+    //       username: username,
+    //     );
+    //     res.repositoryList = await apiService.getRepos(
+    //       cancelToken: cancelToken,
+    //       username: username,
+    //     );
+    //     return res;
+    //   },
+    // );
   }
 }
