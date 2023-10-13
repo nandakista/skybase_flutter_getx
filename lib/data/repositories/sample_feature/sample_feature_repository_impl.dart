@@ -1,9 +1,15 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:skybase/config/base/cache_mixin.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
+import 'package:skybase/data/sources/local/cached_key.dart';
 import 'package:skybase/data/sources/server/sample_feature/sample_feature_sources.dart';
 
-class SampleFeatureRepositoryImpl implements SampleFeatureRepository {
+class SampleFeatureRepositoryImpl
+    with CacheMixin
+    implements SampleFeatureRepository {
   final SampleFeatureSources apiService;
 
   SampleFeatureRepositoryImpl({required this.apiService});
@@ -16,11 +22,24 @@ class SampleFeatureRepositoryImpl implements SampleFeatureRepository {
     required int page,
     required int perPage,
   }) async {
-    return await apiService.getUsers(
-      cancelToken: cancelToken,
-      page: page,
-      perPage: perPage,
-    );
+    try {
+      // Using cached
+      return await getCacheList(
+        cachedKey: CachedKey.SAMPLE_FEATURE_LIST,
+        page: page,
+        onLoad: () async => await apiService.getUsers(
+          cancelToken: cancelToken,
+          page: page,
+          perPage: perPage,
+        ),
+      );
+
+      // Without cache
+      // return await apiService.getUsers(page: page, perPage: perPage);
+    } catch (e, stack) {
+      log('$tag error = $e, $stack');
+      rethrow;
+    }
   }
 
   @override
