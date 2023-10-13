@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -13,6 +14,7 @@ import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 abstract class PaginationController<T> extends GetxController {
   GetStorageManager storage = GetStorageManager.find;
 
+  CancelToken cancelToken = CancelToken();
   int perPage = 20;
   int page = 1;
   final pagingController = PagingController<int, T>(firstPageKey: 0);
@@ -114,6 +116,7 @@ abstract class PaginationController<T> extends GetxController {
   @override
   void onClose() {
     pagingController.dispose();
+    cancelToken.cancel();
     closePage();
     super.onClose();
   }

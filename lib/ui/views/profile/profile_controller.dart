@@ -8,6 +8,7 @@ import 'package:skybase/ui/views/profile/component/repository/profile_repository
 
 class ProfileController extends BaseController<User> {
   final AuthRepository repository;
+
   ProfileController({required this.repository});
 
   @override
@@ -32,7 +33,10 @@ class ProfileController extends BaseController<User> {
   void onGetProfile() async {
     showLoading();
     try {
-      final response = await repository.getProfile(username: 'nandakista');
+      final response = await repository.getProfile(
+        cancelToken: cancelToken,
+        username: 'nandakista',
+      );
       saveCacheAndFinish(data: response);
       dismissLoading();
     } catch (e) {

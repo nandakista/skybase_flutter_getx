@@ -26,6 +26,7 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
   void getUsers() async {
     try {
       final response = await repository.getUsers(
+        cancelToken: cancelToken,
         page: page,
         perPage: perPage,
       );

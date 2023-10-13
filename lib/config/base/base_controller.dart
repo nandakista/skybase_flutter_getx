@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:skybase/data/sources/local/cached_model_converter.dart';
@@ -12,6 +13,7 @@ import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 abstract class BaseController<T> extends GetxController {
   GetStorageManager storage = GetStorageManager.find;
 
+  CancelToken cancelToken = CancelToken();
   RxBool loadingStatus = false.obs;
   RxString errorMessage = ''.obs;
 
@@ -33,6 +35,10 @@ abstract class BaseController<T> extends GetxController {
   /// Must be implemented when you cached object data,
   /// optional when you cached list data
   String get cachedId;
+
+  /// **Note:**
+  /// Set this custom cache id when your **data_id** in data structure is not *id*
+  String? get customCacheId => null;
 
   String get cachedKey;
 
@@ -99,6 +105,7 @@ abstract class BaseController<T> extends GetxController {
   }
 
   String getId(Map<String, dynamic> cache) {
+    if (customCacheId != null) return customCacheId.toString();
     return (cache['id']).toString();
   }
 
@@ -142,6 +149,7 @@ abstract class BaseController<T> extends GetxController {
   @override
   void onClose() {
     closePage();
+    cancelToken.cancel();
     super.onClose();
   }
 }

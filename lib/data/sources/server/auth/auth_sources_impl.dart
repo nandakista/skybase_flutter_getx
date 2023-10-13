@@ -11,7 +11,7 @@ import 'package:skybase/data/models/user/user.dart';
 
 import 'auth_sources.dart';
 
-class AuthSourcesImpl implements AuthSources {
+class AuthSourcesImpl extends AuthSources {
   String tag = 'Auth Api';
 
   @override
@@ -30,8 +30,8 @@ class AuthSourcesImpl implements AuthSources {
         },
       );
       return User.fromJson(ApiResponse.fromJson(response.data).data);
-    } catch (e) {
-      debugPrint('$tag Error = $e');
+    } catch (e, stack) {
+      debugPrint('$tag Error = $e, $stack');
       rethrow;
     }
   }
@@ -57,39 +57,45 @@ class AuthSourcesImpl implements AuthSources {
         ),
       );
       return User.fromJson(ApiResponse.fromJson(response.data).data);
-    } catch (e) {
-      debugPrint('$tag Error = $e');
+    } catch (e, stack) {
+      debugPrint('$tag Error = $e, $stack');
       rethrow;
     }
   }
 
   @override
-  Future<User> getProfile({required String username}) async {
+  Future<User> getProfile({
+    CancelToken? cancelToken,
+    required String username,
+  }) async {
     try {
       final res = await ApiRequest.get(
         url: '/users/$username',
-        useToken: true,
+        cancelToken: cancelToken,
       );
       return User.fromJson(res.data);
-    } catch (e) {
-      debugPrint('$tag Error = $e');
+    } catch (e, stack) {
+      debugPrint('$tag Error = $e, $stack');
       rethrow;
     }
   }
 
   @override
-  Future<List<Repo>> getProfileRepository({required String username}) async {
+  Future<List<Repo>> getProfileRepository({
+    CancelToken? cancelToken,
+    required String username,
+  }) async {
     try {
       final res = await ApiRequest.get(
         url: '/users/$username/repos?type=all',
-        useToken: true,
+        cancelToken: cancelToken,
       );
       return (res.data as List)
           .map((data) => Repo.fromJson(data))
           .toList()
           .cast<Repo>();
-    } catch (e) {
-      debugPrint('$tag Error = $e');
+    } catch (e, stack) {
+      debugPrint('$tag Error = $e, $stack');
       rethrow;
     }
   }

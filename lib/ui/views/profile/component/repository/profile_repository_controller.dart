@@ -5,6 +5,7 @@ import 'package:skybase/data/sources/local/cached_key.dart';
 
 class ProfileRepositoryController extends BaseController<Repo> {
   final AuthRepository repository;
+
   ProfileRepositoryController({required this.repository});
 
   @override
@@ -28,7 +29,10 @@ class ProfileRepositoryController extends BaseController<Repo> {
   void getRepository() async {
     showLoading();
     try {
-      final response = await repository.getProfileRepository(username: 'nandakista');
+      final response = await repository.getProfileRepository(
+        cancelToken: cancelToken,
+        username: 'nandakista',
+      );
       saveCacheAndFinish(list: response);
       dismissLoading();
     } catch (e) {
@@ -36,5 +40,4 @@ class ProfileRepositoryController extends BaseController<Repo> {
       showError(e.toString());
     }
   }
-
 }

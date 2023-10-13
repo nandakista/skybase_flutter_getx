@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/config/base/base_controller.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
@@ -49,6 +48,7 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
     showLoading();
     try {
       final response = await repository.getDetailUser(
+        cancelToken: cancelToken,
         id: idArgs,
         username: usernameArgs,
       );
