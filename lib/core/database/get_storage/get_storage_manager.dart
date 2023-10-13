@@ -19,7 +19,7 @@ class GetStorageManager {
   final _box = Get.find<GetStorage>();
 
   /// If you want to save Object/Model don't forget to encode toJson
-  Future<void> save(String name, dynamic value) async {
+  Future<void> save<T>(String name, T value) async {
     await _box.write(name, value);
   }
 
