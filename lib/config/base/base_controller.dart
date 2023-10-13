@@ -37,8 +37,8 @@ abstract class BaseController<T> extends GetxController {
   String get cachedId;
 
   /// **Note:**
-  /// Set this custom cache id when your **data_id** in data structure is not *id*
-  String? get customCacheId => null;
+  /// Set this custom field id when your **data_id** in data structure is not *id*
+  String? get customFieldId => null;
 
   String get cachedKey;
 
@@ -105,7 +105,7 @@ abstract class BaseController<T> extends GetxController {
   }
 
   String getId(Map<String, dynamic> cache) {
-    if (customCacheId != null) return customCacheId.toString();
+    if (customFieldId != null) return customFieldId.toString();
     return (cache['id']).toString();
   }
 
