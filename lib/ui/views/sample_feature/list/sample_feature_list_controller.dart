@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:skybase/config/base/pagination_controller.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
-import 'package:skybase/data/sources/local/cached_key.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_view.dart';
 
 class SampleFeatureListController extends PaginationController<SampleFeature> {
@@ -13,15 +12,9 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
 
   @override
   void onInit() {
-    getCache(() => getUsers());
-
-    // Only fetch data
-    // loadData(() => getUsers());
+    loadData(() => getUsers());
     super.onInit();
   }
-
-  @override
-  String get cachedKey => CachedKey.SAMPLE_FEATURE_LIST;
 
   void getUsers() async {
     try {
@@ -30,10 +23,7 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
         page: page,
         perPage: perPage,
       );
-      saveCacheAndFinish(data: response);
-
-      // Only fetch data
-      // finishLoadData(data: response);
+      loadNextData(data: response);
     } catch (e) {
       debugPrint('Error : $e');
       showError(e.toString());

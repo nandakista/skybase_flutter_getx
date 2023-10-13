@@ -1,7 +1,6 @@
 import 'package:skybase/config/base/base_controller.dart';
 import 'package:skybase/data/models/repo/repo.dart';
 import 'package:skybase/data/repositories/auth/auth_repository.dart';
-import 'package:skybase/data/sources/local/cached_key.dart';
 
 class ProfileRepositoryController extends BaseController<Repo> {
   final AuthRepository repository;
@@ -10,21 +9,14 @@ class ProfileRepositoryController extends BaseController<Repo> {
 
   @override
   void onInit() {
-    getCache(() => getRepository());
+    loadData(() => getRepository());
     super.onInit();
   }
 
   @override
-  void refreshPage() {
+  void onRefresh() {
     getRepository();
-    super.refreshPage();
   }
-
-  @override
-  String get cachedId => throw UnimplementedError();
-
-  @override
-  String get cachedKey => CachedKey.USER_REPOSITORY;
 
   void getRepository() async {
     showLoading();
@@ -33,7 +25,7 @@ class ProfileRepositoryController extends BaseController<Repo> {
         cancelToken: cancelToken,
         username: 'nandakista',
       );
-      saveCacheAndFinish(list: response);
+      finishLoadData(list: response);
       dismissLoading();
     } catch (e) {
       dismissLoading();
