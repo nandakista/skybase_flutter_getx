@@ -6,12 +6,24 @@ import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
    Varcant
    nanda.kista@gmail.com
 */
+enum RequestState { initial, empty, loading, success, error, shimmering }
+
+extension RequestStateExt on RequestState {
+  bool get isInitial => this == RequestState.initial;
+  bool get isEmpty => this == RequestState.empty;
+  bool get isLoading => this == RequestState.loading;
+  bool get isSuccess => this == RequestState.success;
+  bool get isError => this == RequestState.error;
+  bool get isShimmering => this == RequestState.shimmering;
+}
+
 abstract class BaseController<T> extends GetxController {
   GetStorageManager storage = GetStorageManager.find;
 
   CancelToken cancelToken = CancelToken();
-  RxBool loadingStatus = false.obs;
   RxString errorMessage = ''.obs;
+
+  Rx<RequestState> state = RequestState.initial.obs;
 
   int perPage = 20;
   int page = 1;
@@ -19,26 +31,28 @@ abstract class BaseController<T> extends GetxController {
   final dataObj = Rxn<T>();
   RxList<T> dataList = RxList<T>([]);
 
-  bool get isLoading => loadingStatus.isTrue;
+  bool get isInitial => state.value.isInitial;
 
-  bool get isError => errorMessage.value.isNotEmpty;
+  bool get isLoading => state.value.isLoading;
 
-  bool get isEmpty => dataList.isEmpty && dataObj.value == null;
+  bool get isShimmering => isLoading && !isEmpty;
 
-  bool get isSuccess => !isEmpty && !isError && !isLoading;
+  bool get isError => errorMessage.value.isNotEmpty && state.value.isError;
+
+  bool get isEmpty => state.value.isEmpty;
+
+  bool get isSuccess => !isEmpty && !isError && !isLoading && state.value.isSuccess;
 
   void onRefresh() {}
 
   void showLoading() {
-    loadingStatus.value = true;
+    state.value = RequestState.loading;
     errorMessage.value = '';
   }
 
-  void dismissLoading() => loadingStatus.value = false;
-
   void showError(String message) {
     errorMessage.value = message;
-    dismissLoading();
+    state.value = RequestState.error;
   }
 
   void loadData(Function() onLoad) {
@@ -54,6 +68,11 @@ abstract class BaseController<T> extends GetxController {
   }) {
     if (data != null) dataObj.value = data;
     if (list.isNotEmpty) dataList.value = list;
+    if (dataList.isEmpty && dataObj.value == null) {
+      state.value = RequestState.empty;
+    } else {
+      state.value = RequestState.success;
+    }
   }
 
   @override

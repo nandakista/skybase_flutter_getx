@@ -10,30 +10,32 @@ class FollowerTabView extends GetView<SampleFeatureDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      separatorBuilder: (context, _) => const Divider(),
-      itemCount: controller.dataObj.value?.followersList?.length ?? 0,
-      itemBuilder: (_, index) {
-        final SampleFeature? user =
-            controller.dataObj.value?.followersList![index];
-        return (user == null)
-            ? const Center(
-                child: Text('Tidak ada follower'),
-              )
-            : ListTile(
-                leading: SkyImage(
-                  size: 30,
-                  shapeImage: ShapeImage.circle,
-                  src: '${user.avatarUrl}&s=200',
-                  // onTap: () => controller.onChooseUser(user: user),
-                ),
-                title: Text(user.username.toString()),
-                subtitle: Text(
-                  user.gitUrl.toString(),
-                  style: AppStyle.body2,
-                ),
-              );
-      },
+    return Obx(
+      () => (controller.dataObj.value!.followersList!.isEmpty)
+          ? const Center(
+              child: Text('Tidak ada follower'),
+            )
+          : ListView.separated(
+              separatorBuilder: (context, _) => const Divider(),
+              itemCount: controller.dataObj.value?.followersList?.length ?? 0,
+              itemBuilder: (_, index) {
+                final SampleFeature? user =
+                    controller.dataObj.value?.followersList![index];
+                return ListTile(
+                  leading: SkyImage(
+                    size: 30,
+                    shapeImage: ShapeImage.circle,
+                    src: '${user?.avatarUrl}&s=200',
+                    // onTap: () => controller.onChooseUser(user: user),
+                  ),
+                  title: Text(user?.username ?? ''),
+                  subtitle: Text(
+                    user?.gitUrl ?? '',
+                    style: AppStyle.body2,
+                  ),
+                );
+              },
+            ),
     );
   }
 }

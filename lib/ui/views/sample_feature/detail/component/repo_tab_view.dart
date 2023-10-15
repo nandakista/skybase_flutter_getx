@@ -12,28 +12,29 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => ListView.separated(
-        separatorBuilder: (context, _) => const Divider(),
-        itemCount: controller.dataObj.value?.repositoryList?.length ?? 0,
-        padding: const EdgeInsets.only(top: 8),
-        itemBuilder: (_, index) {
-          final Repo? repos = controller.dataObj.value?.repositoryList![index];
-          return (repos == null)
-              ? const Center(
-                  child: Text('User belum mem-follow siapapun'),
-                )
-              : ListTile(
+      () => controller.dataObj.value!.repositoryList!.isEmpty
+          ? const Center(
+              child: Text('User belum mem-follow siapapun'),
+            )
+          : ListView.separated(
+              separatorBuilder: (context, _) => const Divider(),
+              itemCount: controller.dataObj.value?.repositoryList?.length ?? 0,
+              padding: const EdgeInsets.only(top: 8),
+              itemBuilder: (_, index) {
+                final Repo? repos =
+                    controller.dataObj.value?.repositoryList![index];
+                return ListTile(
                   leading: SkyImage(
                     size: 30,
                     shapeImage: ShapeImage.circle,
-                    src: '${repos.owner.avatarUrl}&s=200',
+                    src: '${repos?.owner.avatarUrl}&s=200',
                   ),
-                  title: Text(repos.name.toString(), style: AppStyle.body2),
+                  title: Text(repos?.name ?? '', style: AppStyle.body2),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Language: ${repos.language ?? '--'}',
+                        'Language: ${repos?.language ?? '--'}',
                         style: AppStyle.body3,
                       ),
                       const SizedBox(height: 8),
@@ -49,7 +50,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                   size: 16,
                                 ),
                                 Text(
-                                  ' ${repos.totalStar}',
+                                  ' ${repos?.totalStar}',
                                   style: AppStyle.body3,
                                 ),
                               ],
@@ -61,7 +62,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                   size: 16,
                                 ),
                                 Text(
-                                  ' ${repos.totalWatch}',
+                                  ' ${repos?.totalWatch}',
                                   style: AppStyle.body3,
                                 ),
                               ],
@@ -74,7 +75,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                   color: AppColors.systemDarkGrey,
                                 ),
                                 Text(
-                                  ' ${repos.totalFork}',
+                                  ' ${repos?.totalFork}',
                                   style: AppStyle.body3,
                                 ),
                               ],
@@ -85,8 +86,8 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                     ],
                   ),
                 );
-        },
-      ),
+              },
+            ),
     );
   }
 }

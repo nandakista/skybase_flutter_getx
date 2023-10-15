@@ -35,7 +35,11 @@ class SampleFeatureRepositoryImpl
       );
 
       // Without cache
-      // return await apiService.getUsers(page: page, perPage: perPage);
+      // return await apiService.getUsers(
+      //   cancelToken: cancelToken,
+      //   page: page,
+      //   perPage: perPage,
+      // );
     } catch (e, stack) {
       log('$tag error = $e, $stack');
       rethrow;
@@ -55,7 +59,7 @@ class SampleFeatureRepositoryImpl
       onLoad: () async => await apiService
           .getDetailUser(cancelToken: cancelToken, username: username)
           .then(
-            (res) async {
+        (res) async {
           res.followersList = await apiService.getFollowers(
             cancelToken: cancelToken,
             username: username,

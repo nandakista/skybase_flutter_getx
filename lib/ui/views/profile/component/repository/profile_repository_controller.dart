@@ -26,9 +26,7 @@ class ProfileRepositoryController extends BaseController<Repo> {
         username: 'nandakista',
       );
       finishLoadData(list: response);
-      dismissLoading();
     } catch (e) {
-      dismissLoading();
       showError(e.toString());
     }
   }

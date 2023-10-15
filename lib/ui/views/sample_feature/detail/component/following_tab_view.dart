@@ -10,30 +10,32 @@ class FollowingTabView extends GetView<SampleFeatureDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      separatorBuilder: (context, _) => const Divider(),
-      itemCount: controller.dataObj.value?.followingList?.length ?? 0,
-      itemBuilder: (_, index) {
-        final SampleFeature? user =
-            controller.dataObj.value?.followingList![index];
-        return (user == null)
-            ? const Center(
-                child: Text('User belum mem-follow siapapun'),
-              )
-            : ListTile(
-                leading: SkyImage(
-                  size: 30,
-                  shapeImage: ShapeImage.circle,
-                  src: '${user.avatarUrl}&s=200',
-                  // onTap: () => controller.onChooseUser(user: user),
-                ),
-                title: Text(user.username.toString()),
-                subtitle: Text(
-                  user.gitUrl.toString(),
-                  style: AppStyle.body2,
-                ),
-              );
-      },
+    return Obx(
+      () => controller.dataObj.value!.followingList!.isEmpty
+          ? const Center(
+              child: Text('User belum mem-follow siapapun'),
+            )
+          : ListView.separated(
+              separatorBuilder: (context, _) => const Divider(),
+              itemCount: controller.dataObj.value?.followingList?.length ?? 0,
+              itemBuilder: (_, index) {
+                final SampleFeature? user =
+                    controller.dataObj.value?.followingList![index];
+                return ListTile(
+                  leading: SkyImage(
+                    size: 30,
+                    shapeImage: ShapeImage.circle,
+                    src: '${user?.avatarUrl}&s=200',
+                    // onTap: () => controller.onChooseUser(user: user),
+                  ),
+                  title: Text(user?.username ?? ''),
+                  subtitle: Text(
+                    user?.gitUrl ?? '',
+                    style: AppStyle.body2,
+                  ),
+                );
+              },
+            ),
     );
   }
 }

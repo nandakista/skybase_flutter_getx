@@ -29,9 +29,7 @@ class ProfileController extends BaseController<User> {
         username: 'nandakista',
       );
       finishLoadData(data: response);
-      dismissLoading();
     } catch (e) {
-      dismissLoading();
       showError(e.toString());
     }
   }

@@ -38,9 +38,7 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
         username: usernameArgs,
       );
       finishLoadData(data: response);
-      dismissLoading();
     } catch (e) {
-      dismissLoading();
       showError(e.toString());
     }
   }
