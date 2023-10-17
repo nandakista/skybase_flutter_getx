@@ -20,20 +20,21 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
 
   @override
   void onReady() async {
-    loadData(() => getDetailUser());
+    loadData(() => getDetailUser(isRefresh: false));
     super.onReady();
   }
 
   @override
-  void onRefresh() {
-    getDetailUser();
+  void onRefresh() async {
+    await getDetailUser(isRefresh: true);
   }
 
-  Future<void> getDetailUser() async {
+  Future<void> getDetailUser({required bool isRefresh}) async {
     showLoading();
     try {
       final response = await repository.getDetailUser(
         cancelToken: cancelToken,
+        isRefresh: isRefresh,
         id: idArgs,
         username: usernameArgs,
       );

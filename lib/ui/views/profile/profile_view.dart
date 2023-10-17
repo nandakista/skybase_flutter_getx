@@ -38,8 +38,7 @@ class ProfileView extends GetView<ProfileController> {
           emptyEnabled: controller.isEmpty,
           onRetry: controller.onRefresh,
           onRefresh: controller.onRefresh,
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
+          child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [

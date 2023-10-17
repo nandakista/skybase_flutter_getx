@@ -23,7 +23,6 @@ class ListUtilsView extends StatelessWidget {
                 loadingEnabled: false,
                 errorEnabled: false,
                 onRetry: () {},
-                onRefresh: () {},
                 emptyEnabled: dummyData.isEmpty,
                 child: SkyGroupedListView<dynamic, String>(
                   shrinkWrap: true,

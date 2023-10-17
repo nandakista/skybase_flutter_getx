@@ -10,6 +10,7 @@ abstract interface class SampleFeatureRepository {
 
   Future<SampleFeature> getDetailUser({
     required CancelToken cancelToken,
+    required bool isRefresh,
     required int id,
     required String username,
   });
