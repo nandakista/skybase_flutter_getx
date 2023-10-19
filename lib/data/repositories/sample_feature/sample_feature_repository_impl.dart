@@ -49,7 +49,6 @@ class SampleFeatureRepositoryImpl
   @override
   Future<SampleFeature> getDetailUser({
     required CancelToken cancelToken,
-    required bool isRefresh,
     required int id,
     required String username,
   }) async {
@@ -57,7 +56,6 @@ class SampleFeatureRepositoryImpl
     return await getCache(
       cachedKey: CachedKey.SAMPLE_FEATURE_DETAIL,
       cachedId: id.toString(),
-      isRefresh: isRefresh,
       onLoad: () async => await apiService
           .getDetailUser(cancelToken: cancelToken, username: username)
           .then(

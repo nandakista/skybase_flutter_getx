@@ -63,20 +63,12 @@ mixin CacheMixin {
     required String? cachedId,
     bool onlyCacheLast = false,
     String? customFieldId,
-    bool? isRefresh,
   }) async {
     T result;
     String key = cachedKey;
-    if (!onlyCacheLast) key += cachedId.toString();
+    if (!onlyCacheLast) key = '$cachedKey/$cachedId';
     log('$cachedTag cached key = $key');
     dynamic cache = await storage.get(key);
-
-    if (isRefresh == true) {
-      return await _saveCache(
-        cachedKey: key,
-        onLoad: onLoad,
-      );
-    }
 
     if (storage.has(key) && cache.toString().isNotNullAndNotEmpty) {
       Map<String, dynamic> cacheMap = json.decode(cache);

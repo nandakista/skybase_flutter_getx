@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_controller.dart';
 import 'package:skybase/ui/views/profile/profile_view.dart';
+import 'package:skybase/ui/views/sample_feature/list/basic/sample_feature_list_basic_view.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_view.dart';
 import 'package:skybase/ui/views/utils/utils_view.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
@@ -22,7 +23,7 @@ class MainNavView extends GetView<MainNavController> {
             controller: controller.pageController,
             onPageChanged: (index) => controller.index.value = index,
             children: const [
-              SampleFeatureListView(),
+              SampleFeatureListBasicView(),
               UtilsView(),
               ProfileView(),
             ],

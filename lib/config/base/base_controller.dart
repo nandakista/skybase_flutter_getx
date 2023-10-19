@@ -10,10 +10,15 @@ enum RequestState { initial, empty, loading, success, error, shimmering }
 
 extension RequestStateExt on RequestState {
   bool get isInitial => this == RequestState.initial;
+
   bool get isEmpty => this == RequestState.empty;
+
   bool get isLoading => this == RequestState.loading;
+
   bool get isSuccess => this == RequestState.success;
+
   bool get isError => this == RequestState.error;
+
   bool get isShimmering => this == RequestState.shimmering;
 }
 
@@ -42,6 +47,14 @@ abstract class BaseController<T> extends GetxController {
   bool get isEmpty => state.value.isEmpty;
 
   bool get isSuccess => !isEmpty && !isError && !isLoading && state.value.isSuccess;
+
+  Future<void> deleteCached(String cacheKey, {String? cacheId}) async {
+    if (cacheId != null) {
+      await storage.delete('$cacheKey/$cacheId');
+    } else {
+      await storage.delete(cacheKey.toString());
+    }
+  }
 
   void onRefresh() {}
 

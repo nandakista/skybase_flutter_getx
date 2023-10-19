@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:skybase/config/base/base_controller.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
+import 'package:skybase/data/sources/local/cached_key.dart';
 
 class SampleFeatureDetailController extends BaseController<SampleFeature> {
   final SampleFeatureRepository repository;
@@ -20,21 +21,24 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
 
   @override
   void onReady() async {
-    loadData(() => getDetailUser(isRefresh: false));
+    loadData(() => getDetailUser());
     super.onReady();
   }
 
   @override
   void onRefresh() async {
-    await getDetailUser(isRefresh: true);
+    await deleteCached(
+      CachedKey.SAMPLE_FEATURE_DETAIL,
+      cacheId: idArgs.toString(),
+    );
+    await getDetailUser();
   }
 
-  Future<void> getDetailUser({required bool isRefresh}) async {
+  Future<void> getDetailUser() async {
     showLoading();
     try {
       final response = await repository.getDetailUser(
         cancelToken: cancelToken,
-        isRefresh: isRefresh,
         id: idArgs,
         username: usernameArgs,
       );
