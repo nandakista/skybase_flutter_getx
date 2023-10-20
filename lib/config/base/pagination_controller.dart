@@ -22,6 +22,10 @@ abstract class PaginationController<T> extends GetxController {
     pagingController.refresh();
   }
 
+  Future<void> deleteCached(String cacheKey) async {
+    await storage.delete(cacheKey.toString());
+  }
+
   void loadData(Function() onLoad) {
     pagingController.addPageRequestListener((page) => onLoad());
   }
