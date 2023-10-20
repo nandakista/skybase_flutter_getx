@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:skybase/core/localization/locale_helper.dart';
-import 'package:skybase/core/database/get_storage/get_storage_key.dart';
-import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/database/storage/storage_key.dart';
+import 'package:skybase/core/database/storage/storage_manager.dart';
 
 /* Created by
    Varcant
@@ -15,8 +15,7 @@ extension DateTimeExt on DateTime {
     String format = 'dd MMM yyyy',
     String? idFormat,
   ]) {
-    String local =
-        GetStorageManager().get(GetStorageKey.CURRENT_LOCALE) ?? 'id';
+    String local = StorageManager().get(StorageKey.CURRENT_LOCALE) ?? 'id';
     return LocaleHelper.builder<String>(
       en: DateFormat(format, local).format(this),
       id: DateFormat(idFormat ?? format, local).format(this),

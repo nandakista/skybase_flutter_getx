@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/database/get_storage/get_storage_key.dart';
-import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/database/storage/storage_key.dart';
+import 'package:skybase/core/database/storage/storage_manager.dart';
 import 'package:skybase/config/themes/app_colors.dart';
 import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/widgets/sky_dialog.dart';
@@ -12,6 +12,8 @@ import 'package:skybase/ui/widgets/sky_dialog.dart';
 */
 class LocaleManager {
   static LocaleManager get find => Get.find<LocaleManager>();
+
+  StorageManager storage = StorageManager.find;
 
   final Map<String, Locale> locales = {
     'English': const Locale('en'),
@@ -62,16 +64,12 @@ class LocaleManager {
   }
 
   void updateLocale(Locale locale) {
-    GetStorageManager.find.save(
-      GetStorageKey.CURRENT_LOCALE,
-      locale.languageCode,
-    );
+    storage.save(StorageKey.CURRENT_LOCALE, locale.languageCode);
     Get.updateLocale(locale);
   }
 
   Locale getCurrentLocale() {
-    String? currentLanguageCode =
-        GetStorageManager.find.get(GetStorageKey.CURRENT_LOCALE);
+    String? currentLanguageCode = storage.get(StorageKey.CURRENT_LOCALE);
     if (currentLanguageCode != null) {
       if (currentLanguageCode == 'en') {
         return const Locale('en');
@@ -79,7 +77,7 @@ class LocaleManager {
         return const Locale('id');
       }
     } else {
-      GetStorageManager.find.save(GetStorageKey.CURRENT_LOCALE, "en");
+      storage.save(StorageKey.CURRENT_LOCALE, "en");
       return const Locale('en');
     }
   }

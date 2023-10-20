@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:skybase/core/database/get_storage/get_storage_key.dart';
-import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/database/storage/storage_key.dart';
+import 'package:skybase/core/database/storage/storage_manager.dart';
 
 /* Created by
    Varcant
@@ -9,21 +9,25 @@ import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
 class ThemeManager extends GetxService {
   static ThemeManager get find => Get.find<ThemeManager>();
 
+  StorageManager storage = StorageManager.find;
+
   RxBool isDark = false.obs;
+
   void toDarkMode() => isDark.value = true;
+
   void toLightMode() => isDark.value = false;
 
   @override
   void onReady() async {
-    isDark.value = await GetStorageManager.find.getAwait(GetStorageKey.IS_DARK_THEME) ?? false;
+    isDark.value = await storage.getAwait(StorageKey.IS_DARK_THEME) ?? false;
     super.onReady();
   }
 
   Future<Rx<bool>> changeTheme() async {
     if (isDark.isTrue) {
-      GetStorageManager.find.save(GetStorageKey.IS_DARK_THEME, false);
+      storage.save(StorageKey.IS_DARK_THEME, false);
     } else {
-      GetStorageManager.find.save(GetStorageKey.IS_DARK_THEME, true);
+      storage.save(StorageKey.IS_DARK_THEME, true);
     }
     return isDark.toggle();
   }

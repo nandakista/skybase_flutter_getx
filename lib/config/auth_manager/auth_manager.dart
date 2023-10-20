@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:skybase/config/auth_manager/auth_state.dart';
-import 'package:skybase/core/database/get_storage/get_storage_key.dart';
-import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/database/storage/storage_key.dart';
+import 'package:skybase/core/database/storage/storage_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/config/themes/theme_manager.dart';
 import 'package:skybase/data/models/user/user.dart';
@@ -23,7 +23,7 @@ class AuthManager extends GetxService {
   Stream<AuthState?> get stream => authState.stream;
   AuthState? get state => authState.value;
 
-  GetStorageManager getStorage = GetStorageManager.find;
+  StorageManager getStorage = StorageManager.find;
   SecureStorageManager secureStorage = SecureStorageManager.find;
   ThemeManager themeManager = ThemeManager.find;
 
@@ -76,7 +76,7 @@ class AuthManager extends GetxService {
   /// Check if app is first time installed. It will navigate to Introduction Page
   void checkFirstInstall() async {
     final bool isFirstInstall =
-        await getStorage.getAwait(GetStorageKey.FIRST_INSTALL) ?? true;
+        await getStorage.getAwait(StorageKey.FIRST_INSTALL) ?? true;
     if (isFirstInstall) {
       await secureStorage.setToken(value: '');
       authState.value = const AuthState(appStatus: AppType.FIRST_INSTALL);
@@ -88,7 +88,7 @@ class AuthManager extends GetxService {
   /// Checking App Theme set it before app display
   Future<void> checkAppTheme() async {
     final bool isDarkTheme =
-        await getStorage.getAwait(GetStorageKey.IS_DARK_THEME) ?? false;
+        await getStorage.getAwait(StorageKey.IS_DARK_THEME) ?? false;
     if (isDarkTheme) {
       themeManager.toDarkMode();
     } else {
@@ -101,7 +101,7 @@ class AuthManager extends GetxService {
   Future<void> checkUser() async {
     // TODO : Add your logic check user here
     final String? token = await secureStorage.getToken();
-    if(token != null && token != '') {
+    if (token != null && token != '') {
       setAuth();
     } else {
       logout();
@@ -153,14 +153,14 @@ class AuthManager extends GetxService {
   }
 
   Future<void> saveUserData({required User user}) async {
-    await getStorage.save(GetStorageKey.USERS, user.toJson());
+    await getStorage.save(StorageKey.USERS, user.toJson());
   }
 
   /// Get User data from GetStorage
   /// * No need to decode or call fromJson again when you used this helper
   User? get user {
-    if (getStorage.has(GetStorageKey.USERS)) {
-      return User.fromJson(getStorage.get(GetStorageKey.USERS));
+    if (getStorage.has(StorageKey.USERS)) {
+      return User.fromJson(getStorage.get(StorageKey.USERS));
     } else {
       return null;
     }

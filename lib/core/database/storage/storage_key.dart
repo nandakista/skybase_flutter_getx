@@ -1,4 +1,4 @@
-class GetStorageKey {
+class StorageKey {
   static const STORAGE_NAME = 'AppGetStorage';
 
   static const FIRST_INSTALL = 'first_install';

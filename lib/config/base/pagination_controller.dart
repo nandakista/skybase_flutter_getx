@@ -2,14 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/database/storage/storage_manager.dart';
 
 /* Created by
    Varcant
    nanda.kista@gmail.com
 */
 abstract class PaginationController<T> extends GetxController {
-  GetStorageManager storage = GetStorageManager.find;
+  StorageManager storage = StorageManager.find;
 
   CancelToken cancelToken = CancelToken();
   int perPage = 20;

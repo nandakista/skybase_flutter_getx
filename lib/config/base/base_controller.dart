@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/database/storage/storage_manager.dart';
 
 /* Created by
    Varcant
@@ -23,7 +23,7 @@ extension RequestStateExt on RequestState {
 }
 
 abstract class BaseController<T> extends GetxController {
-  GetStorageManager storage = GetStorageManager.find;
+  StorageManager storage = StorageManager.find;
 
   CancelToken cancelToken = CancelToken();
   RxString errorMessage = ''.obs;

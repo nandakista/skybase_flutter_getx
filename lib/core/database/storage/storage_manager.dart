@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:skybase/core/database/get_storage/get_storage_key.dart';
+import 'package:skybase/core/database/storage/storage_key.dart';
 
 /* Created by
    Varcant
@@ -14,8 +14,8 @@ import 'package:skybase/core/database/get_storage/get_storage_key.dart';
 ///
 /// Format -> Key == BoxName,
 /// So one box contains one key --> One Box = One Data.
-class GetStorageManager {
-  static GetStorageManager get find => Get.find<GetStorageManager>();
+class StorageManager {
+  static StorageManager get find => Get.find<StorageManager>();
   final _box = Get.find<GetStorage>();
 
   /// If you want to save Object/Model don't forget to encode toJson
@@ -50,8 +50,8 @@ class GetStorageManager {
 
   Future<void> logout() async {
     try {
-      await GetStorage(GetStorageKey.STORAGE_NAME).erase();
-      save(GetStorageKey.FIRST_INSTALL, false);
+      await GetStorage(StorageKey.STORAGE_NAME).erase();
+      save(StorageKey.FIRST_INSTALL, false);
     } catch (e) {
       debugPrint(e.toString());
     }

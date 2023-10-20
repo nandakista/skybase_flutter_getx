@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/database/get_storage/get_storage_key.dart';
-import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/database/storage/storage_key.dart';
+import 'package:skybase/core/database/storage/storage_manager.dart';
 import 'package:skybase/ui/views/login/login_view.dart';
 
 class IntroController extends GetxController {
@@ -28,7 +28,7 @@ class IntroController extends GetxController {
         duration: const Duration(milliseconds: 260),
       );
     } else {
-      GetStorageManager.find.save(GetStorageKey.FIRST_INSTALL, false);
+      StorageManager.find.save(StorageKey.FIRST_INSTALL, false);
       Get.offAllNamed(LoginView.route);
     }
   }

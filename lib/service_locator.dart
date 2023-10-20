@@ -14,8 +14,8 @@ import 'config/network/api_config.dart';
 import 'config/themes/app_theme.dart';
 import 'config/themes/theme_manager.dart';
 import 'config/app/app_info.dart';
-import 'core/database/get_storage/get_storage_key.dart';
-import 'core/database/get_storage/get_storage_manager.dart';
+import 'core/database/storage/storage_key.dart';
+import 'core/database/storage/storage_manager.dart';
 import 'core/database/secure_storage/secure_storage_manager.dart';
 
 /* Created by
@@ -36,19 +36,19 @@ class ServiceLocator {
     if (Platform.isIOS) {
       final dir = await getLibraryDirectory();
       await Get.putAsync(
-        () async => GetStorage(GetStorageKey.STORAGE_NAME, dir.path),
+        () async => GetStorage(StorageKey.STORAGE_NAME, dir.path),
       );
-      await GetStorage(GetStorageKey.STORAGE_NAME, dir.path).initStorage;
+      await GetStorage(StorageKey.STORAGE_NAME, dir.path).initStorage;
     } else {
       await Get.putAsync(() async => GetStorage());
-      await GetStorage(GetStorageKey.STORAGE_NAME).initStorage;
+      await GetStorage(StorageKey.STORAGE_NAME).initStorage;
     }
     Get.putAsync(() async => const FlutterSecureStorage());
     Get.lazyPut(() => DioClient());
   }
 
   static Future<void> _initService() async {
-    Get.lazyPut(() => GetStorageManager());
+    Get.lazyPut(() => StorageManager());
     Get.lazyPut(() => SecureStorageManager());
     Get.lazyPut(() => ThemeManager());
     Get.lazyPut(() => LocaleManager());
