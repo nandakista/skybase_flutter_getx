@@ -16,7 +16,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SkyAppBar.primary(title: controller.dataObj.value?.username),
+      appBar: SkyAppBar.primary(title: controller.usernameArgs),
       body: SafeArea(
         child: Obx(
           () => SkyView.page(
