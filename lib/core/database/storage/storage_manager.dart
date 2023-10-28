@@ -16,24 +16,24 @@ import 'package:skybase/core/database/storage/storage_key.dart';
 /// So one box contains one key --> One Box = One Data.
 class StorageManager {
   static StorageManager get find => Get.find<StorageManager>();
-  final _box = Get.find<GetStorage>();
+  final box = Get.find<GetStorage>();
 
   /// If you want to save Object/Model don't forget to encode toJson
   Future<void> save<T>(String name, T value) async {
-    await _box.write(name, value);
+    await box.write(name, value);
   }
 
   Future<void> delete(String name) async {
-    await _box.remove(name);
+    await box.remove(name);
   }
 
   /// If you want to get Object/Model don't forget to decode fromJson
   dynamic get<T>(String name) {
-    return _box.read<T>(name);
+    return box.read<T>(name);
   }
 
   bool has(String name) {
-    return _box.hasData(name);
+    return box.hasData(name);
   }
 
   String encodeList<T>(List<T> data) {
@@ -45,7 +45,7 @@ class StorageManager {
   }
 
   dynamic getAwait(String name) async {
-    return await _box.read(name);
+    return await box.read(name);
   }
 
   Future<void> logout() async {

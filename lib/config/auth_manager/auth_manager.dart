@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:skybase/config/auth_manager/auth_state.dart';
+import 'package:skybase/core/database/storage/cache_data.dart';
 import 'package:skybase/core/database/storage/storage_key.dart';
 import 'package:skybase/core/database/storage/storage_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
@@ -23,7 +25,7 @@ class AuthManager extends GetxService {
   Stream<AuthState?> get stream => authState.stream;
   AuthState? get state => authState.value;
 
-  StorageManager getStorage = StorageManager.find;
+  StorageManager storage = StorageManager.find;
   SecureStorageManager secureStorage = SecureStorageManager.find;
   ThemeManager themeManager = ThemeManager.find;
 
@@ -71,12 +73,33 @@ class AuthManager extends GetxService {
   Future<void> setup() async {
     checkFirstInstall();
     await checkAppTheme();
+    await clearExpiredCache();
+  }
+
+  Future<void> clearExpiredCache() async {
+    await Future.wait(
+      (storage.box.getKeys() as Iterable).map((key) async {
+        List<String> permanentKeys = [
+          StorageKey.STORAGE_NAME,
+          StorageKey.FIRST_INSTALL,
+          StorageKey.CURRENT_LOCALE,
+          StorageKey.IS_DARK_THEME,
+          StorageKey.USERS,
+        ];
+        if (!permanentKeys.contains(key)) {
+          final now = DateTime.now();
+          dynamic storageItem = await storage.get(key);
+          CacheData cacheData = CacheData.fromJson(jsonDecode(storageItem));
+          if (cacheData.expiredDate.isBefore(now)) await storage.delete(key);
+        }
+      }),
+    );
   }
 
   /// Check if app is first time installed. It will navigate to Introduction Page
   void checkFirstInstall() async {
     final bool isFirstInstall =
-        await getStorage.getAwait(StorageKey.FIRST_INSTALL) ?? true;
+        await storage.getAwait(StorageKey.FIRST_INSTALL) ?? true;
     if (isFirstInstall) {
       await secureStorage.setToken(value: '');
       authState.value = const AuthState(appStatus: AppType.FIRST_INSTALL);
@@ -88,7 +111,7 @@ class AuthManager extends GetxService {
   /// Checking App Theme set it before app display
   Future<void> checkAppTheme() async {
     final bool isDarkTheme =
-        await getStorage.getAwait(StorageKey.IS_DARK_THEME) ?? false;
+        await storage.getAwait(StorageKey.IS_DARK_THEME) ?? false;
     if (isDarkTheme) {
       themeManager.toDarkMode();
     } else {
@@ -126,7 +149,7 @@ class AuthManager extends GetxService {
 
   Future<void> clearData() async {
     await secureStorage.logout();
-    await getStorage.logout();
+    await storage.logout();
   }
 
   /// Just call this function to managed login process.
@@ -153,14 +176,14 @@ class AuthManager extends GetxService {
   }
 
   Future<void> saveUserData({required User user}) async {
-    await getStorage.save(StorageKey.USERS, user.toJson());
+    await storage.save(StorageKey.USERS, user.toJson());
   }
 
   /// Get User data from GetStorage
   /// * No need to decode or call fromJson again when you used this helper
   User? get user {
-    if (getStorage.has(StorageKey.USERS)) {
-      return User.fromJson(getStorage.get(StorageKey.USERS));
+    if (storage.has(StorageKey.USERS)) {
+      return User.fromJson(storage.get(StorageKey.USERS));
     } else {
       return null;
     }
