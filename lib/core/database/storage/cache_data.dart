@@ -5,7 +5,7 @@ class CacheData<T> {
   CacheData({required this.value, DateTime? expiredDate})
       : expiredDate = expiredDate ??
             DateTime.now().add(
-              const Duration(minutes: 1),
+              const Duration(days: 10),
             );
 
   factory CacheData.fromJson(Map<String, dynamic> json) => CacheData(
