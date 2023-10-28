@@ -5,7 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import 'app_configuration.dart';
 import 'config/environment/app_env.dart';
 import 'config/themes/app_theme.dart';
 import 'config/themes/theme_manager.dart';
@@ -17,7 +16,7 @@ import 'ui/routes/app_routes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ServiceLocator.init();
-  if (AppEnv.env == Environment.DEVELOPMENT) {
+  if (AppEnv.env.isDev) {
     runApp(
       DevicePreview(
         enabled: !kReleaseMode,
@@ -38,7 +37,7 @@ class App extends StatelessWidget {
     return GetX<ThemeManager>(
       builder: (theme) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: AppConfiguration.appName,
+        title: 'Skybase Getx',
         theme: AppTheme.light(),
         darkTheme: AppTheme.dark(),
         themeMode: (theme.isDark.isTrue) ? ThemeMode.dark : ThemeMode.light,

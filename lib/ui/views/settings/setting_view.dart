@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/app_configuration.dart';
+import 'package:skybase/config/app/app_info.dart';
 import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/config/themes/theme_manager.dart';
 import 'package:skybase/ui/views/settings/setting_controller.dart';
@@ -25,7 +25,7 @@ class SettingView extends GetView<SettingController> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '${'txt_version'.tr} ${AppConfiguration.appVersion}',
+                '${'txt_version'.tr} ${AppInfo.appVersion}',
                 style: AppStyle.body2.copyWith(color: Colors.grey),
               ),
               const SizedBox(height: 12),
