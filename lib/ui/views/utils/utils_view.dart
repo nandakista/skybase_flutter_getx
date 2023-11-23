@@ -15,7 +15,7 @@ import 'package:skybase/ui/widgets/sky_button.dart';
 import 'component/other_utils_view.dart';
 
 class UtilsView extends GetView<UtilsController> {
-  const UtilsView({Key? key}) : super(key: key);
+  const UtilsView({super.key});
 
   @override
   Widget build(BuildContext context) {

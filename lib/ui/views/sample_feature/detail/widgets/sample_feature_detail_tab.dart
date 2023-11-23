@@ -8,7 +8,7 @@ import 'package:skybase/ui/views/sample_feature/detail/component/repo_tab_view.d
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 
 class SampleFeatureDetailTab extends GetView<SampleFeatureDetailController> {
-  const SampleFeatureDetailTab({Key? key}) : super(key: key);
+  const SampleFeatureDetailTab({super.key});
 
   @override
   Widget build(BuildContext context) {

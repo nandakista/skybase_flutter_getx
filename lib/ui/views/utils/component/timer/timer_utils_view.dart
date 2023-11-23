@@ -8,7 +8,7 @@ import 'package:skybase/ui/widgets/sky_appbar.dart';
 
 class TimerUtilsView extends GetView<TimerUtilsController> {
   static const String route = '/sample-timer';
-  const TimerUtilsView({Key? key}) : super(key: key);
+  const TimerUtilsView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 
 class DialogUtilsView extends StatelessWidget {
-  const DialogUtilsView({Key? key}) : super(key: key);
+  const DialogUtilsView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,7 @@ import 'package:skybase/ui/widgets/sky_appbar.dart';
 class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
   static const String route = '/user-detail';
 
-  const SampleFeatureDetailView({Key? key}) : super(key: key);
+  const SampleFeatureDetailView({super.key});
 
   @override
   Widget build(BuildContext context) {

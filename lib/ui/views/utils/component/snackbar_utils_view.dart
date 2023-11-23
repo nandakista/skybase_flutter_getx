@@ -4,7 +4,7 @@ import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 
 class SnackBarUtilsView extends StatelessWidget {
-  const SnackBarUtilsView({Key? key}) : super(key: key);
+  const SnackBarUtilsView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 
 class SampleFeatureDetailInfo extends GetView<SampleFeatureDetailController> {
-  const SampleFeatureDetailInfo({Key? key}) : super(key: key);
+  const SampleFeatureDetailInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
