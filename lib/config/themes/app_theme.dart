@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:skybase/config/themes/app_colors.dart';
 
 class AppTheme {
-  static ThemeData light() {
+  static ThemeData get light {
     return ThemeData(
       primaryColor: AppColors.primary,
       primarySwatch: AppColors.materialPrimary,
@@ -18,17 +18,10 @@ class AppTheme {
         selectedItemColor: AppColors.primary,
         unselectedItemColor: Colors.grey,
       ),
-      appBarTheme: const AppBarTheme(
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.light,
-          systemNavigationBarColor: Colors.black,
-          statusBarColor: AppColors.primary,
-        ),
-      ),
     );
   }
 
-  static ThemeData dark() {
+  static ThemeData get dark {
     return ThemeData(
       primaryColor: AppColors.primary,
       primarySwatch: AppColors.materialPrimary,
@@ -52,13 +45,6 @@ class AppTheme {
         selectedItemColor: AppColors.primary,
         unselectedItemColor: Colors.grey,
         elevation: 2,
-      ),
-      appBarTheme: const AppBarTheme(
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.light,
-          systemNavigationBarColor: Colors.black,
-          statusBarColor: AppColors.primary,
-        ),
       ),
     );
   }
@@ -142,25 +128,10 @@ class AppTheme {
       ),
     );
   }
-
-  static setStatusBar({
-    required Brightness brightness,
-    Color color = AppColors.primary,
-  }) {
-    final androidIconBrightness =
-        brightness == Brightness.dark ? Brightness.light : Brightness.dark;
-    return SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarIconBrightness: androidIconBrightness,
-        statusBarBrightness: brightness,
-        statusBarColor: color,
-      ),
-    );
-  }
 }
 
 extension DarkMode on BuildContext {
-  bool isDarkMode() {
+  bool get isDarkMode {
     final brightness = MediaQuery.of(this).platformBrightness;
     return brightness == Brightness.dark;
   }

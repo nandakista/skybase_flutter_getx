@@ -38,11 +38,11 @@ class App extends StatelessWidget {
       builder: (theme) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Skybase Getx',
-        theme: AppTheme.light(),
-        darkTheme: AppTheme.dark(),
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
         themeMode: (theme.isDark.isTrue) ? ThemeMode.dark : ThemeMode.light,
         translations: AppTranslation(),
-        locale: LocaleManager.find.getCurrentLocale(),
+        locale: LocaleManager.find.getCurrentLocale,
         fallbackLocale: LocaleManager.find.fallbackLocale,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,

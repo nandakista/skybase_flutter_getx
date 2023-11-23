@@ -11,7 +11,6 @@ import 'package:skybase/core/localization/locale_manager.dart';
 
 import 'config/auth_manager/auth_manager.dart';
 import 'config/network/api_config.dart';
-import 'config/themes/app_theme.dart';
 import 'config/themes/theme_manager.dart';
 import 'config/app/app_info.dart';
 import 'core/database/storage/storage_key.dart';
@@ -27,7 +26,6 @@ class ServiceLocator {
     if (kReleaseMode) debugPrint = (String? message, {int? wrapWidth}) {};
     await _initConfig();
     await _initService();
-    AppTheme.setStatusBar(brightness: Brightness.light);
     AppInfo.setInfo(await PackageInfo.fromPlatform());
   }
 

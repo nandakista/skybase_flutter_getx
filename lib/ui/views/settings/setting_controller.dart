@@ -11,7 +11,7 @@ class SettingController extends GetxController {
 
   @override
   void onInit() {
-    languageCode.value = LocaleManager.find.getCurrentLocale().languageCode;
+    languageCode.value = LocaleManager.find.getCurrentLocale.languageCode;
     super.onInit();
   }
 

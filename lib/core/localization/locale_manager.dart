@@ -68,7 +68,7 @@ class LocaleManager {
     Get.updateLocale(locale);
   }
 
-  Locale getCurrentLocale() {
+  Locale get getCurrentLocale {
     String? currentLanguageCode = storage.get(StorageKey.CURRENT_LOCALE);
     if (currentLanguageCode != null) {
       if (currentLanguageCode == 'en') {
