@@ -5,6 +5,7 @@ import 'package:skybase/config/themes/app_colors.dart';
 class AppTheme {
   static ThemeData light() {
     return ThemeData(
+      useMaterial3: false,
       primaryColor: AppColors.primary,
       primarySwatch: AppColors.materialPrimary,
       indicatorColor: AppColors.accent,
@@ -30,6 +31,7 @@ class AppTheme {
 
   static ThemeData dark() {
     return ThemeData(
+      useMaterial3: false,
       primaryColor: AppColors.primary,
       primarySwatch: AppColors.materialPrimary,
       indicatorColor: AppColors.accent,
