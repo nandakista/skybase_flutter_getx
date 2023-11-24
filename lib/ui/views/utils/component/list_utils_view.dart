@@ -5,7 +5,7 @@ import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_grouped_listview.dart';
 
 class ListUtilsView extends StatelessWidget {
-  const ListUtilsView({Key? key}) : super(key: key);
+  const ListUtilsView({super.key});
 
   @override
   Widget build(BuildContext context) {

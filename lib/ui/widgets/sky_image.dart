@@ -52,7 +52,7 @@ class SkyImage extends StatelessWidget {
   final String? generateByName;
 
   const SkyImage({
-    Key? key,
+    super.key,
     this.src,
     this.width,
     this.height,
@@ -73,7 +73,7 @@ class SkyImage extends StatelessWidget {
     this.alignment = Alignment.center,
     this.size,
     this.generateByName,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +138,7 @@ class BaseImage extends StatelessWidget {
   final Alignment alignment;
 
   const BaseImage({
-    Key? key,
+    super.key,
     required this.src,
     this.width,
     this.height,
@@ -155,7 +155,7 @@ class BaseImage extends StatelessWidget {
     this.shapeImage = ShapeImage.react,
     this.alignment = Alignment.center,
     this.size,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

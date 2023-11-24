@@ -6,7 +6,7 @@ import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_con
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 class FollowerTabView extends GetView<SampleFeatureDetailController> {
-  const FollowerTabView({Key? key}) : super(key: key);
+  const FollowerTabView({super.key});
 
   @override
   Widget build(BuildContext context) {

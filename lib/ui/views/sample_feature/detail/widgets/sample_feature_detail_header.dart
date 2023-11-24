@@ -5,7 +5,7 @@ import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_con
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
-  const SampleFeatureDetailHeader({Key? key}) : super(key: key);
+  const SampleFeatureDetailHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

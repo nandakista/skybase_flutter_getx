@@ -4,7 +4,7 @@ import 'package:skybase/config/themes/theme_manager.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 
 class ThemeComponentUtilsView extends StatelessWidget {
-  const ThemeComponentUtilsView({Key? key}) : super(key: key);
+  const ThemeComponentUtilsView({super.key});
 
   @override
   Widget build(BuildContext context) {

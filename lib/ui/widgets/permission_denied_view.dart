@@ -5,12 +5,12 @@ import 'sky_button.dart';
 
 class PermissionDeniedView extends StatelessWidget {
   const PermissionDeniedView({
-    Key? key,
+    super.key,
     required this.title,
     required this.message,
     required this.onRequest,
     this.buttonTitle,
-  }) : super(key: key);
+  });
 
   final String title;
   final String message;

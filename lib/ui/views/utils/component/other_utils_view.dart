@@ -15,7 +15,7 @@ import 'package:skybase/ui/widgets/sky_button.dart';
 import 'package:skybase/ui/widgets/sky_form_field.dart';
 
 class OtherUtilsView extends GetView<UtilsController> {
-  const OtherUtilsView({Key? key}) : super(key: key);
+  const OtherUtilsView({super.key});
 
   @override
   Widget build(BuildContext context) {

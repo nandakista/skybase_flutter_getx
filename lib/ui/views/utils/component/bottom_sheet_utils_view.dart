@@ -8,7 +8,7 @@ import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_button.dart';
 
 class BottomSheetUtilsView extends StatelessWidget {
-  const BottomSheetUtilsView({Key? key}) : super(key: key);
+  const BottomSheetUtilsView({super.key});
 
   @override
   Widget build(BuildContext context) {
