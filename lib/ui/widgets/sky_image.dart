@@ -169,7 +169,7 @@ class BaseImage extends StatelessWidget {
     return GestureDetector(
       onTap: enablePreview
           ? () => Get.to(
-                MediaPreviewPage(
+                () => MediaPreviewPage(
                   src: src,
                   isAsset: isAsset,
                   title: previewTitle,
