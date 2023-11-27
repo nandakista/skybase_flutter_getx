@@ -19,7 +19,7 @@ class SampleFeatureDetailTab extends GetView<SampleFeatureDetailController> {
           const TabBar(
             labelColor: AppColors.primary,
             unselectedLabelColor: Colors.grey,
-            indicatorColor: AppColors.accent,
+            indicatorColor: AppColors.secondary,
             tabs: [
               Tab(text: 'Repositories'),
               Tab(text: 'Followers'),

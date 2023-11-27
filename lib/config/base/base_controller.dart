@@ -26,7 +26,7 @@ abstract class BaseController<T> extends GetxController {
   StorageManager storage = StorageManager.find;
 
   CancelToken cancelToken = CancelToken();
-  RxString errorMessage = ''.obs;
+  final errorMessage = Rxn<String>();
 
   Rx<RequestState> state = RequestState.initial.obs;
 
@@ -42,7 +42,7 @@ abstract class BaseController<T> extends GetxController {
 
   bool get isShimmering => isLoading && !isEmpty;
 
-  bool get isError => errorMessage.value.isNotEmpty && state.value.isError;
+  bool get isError => errorMessage.value != null && errorMessage.value != '' && state.value.isError;
 
   bool get isEmpty => state.value.isEmpty;
 
@@ -60,7 +60,7 @@ abstract class BaseController<T> extends GetxController {
 
   void showLoading() {
     state.value = RequestState.loading;
-    errorMessage.value = '';
+    errorMessage.value = null;
   }
 
   void showError(String message) {

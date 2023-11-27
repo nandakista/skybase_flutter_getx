@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/themes/app_colors.dart';
 import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/data/models/repo/repo.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
@@ -70,9 +69,9 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                             Row(
                               children: [
                                 const SkyImage(
-                                  src: 'assets/images/fork.svg',
+                                  src: 'assets/images/ic_fork.svg',
                                   height: 14,
-                                  color: AppColors.systemDarkGrey,
+                                  color: Colors.grey,
                                 ),
                                 Text(
                                   ' ${repos?.totalFork}',

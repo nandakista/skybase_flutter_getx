@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/themes/app_colors.dart';
 import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/profile/component/repository/profile_repository_controller.dart';
 import 'package:skybase/ui/widgets/base/sky_view.dart';
@@ -72,9 +71,9 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
                       Row(
                         children: [
                           const SkyImage(
-                            src: 'assets/images/fork.svg',
+                            src: 'assets/images/ic_fork.svg',
                             height: 14,
-                            color: AppColors.systemDarkGrey,
+                            color: Colors.grey,
                           ),
                           Text(
                             ' ${item.totalFork}',
