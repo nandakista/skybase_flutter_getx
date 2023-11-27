@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:skybase/ui/views/404_500/unknown_page.dart';
 
 import 'config/environment/app_env.dart';
 import 'config/themes/app_theme.dart';
@@ -12,6 +13,7 @@ import 'core/localization/app_translations.dart';
 import 'core/localization/locale_manager.dart';
 import 'service_locator.dart';
 import 'ui/routes/app_routes.dart';
+import 'ui/views/404_500/crash_error_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,6 +54,13 @@ class App extends StatelessWidget {
         supportedLocales: LocaleManager.find.locales.values,
         getPages: AppPages.routes,
         initialRoute: AppPages.initial,
+        unknownRoute: unknownPage,
+        builder: (BuildContext context, child) {
+          ErrorWidget.builder = (FlutterErrorDetails error) {
+            return CrashErrorView(errorDetails: error);
+          };
+          return child ?? const SizedBox.shrink();
+        },
       ),
     );
   }
