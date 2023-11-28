@@ -77,8 +77,7 @@ class LocaleManager {
         return const Locale('id');
       }
     } else {
-      storage.save(StorageKey.CURRENT_LOCALE, "en");
-      return const Locale('en');
+      return Get.deviceLocale ?? fallbackLocale;
     }
   }
 }

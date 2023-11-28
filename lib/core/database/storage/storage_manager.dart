@@ -50,8 +50,20 @@ class StorageManager {
 
   Future<void> logout() async {
     try {
-      await GetStorage(StorageKey.STORAGE_NAME).erase();
-      save(StorageKey.FIRST_INSTALL, false);
+      List<String> permanentKeys = [
+        StorageKey.STORAGE_NAME,
+        StorageKey.FIRST_INSTALL,
+        StorageKey.CURRENT_LOCALE,
+      ];
+
+      List<String> deleteKeys =
+          (box.getKeys() as Iterable<String>).where((key) {
+        return !permanentKeys.contains(key);
+      }).toList();
+
+      for (var key in deleteKeys) {
+        await box.remove(key);
+      }
     } catch (e) {
       debugPrint(e.toString());
     }
