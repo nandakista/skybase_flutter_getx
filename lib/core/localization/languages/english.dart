@@ -101,4 +101,7 @@ const Map<String, String> en = {
   'txt_max_item': 'All items have been loaded.',
   'txt_empty_list_title': 'Your data is empty!',
   'txt_empty_list_subtitle': 'Sorry, data is empty. Maybe go back latter',
+  'txt_crash_error_title': 'Something Went Wrong!',
+  'txt_crash_error_message':
+      'Sorry, the page you requested is not accessible at this time. Try again in a moment.'
 };

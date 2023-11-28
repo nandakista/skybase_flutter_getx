@@ -98,4 +98,7 @@ const Map<String, String> id = {
   'txt_max_item': 'Semua item telah dimuat',
   'txt_empty_list_title': 'Data masih kosong !',
   'txt_empty_list_subtitle': 'Maaf tidak ada data yang dapat ditampilkan',
+  'txt_crash_error_title': 'Terjadi Kesalahan!',
+  'txt_crash_error_message':
+      'Mohon maaf, halaman yang Anda minta tidak dapat diakses saat ini. Coba lagi dalam beberapa saat.'
 };
