@@ -54,6 +54,7 @@ class StorageManager {
         StorageKey.STORAGE_NAME,
         StorageKey.FIRST_INSTALL,
         StorageKey.CURRENT_LOCALE,
+        StorageKey.IS_DARK_THEME,
       ];
 
       List<String> deleteKeys =
