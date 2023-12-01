@@ -11,7 +11,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => controller.dataObj.value!.repositoryList!.isEmpty
+      () => (controller.dataObj.value?.repositoryList ?? []).isEmpty
           ? const Center(
               child: Text('User belum mem-follow siapapun'),
             )

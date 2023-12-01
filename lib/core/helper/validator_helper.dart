@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:skybase/core/extension/string_extension.dart';
 
 class AppRegex {
   static const name = r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
-  static const nik = r'^[1-9]{16}$';
-  static const npwp = r'^[0-9]{15}$';
   static const postal = r'^([1-9])[0-9]{4}$';
   static const phone = r'^(\+62|62|0|8)[1-9][0-9]{8,11}$';
   static const email = r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -59,7 +58,7 @@ class ValidatorHelper {
     return null;
   }
 
-  static sameValue({
+  static String? sameValue({
     required String errMessage,
     required String value,
     required String sameAs,

@@ -22,12 +22,16 @@ mixin CacheMixin {
     if (page == 1) {
       dynamic cache = storage.get(cachedKey);
       if (storage.has(cachedKey) && cache.toString().isNotEmpty) {
-        log('$cachedTag get cache');
+        log('$cachedTag get cache $cachedKey');
 
         /// Refresh data so the cache is always actual data
         _saveCacheList(cachedKey: cachedKey, onLoad: onLoad);
 
         CacheData cacheData = CacheData.fromJson(jsonDecode(cache));
+        log('$cachedTag expiry: ${cacheData.expiredDate}');
+        log('$cachedTag Expired in: ${DateTime.now().difference(cacheData.expiredDate).inMinutes} minutes');
+        log('$cachedTag isExpired: ${cacheData.expiredDate.isBefore(DateTime.now())}');
+
         result = List<T>.from(
           (jsonDecode(cacheData.value) as List).map(
             (x) => CachedModelConverter<T>().fromJson(x),
@@ -74,14 +78,15 @@ mixin CacheMixin {
     T result;
     String key = cachedKey;
     if (!onlyCacheLast) key = '$cachedKey/$cachedId';
-    log('$cachedTag cached key = $key');
     dynamic cache = await storage.get(key);
 
     if (storage.has(key) && cache.toString().isNotNullAndNotEmpty) {
       CacheData cacheData = CacheData.fromJson(jsonDecode(cache));
       Map<String, dynamic> cacheMap = cacheData.value as Map<String, dynamic>;
       if (cachedId == _getId(cache: cacheMap, customFieldId: customFieldId)) {
-        log('$cachedTag get cache');
+        log('$cachedTag get cache $cachedKey');
+        log('$cachedTag Expired in: ${DateTime.now().difference(cacheData.expiredDate).inMinutes} minutes');
+        log('$cachedTag isExpired: ${cacheData.expiredDate.isBefore(DateTime.now())}');
 
         /// Refresh data so the cache is always actual data
         _saveCache(cachedKey: key, onLoad: onLoad);

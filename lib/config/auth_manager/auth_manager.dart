@@ -79,13 +79,8 @@ class AuthManager extends GetxService {
   Future<void> clearExpiredCache() async {
     await Future.wait(
       (storage.box.getKeys() as Iterable).map((key) async {
-        List<String> permanentKeys = [
-          StorageKey.STORAGE_NAME,
-          StorageKey.FIRST_INSTALL,
-          StorageKey.CURRENT_LOCALE,
-          StorageKey.IS_DARK_THEME,
-          StorageKey.USERS,
-        ];
+        List<String> permanentKeys = StorageKey.permanentKeys + [StorageKey.USERS];
+
         if (!permanentKeys.contains(key)) {
           final now = DateTime.now();
           dynamic storageItem = await storage.get(key);

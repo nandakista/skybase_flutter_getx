@@ -11,7 +11,7 @@ class FollowerTabView extends GetView<SampleFeatureDetailController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => (controller.dataObj.value!.followersList!.isEmpty)
+      () => (controller.dataObj.value?.followersList ?? []).isEmpty
           ? const Center(
               child: Text('Tidak ada follower'),
             )

@@ -50,13 +50,7 @@ class StorageManager {
 
   Future<void> logout() async {
     try {
-      List<String> permanentKeys = [
-        StorageKey.STORAGE_NAME,
-        StorageKey.FIRST_INSTALL,
-        StorageKey.CURRENT_LOCALE,
-        StorageKey.IS_DARK_THEME,
-      ];
-
+      List<String> permanentKeys = StorageKey.permanentKeys;
       List<String> deleteKeys =
           (box.getKeys() as Iterable<String>).where((key) {
         return !permanentKeys.contains(key);
