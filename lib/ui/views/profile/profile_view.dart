@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/settings/setting_view.dart';
-import 'package:skybase/ui/widgets/base/sky_view.dart';
+import 'package:skybase/ui/widgets/sky_view.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 import 'component/repository/profile_repository_view.dart';
