@@ -15,11 +15,12 @@ dependencies:
     sdk: flutter
 
   # Architecture
-  get: ^4.6.5
+  get: ^4.6.6
   dio: ^5.3.4
   json_annotation: ^4.8.1
   get_storage: ^2.1.1
   flutter_secure_storage: ^9.0.0
+  connectivity_plus: ^4.0.2
 #  sliver_tools: ^0.2.12
 
   # File Manager

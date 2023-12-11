@@ -1,11 +1,14 @@
-import 'package:dio/dio.dart';
-import 'package:get/get.dart';
-import 'package:skybase/core/database/storage/storage_manager.dart';
-
 /* Created by
    Varcant
    nanda.kista@gmail.com
 */
+
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
+import 'package:skybase/config/base/connection_mixin.dart';
+import 'package:skybase/core/database/storage/storage_manager.dart';
+
 enum RequestState { initial, empty, loading, success, error, shimmering }
 
 extension RequestStateExt on RequestState {
@@ -22,7 +25,7 @@ extension RequestStateExt on RequestState {
   bool get isShimmering => this == RequestState.shimmering;
 }
 
-abstract class BaseController<T> extends GetxController {
+abstract class BaseController<T> extends GetxController with ConnectionMixin {
   StorageManager storage = StorageManager.find;
 
   CancelToken cancelToken = CancelToken();
@@ -42,11 +45,15 @@ abstract class BaseController<T> extends GetxController {
 
   bool get isShimmering => isLoading && !isEmpty;
 
-  bool get isError => errorMessage.value != null && errorMessage.value != '' && state.value.isError;
+  bool get isError =>
+      errorMessage.value != null &&
+      errorMessage.value != '' &&
+      state.value.isError;
 
   bool get isEmpty => state.value.isEmpty;
 
-  bool get isSuccess => !isEmpty && !isError && !isLoading && state.value.isSuccess;
+  bool get isSuccess =>
+      !isEmpty && !isError && !isLoading && state.value.isSuccess;
 
   Future<void> deleteCached(String cacheKey, {String? cacheId}) async {
     if (cacheId != null) {
@@ -56,7 +63,24 @@ abstract class BaseController<T> extends GetxController {
     }
   }
 
+  @mustCallSuper
+  @override
+  onInit() {
+    listenConnectivity(() {
+      if (isError && !isLoading) onRefresh();
+    });
+    super.onInit();
+  }
+
   void onRefresh() {}
+
+  @mustCallSuper
+  @override
+  void onClose() {
+    streamConnectivity?.cancel();
+    cancelToken.cancel();
+    super.onClose();
+  }
 
   void showLoading() {
     state.value = RequestState.loading;
@@ -86,11 +110,5 @@ abstract class BaseController<T> extends GetxController {
     } else {
       state.value = RequestState.success;
     }
-  }
-
-  @override
-  void onClose() {
-    cancelToken.cancel();
-    super.onClose();
   }
 }
