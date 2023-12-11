@@ -36,6 +36,7 @@ abstract class PaginationController<T> extends GetxController
     pagingController.refresh();
   }
 
+  @mustCallSuper
   @override
   void onClose() {
     cancelConnectivity();
