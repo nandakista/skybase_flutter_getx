@@ -6,7 +6,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/base/connection_mixin.dart';
+import 'package:skybase/config/base/connectivity_mixin.dart';
 import 'package:skybase/core/database/storage/storage_manager.dart';
 
 enum RequestState { initial, empty, loading, success, error, shimmering }
@@ -25,7 +25,7 @@ extension RequestStateExt on RequestState {
   bool get isShimmering => this == RequestState.shimmering;
 }
 
-abstract class BaseController<T> extends GetxController with ConnectionMixin {
+abstract class BaseController<T> extends GetxController with ConnectivityMixin {
   StorageManager storage = StorageManager.find;
 
   CancelToken cancelToken = CancelToken();
@@ -77,7 +77,7 @@ abstract class BaseController<T> extends GetxController with ConnectionMixin {
   @mustCallSuper
   @override
   void onClose() {
-    streamConnectivity?.cancel();
+    cancelConnectivity();
     cancelToken.cancel();
     super.onClose();
   }

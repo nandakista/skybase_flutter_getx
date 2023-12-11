@@ -9,7 +9,7 @@ import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 
-mixin ConnectionMixin {
+mixin ConnectivityMixin {
   StreamSubscription<ConnectivityResult>? streamConnectivity;
   final Connectivity connectivity = Connectivity();
 

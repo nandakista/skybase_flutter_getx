@@ -1,14 +1,17 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:skybase/core/database/storage/storage_manager.dart';
-
 /* Created by
    Varcant
    nanda.kista@gmail.com
 */
-abstract class PaginationController<T> extends GetxController {
+
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:skybase/config/base/connectivity_mixin.dart';
+import 'package:skybase/core/database/storage/storage_manager.dart';
+
+abstract class PaginationController<T> extends GetxController
+    with ConnectivityMixin {
   StorageManager storage = StorageManager.find;
 
   CancelToken cancelToken = CancelToken();
@@ -17,9 +20,28 @@ abstract class PaginationController<T> extends GetxController {
   final pagingController = PagingController<int, T>(firstPageKey: 0);
 
   @mustCallSuper
+  @override
+  onInit() {
+    listenConnectivity(() {
+      if (pagingController.value.status == PagingStatus.firstPageError) {
+        onRefresh();
+      }
+    });
+    super.onInit();
+  }
+
+  @mustCallSuper
   void onRefresh() {
     page = 1;
     pagingController.refresh();
+  }
+
+  @override
+  void onClose() {
+    cancelConnectivity();
+    pagingController.dispose();
+    cancelToken.cancel();
+    super.onClose();
   }
 
   Future<void> deleteCached(String cacheKey) async {
@@ -41,12 +63,5 @@ abstract class PaginationController<T> extends GetxController {
     } else {
       pagingController.appendPage(data, page ?? this.page++);
     }
-  }
-
-  @override
-  void onClose() {
-    pagingController.dispose();
-    cancelToken.cancel();
-    super.onClose();
   }
 }
