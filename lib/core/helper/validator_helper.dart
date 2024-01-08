@@ -6,7 +6,7 @@ import 'package:skybase/core/extension/string_extension.dart';
 class AppRegex {
   static const name = r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
   static const postal = r'^([1-9])[0-9]{4}$';
-  static const phone = r'^(\+62|62|0|8)[1-9][0-9]{8,11}$';
+  static const phone = r'^(\+628|628|08)[1-9][0-9]{7,11}$';
   static const email = r'^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   static const upperCase = r'^(?=.*[A-Z])';
   static const lowerCase = r'^(?=.*[a-z])';
