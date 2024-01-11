@@ -156,6 +156,7 @@ abstract class SkyView {
     Widget? retryWidget,
     Axis scrollDirection = Axis.vertical,
     EdgeInsetsGeometry? padding,
+    bool emptyRetryEnabled = false,
   }) {
     return BasePaginationView<ItemType>(
       pagingController: pagingController,
@@ -191,6 +192,7 @@ abstract class SkyView {
       physics: physics,
       onRefresh: onRefresh,
       errorView: errorView,
+      emptyRetryEnabled: emptyRetryEnabled,
     );
   }
 }

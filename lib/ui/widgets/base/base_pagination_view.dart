@@ -51,6 +51,7 @@ class BasePaginationView<ItemType> extends StatelessWidget {
     this.padding,
     this.emptyEnabled = true,
     this.errorEnabled = true,
+    this.emptyRetryEnabled = false,
   });
 
   final PagingController<int, ItemType> pagingController;
@@ -59,6 +60,8 @@ class BasePaginationView<ItemType> extends StatelessWidget {
   final ItemWidgetBuilder<ItemType> itemBuilder;
 
   final bool emptyEnabled;
+
+  final bool emptyRetryEnabled;
 
   final bool errorEnabled;
 
@@ -203,6 +206,8 @@ class BasePaginationView<ItemType> extends StatelessWidget {
                 horizontalSpacing: horizontalSpacing ?? 24,
                 verticalSpacing: verticalSpacing ?? 24,
                 imageSize: imageSize,
+                emptyRetryEnabled: emptyRetryEnabled,
+                onRetry: () => pagingController.refresh(),
                 physics: const NeverScrollableScrollPhysics(),
               )
           : const SizedBox.shrink(),
