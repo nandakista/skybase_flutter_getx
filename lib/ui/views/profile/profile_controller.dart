@@ -28,9 +28,9 @@ class ProfileController extends BaseController<User> {
         cancelToken: cancelToken,
         username: 'nandakista',
       );
-      finishLoadData(data: response);
+      loadFinish(data: response);
     } catch (e) {
-      showError(e.toString());
+      loadError(e.toString());
     }
   }
 }

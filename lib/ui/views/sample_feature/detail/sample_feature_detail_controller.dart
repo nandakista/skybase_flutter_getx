@@ -42,9 +42,9 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
         id: idArgs,
         username: usernameArgs,
       );
-      finishLoadData(data: response);
+      loadFinish(data: response);
     } catch (e) {
-      showError(e.toString());
+      loadError(e.toString());
     }
   }
 }

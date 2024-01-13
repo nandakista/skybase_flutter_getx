@@ -53,7 +53,7 @@ abstract class PaginationController<T> extends GetxController
     pagingController.addPageRequestListener((page) => onLoad());
   }
 
-  void showError(String message) {
+  void loadError(String message) {
     pagingController.error = message;
   }
 

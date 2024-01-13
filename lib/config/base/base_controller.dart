@@ -87,7 +87,7 @@ abstract class BaseController<T> extends GetxController with ConnectivityMixin {
     errorMessage.value = null;
   }
 
-  void showError(String message) {
+  void loadError(String message) {
     errorMessage.value = message;
     state.value = RequestState.error;
   }
@@ -97,9 +97,9 @@ abstract class BaseController<T> extends GetxController with ConnectivityMixin {
   }
 
   /// **NOTE:**
-  /// call this [finishLoadData] instead [saveCacheAndFinish] if the data
+  /// call this [loadFinish] instead [saveCacheAndFinish] if the data
   /// is not require to saved in local data
-  finishLoadData({
+  loadFinish({
     T? data,
     List<T> list = const [],
   }) {

@@ -33,7 +33,7 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
       loadNextData(data: response);
     } catch (e) {
       debugPrint('Error : $e');
-      showError(e.toString());
+      loadError(e.toString());
     }
   }
 
