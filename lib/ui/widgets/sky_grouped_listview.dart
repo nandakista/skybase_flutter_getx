@@ -7,25 +7,26 @@ import 'package:flutter/material.dart';
 */
 
 enum SortBy {
-  ASC,
-  DESC,
+  asc,
+  desc,
 }
 
-class SkyGroupedListView<T, G> extends StatelessWidget {
-  const SkyGroupedListView({
+class GroupedListView<T, G> extends StatelessWidget {
+  const GroupedListView({
     super.key,
     required this.data,
     required this.groupBy,
     required this.groupHeaderBuilder,
     required this.itemBuilder,
     this.controller,
-    this.sortBy = SortBy.ASC,
+    this.sortBy = SortBy.asc,
     this.padding,
     this.shrinkWrap = false,
     this.physics,
     this.separator,
-    this.separatorGroup,
+    this.separatorHeader,
     this.groupFooterBuilder,
+    this.separatorGroup,
   });
 
   final ScrollPhysics? physics;
@@ -39,6 +40,7 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
   final G Function(T element) groupBy;
   final EdgeInsetsGeometry? padding;
   final Widget? separator;
+  final Widget? separatorHeader;
   final Widget? separatorGroup;
 
   @override
@@ -49,10 +51,10 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
       padding: padding ?? const EdgeInsets.all(0),
       itemCount: data.length,
       controller: controller,
-      reverse: sortBy == SortBy.ASC ? false : true,
+      reverse: sortBy == SortBy.asc ? false : true,
       itemBuilder: (_, index) {
         (data).sort(
-          (b, a) => (groupBy(b) as dynamic)!.compareTo(
+              (b, a) => (groupBy(b) as dynamic)!.compareTo(
             groupBy(a),
           ),
         );
@@ -76,29 +78,34 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
           nextItem = groupBy(data[index + 1]);
         }
 
-        if (sortBy == SortBy.ASC) {
+        bool isFirstIndex = index == 0;
+        bool isLastIndex = index + 1 == data.length;
+
+        if (sortBy == SortBy.asc) {
           return Column(
             children: [
-              if (index == 0 || !isSame) _buildHeaderWidget(item),
-              if (index != 0 && item == prevItem)
+              if (isFirstIndex || !isSame) _buildHeaderWidget(item),
+              if (!isFirstIndex && item == prevItem)
                 _buildSeparatorWidget(separator),
               _buildItemWidget(context, index),
               if (groupFooterBuilder != null &&
-                  (item != nextItem || index + 1 == data.length))
+                  (item != nextItem || isLastIndex))
                 groupFooterBuilder!(item),
+              if (separatorGroup != null &&
+                  (item != nextItem || isLastIndex) &&
+                  !isLastIndex)
+                separatorGroup!,
             ],
           );
         } else {
           return Column(
             children: [
-              // Last Index
-              if (index + 1 == data.length) _buildHeaderWidget(item),
-              // Content
+              if (isLastIndex) _buildHeaderWidget(item),
               _buildItemWidget(context, index),
-              if (index != 0 && item == prevItem)
+              if (!isFirstIndex && item == prevItem)
                 _buildSeparatorWidget(separator),
               if (groupFooterBuilder != null &&
-                  (item != prevItem || index == 0))
+                  (item != prevItem || isFirstIndex))
                 groupFooterBuilder!(item),
               if (!isSame) _buildHeaderWidget(prevItem),
             ],
@@ -112,7 +119,7 @@ class SkyGroupedListView<T, G> extends StatelessWidget {
     return Column(
       children: [
         SizedBox(width: double.infinity, child: groupHeaderBuilder(item)),
-        _buildSeparatorWidget(separatorGroup),
+        _buildSeparatorWidget(separatorHeader),
       ],
     );
   }
