@@ -46,6 +46,7 @@ class ProfileView extends GetView<ProfileController> {
                   shapeImage: ShapeImage.circle,
                   size: 40,
                   src: '${controller.dataObj.value?.avatarUrl}&s=200',
+                  enablePreview: true,
                 ),
                 const SizedBox(height: 12),
                 Text(

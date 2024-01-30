@@ -19,6 +19,7 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
               size: 45,
               shapeImage: ShapeImage.circle,
               src: '${controller.dataObj.value?.avatarUrl}&s=200',
+              enablePreview: true,
             ),
             Column(
               children: [
