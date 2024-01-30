@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/profile/component/repository/profile_repository_controller.dart';
-import 'package:skybase/ui/widgets/sky_view.dart';
+import 'package:skybase/ui/widgets/base/state_view.dart';
 import 'package:skybase/ui/widgets/shimmer/shimmer_list.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
@@ -12,7 +12,7 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SkyView.component(
+      () => StateView.component(
         loadingEnabled: controller.isLoading,
         errorEnabled: controller.isError,
         emptyEnabled: controller.isEmpty,

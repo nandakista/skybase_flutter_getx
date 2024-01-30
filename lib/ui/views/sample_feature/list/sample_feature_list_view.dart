@@ -6,7 +6,7 @@ import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/sources/local/cached_key.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_controller.dart';
-import 'package:skybase/ui/widgets/sky_view.dart';
+import 'package:skybase/ui/widgets/base/pagination_state_view.dart';
 import 'package:skybase/ui/widgets/shimmer/shimmer_list.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
@@ -20,7 +20,7 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SkyAppBar.secondary(title: 'txt_list_users'.tr),
-      body: SkyView.pagination<SampleFeature>(
+      body: PaginationStateView<SampleFeature>.list(
         pagingController: controller.pagingController,
         loadingView: const ShimmerList(),
         onRefresh: controller.onRefresh,

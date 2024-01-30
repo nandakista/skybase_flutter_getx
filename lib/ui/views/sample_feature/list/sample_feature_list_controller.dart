@@ -23,7 +23,7 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
     super.onRefresh();
   }
 
-  void getUsers() async {
+  Future<void> getUsers() async {
     try {
       final response = await repository.getUsers(
         cancelToken: cancelToken,

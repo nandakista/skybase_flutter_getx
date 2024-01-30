@@ -4,7 +4,7 @@ import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_con
 import 'package:skybase/ui/views/sample_feature/detail/widgets/sample_feature_detail_header.dart';
 import 'package:skybase/ui/views/sample_feature/detail/widgets/sample_feature_detail_info.dart';
 import 'package:skybase/ui/views/sample_feature/detail/widgets/sample_feature_detail_tab.dart';
-import 'package:skybase/ui/widgets/sky_view.dart';
+import 'package:skybase/ui/widgets/base/state_view.dart';
 import 'package:skybase/ui/widgets/shimmer/shimmer_detail.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 
@@ -19,7 +19,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
       appBar: SkyAppBar.primary(title: controller.usernameArgs),
       body: SafeArea(
         child: Obx(
-          () => SkyView.page(
+          () => StateView.page(
             loadingEnabled: controller.isLoading,
             errorEnabled: controller.isError,
             emptyEnabled: controller.isEmpty,
