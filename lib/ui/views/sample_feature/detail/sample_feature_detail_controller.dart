@@ -29,7 +29,7 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
   bool get keepAlive => false;
 
   @override
-  String get cacheKey => '${CachedKey.SAMPLE_FEATURE_DETAIL}/$idArgs';
+  String get cachedKey => '${CachedKey.SAMPLE_FEATURE_DETAIL}/$idArgs';
 
   @override
   Future<void> onRefresh() async {

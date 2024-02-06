@@ -7,8 +7,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:skybase/config/base/cache_mixin.dart';
-import 'package:skybase/config/base/connectivity_mixin.dart';
+import 'package:skybase/core/mixin/cache_mixin.dart';
+import 'package:skybase/core/mixin/connectivity_mixin.dart';
 
 abstract class PaginationController<T> extends GetxController
     with ConnectivityMixin, CacheMixin {
@@ -19,7 +19,7 @@ abstract class PaginationController<T> extends GetxController
 
   bool get keepAlive => false;
 
-  String get cacheKey;
+  String get cachedKey;
 
   @mustCallSuper
   @override
@@ -39,7 +39,7 @@ abstract class PaginationController<T> extends GetxController
   @mustCallSuper
   Future<void> onRefresh() async {
     page = 1;
-    await deleteCached(cacheKey);
+    await deleteCached(cachedKey);
     pagingController.value = PagingState(
       nextPageKey: page,
       error: null,

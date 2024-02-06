@@ -6,8 +6,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/base/connectivity_mixin.dart';
-import 'package:skybase/core/database/storage/storage_manager.dart';
+import 'package:skybase/core/mixin/cache_mixin.dart';
+import 'package:skybase/core/mixin/connectivity_mixin.dart';
 
 enum RequestState { initial, empty, loading, success, error, shimmering }
 
@@ -25,9 +25,8 @@ extension RequestStateExt on RequestState {
   bool get isShimmering => this == RequestState.shimmering;
 }
 
-abstract class BaseController<T> extends GetxController with ConnectivityMixin {
-  StorageManager storage = StorageManager.find;
-
+abstract class BaseController<T> extends GetxController
+    with ConnectivityMixin, CacheMixin {
   CancelToken cancelToken = CancelToken();
   final errorMessage = Rxn<String>();
 
@@ -41,7 +40,7 @@ abstract class BaseController<T> extends GetxController with ConnectivityMixin {
 
   bool get keepAlive => false;
 
-  String get cacheKey => '';
+  String get cachedKey => '';
 
   bool get isInitial => state.value.isInitial;
 
@@ -69,8 +68,8 @@ abstract class BaseController<T> extends GetxController with ConnectivityMixin {
   }
 
   Future<void> onRefresh() async {
-    if (cacheKey.isNotEmpty) {
-      await storage.delete(cacheKey);
+    if (cachedKey.isNotEmpty) {
+      await deleteCached(cachedKey);
     }
     if (!keepAlive) showLoading();
   }

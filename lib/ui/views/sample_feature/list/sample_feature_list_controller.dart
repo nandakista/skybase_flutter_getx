@@ -21,7 +21,7 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
   bool get keepAlive => true;
 
   @override
-  String get cacheKey => CachedKey.SAMPLE_FEATURE_LIST;
+  String get cachedKey => CachedKey.SAMPLE_FEATURE_LIST;
 
   @override
   Future<void> onRefresh() async {
