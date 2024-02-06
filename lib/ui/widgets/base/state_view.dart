@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:skybase/ui/widgets/base/pagination/pagination_sliver_grid.dart';
+import 'package:skybase/ui/widgets/base/pagination/pagination_sliver_list.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
 
 import 'empty_view.dart';
@@ -84,6 +86,22 @@ class StateView extends StatelessWidget {
 
   final bool emptyRetryEnabled;
 
+  /// **Warning:**
+  /// Only accept sliver widget
+  ///
+  /// Useful when you need adding pagination widget inside SingleChildScrollView
+  /// - Put your pagination widget in [headerSliver] using [PaginationSliverList] or [PaginationSliverGrid]
+  /// - Put your pagination widget in [footerSliver] using [PaginationSliverList] or [PaginationSliverGrid]
+  final List<Widget>? footerSliver;
+
+  /// **Warning:**
+  /// Only accept sliver widget
+  ///
+  /// Useful when you need adding pagination widget inside SingleChildScrollView
+  /// - Put your pagination widget in [headerSliver] using [PaginationSliverList] or [PaginationSliverGrid]
+  /// - Put your pagination widget in [footerSliver] using [PaginationSliverList] or [PaginationSliverGrid]
+  final List<Widget>? headerSliver;
+
   const StateView.page({
     super.key,
     required this.loadingEnabled,
@@ -115,6 +133,8 @@ class StateView extends StatelessWidget {
     this.errorImage,
     this.retryWidget,
     this.emptyImageWidget,
+    this.footerSliver,
+    this.headerSliver,
   });
 
   const StateView.component({
@@ -147,6 +167,8 @@ class StateView extends StatelessWidget {
     this.errorImage,
     this.retryWidget,
     this.emptyImageWidget,
+    this.footerSliver,
+    this.headerSliver,
   }) : onRefresh = null;
 
   @override
@@ -185,6 +207,7 @@ class StateView extends StatelessWidget {
       onRefresh: () => Future.sync(onRefresh),
       child: CustomScrollView(
         slivers: [
+          if (headerSliver != null) ...headerSliver!,
           (!loadingEnabled)
               ? SliverToBoxAdapter(child: child)
               : SliverFillRemaining(
@@ -193,6 +216,7 @@ class StateView extends StatelessWidget {
                     child: loadingView ?? const CircularProgressIndicator(),
                   ),
                 ),
+          if (footerSliver != null) ...footerSliver!,
         ],
       ),
     );
@@ -201,6 +225,7 @@ class StateView extends StatelessWidget {
   Widget _iosObjectView({required VoidCallback onRefresh}) {
     return CustomScrollView(
       slivers: [
+        if (headerSliver != null) ...headerSliver!,
         CupertinoSliverRefreshControl(
           onRefresh: () => Future.sync(onRefresh),
         ),
@@ -214,6 +239,7 @@ class StateView extends StatelessWidget {
             : SliverFillRemaining(
                 child: loadingView ?? const PlatformLoadingIndicator(),
               ),
+        if (footerSliver != null) ...footerSliver!,
       ],
     );
   }
