@@ -15,11 +15,11 @@ class ProfileRepositoryController extends BaseController<Repo> {
 
   @override
   Future<void> onRefresh() async {
+    super.onRefresh();
     await getRepository();
   }
 
   Future<void> getRepository() async {
-    showLoading();
     try {
       final response = await repository.getProfileRepository(
         cancelToken: cancelToken,

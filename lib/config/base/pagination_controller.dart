@@ -37,7 +37,7 @@ abstract class PaginationController<T> extends GetxController
   ///
   /// **Don't put your logic before or above super.onRefresh()**
   @mustCallSuper
-  Future<void> onRefresh() async {
+  void onRefresh() async {
     page = 1;
     await deleteCached(cachedKey);
     pagingController.value = PagingState(

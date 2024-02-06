@@ -17,12 +17,12 @@ class ProfileController extends BaseController<User> {
 
   @override
   Future<void> onRefresh() async {
+    super.onRefresh();
     await onGetProfile();
     await Get.find<ProfileRepositoryController>().onRefresh();
   }
 
   Future<void> onGetProfile() async {
-    showLoading();
     try {
       final response = await repository.getProfile(
         cancelToken: cancelToken,

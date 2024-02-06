@@ -67,7 +67,7 @@ abstract class BaseController<T> extends GetxController
     super.onInit();
   }
 
-  Future<void> onRefresh() async {
+  void onRefresh() async {
     if (cachedKey.isNotEmpty) {
       await deleteCached(cachedKey);
     }
