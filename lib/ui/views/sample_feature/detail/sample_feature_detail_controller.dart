@@ -26,16 +26,18 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
   }
 
   @override
-  void onRefresh() async {
-    await deleteCached(
-      CachedKey.SAMPLE_FEATURE_DETAIL,
-      cacheId: idArgs.toString(),
-    );
+  bool get keepAlive => false;
+
+  @override
+  String get cacheKey => '${CachedKey.SAMPLE_FEATURE_DETAIL}/$idArgs';
+
+  @override
+  Future<void> onRefresh() async {
+    super.onRefresh();
     await getDetailUser();
   }
 
   Future<void> getDetailUser() async {
-    showLoading();
     try {
       final response = await repository.getDetailUser(
         cancelToken: cancelToken,

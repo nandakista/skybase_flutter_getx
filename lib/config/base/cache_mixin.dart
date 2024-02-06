@@ -25,7 +25,7 @@ mixin CacheMixin {
         log('$cachedTag get cache $cachedKey');
 
         /// Refresh data so the cache is always actual data
-        _saveCacheList(cachedKey: cachedKey, onLoad: onLoad);
+        saveCacheList(cachedKey: cachedKey, onLoad: onLoad);
 
         CacheData cacheData = CacheData.fromJson(jsonDecode(cache));
         log('$cachedTag expiry: ${cacheData.expiredDate}');
@@ -38,7 +38,7 @@ mixin CacheMixin {
           ),
         );
       } else {
-        result = await _saveCacheList(cachedKey: cachedKey, onLoad: onLoad);
+        result = await saveCacheList(cachedKey: cachedKey, onLoad: onLoad);
       }
     } else {
       result = await onLoad();
@@ -47,7 +47,7 @@ mixin CacheMixin {
     return result;
   }
 
-  Future<List<T>> _saveCacheList<T>({
+  Future<List<T>> saveCacheList<T>({
     required String cachedKey,
     required Future<List<T>> Function() onLoad,
   }) async {
@@ -89,15 +89,15 @@ mixin CacheMixin {
         log('$cachedTag isExpired: ${cacheData.expiredDate.isBefore(DateTime.now())}');
 
         /// Refresh data so the cache is always actual data
-        _saveCache(cachedKey: key, onLoad: onLoad);
+        saveCache(cachedKey: key, onLoad: onLoad);
 
         result = CachedModelConverter<T>().fromJson(cacheMap);
       } else {
         log('$cachedTag cache is not equal with data');
-        result = await _saveCache(cachedKey: key, onLoad: onLoad);
+        result = await saveCache(cachedKey: key, onLoad: onLoad);
       }
     } else {
-      result = await _saveCache(cachedKey: key, onLoad: onLoad);
+      result = await saveCache(cachedKey: key, onLoad: onLoad);
     }
     return result;
   }
@@ -110,7 +110,7 @@ mixin CacheMixin {
     return (cache['id']).toString();
   }
 
-  Future<T> _saveCache<T>({
+  Future<T> saveCache<T>({
     required String cachedKey,
     required Future<T> Function() onLoad,
   }) async {
@@ -123,5 +123,9 @@ mixin CacheMixin {
       ),
     );
     return result;
+  }
+
+  Future<void> deleteCached(String cacheKey) async {
+    await storage.delete(cacheKey.toString());
   }
 }

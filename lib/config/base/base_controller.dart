@@ -39,6 +39,10 @@ abstract class BaseController<T> extends GetxController with ConnectivityMixin {
   final dataObj = Rxn<T>();
   RxList<T> dataList = RxList<T>([]);
 
+  bool get keepAlive => false;
+
+  String get cacheKey => '';
+
   bool get isInitial => state.value.isInitial;
 
   bool get isLoading => state.value.isLoading;
@@ -55,14 +59,6 @@ abstract class BaseController<T> extends GetxController with ConnectivityMixin {
   bool get isSuccess =>
       !isEmpty && !isError && !isLoading && state.value.isSuccess;
 
-  Future<void> deleteCached(String cacheKey, {String? cacheId}) async {
-    if (cacheId != null) {
-      await storage.delete('$cacheKey/$cacheId');
-    } else {
-      await storage.delete(cacheKey.toString());
-    }
-  }
-
   @mustCallSuper
   @override
   onInit() {
@@ -72,7 +68,12 @@ abstract class BaseController<T> extends GetxController with ConnectivityMixin {
     super.onInit();
   }
 
-  void onRefresh() {}
+  Future<void> onRefresh() async {
+    if (cacheKey.isNotEmpty) {
+      await storage.delete(cacheKey);
+    }
+    if (!keepAlive) showLoading();
+  }
 
   @mustCallSuper
   @override
@@ -92,8 +93,9 @@ abstract class BaseController<T> extends GetxController with ConnectivityMixin {
     state.value = RequestState.error;
   }
 
-  void loadData(Function() onLoad) {
-    onLoad();
+  void loadData(Future Function() onLoad) async {
+    showLoading();
+    await onLoad();
   }
 
   /// **NOTE:**

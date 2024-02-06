@@ -18,9 +18,15 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
   }
 
   @override
-  void onRefresh() async {
-    await deleteCached(CachedKey.SAMPLE_FEATURE_LIST);
+  bool get keepAlive => true;
+
+  @override
+  String get cacheKey => CachedKey.SAMPLE_FEATURE_LIST;
+
+  @override
+  Future<void> onRefresh() async {
     super.onRefresh();
+    await getUsers();
   }
 
   Future<void> getUsers() async {
