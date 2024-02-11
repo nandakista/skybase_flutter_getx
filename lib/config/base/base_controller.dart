@@ -6,24 +6,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:skybase/config/base/request_state.dart';
 import 'package:skybase/core/mixin/cache_mixin.dart';
 import 'package:skybase/core/mixin/connectivity_mixin.dart';
-
-enum RequestState { initial, empty, loading, success, error, shimmering }
-
-extension RequestStateExt on RequestState {
-  bool get isInitial => this == RequestState.initial;
-
-  bool get isEmpty => this == RequestState.empty;
-
-  bool get isLoading => this == RequestState.loading;
-
-  bool get isSuccess => this == RequestState.success;
-
-  bool get isError => this == RequestState.error;
-
-  bool get isShimmering => this == RequestState.shimmering;
-}
 
 abstract class BaseController<T> extends GetxController
     with ConnectivityMixin, CacheMixin {
@@ -38,6 +23,8 @@ abstract class BaseController<T> extends GetxController
   final dataObj = Rxn<T>();
   RxList<T> dataList = RxList<T>([]);
 
+  Future Function()? _onLoad;
+
   bool get keepAlive => false;
 
   String get cachedKey => '';
@@ -45,8 +32,6 @@ abstract class BaseController<T> extends GetxController
   bool get isInitial => state.value.isInitial;
 
   bool get isLoading => state.value.isLoading;
-
-  bool get isShimmering => isLoading && !isEmpty;
 
   bool get isError =>
       errorMessage.value != null &&
@@ -67,11 +52,14 @@ abstract class BaseController<T> extends GetxController
     super.onInit();
   }
 
-  void onRefresh() async {
-    if (cachedKey.isNotEmpty) {
-      await deleteCached(cachedKey);
+  Future<void> onRefresh() async {
+    if (_onLoad != null) {
+      if (cachedKey.isNotEmpty) {
+        await deleteCached(cachedKey);
+      }
+      if (!keepAlive) showLoading();
+      await _onLoad!();
     }
-    if (!keepAlive) showLoading();
   }
 
   @mustCallSuper
@@ -95,11 +83,9 @@ abstract class BaseController<T> extends GetxController
   void loadData(Future Function() onLoad) async {
     showLoading();
     await onLoad();
+    this._onLoad = onLoad;
   }
 
-  /// **NOTE:**
-  /// call this [loadFinish] instead [saveCacheAndFinish] if the data
-  /// is not require to saved in local data
   loadFinish({
     T? data,
     List<T> list = const [],

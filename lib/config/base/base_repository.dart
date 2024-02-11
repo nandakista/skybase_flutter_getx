@@ -61,11 +61,11 @@ abstract class BaseRepository with CacheMixin {
         customFieldId: customFieldId,
       );
       if (cacheData != null) {
-        onLoad().then((value) => saveCachedObject(key: cachedKey, data: value));
+        onLoad().then((value) => saveCachedObject(key: key, data: value));
         return cacheData;
       } else {
         final response = await onLoad();
-        await saveCachedObject(key: cachedKey, data: response);
+        await saveCachedObject(key: key, data: response);
         return response;
       }
     } catch (e, stackTrace) {

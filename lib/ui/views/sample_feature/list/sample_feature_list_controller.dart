@@ -23,12 +23,6 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
   @override
   String get cachedKey => CachedKey.SAMPLE_FEATURE_LIST;
 
-  @override
-  Future<void> onRefresh() async {
-    super.onRefresh();
-    await getUsers();
-  }
-
   Future<void> getUsers() async {
     try {
       final response = await repository.getUsers(

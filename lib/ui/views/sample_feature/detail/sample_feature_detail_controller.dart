@@ -31,12 +31,6 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
   @override
   String get cachedKey => '${CachedKey.SAMPLE_FEATURE_DETAIL}/$idArgs';
 
-  @override
-  Future<void> onRefresh() async {
-    super.onRefresh();
-    await getDetailUser();
-  }
-
   Future<void> getDetailUser() async {
     try {
       final response = await repository.getDetailUser(

@@ -21,6 +21,8 @@ abstract class PaginationController<T> extends GetxController
 
   String get cachedKey;
 
+  Future Function()? _onLoad;
+
   @mustCallSuper
   @override
   onInit() {
@@ -32,19 +34,18 @@ abstract class PaginationController<T> extends GetxController
     super.onInit();
   }
 
-  /// ### Note:
-  /// Ensure trigger logic after super.onRefresh().
-  ///
-  /// **Don't put your logic before or above super.onRefresh()**
   @mustCallSuper
-  void onRefresh() async {
-    page = 1;
-    await deleteCached(cachedKey);
-    pagingController.value = PagingState(
-      nextPageKey: page,
-      error: null,
-      itemList: keepAlive ? _keepAliveData : null,
-    );
+  Future<void> onRefresh() async {
+    if (_onLoad != null) {
+      page = 1;
+      await deleteCached(cachedKey);
+      pagingController.value = PagingState(
+        nextPageKey: page,
+        error: null,
+        itemList: keepAlive ? _keepAliveData : null,
+      );
+      await _onLoad!();
+    }
   }
 
   @mustCallSuper
@@ -61,6 +62,7 @@ abstract class PaginationController<T> extends GetxController
       if (page > 1) await onLoad();
     });
     if (page == 1) await onLoad();
+    this._onLoad = onLoad;
   }
 
   void loadError(String message) {
