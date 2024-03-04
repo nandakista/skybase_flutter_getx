@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/profile/component/repository/profile_repository_controller.dart';
 import 'package:skybase/ui/widgets/base/state_view.dart';
-import 'package:skybase/ui/widgets/shimmer/shimmer_list.dart';
+import 'package:skybase/ui/widgets/shimmer/sample_feature/shimmer_sample_feature_list.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
@@ -17,7 +17,7 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
         errorEnabled: controller.isError,
         emptyEnabled: controller.isEmpty,
         onRetry: () => controller.onRefresh(),
-        loadingView: const ShimmerList(),
+        loadingView: const ShimmerSampleFeatureList(),
         child: ListView.builder(
           padding: EdgeInsets.zero,
           shrinkWrap: true,

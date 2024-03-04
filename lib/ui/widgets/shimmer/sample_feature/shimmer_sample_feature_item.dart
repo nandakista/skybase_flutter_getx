@@ -7,8 +7,8 @@ import 'package:skybase/ui/widgets/shimmer/shimmer_text.dart';
    Varcant
    nanda.kista@gmail.com
 */
-class ShimmerItemList extends StatelessWidget {
-  const ShimmerItemList({super.key, required this.height});
+class ShimmerSampleFeatureItem extends StatelessWidget {
+  const ShimmerSampleFeatureItem({super.key, required this.height});
 
   final double height;
 

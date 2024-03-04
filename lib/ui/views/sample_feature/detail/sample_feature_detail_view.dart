@@ -5,7 +5,7 @@ import 'package:skybase/ui/views/sample_feature/detail/widgets/sample_feature_de
 import 'package:skybase/ui/views/sample_feature/detail/widgets/sample_feature_detail_info.dart';
 import 'package:skybase/ui/views/sample_feature/detail/widgets/sample_feature_detail_tab.dart';
 import 'package:skybase/ui/widgets/base/state_view.dart';
-import 'package:skybase/ui/widgets/shimmer/shimmer_detail.dart';
+import 'package:skybase/ui/widgets/shimmer/sample_feature/shimmer_sample_feature_detail.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 
 class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
@@ -23,7 +23,7 @@ class SampleFeatureDetailView extends GetView<SampleFeatureDetailController> {
             loadingEnabled: controller.isLoading,
             errorEnabled: controller.isError,
             emptyEnabled: controller.isEmpty,
-            loadingView: const ShimmerDetail(),
+            loadingView: const ShimmerSampleFeatureDetail(),
             errorTitle: controller.errorMessage.value,
             onRefresh: () => controller.onRefresh(),
             onRetry: () => controller.onRefresh(),
