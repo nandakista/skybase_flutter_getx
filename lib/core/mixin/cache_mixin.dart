@@ -54,6 +54,7 @@ mixin CacheMixin {
     String? customFieldId,
   }) async {
     log("$_tag get cache, key : $key");
+    log('$_tag cache id : ${cachedId != null && cachedId.isNotEmpty}');
     dynamic cache = await storage.get(key);
     if (storage.has(key) && cache.toString().isNotNullAndNotEmpty) {
       CacheData cacheData = CacheData.fromJson(jsonDecode(cache));

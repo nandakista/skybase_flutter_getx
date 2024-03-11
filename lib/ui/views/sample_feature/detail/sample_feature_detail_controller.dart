@@ -25,16 +25,20 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
     super.onReady();
   }
 
+
   @override
   bool get keepAlive => false;
 
   @override
-  String get cachedKey => '${CachedKey.SAMPLE_FEATURE_DETAIL}/$idArgs';
+  String get cachedKey => CachedKey.SAMPLE_FEATURE_DETAIL;
+
+  @override
+  String get cachedId => idArgs.toString();
 
   Future<void> getDetailUser() async {
     try {
       final response = await repository.getDetailUser(
-        cancelToken: cancelToken,
+        requestParams: requestParams,
         id: idArgs,
         username: usernameArgs,
       );

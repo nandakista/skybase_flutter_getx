@@ -7,11 +7,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:skybase/config/base/request_param.dart';
 import 'package:skybase/core/mixin/cache_mixin.dart';
 import 'package:skybase/core/mixin/connectivity_mixin.dart';
 
 abstract class PaginationController<T> extends GetxController
     with ConnectivityMixin, CacheMixin {
+  late RequestParams requestParams;
+
   CancelToken cancelToken = CancelToken();
   int perPage = 20;
   int page = 1;
@@ -19,13 +22,17 @@ abstract class PaginationController<T> extends GetxController
 
   bool get keepAlive => false;
 
-  String get cachedKey;
+  String get cachedKey => '';
 
   Future Function()? _onLoad;
 
   @mustCallSuper
   @override
   onInit() {
+    requestParams = RequestParams(
+      cancelToken: cancelToken,
+      cachedKey: cachedKey,
+    );
     listenConnectivity(() {
       if (pagingController.value.status == PagingStatus.firstPageError) {
         onRefresh();
@@ -38,7 +45,9 @@ abstract class PaginationController<T> extends GetxController
   Future<void> onRefresh() async {
     if (_onLoad != null) {
       page = 1;
-      await deleteCached(cachedKey);
+      if (cachedKey.isNotEmpty) {
+        await deleteCached(cachedKey);
+      }
       pagingController.value = PagingState(
         nextPageKey: page,
         error: null,

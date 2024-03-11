@@ -10,9 +10,9 @@ class ProfileController extends BaseController<User> {
   ProfileController({required this.repository});
 
   @override
-  void onInit() {
+  void onReady() {
     loadData(() => onGetProfile());
-    super.onInit();
+    super.onReady();
   }
 
   @override
@@ -25,7 +25,7 @@ class ProfileController extends BaseController<User> {
   Future<void> onGetProfile() async {
     try {
       final response = await repository.getProfile(
-        cancelToken: cancelToken,
+        requestParams: requestParams,
         username: 'nandakista',
       );
       loadFinish(data: response);

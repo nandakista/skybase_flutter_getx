@@ -8,9 +8,9 @@ class ProfileRepositoryController extends BaseController<Repo> {
   ProfileRepositoryController({required this.repository});
 
   @override
-  void onInit() {
+  void onReady() {
     loadData(() => getRepository());
-    super.onInit();
+    super.onReady();
   }
 
   @override
@@ -22,7 +22,7 @@ class ProfileRepositoryController extends BaseController<Repo> {
   Future<void> getRepository() async {
     try {
       final response = await repository.getProfileRepository(
-        cancelToken: cancelToken,
+        requestParams: requestParams,
         username: 'nandakista',
       );
       loadFinish(list: response);

@@ -10,8 +10,12 @@ import 'package:skybase/config/base/request_state.dart';
 import 'package:skybase/core/mixin/cache_mixin.dart';
 import 'package:skybase/core/mixin/connectivity_mixin.dart';
 
+import 'request_param.dart';
+
 abstract class BaseController<T> extends GetxController
     with ConnectivityMixin, CacheMixin {
+  late RequestParams requestParams;
+
   CancelToken cancelToken = CancelToken();
   final errorMessage = Rxn<String>();
 
@@ -28,6 +32,8 @@ abstract class BaseController<T> extends GetxController
   bool get keepAlive => false;
 
   String get cachedKey => '';
+
+  String get cachedId => '';
 
   bool get isInitial => state.value.isInitial;
 
@@ -46,6 +52,11 @@ abstract class BaseController<T> extends GetxController
   @mustCallSuper
   @override
   onInit() {
+    requestParams = RequestParams(
+      cancelToken: cancelToken,
+      cachedKey: cachedKey,
+      cachedId: cachedId,
+    );
     listenConnectivity(() {
       if (isError && !isLoading) onRefresh();
     });
@@ -54,9 +65,7 @@ abstract class BaseController<T> extends GetxController
 
   Future<void> onRefresh() async {
     if (_onLoad != null) {
-      if (cachedKey.isNotEmpty) {
-        await deleteCached(cachedKey);
-      }
+      if (cachedKey.isNotEmpty) await deleteCached('$cachedKey/$cachedId');
       if (!keepAlive) showLoading();
       await _onLoad!();
     }

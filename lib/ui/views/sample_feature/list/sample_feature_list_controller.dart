@@ -12,9 +12,9 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
   SampleFeatureListController({required this.repository});
 
   @override
-  void onInit() {
+  void onReady() {
     loadData(() => getUsers());
-    super.onInit();
+    super.onReady();
   }
 
   @override
@@ -26,7 +26,7 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
   Future<void> getUsers() async {
     try {
       final response = await repository.getUsers(
-        cancelToken: cancelToken,
+        requestParams: requestParams,
         page: page,
         perPage: perPage,
       );

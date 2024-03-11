@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/config/auth_manager/auth_manager.dart';
+import 'package:skybase/config/base/request_param.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
 import 'package:skybase/data/repositories/auth/auth_repository.dart';
@@ -44,7 +45,7 @@ class LoginController extends GetxController {
     LoadingDialog.show();
     try {
       final response = await repository.getProfile(
-        cancelToken: cancelToken,
+        requestParams: RequestParams(cancelToken: cancelToken),
         username: 'nandakista',
       );
       LoadingDialog.dismiss();
