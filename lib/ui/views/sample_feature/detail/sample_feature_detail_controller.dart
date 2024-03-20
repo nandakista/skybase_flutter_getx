@@ -25,7 +25,6 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
     super.onReady();
   }
 
-
   @override
   bool get keepAlive => false;
 

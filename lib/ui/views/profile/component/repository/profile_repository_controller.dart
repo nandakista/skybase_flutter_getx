@@ -13,12 +13,6 @@ class ProfileRepositoryController extends BaseController<Repo> {
     super.onReady();
   }
 
-  @override
-  Future<void> onRefresh() async {
-    super.onRefresh();
-    await getRepository();
-  }
-
   Future<void> getRepository() async {
     try {
       final response = await repository.getProfileRepository(
