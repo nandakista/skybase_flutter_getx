@@ -50,6 +50,7 @@ class PaginationSliverList<T> extends StatelessWidget {
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
     this.semanticIndexCallback,
+    this.onRefresh,
   });
 
   final PagingController<int, T> pagingController;
@@ -87,6 +88,7 @@ class PaginationSliverList<T> extends StatelessWidget {
   final bool addRepaintBoundaries;
   final bool addSemanticIndexes;
   final int? Function(Widget, int)? semanticIndexCallback;
+  final VoidCallback? onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +103,7 @@ class PaginationSliverList<T> extends StatelessWidget {
         addSemanticIndexes: addSemanticIndexes,
         addRepaintBoundaries: addRepaintBoundaries,
         builderDelegate: PaginationDelegate<T>(
+          onRetry: onRefresh ?? () => pagingController.refresh(),
           pagingController: pagingController,
           loadingView: loadingView,
           emptyView: emptyView,
