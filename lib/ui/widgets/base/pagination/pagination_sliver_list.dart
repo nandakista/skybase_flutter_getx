@@ -17,6 +17,7 @@ class PaginationSliverList<T> extends StatelessWidget {
     super.key,
     required this.pagingController,
     required this.itemBuilder,
+    required this.onRetry,
     this.loadingView,
     this.emptyView,
     this.errorView,
@@ -50,11 +51,11 @@ class PaginationSliverList<T> extends StatelessWidget {
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
     this.semanticIndexCallback,
-    this.onRefresh,
   });
 
   final PagingController<int, T> pagingController;
   final ItemWidgetBuilder<T> itemBuilder;
+  final VoidCallback onRetry;
   final bool emptyRetryEnabled;
   final Widget? loadingView;
   final Widget? emptyView;
@@ -88,7 +89,6 @@ class PaginationSliverList<T> extends StatelessWidget {
   final bool addRepaintBoundaries;
   final bool addSemanticIndexes;
   final int? Function(Widget, int)? semanticIndexCallback;
-  final VoidCallback? onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +103,8 @@ class PaginationSliverList<T> extends StatelessWidget {
         addSemanticIndexes: addSemanticIndexes,
         addRepaintBoundaries: addRepaintBoundaries,
         builderDelegate: PaginationDelegate<T>(
-          onRetry: onRefresh ?? () => pagingController.refresh(),
           pagingController: pagingController,
+          onRetry: onRetry,
           loadingView: loadingView,
           emptyView: emptyView,
           emptyRetryEnabled: emptyRetryEnabled,
@@ -172,12 +172,11 @@ class SliverGroupedListView<T, G> extends StatelessWidget {
       itemCount: data.length,
       separatorBuilder: separatorBuilder,
       itemBuilder: (context, index) {
-
         bool isFirstIndex = index == 0;
         bool isLastIndex = index + 1 == data.length;
 
         (data).sort(
-              (b, a) => (groupBy(b) as dynamic)!.compareTo(
+          (b, a) => (groupBy(b) as dynamic)!.compareTo(
             groupBy(a),
           ),
         );

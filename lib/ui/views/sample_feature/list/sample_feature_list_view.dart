@@ -24,6 +24,7 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
         pagingController: controller.pagingController,
         loadingView: const ShimmerSampleFeatureList(),
         onRefresh: controller.onRefresh,
+        onRetry: controller.onRefresh,
         itemBuilder: (BuildContext context, item, int index) {
           return ListTile(
             onTap: () => controller.onChooseUser(
