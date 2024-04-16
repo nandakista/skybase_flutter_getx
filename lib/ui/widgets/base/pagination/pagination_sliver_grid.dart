@@ -108,6 +108,7 @@ class PaginationSliverGrid<T> extends StatelessWidget {
         shrinkWrapFirstPageIndicators: shrinkWrapFirstPageIndicators,
         builderDelegate: PaginationDelegate<T>(
           pagingController: pagingController,
+          onRetry: onRefresh ?? () => pagingController.refresh(),
           loadingView: loadingView,
           emptyView: emptyView,
           emptyRetryEnabled: emptyRetryEnabled,

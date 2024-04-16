@@ -367,6 +367,7 @@ class PaginationStateView<T> extends StatelessWidget {
   PagedChildBuilderDelegate<T> _builderDelete() {
     return PaginationDelegate<T>(
       pagingController: pagingController,
+      onRetry: onRefresh ?? () => pagingController.refresh(),
       loadingView: loadingView,
       emptyView: emptyView,
       emptyRetryEnabled: emptyRetryEnabled,
