@@ -24,7 +24,7 @@ class TimerUtilsView extends GetView<TimerUtilsController> {
               id: 'count_down_timer',
               builder: (controller) {
                 TimeLeftData timerData = TimerHelper.intToTimeLeftData(
-                  controller.timer1Ctr.currentTime.value,
+                  controller.timer1.currentTime.value,
                 );
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

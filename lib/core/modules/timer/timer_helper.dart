@@ -1,10 +1,21 @@
-import 'package:skybase/core/modules/timer/timer_module.dart';
-
 /* Created by
    Varcant
    06/11/2022
    nanda.kista@gmail.com
 */
+
+class TimeLeftData {
+  final String hour;
+  final String minutes;
+  final String second;
+
+  TimeLeftData({
+    required this.hour,
+    required this.minutes,
+    required this.second,
+  });
+}
+
 class TimerHelper {
   static int startTimer({
     int hours = 0,
