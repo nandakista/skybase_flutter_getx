@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:skybase/config/themes/app_colors.dart';
@@ -5,12 +7,15 @@ import 'package:skybase/config/themes/app_colors.dart';
 class AppTheme {
   static ThemeData get light {
     return ThemeData(
-      useMaterial3: false,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: AppColors.primary,
+        surfaceTint: Colors.white,
+        brightness: Brightness.light,
+      ),
       primaryColor: AppColors.primary,
       primarySwatch: AppColors.materialPrimary,
       indicatorColor: AppColors.secondary,
       fontFamily: "Poppins",
-      brightness: Brightness.light,
       inputDecorationTheme: inputDecorationTheme(),
       checkboxTheme: checkboxThemeData(),
       radioTheme: radioThemeData(),
@@ -19,17 +24,28 @@ class AppTheme {
         selectedItemColor: AppColors.primary,
         unselectedItemColor: Colors.grey,
       ),
+      appBarTheme: const AppBarTheme(
+        surfaceTintColor: Colors.transparent,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+          systemNavigationBarColor: Colors.black,
+          statusBarColor: AppColors.primary,
+        ),
+      ),
     );
   }
 
   static ThemeData get dark {
     return ThemeData(
-      useMaterial3: false,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: AppColors.primary,
+        surfaceTint: Colors.transparent,
+        brightness: Brightness.dark,
+      ),
       primaryColor: AppColors.primary,
       primarySwatch: AppColors.materialPrimary,
       indicatorColor: AppColors.secondary,
       fontFamily: "Poppins",
-      brightness: Brightness.dark,
       inputDecorationTheme: inputDecorationTheme(),
       checkboxTheme: checkboxThemeData(),
       radioTheme: radioThemeData(),
@@ -47,6 +63,15 @@ class AppTheme {
         selectedItemColor: AppColors.primary,
         unselectedItemColor: Colors.grey,
         elevation: 2,
+      ),
+      appBarTheme: AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Platform.isIOS || Platform.isMacOS
+              ? Brightness.dark
+              : Brightness.light,
+          systemNavigationBarColor: Colors.black,
+          statusBarColor: AppColors.primary,
+        ),
       ),
     );
   }
