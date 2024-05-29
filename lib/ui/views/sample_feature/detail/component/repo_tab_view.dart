@@ -12,8 +12,8 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
   Widget build(BuildContext context) {
     return Obx(
       () => (controller.dataObj.value?.repositoryList ?? []).isEmpty
-          ? const Center(
-              child: Text('User belum mem-follow siapapun'),
+          ? Center(
+              child: Text('txt_no_repository'.tr),
             )
           : ListView.separated(
               separatorBuilder: (context, _) => const Divider(),

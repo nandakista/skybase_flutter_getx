@@ -12,8 +12,8 @@ class FollowerTabView extends GetView<SampleFeatureDetailController> {
   Widget build(BuildContext context) {
     return Obx(
       () => (controller.dataObj.value?.followersList ?? []).isEmpty
-          ? const Center(
-              child: Text('Tidak ada follower'),
+          ? Center(
+              child: Text('txt_no_follower'.tr),
             )
           : ListView.separated(
               separatorBuilder: (context, _) => const Divider(),

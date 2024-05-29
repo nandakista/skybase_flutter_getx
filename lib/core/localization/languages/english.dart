@@ -103,5 +103,8 @@ const Map<String, String> en = {
   'txt_empty_list_subtitle': 'Sorry, data is empty. Maybe go back latter',
   'txt_crash_error_title': 'Something Went Wrong!',
   'txt_crash_error_message':
-      'Sorry, the page you requested is not accessible at this time. Try again in a moment.'
+      'Sorry, the page you requested is not accessible at this time. Try again in a moment.',
+  'txt_no_follower': 'You dont have follower',
+  'txt_no_following': 'You are not following anyone',
+  'txt_no_repository': 'You dont have any repositories',
 };

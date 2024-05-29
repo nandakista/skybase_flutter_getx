@@ -12,8 +12,8 @@ class FollowingTabView extends GetView<SampleFeatureDetailController> {
   Widget build(BuildContext context) {
     return Obx(
       () => (controller.dataObj.value?.followingList ?? []).isEmpty
-          ? const Center(
-              child: Text('User belum mem-follow siapapun'),
+          ? Center(
+              child: Text('txt_no_following'.tr),
             )
           : ListView.separated(
               separatorBuilder: (context, _) => const Divider(),
