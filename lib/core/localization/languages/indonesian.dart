@@ -101,7 +101,7 @@ const Map<String, String> id = {
   'txt_crash_error_title': 'Terjadi Kesalahan!',
   'txt_crash_error_message':
       'Mohon maaf, halaman yang Anda minta tidak dapat diakses saat ini. Coba lagi dalam beberapa saat.',
-'txt_no_follower': 'Tidak ada follower',
-'txt_no_following': 'User belum mem-follow siapapun',
-'txt_no_repository': 'Kamu belum memiliki repositori',
+  'txt_no_follower': 'Tidak ada follower',
+  'txt_no_following': 'User belum mem-follow siapapun',
+  'txt_no_repository': 'Kamu belum memiliki repositori',
 };
