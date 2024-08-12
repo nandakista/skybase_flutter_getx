@@ -20,6 +20,7 @@ class SkyImage extends StatelessWidget {
   final double? height;
   final double? size;
   final VoidCallback? onTap;
+  final Border? border;
   final BorderRadiusGeometry? borderRadius;
   final BoxFit fit;
   final Color? color;
@@ -29,6 +30,8 @@ class SkyImage extends StatelessWidget {
   final ShapeImage shapeImage;
 
   /// Called this placeholder src when [src] is null or empty
+  /// If you fill the [generateByName], this placeholderSrc will be replace
+  /// or not work
   final String? placeholderSrc;
 
   /// BoxFit for placeholder
@@ -37,7 +40,7 @@ class SkyImage extends StatelessWidget {
   /// Custom widget that called when [src] is null or empty
   final Widget? placeholderWidget;
 
-  /// if true -> enable on tap to redirect MediaPreview Page
+  /// If true -> enable on tap to redirect MediaPreview Page
   final bool enablePreview;
   final String? previewTitle;
   final TextStyle? previewTitleStyle;
@@ -77,6 +80,7 @@ class SkyImage extends StatelessWidget {
     this.width,
     this.height,
     this.onTap,
+    this.border,
     this.borderRadius,
     this.fit = BoxFit.cover,
     this.enablePreview = false,
@@ -110,6 +114,7 @@ class SkyImage extends StatelessWidget {
         width: width,
         height: height,
         fit: fit,
+        border: border,
         borderRadius: borderRadius,
         enablePreview: enablePreview,
         onTapImage: onTap,
@@ -139,10 +144,12 @@ class SkyImage extends StatelessWidget {
             width: width,
             height: height,
             fit: placeholderFit ?? BoxFit.contain,
+            border: border,
             borderRadius: borderRadius,
             enablePreview: enablePreview,
             onTapImage: onTap,
             isAsset: isAsset,
+            color: color,
             previewTitle: previewTitle,
             previewTitleStyle: previewTitleStyle,
             shapeImage: shapeImage,
@@ -166,6 +173,7 @@ class BaseImage extends StatefulWidget {
   final double? height;
   final double? size;
   final VoidCallback? onTapImage;
+  final Border? border;
   final BorderRadiusGeometry? borderRadius;
   final BoxFit fit;
   final bool enablePreview;
@@ -191,6 +199,7 @@ class BaseImage extends StatefulWidget {
     this.width,
     this.height,
     this.onTapImage,
+    this.border,
     this.borderRadius,
     this.fit = BoxFit.fill,
     this.enablePreview = false,
@@ -243,7 +252,12 @@ class _BaseImageState extends State<BaseImage> {
                 ),
               )
           : widget.onTapImage,
-      child: _determineShapeImage(),
+      child: Container(
+        decoration: BoxDecoration(
+          border: widget.border,
+        ),
+        child: _determineShapeImage(),
+      ),
     );
   }
 
@@ -266,24 +280,13 @@ class _BaseImageState extends State<BaseImage> {
 
   Widget _determineImageWidget() {
     final isFromRemote = widget.src.startsWith('http');
-    final isSvg = widget.src.endsWith('svg');
+    final isSvg = widget.src.endsWith('.svg');
     final isAssets = widget.isAsset ||
         widget.src.startsWith('lib/resources/') ||
         widget.src.startsWith('assets/images/');
     final isFile = !isFromRemote && !isAssets && !isSvg;
 
-    if (isSvg || widget.forceSvgSrc) {
-      return SvgPicture.asset(
-        widget.src,
-        width: widget.width,
-        height: widget.height,
-        colorFilter: widget.color != null
-            ? ColorFilter.mode(widget.color!, BlendMode.srcIn)
-            : null,
-        fit: widget.fit,
-        alignment: widget.alignment,
-      );
-    } else if (isFromRemote || widget.forceRemoteSrc) {
+    if (isFromRemote || widget.forceRemoteSrc) {
       return CachedNetworkImage(
         imageUrl: isFromRemote ? widget.src : 'https://${widget.src}',
         color: widget.color,
@@ -321,6 +324,17 @@ class _BaseImageState extends State<BaseImage> {
           );
         },
       );
+    } else if (isSvg || widget.forceSvgSrc) {
+      return SvgPicture.asset(
+        widget.src,
+        width: widget.width,
+        height: widget.height,
+        colorFilter: widget.color != null
+            ? ColorFilter.mode(widget.color!, BlendMode.srcIn)
+            : null,
+        fit: widget.fit,
+        alignment: widget.alignment,
+      );
     } else if (isAssets || widget.forceAssetSrc) {
       return Image.asset(
         widget.src,
@@ -331,23 +345,6 @@ class _BaseImageState extends State<BaseImage> {
         alignment: widget.alignment,
         errorBuilder: (context, error, stackTrace) {
           debugPrint('Error load asset image $error');
-          return SizedBox(
-            height: widget.height,
-            width: widget.width,
-            child: widget.errorWidget ?? const Icon(Icons.error),
-          );
-        },
-      );
-    } else if (isFile || widget.forceFileSrc) {
-      return Image.file(
-        File(widget.src),
-        width: widget.width,
-        height: widget.height,
-        fit: widget.fit,
-        color: widget.color,
-        alignment: widget.alignment,
-        errorBuilder: (context, err, stackTrace) {
-          debugPrint('Error load file image $err');
           return SizedBox(
             height: widget.height,
             width: widget.width,
