@@ -28,8 +28,7 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
     required this.groupBy,
     this.groupFooterBuilder,
     this.separatorHeader,
-    this.separatorGroup,
-    this.sortBy = SortBy.asc,
+    this.sortGroupBy = SortBy.asc,
     this.loadingView,
     this.emptyView,
     this.maxItemView,
@@ -73,6 +72,7 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
     this.semanticChildCount,
     this.anchor,
     this.center,
+    this.sortGroupItems,
   }) : type = PaginationGroupType.list;
 
   // Pagination properties
@@ -85,8 +85,8 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
   final Widget Function(G element)? groupFooterBuilder;
   final G Function(T element) groupBy;
   final Widget? separatorHeader;
-  final Widget? separatorGroup;
-  final SortBy sortBy;
+  final SortBy sortGroupBy;
+  final int Function(T, T)? sortGroupItems;
 
   // Widget properties
   final bool shrinkWrap;
@@ -219,7 +219,6 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
       shrinkWrap: shrinkWrap,
       reverse: reverse ?? false,
       separator: separator,
-      separatorGroup: separatorGroup,
       separatorHeader: separatorHeader,
       controller: scrollController,
       shrinkWrapFirstPageIndicators: shrinkWrapFirstPageIndicators,
@@ -229,6 +228,8 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
       dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
       clipBehavior: clipBehavior ?? Clip.hardEdge,
       cacheExtent: cacheExtent,
+      sortGroupBy: sortGroupBy,
+      sortGroupItems: sortGroupItems,
       keyboardDismissBehavior:
           keyboardDismissBehavior ?? ScrollViewKeyboardDismissBehavior.manual,
     );
@@ -243,8 +244,9 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
       groupFooterBuilder: groupFooterBuilder,
       shrinkWrapFirstPageIndicators: shrinkWrapFirstPageIndicators,
       separator: separator,
-      separatorGroup: separatorGroup,
       separatorHeader: separatorHeader,
+      sortGroupBy: sortGroupBy,
+      sortGroupItems: sortGroupItems,
     );
   }
 
