@@ -4,12 +4,12 @@ import 'package:skybase/ui/views/profile/profile_binding.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_binding.dart';
 import 'package:skybase/ui/views/utils/utils_binding.dart';
 
-class MainNavBinding implements Bindings {
+class MainNavBinding implements Binding {
   @override
-  void dependencies() {
-    Get.lazyPut(() => MainNavController());
-    UtilsBinding().dependencies();
-    ProfileBinding().dependencies();
-    SampleFeatureListBinding().dependencies();
-  }
+  List<Bind> dependencies() => [
+    Bind.lazyPut(() => MainNavController()),
+    ...UtilsBinding().dependencies(),
+    ...ProfileBinding().dependencies(),
+    ...SampleFeatureListBinding().dependencies(),
+  ];
 }

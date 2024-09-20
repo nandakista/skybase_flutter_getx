@@ -33,15 +33,14 @@ class ServiceLocator {
     WidgetsFlutterBinding.ensureInitialized();
     if (Platform.isIOS) {
       final dir = await getLibraryDirectory();
-      await Get.putAsync(
-        () async => GetStorage(StorageKey.STORAGE_NAME, dir.path),
-      );
       await GetStorage(StorageKey.STORAGE_NAME, dir.path).initStorage;
+      Get.put(GetStorage(StorageKey.STORAGE_NAME, dir.path));
     } else {
-      await Get.putAsync(() async => GetStorage());
       await GetStorage(StorageKey.STORAGE_NAME).initStorage;
+      Get.put(GetStorage(StorageKey.STORAGE_NAME));
     }
-    Get.putAsync(() async => const FlutterSecureStorage());
+
+    Get.put(const FlutterSecureStorage());
     Get.lazyPut(() => DioClient());
   }
 

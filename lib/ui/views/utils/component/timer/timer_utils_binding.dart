@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:skybase/ui/views/utils/component/timer/timer_utils_controller.dart';
 
-class TimerUtilsBinding implements Bindings {
+class TimerUtilsBinding implements Binding {
   @override
-  void dependencies() {
-    Get.lazyPut(() => TimerUtilsController());
-  }
+  List<Bind> dependencies() => [
+    Bind.lazyPut(() => TimerUtilsController()),
+  ];
 }

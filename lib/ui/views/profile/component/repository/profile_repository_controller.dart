@@ -13,6 +13,9 @@ class ProfileRepositoryController extends BaseController<Repo> {
     super.onReady();
   }
 
+  @override
+  bool get keepAlive => false;
+
   Future<void> getRepository() async {
     try {
       final response = await repository.getProfileRepository(

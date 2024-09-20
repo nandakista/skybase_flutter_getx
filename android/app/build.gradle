@@ -38,7 +38,7 @@ android {
     def formattedDate = date.format('yyyyMMdd')
     def fileName = "Skybase"
 
-    compileSdkVersion 33
+    compileSdkVersion 34
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
