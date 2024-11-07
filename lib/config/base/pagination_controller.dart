@@ -44,15 +44,15 @@ abstract class PaginationController<T> extends GetxController
   @mustCallSuper
   Future<void> onRefresh() async {
     if (_onLoad != null) {
-      page = 1;
-      if (cachedKey.isNotEmpty) {
-        await deleteCached(cachedKey);
+      if (cachedKey.isNotEmpty) await deleteCached(cachedKey);
+      if (page > 1) {
+        page = 1;
+        pagingController.value = PagingState(
+          nextPageKey: page,
+          error: null,
+          itemList: keepAlive ? _keepAliveData : null,
+        );
       }
-      pagingController.value = PagingState(
-        nextPageKey: page,
-        error: null,
-        itemList: keepAlive ? _keepAliveData : null,
-      );
       await _onLoad!();
     }
   }
