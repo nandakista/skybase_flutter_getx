@@ -26,9 +26,11 @@ class ThemeManager extends GetxService {
   Future<Rx<bool>> changeTheme() async {
     if (isDark.isTrue) {
       storage.save(StorageKey.IS_DARK_THEME, false);
+      isDark.value = false;
     } else {
       storage.save(StorageKey.IS_DARK_THEME, true);
+      isDark.value = true;
     }
-    return isDark.toggle();
+    return isDark;
   }
 }

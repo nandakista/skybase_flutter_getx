@@ -17,9 +17,12 @@ class ProfileController extends BaseController<User> {
 
   @override
   Future<void> onRefresh() async {
-    super.onRefresh();
     await Get.find<ProfileRepositoryController>().onRefresh();
+    super.onRefresh();
   }
+
+  @override
+  bool get keepAlive => false;
 
   Future<void> onGetProfile() async {
     try {

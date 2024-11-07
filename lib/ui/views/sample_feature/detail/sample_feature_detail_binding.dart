@@ -8,8 +8,9 @@ class SampleFeatureDetailBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(
       () => SampleFeatureDetailController(
-        repository:
-            SampleFeatureRepositoryImpl(apiService: SampleFeatureSourcesImpl()),
+        repository: SampleFeatureRepositoryImpl(
+          apiService: SampleFeatureSourcesImpl(),
+        ),
       ),
     );
   }

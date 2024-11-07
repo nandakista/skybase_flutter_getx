@@ -12,7 +12,6 @@ class ProfileBinding extends Bindings {
         repository: AuthRepositoryImpl(apiService: AuthSourcesImpl()),
       ),
     );
-
     Get.lazyPut(
       () => ProfileRepositoryController(
         repository: AuthRepositoryImpl(apiService: AuthSourcesImpl()),
