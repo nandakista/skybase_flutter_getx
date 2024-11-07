@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 
 import 'intro_controller.dart';
 
-class IntroBinding extends Binding {
+class IntroBinding extends Bindings {
   @override
-  List<Bind> dependencies() => [
-        Bind.lazyPut(() => IntroController()),
-      ];
+  void dependencies() {
+    Get.lazyPut(() => IntroController());
+  }
 }

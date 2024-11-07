@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 
 import 'setting_controller.dart';
 
-class SettingBinding extends Binding {
+class SettingBinding extends Bindings {
   @override
-  List<Bind> dependencies() => [
-        Bind.lazyPut(() => SettingController()),
-      ];
+  void dependencies() {
+    Get.lazyPut(() => SettingController());
+  }
 }

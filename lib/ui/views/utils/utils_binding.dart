@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
 
-class UtilsBinding implements Binding {
+class UtilsBinding implements Bindings {
   @override
-  List<Bind> dependencies() => [
-        Bind.put(UtilsController()),
-      ];
+  void dependencies() {
+    Get.lazyPut(() => UtilsController());
+  }
 }

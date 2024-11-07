@@ -3,17 +3,15 @@ import 'package:skybase/data/repositories/sample_feature/sample_feature_reposito
 import 'package:skybase/data/sources/server/sample_feature/sample_feature_sources_impl.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 
-class SampleFeatureDetailBinding extends Binding {
+class SampleFeatureDetailBinding extends Bindings {
   @override
-  List<Bind> dependencies() {
-    return [
-      Bind.lazyPut(
-        () => SampleFeatureDetailController(
-          repository: SampleFeatureRepositoryImpl(
-            apiService: SampleFeatureSourcesImpl(),
-          ),
+  void dependencies() {
+    Get.lazyPut(
+      () => SampleFeatureDetailController(
+        repository: SampleFeatureRepositoryImpl(
+          apiService: SampleFeatureSourcesImpl(),
         ),
       ),
-    ];
+    );
   }
 }
