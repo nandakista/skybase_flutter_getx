@@ -18,11 +18,11 @@ Follow step below to run :
 Read [this documentation](https://docs.google.com/document/d/1ZwO60uk2SnqVBfL-L7tmIu6ykHCB8MCHP9VxE-ijXYM/edit?usp=share_link) to understand architecture, state, pattern, and style guide of the skybase.
 
 ## Mason CLI Supported
-This codebase supports the use of the Mason CLI library. Follow [this instruction](https://docs.google.com/document/d/1JfoTDzJ8FqCatVjTdzOn_9rDcIJBqadaSlvUZn53UCc/edit?usp=share_link) if you want to use or setup Mason CLI.
+This codebase support Mason CLI library. Follow [this instruction](https://docs.google.com/document/d/1JfoTDzJ8FqCatVjTdzOn_9rDcIJBqadaSlvUZn53UCc/edit?usp=share_link) if you want to use or setup Mason CLI.
 
 ## Build
 
-Open terminal in root project and input command below.
+Open terminal in root of project and input command below.
 
 Note: `<env>` is `staging` | `production`
 
