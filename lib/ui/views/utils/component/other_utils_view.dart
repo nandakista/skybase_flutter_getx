@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:skybase/core/helper/converter_helper.dart';
-import 'package:skybase/core/extension/int_extension.dart';
+import 'package:skybase/core/extension/num_extension.dart';
 import 'package:skybase/core/helper/input_formater.dart';
 import 'package:skybase/core/helper/snackbar_helper.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
