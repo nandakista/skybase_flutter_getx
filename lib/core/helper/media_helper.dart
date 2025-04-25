@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as p;
+// ignore: depend_on_referenced_packages
 import 'package:image/image.dart' as img;
 
 class MediaInfo {
@@ -38,6 +39,10 @@ class MediaHelper {
     "zip",
     "rar"
   ];
+
+  static String generateAvatarByName(String name) {
+    return 'https://ui-avatars.com/api/?size=256&name=$name';
+  }
 
   static MediaInfo getMediaType(String path) {
     final extension = path.startsWith('http')

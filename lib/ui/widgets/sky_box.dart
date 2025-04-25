@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 */
 class SkyBox extends StatelessWidget {
   const SkyBox({
-    Key? key,
+    super.key,
     required this.child,
     this.margin,
     this.padding,
@@ -19,7 +19,8 @@ class SkyBox extends StatelessWidget {
     this.borderColor,
     this.elevation = 4,
     this.boxShadow,
-  }) : super(key: key);
+    this.enabledCard = true,
+  });
 
   final Widget? child;
   final EdgeInsetsGeometry? margin, padding;
@@ -32,36 +33,42 @@ class SkyBox extends StatelessWidget {
   final Gradient? gradient;
   final double elevation;
   final List<BoxShadow>? boxShadow;
+  final bool enabledCard;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: color,
-      margin: margin,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(borderRadius ?? 12),
-      ),
-      elevation: elevation,
-      child: InkWell(
-        splashFactory: NoSplash.splashFactory,
-        highlightColor: Colors.transparent,
-        onTap: onPressed,
-        child: Container(
-          padding: padding ?? const EdgeInsets.all(8),
-          height: height,
-          width: width,
-          decoration: BoxDecoration(
-            color: color,
-            gradient: gradient,
-            borderRadius: BorderRadius.circular(borderRadius ?? 12),
-            border: Border.all(
-              color: borderColor ?? Colors.grey.shade300,
-            ),
-            boxShadow: boxShadow,
+    Widget body = InkWell(
+      splashFactory: NoSplash.splashFactory,
+      highlightColor: Colors.transparent,
+      onTap: onPressed,
+      child: Container(
+        padding: padding ?? const EdgeInsets.all(8),
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          color: color,
+          gradient: gradient,
+          borderRadius: BorderRadius.circular(borderRadius ?? 12),
+          border: Border.all(
+            color: borderColor ?? Colors.grey.shade300,
           ),
-          child: child,
+          boxShadow: boxShadow,
         ),
+        child: child,
       ),
     );
+    if (enabledCard) {
+      return Card(
+        color: color,
+        margin: margin,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 12),
+        ),
+        elevation: elevation,
+        child: body,
+      );
+    } else {
+      return body;
+    }
   }
 }

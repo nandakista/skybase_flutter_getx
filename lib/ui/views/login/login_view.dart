@@ -12,14 +12,14 @@ import 'package:skybase/ui/widgets/sky_form_field.dart';
 class LoginView extends GetView<LoginController> {
   static const String route = '/login';
 
-  const LoginView({Key? key}) : super(key: key);
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return KeyboardDismissible(
       child: ColoredStatusBar(
         color: Get.theme.scaffoldBackgroundColor,
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         child: Scaffold(
           body: Center(
             child: SingleChildScrollView(
@@ -45,9 +45,7 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
                       const Flexible(
-                        child: Image(
-                            image: AssetImage('assets/images/img_login.png'),
-                            width: 250),
+                        child: FlutterLogo(size: 160),
                       )
                     ],
                   ),

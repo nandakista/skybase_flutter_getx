@@ -1,69 +1,49 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/base/base_controller.dart';
+import 'package:skybase/config/base/base_controller.dart';
+import 'package:skybase/data/models/sample_feature/sample_feature.dart';
+import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
 import 'package:skybase/data/sources/local/cached_key.dart';
-import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
-import 'package:skybase/domain/usecases/get_detail_user.dart';
 
 class SampleFeatureDetailController extends BaseController<SampleFeature> {
-  final GetDetailUser getDetailUser;
+  final SampleFeatureRepository repository;
 
-  SampleFeatureDetailController({required this.getDetailUser});
-
-  final GlobalKey headerKey = GlobalKey();
-  final GlobalKey detailInfoKey = GlobalKey();
-  final headerWidget = Rxn<Size>();
-  final detailInfoWidget = Rxn<Size>();
+  SampleFeatureDetailController({required this.repository});
 
   late int idArgs;
   late String usernameArgs;
 
   @override
   void onInit() {
-    super.onInit();
     idArgs = Get.arguments['id'];
     usernameArgs = Get.arguments['username'];
+    super.onInit();
   }
 
   @override
   void onReady() async {
-    getCache(() => onGetDetailUser());
-
-    // Only fetch data
-    // loadData(() => onGetDetailUser());
+    loadData(() => getDetailUser());
+    super.onReady();
   }
 
   @override
-  void onRefresh() {
-    onGetDetailUser();
-    super.onRefresh();
-  }
+  bool get keepAlive => false;
+
+  @override
+  String get cachedKey => CachedKey.SAMPLE_FEATURE_DETAIL;
 
   @override
   String get cachedId => idArgs.toString();
 
-  @override
-  // Only save last cache
-  String get cachedKey => CachedKey.SAMPLE_FEATURE_DETAIL;
-
-  // Save every detail cache
-  // String get storageName => CachedKey.SAMPLE_FEATURE_DETAIL + cacheId;
-
-  Future<void> onGetDetailUser() async {
-    showLoading();
+  Future<void> getDetailUser() async {
     try {
-      final response = await getDetailUser(
+      final response = await repository.getDetailUser(
+        requestParams: requestParams,
         id: idArgs,
         username: usernameArgs,
       );
-      saveCacheAndFinish(data: response);
-
-      // Only fetch data
-      // finishLoadData(data: response);
-      dismissLoading();
+      loadFinish(data: response);
     } catch (e) {
-      dismissLoading();
-      showError(e.toString());
+      loadError(e.toString());
     }
   }
 }

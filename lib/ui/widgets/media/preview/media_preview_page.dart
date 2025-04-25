@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skybase/core/helper/media_helper.dart';
-import 'package:skybase/ui/widgets/sky_appbar.dart';
+import 'package:skybase/ui/widgets/media/determine_media_widget.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 /* Created by
@@ -8,45 +7,54 @@ import 'package:skybase/ui/widgets/sky_image.dart';
    nanda.kista@gmail.com
 */
 class MediaPreviewPage extends StatelessWidget {
-  final String url;
+  final String src;
   final bool isAsset;
   final String? title;
   final TextStyle? titleStyle;
+  final bool forceImage;
+  final bool forceVideo;
+  final bool forceFile;
 
   const MediaPreviewPage({
-    Key? key,
-    required this.url,
+    super.key,
+    required this.src,
     this.isAsset = true,
     this.title,
     this.titleStyle,
-  }) : super(key: key);
+    this.forceImage = false,
+    this.forceVideo = false,
+    this.forceFile = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: SkyAppBar.primary(
-          title: title ?? 'Media Preview',
-          titleStyle: titleStyle,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text(
+          title ?? '',
+          style: titleStyle,
         ),
-        body: _determineMedia(url));
-  }
-
-  Widget _determineMedia(String path) {
-    final mediaType = MediaHelper.getMediaType(path);
-    switch (mediaType.type) {
-      case MediaType.FILE:
-        return const Center(child: Text('Media Unsupported'));
-      case MediaType.IMAGE:
-        return Center(
+      ),
+      backgroundColor: Colors.black,
+      body: DetermineMediaWidget(
+        path: src,
+        forceFile: forceFile,
+        forceImage: forceImage,
+        forceVideo: forceVideo,
+        image: Center(
           child: SkyImage(
-            src: mediaType.path,
+            src: src,
             isAsset: isAsset,
           ),
-        );
-      case MediaType.VIDEO:
-        return const Center(child: Text('Media Unsupported'));
-      case MediaType.UNKNOWN:
-        return const Center(child: Text('Media Unsupported'));
-    }
+        ),
+        // Set this widget if want to show file preview
+        file: const SizedBox.shrink(),
+        // Set this widget if want to show video preview
+        video: const SizedBox.shrink(),
+        // Set this widget if want to show custom unknown preview
+        unknown: const SizedBox.shrink(),
+      ),
+    );
   }
 }

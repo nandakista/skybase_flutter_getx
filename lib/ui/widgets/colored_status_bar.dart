@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:skybase/config/themes/app_colors.dart';
@@ -12,12 +10,12 @@ import 'package:skybase/config/themes/app_colors.dart';
 /// Wrap your Scaffold to this widget for set Status Bar color in specific pages.
 class ColoredStatusBar extends StatelessWidget {
   const ColoredStatusBar({
-    Key? key,
+    super.key,
     required this.child,
     this.color = AppColors.primary,
     this.brightness = Brightness.dark,
     this.coloredBottomBar = false,
-  }) : super(key: key);
+  });
 
   /// Background color of Status Bar
   final Color? color;
@@ -36,23 +34,16 @@ class ColoredStatusBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Brightness iconBrightness;
-    if (Platform.isIOS) {
-      (brightness == Brightness.dark)
-          ? iconBrightness = Brightness.light
-          : iconBrightness = Brightness.dark;
-    } else {
-      iconBrightness = brightness;
-    }
-    const defaultColor = AppColors.primary;
+    final androidIconBrightness =
+        brightness == Brightness.dark ? Brightness.light : Brightness.dark;
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
-        statusBarColor: color ?? defaultColor,
-        statusBarIconBrightness: iconBrightness,
-        statusBarBrightness: iconBrightness,
+        statusBarColor: color,
+        statusBarIconBrightness: androidIconBrightness,
+        statusBarBrightness: brightness,
       ),
       child: Container(
-        color: color ?? defaultColor,
+        color: color,
         child: SafeArea(
           left: false,
           right: false,

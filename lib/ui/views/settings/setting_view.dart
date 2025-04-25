@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/app/app_configuration.dart';
+import 'package:skybase/config/app/app_info.dart';
 import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/config/themes/theme_manager.dart';
 import 'package:skybase/ui/views/settings/setting_controller.dart';
@@ -13,12 +11,12 @@ import 'package:skybase/ui/widgets/sky_button.dart';
 class SettingView extends GetView<SettingController> {
   static const String route = '/setting';
 
-  const SettingView({Key? key}) : super(key: key);
+  const SettingView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ColoredStatusBar(
-      brightness: Brightness.light,
+      brightness: Brightness.dark,
       child: Scaffold(
         appBar: SkyAppBar.secondary(title: 'txt_setting'.tr),
         bottomNavigationBar: Padding(
@@ -27,7 +25,7 @@ class SettingView extends GetView<SettingController> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '${'txt_version'.tr} ${AppConfiguration.appVersion}',
+                '${'txt_version'.tr} ${AppInfo.appVersion}',
                 style: AppStyle.body2.copyWith(color: Colors.grey),
               ),
               const SizedBox(height: 12),
@@ -53,10 +51,8 @@ class SettingView extends GetView<SettingController> {
                         const Text('ENG'),
                         Obx(
                           () => Radio(
-                            value: jsonEncode(
-                              {'name': 'English', 'locale': 'en'},
-                            ),
-                            groupValue: jsonEncode(controller.language.value),
+                            value: 'en',
+                            groupValue: controller.languageCode.value,
                             onChanged: (value) {
                               controller.onUpdateLocale(value.toString());
                             },
@@ -65,10 +61,8 @@ class SettingView extends GetView<SettingController> {
                         const Text('ID'),
                         Obx(
                           () => Radio(
-                            value: jsonEncode(
-                              {'name': 'Indonesia', 'locale': 'id'},
-                            ),
-                            groupValue: jsonEncode(controller.language.value),
+                            value: 'id',
+                            groupValue: controller.languageCode.value,
                             onChanged: (value) {
                               controller.onUpdateLocale(value.toString());
                             },

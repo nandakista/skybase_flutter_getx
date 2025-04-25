@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/themes/app_colors.dart';
 import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/profile/component/repository/profile_repository_controller.dart';
-import 'package:skybase/ui/widgets/base/sky_view.dart';
-import 'package:skybase/ui/widgets/shimmer/shimmer_list.dart';
+import 'package:skybase/ui/widgets/base/state_view.dart';
+import 'package:skybase/ui/widgets/shimmer/sample_feature/shimmer_sample_feature_list.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
-  const ProfileRepositoryView({Key? key}) : super(key: key);
+  const ProfileRepositoryView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SkyView.component(
+      () => StateView.component(
         loadingEnabled: controller.isLoading,
         errorEnabled: controller.isError,
         emptyEnabled: controller.isEmpty,
         onRetry: () => controller.onRefresh(),
-        loadingView: const ShimmerList(),
+        loadingView: const ShimmerSampleFeatureList(),
         child: ListView.builder(
           padding: EdgeInsets.zero,
           shrinkWrap: true,
@@ -28,12 +27,10 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
             final item = controller.dataList[index];
             return ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: CircleAvatar(
-                radius: 30,
-                child: SkyImage(
-                  src: '${item.owner.avatarUrl}&s=200',
-                  borderRadius: BorderRadius.circular(90),
-                ),
+              leading: SkyImage(
+                shapeImage: ShapeImage.circle,
+                size: 30,
+                src: '${item.owner.avatarUrl}&s=200',
               ),
               title: Text(item.name.toString(), style: AppStyle.body2),
               subtitle: Column(
@@ -74,9 +71,9 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
                       Row(
                         children: [
                           const SkyImage(
-                            src: 'assets/images/fork.svg',
+                            src: 'assets/images/ic_fork.svg',
                             height: 14,
-                            color: AppColors.systemDarkGrey,
+                            color: Colors.grey,
                           ),
                           Text(
                             ' ${item.totalFork}',

@@ -1,41 +1,30 @@
-import 'package:skybase/core/base/base_controller.dart';
-import 'package:skybase/data/sources/local/cached_key.dart';
-import 'package:skybase/domain/entities/repo/repo.dart';
-import 'package:skybase/domain/usecases/get_profile_repository.dart';
+import 'package:skybase/config/base/base_controller.dart';
+import 'package:skybase/data/models/repo/repo.dart';
+import 'package:skybase/data/repositories/auth/auth_repository.dart';
 
 class ProfileRepositoryController extends BaseController<Repo> {
-  final GetProfileRepository getProfileRepository;
+  final AuthRepository repository;
 
-  ProfileRepositoryController({required this.getProfileRepository});
+  ProfileRepositoryController({required this.repository});
 
   @override
-  void onInit() {
-    getCache(() => onGetProfileRepository());
-    super.onInit();
+  void onReady() {
+    loadData(() => getRepository());
+    super.onReady();
   }
 
   @override
-  void onRefresh() {
-    onGetProfileRepository();
-    super.onRefresh();
-  }
+  bool get keepAlive => false;
 
-  @override
-  String get cachedId => throw UnimplementedError();
-
-  @override
-  String get cachedKey => CachedKey.USER_REPOSITORY;
-
-  void onGetProfileRepository() async {
-    showLoading();
+  Future<void> getRepository() async {
     try {
-      final response = await getProfileRepository(username: 'nandakista');
-      saveCacheAndFinish(list: response);
-      dismissLoading();
+      final response = await repository.getProfileRepository(
+        requestParams: requestParams,
+        username: 'nandakista',
+      );
+      loadFinish(list: response);
     } catch (e) {
-      dismissLoading();
-      showError(e.toString());
+      loadError(e.toString());
     }
   }
-
 }

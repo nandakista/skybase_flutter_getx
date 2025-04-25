@@ -8,12 +8,11 @@ import 'package:get/get.dart';
    06/11/2022
    nanda.kista@gmail.com
 */
-class TimerModule extends GetxController {
-  static TimerModule get find => Get.find<TimerModule>();
+class TimerModule {
+  static const String tag = 'TIMER_MODULE';
 
   RxInt currentTime = RxInt(0);
-  late Timer timer;
-
+  Timer? timer;
   String? savedUpdateId;
   int? savedTime;
   void Function(int currentTime)? onStartTimer;
@@ -21,7 +20,6 @@ class TimerModule extends GetxController {
   void Function(int currentTime)? onChangedTimer;
 
   void startTimer({
-    required String updateId,
     required int time,
     Duration? intervalTime,
     void Function(int currentTime)? onStart,
@@ -29,7 +27,6 @@ class TimerModule extends GetxController {
     void Function(int currentTime)? onChanged,
   }) {
     // Save timer info
-    savedUpdateId = updateId;
     savedTime = time;
     onStartTimer = onStart;
     onFinishedTimer = onFinished;
@@ -48,8 +45,7 @@ class TimerModule extends GetxController {
           if (onChanged != null) onChanged(currentTime.value);
           savedTime = currentTime.value;
         }
-        if (kDebugMode) debugPrint('TIMER UPDATE: $updateId | $currentTime');
-        update([updateId]);
+        if (kDebugMode) debugPrint('TIMER UPDATE: | $currentTime');
       },
     );
   }
@@ -63,39 +59,45 @@ class TimerModule extends GetxController {
     stopTimer();
   }
 
+  /// Stop timer if there is another timer running,
+  /// then immediately start new timer.
+  /// So no duplicated timer running
+  void restartTimer({
+    required String updateId,
+    required int time,
+    Duration? intervalTime,
+    void Function(int currentTime)? onStart,
+    void Function()? onFinished,
+    void Function(int currentTime)? onChanged,
+  }) {
+    debugPrint('$tag: $savedUpdateId | restart timer');
+    if (currentTime.value != 0) {
+      stopTimer();
+    }
+    startTimer(
+      time: time,
+      intervalTime: intervalTime,
+      onStart: onStart,
+      onFinished: onFinished,
+      onChanged: onChanged,
+    );
+  }
+
+
   void stopTimer() {
-    timer.cancel();
+    timer?.cancel();
   }
 
   void pauseTimer() {
-    timer.cancel();
+    timer?.cancel();
   }
 
   void resumeTimer() {
     startTimer(
-      updateId: savedUpdateId.toString(),
       time: savedTime ?? 0,
       onChanged: onChangedTimer,
       onFinished: onFinishedTimer,
       onStart: onStartTimer,
     );
   }
-
-  @override
-  void onClose() {
-    stopTimer();
-    super.onClose();
-  }
-}
-
-class TimeLeftData {
-  final String hour;
-  final String minutes;
-  final String second;
-
-  TimeLeftData({
-    required this.hour,
-    required this.minutes,
-    required this.second,
-  });
 }

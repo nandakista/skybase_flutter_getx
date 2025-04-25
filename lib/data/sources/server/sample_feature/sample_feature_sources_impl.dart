@@ -1,30 +1,30 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:skybase/config/network/api_request.dart';
+import 'package:skybase/data/models/repo/repo.dart';
+import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/sources/server/sample_feature/sample_feature_sources.dart';
-import 'package:skybase/data/models/repo_model.dart';
-import 'package:skybase/data/models/sample_feature_model.dart';
-import 'package:skybase/domain/entities/repo/repo.dart';
-import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 
-class SampleFeatureSourcesImpl extends SampleFeatureSources {
+class SampleFeatureSourcesImpl implements SampleFeatureSources {
   String tag = 'SampleFeatureApiImpl::->';
 
   @override
   Future<List<SampleFeature>> getUsers({
+    required CancelToken cancelToken,
     required int page,
     required int perPage,
   }) async {
     try {
-      var url = '/search/users?';
-      url += 'q=nanda&';
-      url += 'page=$page&';
-      url += 'per_page=$perPage';
       final res = await ApiRequest.get(
-        url: url,
-        useToken: true,
+        url: '/search/users',
+        queryParameters: {
+          'q': 'nanda',
+          'page': page,
+          'per_page': perPage,
+        },
       );
       return (res.data['items'] as List)
-          .map((data) => SampleFeatureModel.fromJson(data))
+          .map((data) => SampleFeature.fromJson(data))
           .toList()
           .cast<SampleFeature>();
     } catch (e) {
@@ -34,13 +34,15 @@ class SampleFeatureSourcesImpl extends SampleFeatureSources {
   }
 
   @override
-  Future<SampleFeature> getDetailUser({required String username}) async {
+  Future<SampleFeature> getDetailUser({
+    required CancelToken cancelToken,
+    required String username,
+  }) async {
     try {
       final res = await ApiRequest.get(
         url: '/users/$username',
-        useToken: true,
       );
-      return SampleFeatureModel.fromJson(res.data);
+      return SampleFeature.fromJson(res.data);
     } catch (e) {
       debugPrint('$tag Error = $e');
       rethrow;
@@ -48,16 +50,17 @@ class SampleFeatureSourcesImpl extends SampleFeatureSources {
   }
 
   @override
-  Future<List<SampleFeature>> getFollowers({required String username}) async {
+  Future<List<SampleFeature>> getFollowers({
+    required CancelToken cancelToken,
+    required String username,
+  }) async {
     try {
       final res = await ApiRequest.get(
         url: '/users/$username/followers',
-        useToken: true,
       );
-      return (res.data as List)
-          .map((data) => SampleFeatureModel.fromJson(data))
-          .toList()
-          .cast<SampleFeature>();
+      return List<SampleFeature>.from(
+        (res.data as List).map((data) => SampleFeature.fromJson(data)),
+      );
     } catch (e) {
       debugPrint('$tag Error = $e');
       rethrow;
@@ -65,16 +68,17 @@ class SampleFeatureSourcesImpl extends SampleFeatureSources {
   }
 
   @override
-  Future<List<SampleFeature>> getFollowings({required String username}) async {
+  Future<List<SampleFeature>> getFollowings({
+    required CancelToken cancelToken,
+    required String username,
+  }) async {
     try {
       final res = await ApiRequest.get(
         url: '/users/$username/following',
-        useToken: true,
       );
-      return (res.data as List)
-          .map((data) => SampleFeatureModel.fromJson(data))
-          .toList()
-          .cast<SampleFeature>();
+      return List<SampleFeature>.from(
+        (res.data as List).map((data) => SampleFeature.fromJson(data)),
+      );
     } catch (e) {
       debugPrint('$tag Error = $e');
       rethrow;
@@ -82,22 +86,18 @@ class SampleFeatureSourcesImpl extends SampleFeatureSources {
   }
 
   @override
-  Future<List<Repo>> getRepos({required String username}) async {
+  Future<List<Repo>> getRepos({
+    required CancelToken cancelToken,
+    required String username,
+  }) async {
     try {
       final res = await ApiRequest.get(
-        url: '/users/$username/repos?type=all',
-        useToken: true,
+        url: '/users/$username/repos',
+        queryParameters: {'type': 'all'},
       );
-      return (res.data as List)
-          .map((data) => RepoModel.fromJson(data))
-          .toList()
-          .cast<Repo>();
-
-      // return List<Repo>.from(
-      //   (res.data as List).map(
-      //     (data) => RepoModel.fromJson(data),
-      //   ),
-      // );
+      return List<Repo>.from(
+        (res.data as List).map((data) => Repo.fromJson(data)),
+      );
     } catch (e) {
       debugPrint('$tag Error = $e');
       rethrow;

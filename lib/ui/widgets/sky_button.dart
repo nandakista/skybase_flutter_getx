@@ -77,8 +77,8 @@ class SkyButton extends StatelessWidget {
   final bool enabled;
 
   const SkyButton({
-    Key? key,
-    this.text,
+    super.key,
+    required this.text,
     required this.onPressed,
     this.icon,
     this.color = AppColors.primary,
@@ -101,7 +101,7 @@ class SkyButton extends StatelessWidget {
     this.child,
     this.gradient,
     this.enabled = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -152,14 +152,15 @@ class SkyButton extends StatelessWidget {
             fit: BoxFit.scaleDown,
             child: child ??
                 Text(
-                  text ?? ' ',
+                  text ?? '',
                   textAlign: TextAlign.center,
                   style: AppStyle.subtitle4.copyWith(
                     fontSize: fontSize,
                     fontWeight: fontWeight,
                     color: (!enabled)
                         ? Colors.grey.shade400
-                        : textColor ?? (outlineMode ? color : textColor),
+                        : textColor ??
+                            (outlineMode ? color : textColor ?? Colors.white),
                   ),
                 ),
           ),

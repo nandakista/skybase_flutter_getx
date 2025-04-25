@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:skybase/config/themes/app_colors.dart';
+import 'package:skybase/ui/widgets/colored_status_bar.dart';
 import 'package:skybase/ui/widgets/platform_loading_indicator.dart';
 
 class SplashView extends StatelessWidget {
   static const String route = '/splash';
 
-  const SplashView({Key? key}) : super(key: key);
+  const SplashView({super.key});
 
   @override
   Widget build(BuildContext context) {
     /// TODO : If you are using flutter_native_splash use this
-    return const Scaffold(
-      backgroundColor: AppColors.primary,
-      body: Center(
-        child: PlatformLoadingIndicator(color: Colors.white),
+    return const ColoredStatusBar(
+      brightness: Brightness.dark,
+      child: Scaffold(
+        backgroundColor: AppColors.primary,
+        body: Center(
+          child: PlatformLoadingIndicator(color: Colors.white),
+        ),
       ),
     );
 

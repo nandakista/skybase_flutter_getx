@@ -1,22 +1,26 @@
 extension ListNullExtension<T> on List<T>? {
-  bool get isNullOrEmpty {
-    if (this == null) {
-      return true;
-    } else {
-      if (this!.isEmpty) {
-        return true;
-      } else {
-        return false;
-      }
-    }
+  void sortAscBy<K extends Comparable<dynamic>>(K Function(T) keySelector) {
+    this?.sort((T a, T b) {
+      final K keyA = keySelector(a);
+      final K keyB = keySelector(b);
+      return keyA.compareTo(keyB);
+    });
+  }
+
+  void sortDescBy<K extends Comparable<dynamic>>(K Function(T) keySelector) {
+    this?.sort((T a, T b) {
+      final K keyA = keySelector(a);
+      final K keyB = keySelector(b);
+      return keyB.compareTo(keyA);
+    });
   }
 }
 
 extension Iterables<E> on Iterable<E> {
   Map<K, List<E>> groupBy<K>(K Function(E) keyFunction) => fold(
       <K, List<E>>{},
-          (Map<K, List<E>> map, E element) =>
-      map..putIfAbsent(keyFunction(element), () => <E>[]).add(element));
+      (Map<K, List<E>> map, E element) =>
+          map..putIfAbsent(keyFunction(element), () => <E>[]).add(element));
 }
 
 extension Unique<E, Id> on List<E> {

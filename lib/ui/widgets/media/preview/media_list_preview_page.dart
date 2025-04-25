@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/helper/media_helper.dart';
+import 'package:skybase/ui/widgets/media/determine_media_widget.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
@@ -9,8 +9,7 @@ import 'package:skybase/ui/widgets/sky_image.dart';
    nanda.kista@gmail.com
 */
 class MediaListPreviewPage extends StatelessWidget {
-  const MediaListPreviewPage({Key? key, required this.mediaUrls})
-      : super(key: key);
+  const MediaListPreviewPage({super.key, required this.mediaUrls});
   final List<String> mediaUrls;
 
   @override
@@ -18,7 +17,18 @@ class MediaListPreviewPage extends StatelessWidget {
     List<Widget> children = [];
 
     for (var item in mediaUrls) {
-      children.add(_determineMedia(item));
+      children.add(
+        DetermineMediaWidget(
+          path: item,
+          image: SkyImage(src: item, enablePreview: true),
+          // Set this widget if want to show file preview
+          file: const SizedBox.shrink(),
+          // Set this widget if want to show video preview
+          video: const SizedBox.shrink(),
+          // Set this widget if want to show custom unknown preview
+          unknown: const SizedBox.shrink(),
+        ),
+      );
       children.add(const Divider());
     }
     return Scaffold(
@@ -32,19 +42,5 @@ class MediaListPreviewPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget _determineMedia(String path) {
-    final mediaType = MediaHelper.getMediaType(path);
-    switch (mediaType.type) {
-      case MediaType.FILE:
-        return const Center(child: Text('Media Unsupported'));
-      case MediaType.IMAGE:
-        return SkyImage(src: mediaType.path, enablePreview: true);
-      case MediaType.VIDEO:
-        return const Center(child: Text('Media Unsupported'));
-      case MediaType.UNKNOWN:
-        return const Center(child: Text('Media Unsupported'));
-    }
   }
 }

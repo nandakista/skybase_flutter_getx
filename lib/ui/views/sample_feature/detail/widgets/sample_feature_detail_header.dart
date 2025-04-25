@@ -5,23 +5,21 @@ import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_con
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
-  const SampleFeatureDetailHeader({Key? key}) : super(key: key);
+  const SampleFeatureDetailHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      key: controller.headerKey,
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Obx(
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CircleAvatar(
-              radius: 45,
-              child: SkyImage(
-                src: '${controller.dataObj.value?.avatarUrl}&s=200',
-                borderRadius: BorderRadius.circular(90),
-              ),
+            SkyImage(
+              size: 45,
+              shapeImage: ShapeImage.circle,
+              src: '${controller.dataObj.value?.avatarUrl}&s=200',
+              enablePreview: true,
             ),
             Column(
               children: [

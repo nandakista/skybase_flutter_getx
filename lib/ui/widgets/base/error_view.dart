@@ -8,7 +8,7 @@ import 'package:skybase/ui/widgets/sky_button.dart';
 */
 class ErrorView extends StatelessWidget {
   const ErrorView({
-    Key? key,
+    super.key,
     this.errorImage,
     this.errorImageWidget,
     this.errorTitle,
@@ -17,12 +17,13 @@ class ErrorView extends StatelessWidget {
     this.retryText,
     this.verticalSpacing = 24,
     this.horizontalSpacing = 24,
-    this.imageSize,
+    this.imageHeight,
+    this.imageWidth,
     this.titleStyle,
     this.subtitleStyle,
     this.retryWidget,
     this.physics,
-  }) : super(key: key);
+  });
 
   final String? errorImage;
   final Widget? errorImageWidget;
@@ -32,7 +33,8 @@ class ErrorView extends StatelessWidget {
   final VoidCallback? onRetry;
   final double verticalSpacing;
   final double horizontalSpacing;
-  final double? imageSize;
+  final double? imageHeight;
+  final double? imageWidth;
   final TextStyle? titleStyle;
   final TextStyle? subtitleStyle;
   final Widget? retryWidget;
@@ -40,40 +42,44 @@ class ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: physics,
-      padding: EdgeInsets.symmetric(
-        vertical: verticalSpacing,
-        horizontal: horizontalSpacing,
-      ),
-      child: Column(
-        children: [
-          errorImageWidget ??
-              Image.asset(
-                errorImage ?? 'assets/images/img_error.png',
-                height: imageSize,
-              ),
-          SizedBox(height: verticalSpacing * 2),
-          Text(
-            errorTitle ?? 'txt_err_general_formal'.tr,
-            textAlign: TextAlign.center,
-            style: titleStyle ?? Theme.of(context).textTheme.titleLarge,
-          ),
-          Text(
-            errorSubtitle ?? 'txt_tap_retry'.tr,
-            textAlign: TextAlign.center,
-            style: subtitleStyle,
-          ),
-          SizedBox(height: verticalSpacing),
-          retryWidget ??
-              SkyButton(
-                wrapContent: true,
-                height: 50,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                text: retryText ?? 'txt_retry'.tr,
-                onPressed: onRetry,
-              ),
-        ],
+    return Center(
+      child: SingleChildScrollView(
+        physics: physics,
+        padding: EdgeInsets.symmetric(
+          vertical: verticalSpacing,
+          horizontal: horizontalSpacing,
+        ),
+        child: Column(
+          children: [
+            errorImageWidget ??
+                Image.asset(
+                  errorImage ?? 'assets/images/img_error.png',
+                  height: imageHeight,
+                  width: imageWidth,
+                ),
+            SizedBox(height: verticalSpacing * 2),
+            Text(
+              errorTitle ?? 'txt_err_general_formal'.tr,
+              textAlign: TextAlign.center,
+              style: titleStyle ?? Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              errorSubtitle ?? 'txt_tap_retry'.tr,
+              textAlign: TextAlign.center,
+              style: subtitleStyle,
+            ),
+            SizedBox(height: verticalSpacing),
+            retryWidget ??
+                SkyButton(
+                  wrapContent: true,
+                  height: 50,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  text: retryText ?? 'txt_retry'.tr,
+                  onPressed: onRetry,
+                ),
+          ],
+        ),
       ),
     );
   }

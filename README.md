@@ -6,17 +6,24 @@ A Flutter Base project that developed with :
 - Clean Architecture
 - Getx Ecosystem
 - Dio
-- Hive
+
+## How to run
+Follow step below to run :
+1. Type `flutter pub get` in terminal
+2. Get github token from = Github Profile > Settings > Developer Settings > Personal access tokens 
+3. Open `main_development.dart` and change `clientToken` to Github token.
+4. Open `main_staging.dart` and change `clientToken` to Github token.
+5. Open `main_production.dart` and change `clientToken` to Github token.
 
 ## Skybase Documentation
 Read [this documentation](https://docs.google.com/document/d/1ZwO60uk2SnqVBfL-L7tmIu6ykHCB8MCHP9VxE-ijXYM/edit?usp=share_link) to understand architecture, state, pattern, and style guide of the skybase.
 
 ## Mason CLI Supported
-This codebase supports the use of the Mason CLI library. Follow [this instruction](https://docs.google.com/document/d/1JfoTDzJ8FqCatVjTdzOn_9rDcIJBqadaSlvUZn53UCc/edit?usp=share_link) if you want to use or setup Mason CLI.
+This codebase support Mason CLI library. Follow [this instruction](https://docs.google.com/document/d/1JfoTDzJ8FqCatVjTdzOn_9rDcIJBqadaSlvUZn53UCc/edit?usp=share_link) if you want to use or setup Mason CLI.
 
 ## Build
 
-Open terminal in root project and input command below.
+Open terminal in root of project and input command below.
 
 Note: `<env>` is `staging` | `production`
 
@@ -46,9 +53,6 @@ Note: `<env>` is `staging` | `production`
     // build ipa menggunakan version dari pubspec.yaml
     sh build_pub_ipa_adhoc.sh <env>
 
-## Download Manager
-If you use download manager you need to setup flutter_downloader from this
-[flutter_downloader](https://pub.dev/packages/flutter_downloader)
 
 ## Reference
 - [Skybase Documentation](https://docs.google.com/document/d/1ZwO60uk2SnqVBfL-L7tmIu6ykHCB8MCHP9VxE-ijXYM/edit?usp=share_link)

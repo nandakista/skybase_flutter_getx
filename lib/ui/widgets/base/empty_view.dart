@@ -8,13 +8,14 @@ import 'package:skybase/ui/widgets/sky_button.dart';
 */
 class EmptyView extends StatelessWidget {
   const EmptyView({
-    Key? key,
+    super.key,
     this.emptyImage,
     this.emptyImageWidget,
     this.emptyTitle,
     this.emptySubtitle,
     this.physics,
-    this.imageSize,
+    this.imageHeight,
+    this.imageWidth,
     this.verticalSpacing = 24,
     this.horizontalSpacing = 24,
     this.titleStyle,
@@ -22,14 +23,16 @@ class EmptyView extends StatelessWidget {
     this.retryText,
     this.onRetry,
     this.retryWidget,
-  }) : super(key: key);
+    this.emptyRetryEnabled = false,
+  });
 
   final Widget? emptyImageWidget;
   final String? emptyImage;
   final String? emptyTitle;
   final String? emptySubtitle;
   final ScrollPhysics? physics;
-  final double? imageSize;
+  final double? imageHeight;
+  final double? imageWidth;
   final double verticalSpacing;
   final double horizontalSpacing;
   final TextStyle? titleStyle;
@@ -37,6 +40,7 @@ class EmptyView extends StatelessWidget {
   final String? retryText;
   final VoidCallback? onRetry;
   final Widget? retryWidget;
+  final bool emptyRetryEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,8 @@ class EmptyView extends StatelessWidget {
             emptyImageWidget ??
                 Image.asset(
                   emptyImage ?? 'assets/images/img_empty.png',
-                  height: imageSize,
+                  height: imageHeight,
+                  width: imageWidth,
                 ),
             SizedBox(height: verticalSpacing),
             Text(
@@ -70,14 +75,15 @@ class EmptyView extends StatelessWidget {
               ),
             ),
             SizedBox(height: verticalSpacing),
-            retryWidget ??
-                SkyButton(
-                  wrapContent: true,
-                  height: 50,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  text: retryText ?? 'txt_reload'.tr,
-                  onPressed: onRetry,
-                ),
+            if (emptyRetryEnabled && onRetry != null)
+              retryWidget ??
+                  SkyButton(
+                    wrapContent: true,
+                    height: 50,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    text: retryText ?? 'txt_reload'.tr,
+                    onPressed: onRetry,
+                  )
           ],
         ),
       ),

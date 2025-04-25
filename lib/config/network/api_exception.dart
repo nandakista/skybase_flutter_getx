@@ -7,12 +7,13 @@ import 'package:skybase/config/network/api_response.dart';
    Varcant
    nanda.kista@gmail.com
 */
-class NetworkException implements Exception {
+
+sealed class NetworkExceptionData with ApiMessage {
   final String? prefix;
   final String? message;
   final Response? response;
 
-  NetworkException({
+  NetworkExceptionData({
     this.prefix,
     this.message,
     this.response,
@@ -23,81 +24,49 @@ class NetworkException implements Exception {
     String result = '';
     if (response?.statusCode == 400 || response?.statusCode == 401) {
       ApiResponse res = ApiResponse.fromJson(response?.data);
-      result = ApiMessage.message(res.error.toString());
+      result = convertMessage(res.error ?? res.message);
     } else {
       result += (prefix != null) ? '$prefix, $message' : '$message';
     }
     return result;
   }
+}
 
-  static NetworkException handleResponse(Response response) {
-    var statusCode = response.statusCode!;
-    switch (statusCode) {
-      case 400:
-        return BadRequestException(response: response);
-      case 401:
-        return UnauthorisedException(response: response);
-      case 403:
-        return BadRequestException(response: response);
-      case 404:
-        return NotFoundException(response: response);
-      case 409:
-        return FetchDataException(response: response);
-      case 408:
-        return SendTimeOutException();
-      case 413:
-        return RequestEntityTooLargeException(response: response);
-      case 422:
-        return BadRequestException(response: response);
-      case 500:
-        return InternalServerErrorException();
-      case 503:
-        return InternalServerErrorException();
-      default:
-        var responseCode = statusCode;
-        return FetchDataException(
-          message: 'Received invalid status code: $responseCode',
+mixin NetworkException implements Exception {
+  NetworkExceptionData handleResponse(Response response) {
+    int statusCode = response.statusCode!;
+    return switch (statusCode) {
+      400 || 403 || 422  => BadRequestException(response: response),
+      401 => UnauthorisedException(response: response),
+      404 => NotFoundException(response: response),
+      409 => FetchDataException(response: response),
+      408 => SendTimeOutException(),
+      413 => RequestEntityTooLargeException(response: response),
+      500 || 503 => InternalServerErrorException(),
+      _ => FetchDataException(
+          message: 'Received invalid status code: $statusCode',
           response: response,
-        );
-    }
+        ),
+    };
   }
 
-  static NetworkException getErrorException(error) {
+  NetworkExceptionData getErrorException(error) {
     if (error is Exception) {
       try {
-        NetworkException networkExceptions;
+        NetworkExceptionData networkExceptions;
         if (error is DioException) {
-          switch (error.type) {
-            case DioExceptionType.cancel:
-              networkExceptions = RequestCancelled();
-              break;
-            case DioExceptionType.connectionTimeout:
-              networkExceptions = ConnectionTimeOutException();
-              break;
-            case DioExceptionType.unknown:
-              if (error.error is SocketException) {
-                networkExceptions = FetchDataException();
-              } else {
-                networkExceptions = SocketException();
-              }
-              break;
-            case DioExceptionType.receiveTimeout:
-              networkExceptions = ReceiveTimeOutException();
-              break;
-            case DioExceptionType.badResponse:
-              networkExceptions =
-                  NetworkException.handleResponse(error.response!);
-              break;
-            case DioExceptionType.sendTimeout:
-              networkExceptions = SendTimeOutException();
-              break;
-            case DioExceptionType.badCertificate:
-              networkExceptions = BadCertificateException();
-              break;
-            case DioExceptionType.connectionError:
-              networkExceptions = ConnectionTimeOutException();
-              break;
-          }
+          networkExceptions = switch (error.type) {
+            DioExceptionType.cancel => RequestCancelled(),
+            DioExceptionType.connectionTimeout => ConnectionTimeOutException(),
+            DioExceptionType.receiveTimeout => ReceiveTimeOutException(),
+            DioExceptionType.sendTimeout => SendTimeOutException(),
+            DioExceptionType.unknown => error.error is SocketException
+                ? SocketException()
+                : FetchDataException(),
+            DioExceptionType.badResponse => handleResponse(error.response!),
+            DioExceptionType.badCertificate => BadCertificateException(),
+            DioExceptionType.connectionError => ConnectionTimeOutException(),
+          };
         } else if (error is SocketException) {
           networkExceptions = SocketException();
         } else {
@@ -119,79 +88,77 @@ class NetworkException implements Exception {
   }
 }
 
-class ConnectionTimeOutException extends NetworkException {
+final class ConnectionTimeOutException extends NetworkExceptionData {
   ConnectionTimeOutException() : super(message: 'txt_connection_timeout'.tr);
 }
 
-class ReceiveTimeOutException extends NetworkException {
+final class ReceiveTimeOutException extends NetworkExceptionData {
   ReceiveTimeOutException() : super(message: 'txt_connection_timeout'.tr);
 }
 
-class SendTimeOutException extends NetworkException {
+final class SendTimeOutException extends NetworkExceptionData {
   SendTimeOutException() : super(message: 'txt_connection_timeout'.tr);
 }
 
-class InternalServerErrorException extends NetworkException {
+final class InternalServerErrorException extends NetworkExceptionData {
   InternalServerErrorException()
       : super(message: 'txt_internal_server_error'.tr);
 }
 
-class RequestEntityTooLargeException extends NetworkException {
-  RequestEntityTooLargeException({Response? response})
-      : super(message: 'txt_request_entity_to_large'.tr, response: response);
+final class RequestEntityTooLargeException extends NetworkExceptionData {
+  RequestEntityTooLargeException({super.response})
+      : super(message: 'txt_request_entity_to_large'.tr);
 }
 
-class FetchDataException extends NetworkException {
-  FetchDataException({String? message, Response? response})
+final class FetchDataException extends NetworkExceptionData {
+  FetchDataException({String? message, super.response})
       : super(
-            message: message ?? 'txt_error_during_communication'.tr,
-            response: response);
+            message: message ?? 'txt_error_during_communication'.tr);
 }
 
-class NotFoundException extends NetworkException {
-  NotFoundException({String? message, Response? response})
-      : super(message: message ?? 'txt_not_found'.tr, response: response);
+final class NotFoundException extends NetworkExceptionData {
+  NotFoundException({String? message, super.response})
+      : super(message: message ?? 'txt_not_found'.tr);
 }
 
-class BadRequestException extends NetworkException {
-  BadRequestException({Response? response})
+final class BadRequestException extends NetworkExceptionData {
+  BadRequestException({super.response})
       : super(
             prefix: 'txt_bad_request'.tr,
-            message: '${'txt_message'.tr}: ${response?.statusMessage}',
-            response: response);
+            message: '${'txt_message'.tr}: ${response?.statusMessage}');
 }
 
-class BadCertificateException extends NetworkException {
-  BadCertificateException({Response? response})
-      : super(message: 'txt_bad_certificate'.tr, response: response);
+final class BadCertificateException extends NetworkExceptionData {
+  BadCertificateException({super.response})
+      : super(message: 'txt_bad_certificate'.tr);
 }
 
-class UnauthorisedException extends NetworkException {
-  UnauthorisedException({Response? response})
-      : super(message: 'txt_unauthorized'.tr, response: response);
+final class UnauthorisedException extends NetworkExceptionData {
+  UnauthorisedException({super.response})
+      : super(message: 'txt_unauthorized'.tr);
 }
 
-class InvalidInputException extends NetworkException {
-  InvalidInputException({Response? response})
-      : super(message: 'txt_invalid_input'.tr, response: response);
+final class InvalidInputException extends NetworkExceptionData {
+  InvalidInputException({super.response})
+      : super(message: 'txt_invalid_input'.tr);
 }
 
-class RequestCancelled extends NetworkException {
-  RequestCancelled({Response? response})
-      : super(message: 'txt_request_cancel'.tr, response: response);
+final class RequestCancelled extends NetworkExceptionData {
+  RequestCancelled({super.response})
+      : super(message: 'txt_request_cancel'.tr);
 }
 
-class SocketException extends NetworkException {
-  SocketException({Response? response})
-      : super(message: 'txt_no_internet_connection'.tr, response: response);
+final class SocketException extends NetworkExceptionData {
+  SocketException({super.response})
+      : super(message: 'txt_no_internet_connection'.tr);
 }
 
-class UnexpectedError extends NetworkException {
-  UnexpectedError({Response? response})
-      : super(message: 'txt_unexpected_error'.tr, response: response);
+final class UnexpectedError extends NetworkExceptionData {
+  UnexpectedError({super.response})
+      : super(message: 'txt_unexpected_error'.tr);
 }
 
-class UnableToProcess extends NetworkException {
-  UnableToProcess({Response? response})
-      : super(message: 'txt_unable_to_process'.tr, response: response);
+final class UnableToProcess extends NetworkExceptionData {
+  UnableToProcess({super.response})
+      : super(message: 'txt_unable_to_process'.tr);
 }

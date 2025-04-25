@@ -1,7 +1,8 @@
-import 'package:skybase/domain/entities/repo/repo.dart';
-import 'package:skybase/domain/entities/user/user.dart';
+import 'package:dio/dio.dart';
+import 'package:skybase/data/models/repo/repo.dart';
+import 'package:skybase/data/models/user/user.dart';
 
-abstract class AuthSources {
+abstract interface class AuthSources {
   Future<User> verifyToken({
     required int userId,
     required String token,
@@ -13,7 +14,13 @@ abstract class AuthSources {
     required String password,
   });
 
-  Future<User> getProfile({required String username});
+  Future<User> getProfile({
+    required CancelToken cancelToken,
+    required String username,
+  });
 
-  Future<List<Repo>> getProfileRepository({required String username});
+  Future<List<Repo>> getProfileRepository({
+    required CancelToken cancelToken,
+    required String username,
+  });
 }

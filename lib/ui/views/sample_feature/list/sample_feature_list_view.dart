@@ -1,39 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/database/get_storage/get_storage_manager.dart';
+import 'package:skybase/core/database/storage/storage_manager.dart';
 import 'package:skybase/config/themes/app_colors.dart';
 import 'package:skybase/config/themes/app_style.dart';
+import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/sources/local/cached_key.dart';
-import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_controller.dart';
-import 'package:skybase/ui/widgets/base/sky_pagination_view.dart';
+import 'package:skybase/ui/widgets/base/pagination_state_view.dart';
+import 'package:skybase/ui/widgets/shimmer/sample_feature/shimmer_sample_feature_list.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 class SampleFeatureListView extends GetView<SampleFeatureListController> {
   static const String route = '/user-list';
 
-  const SampleFeatureListView({Key? key}) : super(key: key);
+  const SampleFeatureListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SkyAppBar.secondary(title: 'txt_list_users'.tr),
-      body: SkyPaginationView<SampleFeature>(
+      body: PaginationStateView<SampleFeature>.list(
         pagingController: controller.pagingController,
-        onRefresh: () => controller.onRefresh(),
+        loadingView: const ShimmerSampleFeatureList(),
+        onRefresh: controller.onRefresh,
+        onRetry: controller.onRefresh,
         itemBuilder: (BuildContext context, item, int index) {
           return ListTile(
             onTap: () => controller.onChooseUser(
               id: item.id,
               username: item.username,
             ),
-            leading: CircleAvatar(
-              radius: 30,
-              child: SkyImage(
-                src: '${item.avatarUrl}&s=200',
-                borderRadius: BorderRadius.circular(30),
-              ),
+            leading: SkyImage(
+              shapeImage: ShapeImage.circle,
+              size: 30,
+              src: '${item.avatarUrl}&s=200',
             ),
             title: Text(item.username.toString()),
             subtitle: Text(
@@ -46,8 +47,8 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () {
-          GetStorageManager.find.delete(CachedKey.SAMPLE_FEATURE_LIST);
-          GetStorageManager.find.delete(CachedKey.SAMPLE_FEATURE_DETAIL);
+          StorageManager.find.delete(CachedKey.SAMPLE_FEATURE_LIST);
+          StorageManager.find.delete(CachedKey.SAMPLE_FEATURE_DETAIL);
         },
         child: const Icon(Icons.delete, color: Colors.white),
       ),

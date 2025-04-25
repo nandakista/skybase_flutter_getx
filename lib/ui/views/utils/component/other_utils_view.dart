@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:skybase/core/helper/converter_helper.dart';
-import 'package:skybase/core/extension/int_extension.dart';
+import 'package:skybase/core/extension/num_extension.dart';
 import 'package:skybase/core/helper/input_formater.dart';
 import 'package:skybase/core/helper/snackbar_helper.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
@@ -15,7 +15,7 @@ import 'package:skybase/ui/widgets/sky_button.dart';
 import 'package:skybase/ui/widgets/sky_form_field.dart';
 
 class OtherUtilsView extends GetView<UtilsController> {
-  const OtherUtilsView({Key? key}) : super(key: key);
+  const OtherUtilsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                     ? controller.currencyCtr.text =
                         0.currencyFormat(symbol: 'Rp')
                     : value,
-                validator: (value) => ValidatorHelper.generalField('$value'),
+                validator: (value) => ValidatorHelper.required('$value'),
                 inputFormatters: CustomInputFormatters.idrCurrency,
                 onFieldSubmitted: (value) => SnackBarHelper.normal(message: value),
               ),
@@ -51,7 +51,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                   debugPrint('Converted = $converted');
                   SnackBarHelper.normal(message: 'String converted :\n $converted');
                 },
-                text: '${'txt_convert'.tr} String',
+                text: 'Convert String',
                 icon: CupertinoIcons.t_bubble,
               ),
               const SizedBox(height: 26),

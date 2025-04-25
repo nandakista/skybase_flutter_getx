@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/settings/setting_view.dart';
-import 'package:skybase/ui/widgets/base/sky_view.dart';
+import 'package:skybase/ui/widgets/base/state_view.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 import 'component/repository/profile_repository_view.dart';
@@ -12,7 +12,7 @@ import 'profile_controller.dart';
 class ProfileView extends GetView<ProfileController> {
   static const String route = '/profile';
 
-  const ProfileView({Key? key}) : super(key: key);
+  const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,23 +32,21 @@ class ProfileView extends GetView<ProfileController> {
         ],
       ),
       body: Obx(
-        () => SkyView.page(
+        () => StateView.page(
           loadingEnabled: controller.isLoading,
           errorEnabled: controller.isError,
           emptyEnabled: controller.isEmpty,
-          onRetry: () => controller.onRefresh(),
-          onRefresh: () => controller.onRefresh(),
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
+          onRetry: controller.onRefresh,
+          onRefresh: controller.onRefresh,
+          child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
-                CircleAvatar(
-                  radius: 45,
-                  child: SkyImage(
-                    src: '${controller.dataObj.value?.avatarUrl}&s=200',
-                    borderRadius: BorderRadius.circular(90),
-                  ),
+                SkyImage(
+                  shapeImage: ShapeImage.circle,
+                  size: 40,
+                  src: '${controller.dataObj.value?.avatarUrl}&s=200',
+                  enablePreview: true,
                 ),
                 const SizedBox(height: 12),
                 Text(

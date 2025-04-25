@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class BottomSheetHelper {
-  static basic({
+  static Future<T?> basic<T>({
     required Widget child,
     bool isDismissible = true,
     bool isScrollControlled = true,
@@ -11,7 +11,7 @@ class BottomSheetHelper {
     Color? barrierColor,
     bool enableDrag = true,
   }) async {
-    return await showModalBottomSheet(
+    return await showModalBottomSheet<T>(
       context: Get.context!,
       isDismissible: isDismissible,
       isScrollControlled: isScrollControlled,
@@ -31,7 +31,7 @@ class BottomSheetHelper {
     );
   }
 
-  static rounded({
+  static Future<T?> rounded<T>({
     required Widget child,
     bool isDismissible = true,
     bool isScrollControlled = true,
@@ -41,7 +41,7 @@ class BottomSheetHelper {
     double? height,
     bool expand = false,
   }) async {
-    return await showModalBottomSheet(
+    return await showModalBottomSheet<T>(
       context: Get.context!,
       isDismissible: isDismissible,
       isScrollControlled: isScrollControlled,
@@ -69,7 +69,7 @@ class BottomSheetHelper {
     );
   }
 
-  static bar({
+  static Future<T?> bar<T>({
     required Widget child,
     bool isDismissible = true,
     bool isScrollControlled = true,
@@ -77,7 +77,7 @@ class BottomSheetHelper {
     Color? barrierColor,
     bool expand = false,
   }) async {
-    return await showBarModalBottomSheet(
+    return await showBarModalBottomSheet<T>(
       context: Get.context!,
       isDismissible: isDismissible,
       expand: expand,
@@ -90,7 +90,7 @@ class BottomSheetHelper {
     );
   }
 
-  static Future cupertino({
+  static Future<T?> cupertino<T>({
     required Widget child,
     bool isDismissible = true,
     bool isScrollControlled = true,
@@ -99,7 +99,7 @@ class BottomSheetHelper {
     bool expand = false,
     Color? barrierColor,
   }) async {
-    return await showCupertinoModalBottomSheet(
+    return await showCupertinoModalBottomSheet<T>(
       context: Get.context!,
       isDismissible: isDismissible,
       enableDrag: enableDrag,
@@ -109,10 +109,8 @@ class BottomSheetHelper {
       barrierColor: barrierColor ?? Colors.black54,
       expand: expand,
       bounce: true,
-      builder: (btmContext) => WillPopScope(
-        onWillPop: () async {
-          return enableBack;
-        },
+      builder: (btmContext) => PopScope(
+        canPop: enableBack,
         child: Material(
           child: Stack(
             alignment: Alignment.topCenter,
@@ -140,7 +138,7 @@ class BottomSheetHelper {
     );
   }
 
-  static Future material({
+  static Future<T?> material<T>({
     required Widget child,
     bool isDismissible = true,
     bool isScrollControlled = true,
@@ -149,7 +147,7 @@ class BottomSheetHelper {
     bool expand = false,
     Color? barrierColor,
   }) async {
-    return await showMaterialModalBottomSheet(
+    return await showMaterialModalBottomSheet<T>(
       context: Get.context!,
       isDismissible: isDismissible,
       enableDrag: enableDrag,
@@ -158,10 +156,8 @@ class BottomSheetHelper {
       barrierColor: barrierColor ?? Colors.black54,
       expand: expand,
       bounce: true,
-      builder: (btmContext) => WillPopScope(
-        onWillPop: () async {
-          return enableBack;
-        },
+      builder: (btmContext) => PopScope(
+        canPop: enableBack,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
           child: child,

@@ -10,13 +10,13 @@ import 'package:skybase/ui/widgets/sky_box.dart';
 
 class MainNavView extends GetView<MainNavController> {
   static const String route = '/home';
-  const MainNavView({Key? key}) : super(key: key);
+  const MainNavView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ColoredStatusBar(
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         child: SafeArea(
           child: PageView(
             controller: controller.pageController,
@@ -55,18 +55,18 @@ class MainNavView extends GetView<MainNavController> {
                 curve: Curves.ease,
               );
             },
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.home),
-                label: 'Users',
+                icon: const Icon(CupertinoIcons.home),
+                label: 'txt_users'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.slider_horizontal_3),
-                label: 'Utility',
+                icon: const Icon(CupertinoIcons.slider_horizontal_3),
+                label: 'txt_utility'.tr,
               ),
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.profile_circled),
-                label: 'Profile',
+                icon: const Icon(CupertinoIcons.profile_circled),
+                label: 'txt_profile'.tr,
               ),
             ],
           ),

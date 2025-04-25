@@ -1,12 +1,11 @@
 import 'package:get/get.dart';
 import 'package:skybase/core/helper/snackbar_helper.dart';
-import 'package:skybase/core/modules/timer/timer_const.dart';
-import 'package:skybase/core/helper/timer_helper.dart';
+import 'package:skybase/core/modules/timer/timer_helper.dart';
 import 'package:skybase/core/modules/timer/timer_module.dart';
 
 class TimerUtilsController extends GetxController {
-  final timer1Ctr = Get.find<TimerModule>(tag: TimerTag.timer1);
-  final timer2Ctr = Get.find<TimerModule>(tag: TimerTag.timer2);
+  TimerModule timer1 = TimerModule();
+  TimerModule timer2 = TimerModule();
 
   final currTimeTimer2 = 'Waiting...'.obs;
 
@@ -19,8 +18,7 @@ class TimerUtilsController extends GetxController {
 
   /// Timer 1
   void _startTimer() {
-    timer1Ctr.startTimer(
-      updateId: 'timer_test',
+    timer1.startTimer(
       time: TimerHelper.startTimer(hours: 3),
       onChanged: (int time) {
         update(['count_down_timer']);
@@ -30,8 +28,7 @@ class TimerUtilsController extends GetxController {
 
   /// Timer 2
   void _startTimer2() {
-    timer2Ctr.startTimer(
-      updateId: 'timer_test2',
+    timer2.startTimer(
       time: TimerHelper.startTimer(seconds: 3),
       onStart: (item) {
         currTimeTimer2.value = item.toString();
@@ -44,5 +41,12 @@ class TimerUtilsController extends GetxController {
         SnackBarHelper.normal(message: 'Timer 2 is done');
       },
     );
+  }
+
+  @override
+  void onClose() {
+    timer1.stopTimer();
+    timer2.stopTimer();
+    super.onClose();
   }
 }

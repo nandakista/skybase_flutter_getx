@@ -149,7 +149,7 @@ class FileHelper {
         final permission = await Permission.storage.request();
         if (permission.isPermanentlyDenied) {
           LoadingDialog.dismiss();
-          PermissionHelper.showOpenSettings("txt_need_permission_storage".tr);
+          PermissionHelper.openSettings("txt_need_permission_storage".tr);
           return false;
         } else if (permission.isGranted) {
           return true;
@@ -168,7 +168,7 @@ class FileHelper {
         final permission = await Permission.photos.request();
         if (permission.isPermanentlyDenied) {
           LoadingDialog.dismiss();
-          PermissionHelper.showOpenSettings("txt_need_permission_storage".tr);
+          PermissionHelper.openSettings("txt_need_permission_storage".tr);
           return false;
         } else if (permission.isGranted) {
           return true;

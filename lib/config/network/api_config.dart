@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/app/app_env.dart';
+import 'package:skybase/config/environment/app_env.dart';
 import 'package:skybase/config/network/api_interceptor.dart';
 
 /* Created by
@@ -16,12 +16,12 @@ class DioClient extends GetxService {
   void onInit() {
     _dio = Dio();
     _dio.options.baseUrl = baseURL;
-    _dio.options.connectTimeout = const Duration(seconds: 60); //60s
-    _dio.options.receiveTimeout = const Duration(seconds: 3); //3s
+    _dio.options.connectTimeout = const Duration(seconds: 30); //30s
+    _dio.options.receiveTimeout = const Duration(seconds: 30); //30s
     super.onInit();
   }
 
-  static setInterceptor(){
+  static void setInterceptor() {
     DioClient.find.interceptors.clear();
     DioClient.find.interceptors.add(ApiInterceptors(DioClient.find));
   }

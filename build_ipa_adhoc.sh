@@ -10,7 +10,7 @@ declare BUILD_NAME=$2
 declare BUILD_NUMBER=$3
 declare MODE=$4
 
-declare APP_NAME="skybase-getx"
+declare APP_NAME="Skybase"
 
 if [ "$BUILD_NUMBER" == "i" ]
 then
@@ -83,6 +83,11 @@ fi
 ipa_file=(build/ios/adhoc/Release/*.ipa)
 ipa_file=${ipa_file[0]}
 mv "$ipa_file" "build/ios/adhoc/Release/release.ipa"
+
+# backup dSYMs
+declare DSYMS_BK_DIR=".build_ios_dsyms/${BLDCODE}"
+mkdir -p "$DSYMS_BK_DIR"
+cp -r "$ARCHIVE_PATH/dSYMs" "$DSYMS_BK_DIR"
 
 # clean up
 rm -rf "$ARCHIVE_PATH"
