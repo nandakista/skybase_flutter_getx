@@ -3,36 +3,21 @@ import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 
 class SampleFeatureModel extends SampleFeature {
   SampleFeatureModel({
-    required int id,
-    required String username,
-    String? name,
-    String? location,
-    String? company,
-    String? gitUrl,
-    String? bio,
-    String? avatarUrl,
-    int? repository,
-    int? followers,
-    int? following,
-    List<RepoModel>? repositoryList,
-    List<SampleFeatureModel>? followersList,
-    List<SampleFeatureModel>? followingList,
-  }) : super(
-          id: id,
-          username: username,
-          name: name,
-          location: location,
-          company: company,
-          gitUrl: gitUrl,
-          bio: bio,
-          avatarUrl: avatarUrl,
-          repository: repository,
-          followers: followers,
-          following: following,
-          repositoryList: repositoryList,
-          followersList: followersList,
-          followingList: followingList,
-        );
+    required super.id,
+    required super.username,
+    super.name,
+    super.location,
+    super.company,
+    super.gitUrl,
+    super.bio,
+    super.avatarUrl,
+    super.repository,
+    super.followers,
+    super.following,
+    List<RepoModel>? super.repositoryList,
+    List<SampleFeatureModel>? super.followersList,
+    List<SampleFeatureModel>? super.followingList,
+  });
 
   factory SampleFeatureModel.fromJson(Map<dynamic, dynamic> json) {
     return SampleFeatureModel(

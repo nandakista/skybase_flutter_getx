@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:skybase/config/network/api_request.dart';
-import 'package:skybase/data/models/repo/repo.dart';
-import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/sources/server/sample_feature/sample_feature_sources.dart';
+import 'package:skybase/data/models/repo_model.dart';
+import 'package:skybase/data/models/sample_feature_model.dart';
+import 'package:skybase/domain/entities/repo/repo.dart';
+import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 
 class SampleFeatureSourcesImpl implements SampleFeatureSources {
   String tag = 'SampleFeatureApiImpl::->';
@@ -24,7 +26,7 @@ class SampleFeatureSourcesImpl implements SampleFeatureSources {
         },
       );
       return (res.data['items'] as List)
-          .map((data) => SampleFeature.fromJson(data))
+          .map((data) => SampleFeatureModel.fromJson(data))
           .toList()
           .cast<SampleFeature>();
     } catch (e) {
@@ -42,7 +44,7 @@ class SampleFeatureSourcesImpl implements SampleFeatureSources {
       final res = await ApiRequest.get(
         url: '/users/$username',
       );
-      return SampleFeature.fromJson(res.data);
+      return SampleFeatureModel.fromJson(res.data);
     } catch (e) {
       debugPrint('$tag Error = $e');
       rethrow;
@@ -59,7 +61,7 @@ class SampleFeatureSourcesImpl implements SampleFeatureSources {
         url: '/users/$username/followers',
       );
       return List<SampleFeature>.from(
-        (res.data as List).map((data) => SampleFeature.fromJson(data)),
+        (res.data as List).map((data) => SampleFeatureModel.fromJson(data)),
       );
     } catch (e) {
       debugPrint('$tag Error = $e');
@@ -77,7 +79,7 @@ class SampleFeatureSourcesImpl implements SampleFeatureSources {
         url: '/users/$username/following',
       );
       return List<SampleFeature>.from(
-        (res.data as List).map((data) => SampleFeature.fromJson(data)),
+        (res.data as List).map((data) => SampleFeatureModel.fromJson(data)),
       );
     } catch (e) {
       debugPrint('$tag Error = $e');
@@ -96,7 +98,7 @@ class SampleFeatureSourcesImpl implements SampleFeatureSources {
         queryParameters: {'type': 'all'},
       );
       return List<Repo>.from(
-        (res.data as List).map((data) => Repo.fromJson(data)),
+        (res.data as List).map((data) => RepoModel.fromJson(data)),
       );
     } catch (e) {
       debugPrint('$tag Error = $e');

@@ -1,19 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:skybase/config/base/pagination_controller.dart';
-import 'package:skybase/data/models/sample_feature/sample_feature.dart';
-import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
 import 'package:skybase/data/sources/local/cached_key.dart';
+import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
+import 'package:skybase/domain/usecases/get_users.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_view.dart';
 
 class SampleFeatureListController extends PaginationController<SampleFeature> {
-  final SampleFeatureRepository repository;
+  final GetUsers getUsers;
 
-  SampleFeatureListController({required this.repository});
+  SampleFeatureListController({required this.getUsers});
 
   @override
   void onReady() {
-    loadData(() => getUsers());
+    loadData(() => onGetUsers());
     super.onReady();
   }
 
@@ -23,9 +23,9 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
   @override
   String get cachedKey => CachedKey.SAMPLE_FEATURE_LIST;
 
-  Future<void> getUsers() async {
+  Future<void> onGetUsers() async {
     try {
-      final response = await repository.getUsers(
+      final response = await getUsers(
         requestParams: requestParams,
         page: page,
         perPage: perPage,

@@ -1,3 +1,4 @@
+import 'package:skybase/config/base/request_param.dart';
 import 'package:skybase/domain/entities/repo/repo.dart';
 import 'package:skybase/domain/entities/user/user.dart';
 
@@ -13,7 +14,13 @@ abstract class AuthRepository {
     required String password,
   });
 
-  Future<User> getProfile({required String username});
+  Future<User> getProfile({
+    required String username,
+    required RequestParams requestParams,
+  });
 
-  Future<List<Repo>> getProfileRepository({required String username});
+  Future<List<Repo>> getProfileRepository({
+    required String username,
+    required RequestParams requestParams,
+  });
 }

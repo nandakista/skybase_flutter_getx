@@ -3,22 +3,14 @@ import 'package:skybase/domain/entities/repo/repo.dart';
 
 class RepoModel extends Repo {
   RepoModel({
-    required String name,
-    required SampleFeatureModel owner,
-    String? description,
-    String? language,
-    int? totalWatch,
-    int? totalFork,
-    int? totalStar,
-  }) : super(
-          name: name,
-          owner: owner,
-          description: description,
-          language: language,
-          totalWatch: totalWatch,
-          totalFork: totalFork,
-          totalStar: totalStar,
-        );
+    required super.name,
+    required SampleFeatureModel super.owner,
+    super.description,
+    super.language,
+    super.totalWatch,
+    super.totalFork,
+    super.totalStar,
+  });
 
   factory RepoModel.fromJson(Map<dynamic, dynamic> json) {
     return RepoModel(

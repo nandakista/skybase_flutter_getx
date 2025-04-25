@@ -1,3 +1,4 @@
+import 'package:skybase/config/base/request_param.dart';
 import 'package:skybase/data/sources/server/auth/auth_sources_impl.dart';
 import 'package:skybase/domain/entities/repo/repo.dart';
 import 'package:skybase/domain/entities/user/user.dart';
@@ -33,12 +34,22 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<User> getProfile({required String username}) async {
-    return await apiService.getProfile(username: username);
+  Future<User> getProfile({
+    required String username,
+    required RequestParams requestParams,
+  }) async {
+    return await apiService.getProfile(
+        username: username, cancelToken: requestParams.cancelToken);
   }
 
   @override
-  Future<List<Repo>> getProfileRepository({required String username}) async {
-    return await apiService.getProfileRepository(username: username);
+  Future<List<Repo>> getProfileRepository({
+    required String username,
+    required RequestParams requestParams,
+  }) async {
+    return await apiService.getProfileRepository(
+      username: username,
+      cancelToken: requestParams.cancelToken,
+    );
   }
 }

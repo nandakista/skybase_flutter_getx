@@ -5,7 +5,7 @@ import 'package:skybase/config/auth_manager/auth_manager.dart';
 import 'package:skybase/config/base/request_param.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
 import 'package:skybase/core/helper/validator_helper.dart';
-import 'package:skybase/data/repositories/auth/auth_repository.dart';
+import 'package:skybase/domain/repositories/auth_repository.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 
 class LoginController extends GetxController {
@@ -58,5 +58,11 @@ class LoginController extends GetxController {
       LoadingDialog.dismiss();
       DialogHelper.failed(message: e.toString());
     }
+  }
+
+  @override
+  void onClose() {
+    cancelToken.cancel();
+    super.onClose();
   }
 }

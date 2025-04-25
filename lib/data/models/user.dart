@@ -2,34 +2,20 @@ import 'package:skybase/domain/entities/user/user.dart';
 
 class UserModel extends User {
   UserModel({
-    int? id,
-    String? token,
-    String? refreshToken,
-    String? username,
-    String? name,
-    String? location,
-    String? company,
-    String? gitUrl,
-    String? bio,
-    String? avatarUrl,
-    int? repository,
-    int? followers,
-    int? following,
-  }) : super(
-          id: id,
-          token: token,
-          refreshToken: refreshToken,
-          username: username,
-          name: name,
-          location: location,
-          company: company,
-          gitUrl: gitUrl,
-          bio: bio,
-          avatarUrl: avatarUrl,
-          repository: repository,
-          followers: followers,
-          following: following,
-        );
+    super.id,
+    super.token,
+    super.refreshToken,
+    super.username,
+    super.name,
+    super.location,
+    super.company,
+    super.gitUrl,
+    super.bio,
+    super.avatarUrl,
+    super.repository,
+    super.followers,
+    super.following,
+  });
 
   factory UserModel.fromJson(Map<dynamic, dynamic> json) {
     return UserModel(

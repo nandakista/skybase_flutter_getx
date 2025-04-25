@@ -7,10 +7,10 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:skybase/ui/views/404_500/unknown_page.dart';
 
 import 'config/environment/app_env.dart';
+import 'config/localization/app_translations.dart';
+import 'config/localization/locale_manager.dart';
 import 'config/themes/app_theme.dart';
 import 'config/themes/theme_manager.dart';
-import 'core/localization/app_translations.dart';
-import 'core/localization/locale_manager.dart';
 import 'service_locator.dart';
 import 'ui/routes/app_routes.dart';
 import 'ui/views/404_500/crash_error_view.dart';

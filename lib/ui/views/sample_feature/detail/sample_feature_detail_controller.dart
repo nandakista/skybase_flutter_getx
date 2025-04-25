@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
 import 'package:skybase/config/base/base_controller.dart';
-import 'package:skybase/data/models/sample_feature/sample_feature.dart';
-import 'package:skybase/data/repositories/sample_feature/sample_feature_repository.dart';
 import 'package:skybase/data/sources/local/cached_key.dart';
+import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
+import 'package:skybase/domain/usecases/get_detail_user.dart';
 
 class SampleFeatureDetailController extends BaseController<SampleFeature> {
-  final SampleFeatureRepository repository;
+  final GetDetailUser getDetailUser;
 
-  SampleFeatureDetailController({required this.repository});
+  SampleFeatureDetailController({required this.getDetailUser});
 
   late int idArgs;
   late String usernameArgs;
@@ -21,7 +21,7 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
 
   @override
   void onReady() async {
-    loadData(() => getDetailUser());
+    loadData(() => onGetDetailUser());
     super.onReady();
   }
 
@@ -34,9 +34,9 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
   @override
   String get cachedId => idArgs.toString();
 
-  Future<void> getDetailUser() async {
+  Future<void> onGetDetailUser() async {
     try {
-      final response = await repository.getDetailUser(
+      final response = await getDetailUser(
         requestParams: requestParams,
         id: idArgs,
         username: usernameArgs,

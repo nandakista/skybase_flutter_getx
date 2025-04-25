@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/config/themes/app_style.dart';
-import 'package:skybase/data/models/repo/repo.dart';
+import 'package:skybase/domain/entities/repo/repo.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 

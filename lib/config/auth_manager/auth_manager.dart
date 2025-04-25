@@ -8,7 +8,8 @@ import 'package:skybase/core/database/storage/storage_key.dart';
 import 'package:skybase/core/database/storage/storage_manager.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/config/themes/theme_manager.dart';
-import 'package:skybase/data/models/user/user.dart';
+import 'package:skybase/data/models/user.dart';
+import 'package:skybase/domain/entities/user/user.dart';
 import 'package:skybase/ui/views/intro/intro_view.dart';
 import 'package:skybase/ui/views/login/login_view.dart';
 import 'package:skybase/ui/views/splash/splash_view.dart';
@@ -178,14 +179,14 @@ class AuthManager extends GetxService {
   }
 
   Future<void> saveUserData({required User user}) async {
-    await storage.save(StorageKey.USERS, user.toJson());
+    await storage.save(StorageKey.USERS, user.toModel().toJson());
   }
 
   /// Get User data from GetStorage
   /// * No need to decode or call fromJson again when you used this helper
   User? get user {
     if (storage.has(StorageKey.USERS)) {
-      return User.fromJson(storage.get(StorageKey.USERS));
+      return UserModel.fromJson(storage.get(StorageKey.USERS));
     } else {
       return null;
     }

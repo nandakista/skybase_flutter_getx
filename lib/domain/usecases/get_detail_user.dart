@@ -1,3 +1,4 @@
+import 'package:skybase/config/base/request_param.dart';
 import 'package:skybase/domain/entities/sample_feature/sample_feature.dart';
 import 'package:skybase/domain/repositories/sample_feature_repository.dart';
 
@@ -9,7 +10,12 @@ class GetDetailUser {
   Future<SampleFeature> call({
     required int id,
     required String username,
+    required RequestParams requestParams,
   }) async {
-    return await repository.getDetailUser(id: id, username: username);
+    return await repository.getDetailUser(
+      id: id,
+      username: username,
+      requestParams: requestParams,
+    );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:skybase/data/models/repo/repo.dart';
-import 'package:skybase/data/models/user/user.dart';
+import 'package:skybase/domain/entities/repo/repo.dart';
+import 'package:skybase/domain/entities/user/user.dart';
 
 abstract interface class AuthSources {
   Future<User> verifyToken({

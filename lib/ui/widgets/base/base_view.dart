@@ -64,7 +64,9 @@ class BaseView extends StatelessWidget {
 
   final VoidCallback? onRefresh;
 
-  final double? imageSize;
+  final double? imageHeight;
+
+  final double? imageWidth;
 
   final double? verticalSpacing;
 
@@ -77,7 +79,7 @@ class BaseView extends StatelessWidget {
   final Widget? errorView;
 
   const BaseView({
-    Key? key,
+    super.key,
     required this.loadingEnabled,
     required this.errorEnabled,
     required this.emptyEnabled,
@@ -97,7 +99,8 @@ class BaseView extends StatelessWidget {
     this.emptyView,
     this.retryText,
     this.onRefresh,
-    this.imageSize,
+    this.imageHeight,
+    this.imageWidth,
     this.verticalSpacing,
     this.horizontalSpacing,
     this.titleStyle,
@@ -105,7 +108,7 @@ class BaseView extends StatelessWidget {
     this.errorImage,
     this.retryWidget,
     this.emptyImageWidget,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +163,8 @@ class BaseView extends StatelessWidget {
           emptyImageWidget: emptyImageWidget,
           emptyTitle: emptyTitle,
           emptySubtitle: emptySubtitle,
-          imageSize: imageSize,
+          imageHeight: imageHeight,
+          imageWidth: imageWidth,
           horizontalSpacing: horizontalSpacing ?? 24,
           verticalSpacing: verticalSpacing ?? 24,
           titleStyle: titleStyle,
@@ -180,7 +184,8 @@ class BaseView extends StatelessWidget {
           errorSubtitle: errorSubtitle,
           onRetry: onRetry,
           retryText: retryText,
-          imageSize: imageSize,
+          imageHeight: imageHeight,
+          imageWidth: imageWidth,
           horizontalSpacing: horizontalSpacing ?? 24,
           verticalSpacing: verticalSpacing ?? 24,
           titleStyle: titleStyle,

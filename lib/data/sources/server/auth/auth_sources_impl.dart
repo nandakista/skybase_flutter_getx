@@ -6,8 +6,10 @@ import 'package:skybase/config/environment/app_env.dart';
 import 'package:skybase/core/database/secure_storage/secure_storage_manager.dart';
 import 'package:skybase/config/network/api_request.dart';
 import 'package:skybase/config/network/api_response.dart';
-import 'package:skybase/data/models/repo/repo.dart';
-import 'package:skybase/data/models/user/user.dart';
+import 'package:skybase/data/models/repo_model.dart';
+import 'package:skybase/data/models/user.dart';
+import 'package:skybase/domain/entities/repo/repo.dart';
+import 'package:skybase/domain/entities/user/user.dart';
 
 import 'auth_sources.dart';
 
@@ -29,7 +31,7 @@ class AuthSourcesImpl implements AuthSources {
           'email': email,
         },
       );
-      return User.fromJson(ApiResponse.fromJson(response.data).data);
+      return UserModel.fromJson(ApiResponse.fromJson(response.data).data);
     } catch (e, stack) {
       debugPrint('$tag Error = $e, $stack');
       rethrow;
@@ -53,7 +55,7 @@ class AuthSourcesImpl implements AuthSources {
           contentType: Headers.jsonContentType,
         ),
       );
-      return User.fromJson(ApiResponse.fromJson(response.data).data);
+      return UserModel.fromJson(ApiResponse.fromJson(response.data).data);
     } catch (e, stack) {
       debugPrint('$tag Error = $e, $stack');
       rethrow;
@@ -70,7 +72,7 @@ class AuthSourcesImpl implements AuthSources {
         url: '/users/$username',
         cancelToken: cancelToken,
       );
-      return User.fromJson(res.data);
+      return UserModel.fromJson(res.data);
     } catch (e, stack) {
       debugPrint('$tag Error = $e, $stack');
       rethrow;
@@ -88,7 +90,7 @@ class AuthSourcesImpl implements AuthSources {
         cancelToken: cancelToken,
       );
       return (res.data as List)
-          .map((data) => Repo.fromJson(data))
+          .map((data) => RepoModel.fromJson(data))
           .toList()
           .cast<Repo>();
     } catch (e, stack) {

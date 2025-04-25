@@ -1,11 +1,11 @@
 import 'package:skybase/config/base/base_controller.dart';
-import 'package:skybase/data/models/repo/repo.dart';
-import 'package:skybase/data/repositories/auth/auth_repository.dart';
+import 'package:skybase/domain/entities/repo/repo.dart';
+import 'package:skybase/domain/usecases/get_profile_repository.dart';
 
 class ProfileRepositoryController extends BaseController<Repo> {
-  final AuthRepository repository;
+  final GetProfileRepository getProfileRepository;
 
-  ProfileRepositoryController({required this.repository});
+  ProfileRepositoryController({required this.getProfileRepository});
 
   @override
   void onReady() {
@@ -18,7 +18,7 @@ class ProfileRepositoryController extends BaseController<Repo> {
 
   Future<void> getRepository() async {
     try {
-      final response = await repository.getProfileRepository(
+      final response = await getProfileRepository(
         requestParams: requestParams,
         username: 'nandakista',
       );
