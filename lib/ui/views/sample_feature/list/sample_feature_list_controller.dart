@@ -11,6 +11,8 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
 
   SampleFeatureListController({required this.repository});
 
+  String? searchQuery;
+
   @override
   void onReady() {
     loadData(() => getUsers());
@@ -29,6 +31,7 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
         requestParams: requestParams,
         page: page,
         perPage: perPage,
+        username: searchQuery,
       );
       loadNextData(data: response);
     } catch (e) {
@@ -45,5 +48,16 @@ class SampleFeatureListController extends PaginationController<SampleFeature> {
         'username': username,
       },
     );
+  }
+
+  void onUpdateSearch({required String? search}) async {
+    try {
+      searchQuery = search;
+      resetState();
+      await getUsers();
+    } catch (e) {
+      debugPrint('Error : $e');
+      loadError(e.toString());
+    }
   }
 }

@@ -4,7 +4,7 @@
 */
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:skybase/config/base/request_param.dart';
@@ -19,6 +19,7 @@ abstract class PaginationController<T> extends GetxController
   int perPage = 20;
   int page = 1;
   final pagingController = PagingController<int, T>(firstPageKey: 1);
+  final scrollController = ScrollController();
 
   bool get keepAlive => false;
 
@@ -45,14 +46,7 @@ abstract class PaginationController<T> extends GetxController
   Future<void> onRefresh() async {
     if (_onLoad != null) {
       if (cachedKey.isNotEmpty) await deleteCached(cachedKey);
-      if (page > 1) {
-        page = 1;
-        pagingController.value = PagingState(
-          nextPageKey: page,
-          error: null,
-          itemList: keepAlive ? _keepAliveData : null,
-        );
-      }
+      if (page > 1) resetState(keepAlive: keepAlive);
       await _onLoad!();
     }
   }
@@ -64,6 +58,21 @@ abstract class PaginationController<T> extends GetxController
     pagingController.dispose();
     cancelToken.cancel();
     super.onClose();
+  }
+
+  /// if keepAlive = true the loading state never show
+  void resetState({bool keepAlive = false}) {
+    page = 1;
+    pagingController.value = PagingState(
+      nextPageKey: page,
+      error: null,
+      itemList: keepAlive ? _keepAliveData : null,
+    );
+    scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
   }
 
   void loadData(Future Function() onLoad) async {

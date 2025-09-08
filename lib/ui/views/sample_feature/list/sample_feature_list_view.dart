@@ -25,6 +25,7 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
         loadingView: const ShimmerSampleFeatureList(),
         onRefresh: controller.onRefresh,
         onRetry: controller.onRefresh,
+        scrollController: controller.scrollController,
         itemBuilder: (BuildContext context, item, int index) {
           return ListTile(
             onTap: () => controller.onChooseUser(
@@ -49,6 +50,7 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
         onPressed: () {
           StorageManager.find.delete(CachedKey.SAMPLE_FEATURE_LIST);
           StorageManager.find.delete(CachedKey.SAMPLE_FEATURE_DETAIL);
+          // controller.onUpdateSearch(search: 'ada');
         },
         child: const Icon(Icons.delete, color: Colors.white),
       ),
