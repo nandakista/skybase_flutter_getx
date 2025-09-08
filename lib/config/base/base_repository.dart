@@ -14,7 +14,7 @@ abstract class BaseRepository with CacheMixin {
   Future<List<T>> loadCachedList<T>({
     required String cachedKey,
     required Future<List<T>> Function() onLoad,
-    bool loadWhen = true,
+    bool loadWhen = false,
   }) async {
     try {
       List<T> result = [];
