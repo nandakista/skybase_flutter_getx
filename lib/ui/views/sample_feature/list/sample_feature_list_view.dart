@@ -45,14 +45,29 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primary,
-        onPressed: () {
-          StorageManager.find.delete(CachedKey.SAMPLE_FEATURE_LIST);
-          StorageManager.find.delete(CachedKey.SAMPLE_FEATURE_DETAIL);
-          // controller.onUpdateSearch(search: 'ada');
-        },
-        child: const Icon(Icons.delete, color: Colors.white),
+      floatingActionButton: Align(
+        alignment: Alignment.bottomRight,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          spacing: 12,
+          children: [
+            FloatingActionButton(
+              backgroundColor: AppColors.primary,
+              onPressed: () {
+                StorageManager.find.delete(CachedKey.SAMPLE_FEATURE_LIST);
+                StorageManager.find.delete(CachedKey.SAMPLE_FEATURE_DETAIL);
+              },
+              child: const Icon(Icons.delete, color: Colors.white),
+            ),
+            FloatingActionButton(
+              backgroundColor: AppColors.primary,
+              onPressed: () {
+                controller.onUpdateSearch(search: 'ada');
+              },
+              child: const Icon(Icons.search, color: Colors.white),
+            ),
+          ],
+        ),
       ),
     );
   }
