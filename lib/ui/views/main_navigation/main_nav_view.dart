@@ -37,7 +37,7 @@ class MainNavView extends GetView<MainNavController> {
           borderColor: Colors.transparent,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withValues(alpha: 0.2),
               spreadRadius: 5,
               blurRadius: 3,
               offset: const Offset(0, 3), // changes position of shadow
