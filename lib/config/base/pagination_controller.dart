@@ -56,6 +56,7 @@ abstract class PaginationController<T> extends GetxController
   void onClose() {
     cancelConnectivity();
     pagingController.dispose();
+    scrollController.dispose();
     cancelToken.cancel();
     super.onClose();
   }
