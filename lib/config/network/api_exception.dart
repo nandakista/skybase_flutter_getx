@@ -36,7 +36,7 @@ mixin NetworkException implements Exception {
   NetworkExceptionData handleResponse(Response response) {
     int statusCode = response.statusCode!;
     return switch (statusCode) {
-      400 || 403 || 422  => BadRequestException(),
+      400 || 403 || 422 => BadRequestException(response: response),
       401 => UnauthorisedException(),
       404 => NotFoundException(),
       409 => FetchDataException(),
