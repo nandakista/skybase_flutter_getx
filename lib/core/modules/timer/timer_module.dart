@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
 
 /* Created by
    Varcant
@@ -11,7 +10,7 @@ import 'package:get/get.dart';
 class TimerModule {
   static const String tag = 'TIMER_MODULE';
 
-  RxInt currentTime = RxInt(0);
+  int currentTime = 0;
   Timer? timer;
   String? savedUpdateId;
   int? savedTime;
@@ -37,13 +36,13 @@ class TimerModule {
     timer = Timer.periodic(
       intervalTime ?? const Duration(seconds: 1),
       (Timer timerP) {
-        if (currentTime.value == 0) {
+        if (currentTime == 0) {
           _stopTimerP(timerP);
           if (onFinished != null) onFinished();
         } else {
-          _setCurrentTime(currentTime.value -= 1);
-          if (onChanged != null) onChanged(currentTime.value);
-          savedTime = currentTime.value;
+          _setCurrentTime(currentTime -= 1);
+          if (onChanged != null) onChanged(currentTime);
+          savedTime = currentTime;
         }
         if (kDebugMode) debugPrint('TIMER UPDATE: | $currentTime');
       },
@@ -51,7 +50,7 @@ class TimerModule {
   }
 
   void _setCurrentTime(int time) {
-    currentTime.value = time;
+    currentTime = time;
   }
 
   void _stopTimerP(Timer timerP) {
@@ -71,7 +70,7 @@ class TimerModule {
     void Function(int currentTime)? onChanged,
   }) {
     debugPrint('$tag: $savedUpdateId | restart timer');
-    if (currentTime.value != 0) {
+    if (currentTime != 0) {
       stopTimer();
     }
     startTimer(
@@ -82,7 +81,6 @@ class TimerModule {
       onChanged: onChanged,
     );
   }
-
 
   void stopTimer() {
     timer?.cancel();

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
+// import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as p;
 // ignore: depend_on_referenced_packages
@@ -60,38 +60,38 @@ class MediaHelper {
     }
   }
 
-  static Future<Uint8List> compressBytes(Uint8List list) async {
-    Uint8List result = await FlutterImageCompress.compressWithList(
-      list,
-      minHeight: 1920,
-      minWidth: 1080,
-      quality: 20,
-    );
-    debugPrint(list.length.toString());
-    debugPrint(result.length.toString());
-    return result;
-  }
+  // static Future<Uint8List> compressBytes(Uint8List list) async {
+  //   Uint8List result = await FlutterImageCompress.compressWithList(
+  //     list,
+  //     minHeight: 1920,
+  //     minWidth: 1080,
+  //     quality: 20,
+  //   );
+  //   debugPrint(list.length.toString());
+  //   debugPrint(result.length.toString());
+  //   return result;
+  // }
 
-  static Future<File> compressImage({
-    required File file,
-    required int limit,
-  }) async {
-    int minLimit = 1000000;
-    if (limit < minLimit) limit = minLimit;
-    int size = file.lengthSync();
-    while (size >= limit) {
-      Uint8List? result = await FlutterImageCompress.compressWithFile(
-        file.absolute.path,
-        minWidth: 1024,
-        minHeight: 1024,
-        quality: 80,
-      );
-      img.Image image = img.decodeJpg(result!)!;
-      File(file.path).writeAsBytesSync(img.encodePng(image));
-      size = file.lengthSync();
-    }
-    return file;
-  }
+  // static Future<File> compressImage({
+  //   required File file,
+  //   required int limit,
+  // }) async {
+  //   int minLimit = 1000000;
+  //   if (limit < minLimit) limit = minLimit;
+  //   int size = file.lengthSync();
+  //   while (size >= limit) {
+  //     Uint8List? result = await FlutterImageCompress.compressWithFile(
+  //       file.absolute.path,
+  //       minWidth: 1024,
+  //       minHeight: 1024,
+  //       quality: 80,
+  //     );
+  //     img.Image image = img.decodeJpg(result!)!;
+  //     File(file.path).writeAsBytesSync(img.encodePng(image));
+  //     size = file.lengthSync();
+  //   }
+  //   return file;
+  // }
 
   static Future<File?> pickImage({
     required ImageSource source,
@@ -100,7 +100,7 @@ class MediaHelper {
     double? maxHeight,
     double? maxWidth,
     int? imageQuality,
-    int sizeLimit = 2000000,
+    // int sizeLimit = 2000000,
   }) async {
     XFile? pickedFile = await ImagePicker().pickImage(
       source: source,
@@ -111,12 +111,12 @@ class MediaHelper {
     );
     if (pickedFile != null) {
       File imageFile = File(pickedFile.path);
-      if (withCompression) {
-        imageFile = await compressImage(
-          file: imageFile,
-          limit: sizeLimit,
-        );
-      }
+      // if (withCompression) {
+      //   imageFile = await compressImage(
+      //     file: imageFile,
+      //     limit: sizeLimit,
+      //   );
+      // }
       return imageFile;
     }
     return null;

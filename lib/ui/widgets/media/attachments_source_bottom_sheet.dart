@@ -122,7 +122,7 @@ class AttachmentsSourceBottomSheet extends StatelessWidget {
       maxWidth: maxWidth,
       imageQuality: imageQuality,
       preferredCameraDevice: preferredCameraDevice,
-      sizeLimit: sizeLimit,
+      // sizeLimit: sizeLimit,
     );
     if (null != pickedFile) {
       onAttachmentsSelected(pickedFile);
