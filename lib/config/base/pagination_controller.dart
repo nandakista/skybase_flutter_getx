@@ -67,7 +67,7 @@ abstract class PaginationController<T> extends GetxController
     pagingController.value = PagingState(
       nextPageKey: page,
       error: null,
-      itemList: keepAlive ? _keepAliveData : null,
+      itemList: keepAlive && _keepAliveData.isNotEmpty ? _keepAliveData : null,
     );
     scrollController.animateTo(
       0,
