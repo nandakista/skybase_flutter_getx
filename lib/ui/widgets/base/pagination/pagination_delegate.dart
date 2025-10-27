@@ -40,6 +40,7 @@ PagedChildBuilderDelegate<T> PaginationDelegate<T>({
   TextStyle? errorTitleStyle,
   TextStyle? errorSubtitleStyle,
   Widget? maxItemView,
+  Widget? separator,
 }) {
   return PagedChildBuilderDelegate<T>(
     animateTransitions: true,
@@ -112,6 +113,16 @@ PagedChildBuilderDelegate<T> PaginationDelegate<T>({
             ],
           ),
         ),
-    itemBuilder: itemBuilder,
+    itemBuilder: separator == null
+        ? itemBuilder
+        : (context, item, index) {
+      return Column(
+        children: [
+          itemBuilder(context, item, index),
+          if (index != (pagingController.itemList?.length ?? 0) - 1)
+            separator,
+        ],
+      );
+    },
   );
 }

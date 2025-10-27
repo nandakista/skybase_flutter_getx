@@ -72,7 +72,10 @@ class PaginationStateView<T> extends StatelessWidget {
     this.semanticChildCount,
     this.anchor,
     this.center,
-  })  : type = PaginationType.list,
+  })  : assert(
+  (scrollDirection == Axis.horizontal && onRefresh == null) || scrollDirection == Axis.vertical,
+  "onRefresh is not supported for horizontal scrolling"),
+        type = PaginationType.list,
         gridDelegate = null,
         showNewPageErrorIndicatorAsGridChild = null,
         showNewPageProgressIndicatorAsGridChild = null,
@@ -278,7 +281,7 @@ class PaginationStateView<T> extends StatelessWidget {
     return PagedListView.separated(
       key: key,
       pagingController: pagingController,
-      builderDelegate: _builderDelete(),
+      builderDelegate: _builderDelete(isSliver: false),
       addAutomaticKeepAlives: addAutomaticKeepAlives ?? true,
       addRepaintBoundaries: addRepaintBoundaries ?? true,
       addSemanticIndexes: addSemanticIndexes ?? true,
@@ -306,7 +309,7 @@ class PaginationStateView<T> extends StatelessWidget {
     return PagedSliverList(
       key: key,
       pagingController: pagingController,
-      builderDelegate: _builderDelete(),
+      builderDelegate: _builderDelete(isSliver: true),
       addAutomaticKeepAlives: addAutomaticKeepAlives ?? true,
       addRepaintBoundaries: addRepaintBoundaries ?? true,
       addSemanticIndexes: addSemanticIndexes ?? true,
@@ -321,7 +324,7 @@ class PaginationStateView<T> extends StatelessWidget {
     return PagedGridView(
       key: key,
       pagingController: pagingController,
-      builderDelegate: _builderDelete(),
+      builderDelegate: _builderDelete(isSliver: false),
       gridDelegate: gridDelegate!,
       addAutomaticKeepAlives: addAutomaticKeepAlives ?? true,
       addRepaintBoundaries: addRepaintBoundaries ?? true,
@@ -352,7 +355,7 @@ class PaginationStateView<T> extends StatelessWidget {
     return PagedSliverGrid(
       key: key,
       pagingController: pagingController,
-      builderDelegate: _builderDelete(),
+      builderDelegate: _builderDelete(isSliver: true),
       gridDelegate: gridDelegate!,
       addAutomaticKeepAlives: addAutomaticKeepAlives ?? true,
       addRepaintBoundaries: addRepaintBoundaries ?? true,
@@ -367,7 +370,7 @@ class PaginationStateView<T> extends StatelessWidget {
     );
   }
 
-  PagedChildBuilderDelegate<T> _builderDelete() {
+  PagedChildBuilderDelegate<T> _builderDelete({required bool isSliver}) {
     return PaginationDelegate<T>(
       pagingController: pagingController,
       onRetry: onRetry,
@@ -396,6 +399,7 @@ class PaginationStateView<T> extends StatelessWidget {
       itemBuilder: itemBuilder,
       errorLoadMoreView: errorLoadMoreView,
       errorView: errorView,
+      separator: isSliver ? separator : null,
     );
   }
 }
