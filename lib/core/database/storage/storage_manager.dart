@@ -10,7 +10,7 @@ import 'package:skybase/core/database/storage/storage_key.dart';
    nanda.kista@gmail.com
 */
 
-/// ----<Getx Storage>----
+/// ----Getx Storage----
 ///
 /// Format -> Key == BoxName,
 /// So one box contains one key --> One Box = One Data.

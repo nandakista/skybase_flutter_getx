@@ -234,7 +234,7 @@ class SliverGroupedListView<T, G> extends StatelessWidget {
     );
   }
 
-  _buildHeaderWidget(G item) {
+  Widget _buildHeaderWidget(G item) {
     return Column(
       children: [
         SizedBox(width: double.infinity, child: groupHeaderBuilder(item)),
@@ -243,14 +243,14 @@ class SliverGroupedListView<T, G> extends StatelessWidget {
     );
   }
 
-  _buildItemWidget(BuildContext context, int index) {
+  Widget _buildItemWidget(BuildContext context, int index) {
     return SizedBox(
       width: double.infinity,
       child: itemBuilder(context, index, data[index]),
     );
   }
 
-  _buildSeparatorWidget(Widget? item) {
+  Widget _buildSeparatorWidget(Widget? item) {
     return SizedBox(
       width: double.infinity,
       child: item ?? const SizedBox.shrink(),

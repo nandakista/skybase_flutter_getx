@@ -32,10 +32,12 @@ class ThemeComponentUtilsView extends StatelessWidget {
               ],
             ),
             Obx(
-              () => Radio(
-                value: switchValue.value,
+              () => RadioGroup(
                 groupValue: true,
                 onChanged: (value) => switchValue.toggle(),
+                child: Radio(
+                  value: switchValue.value,
+                ),
               ),
             ),
             Obx(

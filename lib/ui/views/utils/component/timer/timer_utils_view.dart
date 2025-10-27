@@ -58,7 +58,7 @@ class TimerUtilsView extends GetView<TimerUtilsController> {
     );
   }
 
-  _buildTimeItem({required String time, required String title}) {
+  Widget _buildTimeItem({required String time, required String title}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

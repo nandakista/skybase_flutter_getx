@@ -92,10 +92,10 @@ abstract class BaseController<T> extends GetxController
   void loadData(Future Function() onLoad) async {
     showLoading();
     await onLoad();
-    this._onLoad = onLoad;
+    _onLoad = onLoad;
   }
 
-  loadFinish({
+  void loadFinish({
     T? data,
     List<T> list = const [],
   }) {

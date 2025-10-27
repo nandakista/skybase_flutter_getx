@@ -58,7 +58,7 @@ class MediaUtilsView extends GetView<UtilsController> {
     );
   }
 
-  _buildImagePicker(BuildContext context) {
+  List<Widget> _buildImagePicker(BuildContext context) {
     return [
       const Text('Preview File'),
       const SizedBox(height: 4),

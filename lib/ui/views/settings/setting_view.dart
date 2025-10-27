@@ -48,29 +48,25 @@ class SettingView extends GetView<SettingController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const Text('ENG'),
                         Obx(
-                          () => Radio(
-                            value: 'en',
+                          () => RadioGroup(
                             groupValue: controller.languageCode.value,
                             onChanged: (value) {
                               controller.onUpdateLocale(value.toString());
                             },
-                          ),
-                        ),
-                        const Text('ID'),
-                        Obx(
-                          () => Radio(
-                            value: 'id',
-                            groupValue: controller.languageCode.value,
-                            onChanged: (value) {
-                              controller.onUpdateLocale(value.toString());
-                            },
+                            child: Row(
+                              children: [
+                                const Text('ENG'),
+                                Radio(value: 'en'),
+                                const Text('ID'),
+                                Radio(value: 'id'),
+                              ],
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
               const Divider(color: Colors.grey),

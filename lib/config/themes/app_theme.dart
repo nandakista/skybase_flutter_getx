@@ -14,7 +14,6 @@ class AppTheme {
       ),
       primaryColor: AppColors.primary,
       primarySwatch: AppColors.materialPrimary,
-      indicatorColor: AppColors.secondary,
       fontFamily: "Poppins",
       inputDecorationTheme: inputDecorationTheme(),
       checkboxTheme: checkboxThemeData(),
@@ -32,6 +31,7 @@ class AppTheme {
           statusBarColor: AppColors.primary,
         ),
       ),
+      tabBarTheme: TabBarThemeData(indicatorColor: AppColors.secondary),
     );
   }
 
@@ -44,7 +44,6 @@ class AppTheme {
       ),
       primaryColor: AppColors.primary,
       primarySwatch: AppColors.materialPrimary,
-      indicatorColor: AppColors.secondary,
       fontFamily: "Poppins",
       inputDecorationTheme: inputDecorationTheme(),
       checkboxTheme: checkboxThemeData(),
@@ -73,6 +72,7 @@ class AppTheme {
           statusBarColor: AppColors.primary,
         ),
       ),
+      tabBarTheme: TabBarThemeData(indicatorColor: AppColors.secondary),
     );
   }
 
@@ -82,8 +82,9 @@ class AppTheme {
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),
       side: const BorderSide(width: 1, color: Color(0xFFCFCFCF)),
-      fillColor: WidgetStateProperty.resolveWith<Color?>(
-          (Set<WidgetState> states) {
+      fillColor: WidgetStateProperty.resolveWith<Color?>((
+        Set<WidgetState> states,
+      ) {
         if (states.contains(WidgetState.disabled)) {
           return null;
         }
@@ -97,8 +98,9 @@ class AppTheme {
 
   static RadioThemeData radioThemeData() {
     return RadioThemeData(
-      fillColor: WidgetStateProperty.resolveWith<Color?>(
-          (Set<WidgetState> states) {
+      fillColor: WidgetStateProperty.resolveWith<Color?>((
+        Set<WidgetState> states,
+      ) {
         if (states.contains(WidgetState.disabled)) {
           return null;
         }
@@ -112,8 +114,9 @@ class AppTheme {
 
   static SwitchThemeData switchThemeData() {
     return SwitchThemeData(
-      thumbColor: WidgetStateProperty.resolveWith<Color?>(
-          (Set<WidgetState> states) {
+      thumbColor: WidgetStateProperty.resolveWith<Color?>((
+        Set<WidgetState> states,
+      ) {
         if (states.contains(WidgetState.disabled)) {
           return null;
         }
@@ -122,8 +125,9 @@ class AppTheme {
         }
         return null;
       }),
-      trackColor: WidgetStateProperty.resolveWith<Color?>(
-          (Set<WidgetState> states) {
+      trackColor: WidgetStateProperty.resolveWith<Color?>((
+        Set<WidgetState> states,
+      ) {
         if (states.contains(WidgetState.disabled)) {
           return null;
         }
@@ -165,9 +169,7 @@ extension DarkMode on BuildContext {
 }
 
 class AppOrientation {
-  static lock(DeviceOrientation orientation) {
-    return SystemChrome.setPreferredOrientations([
-      orientation,
-    ]);
+  static Future<void> lock(DeviceOrientation orientation) {
+    return SystemChrome.setPreferredOrientations([orientation]);
   }
 }

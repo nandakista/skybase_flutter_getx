@@ -81,7 +81,7 @@ abstract class PaginationController<T> extends GetxController
       if (page > 1) await onLoad();
     });
     if (page == 1) await onLoad();
-    this._onLoad = onLoad;
+    _onLoad = onLoad;
   }
 
   void loadError(String message) {
@@ -96,7 +96,7 @@ abstract class PaginationController<T> extends GetxController
       if (page == 1 && (pagingController.itemList ?? []).isNotEmpty) {
         pagingController.itemList?.clear();
       }
-      this.page++;
+      page++;
       pagingController.appendPage(data, page);
     }
   }
