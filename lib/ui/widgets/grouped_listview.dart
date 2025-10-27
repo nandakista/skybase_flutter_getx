@@ -125,7 +125,7 @@ class SliverGroupedListView<T, G> extends StatelessWidget {
   final G Function(T element) groupBy;
   final Widget? separator;
   final Widget? separatorHeader;
-  final NullableIndexedWidgetBuilder separatorGroupBuilder;
+  final NullableIndexedWidgetBuilder? separatorGroupBuilder;
   final int Function(T, T)? sortGroupItems;
 
   @override
@@ -146,7 +146,7 @@ class SliverGroupedListView<T, G> extends StatelessWidget {
 
     return SliverList.separated(
       itemCount: groupList.length,
-      separatorBuilder: separatorGroupBuilder,
+      separatorBuilder: separatorGroupBuilder ?? (context, index) => const SizedBox.shrink(),
       itemBuilder: (context, indexGroup) {
         G group = groupList[indexGroup];
         List<T> groupItems = groupedData.values.toList()[indexGroup];

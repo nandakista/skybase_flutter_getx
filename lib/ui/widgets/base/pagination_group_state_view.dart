@@ -26,8 +26,10 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
     required this.itemBuilder,
     required this.groupHeaderBuilder,
     required this.groupBy,
+    required this.onRetry,
     this.groupFooterBuilder,
     this.separatorHeader,
+    this.separatorGroup,
     this.sortGroupBy = SortBy.asc,
     this.loadingView,
     this.emptyView,
@@ -85,6 +87,7 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
   final Widget Function(G element)? groupFooterBuilder;
   final G Function(T element) groupBy;
   final Widget? separatorHeader;
+  final NullableIndexedWidgetBuilder? separatorGroup;
   final SortBy sortGroupBy;
   final int Function(T, T)? sortGroupItems;
 
@@ -118,6 +121,7 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
   final Widget? errorLoadMoreView;
   final bool shrinkWrapFirstPageIndicators;
   final VoidCallback? onRefresh;
+  final VoidCallback onRetry;
   final Widget? emptyImageWidget;
   final String? emptyImage;
   final String? errorTitle;
@@ -172,7 +176,7 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
   }
 
   Widget _iosPaginationView() {
-    if (onRefresh != null) {
+    if (onRefresh != null && scrollDirection == Axis.vertical) {
       return Padding(
         key: key,
         padding: padding ?? EdgeInsets.zero,
@@ -209,7 +213,7 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
   Widget _buildPagedGroupedList() {
     return PagedGroupedListView(
       pagingController: pagingController,
-      builderDelegate: _builderDelete(),
+      builderDelegate: _builderDelete(isSliver: false),
       groupBy: groupBy,
       groupHeaderBuilder: groupHeaderBuilder,
       groupFooterBuilder: groupFooterBuilder,
@@ -232,13 +236,14 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
       sortGroupItems: sortGroupItems,
       keyboardDismissBehavior:
           keyboardDismissBehavior ?? ScrollViewKeyboardDismissBehavior.manual,
+      separatorGroup: separatorGroup,
     );
   }
 
   Widget _buildPagedSliverGroupedList() {
     return PagedSliverGroupedListView(
       pagingController: pagingController,
-      builderDelegate: _builderDelete(),
+      builderDelegate: _builderDelete(isSliver: true),
       groupBy: groupBy,
       groupHeaderBuilder: groupHeaderBuilder,
       groupFooterBuilder: groupFooterBuilder,
@@ -260,10 +265,10 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
     return const SizedBox.shrink();
   }
 
-  PagedChildBuilderDelegate<T> _builderDelete() {
+  PagedChildBuilderDelegate<T> _builderDelete({required bool isSliver}) {
     return PaginationDelegate<T>(
       pagingController: pagingController,
-      onRetry: onRefresh ?? () => pagingController.refresh(),
+      onRetry: onRetry,
       loadingView: loadingView,
       emptyView: emptyView,
       emptyRetryEnabled: emptyRetryEnabled,
@@ -289,6 +294,7 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
       itemBuilder: itemBuilder,
       errorLoadMoreView: errorLoadMoreView,
       errorView: errorView,
+      separator: isSliver ? separator : null,
     );
   }
 }
