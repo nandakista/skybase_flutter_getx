@@ -85,7 +85,8 @@ class GroupedListView<T, G> extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                return itemBuilder(context, index, groupItems[index]);
+                final int originalIndex = data.indexOf(groupItems[index]);
+                return itemBuilder(context, originalIndex, groupItems[index]);
               },
               separatorBuilder: (BuildContext context, int index) {
                 return separator ?? const SizedBox.shrink();
@@ -163,7 +164,8 @@ class SliverGroupedListView<T, G> extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                return itemBuilder(context, index, groupItems[index]);
+                final int originalIndex = data.indexOf(groupItems[index]);
+                return itemBuilder(context, originalIndex, groupItems[index]);
               },
               separatorBuilder: (BuildContext context, int index) {
                 return separator ?? const SizedBox.shrink();
