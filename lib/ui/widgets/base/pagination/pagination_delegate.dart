@@ -109,20 +109,20 @@ PagedChildBuilderDelegate<T> PaginationDelegate<T>({
                 padding: const EdgeInsets.all(12.0),
                 child: errorLoadMoreView ?? const Icon(CupertinoIcons.refresh),
               ),
-              Text('txt_tap_retry'.tr)
+              Text('txt_tap_retry'.tr),
             ],
           ),
         ),
     itemBuilder: separator == null
         ? itemBuilder
         : (context, item, index) {
-      return Column(
-        children: [
-          itemBuilder(context, item, index),
-          if (index != (pagingController.itemList?.length ?? 0) - 1)
-            separator,
-        ],
-      );
-    },
+            return Column(
+              children: [
+                itemBuilder(context, item, index),
+                if (index != (pagingController.itemList?.length ?? 0) - 1)
+                  separator,
+              ],
+            );
+          },
   );
 }

@@ -75,14 +75,18 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
     this.anchor,
     this.center,
     this.sortGroupItems,
-  }) : type = PaginationGroupType.list;
+  })  : assert(
+  (scrollDirection == Axis.horizontal && onRefresh == null) ||
+      scrollDirection == Axis.vertical,
+  "onRefresh is not supported for horizontal scrolling"),
+        type = PaginationGroupType.list;
 
   // Pagination properties
   final PaginationGroupType type;
   final PagingController<int, T> pagingController;
   final ItemWidgetBuilder<T> itemBuilder;
 
-  // Grouped
+  // Group properties
   final Widget Function(G element) groupHeaderBuilder;
   final Widget Function(G element)? groupFooterBuilder;
   final G Function(T element) groupBy;
@@ -211,7 +215,8 @@ class PaginationGroupStateView<T, G> extends StatelessWidget {
   }
 
   Widget _buildPagedGroupedList() {
-    return PagedGroupedListView(
+    return PagedGroupedListView<int, T, G>(
+      key: key,
       pagingController: pagingController,
       builderDelegate: _builderDelete(isSliver: false),
       groupBy: groupBy,

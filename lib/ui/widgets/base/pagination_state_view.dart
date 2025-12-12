@@ -12,10 +12,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import 'pagination/pagination_delegate.dart';
 
-enum PaginationType {
-  list,
-  grid,
-}
+enum PaginationType { list, grid }
 
 class PaginationStateView<T> extends StatelessWidget {
   const PaginationStateView.list({
@@ -72,14 +69,16 @@ class PaginationStateView<T> extends StatelessWidget {
     this.semanticChildCount,
     this.anchor,
     this.center,
-  })  : assert(
-  (scrollDirection == Axis.horizontal && onRefresh == null) || scrollDirection == Axis.vertical,
-  "onRefresh is not supported for horizontal scrolling"),
-        type = PaginationType.list,
-        gridDelegate = null,
-        showNewPageErrorIndicatorAsGridChild = null,
-        showNewPageProgressIndicatorAsGridChild = null,
-        showNoMoreItemsIndicatorAsGridChild = null;
+  }) : assert(
+         (scrollDirection == Axis.horizontal && onRefresh == null) ||
+             scrollDirection == Axis.vertical,
+         "onRefresh is not supported for horizontal scrolling",
+       ),
+       type = PaginationType.list,
+       gridDelegate = null,
+       showNewPageErrorIndicatorAsGridChild = null,
+       showNewPageProgressIndicatorAsGridChild = null,
+       showNoMoreItemsIndicatorAsGridChild = null;
 
   const PaginationStateView.grid({
     super.key,
@@ -132,14 +131,14 @@ class PaginationStateView<T> extends StatelessWidget {
     this.errorTitleStyle,
     this.errorSubtitleStyle,
     this.retryWidget,
-  })  : type = PaginationType.grid,
-        separator = null,
-        prototypeItem = null,
-        semanticIndexCallback = null,
-        scrollBehavior = null,
-        semanticChildCount = null,
-        anchor = null,
-        center = null;
+  }) : type = PaginationType.grid,
+       separator = null,
+       prototypeItem = null,
+       semanticIndexCallback = null,
+       scrollBehavior = null,
+       semanticChildCount = null,
+       anchor = null,
+       center = null;
 
   // Pagination properties
   final PaginationType type;
@@ -253,7 +252,8 @@ class PaginationStateView<T> extends StatelessWidget {
           scrollDirection: scrollDirection,
           scrollBehavior: scrollBehavior,
           controller: scrollController,
-          keyboardDismissBehavior: keyboardDismissBehavior ??
+          keyboardDismissBehavior:
+              keyboardDismissBehavior ??
               ScrollViewKeyboardDismissBehavior.manual,
           cacheExtent: cacheExtent,
           clipBehavior: clipBehavior ?? Clip.hardEdge,
