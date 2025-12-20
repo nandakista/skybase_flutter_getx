@@ -6,7 +6,6 @@ import 'package:skybase/core/helper/converter_helper.dart';
 import 'package:skybase/core/extension/num_extension.dart';
 import 'package:skybase/core/helper/input_formater.dart';
 import 'package:skybase/core/helper/snackbar_helper.dart';
-import 'package:skybase/core/helper/validator_helper.dart';
 import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
 import 'package:skybase/ui/widgets/keyboard_dismissible.dart';
@@ -39,7 +38,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                     ? controller.currencyCtr.text =
                         0.currencyFormat(symbol: 'Rp')
                     : value,
-                validator: (value) => ValidatorHelper.required('$value'),
+                isRequired: true,
                 inputFormatters: CustomInputFormatters.idrCurrency,
                 onFieldSubmitted: (value) => SnackBarHelper.normal(message: value),
               ),

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:skybase/config/auth_manager/auth_manager.dart';
 import 'package:skybase/config/base/request_param.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
-import 'package:skybase/core/helper/validator_helper.dart';
+import 'package:skybase/core/helper/validator.dart';
 import 'package:skybase/data/repositories/auth/auth_repository.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 
@@ -24,7 +24,7 @@ class LoginController extends GetxController {
   void hidePassword() => isHiddenPassword.toggle();
 
   void login() async {
-    if (ValidatorHelper.validateForm(formKey)) {
+    if (Validator.validateForm(formKey)) {
       try {
         LoadingDialog.show();
         await repository.login(

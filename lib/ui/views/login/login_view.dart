@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/core/helper/validator_helper.dart';
+import 'package:skybase/core/helper/validator.dart';
 import 'package:skybase/config/themes/app_colors.dart';
 import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/login/login_controller.dart';
@@ -62,11 +62,8 @@ class LoginView extends GetView<LoginController> {
                           controller: controller.phoneController,
                           keyboardType: TextInputType.phone,
                           icon: Icons.phone,
-                          validator: (value) => ValidatorHelper.field(
-                            title: 'txt_phone'.tr,
-                            value: value.toString(),
-                            regex: AppRegex.phone,
-                          ),
+                          isRequired: true,
+                          validator: Validator.phone(),
                         ),
                         const SizedBox(height: 20),
                         Obx(
@@ -79,11 +76,7 @@ class LoginView extends GetView<LoginController> {
                             endIcon: IconButton(
                                 icon: const Icon(Icons.visibility_off),
                                 onPressed: () => controller.hidePassword()),
-                            validator: (value) => ValidatorHelper.field(
-                              title: 'txt_password'.tr,
-                              value: value.toString(),
-                              regex: AppRegex.password,
-                            ),
+                            validator: Validator.password(),
                           ),
                         ),
                         const SizedBox(height: 20),
