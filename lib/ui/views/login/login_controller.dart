@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/config/auth_manager/auth_manager.dart';
 import 'package:skybase/config/base/request_param.dart';
+import 'package:skybase/core/extension/form_state_extension.dart';
 import 'package:skybase/core/helper/dialog_helper.dart';
-import 'package:skybase/core/helper/validator.dart';
 import 'package:skybase/data/repositories/auth/auth_repository.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_view.dart';
 
@@ -24,20 +24,20 @@ class LoginController extends GetxController {
   void hidePassword() => isHiddenPassword.toggle();
 
   void login() async {
-    if (Validator.validateForm(formKey)) {
-      try {
-        LoadingDialog.show();
-        await repository.login(
-          phoneNumber: phoneController.text,
-          email: emailController.text,
-          password: passwordController.text,
-        );
-        LoadingDialog.dismiss();
-        Get.offAllNamed(MainNavView.route);
-      } catch (err) {
-        LoadingDialog.dismiss();
-        DialogHelper.failed(message: err.toString());
-      }
+    bool isValid = formKey.saveAndValidate();
+    if (!isValid) return;
+    try {
+      LoadingDialog.show();
+      await repository.login(
+        phoneNumber: phoneController.text,
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      LoadingDialog.dismiss();
+      Get.offAllNamed(MainNavView.route);
+    } catch (err) {
+      LoadingDialog.dismiss();
+      DialogHelper.failed(message: err.toString());
     }
   }
 

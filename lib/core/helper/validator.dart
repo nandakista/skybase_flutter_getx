@@ -17,14 +17,6 @@ sealed class Validate {
 }
 
 class Validator {
-  static bool validateForm(GlobalKey<FormState> formKey) {
-    if (formKey.currentState!.validate()) {
-      formKey.currentState!.save();
-      return true;
-    }
-    return false;
-  }
-
   static FormFieldValidator<T> list<T>(List<FormFieldValidator<T>> validators) {
     return (valueCandidate) {
       for (var validator in validators) {
@@ -37,9 +29,7 @@ class Validator {
     };
   }
 
-  static FormFieldValidator<String> required({
-    String? message,
-  }) {
+  static FormFieldValidator<String> required({String? message}) {
     return (value) {
       if (value == null || value.trim().isEmpty) {
         return message ?? 'txt_field_cannot_be_empty'.tr;
@@ -49,7 +39,9 @@ class Validator {
   }
 
   static FormFieldValidator<String> name({String? err}) {
-    RegExp regex = RegExp(r"^^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*[a-zA-Z]\s*$");
+    RegExp regex = RegExp(
+      r"^^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*[a-zA-Z]\s*$",
+    );
     return Validate.regex(regex: regex, err: err ?? 'txt_valid_name'.tr);
   }
 
