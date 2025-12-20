@@ -7,6 +7,5 @@ final sampleFeatureRoute = [
     name: SampleFeatureListView.route,
     page: () => const SampleFeatureListView(),
     binding: SampleFeatureListBinding(),
-    participatesInRootNavigator: true,
   ),
 ];

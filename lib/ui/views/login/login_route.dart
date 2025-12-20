@@ -7,7 +7,5 @@ final loginRoute = [
     name: LoginView.route,
     page: () => const LoginView(),
     binding: LoginBinding(),
-    preventDuplicates: false,
-    participatesInRootNavigator: true,
   ),
 ];

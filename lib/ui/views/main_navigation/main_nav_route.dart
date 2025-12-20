@@ -7,6 +7,5 @@ final mainNavRoute = [
     name: MainNavView.route,
     page: () => const MainNavView(),
     binding: MainNavBinding(),
-    participatesInRootNavigator: true,
   ),
 ];

@@ -7,6 +7,5 @@ final profileRoute = [
     name: ProfileView.route,
     page: () => const ProfileView(),
     binding: ProfileBinding(),
-    preventDuplicates: false
   ),
 ];
