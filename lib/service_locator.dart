@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:skybase/core/helper/orientation_helper.dart';
 import 'package:skybase/core/localization/locale_manager.dart';
 
 import 'config/auth_manager/auth_manager.dart';
@@ -23,32 +23,39 @@ import 'core/database/secure_storage/secure_storage_manager.dart';
 */
 class ServiceLocator {
   static Future<void> init() async {
+    /// Hide debugPrint on Release
     if (kReleaseMode) debugPrint = (String? message, {int? wrapWidth}) {};
-    await _initConfig();
-    await _initService();
-    AppInfo.setInfo(await PackageInfo.fromPlatform());
-  }
 
-  static Future<void> _initConfig() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    if (Platform.isIOS) {
-      final dir = await getLibraryDirectory();
-      await GetStorage(StorageKey.STORAGE_NAME, dir.path).initStorage;
-      Get.put(GetStorage(StorageKey.STORAGE_NAME, dir.path));
-    } else {
-      await GetStorage(StorageKey.STORAGE_NAME).initStorage;
-      Get.put(GetStorage(StorageKey.STORAGE_NAME));
-    }
+    /// Lock app orientation
+    AppOrientation.lock([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
+    await AppInfo.init();
+
+    /// Configs
+    await _initStorage();
     Get.put(const FlutterSecureStorage());
     Get.lazyPut(() => DioClient());
-  }
 
-  static Future<void> _initService() async {
+    /// Managers
     Get.lazyPut(() => StorageManager());
     Get.lazyPut(() => SecureStorageManager());
     Get.lazyPut(() => ThemeManager());
     Get.lazyPut(() => LocaleManager());
     Get.put(AuthManager());
+  }
+
+  static Future<void> _initStorage() async {
+    late final GetStorage storage;
+    if (Platform.isIOS) {
+      final dir = await getLibraryDirectory();
+      storage = GetStorage(StorageKey.STORAGE_NAME, dir.path);
+    } else {
+      storage = GetStorage(StorageKey.STORAGE_NAME);
+    }
+    await storage.initStorage;
+    Get.put(storage);
   }
 }
