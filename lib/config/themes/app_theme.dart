@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:skybase/config/themes/app_colors.dart';
-import 'package:skybase/config/themes/fonts.gen.dart';
+import 'package:skybase/config/themes/generated/fonts.gen.dart';
 
 class AppTheme {
   static ThemeData get light {

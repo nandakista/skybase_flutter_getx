@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'assets.gen.dart';
+import 'generated/assets.gen.dart';
 
 // ignore: non_constant_identifier_names
 final AppImages = Assets.images;

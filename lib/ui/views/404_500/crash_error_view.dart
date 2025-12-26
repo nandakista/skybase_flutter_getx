@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/themes/assets.gen.dart';
+import 'package:skybase/config/themes/generated/assets.gen.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 class CrashErrorView extends StatelessWidget {
