@@ -52,6 +52,7 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
           spacing: 12,
           children: [
             FloatingActionButton(
+              heroTag: 'clear_cache',
               backgroundColor: AppColors.primary,
               onPressed: () {
                 StorageManager.find.delete(CachedKey.SAMPLE_FEATURE_LIST);
@@ -60,6 +61,7 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
               child: const Icon(Icons.delete, color: Colors.white),
             ),
             FloatingActionButton(
+              heroTag: 'search',
               backgroundColor: AppColors.primary,
               onPressed: () {
                 controller.onUpdateSearch(search: 'ada');
