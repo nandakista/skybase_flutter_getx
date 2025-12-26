@@ -158,13 +158,6 @@ class AppTheme {
   }
 }
 
-extension DarkMode on BuildContext {
-  bool get isDarkMode {
-    final brightness = MediaQuery.of(this).platformBrightness;
-    return brightness == Brightness.dark;
-  }
-}
-
 class AppOrientation {
   static Future<void> lock(DeviceOrientation orientation) {
     return SystemChrome.setPreferredOrientations([orientation]);
