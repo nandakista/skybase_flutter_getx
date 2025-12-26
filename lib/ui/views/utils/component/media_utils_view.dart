@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skybase/config/themes/app_colors.dart';
 import 'package:skybase/core/helper/bottom_sheet_helper.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
 import 'package:skybase/ui/widgets/media/attachments_source_bottom_sheet.dart';
@@ -26,32 +27,32 @@ class MediaUtilsView extends GetView<UtilsController> {
             const Divider(thickness: 1, height: 36),
             const SkyImage(),
             const Divider(thickness: 1, height: 36),
-            const MediaItems(
+            MediaItems(
               isGrid: true,
               mediaUrls: [
                 'https://picsum.photos/200/200.jpg',
                 'https://picsum.photos/200/200.jpg',
-                'assets/images/img_error.png',
+                AppImages.imgError.path,
                 'https://picsum.photos/200/200.jpg',
                 'https://picsum.photos/200/200.jpg',
               ],
             ),
             const Divider(thickness: 1, height: 36),
-            const MediaItems(
+            MediaItems(
               size: 100,
               maxItem: 3,
               mediaUrls: [
                 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-                'assets/images/img_pv_1.png',
+                AppImages.imgPv1.path,
                 'https://picsum.photos/200/200.jpg',
                 'https://picsum.photos/200/200.jpg',
                 'https://picsum.photos/200/200.jpg',
-                'assets/images/img_error.png',
+                AppImages.imgError.path,
                 'https://picsum.photos/200/200.jpg',
               ],
             ),
             const SizedBox(height: 24),
-            const SkyImage(src: 'assets/images/img_error.jpeg'),
+            SkyImage(src: AppImages.imgError.path),
           ],
         ),
       ),
@@ -78,9 +79,9 @@ class MediaUtilsView extends GetView<UtilsController> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    child: const Padding(
+                    child: Padding(
                       padding: EdgeInsets.all(40.0),
-                      child: SkyImage(src: 'assets/images/img_placeholder_user.png'),
+                      child: SkyImage(src: AppImages.imgPlaceholderUser.path),
                     ),
                   ),
                 ),
