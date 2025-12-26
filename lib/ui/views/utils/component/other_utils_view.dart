@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/core/helper/converter_helper.dart';
 import 'package:skybase/core/extension/num_extension.dart';
 import 'package:skybase/core/helper/input_formater.dart';
 import 'package:skybase/core/helper/snackbar_helper.dart';
-import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/utils/utils_controller.dart';
 import 'package:skybase/ui/widgets/keyboard_dismissible.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
@@ -54,7 +54,7 @@ class OtherUtilsView extends GetView<UtilsController> {
                 icon: CupertinoIcons.t_bubble,
               ),
               const SizedBox(height: 26),
-              Text('Date', style: AppStyle.subtitle4),
+              Text('Date', style: context.typography.subtitle4),
               const SizedBox(height: 12),
               const Text('Date Sample Converter'),
               Text(DateFormat('dd MMMM yyy').format(DateTime.now())),

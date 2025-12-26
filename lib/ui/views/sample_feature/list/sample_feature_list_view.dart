@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/database/storage/storage_manager.dart';
 import 'package:skybase/config/themes/app_colors.dart';
-import 'package:skybase/config/themes/app_style.dart';
+import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/data/sources/local/cached_key.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_controller.dart';
@@ -40,7 +40,7 @@ class SampleFeatureListView extends GetView<SampleFeatureListController> {
             title: Text(item.username.toString()),
             subtitle: Text(
               item.gitUrl.toString(),
-              style: AppStyle.body2,
+              style: context.typography.body2,
             ),
           );
         },

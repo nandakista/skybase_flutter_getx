@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/themes/app_style.dart';
+import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
@@ -25,7 +25,7 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
               children: [
                 Text(
                   '${controller.dataObj.value?.repository ?? 0}',
-                  style: AppStyle.headline3,
+                  style: context.typography.headline3,
                 ),
                 const Text('Repository'),
               ],
@@ -34,7 +34,7 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
               children: [
                 Text(
                   '${controller.dataObj.value?.followers ?? 0}',
-                  style: AppStyle.headline3,
+                  style: context.typography.headline3,
                 ),
                 const Text('Follower'),
               ],
@@ -43,7 +43,7 @@ class SampleFeatureDetailHeader extends GetView<SampleFeatureDetailController> {
               children: [
                 Text(
                   '${controller.dataObj.value?.following ?? 0}',
-                  style: AppStyle.headline3,
+                  style: context.typography.headline3,
                 ),
                 const Text('Following'),
               ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skybase/config/themes/app_colors.dart';
-import 'package:skybase/config/themes/app_style.dart';
+import 'package:skybase/core/extension/context_extension.dart';
 
 /* Created by
    Varcant
@@ -154,7 +154,7 @@ class SkyButton extends StatelessWidget {
                 Text(
                   text ?? '',
                   textAlign: TextAlign.center,
-                  style: AppStyle.subtitle4.copyWith(
+                  style: context.typography.subtitle4.copyWith(
                     fontSize: fontSize,
                     fontWeight: fontWeight,
                     color: (!enabled)

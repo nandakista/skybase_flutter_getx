@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/themes/app_style.dart';
+import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/data/models/sample_feature/sample_feature.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
@@ -31,7 +31,7 @@ class FollowerTabView extends GetView<SampleFeatureDetailController> {
                   title: Text(user?.username ?? ''),
                   subtitle: Text(
                     user?.gitUrl ?? '',
-                    style: AppStyle.body2,
+                    style: context.typography.body2,
                   ),
                 );
               },

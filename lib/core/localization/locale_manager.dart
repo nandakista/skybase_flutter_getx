@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/database/storage/storage_key.dart';
 import 'package:skybase/core/database/storage/storage_manager.dart';
-import 'package:skybase/config/themes/app_colors.dart';
-import 'package:skybase/config/themes/app_style.dart';
+import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/ui/widgets/sky_dialog.dart';
 
 /* Created by
@@ -32,7 +31,7 @@ class LocaleManager {
             children: [
               Text(
                 'txt_choose_language'.tr,
-                style: AppStyle.subtitle2.copyWith(color: AppColors.primary),
+                style: context.typography.subtitle2,
               ),
               const SizedBox(height: 16),
               ListView.separated(
@@ -51,7 +50,7 @@ class LocaleManager {
                     padding: const EdgeInsets.all(10),
                     child: Text(
                       locales.entries.toList()[index].key,
-                      style: AppStyle.body1,
+                      style: context.typography.body1,
                     ),
                   ),
                 ),

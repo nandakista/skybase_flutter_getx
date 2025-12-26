@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/themes/app_style.dart';
+import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/ui/views/settings/setting_view.dart';
 import 'package:skybase/ui/widgets/base/state_view.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
@@ -51,7 +51,7 @@ class ProfileView extends GetView<ProfileController> {
                 const SizedBox(height: 12),
                 Text(
                   controller.dataObj.value?.name ?? '--',
-                  style: AppStyle.headline3,
+                  style: context.typography.headline3,
                 ),
                 Text(controller.dataObj.value?.bio ?? '--'),
                 const SizedBox(height: 24),
@@ -62,7 +62,7 @@ class ProfileView extends GetView<ProfileController> {
                       children: [
                         Text(
                           '${controller.dataObj.value?.repository ?? 0}',
-                          style: AppStyle.headline3,
+                          style: context.typography.headline3,
                         ),
                         const Text('Repository'),
                       ],
@@ -71,7 +71,7 @@ class ProfileView extends GetView<ProfileController> {
                       children: [
                         Text(
                           '${controller.dataObj.value?.followers ?? 0}',
-                          style: AppStyle.headline3,
+                          style: context.typography.headline3,
                         ),
                         const Text('Follower'),
                       ],
@@ -80,7 +80,7 @@ class ProfileView extends GetView<ProfileController> {
                       children: [
                         Text(
                           '${controller.dataObj.value?.following ?? 0}',
-                          style: AppStyle.headline3,
+                          style: context.typography.headline3,
                         ),
                         const Text('Following'),
                       ],
@@ -104,7 +104,7 @@ class ProfileView extends GetView<ProfileController> {
                 const Divider(color: Colors.black38),
                 Row(
                   children: [
-                    Text('Repository List', style: AppStyle.headline3),
+                    Text('Repository List', style: context.typography.headline3),
                   ],
                 ),
                 const SizedBox(height: 12),

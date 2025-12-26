@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/config/themes/app_colors.dart';
-import 'package:skybase/config/themes/app_style.dart';
+import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/data/models/repo/repo.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
@@ -29,13 +29,13 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                     shapeImage: ShapeImage.circle,
                     src: '${repos?.owner.avatarUrl}&s=200',
                   ),
-                  title: Text(repos?.name ?? '', style: AppStyle.body2),
+                  title: Text(repos?.name ?? '', style: context.typography.body2),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Language: ${repos?.language ?? '--'}',
-                        style: AppStyle.body3,
+                        style: context.typography.body3,
                       ),
                       const SizedBox(height: 8),
                       Padding(
@@ -51,7 +51,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                 ),
                                 Text(
                                   ' ${repos?.totalStar}',
-                                  style: AppStyle.body3,
+                                  style: context.typography.body3,
                                 ),
                               ],
                             ),
@@ -63,7 +63,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                 ),
                                 Text(
                                   ' ${repos?.totalWatch}',
-                                  style: AppStyle.body3,
+                                  style: context.typography.body3,
                                 ),
                               ],
                             ),
@@ -76,7 +76,7 @@ class RepoTabView extends GetView<SampleFeatureDetailController> {
                                 ),
                                 Text(
                                   ' ${repos?.totalFork}',
-                                  style: AppStyle.body3,
+                                  style: context.typography.body3,
                                 ),
                               ],
                             )

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/core/modules/timer/timer_helper.dart';
-import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/utils/component/timer/timer_utils_controller.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 
@@ -17,7 +17,7 @@ class TimerUtilsView extends GetView<TimerUtilsController> {
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-            Text('Sample Timer', style: AppStyle.subtitle2),
+            Text('Sample Timer', style: context.typography.subtitle2),
             const SizedBox(height: 12),
             GetBuilder<TimerUtilsController>(
               id: 'count_down_timer',
@@ -29,41 +29,60 @@ class TimerUtilsView extends GetView<TimerUtilsController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _buildTimeItem(time: timerData.hour, title: 'Hour'),
+                    _buildTimeItem(
+                      context: context,
+                      time: timerData.hour,
+                      title: 'Hour',
+                    ),
                     const SizedBox(width: 12),
-                    Text(':', style: AppStyle.headline1),
+                    Text(':', style: context.typography.headline1),
                     const SizedBox(width: 12),
-                    _buildTimeItem(time: timerData.minutes, title: 'Minutes'),
+                    _buildTimeItem(
+                      context: context,
+                      time: timerData.minutes,
+                      title: 'Minutes',
+                    ),
                     const SizedBox(width: 12),
-                    Text(':', style: AppStyle.headline1),
+                    Text(':', style: context.typography.headline1),
                     const SizedBox(width: 12),
-                    _buildTimeItem(time: timerData.second, title: 'Second'),
+                    _buildTimeItem(
+                      context: context,
+                      time: timerData.second,
+                      title: 'Second',
+                    ),
                   ],
                 );
               },
             ),
             const SizedBox(height: 36),
             Obx(
-              ()=> Column(
+              () => Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(controller.currTimeTimer2.value, style: AppStyle.headline2),
-                  Text('Raw Timer', style: AppStyle.subtitle3),
+                  Text(
+                    controller.currTimeTimer2.value,
+                    style: context.typography.headline2,
+                  ),
+                  Text('Raw Timer', style: context.typography.subtitle3),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTimeItem({required String time, required String title}) {
+  Widget _buildTimeItem({
+    required BuildContext context,
+    required String time,
+    required String title,
+  }) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(time, style: AppStyle.headline1),
-        Text(title, style: AppStyle.subtitle3),
+        Text(time, style: context.typography.headline1),
+        Text(title, style: context.typography.subtitle3),
       ],
     );
   }

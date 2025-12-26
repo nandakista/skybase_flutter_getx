@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/themes/app_style.dart';
+import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/ui/views/sample_feature/detail/sample_feature_detail_controller.dart';
 
 class SampleFeatureDetailInfo extends GetView<SampleFeatureDetailController> {
@@ -15,7 +15,7 @@ class SampleFeatureDetailInfo extends GetView<SampleFeatureDetailController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 12),
-            Text(controller.dataObj.value?.name ?? '--', style: AppStyle.headline4),
+            Text(controller.dataObj.value?.name ?? '--', style: context.typography.headline4),
             Text(controller.dataObj.value?.bio ?? '--'),
             const SizedBox(height: 8),
             Row(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/config/themes/app_colors.dart';
-import 'package:skybase/config/themes/app_style.dart';
+import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/ui/views/profile/component/repository/profile_repository_controller.dart';
 import 'package:skybase/ui/widgets/base/state_view.dart';
 import 'package:skybase/ui/widgets/shimmer/sample_feature/shimmer_sample_feature_list.dart';
@@ -33,13 +33,13 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
                 size: 30,
                 src: '${item.owner.avatarUrl}&s=200',
               ),
-              title: Text(item.name.toString(), style: AppStyle.body2),
+              title: Text(item.name.toString(), style: context.typography.body2),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Language: ${item.language ?? '--'}',
-                    style: AppStyle.body3,
+                    style: context.typography.body3,
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -53,7 +53,7 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
                           ),
                           Text(
                             ' ${item.totalStar}',
-                            style: AppStyle.body3,
+                            style: context.typography.body3,
                           ),
                         ],
                       ),
@@ -65,7 +65,7 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
                           ),
                           Text(
                             ' ${item.totalWatch}',
-                            style: AppStyle.body3,
+                            style: context.typography.body3,
                           ),
                         ],
                       ),
@@ -78,7 +78,7 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
                           ),
                           Text(
                             ' ${item.totalFork}',
-                            style: AppStyle.body3,
+                            style: context.typography.body3,
                           ),
                         ],
                       )

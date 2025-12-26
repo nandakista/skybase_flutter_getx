@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/core/helper/validator.dart';
 import 'package:skybase/config/themes/app_colors.dart';
-import 'package:skybase/config/themes/app_style.dart';
 import 'package:skybase/ui/views/login/login_controller.dart';
 import 'package:skybase/ui/widgets/colored_status_bar.dart';
 import 'package:skybase/ui/widgets/keyboard_dismissible.dart';
@@ -35,11 +35,11 @@ class LoginView extends GetView<LoginController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('txt_login'.tr, style: AppStyle.headline2),
+                            Text('txt_login'.tr, style: context.typography.headline2),
                             const SizedBox(height: 10),
                             Text(
                               'txt_login_subtitle'.tr,
-                              style: AppStyle.subtitle4,
+                              style: context.typography.subtitle4,
                             ),
                           ],
                         ),
