@@ -15,6 +15,12 @@ import 'error_view.dart';
    nanda.kista@gmail.com
 */
 class StateView extends StatelessWidget {
+  /// Force iOS style
+  final bool forceiOSStyle;
+
+  /// Force Android style
+  final bool forceAndroidStyle;
+
   /// Can override setting Visibility emptyView even if [emptyEnabled] is true
   final bool visibleOnEmpty;
 
@@ -130,6 +136,9 @@ class StateView extends StatelessWidget {
   /// [PaginationSliverList] or [PaginationSliverGrid]
   final List<Widget>? headerSliver;
 
+  /// Refresh indicator property
+  final double displacement;
+
   const StateView.page({
     super.key,
     required this.loadingEnabled,
@@ -184,6 +193,9 @@ class StateView extends StatelessWidget {
     this.semanticChildCount,
     this.anchor,
     this.center,
+    this.forceiOSStyle = false,
+    this.forceAndroidStyle = false,
+    this.displacement = 40,
   });
 
   const StateView.component({
@@ -239,15 +251,18 @@ class StateView extends StatelessWidget {
     this.semanticChildCount,
     this.anchor,
     this.center,
-  }) : onRefresh = null;
+  }) : onRefresh = null,
+       forceiOSStyle = false,
+       forceAndroidStyle = false,
+       displacement = 40;
 
   @override
   Widget build(BuildContext context) {
     Widget body;
     if (visibleOnError && errorEnabled) {
-      body = getErrorView(context);
+      body = _getErrorView(context);
     } else if (visibleOnEmpty && emptyEnabled && !loadingEnabled) {
-      body = getEmptyView(context);
+      body = _getEmptyView(context);
     } else if (loadingEnabled || (!emptyEnabled && !errorEnabled)) {
       body = getLoadingAndBodyView(context);
     } else {
@@ -260,10 +275,10 @@ class StateView extends StatelessWidget {
   Widget getLoadingAndBodyView(BuildContext context) {
     if (isComponent || onRefresh == null) {
       return loadingEnabled
-          ? loadingView ?? const PlatformLoadingIndicator()
+          ? _getLoadingView(loadingView ?? const PlatformLoadingIndicator())
           : child;
     } else {
-      return Platform.isIOS
+      return Platform.isIOS && (forceiOSStyle || !forceAndroidStyle)
           ? _iosObjectView(onRefresh: onRefresh!)
           : _androidObjectView(onRefresh: onRefresh!);
     }
@@ -272,6 +287,7 @@ class StateView extends StatelessWidget {
   Widget _androidObjectView({required VoidCallback onRefresh}) {
     return RefreshIndicator(
       onRefresh: () => Future.sync(onRefresh),
+      displacement: displacement,
       child: CustomScrollView(
         shrinkWrap: shrinkWrap,
         physics: physics,
@@ -290,16 +306,16 @@ class StateView extends StatelessWidget {
         anchor: anchor ?? 0.0,
         center: center,
         slivers: [
-          if (headerSliver != null) ...headerSliver!,
+          if (headerSliver != null && !loadingEnabled) ...headerSliver!,
           (!loadingEnabled)
               ? SliverToBoxAdapter(child: child)
               : SliverFillRemaining(
                   hasScrollBody: false,
-                  child: Center(
-                    child: loadingView ?? const CircularProgressIndicator(),
+                  child: _getLoadingView(
+                    loadingView ?? const PlatformLoadingIndicator(),
                   ),
                 ),
-          if (footerSliver != null) ...footerSliver!,
+          if (footerSliver != null && !loadingEnabled) ...footerSliver!,
         ],
       ),
     );
@@ -324,26 +340,21 @@ class StateView extends StatelessWidget {
       anchor: anchor ?? 0.0,
       center: center,
       slivers: [
-        if (headerSliver != null) ...headerSliver!,
-        CupertinoSliverRefreshControl(
-          onRefresh: () => Future.sync(onRefresh),
-        ),
+        if (headerSliver != null && !loadingEnabled) ...headerSliver!,
+        CupertinoSliverRefreshControl(onRefresh: () => Future.sync(onRefresh)),
         (!loadingEnabled)
-            ? SliverToBoxAdapter(
-                child: SingleChildScrollView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  child: child,
-                ),
-              )
+            ? SliverToBoxAdapter(child: child)
             : SliverFillRemaining(
-                child: loadingView ?? const PlatformLoadingIndicator(),
+                child: _getLoadingView(
+                  loadingView ?? const PlatformLoadingIndicator(),
+                ),
               ),
-        if (footerSliver != null) ...footerSliver!,
+        if (footerSliver != null && !loadingEnabled) ...footerSliver!,
       ],
     );
   }
 
-  Widget getLoadingView(Widget loadingWidget) {
+  Widget _getLoadingView(Widget loadingWidget) {
     return Center(
       child: AnimatedOpacity(
         opacity: loadingEnabled ? 1.0 : 0.0,
@@ -353,7 +364,7 @@ class StateView extends StatelessWidget {
     );
   }
 
-  Widget getEmptyView(BuildContext context) {
+  Widget _getEmptyView(BuildContext context) {
     return emptyView ??
         EmptyView(
           emptyImage: emptyImage,
@@ -373,7 +384,7 @@ class StateView extends StatelessWidget {
         );
   }
 
-  Widget getErrorView(BuildContext context) {
+  Widget _getErrorView(BuildContext context) {
     return errorView ??
         ErrorView(
           errorImage: errorImage,
