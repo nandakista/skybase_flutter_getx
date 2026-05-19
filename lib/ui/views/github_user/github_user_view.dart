@@ -31,6 +31,7 @@ class GithubUserView extends GetView<GithubUserController> {
           allLoaded: controller.allLoaded.value,
           errorConfig: ErrorConfig(subtitle: controller.errorMessage.value),
           loadingView: const ShimmerSampleFeatureList(),
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
           sliverGridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 180,
             mainAxisSpacing: 4,
