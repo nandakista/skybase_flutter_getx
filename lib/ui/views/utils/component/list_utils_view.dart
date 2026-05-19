@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skybase/core/extension/context_extension.dart';
-import 'package:skybase/ui/widgets/base/state_view.dart';
+import 'package:skybase/ui/widgets/base/state/state_view.dart';
 import 'package:skybase/ui/widgets/sky_appbar.dart';
 import 'package:skybase/ui/widgets/grouped_listview.dart';
 
@@ -21,10 +21,8 @@ class ListUtilsView extends StatelessWidget {
               page: 1,
               title: 'Sample Grouped ListView',
               content: StateView.component(
-                loadingEnabled: false,
-                errorEnabled: false,
+                state: RequestState.empty,
                 onRetry: () {},
-                emptyEnabled: dummyData.isEmpty,
                 child: GroupedListView<dynamic, String>(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),

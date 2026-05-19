@@ -21,12 +21,12 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
 
   @override
   void onReady() async {
-    loadData(() => getDetailUser());
+    getDetailUser();
     super.onReady();
   }
 
   @override
-  bool get keepAlive => false;
+  bool get keepAlive => true;
 
   @override
   String get cachedKey => CachedKey.SAMPLE_FEATURE_DETAIL;
@@ -34,8 +34,16 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
   @override
   String get cachedId => idArgs.toString();
 
+  @override
+  Future<void> onRefresh() async {
+    resetState();
+    await getDetailUser();
+  }
+
   Future<void> getDetailUser() async {
     try {
+      showLoading();
+      await Future.delayed(Duration(seconds: 2));
       final response = await repository.getDetailUser(
         requestParams: requestParams,
         id: idArgs,

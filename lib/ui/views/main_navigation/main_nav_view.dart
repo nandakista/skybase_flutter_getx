@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skybase/ui/views/github_user/github_user_view.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_controller.dart';
 import 'package:skybase/ui/views/profile/profile_view.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_view.dart';
@@ -23,6 +24,7 @@ class MainNavView extends GetView<MainNavController> {
             onPageChanged: (index) => controller.index.value = index,
             children: const [
               SampleFeatureListView(),
+              GithubUserView(),
               UtilsView(),
               ProfileView(),
             ],
@@ -59,6 +61,10 @@ class MainNavView extends GetView<MainNavController> {
               BottomNavigationBarItem(
                 icon: const Icon(CupertinoIcons.home),
                 label: 'txt_users'.tr,
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.person_2),
+                label: 'Github',
               ),
               BottomNavigationBarItem(
                 icon: const Icon(CupertinoIcons.slider_horizontal_3),

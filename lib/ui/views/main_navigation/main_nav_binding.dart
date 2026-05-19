@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:skybase/ui/views/github_user/github_user_binding.dart';
 import 'package:skybase/ui/views/main_navigation/main_nav_controller.dart';
 import 'package:skybase/ui/views/profile/profile_binding.dart';
 import 'package:skybase/ui/views/sample_feature/list/sample_feature_list_binding.dart';
@@ -11,5 +12,6 @@ class MainNavBinding implements Bindings {
     UtilsBinding().dependencies();
     ProfileBinding().dependencies();
     SampleFeatureListBinding().dependencies();
+    GithubUserBinding().dependencies();
   }
 }

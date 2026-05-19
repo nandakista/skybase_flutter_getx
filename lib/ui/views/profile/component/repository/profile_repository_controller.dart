@@ -9,15 +9,19 @@ class ProfileRepositoryController extends BaseController<Repo> {
 
   @override
   void onReady() {
-    loadData(() => getRepository());
+    getRepository();
     super.onReady();
   }
 
   @override
-  bool get keepAlive => false;
+  Future<void> onRefresh() async {
+    resetState();
+    await getRepository();
+  }
 
   Future<void> getRepository() async {
     try {
+      showLoading();
       final response = await repository.getProfileRepository(
         requestParams: requestParams,
         username: 'nandakista',

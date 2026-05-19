@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:skybase/config/themes/app_colors.dart';
 import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/ui/views/profile/component/repository/profile_repository_controller.dart';
-import 'package:skybase/ui/widgets/base/state_view.dart';
+import 'package:skybase/ui/widgets/base/state/state_view.dart';
 import 'package:skybase/ui/widgets/shimmer/sample_feature/shimmer_sample_feature_list.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
@@ -14,10 +14,8 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
   Widget build(BuildContext context) {
     return Obx(
       () => StateView.component(
-        loadingEnabled: controller.isLoading,
-        errorEnabled: controller.isError,
-        emptyEnabled: controller.isEmpty,
-        onRetry: () => controller.onRefresh(),
+        state: controller.state.value,
+        onRetry: controller.onRefresh,
         loadingView: const ShimmerSampleFeatureList(),
         child: ListView.builder(
           padding: EdgeInsets.zero,
@@ -33,7 +31,10 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
                 size: 30,
                 src: '${item.owner.avatarUrl}&s=200',
               ),
-              title: Text(item.name.toString(), style: context.typography.body2),
+              title: Text(
+                item.name.toString(),
+                style: context.typography.body2,
+              ),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -47,10 +48,7 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
                     children: [
                       Row(
                         children: [
-                          const Icon(
-                            Icons.star_border,
-                            size: 16,
-                          ),
+                          const Icon(Icons.star_border, size: 16),
                           Text(
                             ' ${item.totalStar}',
                             style: context.typography.body3,
@@ -59,10 +57,7 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
                       ),
                       Row(
                         children: [
-                          const Icon(
-                            Icons.remove_red_eye_outlined,
-                            size: 16,
-                          ),
+                          const Icon(Icons.remove_red_eye_outlined, size: 16),
                           Text(
                             ' ${item.totalWatch}',
                             style: context.typography.body3,
@@ -81,9 +76,9 @@ class ProfileRepositoryView extends GetView<ProfileRepositoryController> {
                             style: context.typography.body3,
                           ),
                         ],
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             );

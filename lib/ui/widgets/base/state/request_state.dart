@@ -1,4 +1,6 @@
-enum RequestState { initial, empty, loading, success, error, shimmering }
+part of 'state_view.dart';
+
+enum RequestState { initial, empty, loading, success, error }
 
 extension RequestStateExt on RequestState {
   bool get isInitial => this == RequestState.initial;
@@ -10,6 +12,4 @@ extension RequestStateExt on RequestState {
   bool get isSuccess => this == RequestState.success;
 
   bool get isError => this == RequestState.error;
-
-  bool get isShimmering => this == RequestState.shimmering;
 }

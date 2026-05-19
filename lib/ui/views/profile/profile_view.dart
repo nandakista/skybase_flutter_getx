@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skybase/core/extension/context_extension.dart';
 import 'package:skybase/ui/views/settings/setting_view.dart';
-import 'package:skybase/ui/widgets/base/state_view.dart';
+import 'package:skybase/ui/widgets/base/state/state_view.dart';
 import 'package:skybase/ui/widgets/sky_image.dart';
 
 import 'component/repository/profile_repository_view.dart';
@@ -33,9 +33,8 @@ class ProfileView extends GetView<ProfileController> {
       ),
       body: Obx(
         () => StateView.page(
-          loadingEnabled: controller.isLoading,
-          errorEnabled: controller.isError,
-          emptyEnabled: controller.isEmpty,
+          // state: RequestState.loading,
+          state: controller.state.value,
           onRetry: controller.onRefresh,
           onRefresh: controller.onRefresh,
           child: Padding(

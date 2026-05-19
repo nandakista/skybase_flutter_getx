@@ -6,9 +6,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:skybase/config/base/request_state.dart';
 import 'package:skybase/core/mixin/cache_mixin.dart';
 import 'package:skybase/core/mixin/connectivity_mixin.dart';
+import 'package:skybase/ui/widgets/base/state/state_view.dart';
 
 import 'request_param.dart';
 
@@ -19,35 +19,22 @@ abstract class BaseController<T> extends GetxController
   CancelToken cancelToken = CancelToken();
   final errorMessage = Rxn<String>();
 
-  Rx<RequestState> state = RequestState.initial.obs;
+  Rx<RequestState> state = Rx<RequestState>(RequestState.initial);
 
   int perPage = 20;
   int page = 1;
+  bool isPullRefresh = false;
 
   final dataObj = Rxn<T>();
   RxList<T> dataList = RxList<T>([]);
 
-  Future Function()? _onLoad;
+  // Future Function()? _onLoad;
 
   bool get keepAlive => false;
 
   String get cachedKey => '';
 
   String get cachedId => '';
-
-  bool get isInitial => state.value.isInitial;
-
-  bool get isLoading => state.value.isLoading;
-
-  bool get isError =>
-      errorMessage.value != null &&
-      errorMessage.value != '' &&
-      state.value.isError;
-
-  bool get isEmpty => state.value.isEmpty;
-
-  bool get isSuccess =>
-      !isEmpty && !isError && !isLoading && state.value.isSuccess;
 
   @mustCallSuper
   @override
@@ -58,17 +45,9 @@ abstract class BaseController<T> extends GetxController
       cachedId: cachedId,
     );
     listenConnectivity(() {
-      if (isError && !isLoading) onRefresh();
+      if (state.value.isError && !state.value.isLoading) onRefresh();
     });
     super.onInit();
-  }
-
-  Future<void> onRefresh() async {
-    if (_onLoad != null) {
-      if (cachedKey.isNotEmpty) await deleteCached('$cachedKey/$cachedId');
-      if (!keepAlive) showLoading();
-      await _onLoad!();
-    }
   }
 
   @mustCallSuper
@@ -79,8 +58,23 @@ abstract class BaseController<T> extends GetxController
     super.onClose();
   }
 
+  void onRefresh();
+
+  void resetState() async {
+    isPullRefresh = true;
+    if (cachedKey.isNotEmpty) await deleteCached('$cachedKey/$cachedId');
+    page = 1;
+    state.value = RequestState.initial;
+    if (!keepAlive) {
+      dataList.clear();
+      dataObj.value = null;
+    }
+  }
+
   void showLoading() {
-    state.value = RequestState.loading;
+    state.value = isPullRefresh && keepAlive
+        ? RequestState.success
+        : RequestState.loading;
     errorMessage.value = null;
   }
 
@@ -89,16 +83,7 @@ abstract class BaseController<T> extends GetxController
     state.value = RequestState.error;
   }
 
-  void loadData(Future Function() onLoad) async {
-    showLoading();
-    await onLoad();
-    _onLoad = onLoad;
-  }
-
-  void loadFinish({
-    T? data,
-    List<T> list = const [],
-  }) {
+  void loadFinish({T? data, List<T> list = const []}) {
     if (data != null) dataObj.value = data;
     if (list.isNotEmpty) dataList.value = list;
     if (dataList.isEmpty && dataObj.value == null) {
@@ -106,5 +91,6 @@ abstract class BaseController<T> extends GetxController
     } else {
       state.value = RequestState.success;
     }
+    isPullRefresh = false;
   }
 }

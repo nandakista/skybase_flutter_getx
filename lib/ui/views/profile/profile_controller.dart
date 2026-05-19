@@ -11,21 +11,25 @@ class ProfileController extends BaseController<User> {
 
   @override
   void onReady() {
-    loadData(() => onGetProfile());
+    onGetProfile();
     super.onReady();
   }
 
   @override
-  Future<void> onRefresh() async {
-    await Get.find<ProfileRepositoryController>().onRefresh();
-    super.onRefresh();
-  }
+  bool get keepAlive => true;
 
   @override
-  bool get keepAlive => false;
+  Future<void> onRefresh() async {
+    resetState();
+    await Future.wait([
+      Get.find<ProfileRepositoryController>().onRefresh(),
+      onGetProfile(),
+    ]);
+  }
 
   Future<void> onGetProfile() async {
     try {
+      showLoading();
       final response = await repository.getProfile(
         requestParams: requestParams,
         username: 'nandakista',
