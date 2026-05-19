@@ -23,25 +23,25 @@ class SampleFeatureRepositoryImpl extends BaseRepository
   }) async {
     try {
       // Using cached
-      // return await loadCachedList(
-      //   cachedKey: requestParams.cachedKey.toString(),
-      //   loadWhen: page == 1 && username == null,
-      //   onLoad: () async => await apiService.getUsers(
-      //     cancelToken: requestParams.cancelToken,
-      //     page: page,
-      //     perPage: perPage,
-      //     username: username,
-      //   ),
-      // );
+      return await loadCachedList(
+        cachedKey: requestParams.cachedKey.toString(),
+        loadWhen: page == 1 && username == null,
+        onLoad: () async => await apiService.getUsers(
+          cancelToken: requestParams.cancelToken,
+          page: page,
+          perPage: perPage,
+          username: username,
+        ),
+      );
 
       // Without cache
-      await Future.delayed(Duration(seconds: 2));
-      return await apiService.getUsers(
-        cancelToken: requestParams.cancelToken,
-        page: page,
-        perPage: perPage,
-        username: username,
-      );
+      // await Future.delayed(Duration(seconds: 2));
+      // return await apiService.getUsers(
+      //   cancelToken: requestParams.cancelToken,
+      //   page: page,
+      //   perPage: perPage,
+      //   username: username,
+      // );
     } catch (e, stack) {
       log('$tag error = $e, $stack');
       rethrow;

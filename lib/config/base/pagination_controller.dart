@@ -52,12 +52,12 @@ abstract class PaginationController<T> extends GetxController
 
   void resetState() async {
     isPullRefresh = true;
-    if (cachedKey.isNotEmpty) await deleteCached(cachedKey);
     page = 1;
     state.value = PaginationState.initial;
     if (!keepAlive) {
       dataList.clear();
     }
+    if (cachedKey.isNotEmpty) await deleteCached(cachedKey);
   }
 
   void showLoading() {

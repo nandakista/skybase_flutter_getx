@@ -43,7 +43,6 @@ class SampleFeatureDetailController extends BaseController<SampleFeature> {
   Future<void> getDetailUser() async {
     try {
       showLoading();
-      await Future.delayed(Duration(seconds: 2));
       final response = await repository.getDetailUser(
         requestParams: requestParams,
         id: idArgs,

@@ -62,13 +62,13 @@ abstract class BaseController<T> extends GetxController
 
   void resetState() async {
     isPullRefresh = true;
-    if (cachedKey.isNotEmpty) await deleteCached('$cachedKey/$cachedId');
     page = 1;
     state.value = RequestState.initial;
     if (!keepAlive) {
       dataList.clear();
       dataObj.value = null;
     }
+    if (cachedKey.isNotEmpty) await deleteCached('$cachedKey/$cachedId');
   }
 
   void showLoading() {
